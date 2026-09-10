@@ -296,7 +296,7 @@ function playShimmerSound() {
 // Sonido apertura de modal (assets/audio/pantallas_emergentes.wav)
 function playModalOpenSound() {
   if (typeof SoundManager !== 'undefined') {
-    SoundManager.playSFX('pantallas_emergentes.mp3', 0.65);
+    SoundManager.playSFX('pantallas_emergentes.wav', 0.65);
     return;
   }
   if (!state.sfxEnabled) return;
@@ -1931,7 +1931,7 @@ async function cargarBancoExclusivo(categoriaGanadora) {
     rutaArchivo = 'data/preguntas_videojuegos.json';
   } else if (cat === 'TV' || cat.includes('SERIE')) {
     rutaArchivo = 'data/preguntas_tv.json';
-  } else if (cat === 'MÚSICA' || cat === 'MUSICA') {
+  } else if (cat === 'MÚSICA' || cat === 'MUSICA' || cat.includes('MUS') || cat.includes('MÚS')) {
     rutaArchivo = 'data/preguntas_musica.json';
   } else if (cat === 'TODO' || cat === 'MIX') {
     esModoTodo = true;
@@ -2709,7 +2709,7 @@ function handleTriviaAnswer(selectedIndex) {
     window.state.lives = state.trivia.lives;
     updateTriviaHeartsUI();
     playErrorSound();
-    if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.mp3');
+    if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
 
     // 2. CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
     if (window.state.lives <= 0) {
@@ -2807,7 +2807,7 @@ function handleTriviaTimeout() {
   window.state.lives = state.trivia.lives;
   updateTriviaHeartsUI();
   playErrorSound();
-  if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.mp3');
+  if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
 
   // 2. CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
   if (window.state.lives <= 0) {
@@ -5057,48 +5057,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Toolbar Externa
-  document.getElementById('btnDebugGameOver')?.addEventListener('click', () => {
-    triggerGameOver('Prueba Game Over');
-  });
 
-  document.getElementById('btnDebugAbandonLoss')?.addEventListener('click', () => {
-    if (state.activeTab !== 'trivia') {
-      startTriviaSession('cine');
-    }
-    state.trivia.sessionCoins = 40;
-    updateRoundCoinsUI(40);
-    const abandonModal = document.getElementById('abandonModal');
-    if (abandonModal) {
-      abandonModal.style.display = 'flex';
-      pauseTriviaTimer();
-    }
-  });
-
-  document.getElementById('btnDebugResults')?.addEventListener('click', () => {
-    showResults(9);
-  });
-
-  document.getElementById('btnDebugChallenges')?.addEventListener('click', () => {
-    navigateToScreen('challengesView');
-  });
-
-  document.getElementById('btnDebugDuelWheel')?.addEventListener('click', () => {
-    setupDuelMatchUI('Usuario 2', '🕹️');
-    navigateToScreen('challengeMatchView');
-  });
-
-  document.getElementById('btnDebugDuelResults')?.addEventListener('click', () => {
-    showChallengeDuelResults(1, 4);
-  });
-
-  document.getElementById('btnDebugStore')?.addEventListener('click', () => {
-    navigateToScreen('storeView');
-  });
-
-  document.getElementById('btnDebugProfile')?.addEventListener('click', () => {
-    openProfileModal();
-  });
 
   window.debugShowProfile = function() {
     openProfileModal();

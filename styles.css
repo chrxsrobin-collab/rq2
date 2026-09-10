@@ -525,7 +525,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: max(20px, env(safe-area-inset-top, 20px)) 20px max(20px, env(safe-area-inset-bottom, 20px)) 20px;
   box-sizing: border-box;
   animation: htpFadeIn 0.2s ease forwards;
 }
@@ -4662,7 +4662,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: max(20px, env(safe-area-inset-top, 20px)) 20px max(20px, env(safe-area-inset-bottom, 20px)) 20px;
   animation: abandonOverlayFadeIn 0.2s ease forwards;
 }
 
@@ -7814,7 +7814,7 @@ input:checked + .slider:before {
   justify-content: space-around;
   border-top: var(--border-atomic);
   padding: 0 16px;
-  padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
   z-index: 30;
   box-sizing: border-box;
 }
