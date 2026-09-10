@@ -69,7 +69,7 @@
           </div>
 
           <!-- 1. BARRA SUPERIOR (HEADER) -->
-          <header class="game-header anim-enter-top" style="--delay: 0.15s;">
+          <header class="game-header top-hud anim-enter-top" style="--delay: 0.15s;">
             <!-- Pastilla de Monedas -->
             <div class="coin-pill interactive-press" id="btnCoinPill" role="button" tabindex="0" title="Ver Tienda de Monedas">
               <div class="coin-icon-wrapper">
@@ -84,27 +84,28 @@
             </button>
           </header>
 
-          <!-- 2. LOGO Y SUBTÍTULO -->
-          <section class="hero-section">
-            <!-- Logo RETRO QUIZ animado -->
-            <div class="logo-container anim-enter-logo" style="--delay: 0.3s;">
-              <img src="assets/pantalla_inicio/logo_retroquiz.webp" alt="Retro Quiz Logo" class="retro-logo-img">
-            </div>
+          <!-- 2. BLOQUE CENTRAL (LOGO Y PERSONAJES) -->
+          <div class="hero-container">
+            <!-- LOGO Y SUBTÍTULO -->
+            <section class="hero-section">
+              <!-- Logo RETRO QUIZ animado -->
+              <div class="logo-container anim-enter-logo" style="--delay: 0.3s;">
+                <img src="assets/pantalla_inicio/logo_retroquiz.webp" alt="Retro Quiz Logo" class="retro-logo-img">
+              </div>
+            </section>
 
-
-          </section>
-
-          <!-- 3. PERSONAJES (FLOTANDO Y DINÁMICOS) -->
-          <section class="characters-stage avatar-container anim-enter-chars" style="--delay: 0.55s;" role="button" tabindex="0" title="Ver Perfil">
-            <!-- Personaje Hombre -->
-            <div class="character-wrapper char-hombre-wrap float-hombre" role="button" tabindex="0" title="Ver Perfil">
-              <img src="assets/pantalla_inicio/hombre.webp" alt="Personaje Retro Hombre" class="char-img char-hombre">
-            </div>
-            <!-- Personaje Mujer -->
-            <div class="character-wrapper char-mujer-wrap float-mujer" role="button" tabindex="0" title="Ver Perfil">
-              <img src="assets/pantalla_inicio/mujer.webp" alt="Personaje Retro Mujer" class="char-img char-mujer">
-            </div>
-          </section>
+            <!-- 3. PERSONAJES (FLOTANDO Y DINÁMICOS) -->
+            <section class="characters-stage avatar-container anim-enter-chars" style="--delay: 0.55s;" role="button" tabindex="0" title="Ver Perfil">
+              <!-- Personaje Hombre -->
+              <div class="character-wrapper char-hombre-wrap float-hombre" role="button" tabindex="0" title="Ver Perfil">
+                <img src="assets/pantalla_inicio/hombre.webp" alt="Personaje Retro Hombre" class="char-img char-hombre">
+              </div>
+              <!-- Personaje Mujer -->
+              <div class="character-wrapper char-mujer-wrap float-mujer" role="button" tabindex="0" title="Ver Perfil">
+                <img src="assets/pantalla_inicio/mujer.webp" alt="Personaje Retro Mujer" class="char-img char-mujer">
+              </div>
+            </section>
+          </div>
 
           <!-- 4. BOTONERA DE ACCIÓN -->
           <section class="actions-section">
