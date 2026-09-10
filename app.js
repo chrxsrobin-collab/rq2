@@ -54,6 +54,12 @@ const state = {
   bio: "",
   coins: 0,
   xp: 0,
+  stats: {
+    totalQuestions: 0,
+    correctAnswers: 0,
+    maxStreak: 0,
+    currentStreak: 0
+  },
   userScore: 0, // Puntaje/XP acumulado del usuario
   winStreak: 0, // Racha de victorias consecutivas
   currentStreak: 0, // Racha de respuestas correctas
@@ -148,6 +154,18 @@ const state = {
 state.currentView = '#homeView';
 window.state = state;
 window.state.currentView = '#homeView';
+
+// Cargar estadísticas guardadas del jugador
+try {
+  const savedStats = localStorage.getItem('retroquiz_stats');
+  if (savedStats) {
+    const parsed = JSON.parse(savedStats);
+    state.stats.totalQuestions = Number(parsed.totalQuestions) || 0;
+    state.stats.correctAnswers = Number(parsed.correctAnswers) || 0;
+    state.stats.maxStreak = Number(parsed.maxStreak) || 0;
+    state.stats.currentStreak = Number(parsed.currentStreak) || 0;
+  }
+} catch (e) {}
 
 // Categorías y configuración de ángulos en ruleta_musica_todo.webp
 const categoriesConfig = {
@@ -2630,6 +2648,7 @@ function handleTriviaAnswer(selectedIndex) {
   if (isCorrect) {
     // Verde neón si acierta (animación de monedas al HUD)
     if (selectedBtn) selectedBtn.classList.add('option-correct');
+    recordTriviaAnswerResult(true);
 
     state.trivia.currentStreak = (state.trivia.currentStreak || 0) + 1;
     state.trivia.correctAnswersCount = (state.trivia.correctAnswersCount || 0) + 1;
@@ -2714,6 +2733,7 @@ function handleTriviaAnswer(selectedIndex) {
   } else {
     // Rojo si falla (revela correcta en verde y resta 1 vida)
     if (selectedBtn) selectedBtn.classList.add('option-wrong');
+    recordTriviaAnswerResult(false);
     btns.forEach(b => {
       const bText = b.getAttribute('data-text') || b.querySelector('.option-text')?.innerText || '';
       if (bText === correctText) {
@@ -2820,6 +2840,7 @@ function handleTriviaTimeout() {
   }
 
   state.trivia.currentStreak = 0; // Reiniciar racha al agotarse el tiempo
+  recordTriviaAnswerResult(false);
   state.trivia.lives--;
   window.state.lives = state.trivia.lives;
   updateTriviaHeartsUI();
@@ -3825,18 +3846,120 @@ function setupNoAdsFeature() {
   }
 }
 
+// =============================================================================
+// ESTADÍSTICAS Y GESTIÓN DE PERFIL (#profileView)
+// =============================================================================
+function updateProfileStatsUI() {
+  const currentStats = (window.state && window.state.stats) || (state && state.stats) || { totalQuestions: 0, correctAnswers: 0, maxStreak: 0 };
+  const accEl = document.getElementById('profileAccuracy');
+  const corEl = document.getElementById('profileCorrectCount');
+  const strEl = document.getElementById('profileMaxStreak');
+
+  const total = Number(currentStats.totalQuestions) || 0;
+  const correct = Number(currentStats.correctAnswers) || 0;
+  const maxStr = Number(currentStats.maxStreak) || 0;
+
+  const accPercent = total > 0 ? Math.round((correct / total) * 100) + '%' : '0%';
+
+  if (accEl) accEl.textContent = accPercent;
+  if (corEl) corEl.textContent = String(correct);
+  if (strEl) strEl.textContent = String(maxStr);
+}
+window.updateProfileStatsUI = updateProfileStatsUI;
+
+function updatePlayerNameAcrossApp(newName) {
+  if (!newName) return;
+  if (state) state.username = newName;
+  if (window.state) window.state.username = newName;
+
+  // 1. Tarjeta en Ranking (#userRankName)
+  const userRankNameEl = document.getElementById('userRankName');
+  if (userRankNameEl) {
+    userRankNameEl.textContent = `${newName} (Tú)`;
+    userRankNameEl.style.color = '#FFFFFF';
+  }
+
+  // 2. Jugador Local en Duelo
+  const localDuelNameEl = document.querySelector('.duel-player-local .duel-player-name');
+  if (localDuelNameEl) {
+    localDuelNameEl.textContent = newName;
+  }
+
+  // 3. Tarjetas de Desafíos activos (slots de usuario)
+  document.querySelectorAll('.player-slot.player-user .player-name').forEach(el => {
+    el.textContent = newName;
+  });
+
+  // 4. Saludos o tarjetas HUD si existen
+  const homePlayerName = document.getElementById('homePlayerName') || document.querySelector('.home-player-name') || document.querySelector('.user-display-name');
+  if (homePlayerName) {
+    homePlayerName.textContent = newName;
+  }
+}
+window.updatePlayerNameAcrossApp = updatePlayerNameAcrossApp;
+
+function recordTriviaAnswerResult(isCorrect) {
+  if (!state.stats) {
+    state.stats = { totalQuestions: 0, correctAnswers: 0, maxStreak: 0, currentStreak: 0 };
+  }
+  state.stats.totalQuestions = (Number(state.stats.totalQuestions) || 0) + 1;
+  if (isCorrect) {
+    state.stats.correctAnswers = (Number(state.stats.correctAnswers) || 0) + 1;
+    state.stats.currentStreak = (Number(state.stats.currentStreak) || 0) + 1;
+    if (state.stats.currentStreak > (Number(state.stats.maxStreak) || 0)) {
+      state.stats.maxStreak = state.stats.currentStreak;
+    }
+  } else {
+    state.stats.currentStreak = 0;
+  }
+  if (window.state) {
+    window.state.stats = { ...state.stats };
+  }
+  try {
+    localStorage.setItem('retroquiz_stats', JSON.stringify({
+      totalQuestions: state.stats.totalQuestions,
+      correctAnswers: state.stats.correctAnswers,
+      maxStreak: state.stats.maxStreak
+    }));
+  } catch (e) {}
+
+  updateProfileStatsUI();
+
+  // Guardar en Firestore si el usuario está conectado
+  if (window.db && window.firestoreOps && window.state && window.state.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      const userRef = doc(window.db, "usuarios", window.state.userId);
+      updateDoc(userRef, {
+        stats: {
+          totalQuestions: state.stats.totalQuestions,
+          correctAnswers: state.stats.correctAnswers,
+          maxStreak: state.stats.maxStreak
+        },
+        updatedAt: new Date().toISOString()
+      }).catch(err => console.warn("Error actualizando stats en Firestore:", err));
+    } catch (e) {}
+  }
+}
+window.recordTriviaAnswerResult = recordTriviaAnswerResult;
+
 function setupProfileUserFields() {
-  const nameInput = document.getElementById('profileUserNameInput');
+  const nameInput = document.getElementById('profileUsernameInput') || document.getElementById('profileUserNameInput');
   const editBtn = document.getElementById('btnEditUserName');
   const bioInput = document.getElementById('profileBioInput');
 
   // Sincronizar valores actuales
-  const currentUsername = (state && state.username) || (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || '';
+  const savedUsername = localStorage.getItem('retroquiz_username');
+  const hasSavedName = (window.state && window.state.username) || (state && state.username) || savedUsername || '';
   const currentBio = (state && state.bio) || (window.state && window.state.bio) || localStorage.getItem('retroquiz_bio') || '';
 
   if (nameInput) {
-    nameInput.value = currentUsername;
-    nameInput.placeholder = "Tu nombre de usuario...";
+    if (hasSavedName) {
+      nameInput.value = hasSavedName;
+    } else {
+      nameInput.value = '';
+    }
+    nameInput.placeholder = "Introduce tu nombre de usuario...";
   }
   if (bioInput) {
     bioInput.value = currentBio;
@@ -3849,7 +3972,6 @@ function setupProfileUserFields() {
     const saveName = async () => {
       const val = nameInput.value.trim();
       if (!val) {
-        nameInput.value = state.username || window.state?.username || '';
         return;
       }
       nameInput.value = val;
@@ -3860,6 +3982,9 @@ function setupProfileUserFields() {
       } catch (err) {
         console.warn('Error saving username:', err);
       }
+
+      // Actualizar inmediatamente en toda la app
+      updatePlayerNameAcrossApp(val);
 
       // Actualizar en Firestore inmediatamente con updateDoc
       if (window.db && window.firestoreOps && window.state && window.state.userId) {
@@ -4016,6 +4141,7 @@ function openProfileModal() {
   if (!p) return;
 
   setupProfileUserFields();
+  updateProfileStatsUI();
 
   // Mantén visible #homeView de fondo si no hay otra vista abierta
   const homeView = document.getElementById('homeView');
@@ -4515,6 +4641,11 @@ async function syncUserProfileWithCloud(uid) {
         bio: defaultBio,
         coins: 0,
         xp: 0,
+        stats: {
+          totalQuestions: Number(state.stats?.totalQuestions) || 0,
+          correctAnswers: Number(state.stats?.correctAnswers) || 0,
+          maxStreak: Number(state.stats?.maxStreak) || 0
+        },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -4560,6 +4691,18 @@ async function syncUserProfileWithCloud(uid) {
         if (window.state) window.state.bio = data.bio;
         localStorage.setItem('retroquiz_bio', data.bio);
       }
+      if (data.stats && typeof data.stats === 'object') {
+        if (!state.stats) state.stats = { totalQuestions: 0, correctAnswers: 0, maxStreak: 0, currentStreak: 0 };
+        state.stats.totalQuestions = Number(data.stats.totalQuestions) || 0;
+        state.stats.correctAnswers = Number(data.stats.correctAnswers) || 0;
+        state.stats.maxStreak = Number(data.stats.maxStreak) || 0;
+        if (window.state) {
+          window.state.stats = { ...state.stats };
+        }
+        try {
+          localStorage.setItem('retroquiz_stats', JSON.stringify(state.stats));
+        } catch (e) {}
+      }
       if (Array.isArray(data.challenges)) {
         state.challenges = data.challenges;
       } else {
@@ -4570,6 +4713,7 @@ async function syncUserProfileWithCloud(uid) {
     updateHUD();
     renderChallengesUI();
     setupProfileUserFields();
+    updateProfileStatsUI();
     if (typeof initRealtimeChallengesListener === 'function') {
       initRealtimeChallengesListener(uid);
     }
@@ -4604,6 +4748,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupProfileAvatar();
   setupNoAdsFeature();
   setupProfileUserFields();
+  updateProfileStatsUI();
   setupAudioSettingsPersistence();
   setupProfileNavigationEvents();
   updatePendingChallengesBadge();
