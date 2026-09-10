@@ -1,0 +1,407 @@
+[
+  {
+    "id": "game_001",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llamaba originalmente Mario en su debut en el arcade 'Donkey Kong' (1981)?",
+    "emojis": "🦍 🔨 🍄",
+    "opciones": ["Jumpman", "Mr. Video", "Plumber Man", "Super Mario"],
+    "respuesta_correcta": "Jumpman"
+  },
+  {
+    "id": "game_002",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué accesorio para Game Boy permitía imprimir fotografías en papel térmico adhesivo?",
+    "emojis": "🎮 📸 🖨️",
+    "opciones": ["Game Boy Printer", "Pocket Photo", "Nintendo Print", "SnapBoy"],
+    "respuesta_correcta": "Game Boy Printer"
+  },
+  {
+    "id": "game_003",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es el legendario código Konami clásico introducido en 'Gradius' y popularizado en 'Contra'?",
+    "emojis": "⬆️ ⬇️ 🕹️",
+    "opciones": [
+      "Arriba Arriba Abajo Abajo Izq Der Izq Der B A",
+      "Arriba Abajo Izq Der Arriba Abajo B A B A",
+      "Arriba Arriba Abajo Abajo A B A B Select Start",
+      "Izq Der Izq Der Arriba Abajo B A Select Start"
+    ],
+    "respuesta_correcta": "Arriba Arriba Abajo Abajo Izq Der Izq Der B A"
+  },
+  {
+    "id": "game_004",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué erizo azul debutó en Sega Genesis en 1991 como la mascota oficial de la marca?",
+    "emojis": "🦔 💨 💍",
+    "opciones": ["Sonic the Hedgehog", "Shadow", "Knuckles", "Tails"],
+    "respuesta_correcta": "Sonic the Hedgehog"
+  },
+  {
+    "id": "game_005",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la ciudad submarina distópica donde transcurre 'BioShock' (2007)?",
+    "emojis": "🌊 🏙️ 💉",
+    "opciones": ["Rapture", "Columbia", "Atlantis", "New Carthage"],
+    "respuesta_correcta": "Rapture"
+  },
+  {
+    "id": "game_006",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué año se lanzó la consola original Sony PlayStation en Japón?",
+    "emojis": "💿 🕹️ 🇯🇵",
+    "opciones": ["1994", "1995", "1993", "1996"],
+    "respuesta_correcta": "1994"
+  },
+  {
+    "id": "game_007",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué criatura fantástica monta Link en 'The Legend of Zelda: Ocarina of Time'?",
+    "emojis": "🗡️ 🛡️ 🐎",
+    "opciones": ["Epona", "Roach", "Agro", "Shadowmere"],
+    "respuesta_correcta": "Epona"
+  },
+  {
+    "id": "game_008",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué frase icónica pronuncia el narrador al inicio de 'Mortal Kombat' antes de un golpe letal?",
+    "emojis": "🥋 🩸 💀",
+    "opciones": ["Finish Him!", "Fatality Now!", "Kill Him!", "Fight to Death!"],
+    "respuesta_correcta": "Finish Him!"
+  },
+  {
+    "id": "game_009",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es la raza alienígena principal que sirve como infantería en el Covenant de 'Halo'?",
+    "emojis": "🪐 👽 🔫",
+    "opciones": ["Grunts (Unggoy)", "Elites (Sangheili)", "Jackals (Kig-Yar)", "Brutes (Jiralhanae)"],
+    "respuesta_correcta": "Grunts (Unggoy)"
+  },
+  {
+    "id": "game_010",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué vehículo espacial pilotea Fox McCloud junto a su equipo en 'Star Fox 64'?",
+    "emojis": "🦊 🚀 🌌",
+    "opciones": ["Arwing", "Landmaster", "Blue Falcon", "Great Fox"],
+    "respuesta_correcta": "Arwing"
+  },
+  {
+    "id": "game_011",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el protagonista de la saga 'The Legend of Zelda'?",
+    "emojis": "🧝‍♂️ 🗡️ 🛡️",
+    "opciones": ["Link", "Zelda", "Ganon", "Sheik"],
+    "respuesta_correcta": "Link"
+  },
+  {
+    "id": "game_012",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué compañía de videojuegos desarrolló originalmente 'Crash Bandicoot' en 1996?",
+    "emojis": "🦊 🍎 📦",
+    "opciones": ["Naughty Dog", "Insomniac Games", "Rare", "Capcom"],
+    "respuesta_correcta": "Naughty Dog"
+  },
+  {
+    "id": "game_013",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la ciudad ficticia infestada de zombis donde se ambienta 'Resident Evil 2'?",
+    "emojis": "🧟‍♂️ 🚓 🧪",
+    "opciones": ["Raccoon City", "Silent Hill", "Black Mesa", "Midgar"],
+    "respuesta_correcta": "Raccoon City"
+  },
+  {
+    "id": "game_014",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué personaje esférico amarillo debutó en salas arcade comiendo puntos en 1980?",
+    "emojis": "🟡 👻 🍒",
+    "opciones": ["Pac-Man", "Q*bert", "Dig Dug", "Frogger"],
+    "respuesta_correcta": "Pac-Man"
+  },
+  {
+    "id": "game_015",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué año se lanzó al mercado la consola Super Nintendo (SNES) en Norteamérica?",
+    "emojis": "🎮 📺 🇺🇸",
+    "opciones": ["1991", "1989", "1993", "1990"],
+    "respuesta_correcta": "1991"
+  },
+  {
+    "id": "game_016",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué arma mítica blande Cloud Strife en 'Final Fantasy VII'?",
+    "emojis": "⚔️ ⚡ 🪨",
+    "opciones": ["Espada Mortal (Buster Sword)", "Gunblade", "Master Sword", "Masamune"],
+    "respuesta_correcta": "Espada Mortal (Buster Sword)"
+  },
+  {
+    "id": "game_017",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el antagonista principal con aspecto de dragón/tortuga en Super Mario?",
+    "emojis": "🐢 👑 🔥",
+    "opciones": ["Bowser", "Wario", "Kamek", "Waluigi"],
+    "respuesta_correcta": "Bowser"
+  },
+  {
+    "id": "game_018",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué clásico shooter de PC de 1993 fue desarrollado por id Software y popularizó el género FPS?",
+    "emojis": "👹 🔫 🩸",
+    "opciones": ["DOOM", "Wolfenstein 3D", "Quake", "Duke Nukem 3D"],
+    "respuesta_correcta": "DOOM"
+  },
+  {
+    "id": "game_019",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es el nombre del protagonista y líder de la rebelión en 'Half-Life'?",
+    "emojis": "🥼 🪓 🧪",
+    "opciones": ["Gordon Freeman", "Barney Calhoun", "Eli Vance", "Adrian Shephard"],
+    "respuesta_correcta": "Gordon Freeman"
+  },
+  {
+    "id": "game_020",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué Pokémon ocupa el número 025 en la Pokédex Nacional?",
+    "emojis": "⚡ 🐭 🎒",
+    "opciones": ["Pikachu", "Raichu", "Charmander", "Squirtle"],
+    "respuesta_correcta": "Pikachu"
+  },
+  {
+    "id": "game_021",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la consola de 128 bits lanzada por Sega en 1998/1999 con módem integrado?",
+    "emojis": "🌀 💿 🕹️",
+    "opciones": ["Dreamcast", "Saturn", "Genesis", "Game Gear"],
+    "respuesta_correcta": "Dreamcast"
+  },
+  {
+    "id": "game_022",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué personaje femenino arqueólogo protagoniza la clásica franquicia 'Tomb Raider'?",
+    "emojis": "🏺 🔫 🧗‍♀️",
+    "opciones": ["Lara Croft", "Jill Valentine", "Samus Aran", "Joanna Dark"],
+    "respuesta_correcta": "Lara Croft"
+  },
+  {
+    "id": "game_023",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué objeto arrojan los jugadores de 'Mario Kart' para rastrear y derribar al que va en primer lugar?",
+    "emojis": "🐢 🏎️ 💥",
+    "opciones": ["Caparazón Azul con alas", "Caparazón Rojo", "Plátano Gigante", "Bomba Bob-omb"],
+    "respuesta_correcta": "Caparazón Azul con alas"
+  },
+  {
+    "id": "game_024",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué entrega de la saga Grand Theft Auto tomamos el control de Carl 'CJ' Johnson?",
+    "emojis": "🚲 🔫 🏙️",
+    "opciones": ["GTA: San Andreas", "GTA: Vice City", "GTA III", "GTA IV"],
+    "respuesta_correcta": "GTA: San Andreas"
+  },
+  {
+    "id": "game_025",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el zorro de dos colas que acompaña a Sonic en sus aventuras?",
+    "emojis": "🦊 ✈️ 🌀",
+    "opciones": ["Miles 'Tails' Prower", "Knuckles", "Shadow", "Silver"],
+    "respuesta_correcta": "Miles 'Tails' Prower"
+  },
+  {
+    "id": "game_026",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué artefacto del traje espacial lleva Samus Aran en su brazo derecho en 'Metroid'?",
+    "emojis": "🚀 🤖 💥",
+    "opciones": ["Cañón de plasma (Arm Cannon)", "Gancho magnético", "Láser térmico", "Espada de energía"],
+    "respuesta_correcta": "Cañón de plasma (Arm Cannon)"
+  },
+  {
+    "id": "game_027",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué mítico juego arcade de puzles soviético fue creado por Alekséi Pázhitnov en 1984?",
+    "emojis": "🧱 🟦 🇷🇺",
+    "opciones": ["Tetris", "Columns", "Puyo Puyo", "Klax"],
+    "respuesta_correcta": "Tetris"
+  },
+  {
+    "id": "game_028",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el protagonista silencioso de la saga de espionaje 'Metal Gear Solid'?",
+    "emojis": "📦 🐍 🚬",
+    "opciones": ["Solid Snake", "Liquid Snake", "Revolver Ocelot", "Raiden"],
+    "respuesta_correcta": "Solid Snake"
+  },
+  {
+    "id": "game_029",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué franquicia de peleas de Capcom introdujo el movimiento 'Hadoken'?",
+    "emojis": "🥋 🔵 👊",
+    "opciones": ["Street Fighter", "Darkstalkers", "Tekken", "Fatal Fury"],
+    "respuesta_correcta": "Street Fighter"
+  },
+  {
+    "id": "game_030",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué consola portátil de Nintendo lanzada en 2001 funcionaba con cartuchos de 32 bits?",
+    "emojis": "🎮 🟣 👾",
+    "opciones": ["Game Boy Advance", "Game Boy Color", "Nintendo DS", "Game Boy Pocket"],
+    "respuesta_correcta": "Game Boy Advance"
+  },
+  {
+    "id": "game_031",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el pueblo con niebla constante creado por Konami en el survival horror de 1999?",
+    "emojis": "🌫️ 📻 🔦",
+    "opciones": ["Silent Hill", "Raccoon City", "Bright Falls", "Ravenholm"],
+    "respuesta_correcta": "Silent Hill"
+  },
+  {
+    "id": "game_032",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es la profesión original de Guybrush Threepwood en 'The Secret of Monkey Island'?",
+    "emojis": "🏴‍☠️ 🐵 ⚔️",
+    "opciones": ["Aspirante a pirata", "Grumete naval", "Comerciante de ron", "Gobernador colonial"],
+    "respuesta_correcta": "Aspirante a pirata"
+  },
+  {
+    "id": "game_033",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué legendaria consola de Nintendo venía de serie con dos puertos de control y el juego 'Duck Hunt'?",
+    "emojis": "🕹️ 🦆 🔫",
+    "opciones": ["NES", "SNES", "Nintendo 64", "GameCube"],
+    "respuesta_correcta": "NES"
+  },
+  {
+    "id": "game_034",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el robot azul creado por el Dr. Light en la saga de Capcom?",
+    "emojis": "🤖 🔵 ⚡",
+    "opciones": ["Mega Man", "Proto Man", "Bass", "Zero"],
+    "respuesta_correcta": "Mega Man"
+  },
+  {
+    "id": "game_035",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué juego de rol masivo en línea (MMORPG) lanzó Blizzard en noviembre de 2004?",
+    "emojis": "⚔️ 🛡️ 🐉",
+    "opciones": ["World of Warcraft", "Diablo II", "StarCraft", "EverQuest"],
+    "respuesta_correcta": "World of Warcraft"
+  },
+  {
+    "id": "game_036",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué botón del control de Nintendo 64 estaba ubicado en la empuñadura trasera central?",
+    "emojis": "🎮 🔴 🕹️",
+    "opciones": ["Gatillo Z", "Botón R", "Botón C-Abajo", "Botón Start"],
+    "respuesta_correcta": "Gatillo Z"
+  },
+  {
+    "id": "game_037",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el dragón morado protagonista de la serie de plataformas en PlayStation?",
+    "emojis": "🐲 🟣 💎",
+    "opciones": ["Spyro", "Sparx", "Ripto", "Crash"],
+    "respuesta_correcta": "Spyro"
+  },
+  {
+    "id": "game_038",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es la moneda ficticia utilizada en la saga 'The Legend of Zelda'?",
+    "emojis": "💎 🗡️ 🛡️",
+    "opciones": ["Rupias", "Giles", "Monedas estrella", "Zenny"],
+    "respuesta_correcta": "Rupias"
+  },
+  {
+    "id": "game_039",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué compañía fabricó la consola Neo Geo en la década de 1990?",
+    "emojis": "🕹️ 🪙 🇯🇵",
+    "opciones": ["SNK", "Capcom", "Namco", "Sega"],
+    "respuesta_correcta": "SNK"
+  },
+  {
+    "id": "game_040",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el soldado Spartan con armadura verde protagonista de 'Halo'?",
+    "emojis": "🪖 🟢 🪐",
+    "opciones": ["Master Chief (John-117)", "Noble Six", "Cortana", "Sgt. Johnson"],
+    "respuesta_correcta": "Master Chief (John-117)"
+  },
+  {
+    "id": "game_041",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué juego de lucha de Namco tiene a combatientes como Jin Kazama, Kazuya y Heihachi?",
+    "emojis": "👊 🥋 🔥",
+    "opciones": ["Tekken", "Virtua Fighter", "Soulcalibur", "Dead or Alive"],
+    "respuesta_correcta": "Tekken"
+  },
+  {
+    "id": "game_042",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué año se lanzó en cines y consolas el fenómeno 'Pokémon Rojo y Azul' en Norteamérica?",
+    "emojis": "🔴 🔵 🎮",
+    "opciones": ["1998", "1996", "1999", "1997"],
+    "respuesta_correcta": "1998"
+  },
+  {
+    "id": "game_043",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la IA que somete a pruebas con portales a Chell en 'Portal' (2007)?",
+    "emojis": "🤖 🍰 🔵",
+    "opciones": ["GLaDOS", "Wheatley", "SHODAN", "Cortana"],
+    "respuesta_correcta": "GLaDOS"
+  },
+  {
+    "id": "game_044",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué saga de acción histórica de Ubisoft debutó en 2007 con el asesino Altaïr Ibn-La'Ahad?",
+    "emojis": "🦅 🗡️ 🏰",
+    "opciones": ["Assassin's Creed", "Prince of Persia", "Splinter Cell", "Rayman"],
+    "respuesta_correcta": "Assassin's Creed"
+  },
+  {
+    "id": "game_045",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué animal antropomórfico con corbata roja es el protagonista en 'Donkey Kong Country'?",
+    "emojis": "🦍 👔 🍌",
+    "opciones": ["Donkey Kong", "Diddy Kong", "Cranky Kong", "Funky Kong"],
+    "respuesta_correcta": "Donkey Kong"
+  },
+  {
+    "id": "game_046",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál fue la primera consola de videojuegos doméstica comercial de la historia, lanzada en 1972?",
+    "emojis": "📺 🕹️ 📜",
+    "opciones": ["Magnavox Odyssey", "Atari 2600", "ColecoVision", "Fairchild Channel F"],
+    "respuesta_correcta": "Magnavox Odyssey"
+  },
+  {
+    "id": "game_047",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la espada viviente con cadena de Kratos en 'God of War'?",
+    "emojis": "⚔️ ⛓️ 🩸",
+    "opciones": ["Espadas del Caos", "Espada del Olimpo", "Garras de Hades", "Hacha Leviatán"],
+    "respuesta_correcta": "Espadas del Caos"
+  },
+  {
+    "id": "game_048",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué desarrolladora escocesa creó 'Grand Theft Auto' antes de renombrarse Rockstar North?",
+    "emojis": "🏴󠁧󠁢󠁳󠁣󠁴󠁿 🚗 💾",
+    "opciones": ["DMA Design", "Bungie", "Psygnosis", "Core Design"],
+    "respuesta_correcta": "DMA Design"
+  },
+  {
+    "id": "game_049",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama la princesa gobernante del Mushroom Kingdom en Super Mario?",
+    "emojis": "👸 👑 🍄",
+    "opciones": ["Peach", "Daisy", "Rosalina", "Pauline"],
+    "respuesta_correcta": "Peach"
+  },
+  {
+    "id": "game_050",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué título de estrategia en tiempo real de Blizzard de 1998 enfrentó a Terran, Zerg y Protoss?",
+    "emojis": "🚀 👽 ⚔️",
+    "opciones": ["StarCraft", "Warcraft III", "Command & Conquer", "Age of Empires"],
+    "respuesta_correcta": "StarCraft"
+  }
+]

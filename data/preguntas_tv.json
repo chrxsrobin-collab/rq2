@@ -1,0 +1,402 @@
+[
+  {
+    "id": "tv_001",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llama la cafetería neoyorquina donde se reunía el grupo en 'Friends'?",
+    "emojis": "☕ 🛋️ 🗽",
+    "opciones": ["Central Perk", "Monk's Diner", "MacLaren's", "The Peach Pit"],
+    "respuesta_correcta": "Central Perk"
+  },
+  {
+    "id": "tv_002",
+    "categoria": "TV",
+    "pregunta": "¿Qué número de barril utilizaba El Chavo del 8 como su escondite habitual en la vecindad?",
+    "emojis": "🪵 🧢 🥪",
+    "opciones": ["El barril no tenía número", "Barril número 8", "Barril número 14", "Barril número 72"],
+    "respuesta_correcta": "El barril no tenía número"
+  },
+  {
+    "id": "tv_003",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era la frase de optimismo alienígena en el póster del agente Mulder en 'The X-Files'?",
+    "emojis": "🛸 👽 🌲",
+    "opciones": ["I Want to Believe", "The Truth is Out There", "Trust No One", "Watch the Skies"],
+    "respuesta_correcta": "I Want to Believe"
+  },
+  {
+    "id": "tv_004",
+    "categoria": "TV",
+    "pregunta": "¿En qué empresa de modas trabajaba Beatriz Pinzón Solano en 'Yo soy Betty, la fea'?",
+    "emojis": "👓 💼 👗",
+    "opciones": ["Ecomoda", "Terramoda", "Moda Express", "Fashion Colombia"],
+    "respuesta_correcta": "Ecomoda"
+  },
+  {
+    "id": "tv_005",
+    "categoria": "TV",
+    "pregunta": "¿Qué número de vuelo se estrelló en la misteriosa isla de 'Lost' (2004)?",
+    "emojis": "✈️ 🏝️ 🔢",
+    "opciones": ["Oceanic 815", "Oceanic 777", "Pacific 815", "Ajira 316"],
+    "respuesta_correcta": "Oceanic 815"
+  },
+  {
+    "id": "tv_006",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era el arma clásica utilizada por El Chapulín Colorado para noquear a sus enemigos?",
+    "emojis": "🦗 🔨 💥",
+    "opciones": ["El Chipote Chillón", "Las Pastillas de Chiquitolina", "La Chicharra Paralizadora", "La Antenita de Vinil"],
+    "respuesta_correcta": "El Chipote Chillón"
+  },
+  {
+    "id": "tv_007",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llama la camioneta negra con franja roja de 'The A-Team' (Los Magníficos)?",
+    "emojis": "🚐 💥 🎖️",
+    "opciones": ["GMC Vandura", "Ford Econoline", "Chevy Van", "Dodge Ram Van"],
+    "respuesta_correcta": "GMC Vandura"
+  },
+  {
+    "id": "tv_008",
+    "categoria": "TV",
+    "pregunta": "¿Qué actor mexicano interpretó al mayordomo y al mismísimo Don Ramón en 'El Chavo del 8'?",
+    "emojis": "🥊 🧢 👴",
+    "opciones": ["Ramón Valdés", "Carlos Villagrán", "Rubén Aguirre", "Édgar Vivar"],
+    "respuesta_correcta": "Ramón Valdés"
+  },
+  {
+    "id": "tv_009",
+    "categoria": "TV",
+    "pregunta": "¿En qué ciudad ficticia vive la familia animada de Los Simpson?",
+    "emojis": "🍩 📺 🛹",
+    "opciones": ["Springfield", "Shelbyville", "Quahog", "South Park"],
+    "respuesta_correcta": "Springfield"
+  },
+  {
+    "id": "tv_010",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba la icónica villana interpretada por Itatí Cantoral en 'María la del Barrio'?",
+    "emojis": "🦽 🔪 🩸",
+    "opciones": ["Soraya Montenegro", "Paola Bracho", "Rubí Pérez", "Catalina Creel"],
+    "respuesta_correcta": "Soraya Montenegro"
+  },
+  {
+    "id": "tv_011",
+    "categoria": "TV",
+    "pregunta": "¿Qué vehículo inteligente con escáner frontal rojo conducía Michael Knight en 'Knight Rider'?",
+    "emojis": "🏎️ 🔴 🤖",
+    "opciones": ["KITT", "KARR", "DMC-12", "Cobra"],
+    "respuesta_correcta": "KITT"
+  },
+  {
+    "id": "tv_012",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el noticiero chileno de títeres conducido por Tulio Triviño?",
+    "emojis": "🎙️ 🐒 📰",
+    "opciones": ["31 Minutos", "El Show de Xuxa", "Plaza Sésamo", "Nubeluz"],
+    "respuesta_correcta": "31 Minutos"
+  },
+  {
+    "id": "tv_013",
+    "categoria": "TV",
+    "pregunta": "¿A qué suburbio adinerado se mudaba Will Smith en 'The Fresh Prince of Bel-Air'?",
+    "emojis": "👑 🏀 🧢",
+    "opciones": ["Bel-Air", "Beverly Hills", "Malibu", "Pasadena"],
+    "respuesta_correcta": "Bel-Air"
+  },
+  {
+    "id": "tv_014",
+    "categoria": "TV",
+    "pregunta": "¿Quién era el reportero conejo rojo estrella de notas verdes en '31 Minutos'?",
+    "emojis": "🐰 🎤 🌳",
+    "opciones": ["Juan Carlos Bodoque", "Policarpo Avendaño", "Mario Hugo", "Patana"],
+    "respuesta_correcta": "Juan Carlos Bodoque"
+  },
+  {
+    "id": "tv_015",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el misterioso pueblo boscoso del crimen de Laura Palmer en la serie de 1990?",
+    "emojis": "☕ 🌲 🦉",
+    "opciones": ["Twin Peaks", "Wayward Pines", "Riverdale", "Silent Hill"],
+    "respuesta_correcta": "Twin Peaks"
+  },
+  {
+    "id": "tv_016",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era la frase de resignación que decía El Chavo del 8 cuando algo salía mal?",
+    "emojis": "🪵 😢 🇲🇽",
+    "opciones": ["Fue sin querer queriendo", "Se me chispoteó", "Ya me dio cosa", "Eso, eso, eso"],
+    "respuesta_correcta": "Fue sin querer queriendo"
+  },
+  {
+    "id": "tv_017",
+    "categoria": "TV",
+    "pregunta": "¿Qué ocupación oficial de fachada usaba Tony Soprano en la serie 'The Sopranos'?",
+    "emojis": "🥩 💼 🚬",
+    "opciones": ["Gestión de residuos", "Club nocturno", "Carnicería", "Constructora"],
+    "respuesta_correcta": "Gestión de residuos"
+  },
+  {
+    "id": "tv_018",
+    "categoria": "TV",
+    "pregunta": "¿Qué presentador chileno condujo el maratónico programa 'Sábado Gigante' durante más de 50 años?",
+    "emojis": "📺 🎺 🇨🇱",
+    "opciones": ["Don Francisco", "Raúl Velasco", "Kike Morandé", "Felipe Camiroaga"],
+    "respuesta_correcta": "Don Francisco"
+  },
+  {
+    "id": "tv_019",
+    "categoria": "TV",
+    "pregunta": "¿Cuál es el nombre del perro cobarde que vivía con Muriel y Justo en medio de Ningún Lugar?",
+    "emojis": "🐶 🏚️ 👻",
+    "opciones": ["Coraje", "Ren", "Odie", "Spunky"],
+    "respuesta_correcta": "Coraje"
+  },
+  {
+    "id": "tv_020",
+    "categoria": "TV",
+    "pregunta": "¿Qué personaje de Roberto Gómez Bolaños era un doctor loco que traía una bolsa de papel?",
+    "emojis": "🩺 🛍️ 🤪",
+    "opciones": ["Doctor Chapatín", "Chómpiras", "Chaparrón Bonaparte", "Vicente Chambón"],
+    "respuesta_correcta": "Doctor Chapatín"
+  },
+  {
+    "id": "tv_021",
+    "categoria": "TV",
+    "pregunta": "¿En qué año se emitió el último episodio de la legendaria serie cómica 'Seinfeld'?",
+    "emojis": "🥣 🚪 🗽",
+    "opciones": ["1998", "1996", "2000", "1999"],
+    "respuesta_correcta": "1998"
+  },
+  {
+    "id": "tv_022",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el colegio de élite donde transcurría la telenovela juvenil 'Rebelde Way' (2002)?",
+    "emojis": "🎒 🎸 🇦🇷",
+    "opciones": ["Elite Way School", "Las Encinas", "Colegio Arrayanes", "San Bartolomé"],
+    "respuesta_correcta": "Elite Way School"
+  },
+  {
+    "id": "tv_023",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llama el extraterrestre peludo del planeta Melmac que adoraba comer gatos?",
+    "emojis": "🛸 🐱 🥪",
+    "opciones": ["ALF", "E.T.", "Mork", "Chewbacca"],
+    "respuesta_correcta": "ALF"
+  },
+  {
+    "id": "tv_024",
+    "categoria": "TV",
+    "pregunta": "¿Quién interpretaba a las gemelas Paulina Martínez y Paola Bracho en 'La Usurpadora' (1998)?",
+    "emojis": "💄 🪞 👠",
+    "opciones": ["Gabriela Spanic", "Adela Noriega", "Thalía", "Lucero"],
+    "respuesta_correcta": "Gabriela Spanic"
+  },
+  {
+    "id": "tv_025",
+    "categoria": "TV",
+    "pregunta": "¿Qué artefacto permitía a Zack Morris congelar el tiempo en 'Saved by the Bell'?",
+    "emojis": "📱 ⏰ 🏫",
+    "opciones": ["Time-out (mirando a cámara)", "Un reloj digital Casio", "Un teléfono móvil gigante", "Un silbato escolar"],
+    "respuesta_correcta": "Time-out (mirando a cámara)"
+  },
+  {
+    "id": "tv_026",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era la famosa frase de Quico para pedirle a su mamá que le pegara a Don Ramón?",
+    "emojis": "⛵ 👵 💢",
+    "opciones": ["¡Acúsalo con tu mamá!", "¡No me simpatizas!", "¡Chusma, chusma, pfff!", "¡Cállate que me desesperas!"],
+    "respuesta_correcta": "¡Chusma, chusma, pfff!"
+  },
+  {
+    "id": "tv_027",
+    "categoria": "TV",
+    "pregunta": "¿En qué ciudad patrullaban de noche los agentes Crockett y Tubbs en 'Miami Vice'?",
+    "emojis": "🌴 🏎️ 🦩",
+    "opciones": ["Miami", "Los Ángeles", "Las Vegas", "Honolulu"],
+    "respuesta_correcta": "Miami"
+  },
+  {
+    "id": "tv_028",
+    "categoria": "TV",
+    "pregunta": "¿Qué famosa animadora brasileña conducía 'El Show de Xuxa' con su nave espacial en los 90s?",
+    "emojis": "🚀 👱‍♀️ 🇧🇷",
+    "opciones": ["Xuxa", "Angélica", "Eliana", "Mara Maravilha"],
+    "respuesta_correcta": "Xuxa"
+  },
+  {
+    "id": "tv_029",
+    "categoria": "TV",
+    "pregunta": "¿Qué sustancia química añadieron por accidente para crear a 'The Powerpuff Girls'?",
+    "emojis": "🧪 👧 💥",
+    "opciones": ["Sustancia X", "Elemento 115", "Químico Z", "Fórmula Cero"],
+    "respuesta_correcta": "Sustancia X"
+  },
+  {
+    "id": "tv_030",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el chofer y bailarín de 'Pedro el Escamoso' que popularizó 'El Pirulino'?",
+    "emojis": "🕺 👢 🇨🇴",
+    "opciones": ["Pedro Coral Tavera", "Armando Mendoza", "Juan Reyes", "Aurelio Cheveroni"],
+    "respuesta_correcta": "Pedro Coral Tavera"
+  },
+  {
+    "id": "tv_031",
+    "categoria": "TV",
+    "pregunta": "¿Cuál es el nombre del creador y protagonista del laboratorio secreto en Cartoon Network?",
+    "emojis": "🥼 🧪 🧤",
+    "opciones": ["Dexter", "Mandark", "Dee Dee", "Johnny Bravo"],
+    "respuesta_correcta": "Dexter"
+  },
+  {
+    "id": "tv_032",
+    "categoria": "TV",
+    "pregunta": "¿Qué famosa conductora de televisión mexicana producía y presentaba 'Mujer, casos de la vida real'?",
+    "emojis": "💔 📜 🇲🇽",
+    "opciones": ["Silvia Pinal", "Verónica Castro", "Talina Fernández", "Lolita Ayala"],
+    "respuesta_correcta": "Silvia Pinal"
+  },
+  {
+    "id": "tv_033",
+    "categoria": "TV",
+    "pregunta": "¿Qué serie de los 90 seguía a un grupo de socorristas en traje de baño rojo en California?",
+    "emojis": "🏖️ 🏊‍♂️ 🛟",
+    "opciones": ["Baywatch", "Pacific Blue", "Melrose Place", "Sunset Beach"],
+    "respuesta_correcta": "Baywatch"
+  },
+  {
+    "id": "tv_034",
+    "categoria": "TV",
+    "pregunta": "¿Qué apodo tenía el grupo de amigas de la protagonista en 'Yo soy Betty, la fea'?",
+    "emojis": "👯‍♀️ ☕ 💅",
+    "opciones": ["El Cuartel de las Feas", "Las Chismosas de Ecomoda", "Las Terramodas", "El Club del Café"],
+    "respuesta_correcta": "El Cuartel de las Feas"
+  },
+  {
+    "id": "tv_035",
+    "categoria": "TV",
+    "pregunta": "¿Qué actor interpretó a Walter White en el inicio de 'Breaking Bad' (2008)?",
+    "emojis": "🧪 ⚗️ 🏜️",
+    "opciones": ["Bryan Cranston", "Aaron Paul", "Bob Odenkirk", "Giancarlo Esposito"],
+    "respuesta_correcta": "Bryan Cranston"
+  },
+  {
+    "id": "tv_036",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era la frase que decía el Chaparrón Bonaparte cuando le daba la chiripiorca?",
+    "emojis": "🎩 😵‍💫 🛋️",
+    "opciones": ["No hay de queso, nomás de papa", "¿Sabías que la gente sigue diciendo que tú y yo estamos locos?", "Tómalo por el lado amable", "Pa' qué te digo que no si sí"],
+    "respuesta_correcta": "¿Sabías que la gente sigue diciendo que tú y yo estamos locos?"
+  },
+  {
+    "id": "tv_037",
+    "categoria": "TV",
+    "pregunta": "¿Quién era el vecino entrometido con peinado tupé que entraba derrapando a la casa de Jerry Seinfeld?",
+    "emojis": "🚪 🥪 🕺",
+    "opciones": ["Cosmo Kramer", "George Costanza", "Newman", "Uncle Leo"],
+    "respuesta_correcta": "Cosmo Kramer"
+  },
+  {
+    "id": "tv_038",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el programa infantil peruano de los 90 conducido por las 'Dalinas'?",
+    "emojis": "☁️ 🍭 🇵🇪",
+    "opciones": ["Nubeluz", "De Colores", "El Show de Yuly", "Karina y Timoteo"],
+    "respuesta_correcta": "Nubeluz"
+  },
+  {
+    "id": "tv_039",
+    "categoria": "TV",
+    "pregunta": "¿Qué detective usaba una gabardina arrugada y siempre decía: 'Solo una cosa más...'?",
+    "emojis": "🕵️‍♂️ 🧥 🚬",
+    "opciones": ["Columbo", "Kojak", "Magnum", "Monk"],
+    "respuesta_correcta": "Columbo"
+  },
+  {
+    "id": "tv_040",
+    "categoria": "TV",
+    "pregunta": "¿En qué vecindario humilde vivía la protagonista interpretada por Thalía en 'Marimar' (1994)?",
+    "emojis": "🌊 🐶 🛖",
+    "opciones": ["San Fernando del Valle", "San Martín de la Costa", "San Pedro de las Rocas", "Santa María del Mar"],
+    "respuesta_correcta": "San Martín de la Costa"
+  },
+  {
+    "id": "tv_041",
+    "categoria": "TV",
+    "pregunta": "¿Qué serie de comedia de los 80 mostraba a cuatro mujeres mayores conviviendo en Miami?",
+    "emojis": "👵 🍰 🌴",
+    "opciones": ["The Golden Girls", "Designing Women", "Murphy Brown", "Cheers"],
+    "respuesta_correcta": "The Golden Girls"
+  },
+  {
+    "id": "tv_042",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el perro que hablaba con pensamientos en la telenovela 'Marimar'?",
+    "emojis": "🐶 💭 🏖️",
+    "opciones": ["Pulgoso", "Chispas", "Firulais", "Dinamita"],
+    "respuesta_correcta": "Pulgoso"
+  },
+  {
+    "id": "tv_043",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el mayordomo sarcástico de la familia Banks en 'The Fresh Prince'?",
+    "emojis": "🤵 🍽️ 👑",
+    "opciones": ["Geoffrey", "Alfred", "Niles", "Jeeves"],
+    "respuesta_correcta": "Geoffrey"
+  },
+  {
+    "id": "tv_044",
+    "categoria": "TV",
+    "pregunta": "¿Qué trío de hermanos protagonizaba la telenovela colombiana 'Pasión de Gavilanes' (2003)?",
+    "emojis": "🤠 🐎 🌾",
+    "opciones": ["Los Hermanos Reyes", "Los Hermanos Elizondo", "Los Hermanos Guerrero", "Los Hermanos Peñalver"],
+    "respuesta_correcta": "Los Hermanos Reyes"
+  },
+  {
+    "id": "tv_045",
+    "categoria": "TV",
+    "pregunta": "¿En qué bar de Boston 'todos sabían tu nombre' en la famosa serie de comedia?",
+    "emojis": "🍻 🥜 🚪",
+    "opciones": ["Cheers", "Moe's Tavern", "MacLaren's", "Paddy's Pub"],
+    "respuesta_correcta": "Cheers"
+  },
+  {
+    "id": "tv_046",
+    "categoria": "TV",
+    "pregunta": "¿Qué personaje mexicano de comedia decía la frase '¡Fue horrible, fue horrible!'?",
+    "emojis": "👹 📺 🇲🇽",
+    "opciones": ["El Lonje Moco (Eugenio Derbez)", "El Chómpiras", "Armando Hoyos", "Ludovico P. Luche"],
+    "respuesta_correcta": "El Lonje Moco (Eugenio Derbez)"
+  },
+  {
+    "id": "tv_047",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el dinosaurio púrpura que cantaba 'Te quiero yo y tú a mí'?",
+    "emojis": "🦖 🟣 🎒",
+    "opciones": ["Barney", "Baby Bop", "Dino", "Denver"],
+    "respuesta_correcta": "Barney"
+  },
+  {
+    "id": "tv_048",
+    "categoria": "TV",
+    "pregunta": "¿Qué familia vivía en una casa cubierta de peluche en Ciudad Peluche?",
+    "emojis": "🧸 🛋️ 📺",
+    "opciones": ["La Familia P. Luche", "Una Familia de Diez", "Vecinos", "Los Polivoces"],
+    "respuesta_correcta": "La Familia P. Luche"
+  },
+  {
+    "id": "tv_049",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba la guardería donde trabajaba Fran Fine en 'The Nanny' antes de ser niñera?",
+    "emojis": "💄 👗 👠",
+    "opciones": ["Trabajaba en una tienda de novias", "Trabajaba en una escuela privada", "Trabajaba en un hospital infantil", "Era secretaria ejecutiva"],
+    "respuesta_correcta": "Trabajaba en una tienda de novias"
+  },
+  {
+    "id": "tv_050",
+    "categoria": "TV",
+    "pregunta": "¿Cuál era la frase icónica que pronunciaba Don Ramón cuando El Chavo le pegaba sin querer?",
+    "emojis": "🧢 🥊 😡",
+    "opciones": ["¡Tenía que ser el Chavo del 8!", "¡Qué pasó, qué pasó, vamos ahí!", "¡No te doy otra nomás porque...!", "¡Si serás, si serás!"],
+    "respuesta_correcta": "¡No te doy otra nomás porque...!"
+  }
+]

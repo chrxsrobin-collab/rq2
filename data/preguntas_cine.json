@@ -1,0 +1,407 @@
+[
+  {
+    "id": "cine_001",
+    "categoria": "CINE",
+    "pregunta": "¿Quién interpretó a Alan Grant en 'Jurassic Park' (1993)?",
+    "emojis": "🦖 🚙 🌴",
+    "opciones": ["Sam Neill", "Jeff Goldblum", "Laura Dern", "Richard Attenborough"],
+    "respuesta_correcta": "Sam Neill"
+  },
+  {
+    "id": "cine_002",
+    "categoria": "CINE",
+    "pregunta": "¿Qué modelo de auto modificó el 'Doc' Brown para viajar en el tiempo?",
+    "emojis": "⚡ 🚗 ⏰",
+    "opciones": ["DeLorean DMC-12", "Pontiac Firebird", "Ford Mustang", "Chevrolet Corvette"],
+    "respuesta_correcta": "DeLorean DMC-12"
+  },
+  {
+    "id": "cine_003",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó a Neo en la película 'The Matrix' (1999)?",
+    "emojis": "🕶️ 💊 🟢",
+    "opciones": ["Keanu Reeves", "Brad Pitt", "Will Smith", "Tom Cruise"],
+    "respuesta_correcta": "Keanu Reeves"
+  },
+  {
+    "id": "cine_004",
+    "categoria": "CINE",
+    "pregunta": "¿Quién dirigió el clásico de culto 'Pulp Fiction' (1994)?",
+    "emojis": "🍔 💼 🕺",
+    "opciones": ["Quentin Tarantino", "Martin Scorsese", "David Fincher", "Stanley Kubrick"],
+    "respuesta_correcta": "Quentin Tarantino"
+  },
+  {
+    "id": "cine_005",
+    "categoria": "CINE",
+    "pregunta": "¿Qué frase dice el T-800 antes de disparar en 'Terminator 2'?",
+    "emojis": "🤖 🕶️ 🔫",
+    "opciones": ["Hasta la vista, baby", "I will return", "Sayonara, amigo", "You are terminated"],
+    "respuesta_correcta": "Hasta la vista, baby"
+  },
+  {
+    "id": "cine_006",
+    "categoria": "CINE",
+    "pregunta": "¿En qué película de los 80 usan mochilas de protones para atrapar espectros?",
+    "emojis": "👻 ⚡ 🚫",
+    "opciones": ["Ghostbusters", "Gremlins", "The Goonies", "Beetlejuice"],
+    "respuesta_correcta": "Ghostbusters"
+  },
+  {
+    "id": "cine_007",
+    "categoria": "CINE",
+    "pregunta": "¿Quién dio vida al arqueólogo Indiana Jones en su trilogía clásica?",
+    "emojis": "🤠 🐍 🏺",
+    "opciones": ["Harrison Ford", "Mel Gibson", "Kurt Russell", "Bruce Willis"],
+    "respuesta_correcta": "Harrison Ford"
+  },
+  {
+    "id": "cine_008",
+    "categoria": "CINE",
+    "pregunta": "¿Cuál es la primera regla del club en 'Fight Club' (1999)?",
+    "emojis": "🧼 🥊 🤫",
+    "opciones": ["No hablar del club de la pelea", "Pelear sin camisa", "Traer un amigo nuevo", "Solo dos hombres por pelea"],
+    "respuesta_correcta": "No hablar del club de la pelea"
+  },
+  {
+    "id": "cine_009",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el villano con guante de cuchillas en 'A Nightmare on Elm Street'?",
+    "emojis": "🧤 🔪 💤",
+    "opciones": ["Freddy Krueger", "Jason Voorhees", "Michael Myers", "Leatherface"],
+    "respuesta_correcta": "Freddy Krueger"
+  },
+  {
+    "id": "cine_010",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al Joker en 'The Dark Knight' (2008)?",
+    "emojis": "🃏 🦇 🤡",
+    "opciones": ["Heath Ledger", "Jack Nicholson", "Joaquin Phoenix", "Jared Leto"],
+    "respuesta_correcta": "Heath Ledger"
+  },
+  {
+    "id": "cine_011",
+    "categoria": "CINE",
+    "pregunta": "¿Qué director estuvo a cargo de la trilogía original de 'The Lord of the Rings'?",
+    "emojis": "💍 🧙‍♂️ 🌋",
+    "opciones": ["Peter Jackson", "George Lucas", "Steven Spielberg", "Ridley Scott"],
+    "respuesta_correcta": "Peter Jackson"
+  },
+  {
+    "id": "cine_012",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor protagonizó a Forrest Gump en el filme de 1994?",
+    "emojis": "🍫 🏃‍♂️ 🪶",
+    "opciones": ["Tom Hanks", "Robin Williams", "John Travolta", "Bill Murray"],
+    "respuesta_correcta": "Tom Hanks"
+  },
+  {
+    "id": "cine_013",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama la inteligencia artificial rebelde de la nave en '2001: A Space Odyssey'?",
+    "emojis": "🔴 🚀 👁️",
+    "opciones": ["HAL 9000", "Skynet", "GLaDOS", "Auto"],
+    "respuesta_correcta": "HAL 9000"
+  },
+  {
+    "id": "cine_014",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al policía John McClane en 'Die Hard' (1988)?",
+    "emojis": "🏢 🔫 💥",
+    "opciones": ["Bruce Willis", "Sylvester Stallone", "Arnold Schwarzenegger", "Mel Gibson"],
+    "respuesta_correcta": "Bruce Willis"
+  },
+  {
+    "id": "cine_015",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el reino ficticio gobernado por Simba en 'The Lion King'?",
+    "emojis": "🦁 👑 🌅",
+    "opciones": ["Las Tierras del Orgullo", "La Sabana Real", "Kenia Central", "El Valle Sombrío"],
+    "respuesta_correcta": "Las Tierras del Orgullo"
+  },
+  {
+    "id": "cine_016",
+    "categoria": "CINE",
+    "pregunta": "¿Quién dirigió la obra de ciencia ficción 'Inception' (2010)?",
+    "emojis": "🌀 ⏳ 🏙️",
+    "opciones": ["Christopher Nolan", "Denis Villeneuve", "David Fincher", "James Cameron"],
+    "respuesta_correcta": "Christopher Nolan"
+  },
+  {
+    "id": "cine_017",
+    "categoria": "CINE",
+    "pregunta": "¿Qué comida es la debilidad de los Gremlins si se les alimenta pasada la medianoche?",
+    "emojis": "🍗 🕛 👹",
+    "opciones": ["Cualquier alimento", "Solo pollo frito", "Galletas de chocolate", "Agua destilada"],
+    "respuesta_correcta": "Cualquier alimento"
+  },
+  {
+    "id": "cine_018",
+    "categoria": "CINE",
+    "pregunta": "¿Qué frase dice Jack Torrance mientras rompe la puerta con un hacha en 'The Shining'?",
+    "emojis": "🪓 🚪 ❄️",
+    "opciones": ["Here's Johnny!", "I found you!", "Open up!", "Ready or not!"],
+    "respuesta_correcta": "Here's Johnny!"
+  },
+  {
+    "id": "cine_019",
+    "categoria": "CINE",
+    "pregunta": "¿Qué nave espacial comanda Han Solo junto a Chewbacca en 'Star Wars'?",
+    "emojis": "🚀 🌌 🦧",
+    "opciones": ["Millennium Falcon", "X-Wing", "Star Destroyer", "Razor Crest"],
+    "respuesta_correcta": "Millennium Falcon"
+  },
+  {
+    "id": "cine_020",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el caníbal psiquiatra en 'The Silence of the Lambs' (1991)?",
+    "emojis": "🍷 🥩 🦋",
+    "opciones": ["Hannibal Lecter", "Norman Bates", "Patrick Bateman", "John Doe"],
+    "respuesta_correcta": "Hannibal Lecter"
+  },
+  {
+    "id": "cine_021",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de 1982 popularizó la frase 'E.T. phone home'?",
+    "emojis": "🚲 🌕 👽",
+    "opciones": ["E.T. the Extra-Terrestrial", "Close Encounters", "Alien", "Cocoon"],
+    "respuesta_correcta": "E.T. the Extra-Terrestrial"
+  },
+  {
+    "id": "cine_022",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor encarnó a Tony Montana en el clásico 'Scarface' (1983)?",
+    "emojis": "🌴 🔫 💵",
+    "opciones": ["Al Pacino", "Robert De Niro", "Joe Pesci", "Ray Liotta"],
+    "respuesta_correcta": "Al Pacino"
+  },
+  {
+    "id": "cine_023",
+    "categoria": "CINE",
+    "pregunta": "¿En qué año se estrenó 'Titanic' de James Cameron?",
+    "emojis": "🚢 🧊 💎",
+    "opciones": ["1997", "1995", "1999", "1998"],
+    "respuesta_correcta": "1997"
+  },
+  {
+    "id": "cine_024",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el oficial cyborg en la película 'RoboCop' (1987)?",
+    "emojis": "🤖 👮‍♂️ 🏙️",
+    "opciones": ["Alex Murphy", "John Connor", "Rick Deckard", "Kyle Reese"],
+    "respuesta_correcta": "Alex Murphy"
+  },
+  {
+    "id": "cine_025",
+    "categoria": "CINE",
+    "pregunta": "¿Qué director estadounidense creó la saga intergaláctica 'Star Wars'?",
+    "emojis": "⭐ ⚔️ 🌌",
+    "opciones": ["George Lucas", "Steven Spielberg", "Francis Ford Coppola", "Stanley Kubrick"],
+    "respuesta_correcta": "George Lucas"
+  },
+  {
+    "id": "cine_026",
+    "categoria": "CINE",
+    "pregunta": "¿Qué objeto mágico busca Indiana Jones en 'Raiders of the Lost Ark'?",
+    "emojis": "🏺 🐍 ⚡",
+    "opciones": ["El Arca de la Alianza", "El Santo Grial", "Las Piedras de Sankara", "La Calavera de Cristal"],
+    "respuesta_correcta": "El Arca de la Alianza"
+  },
+  {
+    "id": "cine_027",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al boxeador Rocky Balboa a lo largo de su saga?",
+    "emojis": "🥊 🥩 🏆",
+    "opciones": ["Sylvester Stallone", "Arnold Schwarzenegger", "Jean-Claude Van Damme", "Chuck Norris"],
+    "respuesta_correcta": "Sylvester Stallone"
+  },
+  {
+    "id": "cine_028",
+    "categoria": "CINE",
+    "pregunta": "¿Cuál es la raza alienígena biomecánica que persigue a Ripley en 'Alien'?",
+    "emojis": "🥚 👽 🚀",
+    "opciones": ["Xenomorfo", "Depredador", "Yautja", "Klingon"],
+    "respuesta_correcta": "Xenomorfo"
+  },
+  {
+    "id": "cine_029",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama la ciudad submarina donde vive Bob Esponja en su película de 2004?",
+    "emojis": "🍍 🌊 🍔",
+    "opciones": ["Fondo de Bikini", "Atlántida", "Bahía Aventura", "Fondo Rocoso"],
+    "respuesta_correcta": "Fondo de Bikini"
+  },
+  {
+    "id": "cine_030",
+    "categoria": "CINE",
+    "pregunta": "¿Qué profesión tiene el personaje de Leonardo DiCaprio en 'Catch Me If You Can'?",
+    "emojis": "✈️ 💳 👮‍♂️",
+    "opciones": ["Falsificador y estafador", "Piloto de guerra", "Abogado fiscal", "Médico cirujano"],
+    "respuesta_correcta": "Falsificador y estafador"
+  },
+  {
+    "id": "cine_031",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de 1999 popularizó el efecto visual 'bullet time' en 360 grados?",
+    "emojis": "🕶️ 💥 🟢",
+    "opciones": ["The Matrix", "Blade", "Fight Club", "The Sixth Sense"],
+    "respuesta_correcta": "The Matrix"
+  },
+  {
+    "id": "cine_032",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama la muñeca poseída que aterroriza a una familia en 'Child's Play' (1988)?",
+    "emojis": "🔪 🧸 ⚡",
+    "opciones": ["Chucky", "Annabelle", "Billy", "Slappy"],
+    "respuesta_correcta": "Chucky"
+  },
+  {
+    "id": "cine_033",
+    "categoria": "CINE",
+    "pregunta": "¿Qué cineasta dirigió 'Edward Scissorhands' y 'Beetlejuice'?",
+    "emojis": "✂️ 🧤 🏰",
+    "opciones": ["Tim Burton", "Guillermo del Toro", "Sam Raimi", "Terry Gilliam"],
+    "respuesta_correcta": "Tim Burton"
+  },
+  {
+    "id": "cine_034",
+    "categoria": "CINE",
+    "pregunta": "¿En qué clásica prisión de máxima seguridad se ambienta 'The Rock' (1996)?",
+    "emojis": "🏝️ 💣 ⛓️",
+    "opciones": ["Alcatraz", "Sing Sing", "Rikers Island", "Guantánamo"],
+    "respuesta_correcta": "Alcatraz"
+  },
+  {
+    "id": "cine_035",
+    "categoria": "CINE",
+    "pregunta": "¿Qué arma empuña el guerrillero John Rambo en su saga de acción?",
+    "emojis": "🏹 💥 🪖",
+    "opciones": ["Arco con flechas explosivas", "Escopeta de doble cañón", "Katana samurái", "Lanzallamas pesado"],
+    "respuesta_correcta": "Arco con flechas explosivas"
+  },
+  {
+    "id": "cine_036",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el protagonista del filme de culto 'The Big Lebowski' (1998)?",
+    "emojis": "🎳 🥛 🕶️",
+    "opciones": ["The Dude (El Nota)", "Walter Sobchak", "Donny", "Jesus Quintana"],
+    "respuesta_correcta": "The Dude (El Nota)"
+  },
+  {
+    "id": "cine_037",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al pirata Jack Sparrow en 'Pirates of the Caribbean'?",
+    "emojis": "🏴‍☠️ 🧭 🦜",
+    "opciones": ["Johnny Depp", "Orlando Bloom", "Geoffrey Rush", "Javier Bardem"],
+    "respuesta_correcta": "Johnny Depp"
+  },
+  {
+    "id": "cine_038",
+    "categoria": "CINE",
+    "pregunta": "¿En qué año se estrenó en cines la cinta original de 'Jurassic Park'?",
+    "emojis": "🦖 🦟 🌴",
+    "opciones": ["1993", "1991", "1995", "1994"],
+    "respuesta_correcta": "1993"
+  },
+  {
+    "id": "cine_039",
+    "categoria": "CINE",
+    "pregunta": "¿Qué regalo le da Red a Andy Dufresne en 'The Shawshank Redemption'?",
+    "emojis": "⛏️ 📖 🌧️",
+    "opciones": ["Un martillo de geólogo", "Una lima de uñas", "Un póster de Rita Hayworth", "Una cuerda de soga"],
+    "respuesta_correcta": "Un martillo de geólogo"
+  },
+  {
+    "id": "cine_040",
+    "categoria": "CINE",
+    "pregunta": "¿Quién interpretó a Marty McFly en la trilogía 'Back to the Future'?",
+    "emojis": "🛹 🎸 ⚡",
+    "opciones": ["Michael J. Fox", "Eric Stoltz", "Crispin Glover", "Matthew Broderick"],
+    "respuesta_correcta": "Michael J. Fox"
+  },
+  {
+    "id": "cine_041",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de Quentin Tarantino cuenta la venganza de 'La Novia' con traje amarillo?",
+    "emojis": "🗡️ 🟡 🩸",
+    "opciones": ["Kill Bill", "Jackie Brown", "Death Proof", "Inglourious Basterds"],
+    "respuesta_correcta": "Kill Bill"
+  },
+  {
+    "id": "cine_042",
+    "categoria": "CINE",
+    "pregunta": "¿Cómo se llama el espía británico con licencia para matar creado por Ian Fleming?",
+    "emojis": "🍸 🔫 🤵",
+    "opciones": ["James Bond", "Jason Bourne", "Ethan Hunt", "Jack Reacher"],
+    "respuesta_correcta": "James Bond"
+  },
+  {
+    "id": "cine_043",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al androide T-800 en 'The Terminator' (1984)?",
+    "emojis": "🤖 🏍️ 🕶️",
+    "opciones": ["Arnold Schwarzenegger", "Dolph Lundgren", "Jean-Claude Van Damme", "Kurt Russell"],
+    "respuesta_correcta": "Arnold Schwarzenegger"
+  },
+  {
+    "id": "cine_044",
+    "categoria": "CINE",
+    "pregunta": "¿Qué famosa nave sufre un accidente en 'Apollo 13' (1995)?",
+    "emojis": "🚀 🌕 📟",
+    "opciones": ["Odyssey", "Challenger", "Enterprise", "Columbia"],
+    "respuesta_correcta": "Odyssey"
+  },
+  {
+    "id": "cine_045",
+    "categoria": "CINE",
+    "pregunta": "¿Cuál es la frase célebre de Vito Corleone sobre negociar en 'The Godfather'?",
+    "emojis": "🌹 💼 🤝",
+    "opciones": [
+      "Le haré una oferta que no podrá rechazar",
+      "La familia es lo primero",
+      "Nunca te pongas en contra de la familia",
+      "El respeto se gana con sangre"
+    ],
+    "respuesta_correcta": "Le haré una oferta que no podrá rechazar"
+  },
+  {
+    "id": "cine_046",
+    "categoria": "CINE",
+    "pregunta": "¿Qué director español ganó el Óscar con 'Todo sobre mi madre' (1999)?",
+    "emojis": "🏆 🎭 🇪🇸",
+    "opciones": ["Pedro Almodóvar", "Alejandro Amenábar", "Guillermo del Toro", "Luis Buñuel"],
+    "respuesta_correcta": "Pedro Almodóvar"
+  },
+  {
+    "id": "cine_047",
+    "categoria": "CINE",
+    "pregunta": "¿En qué película animada de Pixar los juguetes cobran vida cuando los humanos salen?",
+    "emojis": "🤠 🚀 🧸",
+    "opciones": ["Toy Story", "Monsters, Inc.", "A Bug's Life", "Cars"],
+    "respuesta_correcta": "Toy Story"
+  },
+  {
+    "id": "cine_048",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor protagonizó al agente Ethan Hunt en la saga 'Mission: Impossible'?",
+    "emojis": "🕶️ 💣 🧗‍♂️",
+    "opciones": ["Tom Cruise", "Brad Pitt", "Matt Damon", "Keanu Reeves"],
+    "respuesta_correcta": "Tom Cruise"
+  },
+  {
+    "id": "cine_049",
+    "categoria": "CINE",
+    "pregunta": "¿Qué director estrenó 'Blade Runner' en 1982?",
+    "emojis": "🌧️ 👁️ 🏙️",
+    "opciones": ["Ridley Scott", "James Cameron", "David Lynch", "John Carpenter"],
+    "respuesta_correcta": "Ridley Scott"
+  },
+  {
+    "id": "cine_050",
+    "categoria": "CINE",
+    "pregunta": "¿Cuál es el nombre del ogro verde del pantano en la comedia animada de DreamWorks?",
+    "emojis": "🧅 🪞 🐴",
+    "opciones": ["Shrek", "Fiona", "Lord Farquaad", "Gusano"],
+    "respuesta_correcta": "Shrek"
+  }
+]

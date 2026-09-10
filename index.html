@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Retro Quiz - Inicio</title>
+  
+  <!-- Tipografías Retrofuturistas Atompunk / Googie & Pixel Art -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Contenedor general centrado con marco de teléfono (toggleable) -->
+  <div class="app-viewport">
+    
+
+    <!-- Dispositivo / Mockup -->
+    <div class="device-frame" id="deviceFrame">
+      
+      <!-- Pantalla interna del juego -->
+      <main class="game-screen app-container" id="gameScreen">
+
+        <!-- VISTA 1: HOME (INICIO) -->
+        <div class="screen-view active" id="homeView">
+          <!-- Fondo con la imagen fondo.webp exclusivo del Home -->
+          <div class="screen-background"></div>
+
+          <!-- Capa de decoraciones flotantes exclusivas de Home -->
+          <div class="floating-decorations-layer" id="floatingLayer">
+            <!-- Estrella violeta superior izquierda -->
+            <div class="decor-item star-violet star-left anim-enter-decor" style="--delay: 0.65s; --float-duration: 3.8s;">
+              <svg viewBox="0 0 100 100" class="svg-star">
+                <path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="url(#violetStarGrad)" stroke="#181414" stroke-width="4" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="violetStarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#C27DF8"/>
+                    <stop offset="100%" stop-color="#8445E6"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Estrella brillante (estrella.webp) al costado izquierdo -->
+            <img src="assets/pantalla_inicio/estrella.webp" alt="Brillo" class="decor-item sparkle-left anim-enter-decor" style="--delay: 0.75s; --float-duration: 4.2s;">
+
+            <!-- Estrella violeta superior derecha -->
+            <div class="decor-item star-violet star-right anim-enter-decor" style="--delay: 0.7s; --float-duration: 3.5s;">
+              <svg viewBox="0 0 100 100" class="svg-star">
+                <path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="url(#violetStarGrad2)" stroke="#181414" stroke-width="4" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="violetStarGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E28DF8"/>
+                    <stop offset="100%" stop-color="#934EEB"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Rayo amarillo (rayo.webp) al costado derecho -->
+            <img src="assets/pantalla_inicio/rayo.webp" alt="Rayo" class="decor-item rayo-right anim-enter-decor" style="--delay: 0.8s; --float-duration: 3.2s;">
+            
+            <!-- Destellos secundarios sutiles -->
+            <div class="decor-item sparkle-micro micro-1 anim-enter-decor" style="--delay: 0.9s;">✦</div>
+            <div class="decor-item sparkle-micro micro-2 anim-enter-decor" style="--delay: 1.0s;">★</div>
+          </div>
+
+          <!-- 1. BARRA SUPERIOR (HEADER) -->
+          <header class="game-header anim-enter-top" style="--delay: 0.15s;">
+            <!-- Pastilla de Monedas -->
+            <div class="coin-pill interactive-press" id="btnCoinPill" role="button" tabindex="0" title="Ver Tienda de Monedas">
+              <div class="coin-icon-wrapper">
+                <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-img">
+              </div>
+              <span class="coin-amount" id="userCoins">1,250</span>
+            </div>
+
+            <!-- Botón de Ayuda (?) -->
+            <button class="help-btn interactive-press" id="btnHelp" aria-label="¿Cómo se juega?">
+              <span class="help-btn-icon">?</span>
+            </button>
+          </header>
+
+          <!-- 2. LOGO Y SUBTÍTULO -->
+          <section class="hero-section">
+            <!-- Logo RETRO QUIZ animado -->
+            <div class="logo-container anim-enter-logo" style="--delay: 0.3s;">
+              <img src="assets/pantalla_inicio/logo_retroquiz.webp" alt="Retro Quiz Logo" class="retro-logo-img">
+            </div>
+
+
+          </section>
+
+          <!-- 3. PERSONAJES (FLOTANDO Y DINÁMICOS) -->
+          <section class="characters-stage avatar-container anim-enter-chars" style="--delay: 0.55s;" role="button" tabindex="0" title="Ver Perfil">
+            <!-- Personaje Hombre -->
+            <div class="character-wrapper char-hombre-wrap float-hombre" role="button" tabindex="0" title="Ver Perfil">
+              <img src="assets/pantalla_inicio/hombre.webp" alt="Personaje Retro Hombre" class="char-img char-hombre">
+            </div>
+            <!-- Personaje Mujer -->
+            <div class="character-wrapper char-mujer-wrap float-mujer" role="button" tabindex="0" title="Ver Perfil">
+              <img src="assets/pantalla_inicio/mujer.webp" alt="Personaje Retro Mujer" class="char-img char-mujer">
+            </div>
+          </section>
+
+          <!-- 4. BOTONERA DE ACCIÓN -->
+          <section class="actions-section">
+            
+            <!-- Botón Principal "JUGAR ▶" con resalte periódico de rato en rato -->
+            <div class="btn-jugar-container anim-enter-btn-jugar" style="--delay: 0.7s;">
+              <button class="retro-btn btn-jugar periodic-highlight interactive-press" id="btnJugar">
+                <span class="btn-jugar-label">JUGAR</span>
+                <span class="highlight-halo"></span>
+              </button>
+            </div>
+
+            <!-- Fila de Botones Secundarios: DESAFÍOS y RANKING -->
+            <div class="secondary-buttons-row anim-enter-sub-btns" style="--delay: 0.85s;">
+              <!-- Wrapper para alojar el badge flotante en la esquina superior derecha -->
+              <div class="btn-desafios-wrapper">
+                <!-- Botón DESAFÍOS con efecto de reflejo periódico -->
+                <button class="retro-btn btn-desafios periodic-shimmer interactive-press" id="btnDesafios">
+                  <span class="btn-icon">🏆</span>
+                  <span class="btn-text">DESAFÍOS</span>
+                  <!-- Capa para el barrido de reflejo de luz -->
+                  <span class="shimmer-sweep"></span>
+                </button>
+                <!-- Insignia flotante de retos pendientes -->
+                <span class="desafios-badge-count" id="homeDesafiosBadge">+2</span>
+              </div>
+
+              <!-- Botón RANKING -->
+              <button class="retro-btn btn-ranking interactive-press" id="btnRanking">
+                <span class="btn-icon">📊</span>
+                <span class="btn-text">RANKING</span>
+              </button>
+            </div>
+
+          </section>
+
+          <!-- 5. BARRA DE NAVEGACIÓN INFERIOR (3 Accesos Claros y Equilibrados) -->
+          <nav class="bottom-navbar bottom-nav anim-enter-bottom" style="--delay: 1.0s;">
+            <button class="nav-tab active" data-tab="inicio" id="tabInicio">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Inicio</span>
+            </button>
+
+            <button class="nav-tab" data-tab="tienda" id="tabTienda">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 3h18v4H3zM4 7v13h16V7H4zm6 3h4v4h-4z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Tienda</span>
+            </button>
+
+            <button class="nav-tab nav-perfil btn-nav-profile" data-tab="perfil" id="tabPerfil">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <circle cx="12" cy="7" r="4" fill="currentColor"/>
+                  <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Perfil</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- VISTA 2: RULETA DE SELECCIÓN (WheelSelectionScreen) -->
+        <div class="screen-view" id="wheelView" style="display: none;">
+          <!-- Fondo Decorativo de la Ruleta -->
+          <div class="wheel-screen-bg">
+
+            <!-- Estrella Googie esquina superior derecha -->
+            <div class="star-decor-top-right">
+              <svg viewBox="0 0 100 100" class="svg-star-top">
+                <path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="#9B5DE5"/>
+              </svg>
+            </div>
+
+            <!-- Ola lila base -->
+            <div class="purple-wave-bottom"></div>
+            <div class="sparkle-bottom-right">✦</div>
+
+            <!-- ── Capa de elementos retrofuturistas flotantes ── -->
+            <div class="floating-space-bg">
+
+              <!-- Estrellas Googie de 4 puntas (marfil, lila, amarillo pálido) -->
+              <svg class="wsb-el wsb-star-1 float-slow pulse-star" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 0 L36 24 L60 30 L36 36 L30 60 L24 36 L0 30 L24 24 Z" fill="#FDFBF7" opacity="0.75"/>
+              </svg>
+
+              <svg class="wsb-el wsb-star-2 float-slow pulse-star" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 0 L29 19 L48 24 L29 29 L24 48 L19 29 L0 24 L19 19 Z" fill="#D8B4FE" opacity="0.7"/>
+              </svg>
+
+              <svg class="wsb-el wsb-star-3 float-slow pulse-star" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z" fill="#FFF9C4" opacity="0.65"/>
+              </svg>
+
+              <!-- Chispas / Cruces atómicas -->
+              <span class="wsb-el wsb-cross-1 float-slow">✦</span>
+              <span class="wsb-el wsb-cross-2 float-slow">✚</span>
+              <span class="wsb-el wsb-cross-3 float-slow">✦</span>
+
+              <!-- Círculos orbitales translúcidos (CSS puro) -->
+              <div class="wsb-el wsb-ring-1 float-slow"></div>
+              <div class="wsb-el wsb-ring-2 float-slow"></div>
+              <div class="wsb-el wsb-ring-3 float-slow"></div>
+
+            </div><!-- /floating-space-bg -->
+
+          </div>
+
+          <!-- Encabezado y Navegación de la Ruleta (Safe Area Top Padding: 54px) -->
+          <header class="wheel-header">
+            <!-- Botón Flecha Retorno (Regresa a Home) -->
+            <button class="wheel-btn-back interactive-press" id="btnBackToHome" aria-label="Volver al Inicio" title="Volver al Inicio">
+              <svg viewBox="0 0 24 24" class="back-icon-svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#000000"/>
+              </svg>
+            </button>
+
+            <!-- Título Editable Nativo -->
+            <h1 class="wheel-title">¿Que tanto sabes de antes?</h1>
+
+            <!-- Botón Información 'i' (Abre Modal de Reglas) -->
+            <button class="wheel-btn-info interactive-press" id="btnWheelInfo" aria-label="Instrucciones de Juego" title="Cómo jugar">
+              <span>i</span>
+            </button>
+          </header>
+
+          <!-- Escenario de la Ruleta -->
+          <section class="wheel-stage">
+            <!-- Marcador Triangular Superior (Indicador de aguja negro apuntando hacia abajo) -->
+            <div class="wheel-pointer-container">
+              <div class="wheel-pointer-triangle"></div>
+            </div>
+
+            <!-- Contenedor del Disco Rotatorio Ruleta WebP -->
+            <div class="wheel-disc-wrapper">
+              <div class="wheel-disc" id="wheelDisc">
+                <img src="assets/pantalla_ruleta/ruleta_cine.webp" alt="Ruleta Retro Quiz" class="wheel-disc-img" id="wheelDiscImg">
+                
+                <!-- Núcleo Central Negro 'GIRAR' (Fijo en el centro exacto) -->
+                <button class="wheel-center-hub interactive-press spin-btn" id="btnGirarWheel" aria-label="Girar Ruleta">
+                  <span id="btnGirarLabel">GIRAR</span>
+                </button>
+              </div>
+
+              <!-- Capa de Humo Mágico & Partículas de Recompensa -->
+              <div class="magic-smoke-overlay" id="magicSmokeOverlay"></div>
+            </div>
+          </section>
+
+          <!-- Sistema de Tiros & Anuncio Recompensado -->
+          <section class="shots-system-section">
+            <!-- Contador de Energía / Tiros -->
+            <div class="shots-counter-pill" id="shotsPill">
+              <span class="shots-icon">🎯</span>
+              <span class="shots-text">TIROS DISPONIBLES: <strong id="shotsAvailable">3</strong>/3</span>
+            </div>
+
+            <!-- Recarga Temporizador (Visible solo cuando tiros = 0) -->
+            <div class="reload-timer-box hidden" id="reloadTimerBox">
+              <span class="timer-icon">⏳</span>
+              <span class="timer-text">Recarga en: <strong id="reloadTimerCountdown">23:59:58</strong></span>
+            </div>
+
+            <!-- Botón Anuncio Recompensado (Rewarded Ad) -->
+            <button class="btn-rewarded-ad interactive-press" id="btnWatchAd">
+              <span class="ad-icon">📺</span>
+              <span class="ad-text">+1 TIRO EXTRA <small>(Ver Anuncio)</small></span>
+            </button>
+          </section>
+
+          <!-- Botón Inferior VER MI PROGRESO -->
+          <footer class="wheel-footer-section">
+            <button class="btn-ver-progreso interactive-press" id="btnVerProgreso">
+              VER MI PROGRESO
+            </button>
+          </footer>
+        </div>
+
+        <!-- VISTA 3: PANTALLA DE PROGRESIÓN Y COLECCIÓN (#collectionView) -->
+        <div class="screen-view" id="collectionView" style="display: none;">
+          <!-- Fondo Pastel de la Colección -->
+          <div class="collection-screen-bg">
+            <div class="collection-sparkle sparkle-top-left">✦</div>
+            <div class="collection-sparkle sparkle-mid-right">✦</div>
+            <div class="collection-sparkle sparkle-bottom-center">✦</div>
+          </div>
+
+          <!-- Encabezado de Colección (Safe Area Top Padding: 54px) -->
+          <header class="collection-header">
+            <!-- Botón Volver (<) a la Ruleta -->
+            <button class="collection-btn-back interactive-press" id="btnBackFromCollection" aria-label="Volver a la Ruleta" title="Volver">
+              <svg viewBox="0 0 24 24" class="back-icon-svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#FFFFFF"/>
+              </svg>
+            </button>
+
+            <!-- Título Pixelado -->
+            <h1 class="collection-title">TU COLECCIÓN</h1>
+
+            <!-- Círculo / Pastilla de Monedas -->
+            <div class="collection-coin-circle" id="coinCircleCollection" title="Monedas">
+              <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-img mini-coin">
+              <span class="collection-coin-amount" id="userCoinsCollection">1,250</span>
+            </div>
+          </header>
+
+          <!-- Subtítulo con estrellas decorativas -->
+          <div class="collection-subtitle-wrap">
+            <span class="decor-star star-sub-left">★</span>
+            <p class="collection-subtitle">Juega, gana monedas y desbloquea nuevas categorias de preguntas.</p>
+            <span class="decor-star star-sub-right">★</span>
+          </div>
+
+          <!-- Lista de 5 Tarjetas de Temáticas -->
+          <section class="collection-cards-list" id="collectionCardsList">
+            
+            <!-- 1. Cine -->
+            <div class="collection-card" data-cat="cine" style="--i: 0;">
+              <div class="card-icon-box box-cine">
+                <img src="assets/pantalla_progreso/claqueta.png" alt="Cine" class="cat-card-img">
+              </div>
+              <div class="card-info-col">
+                <span class="card-cat-name">CINE</span>
+                <div class="card-progress-track">
+                  <div class="card-progress-fill fill-cine" style="width: 100%;"></div>
+                  <div class="card-progress-segments">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-status-col">
+                <span class="card-percent-text">100%</span>
+                <div class="card-status-badge badge-unlocked">✓</div>
+              </div>
+            </div>
+
+            <!-- 2. Videojuegos -->
+            <div class="collection-card" data-cat="videojuegos" style="--i: 1;">
+              <div class="card-icon-box box-videojuegos">
+                <img src="assets/pantalla_progreso/mando.png" alt="Videojuegos" class="cat-card-img">
+              </div>
+              <div class="card-info-col">
+                <span class="card-cat-name">VIDEOJUEGOS</span>
+                <div class="card-progress-track">
+                  <div class="card-progress-fill fill-videojuegos" style="width: 40%;"></div>
+                  <div class="card-progress-segments">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-status-col">
+                <span class="card-percent-text">40%</span>
+                <div class="card-status-badge badge-locked">🔒</div>
+              </div>
+            </div>
+
+            <!-- 3. TV -->
+            <div class="collection-card" data-cat="tv" style="--i: 2;">
+              <div class="card-icon-box box-tv">
+                <img src="assets/pantalla_progreso/television.png" alt="TV" class="cat-card-img">
+              </div>
+              <div class="card-info-col">
+                <span class="card-cat-name">TV</span>
+                <div class="card-progress-track">
+                  <div class="card-progress-fill fill-tv" style="width: 0%;"></div>
+                  <div class="card-progress-segments">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-status-col">
+                <span class="card-percent-text">0%</span>
+                <div class="card-status-badge badge-locked">🔒</div>
+              </div>
+            </div>
+
+            <!-- 4. Música -->
+            <div class="collection-card" data-cat="musica" style="--i: 3;">
+              <div class="card-icon-box box-musica">
+                <img src="assets/pantalla_progreso/guitarra.png" alt="Música" class="cat-card-img">
+              </div>
+              <div class="card-info-col">
+                <span class="card-cat-name">MÚSICA</span>
+                <div class="card-progress-track">
+                  <div class="card-progress-fill fill-musica" style="width: 0%;"></div>
+                  <div class="card-progress-segments">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-status-col">
+                <span class="card-percent-text">0%</span>
+                <div class="card-status-badge badge-locked">🔒</div>
+              </div>
+            </div>
+
+            <!-- 5. Todo / Mix -->
+            <div class="collection-card" data-cat="todo" style="--i: 4;">
+              <div class="card-icon-box box-todo">
+                <img src="assets/pantalla_progreso/interrogacion.png" alt="Todo / Mix" class="cat-card-img">
+              </div>
+              <div class="card-info-col">
+                <span class="card-cat-name">TODO / MIX</span>
+                <div class="card-progress-track">
+                  <div class="card-progress-fill fill-todo" style="width: 0%;"></div>
+                  <div class="card-progress-segments">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-status-col">
+                <span class="card-percent-text">0%</span>
+                <div class="card-status-badge badge-locked">🔒</div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Botón de Desbloqueo Completo -->
+          <div class="collection-bottom-action" style="--i: 5;">
+            <button class="btn-unlock-all-collection interactive-press" id="btnUnlockAllCollection">
+              <span>Activa todas las categorías y elimina los anuncios por $us2.99</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- VISTA 4: PANTALLA DE TRIVIA / PREGUNTAS (#triviaView) -->
+        <div class="screen-view" id="triviaView" style="display: none;">
+          <!-- Fondo dinámico con color base por categoría -->
+          <div class="trivia-screen-bg" id="triviaScreenBg"></div>
+
+          <!-- Capa Túnel Espacial Warp 3D -->
+          <div class="space-warp-bg" aria-hidden="true">
+            <div class="warp-particle wp-1"></div>
+            <div class="warp-particle wp-2"></div>
+            <div class="warp-particle wp-3"></div>
+            <div class="warp-particle wp-4"></div>
+            <div class="warp-particle wp-5"></div>
+            <div class="warp-particle wp-6"></div>
+            <div class="warp-particle wp-7"></div>
+            <div class="warp-particle wp-8"></div>
+            <div class="warp-particle wp-9"></div>
+            <div class="warp-particle wp-10"></div>
+            <div class="warp-particle wp-11"></div>
+            <div class="warp-particle wp-12"></div>
+            <div class="warp-particle wp-13"></div>
+            <div class="warp-particle wp-14"></div>
+            <div class="warp-particle wp-15"></div>
+            <div class="warp-particle wp-16"></div>
+            <div class="warp-particle wp-17"></div>
+            <div class="warp-particle wp-18"></div>
+            <div class="warp-particle wp-19"></div>
+            <div class="warp-particle wp-20"></div>
+            <div class="warp-particle wp-21"></div>
+            <div class="warp-particle wp-22"></div>
+          </div>
+
+          <!-- Capa de Alerta Sirena (.siren-panic activa esta capa parpadeante) -->
+          <div class="trivia-siren-overlay" id="triviaSirenOverlay"></div>
+
+          <!-- Barra Superior HUD -->
+          <header class="trivia-hud-header">
+            <!-- Esquina Izquierda: Pastilla Retro de RetroCoins de la ronda actual -->
+            <div class="round-coin-counter-pill" id="roundCoinCounter" title="RetroCoins acumuladas en esta ronda">
+              <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="round-coin-icon">
+              <span class="round-coin-amount" id="roundCoinCounterVal">0</span>
+            </div>
+
+            <!-- Centro: Progreso de preguntas 1/10 -->
+            <div class="trivia-progress-counter" id="triviaProgressCounter">
+              <span class="q-current" id="triviaQCurrent">1</span>
+              <span class="q-slash">/</span>
+              <span class="q-total" id="triviaQTotal">10</span>
+            </div>
+
+            <!-- Derecha: Píldora Amarilla de Tiempo -->
+            <div class="trivia-timer-pill" id="triviaTimerPill">
+              <svg viewBox="0 0 24 24" class="timer-icon-svg">
+                <circle cx="12" cy="13" r="8" fill="none" stroke="#181414" stroke-width="2.5"/>
+                <line x1="12" y1="13" x2="12" y2="8" stroke="#181414" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="12" y1="13" x2="15.5" y2="13" stroke="#181414" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="12" y1="3" x2="12" y2="5" stroke="#181414" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="10" y1="2" x2="14" y2="2" stroke="#181414" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span class="timer-seconds-num" id="triviaTimerSecs">15</span>
+            </div>
+          </header>
+
+          <!-- Barra horizontal de tiempo restante -->
+          <div class="trivia-timer-track-wrap">
+            <div class="trivia-timer-track">
+              <div class="trivia-timer-fill" id="triviaTimerFill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Debajo de la barra de tiempo: 3 corazones de vidas centrados -->
+          <div class="trivia-hearts-row-wrap">
+            <div class="trivia-hearts-container" id="triviaHeartsContainer" title="Vidas">
+              <span class="hud-heart active" data-heart="1">
+                <svg viewBox="0 0 24 24" class="svg-heart">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </span>
+              <span class="hud-heart active" data-heart="2">
+                <svg viewBox="0 0 24 24" class="svg-heart">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </span>
+              <span class="hud-heart active" data-heart="3">
+                <svg viewBox="0 0 24 24" class="svg-heart">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Contenedor 3D de la Tarjeta Central (Efecto Cómic) -->
+          <div class="trivia-card-viewport">
+            <div class="trivia-card" id="triviaCard">
+              <!-- Pregunta Central -->
+              <h2 class="trivia-question-text" id="triviaQuestionText">
+                ¿Quién interpretó a Alan Grant en Jurassic Park?
+              </h2>
+
+              <!-- Marco central para emojis / texto -->
+              <div class="question-avatar-frame">
+                <div class="question-emojis" id="questionEmojis"></div>
+              </div>
+
+              <!-- 4 Alternativas de Respuesta (A, B, C, D) -->
+              <div class="trivia-options-list" id="triviaOptionsList">
+                <button class="trivia-option-btn interactive-press" data-index="0">
+                  <span class="option-badge badge-a">A</span>
+                  <span class="option-text">Sam Neill</span>
+                </button>
+                <button class="trivia-option-btn interactive-press" data-index="1">
+                  <span class="option-badge badge-b">B</span>
+                  <span class="option-text">Jeff Goldblum</span>
+                </button>
+                <button class="trivia-option-btn interactive-press" data-index="2">
+                  <span class="option-badge badge-c">C</span>
+                  <span class="option-text">Laura Dern</span>
+                </button>
+                <button class="trivia-option-btn interactive-press" data-index="3">
+                  <span class="option-badge badge-d">D</span>
+                  <span class="option-text">Richard Attenborough</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón Inferior: abandonar -->
+          <footer class="trivia-bottom-bar">
+            <button class="btn-abandonar interactive-press" id="btnAbandonarTrivia">
+              abandonar
+            </button>
+          </footer>
+
+          <!-- Modal Emergente de Confirmación (#abandonModal) -->
+          <div class="abandon-modal-overlay" id="abandonModal" style="display: none;">
+            <div class="abandon-modal-box">
+              <div class="abandon-modal-icon">⚠️</div>
+              <h3 class="abandon-modal-title">¿ABANDONAR PARTIDA?</h3>
+              <p class="abandon-modal-desc">
+                Si sales ahora perderás tus vidas y todas las RetroCoins ganadas en esta ronda.
+              </p>
+              <div class="abandon-modal-actions">
+                <button class="abandon-modal-btn btn-confirm-exit interactive-press" id="btnConfirmExitTrivia">
+                  SÍ, SALIR
+                </button>
+                <button class="abandon-modal-btn btn-cancel-exit interactive-press" id="btnCancelExitTrivia">
+                  CONTINUAR
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA 5: PANTALLA GAME OVER (#gameOverView) -->
+        <div class="screen-view" id="gameOverView" style="display: none;">
+          <div class="gameover-container" id="gameOverContainer">
+            <div class="gameover-titles-box" id="gameOverTitlesBox">
+              <img src="assets/pantalla_gameover/game.webp" alt="GAME" class="img-game-slide" id="imgGameOverGame">
+              <img src="assets/pantalla_gameover/over.webp" alt="OVER" class="img-over-slide" id="imgGameOverOver">
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA 6: PANTALLA DE RESULTADOS (#resultsView) -->
+        <div class="screen-view" id="resultsView" style="display: none;">
+          <!-- Fondo Decorativo con Confeti y Destellos Flotantes -->
+          <div class="results-screen-bg">
+            <span class="decor-particle p-star-1">★</span>
+            <span class="decor-particle p-sparkle-1">✦</span>
+            <span class="decor-particle p-sparkle-2">✦</span>
+            <span class="decor-particle p-ribbon-1">➰</span>
+            <span class="decor-particle p-star-2">★</span>
+            <span class="decor-particle p-circle-1">●</span>
+            <span class="decor-particle p-sparkle-3">✦</span>
+            <span class="decor-particle p-ribbon-2">〰</span>
+            <span class="decor-particle p-circle-2">●</span>
+          </div>
+
+          <div class="results-content-wrapper">
+            <!-- Encabezado y Textos Dinámicos -->
+            <div class="results-header-box">
+              <h1 class="results-main-title" id="resultsTitle">¡WOW, impresionante!</h1>
+              <p class="results-subtitle" id="resultsSubtitle">Respuestas correctas: 10/10</p>
+            </div>
+
+            <!-- Círculo Central de Experiencia (XP) -->
+            <div class="results-xp-circle" id="resultsXpCircle">
+              <span class="results-xp-value" id="resultsXpVal">0</span>
+              <span class="results-xp-label">PUNTOS XP</span>
+            </div>
+
+            <!-- Desglose de Nivel y XP del Jugador -->
+            <div class="results-level-badge-row" id="resultsLevelRow">
+              <span class="results-player-level-tag" id="resultsPlayerLevel">Nivel 12</span>
+              <span class="results-player-divider">•</span>
+              <span class="results-player-xp-tag" id="resultsPlayerTotalXp">XP Total: 0 pts</span>
+            </div>
+
+            <!-- Tarjeta Inferior Dual (Racha y Retrocoins) -->
+            <div class="results-dual-card">
+              <!-- Lado Izquierdo: Racha -->
+              <div class="results-card-col results-streak-col">
+                <span class="results-col-label">RACHA</span>
+                <div class="results-streak-val-box">
+                  <span class="results-streak-val" id="resultsStreakVal">+1 🔥</span>
+                </div>
+              </div>
+
+              <!-- Divisor Vertical -->
+              <div class="results-card-divider"></div>
+
+              <!-- Lado Derecho: Retrocoins -->
+              <div class="results-card-col results-coins-col">
+                <span class="results-col-label">Retrocoins</span>
+                <div class="results-coins-val-box">
+                  <span class="results-coins-session" id="resultsCoinsSessionVal">+0</span>
+                  <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="results-coin-icon-img">
+                </div>
+                <span class="results-coins-total-row">Total acumulado: <span id="resultsCoinsTotalVal">0</span> <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-inline"></span>
+              </div>
+            </div>
+
+            <!-- Botones de Acción de Navegación -->
+            <div class="results-actions-row">
+              <button class="btn-results btn-results-ranking interactive-press" id="btnResultsRanking">
+                <span>VER RANKING</span>
+              </button>
+              <button class="btn-results btn-results-again interactive-press" id="btnResultsPlayAgain">
+                <span>JUGAR DE NUEVO</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA 7: PANTALLA DE DESAFÍOS (#challengesView) -->
+        <div class="screen-view" id="challengesView" style="display: none;">
+          <!-- Fondo Decorativo Neo-Arcade con 14 Elementos Atompunk en Movimiento -->
+          <div class="challenges-screen-bg floating-space-bg">
+            <!-- 4 Estrellas espaciales Googie de 4 puntas -->
+            <span class="ch-decor-elem ch-googie-star ch-gstar-1">✦</span>
+            <span class="ch-decor-elem ch-googie-star ch-gstar-2">✦</span>
+            <span class="ch-decor-elem ch-googie-star ch-gstar-3">✦</span>
+            <span class="ch-decor-elem ch-googie-star ch-gstar-4">✦</span>
+
+            <!-- 4 Chispas / Cruces atómicas (+) con micro-rotación continua -->
+            <span class="ch-decor-elem ch-atomic-cross ch-cross-1">+</span>
+            <span class="ch-decor-elem ch-atomic-cross ch-cross-2">+</span>
+            <span class="ch-decor-elem ch-atomic-cross ch-cross-3">+</span>
+            <span class="ch-decor-elem ch-atomic-cross ch-cross-4">+</span>
+
+            <!-- 4 Aros y partículas circulares orbitales semi-translúcidas -->
+            <div class="ch-decor-elem ch-orbital-ring ch-orbital-1"></div>
+            <div class="ch-decor-elem ch-orbital-dot ch-orbital-2"></div>
+            <div class="ch-decor-elem ch-orbital-ring ch-orbital-3"></div>
+            <div class="ch-decor-elem ch-orbital-dot ch-orbital-4"></div>
+
+            <!-- 2 Pequeños rombos retro flotantes -->
+            <div class="ch-decor-elem ch-retro-rhombus ch-rhombus-1"></div>
+            <div class="ch-decor-elem ch-retro-rhombus ch-rhombus-2"></div>
+
+            <!-- Cintas decorativas en onda -->
+            <svg class="ch-decor-ribbon ribbon-top-right" viewBox="0 0 100 80" fill="none">
+              <path d="M10 20 Q 35 5, 50 30 T 90 40" stroke="#E11D48" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <svg class="ch-decor-ribbon ribbon-bottom-left" viewBox="0 0 100 80" fill="none">
+              <path d="M15 60 Q 40 20, 65 50 T 95 30" stroke="#84CC16" stroke-width="7" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="challenges-content-wrapper">
+            <!-- Encabezado Superior (Botón Atrás Circular y Título Arcade) -->
+            <header class="challenges-header anim-ch-header">
+              <button class="challenges-back-btn interactive-press" id="btnChallengesBack" aria-label="Volver al Menú Principal">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="#181414" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+
+              <div class="challenges-title-box">
+                <h1 class="challenges-main-title">DESAFÍOS</h1>
+              </div>
+
+              <!-- Espaciador simétrico para centrar título con el botón atrás -->
+              <div class="challenges-header-spacer"></div>
+            </header>
+
+            <!-- Tarjeta Superior / Selector de Pestañas (Hero Card) -->
+            <div class="challenges-hero-card anim-ch-tabs">
+              <div class="challenges-tabs-row">
+                <!-- Pestaña 1: TUS RETOS / ACEPTAR DESAFÍO -->
+                <button class="challenge-tab-pill tab-aceptar active interactive-press" id="tabAceptarDesafio" data-tab="retos">
+                  <span>Aceptar Desafío</span>
+                  <span class="tab-notification-badge">+1</span>
+                </button>
+
+                <!-- Pestaña 2: CREAR DESAFÍO / ENVIAR DESAFÍO -->
+                <button class="challenge-tab-pill tab-enviar interactive-press" id="tabEnviarDesafio" data-tab="crear">
+                  <span>Enviar Desafío</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Título de Sección -->
+            <div class="challenges-section-header anim-ch-section-title">
+              <h2 class="challenges-section-title">Partidas activas (¡continúa!)</h2>
+            </div>
+
+            <!-- Lista de Desafíos Activos con Scroll Vertical Exclusivo -->
+            <div class="challenges-cards-list active-matches-scroll" id="challengesCardsList">
+              <!-- Tarjeta 1 (Tu turno) -->
+              <div class="challenge-card anim-ch-card-1 interactive-press" data-challenge-id="1">
+                <div class="card-vs-group">
+                  <div class="player-slot player-user">
+                    <div class="player-avatar-circle bg-purple">
+                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+                    </div>
+                    <span class="player-name">Usuario</span>
+                  </div>
+
+                  <span class="vs-badge">vs</span>
+
+                  <div class="player-slot player-rival">
+                    <div class="player-avatar-circle bg-yellow">
+                      <span>👧</span>
+                    </div>
+                    <span class="player-name">Usuario 2</span>
+                  </div>
+                </div>
+
+                <div class="card-status-col">
+                  <div class="status-indicator status-your-turn">
+                    <span class="status-check">✔</span> Continúa!
+                  </div>
+                  <div class="status-streak">
+                    <button class="challenge-play-btn interactive-press">JUGAR</button>
+                    <span class="streak-flame" title="Racha activa">🔥</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tarjeta 2 (Tu turno) -->
+              <div class="challenge-card anim-ch-card-2 interactive-press" data-challenge-id="2">
+                <div class="card-vs-group">
+                  <div class="player-slot player-user">
+                    <div class="player-avatar-circle bg-purple">
+                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+                    </div>
+                    <span class="player-name">Usuario</span>
+                  </div>
+
+                  <span class="vs-badge">vs</span>
+
+                  <div class="player-slot player-rival">
+                    <div class="player-avatar-circle bg-blue">
+                      <span>👦</span>
+                    </div>
+                    <span class="player-name">Usuario 3</span>
+                  </div>
+                </div>
+
+                <div class="card-status-col">
+                  <div class="status-indicator status-your-turn">
+                    <span class="status-check">✔</span> Continúa!
+                  </div>
+                  <div class="status-streak">
+                    <button class="challenge-play-btn interactive-press">JUGAR</button>
+                    <span class="streak-flame" title="Racha activa">🔥</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tarjeta 3 (Esperando jugada) -->
+              <div class="challenge-card anim-ch-card-3 interactive-press" data-challenge-id="3">
+                <div class="card-vs-group">
+                  <div class="player-slot player-user">
+                    <div class="player-avatar-circle bg-purple">
+                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+                    </div>
+                    <span class="player-name">Usuario</span>
+                  </div>
+
+                  <span class="vs-badge">vs</span>
+
+                  <div class="player-slot player-rival">
+                    <div class="player-avatar-circle bg-pink">
+                      <span>👩‍🎤</span>
+                    </div>
+                    <span class="player-name">PixelQueen</span>
+                  </div>
+                </div>
+
+                <div class="card-status-col">
+                  <div class="status-indicator status-waiting">
+                    <span class="status-clock">⏳</span> Esperando
+                  </div>
+                  <div class="status-streak">
+                    <span class="streak-flame" title="Racha activa">🔥</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personajes Inferiores Fijos y con Vida Propia -->
+          <div class="characters-footer">
+            <img src="assets/pantalla_desafios/chico.webp" alt="Chico Retro" class="ch-character ch-chico">
+            <img src="assets/pantalla_desafios/chica.webp" alt="Chica Retro" class="ch-character ch-chica">
+          </div>
+
+          <!-- Barra de Navegación Inferior en Desafíos -->
+          <nav class="challenges-bottom-navbar bottom-nav anim-ch-navbar">
+            <button class="nav-tab" id="tabChallengesInicio" data-tab="inicio">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Inicio</span>
+            </button>
+
+            <button class="nav-tab active" id="tabChallengesDesafios" data-tab="desafios">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0011 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 003.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Desafíos</span>
+            </button>
+
+            <button class="nav-tab" id="tabChallengesTienda" data-tab="tienda">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 3h18v4H3zM4 7v13h16V7H4zm6 3h4v4h-4z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Tienda</span>
+            </button>
+
+            <button class="nav-tab nav-perfil btn-nav-profile" id="tabChallengesPerfil" data-tab="perfil">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <circle cx="12" cy="7" r="4" fill="currentColor"/>
+                  <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Perfil</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- VISTA 8: PANTALLA DE RULETA PARA PARTIDAS DE DUELO (#challengeMatchView) -->
+        <div class="screen-view" id="challengeMatchView" style="display: none;">
+          <!-- Fondo Decorativo -->
+          <div class="challenge-match-bg floating-space-bg">
+            <div class="duel-star-decor star-top-left">
+              <svg viewBox="0 0 100 100" class="svg-duel-star">
+                <path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="#ffed31"/>
+              </svg>
+            </div>
+            <div class="duel-star-decor star-top-right">
+              <svg viewBox="0 0 100 100" class="svg-duel-star">
+                <path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="#ff0356"/>
+              </svg>
+            </div>
+            <div class="duel-sparkle duel-sp-1">✦</div>
+            <div class="duel-sparkle duel-sp-2">✦</div>
+            <div class="duel-sparkle duel-sp-3">★</div>
+            <div class="duel-wave-bottom"></div>
+          </div>
+
+          <!-- Contenedor Principal con Safe Area -->
+          <div class="challenge-match-content">
+
+            <!-- 1. ENCABEZADO: botón back + título -->
+            <header class="challenge-match-header anim-dm-header">
+              <button class="duel-btn-back interactive-press" id="btnChallengeMatchBack" aria-label="Volver a Desafíos">
+                <svg viewBox="0 0 24 24" class="back-icon-svg">
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#000000"/>
+                </svg>
+              </button>
+              <h2 class="duel-screen-title">¡Que comience el reto!</h2>
+              <div class="duel-header-spacer"></div>
+            </header>
+
+            <!-- 2. RULETA CENTRAL -->
+            <section class="wheel-stage duel-wheel-stage anim-dm-wheel">
+              <!-- Aguja triangular negra superior -->
+              <div class="wheel-pointer-container">
+                <div class="wheel-pointer-triangle"></div>
+              </div>
+              <!-- Disco Rotatorio -->
+              <div class="wheel-disc-wrapper">
+                <div class="wheel-disc" id="duelWheelDisc">
+                  <img src="assets/pantalla_ruleta/ruleta_cine.webp" alt="Ruleta Duelo Retro Quiz" class="wheel-disc-img" id="duelWheelDiscImg">
+                  <!-- Botón GIRAR central -->
+                  <button class="wheel-center-hub interactive-press spin-btn" id="btnGirarDuelWheel" aria-label="Girar Ruleta Duelo">
+                    <span id="btnGirarDuelLabel">GIRAR</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. MÓDULO VERSUS (debajo de la ruleta) -->
+            <section class="duel-versus-section versus-container anim-dm-versus">
+              <div class="duel-versus-row">
+                <!-- Jugador Local -->
+                <div class="duel-player-box duel-player-local">
+                  <div class="duel-avatar-circle bg-purple">
+                    <img src="assets/pantalla_inicio/hombre.webp" alt="Tú" class="duel-user-avatar-img user-avatar-sync" id="duelUserAvatarImg">
+                  </div>
+                  <span class="duel-player-name">Tú</span>
+                </div>
+
+                <!-- VS central -->
+                <div class="duel-vs-badge-wrap">
+                  <div class="duel-vs-badge">VS</div>
+                </div>
+
+                <!-- Jugador Rival -->
+                <div class="duel-player-box duel-player-rival">
+                  <div class="duel-avatar-circle bg-yellow" id="duelRivalAvatar">
+                    <span>🕹️</span>
+                  </div>
+                  <span class="duel-player-name" id="duelRivalName">Usuario 2</span>
+                </div>
+              </div>
+
+              <!-- Píldora "ES TU TURNO" -->
+              <div class="duel-turn-pill-wrap">
+                <div class="duel-turn-pill">
+                  <span class="turn-flame">🔥</span>
+                  <span>ES TU TURNO</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. AVISO DE HÁNDICAP (fijo al fondo) -->
+            <section class="duel-handicap-section anim-dm-handicap">
+              <div class="duel-handicap-plate" id="duelHandicapPlate">
+                <span class="handicap-warning-icon">⚠️</span>
+                <span class="handicap-text" id="duelHandicapText"><strong id="duelHandicapRival">Usuario 2</strong> ha activado: <strong>-5 segundos por respuesta</strong></span>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+
+        <!-- VISTA 9: PANTALLA DE RESULTADOS DE DUELO (#challengeResultView) -->
+        <div class="screen-view" id="challengeResultView" style="display: none;">
+          <!-- Fondo Decorativo Neo-Arcade con Destellos -->
+          <div class="duel-results-bg">
+            <div class="dr-glow-blob blob-top"></div>
+            <div class="dr-glow-blob blob-bottom"></div>
+            <span class="ch-decor-sparkle dr-sparkle-1">✦</span>
+            <span class="ch-decor-sparkle dr-sparkle-2">★</span>
+            <span class="ch-decor-sparkle dr-sparkle-3">✦</span>
+          </div>
+
+          <div class="duel-results-content">
+            <!-- HUD Superior: Marcador de Ronda y Podio Compacto -->
+            <header class="duel-results-header anim-dr-header">
+              <div class="duel-round-badge-wrap">
+                <span class="duel-round-badge" id="duelResultRoundBadge">RONDA 1 DE 3</span>
+              </div>
+              <h2 class="duel-outcome-title" id="duelOutcomeTitle">RESULTADO DE RONDA</h2>
+
+              <!-- Podio Compacto con los 2 Avatares Enfrentados -->
+              <div class="duel-result-podium">
+                <!-- Jugador Local -->
+                <div class="podium-player player-local" id="podiumLocalPlayer">
+                  <div class="podium-avatar-wrap">
+                    <span class="winner-crown-icon hidden" id="localWinnerCrown">👑</span>
+                    <div class="podium-avatar-circle bg-purple">
+                      <img src="assets/pantalla_inicio/hombre.webp" alt="Tú" class="podium-user-avatar-img user-avatar-sync" id="podiumUserAvatarImg">
+                    </div>
+                  </div>
+                  <span class="podium-name">Tú</span>
+                  <span class="podium-score" id="duelResultLocalScore">280 pts</span>
+                </div>
+
+                <!-- Tag Central VS -->
+                <div class="podium-vs-tag">VS</div>
+
+                <!-- Rival -->
+                <div class="podium-player player-rival" id="podiumRivalPlayer">
+                  <div class="podium-avatar-wrap">
+                    <span class="winner-crown-icon hidden" id="rivalWinnerCrown">👑</span>
+                    <div class="podium-avatar-circle bg-yellow" id="podiumRivalAvatar">
+                      <span>🕹️</span>
+                    </div>
+                  </div>
+                  <span class="podium-name" id="duelResultRivalName">Usuario 2</span>
+                  <span class="podium-score" id="duelResultRivalScore">210 pts</span>
+                </div>
+              </div>
+            </header>
+
+            <!-- Tarjeta Central de Desempeño -->
+            <main class="duel-performance-card neo-memphis-card anim-dr-card">
+              <div class="perf-card-header">
+                <span class="perf-card-tag">DESEMPEÑO EN ESTA RONDA</span>
+                <div class="perf-hits-badge" id="duelHitsBadge">
+                  <span class="hits-number" id="duelHitsNumber">4 / 5</span>
+                  <span class="hits-label">CORRECTAS</span>
+                </div>
+              </div>
+
+              <!-- Rejilla de Estadísticas -->
+              <div class="perf-stats-grid">
+                <div class="perf-stat-box">
+                  <span class="stat-icon">⏱️</span>
+                  <div class="stat-info">
+                    <span class="stat-label">TIEMPO EMPLEADO</span>
+                    <span class="stat-value" id="duelTimeSpent">28.4s</span>
+                  </div>
+                </div>
+
+                <div class="perf-stat-box">
+                  <span class="stat-icon">⭐</span>
+                  <div class="stat-info">
+                    <span class="stat-label">PUNTOS GANADOS</span>
+                    <span class="stat-value text-accent-xp" id="duelPointsEarned">+240 XP</span>
+                  </div>
+                </div>
+
+                <div class="perf-stat-box stat-full-row">
+                  <span class="stat-icon">
+                    <img src="assets/global/retrocoin.webp" alt="RetroCoins" class="global-retrocoin-img mini-coin">
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">RETROCOINS DE LA TANDA</span>
+                    <span class="stat-value text-accent-coin" id="duelCoinsEarned">+20 RC</span>
+                  </div>
+                </div>
+              </div>
+            </main>
+
+            <!-- Botones de Acción Inferiores -->
+            <footer class="duel-results-footer anim-dr-footer">
+              <!-- Rondas 1 y 2: Opciones de Ataque o Pasar -->
+              <div class="duel-round-actions" id="duelRoundActions">
+                <button class="btn-duel-action btn-send-attack interactive-press" id="btnOpenAttackModal">
+                  <span class="btn-action-icon">💣</span>
+                  <span class="btn-action-text">ENVIAR ATAQUE AL RIVAL</span>
+                </button>
+                <button class="btn-duel-action btn-pass-turn interactive-press" id="btnPassTurnWithoutAttack">
+                  <span>PASAR TURNO SIN ATACAR</span>
+                </button>
+              </div>
+
+              <!-- Ronda 3 Final: Resolución Definitiva (Revancha / Volver) -->
+              <div class="duel-final-actions" id="duelFinalActions" style="display: none;">
+                <button class="btn-duel-action btn-rematch-duel interactive-press" id="btnRematchDuel">
+                  <span class="btn-action-icon">🔄</span>
+                  <span>SOLICITAR REVANCHA</span>
+                </button>
+                <button class="btn-duel-action btn-back-challenges interactive-press" id="btnDuelBackToChallenges">
+                  <span>VOLVER A DESAFÍOS</span>
+                </button>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+        <!-- VISTA 10: PANTALLA COMPLETA DEDICADA DE TIENDA (#storeView) -->
+        <div class="screen-view" id="storeView" style="display: none;">
+          <!-- HUD Superior: Botón Atrás, Título Central y Pastilla de Monedas -->
+          <header class="store-top-header anim-st-header">
+            <button class="store-back-btn interactive-press" id="btnStoreBack" title="Volver al Inicio">
+              <span class="store-back-arrow">‹</span>
+            </button>
+            <h1 class="store-main-title">TIENDA</h1>
+            <div class="store-coin-pill" id="storeCoinPill" title="Tus RetroCoins">
+              <img src="assets/global/retrocoin.webp" alt="RetroCoins" class="global-retrocoin-img mini-coin">
+              <span class="store-coins-val" id="storeUserCoins">1,250</span>
+            </div>
+          </header>
+
+          <!-- Contenedor con Scroll Vertical de las 3 Secciones -->
+          <div class="store-scroll-content">
+            
+            <!-- SECCIÓN 1: 📦 PACKS DE PREGUNTAS -->
+            <section class="store-section anim-st-packs">
+              <div class="store-section-header">
+                <div class="store-section-title-wrap">
+                  <span class="store-section-icon">📦</span>
+                  <h2 class="store-section-title">Packs de Preguntas</h2>
+                </div>
+                <button class="store-see-all-btn interactive-press" id="btnStorePacksSeeAll">VER TODO</button>
+              </div>
+
+              <!-- Carrusel Horizontal de Packs -->
+              <div class="store-packs-scroll" id="storePacksScroll">
+                <!-- Pack 1: Cine 2000s -->
+                <div class="store-pack-card pack-purple interactive-press" data-pack="cine_2000s">
+                  <div class="pack-title-box">
+                    <span class="pack-title">CINE</span>
+                    <span class="pack-subtitle">2000s</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <img src="assets/pantalla_progreso/claqueta.png" alt="Cine" class="pack-art-img">
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>120</span>
+                  </div>
+                </div>
+
+                <!-- Pack 2: Videojuegos Clásicos -->
+                <div class="store-pack-card pack-red interactive-press" data-pack="videojuegos_clasicos">
+                  <div class="pack-title-box">
+                    <span class="pack-title">VIDEOJUEGOS</span>
+                    <span class="pack-subtitle">CLÁSICOS</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <img src="assets/pantalla_progreso/mando.png" alt="Videojuegos" class="pack-art-img">
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>120</span>
+                  </div>
+                </div>
+
+                <!-- Pack 3: Series Icónicas -->
+                <div class="store-pack-card pack-blue interactive-press" data-pack="series_iconicas">
+                  <div class="pack-title-box">
+                    <span class="pack-title">SERIES</span>
+                    <span class="pack-subtitle">ICÓNICAS</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <img src="assets/pantalla_progreso/television.png" alt="Series" class="pack-art-img">
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>120</span>
+                  </div>
+                </div>
+
+                <!-- Pack 4: Puro 80s -->
+                <div class="store-pack-card pack-orange interactive-press" data-pack="puro_80s">
+                  <div class="pack-title-box">
+                    <span class="pack-title">PURO</span>
+                    <span class="pack-subtitle">80s</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <span class="pack-art-emoji">📻</span>
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>150</span>
+                  </div>
+                </div>
+
+                <!-- Pack 5: Puro 90s -->
+                <div class="store-pack-card pack-teal interactive-press" data-pack="puro_90s">
+                  <div class="pack-title-box">
+                    <span class="pack-title">PURO</span>
+                    <span class="pack-subtitle">90s</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <span class="pack-art-emoji">🛹</span>
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>150</span>
+                  </div>
+                </div>
+
+                <!-- Pack 6: Artistas Latinos -->
+                <div class="store-pack-card pack-pink interactive-press" data-pack="artistas_latinos">
+                  <div class="pack-title-box">
+                    <span class="pack-title">ARTISTAS</span>
+                    <span class="pack-subtitle">LATINOS</span>
+                  </div>
+                  <div class="pack-artwork">
+                    <img src="assets/pantalla_progreso/guitarra.png" alt="Artistas Latinos" class="pack-art-img">
+                  </div>
+                  <div class="pack-status-badge">
+                    <span>🔒 PRÓXIMAMENTE</span>
+                  </div>
+                  <div class="pack-price-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>150</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECCIÓN 2: ⚡ POTENCIADORES -->
+            <section class="store-section anim-st-boosters">
+              <div class="store-section-header">
+                <div class="store-section-title-wrap">
+                  <span class="store-section-icon">⚡</span>
+                  <h2 class="store-section-title">Potenciadores <span class="store-section-tag">Solo Solitario</span></h2>
+                </div>
+              </div>
+
+              <!-- Tarjeta Neo-Memphis con Lista de Potenciadores -->
+              <div class="store-boosters-card neo-memphis-card">
+                <!-- Potenciador 1: +5 Segundos Extra -->
+                <div class="booster-row-item">
+                  <div class="booster-icon-circle bg-blue">
+                    <span>⏱️</span>
+                  </div>
+                  <div class="booster-details">
+                    <div class="booster-name-wrap">
+                      <span class="booster-name">+5 SEGUNDOS EXTRA</span>
+                      <span class="booster-inventory-badge" id="badgeBoosterTime">x1</span>
+                    </div>
+                    <span class="booster-desc">Añade 5s al temporizador de trivia.</span>
+                  </div>
+                  <button class="btn-buy-booster interactive-press" data-booster="time" data-cost="150" title="Comprar +5 Segundos Extra">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>150</span>
+                  </button>
+                </div>
+
+                <!-- Potenciador 2: 50 / 50 -->
+                <div class="booster-row-item">
+                  <div class="booster-icon-circle bg-cyan">
+                    <span>🎯</span>
+                  </div>
+                  <div class="booster-details">
+                    <div class="booster-name-wrap">
+                      <span class="booster-name">50 / 50</span>
+                      <span class="booster-inventory-badge" id="badgeBooster5050">x1</span>
+                    </div>
+                    <span class="booster-desc">Elimina al instante 2 opciones erróneas.</span>
+                  </div>
+                  <button class="btn-buy-booster interactive-press" data-booster="fiftyFifty" data-cost="250" title="Comprar 50/50">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>250</span>
+                  </button>
+                </div>
+
+                <!-- Potenciador 3: Respuesta Doble -->
+                <div class="booster-row-item">
+                  <div class="booster-icon-circle bg-yellow">
+                    <span>⭐</span>
+                  </div>
+                  <div class="booster-details">
+                    <div class="booster-name-wrap">
+                      <span class="booster-name">RESPUESTA DOBLE</span>
+                      <span class="booster-inventory-badge" id="badgeBoosterDouble">x0</span>
+                    </div>
+                    <span class="booster-desc">Otorga una segunda oportunidad si fallas.</span>
+                  </div>
+                  <button class="btn-buy-booster interactive-press" data-booster="double" data-cost="300" title="Comprar Respuesta Doble">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>300</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECCIÓN 3: 🎨 TEMAS ESTACIONALES (SKINS) -->
+            <section class="store-section anim-st-themes">
+              <div class="store-section-header">
+                <div class="store-section-title-wrap">
+                  <span class="store-section-icon">🎨</span>
+                  <h2 class="store-section-title">Temas Estacionales <span class="store-section-tag">Skins App</span></h2>
+                </div>
+                <button class="store-reset-theme-btn interactive-press" id="btnStoreResetTheme" title="Restaurar tema original">POR DEFECTO</button>
+              </div>
+
+              <!-- Rejilla de Temas -->
+              <div class="store-themes-grid">
+                <!-- Tema 1: Navidad Retro -->
+                <div class="store-theme-card theme-card-navidad" data-theme="navidad" data-cost="3000">
+                  <div class="theme-card-banner">
+                    <span class="theme-emoji">🎄</span>
+                    <div class="theme-palette-dots">
+                      <span class="dot" style="background: #DC2626;"></span>
+                      <span class="dot" style="background: #16A34A;"></span>
+                      <span class="dot" style="background: #FEF08A;"></span>
+                    </div>
+                  </div>
+                  <div class="theme-info">
+                    <span class="theme-title">Navidad Retro</span>
+                    <span class="theme-desc">Nieve, luces y tonos rojo carmesí.</span>
+                  </div>
+                  <button class="btn-theme-action interactive-press" data-theme="navidad" data-cost="3000">
+                    <span class="btn-theme-label">COMPRAR</span>
+                    <span class="btn-theme-price">
+                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                      <span>3,000</span>
+                    </span>
+                  </button>
+                </div>
+
+                <!-- Tema 2: Noche de Halloween -->
+                <div class="store-theme-card theme-card-halloween" data-theme="halloween" data-cost="3000">
+                  <div class="theme-card-banner">
+                    <span class="theme-emoji">🎃</span>
+                    <div class="theme-palette-dots">
+                      <span class="dot" style="background: #7C3AED;"></span>
+                      <span class="dot" style="background: #EA580C;"></span>
+                      <span class="dot" style="background: #FDE047;"></span>
+                    </div>
+                  </div>
+                  <div class="theme-info">
+                    <span class="theme-title">Noche Halloween</span>
+                    <span class="theme-desc">Calabazas, murciélagos y neón naranja.</span>
+                  </div>
+                  <button class="btn-theme-action interactive-press" data-theme="halloween" data-cost="3000">
+                    <span class="btn-theme-label">COMPRAR</span>
+                    <span class="btn-theme-price">
+                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                      <span>3,000</span>
+                    </span>
+                  </button>
+                </div>
+
+                <!-- Tema 3: Pascua Arcade -->
+                <div class="store-theme-card theme-card-pascua" data-theme="pascua" data-cost="2500">
+                  <div class="theme-card-banner">
+                    <span class="theme-emoji">🐣</span>
+                    <div class="theme-palette-dots">
+                      <span class="dot" style="background: #FDE047;"></span>
+                      <span class="dot" style="background: #6EE7B7;"></span>
+                      <span class="dot" style="background: #C084FC;"></span>
+                    </div>
+                  </div>
+                  <div class="theme-info">
+                    <span class="theme-title">Pascua Arcade</span>
+                    <span class="theme-desc">Tonos pastel primaverales y confeti.</span>
+                  </div>
+                  <button class="btn-theme-action interactive-press" data-theme="pascua" data-cost="2500">
+                    <span class="btn-theme-label">COMPRAR</span>
+                    <span class="btn-theme-price">
+                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                      <span>2,500</span>
+                    </span>
+                  </button>
+                </div>
+
+                <!-- Tema 4: Verano Synthwave -->
+                <div class="store-theme-card theme-card-verano" data-theme="verano" data-cost="2500">
+                  <div class="theme-card-banner">
+                    <span class="theme-emoji">🌴</span>
+                    <div class="theme-palette-dots">
+                      <span class="dot" style="background: #F43F5E;"></span>
+                      <span class="dot" style="background: #06B6D4;"></span>
+                      <span class="dot" style="background: #FBBF24;"></span>
+                    </div>
+                  </div>
+                  <div class="theme-info">
+                    <span class="theme-title">Verano Synth</span>
+                    <span class="theme-desc">Palmeras neón, degradados cian y fucsia.</span>
+                  </div>
+                  <button class="btn-theme-action interactive-press" data-theme="verano" data-cost="2500">
+                    <span class="btn-theme-label">COMPRAR</span>
+                    <span class="btn-theme-price">
+                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                      <span>2,500</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Barra de Navegación Inferior (Idéntica a la referencia de tienda) -->
+          <nav class="store-bottom-navbar bottom-nav anim-st-navbar">
+            <button class="nav-tab" id="tabStoreInicio" data-tab="inicio">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Inicio</span>
+            </button>
+
+            <button class="nav-tab" id="tabStoreDesafios" data-tab="desafios">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0011 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 003.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Desafíos</span>
+            </button>
+
+            <button class="nav-tab active" id="tabStoreTienda" data-tab="tienda">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path d="M3 3h18v4H3zM4 7v13h16V7H4zm6 3h4v4h-4z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Tienda</span>
+            </button>
+
+            <button class="nav-tab nav-perfil btn-nav-profile" id="tabStorePerfil" data-tab="perfil">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <circle cx="12" cy="7" r="4" fill="currentColor"/>
+                  <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="nav-label">Perfil</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- ================= MODALES INTERACTIVOS ================= -->
+
+        <!-- Modal 1: ACEPTAR DESAFÍO (#acceptChallengeModal) -->
+        <div class="modal-backdrop" id="acceptChallengeModal">
+          <div class="challenge-modal-card neo-memphis-modal">
+            <div class="modal-header purple-header challenge-popup-header">
+              <div class="popup-title-wrap">
+                <span class="popup-icon">⚔️</span>
+                <span class="modal-title popup-title">Mira quién te desafía</span>
+              </div>
+              <button class="close-modal-btn challenge-popup-close" data-close="acceptChallengeModal" title="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body challenge-popup-body">
+              <div class="challenge-requests-list" id="acceptChallengeList">
+                <!-- Fila 1 -->
+                <div class="challenge-request-row" data-user="PixelGamer_99">
+                  <div class="challenger-info">
+                    <div class="challenger-avatar bg-purple">
+                      <span>👾</span>
+                    </div>
+                    <div class="challenger-details">
+                      <span class="challenger-name">PixelGamer_99</span>
+                      <span class="challenger-tag">Nivel 14 · Cine & Series</span>
+                    </div>
+                  </div>
+                  <div class="request-actions">
+                    <button class="btn-req-action btn-req-accept interactive-press" title="Aceptar desafío">
+                      <span>✓</span>
+                    </button>
+                    <button class="btn-req-action btn-req-reject interactive-press" title="Rechazar desafío">
+                      <span>✕</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="challenge-request-row" data-user="RetroMaster">
+                  <div class="challenger-info">
+                    <div class="challenger-avatar bg-yellow">
+                      <span>🕹️</span>
+                    </div>
+                    <div class="challenger-details">
+                      <span class="challenger-name">RetroMaster</span>
+                      <span class="challenger-tag">Nivel 22 · Videojuegos</span>
+                    </div>
+                  </div>
+                  <div class="request-actions">
+                    <button class="btn-req-action btn-req-accept interactive-press" title="Aceptar desafío">
+                      <span>✓</span>
+                    </button>
+                    <button class="btn-req-action btn-req-reject interactive-press" title="Rechazar desafío">
+                      <span>✕</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estado vacío cuando no hay más solicitudes -->
+              <div class="empty-challenges-msg" id="emptyPendingChallenges" style="display: none;">
+                <span class="empty-icon">📭</span>
+                <p class="empty-text">No tienes más desafíos pendientes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal 2: ENVIAR DESAFÍO (#sendChallengeModal) -->
+        <div class="modal-backdrop" id="sendChallengeModal">
+          <div class="challenge-modal-card neo-memphis-modal">
+            <div class="modal-header yellow-header challenge-popup-header">
+              <div class="popup-title-wrap">
+                <span class="popup-icon">🚀</span>
+                <span class="modal-title popup-title">Desafía a tus cuates</span>
+              </div>
+              <button class="close-modal-btn challenge-popup-close" data-close="sendChallengeModal" title="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body challenge-popup-body">
+              <!-- Barra de Búsqueda -->
+              <div class="challenge-search-box">
+                <input type="text" id="inputSearchUserChallenge" class="challenge-search-input" placeholder="🔍 Buscar por nombre de usuario..." autocomplete="off" />
+              </div>
+
+              <!-- Botón de Acción 1: Contactos -->
+              <button class="btn-challenge-action btn-action-contacts interactive-press" id="btnAccessContacts">
+                <span class="action-icon">📱</span>
+                <span class="action-text">Acceder a tus contactos</span>
+              </button>
+
+              <!-- Divisor sutil -->
+              <div class="challenge-divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">- O COMPARTE TU LINK -</span>
+                <span class="divider-line"></span>
+              </div>
+
+              <!-- Botón de Acción 2: Viral Share Link -->
+              <button class="btn-challenge-action btn-action-viral-share interactive-press" id="btnShareViralLink">
+                <span class="action-icon">🔗</span>
+                <span class="action-text">Compartir enlace único</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal 3: ATAQUES / HÁNDICAPS DE DUELO (#attackModal) -->
+        <div class="modal-backdrop" id="attackModal">
+          <div class="challenge-modal-card neo-memphis-modal attack-modal-card">
+            <div class="modal-header red-header challenge-popup-header">
+              <div class="popup-title-wrap">
+                <span class="popup-icon">💣</span>
+                <span class="modal-title popup-title">SELECCIONA UN ATAQUE</span>
+              </div>
+              <button class="close-modal-btn challenge-popup-close" data-close="attackModal" title="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body challenge-popup-body attack-popup-body">
+              <p class="attack-modal-subtitle">Dificulta el turno de tu contrincante en la siguiente ronda:</p>
+
+              <!-- Lista de 5 Tarjetas de Ataque -->
+              <div class="attacks-list" id="attacksList">
+                <!-- Ataque 1 -->
+                <div class="attack-card-item interactive-press" data-attack-id="time_penalty" data-cost="40" data-name="-5 Segundos por respuesta">
+                  <div class="attack-icon-circle bg-orange">⏱️</div>
+                  <div class="attack-details">
+                    <span class="attack-name">-5 Segundos por respuesta</span>
+                    <span class="attack-desc">Reduce el tiempo del rival a la mitad.</span>
+                  </div>
+                  <div class="attack-cost-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>40</span>
+                  </div>
+                </div>
+
+                <!-- Ataque 2 -->
+                <div class="attack-card-item interactive-press" data-attack-id="overload_questions" data-cost="60" data-name="+5 Preguntas de sobrecarga">
+                  <div class="attack-icon-circle bg-red">📚</div>
+                  <div class="attack-details">
+                    <span class="attack-name">+5 Preguntas de sobrecarga</span>
+                    <span class="attack-desc">Obliga al rival a responder el doble.</span>
+                  </div>
+                  <div class="attack-cost-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>60</span>
+                  </div>
+                </div>
+
+                <!-- Ataque 3 -->
+                <div class="attack-card-item interactive-press" data-attack-id="smoke_screen" data-cost="50" data-name="Cortina de Humo">
+                  <div class="attack-icon-circle bg-gray">🌫️</div>
+                  <div class="attack-details">
+                    <span class="attack-name">Cortina de Humo (Opciones borrosas)</span>
+                    <span class="attack-desc">Desenfoca las opciones por 4 segundos.</span>
+                  </div>
+                  <div class="attack-cost-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>50</span>
+                  </div>
+                </div>
+
+                <!-- Ataque 4 -->
+                <div class="attack-card-item interactive-press" data-attack-id="shuffle_buttons" data-cost="45" data-name="Ruleta Rusa">
+                  <div class="attack-icon-circle bg-purple">🔀</div>
+                  <div class="attack-details">
+                    <span class="attack-name">Ruleta Rusa (Botones barajados)</span>
+                    <span class="attack-desc">Intercambia las opciones de lugar.</span>
+                  </div>
+                  <div class="attack-cost-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>45</span>
+                  </div>
+                </div>
+
+                <!-- Ataque 5 -->
+                <div class="attack-card-item interactive-press" data-attack-id="freeze_streak" data-cost="35" data-name="Congelador de Rachas">
+                  <div class="attack-icon-circle bg-blue">❄️</div>
+                  <div class="attack-details">
+                    <span class="attack-name">Congelador de Rachas</span>
+                    <span class="attack-desc">Anula los multiplicadores del rival.</span>
+                  </div>
+                  <div class="attack-cost-pill">
+                    <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                    <span>35</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal JUGAR / SELECCIÓN DE MODO -->
+        <div class="modal-backdrop" id="modalJugar">
+          <div class="retro-modal">
+            <div class="modal-header yellow-header">
+              <span class="modal-title">🕹️ ¡A JUGAR!</span>
+              <button class="close-modal-btn" data-close="modalJugar">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="modal-subtitle">Elige tu modo favorito de trivia retro:</p>
+              
+              <div class="mode-cards">
+                <div class="mode-card mode-classic" data-mode="classic">
+                  <div class="mode-icon">📻</div>
+                  <div class="mode-info">
+                    <h4>Modo Clásico</h4>
+                    <p>80s, 90s y 2000s al azar</p>
+                  </div>
+                  <span class="mode-badge">¡Popular!</span>
+                </div>
+
+                <div class="mode-card mode-blitz" data-mode="blitz">
+                  <div class="mode-icon">⚡</div>
+                  <div class="mode-info">
+                    <h4>Contrarreloj</h4>
+                    <p>60 segundos de pura adrenalina</p>
+                  </div>
+                </div>
+
+                <div class="mode-card mode-duel" data-mode="duel">
+                  <div class="mode-icon">👾</div>
+                  <div class="mode-info">
+                    <h4>Duelo de Épocas</h4>
+                    <p>Demuestra qué década fue la mejor</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini Juego Rápido -->
+              <div class="quick-quiz-box" id="quickQuizBox">
+                <div class="quiz-question-tag">PREGUNTA RETRO EXPRESS</div>
+                <div class="quiz-question-text" id="quizQuestionText">¿En qué año se lanzó al mercado la consola Super Nintendo (SNES)?</div>
+                <div class="quiz-options-grid" id="quizOptionsGrid">
+                  <button class="quiz-opt-btn" data-correct="false">1985</button>
+                  <button class="quiz-opt-btn" data-correct="true">1990</button>
+                  <button class="quiz-opt-btn" data-correct="false">1994</button>
+                  <button class="quiz-opt-btn" data-correct="false">1998</button>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal DESAFÍOS -->
+        <div class="modal-backdrop" id="modalDesafios">
+          <div class="retro-modal">
+            <div class="modal-header purple-header">
+              <span class="modal-title">🏆 DESAFÍOS DIARIOS</span>
+              <button class="close-modal-btn" data-close="modalDesafios">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="modal-subtitle">Completa misiones para ganar monedas y premios:</p>
+              
+              <div class="challenges-list">
+                <!-- Desafío 1 -->
+                <div class="challenge-item">
+                  <div class="challenge-top">
+                    <span class="challenge-title">Adivina 5 intros de series 90s</span>
+                    <span class="challenge-reward">+100 🟡</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill" style="width: 60%;"></div>
+                  </div>
+                  <div class="challenge-bottom">
+                    <span class="progress-txt">3 / 5 completadas</span>
+                    <button class="claim-btn disabled" disabled>En progreso</button>
+                  </div>
+                </div>
+
+                <!-- Desafío 2 (Reclamable) -->
+                <div class="challenge-item challenge-ready" id="challengeClaimable">
+                  <div class="challenge-top">
+                    <span class="challenge-title">Racha de 3 respuestas correctas</span>
+                    <span class="challenge-reward">+250 🟡</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill full" style="width: 100%;"></div>
+                  </div>
+                  <div class="challenge-bottom">
+                    <span class="progress-txt">¡Misión lista!</span>
+                    <button class="claim-btn active-claim" id="btnClaimChallenge">¡Reclamar!</button>
+                  </div>
+                </div>
+
+                <!-- Desafío 3 -->
+                <div class="challenge-item">
+                  <div class="challenge-top">
+                    <span class="challenge-title">Juega una partida Contrarreloj</span>
+                    <span class="challenge-reward">+150 🟡</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill" style="width: 0%;"></div>
+                  </div>
+                  <div class="challenge-bottom">
+                    <span class="progress-txt">0 / 1 completada</span>
+                    <button class="claim-btn disabled" disabled>Ir a Jugar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal RANKING -->
+        <div class="modal-backdrop" id="modalRanking">
+          <div class="retro-modal">
+            <div class="modal-header green-header">
+              <span class="modal-title">📊 SALÓN DE LA FAMA</span>
+              <button class="close-modal-btn" data-close="modalRanking">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="ranking-podium">
+                <div class="podium-item podium-2">
+                  <div class="podium-avatar">👩‍🎤</div>
+                  <div class="podium-name">SailorMoon</div>
+                  <div class="podium-score">12,850</div>
+                  <div class="podium-rank">2</div>
+                </div>
+                <div class="podium-item podium-1">
+                  <div class="podium-crown">👑</div>
+                  <div class="podium-avatar">🕹️</div>
+                  <div class="podium-name">MartyMcFly</div>
+                  <div class="podium-score">15,420</div>
+                  <div class="podium-rank">1</div>
+                </div>
+                <div class="podium-item podium-3">
+                  <div class="podium-avatar">👾</div>
+                  <div class="podium-name">Goku90s</div>
+                  <div class="podium-score">11,200</div>
+                  <div class="podium-rank">3</div>
+                </div>
+              </div>
+
+              <!-- Fila del Usuario -->
+              <div class="user-rank-card">
+                <span class="rank-pos">#42</span>
+                <span class="rank-user">Tú (Jugador Retro)</span>
+                <span class="rank-pts" id="rankingUserPts">1,250 pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal AJUSTES -->
+        <div class="modal-backdrop" id="modalSettings">
+          <div class="retro-modal">
+            <div class="modal-header dark-header">
+              <span class="modal-title">⚙️ CONFIGURACIÓN</span>
+              <button class="close-modal-btn" data-close="modalSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-label">
+                    <span>Efectos de Sonido (SFX)</span>
+                    <small>Beeps, fanfarrias y monedas</small>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="settingSoundToggle" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-label">
+                    <span>Música Chiptune 8-Bit</span>
+                    <small>Sintonizador retro de fondo</small>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="settingMusicToggle">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-label">
+                    <span>Animaciones Dinámicas</span>
+                    <small>Flotación de personajes y reflejos</small>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="settingAnimToggle" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-action-row">
+                  <button class="retro-btn-sm" id="btnRestartIntroModal">Repetir Entrada</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL EMERGENTE DE PERFIL (#profileView) -->
+        <div class="modal-backdrop profile-modal-overlay" id="profileView" style="display: none;">
+          <div class="profile-modal-card" id="profileModalCard">
+            <div class="modal-header yellow-header profile-modal-header">
+              <span class="modal-title">👤 PERFIL DE JUGADOR</span>
+              <button class="close-modal-btn profile-close-btn interactive-press" id="btnCloseProfile" aria-label="Cerrar perfil">✕</button>
+            </div>
+            <div class="modal-body profile-modal-body">
+              <!-- Encabezado con Avatar Interactivo -->
+              <div class="profile-header">
+                <div class="profile-avatar-wrapper" id="profileAvatarWrapper" title="Toca para cambiar foto de perfil">
+                  <div class="profile-avatar" id="profileAvatarFrame" role="button" tabindex="0">
+                    <img src="assets/pantalla_inicio/hombre.webp" alt="Avatar de usuario" class="profile-avatar-img user-avatar-sync" id="userAvatarImg">
+                  </div>
+                  <button class="avatar-edit-badge interactive-press" id="btnEditAvatar" aria-label="Cambiar foto de perfil" title="Cambiar foto">
+                    <span class="edit-badge-icon">📷</span>
+                  </button>
+                  <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                </div>
+                <div class="profile-details">
+                  <div class="profile-name-edit-wrap">
+                    <input type="text" id="profileUserNameInput" class="profile-name-input" value="RetroGamer99" maxlength="20" aria-label="Nombre de usuario" title="Toca para editar tu nombre">
+                    <button type="button" class="profile-name-edit-btn" id="btnEditUserName" aria-label="Editar nombre" title="Editar nombre">✏️</button>
+                  </div>
+                  <span class="profile-badge" id="profileBadge">Nivel 12 • Maestro de los 90s</span>
+                  <div class="profile-bio-wrap">
+                    <input type="text" id="profileBioInput" class="profile-bio-input" placeholder="Escribe algo sobre ti..." maxlength="80" aria-label="Biografía corta" title="Escribe tu biografía">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estadísticas del Jugador -->
+              <div class="profile-stats-grid">
+                <div class="stat-box">
+                  <span class="stat-num" id="profileAccuracy">84%</span>
+                  <span class="stat-lbl">Precisión</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num" id="profileCorrectCount">142</span>
+                  <span class="stat-lbl">Aciertos</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num" id="profileMaxStreak">9</span>
+                  <span class="stat-lbl">Racha Máx</span>
+                </div>
+              </div>
+
+              <!-- BANNER DE COMPRA: ELIMINAR PUBLICIDAD -->
+              <div class="profile-no-ads-banner interactive-press" id="btnRemoveAds" role="button" tabindex="0" title="Eliminar anuncios por $0.99 USD">
+                <div class="no-ads-icon-col">
+                  <span class="no-ads-icon" id="noAdsIcon">📵</span>
+                </div>
+                <div class="no-ads-info-col">
+                  <span class="no-ads-title" id="noAdsTitle">ELIMINAR PUBLICIDAD</span>
+                  <span class="no-ads-sub" id="noAdsSub">Disfruta de RetroQuiz sin anuncios por $0.99</span>
+                </div>
+                <div class="no-ads-price-col">
+                  <span class="no-ads-price-pill" id="noAdsPriceBadge">$0.99</span>
+                </div>
+              </div>
+
+              <!-- Botón discreto para reiniciar compra y probar -->
+              <div class="profile-reset-ads-wrap" id="wrapResetAds" style="display: none;">
+                <button type="button" class="profile-reset-ads-btn" id="btnResetNoAdsTest">
+                  🔄 Probar compra de nuevo
+                </button>
+              </div>
+
+              <!-- Ajustes de Audio -->
+              <div class="profile-account-settings">
+                <h4 class="settings-group-title">🔊 Ajustes de Audio</h4>
+                <div class="profile-setting-row">
+                  <div class="setting-info">
+                    <span class="setting-name">Efectos de Sonido</span>
+                  </div>
+                  <label class="retro-toggle" aria-label="Alternar efectos de sonido">
+                    <input type="checkbox" id="toggleSoundProfile" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="profile-setting-row">
+                  <div class="setting-info">
+                    <span class="setting-name">Música</span>
+                  </div>
+                  <label class="retro-toggle" aria-label="Alternar música">
+                    <input type="checkbox" id="toggleMusicProfile">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal REGLAS DE JUEGO ('i') -->
+        <div class="modal-backdrop" id="modalRulesInfo">
+          <div class="retro-modal">
+            <div class="modal-header yellow-header">
+              <span class="modal-title">ℹ️ ¿CÓMO SE JUEGA?</span>
+              <button class="close-modal-btn" data-close="modalRulesInfo">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="rules-list">
+                <div class="rule-card">
+                  <span class="rule-icon">🎯</span>
+                  <div class="rule-info">
+                    <h4>3 Lanzamientos Diarios</h4>
+                    <p>Tienes 3 tiros de ruleta cada 24 horas para jugar y ganar RetroCoins.</p>
+                  </div>
+                </div>
+
+                <div class="rule-card">
+                  <span class="rule-icon">⚡</span>
+                  <div class="rule-info">
+                    <h4>Velocidad = Más Monedas</h4>
+                    <p>Mientras más rápido respondas, mayor será la bonificación de RetroCoins.</p>
+                  </div>
+                </div>
+
+                <div class="rule-card">
+                  <span class="rule-icon">⏳</span>
+                  <div class="rule-info">
+                    <h4>Cuidado con el Tiempo</h4>
+                    <p>Si no respondes dentro del tiempo límite de la pregunta, pierdes 1 vida.</p>
+                  </div>
+                </div>
+
+                <div class="rule-card">
+                  <span class="rule-icon">🔓</span>
+                  <div class="rule-info">
+                    <h4>Categorías Temáticas</h4>
+                    <p>Desbloquea Música, TV, Todo y Videojuegos para activar sus colores en la ruleta.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal ANUNCIO RECOMPENSADO (Rewarded Ad) -->
+        <div class="modal-backdrop" id="modalAdLoader">
+          <div class="retro-modal ad-modal">
+            <div class="modal-header dark-header">
+              <span class="modal-title">📺 ANUNCIO RECOMPENSADO</span>
+            </div>
+            <div class="modal-body text-center">
+              <div class="ad-tv-frame">
+                <div class="ad-screen-spinner">
+                  <span class="ad-spinner-icon">👾</span>
+                </div>
+              </div>
+              <h4 class="ad-loading-text">Cargando Anuncio...</h4>
+              <p class="ad-subtext">Obtendrás +1 Tiro Extra al finalizar</p>
+              
+              <div class="ad-progress-bar">
+                <div class="ad-progress-fill" id="adProgressFill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal MI PROGRESO -->
+        <div class="modal-backdrop" id="modalProgress">
+          <div class="retro-modal">
+            <div class="modal-header purple-header">
+              <span class="modal-title">📊 MI PROGRESO</span>
+              <button class="close-modal-btn" data-close="modalProgress">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="modal-subtitle">Categorías temáticas desbloqueadas:</p>
+              <div class="categories-progress-list">
+                <div class="cat-progress-item unlocked" id="progCine">
+                  <span class="cat-icon">🎬</span>
+                  <span class="cat-name">CINE</span>
+                  <span class="cat-status-badge">¡Desbloqueado!</span>
+                </div>
+                <div class="cat-progress-item" id="progMusica">
+                  <span class="cat-icon">🎧</span>
+                  <span class="cat-name">MÚSICA</span>
+                  <button class="btn-unlock-cat" data-unlock="musica">🔒 Desbloquear (200 🟡)</button>
+                </div>
+                <div class="cat-progress-item" id="progTv">
+                  <span class="cat-icon">📺</span>
+                  <span class="cat-name">TV</span>
+                  <button class="btn-unlock-cat" data-unlock="tv">🔒 Desbloquear (300 🟡)</button>
+                </div>
+                <div class="cat-progress-item" id="progTodo">
+                  <span class="cat-icon">🔀</span>
+                  <span class="cat-name">TODO</span>
+                  <button class="btn-unlock-cat" data-unlock="todo">🔒 Desbloquear (400 🟡)</button>
+                </div>
+                <div class="cat-progress-item" id="progVideojuegos">
+                  <span class="cat-icon">🎮</span>
+                  <span class="cat-name">VIDEOJUEGOS</span>
+                  <button class="btn-unlock-cat" data-unlock="videojuegos">🔒 Desbloquear (500 🟡)</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- OVERLAY DE CONTEO Y RESULTADO DE RULETA (3, 2, 1) -->
+        <div class="landing-countdown-overlay" id="wheelLandingOverlay">
+          <div class="landing-box">
+            <div class="landing-category-badge" id="landingCatBadge">
+              <span class="landing-icon" id="landingCatIcon">🎬</span>
+              <span class="landing-title" id="landingCatName">CINE</span>
+            </div>
+            
+            <div class="countdown-display-wrap">
+              <span class="countdown-label">LA TRIVIA COMIENZA EN</span>
+              <div class="countdown-number" id="landingCountNumber">3</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+      
+      <!-- Efecto brillo de marco / notch simulado -->
+      <div class="device-speaker"></div>
+      <div class="device-home-indicator"></div>
+
+    </div>
+  </div>
+
+  <!-- Modal ¿CÓMO SE JUEGA? (#howToPlayModal) -->
+  <div class="how-to-play-overlay" id="howToPlayModal" style="display:none;" aria-modal="true" role="dialog">
+    <div class="how-to-play-box">
+
+      <!-- Botón cerrar (✕) esquina superior derecha -->
+      <button class="htp-close-btn interactive-press" id="btnCloseHowToPlay" aria-label="Cerrar">✕</button>
+
+      <!-- Título -->
+      <h2 class="htp-title">¿CÓMO SE JUEGA?</h2>
+
+      <!-- Tarjetas de instrucciones -->
+      <div class="htp-cards">
+
+        <div class="htp-card">
+          <span class="htp-card-icon">🎯</span>
+          <div class="htp-card-text">
+            <strong>GIRA LA RULETA</strong>
+            <span>Elige tu categoría diaria: Cine, Videojuegos, TV o Música.</span>
+          </div>
+        </div>
+
+        <div class="htp-card">
+          <span class="htp-card-icon">⏱️</span>
+          <div class="htp-card-text">
+            <strong>15 SEGUNDOS</strong>
+            <span>Piensa rápido. ¡El fondo se pone rojo cuando el tiempo se acaba!</span>
+          </div>
+        </div>
+
+        <div class="htp-card">
+          <span class="htp-card-icon">❤️</span>
+          <div class="htp-card-text">
+            <strong>CUIDA TUS VIDAS</strong>
+            <span>Tienes 3 oportunidades por ronda para acumular RetroCoins.</span>
+          </div>
+        </div>
+
+        <div class="htp-card">
+          <span class="htp-card-icon">🪙</span>
+          <div class="htp-card-text">
+            <strong>RETROCOINS</strong>
+            <span>Sirven para desbloquear temáticas, mejoras y ataques en modo desafío.</span>
+          </div>
+        </div>
+
+        <div class="htp-card">
+          <span class="htp-card-icon">🔥</span>
+          <div class="htp-card-text">
+            <strong>DESAFÍOS</strong>
+            <span>Juega contra amigos en rondas especiales y envía ataques al rival.</span>
+          </div>
+        </div>
+
+      </div><!-- /htp-cards -->
+
+      <!-- Botón inferior "¡ENTENDIDO!" -->
+      <button class="htp-understood-btn interactive-press" id="btnHtpUnderstood">¡ENTENDIDO!</button>
+
+    </div><!-- /how-to-play-box -->
+  </div><!-- /#howToPlayModal -->
+
+  <!-- Confetti Canvas Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="soundManager.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

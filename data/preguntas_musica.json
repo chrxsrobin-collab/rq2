@@ -1,0 +1,422 @@
+[
+  {
+    "id": "mus_001",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué artista lanzó el álbum 'Thriller' en 1982, el disco más vendido de la historia?",
+    "emojis": "🧟 🧤 🕺",
+    "opciones": ["Michael Jackson", "Prince", "Stevie Wonder", "Lionel Richie"],
+    "respuesta_correcta": "Michael Jackson"
+  },
+  {
+    "id": "mus_002",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué legendaria banda de rock británica lideró Freddie Mercury hasta 1991?",
+    "emojis": "👑 🎤 🎹",
+    "opciones": ["Queen", "Led Zeppelin", "The Who", "Pink Floyd"],
+    "respuesta_correcta": "Queen"
+  },
+  {
+    "id": "mus_003",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué tema de Nirvana en 1991 impulsó el movimiento grunge a nivel mundial?",
+    "emojis": "🎸 👶 🏊",
+    "opciones": ["Smells Like Teen Spirit", "Come as You Are", "Lithium", "In Bloom"],
+    "respuesta_correcta": "Smells Like Teen Spirit"
+  },
+  {
+    "id": "mus_004",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaban las cinco integrantes del fenómeno pop británico Spice Girls?",
+    "emojis": "🇬🇧 ✌️ 👠",
+    "opciones": [
+      "Posh, Baby, Scary, Sporty y Ginger",
+      "Baby, Honey, Star, Sporty y Posh",
+      "Ginger, Candy, Baby, Posh y Chic",
+      "Scary, Posh, Roxy, Glam y Baby"
+    ],
+    "respuesta_correcta": "Posh, Baby, Scary, Sporty y Ginger"
+  },
+  {
+    "id": "mus_005",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué dúo francés de música electrónica utilizaba cascos robóticos como identidad?",
+    "emojis": "🤖 🎧 🪩",
+    "opciones": ["Daft Punk", "Justice", "Air", "Cassius"],
+    "respuesta_correcta": "Daft Punk"
+  },
+  {
+    "id": "mus_006",
+    "categoria": "MÚSICA",
+    "pregunta": "¿En qué año se lanzó el icónico videoclip animado de 'Take On Me' del grupo a-ha?",
+    "emojis": "✏️ 🏃 📻",
+    "opciones": ["1985", "1983", "1987", "1989"],
+    "respuesta_correcta": "1985"
+  },
+  {
+    "id": "mus_007",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante pop fue apodada la 'Princesa del Pop' tras su debut en 1998 con '...Baby One More Time'?",
+    "emojis": "👱‍♀️ 🎀 💿",
+    "opciones": ["Britney Spears", "Christina Aguilera", "Jessica Simpson", "Mandy Moore"],
+    "respuesta_correcta": "Britney Spears"
+  },
+  {
+    "id": "mus_008",
+    "categoria": "MÚSICA",
+    "pregunta": "¿A qué virtuoso guitarrista apodaban 'Slowhand' en el mundo del blues y rock?",
+    "emojis": "🎸 ⚡ 🚬",
+    "opciones": ["Eric Clapton", "Jimi Hendrix", "Jimmy Page", "Jeff Beck"],
+    "respuesta_correcta": "Eric Clapton"
+  },
+  {
+    "id": "mus_009",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda argentina liderada por Gustavo Cerati editó el mítico disco 'Canción Animal' en 1990?",
+    "emojis": "🇦🇷 🎸 📻",
+    "opciones": ["Soda Stereo", "Los Fabulosos Cadillacs", "Enanitos Verdes", "Sumo"],
+    "respuesta_correcta": "Soda Stereo"
+  },
+  {
+    "id": "mus_010",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué formato de compresión digital revolucionó la distribución musical en internet en los 90s?",
+    "emojis": "💾 🎵 🖥️",
+    "opciones": ["MP3", "WAV", "MIDI", "FLAC"],
+    "respuesta_correcta": "MP3"
+  },
+  {
+    "id": "mus_011",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante es conocida mundialmente como la 'Reina del Pop'?",
+    "emojis": "👑 🎤 💃",
+    "opciones": ["Madonna", "Cyndi Lauper", "Whitney Houston", "Cher"],
+    "respuesta_correcta": "Madonna"
+  },
+  {
+    "id": "mus_012",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cuál es el título del tema de Bon Jovi lanzado en 1986 que se convirtió en un himno de estadio?",
+    "emojis": "🎸 🎙️ ⚡",
+    "opciones": ["Livin' on a Prayer", "You Give Love a Bad Name", "It's My Life", "Always"],
+    "respuesta_correcta": "Livin' on a Prayer"
+  },
+  {
+    "id": "mus_013",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda de hard rock australiana compuso el inmortal clásico 'Back in Black' en 1980?",
+    "emojis": "⚡ 🎸 🪨",
+    "opciones": ["AC/DC", "Guns N' Roses", "Def Leppard", "Aerosmith"],
+    "respuesta_correcta": "AC/DC"
+  },
+  {
+    "id": "mus_014",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Quién interpretó la balada 'I Will Always Love You' para la banda sonora de 'The Bodyguard' (1992)?",
+    "emojis": "🎙️ 🎬 ❤️",
+    "opciones": ["Whitney Houston", "Mariah Carey", "Céline Dion", "Toni Braxton"],
+    "respuesta_correcta": "Whitney Houston"
+  },
+  {
+    "id": "mus_015",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaba el cuarteto sueco creador de éxitos como 'Dancing Queen' y 'Mamma Mia'?",
+    "emojis": "🇸🇪 🪩 🕺",
+    "opciones": ["ABBA", "Roxette", "Ace of Base", "The Cardigans"],
+    "respuesta_correcta": "ABBA"
+  },
+  {
+    "id": "mus_016",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué guitarrista de Guns N' Roses es famoso por su sombrero de copa y su largo cabello rizado?",
+    "emojis": "🎩 🎸 🚬",
+    "opciones": ["Slash", "Duff McKagan", "Izzy Stradlin", "Buckethead"],
+    "respuesta_correcta": "Slash"
+  },
+  {
+    "id": "mus_017",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué tema de Los del Río desató una fiebre de baile global a mediados de los noventa?",
+    "emojis": "💃 🕺 🇪🇸",
+    "opciones": ["Macarena", "Aserejé", "La Bomba", "Suavemente"],
+    "respuesta_correcta": "Macarena"
+  },
+  {
+    "id": "mus_018",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué rapero blanco debutó masivamente con 'The Slim Shady LP' en 1999?",
+    "emojis": "🎤 👱‍♂️ 💊",
+    "opciones": ["Eminem", "Vanilla Ice", "Machine Gun Kelly", "Beastie Boys"],
+    "respuesta_correcta": "Eminem"
+  },
+  {
+    "id": "mus_019",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cuál es el título del álbum de Pink Floyd de 1973 con un prisma refractando luz en la portada?",
+    "emojis": "🌈 🔺 🌑",
+    "opciones": ["The Dark Side of the Moon", "The Wall", "Wish You Were Here", "Animals"],
+    "respuesta_correcta": "The Dark Side of the Moon"
+  },
+  {
+    "id": "mus_020",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué boy band estadounidense causó furor con el tema 'I Want It That Way' en 1999?",
+    "emojis": "✈️ 🕺 📻",
+    "opciones": ["Backstreet Boys", "*NSYNC", "Boyz II Men", "New Kids on the Block"],
+    "respuesta_correcta": "Backstreet Boys"
+  },
+  {
+    "id": "mus_021",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Quién era la carismática vocalista de la banda estadounidense No Doubt en los años 90?",
+    "emojis": "👱‍♀️ 🎤 🏁",
+    "opciones": ["Gwen Stefani", "Shirley Manson", "Alanis Morissette", "Courtney Love"],
+    "respuesta_correcta": "Gwen Stefani"
+  },
+  {
+    "id": "mus_022",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantautor mexicano compuso e interpretó 'Querida' y 'Hasta que te conocí'?",
+    "emojis": "🌹 🎙️ 🇲🇽",
+    "opciones": ["Juan Gabriel", "José José", "Vicente Fernández", "Marco Antonio Solís"],
+    "respuesta_correcta": "Juan Gabriel"
+  },
+  {
+    "id": "mus_023",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cuál fue el exitoso álbum solista de Michael Jackson lanzado en 1987 con portada en blanco y negro?",
+    "emojis": "🕶️ 🧥 🕺",
+    "opciones": ["Bad", "Dangerous", "Off the Wall", "HIStory"],
+    "respuesta_correcta": "Bad"
+  },
+  {
+    "id": "mus_024",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda británica liderada por los hermanos Gallagher lanzó 'Wonderwall' en 1995?",
+    "emojis": "🎸 🇬🇧 🧱",
+    "opciones": ["Oasis", "Blur", "Pulp", "The Verve"],
+    "respuesta_correcta": "Oasis"
+  },
+  {
+    "id": "mus_025",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaba la 'Reina del Tex-Mex' trágicamente asesinada en 1995?",
+    "emojis": "🌹 🎤 💃",
+    "opciones": ["Selena Quintanilla", "Gloria Estefan", "Jenni Rivera", "Thalía"],
+    "respuesta_correcta": "Selena Quintanilla"
+  },
+  {
+    "id": "mus_026",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué clásico tema synthpop de New Order de 1983 se convirtió en el vinilo de 12 pulgadas más vendido?",
+    "emojis": "🎹 🪩 💾",
+    "opciones": ["Blue Monday", "Bizarre Love Triangle", "True Faith", "Temptation"],
+    "respuesta_correcta": "Blue Monday"
+  },
+  {
+    "id": "mus_027",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante puertorriqueño conquistó las listas anglosajonas en 1999 con 'Livin' la Vida Loca'?",
+    "emojis": "🕺 🎺 🇵🇷",
+    "opciones": ["Ricky Martin", "Chayanne", "Enrique Iglesias", "Marc Anthony"],
+    "respuesta_correcta": "Ricky Martin"
+  },
+  {
+    "id": "mus_028",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué mítica banda de thrash metal lanzó el célebre 'Black Album' en 1991?",
+    "emojis": "🐍 🎸 🥁",
+    "opciones": ["Metallica", "Megadeth", "Slayer", "Pantera"],
+    "respuesta_correcta": "Metallica"
+  },
+  {
+    "id": "mus_029",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaba el trío de hip-hop neoyorquino autor de 'Intergalactic' y 'Sabotage'?",
+    "emojis": "📻 🧢 🛹",
+    "opciones": ["Beastie Boys", "Run-DMC", "Public Enemy", "A Tribe Called Quest"],
+    "respuesta_correcta": "Beastie Boys"
+  },
+  {
+    "id": "mus_030",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué tema de Rick Astley de 1987 dio origen años después al fenómeno de internet 'Rickroll'?",
+    "emojis": "🕺 🎙️ 🔄",
+    "opciones": [
+      "Never Gonna Give You Up",
+      "Together Forever",
+      "Whenever You Need Somebody",
+      "Take Me to Your Heart"
+    ],
+    "respuesta_correcta": "Never Gonna Give You Up"
+  },
+  {
+    "id": "mus_031",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué grupo de rock en español liderado por Fher Olvera lanzó 'Rayando el sol' en 1990?",
+    "emojis": "☀️ 🎸 🇲🇽",
+    "opciones": ["Maná", "Caifanes", "Café Tacvba", "Héroes del Silencio"],
+    "respuesta_correcta": "Maná"
+  },
+  {
+    "id": "mus_032",
+    "categoria": "MÚSICA",
+    "pregunta": "¿En qué año se lanzó al aire el canal de televisión musical MTV en Estados Unidos?",
+    "emojis": "📺 🎸 🚀",
+    "opciones": ["1981", "1983", "1979", "1985"],
+    "respuesta_correcta": "1981"
+  },
+  {
+    "id": "mus_033",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cuál fue el álbum debut que catapultó a la fama a Guns N' Roses en 1987?",
+    "emojis": "🌹 🔫 🎸",
+    "opciones": [
+      "Appetite for Destruction",
+      "Use Your Illusion I",
+      "G N' R Lies",
+      "The Spaghetti Incident?"
+    ],
+    "respuesta_correcta": "Appetite for Destruction"
+  },
+  {
+    "id": "mus_034",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante colombiana alcanzó éxito continental en 1995 con su álbum 'Pies Descalzos'?",
+    "emojis": "👣 🎸 🇨🇴",
+    "opciones": ["Shakira", "Fanny Lu", "Soraya", "Andrea Echeverri"],
+    "respuesta_correcta": "Shakira"
+  },
+  {
+    "id": "mus_035",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué instrumento característico e innovador tocaba Phil Collins mientras cantaba en Genesis?",
+    "emojis": "🥁 🎤 🦍",
+    "opciones": ["Batería", "Bajo eléctrico", "Sintetizador", "Saxofón"],
+    "respuesta_correcta": "Batería"
+  },
+  {
+    "id": "mus_036",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué artista lanzó la pegajosa canción 'U Can't Touch This' con pantalones bombachos en 1990?",
+    "emojis": "👖 🔨 🕺",
+    "opciones": ["MC Hammer", "Vanilla Ice", "Coolio", "Sir Mix-a-Lot"],
+    "respuesta_correcta": "MC Hammer"
+  },
+  {
+    "id": "mus_037",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Quién era el líder y vocalista de la influyente banda de rock española Héroes del Silencio?",
+    "emojis": "🇪🇸 🎸 🎙️",
+    "opciones": ["Enrique Bunbury", "Andrés Calamaro", "Mikel Erentxun", "Pau Donés"],
+    "respuesta_correcta": "Enrique Bunbury"
+  },
+  {
+    "id": "mus_038",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué tema de The Police de 1983 trataba sobre una obsesiva y constante vigilancia?",
+    "emojis": "👀 🎸 📻",
+    "opciones": ["Every Breath You Take", "Roxanne", "Message in a Bottle", "Synchronicity II"],
+    "respuesta_correcta": "Every Breath You Take"
+  },
+  {
+    "id": "mus_039",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda sueca de pop-rock lideraban Marie Fredriksson y Per Gessle en éxitos como 'Listen to Your Heart'?",
+    "emojis": "🇸🇪 📻 ❤️",
+    "opciones": ["Roxette", "Ace of Base", "The Cardigans", "Europe"],
+    "respuesta_correcta": "Roxette"
+  },
+  {
+    "id": "mus_040",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué rapero estadounidense de la costa oeste compuso el clásico noventero 'Gangsta's Paradise'?",
+    "emojis": "🕶️ 🎤 🏙️",
+    "opciones": ["Coolio", "Tupac Shakur", "Snoop Dogg", "Dr. Dre"],
+    "respuesta_correcta": "Coolio"
+  },
+  {
+    "id": "mus_041",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cuál era el nombre artístico del músico y compositor Prince entre 1993 y 2000?",
+    "emojis": "🟣 🎸 🕊️",
+    "opciones": ["Un símbolo impronunciable (The Artist)", "The Purple King", "The Revolution", "Prince Nelson"],
+    "respuesta_correcta": "Un símbolo impronunciable (The Artist)"
+  },
+  {
+    "id": "mus_042",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué grupo de rock chileno grabó en 1995 el tema 'Un amor violento'?",
+    "emojis": "🇨🇱 🎸 🍷",
+    "opciones": ["Los Tres", "La Ley", "Los Prisioneros", "Lucybell"],
+    "respuesta_correcta": "Los Tres"
+  },
+  {
+    "id": "mus_043",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante pop estadounidense debutó en 1999 con el éxito 'Genie in a Bottle'?",
+    "emojis": "🧞‍♀️ 🍾 👱‍♀️",
+    "opciones": ["Christina Aguilera", "Jessica Simpson", "Britney Spears", "Pink"],
+    "respuesta_correcta": "Christina Aguilera"
+  },
+  {
+    "id": "mus_044",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda británica de synthpop liderada por Dave Gahan popularizó 'Enjoy the Silence'?",
+    "emojis": "🌹 👑 🎹",
+    "opciones": ["Depeche Mode", "Pet Shop Boys", "Erasure", "Tears for Fears"],
+    "respuesta_correcta": "Depeche Mode"
+  },
+  {
+    "id": "mus_045",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante de salsa panameño compuso la épica crónica urbana 'Pedro Navaja' en 1978?",
+    "emojis": "🗡️ 🎩 🇵🇦",
+    "opciones": ["Rubén Blades", "Héctor Lavoe", "Willie Colón", "Cheo Feliciano"],
+    "respuesta_correcta": "Rubén Blades"
+  },
+  {
+    "id": "mus_046",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda estadounidense de punk rock alcanzó estrellato mundial en 1994 con el álbum 'Dookie'?",
+    "emojis": "💣 🎸 🎸",
+    "opciones": ["Green Day", "The Offspring", "Blink-182", "Rancid"],
+    "respuesta_correcta": "Green Day"
+  },
+  {
+    "id": "mus_047",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda mexicana de rock y ska compuso el tema 'La Carencia' en 2001?",
+    "emojis": "🎺 🎸 🇲🇽",
+    "opciones": ["Panteón Rococó", "Maldita Vecindad", "Molotov", "Inspector"],
+    "respuesta_correcta": "Panteón Rococó"
+  },
+  {
+    "id": "mus_048",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaba el vocalista y líder de la mítica banda The Doors?",
+    "emojis": "🚪 🎙️ 🦎",
+    "opciones": ["Jim Morrison", "Ray Manzarek", "Robby Krieger", "John Densmore"],
+    "respuesta_correcta": "Jim Morrison"
+  },
+  {
+    "id": "mus_049",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué clásica canción de Queen de 1975 mezcla rock progresivo, balada y ópera?",
+    "emojis": "🎭 👑 🎹",
+    "opciones": [
+      "Bohemian Rhapsody",
+      "Somebody to Love",
+      "We Are the Champions",
+      "Don't Stop Me Now"
+    ],
+    "respuesta_correcta": "Bohemian Rhapsody"
+  },
+  {
+    "id": "mus_050",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda de rock argentina grabó 'Lamento Boliviano' en su álbum 'Big Bang' (1994)?",
+    "emojis": "🎸 🇦🇷 🍻",
+    "opciones": ["Los Enanitos Verdes", "Los Fabulosos Cadillacs", "Rata Blanca", "Attaque 77"],
+    "respuesta_correcta": "Los Enanitos Verdes"
+  }
+]
