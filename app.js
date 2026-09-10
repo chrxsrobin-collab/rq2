@@ -67,7 +67,6 @@ const state = {
   allUnlocked: false, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
   challenges: [], // Arreglo de desafíos del usuario (sin mock data)
-  selectedRival: null, // Rival seleccionado en el modal de desafío
   playedQuestionIds: new Set(), // Registro de preguntas ya jugadas
 
   wheelNeedsMagicUnlockAnim: false, // Sincronización para disparar humo mágico en la ruleta al volver de la colección
@@ -791,6 +790,15 @@ function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', roun
     activeAttack: null
   };
 
+  const titleEl = document.getElementById('challengeMatchTitle');
+  if (titleEl) {
+    if (round === 'desempate' || state.isTieBreaker || window.state?.isTieBreaker) {
+      titleEl.innerText = 'RONDA DE DESEMPATE';
+    } else {
+      titleEl.innerText = `RONDA ${round}`.toUpperCase();
+    }
+  }
+
   const nameEl = document.getElementById('duelRivalName');
   if (nameEl) nameEl.innerText = rivalName;
 
@@ -859,6 +867,15 @@ function renderScreenView(screenId) {
       setActiveTab('desafios');
       triggerChallengesEntranceAnimation();
       if (typeof renderChallengesUI === 'function') renderChallengesUI();
+      try {
+        if (!localStorage.getItem('retroquiz_seen_challenge_intro')) {
+          setTimeout(() => {
+            if (typeof openChallengeOnboardingModal === 'function') {
+              openChallengeOnboardingModal();
+            }
+          }, 350);
+        }
+      } catch (e) {}
     } else if (targetView.id === 'challengeMatchView') {
       state.activeTab = 'duelo-ruleta';
       updateWheelCategoriesUI();
@@ -2149,23 +2166,28 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
 
   // Asignar al estado global
   const isChallenge = Boolean(window.state && window.state.isChallengeMode);
+  const isTieBreaker = Boolean(window.state && window.state.isTieBreaker);
   if (window.state) {
     window.state.isChallengeMode = isChallenge;
+    window.state.isTieBreaker = isTieBreaker;
     window.state.currentRoundQuestions = questions;
     window.state.currentQuestionIndex = 0;
     window.state.lives = 3;
     window.state.correctAnswersCount = 0;
     window.state.currentRoundXP = 0;
+    window.state.accumulatedAnswerTimeMs = 0;
   }
   state.currentRoundXP = 0;
   state.isChallengeMode = isChallenge;
+  state.isTieBreaker = isTieBreaker;
   if (state.trivia) {
     state.trivia.isDuel = isChallenge;
     state.trivia.questions = questions;
-    state.trivia.totalQuestions = isChallenge ? 5 : 10;
-    state.trivia.timerSeconds = isChallenge ? 10 : 15;
-    state.trivia.remainingMs = (isChallenge ? 10 : 15) * 1000;
+    state.trivia.totalQuestions = isTieBreaker ? 3 : (isChallenge ? 5 : 10);
+    state.trivia.timerSeconds = (isChallenge || isTieBreaker) ? 10 : 15;
+    state.trivia.remainingMs = (isChallenge || isTieBreaker ? 10 : 15) * 1000;
     state.trivia.duelStartTime = performance.now();
+    state.trivia.questionStartTime = performance.now();
     state.trivia.lives = 3;
     state.trivia.sessionCoins = 0;
     state.trivia.sessionXP = 0;
@@ -2446,6 +2468,7 @@ function renderizarPreguntaActual() {
   if (!q) return;
 
   state.trivia.isAnswering = false;
+  state.trivia.questionStartTime = performance.now();
 
   // Actualiza el contador "1/10", "2/10", etc.
   const currentEl = document.getElementById('triviaQCurrent');
@@ -2646,6 +2669,10 @@ function handleTriviaAnswer(selectedIndex) {
   const correctText = q.respuesta_correcta || '';
   const isCorrect = selectedText === correctText;
 
+  // Registrar tiempo de respuesta (en ms) para desempates y métricas
+  const answerDuration = Math.min(10000, performance.now() - (state.trivia.questionStartTime || performance.now()));
+  window.state.accumulatedAnswerTimeMs = (window.state.accumulatedAnswerTimeMs || 0) + answerDuration;
+
   if (isCorrect) {
     // Verde neón si acierta (animación de monedas al HUD)
     if (selectedBtn) selectedBtn.classList.add('option-correct');
@@ -2655,11 +2682,17 @@ function handleTriviaAnswer(selectedIndex) {
     state.trivia.correctAnswersCount = (state.trivia.correctAnswersCount || 0) + 1;
     if (window.state) window.state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.correctAnswersCount = state.trivia.correctAnswersCount;
-    state.trivia.sessionXP = (state.trivia.sessionXP || 0) + 15;
-    if (window.state) {
+
+    // Regla de economía: XP ÚNICAMENTE en Modo Desafíos
+    if (window.state && window.state.isChallengeMode) {
+      state.trivia.sessionXP = (state.trivia.sessionXP || 0) + 15;
       window.state.currentRoundXP = (window.state.currentRoundXP || 0) + 15;
+      state.currentRoundXP = (state.currentRoundXP || 0) + 15;
+    } else {
+      state.trivia.sessionXP = 0;
+      if (window.state) window.state.currentRoundXP = 0;
+      state.currentRoundXP = 0;
     }
-    state.currentRoundXP = (state.currentRoundXP || 0) + 15;
 
     const remainingSecs = Math.max(1, Math.ceil((state.trivia.remainingMs || 0) / 1000));
     const reward = calculateQuestionReward(remainingSecs, state.trivia.currentStreak);
@@ -2689,7 +2722,7 @@ function handleTriviaAnswer(selectedIndex) {
         window.state.currentQuestionIndex++;
         state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-        const totalPreguntas = window.state.isChallengeMode ? 5 : 10;
+        const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
           // Detén el temporizador definitivamente
@@ -2698,7 +2731,6 @@ function handleTriviaAnswer(selectedIndex) {
 
           // Enrutamiento según el modo:
           if (window.state.isChallengeMode) {
-            // Modo Desafío: abre resultados de duelo con botón para atacar
             showView('#challengeResultView');
             if (typeof renderResultadosDesafio === 'function') {
               renderResultadosDesafio();
@@ -2749,12 +2781,20 @@ function handleTriviaAnswer(selectedIndex) {
     playErrorSound();
     if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
 
-    // 2. CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
+    // CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
     if (window.state.lives <= 0) {
-      // Si window.state.lives <= 0: NO ejecutes el flip hacia la siguiente pregunta.
-      // Muestra brevemente el botón en rojo (300 ms) e invoca de inmediato ejecutarSecuenciaGameOver().
       setTimeout(() => {
-        ejecutarSecuenciaGameOver('Te has quedado sin vidas');
+        if (window.state.isChallengeMode) {
+          // En modo desafío NUNCA mostrar game over, ir directo a resultados de la ronda
+          clearInterval(window.state.timerInterval);
+          if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
+          showView('#challengeResultView');
+          if (typeof renderResultadosDesafio === 'function') {
+            renderResultadosDesafio();
+          }
+        } else {
+          ejecutarSecuenciaGameOver('Te has quedado sin vidas');
+        }
       }, 300);
     } else {
       // Si aún quedan vidas (> 0): continúa con el flujo normal de Flip y pasa a la siguiente pregunta.
@@ -2767,7 +2807,7 @@ function handleTriviaAnswer(selectedIndex) {
           window.state.currentQuestionIndex++;
           state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-          const totalPreguntas = window.state.isChallengeMode ? 5 : 10;
+          const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
           if (window.state.currentQuestionIndex >= totalPreguntas || 
               (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
             // Detén el temporizador definitivamente
@@ -2776,7 +2816,6 @@ function handleTriviaAnswer(selectedIndex) {
 
             // Enrutamiento según el modo:
             if (window.state.isChallengeMode) {
-              // Modo Desafío: abre resultados de duelo con botón para atacar
               showView('#challengeResultView');
               if (typeof renderResultadosDesafio === 'function') {
                 renderResultadosDesafio();
@@ -2840,6 +2879,9 @@ function handleTriviaTimeout() {
     });
   }
 
+  // Registrar penalización de tiempo de respuesta (10s) en timeout
+  window.state.accumulatedAnswerTimeMs = (window.state.accumulatedAnswerTimeMs || 0) + 10000;
+
   state.trivia.currentStreak = 0; // Reiniciar racha al agotarse el tiempo
   recordTriviaAnswerResult(false);
   state.trivia.lives--;
@@ -2848,12 +2890,20 @@ function handleTriviaTimeout() {
   playErrorSound();
   if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
 
-  // 2. CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
+  // CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
   if (window.state.lives <= 0) {
-    // Si window.state.lives <= 0: NO ejecutes el flip hacia la siguiente pregunta.
-    // Breve pausa (300 ms) e invoca de inmediato ejecutarSecuenciaGameOver().
     setTimeout(() => {
-      ejecutarSecuenciaGameOver('Se agotó el tiempo y te has quedado sin vidas');
+      if (window.state.isChallengeMode) {
+        // En modo desafío NUNCA mostrar game over, ir directo a resultados de la ronda
+        clearInterval(window.state.timerInterval);
+        if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
+        showView('#challengeResultView');
+        if (typeof renderResultadosDesafio === 'function') {
+          renderResultadosDesafio();
+        }
+      } else {
+        ejecutarSecuenciaGameOver('Se agotó el tiempo y te has quedado sin vidas');
+      }
     }, 300);
   } else {
     // Si aún quedan vidas (> 0): continúa con el flujo normal de Flip y pasa a la siguiente pregunta.
@@ -2866,7 +2916,7 @@ function handleTriviaTimeout() {
         window.state.currentQuestionIndex++;
         state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-        const totalPreguntas = window.state.isChallengeMode ? 5 : 10;
+        const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
           // Detén el temporizador definitivamente
@@ -2875,7 +2925,6 @@ function handleTriviaTimeout() {
 
           // Enrutamiento según el modo:
           if (window.state.isChallengeMode) {
-            // Modo Desafío: abre resultados de duelo con botón para atacar
             showView('#challengeResultView');
             if (typeof renderResultadosDesafio === 'function') {
               renderResultadosDesafio();
@@ -2913,6 +2962,17 @@ function handleTriviaTimeout() {
 
 // 1. SECUENCIA DRAMÁTICA REUTILIZABLE DE GAME OVER
 function ejecutarSecuenciaGameOver(reason = 'Te has quedado sin vidas') {
+  // Salvaguarda: si estamos en Modo Desafío, NUNCA mostrar Game Over
+  if (window.state?.isChallengeMode || state.trivia?.isDuel) {
+    clearInterval(state.trivia.timerInterval);
+    state.trivia.isPaused = false;
+    state.trivia.isAnswering = false;
+    showView('#challengeResultView');
+    if (typeof renderResultadosDesafio === 'function') {
+      renderResultadosDesafio();
+    }
+    return;
+  }
   // Bloquea inmediatamente las interacciones y detén el temporizador (clearInterval)
   clearInterval(state.trivia.timerInterval);
   state.trivia.isPaused = false;
@@ -3192,22 +3252,12 @@ function showResults(aciertos = 10) {
   const abandonModal = document.getElementById('abandonModal');
   if (abandonModal) abandonModal.style.display = 'none';
 
-  // 3. Métricas de la Sesión y Cálculo Dinámico de Experiencia (XP)
+  // 3. Métricas de la Sesión: En MODO SOLITARIO se otorga ÚNICAMENTE RetroCoins (XP ganada = 0)
   if (!window.state) window.state = state;
 
-  // Base XP de aciertos acumulados durante la ronda (+15 XP por acierto)
-  let currentRoundXP = (window.state.currentRoundXP !== undefined && window.state.currentRoundXP !== null)
-    ? window.state.currentRoundXP
-    : (state.currentRoundXP || (correctCount * 15));
-
-  // Bonificaciones: Si el jugador completó las preguntas sin perder sus vidas
-  const livesLeft = (window.state.lives !== undefined) ? window.state.lives : (state.trivia.lives || 0);
-  const victoryBonus = livesLeft > 0 ? 50 : 0;
-  const perfectBonus = (livesLeft > 0 && correctCount >= 10) ? 100 : 0;
-
-  currentRoundXP += (victoryBonus + perfectBonus);
-  window.state.currentRoundXP = currentRoundXP;
-  state.currentRoundXP = currentRoundXP;
+  const currentRoundXP = 0;
+  window.state.currentRoundXP = 0;
+  state.currentRoundXP = 0;
 
   // Monedas dinámicas acumuladas en la sesión
   const sessionCoins = (state.trivia.sessionCoins !== undefined && state.trivia.sessionCoins > 0)
@@ -3217,12 +3267,10 @@ function showResults(aciertos = 10) {
   // Incrementar Racha consecutiva (mínimo 1 al ganar/completar)
   state.winStreak = Math.max(1, (state.winStreak || 0) + 1);
 
-  // Acumular la experiencia ganada al total acumulado del perfil
-  const previousTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
-  const newTotalXP = previousTotalXP + currentRoundXP;
-
-  window.state.xp = newTotalXP;
-  state.userScore = newTotalXP;
+  // En solitario la XP no se incrementa (sólo Modo Desafíos otorga XP)
+  const currentTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
+  window.state.xp = currentTotalXP;
+  state.userScore = currentTotalXP;
   window.state.coins = state.coins + sessionCoins;
   state.coins = window.state.coins;
 
@@ -3230,10 +3278,9 @@ function showResults(aciertos = 10) {
 
   // Actualizar progreso en localStorage
   try {
-    localStorage.setItem('retroquiz_xp', String(window.state.xp));
     localStorage.setItem('retroquiz_coins', String(state.coins));
   } catch (err) {
-    console.warn('Error saving XP/Coins to localStorage:', err);
+    console.warn('Error saving Coins to localStorage:', err);
   }
 
   // Sincronizar actualización en Firestore si el usuario está autenticado
@@ -3243,7 +3290,6 @@ function showResults(aciertos = 10) {
       const userRef = doc(window.db, "usuarios", window.state.userId);
       updateDoc(userRef, {
         coins: window.state.coins,
-        xp: window.state.xp,
         updatedAt: new Date().toISOString()
       }).catch(err => console.error("Error al actualizar datos en Firestore (showResults):", err));
     } catch (err) {
@@ -3288,13 +3334,7 @@ function showResults(aciertos = 10) {
     }
   }
   if (resultsSubtitle) {
-    let bonusText = '';
-    if (perfectBonus > 0) {
-      bonusText = ' • ¡Bono Maestro +150 XP!';
-    } else if (victoryBonus > 0) {
-      bonusText = ' • ¡Bono Victoria +50 XP!';
-    }
-    resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10${bonusText}`;
+    resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10`;
   }
 
   // Desglose de Nivel y XP Total del Jugador
@@ -3355,36 +3395,11 @@ function showResults(aciertos = 10) {
     }
   }
 
-  // 8. Conteo Animado de XP en Círculo Central (+currentRoundXP XP)
+  // 8. Círculo Central en Solitario: muestra fijo "+0 XP"
   document.querySelectorAll('.results-xp-label').forEach(el => el.remove());
   const xpValEl = document.getElementById('resultsXpVal') || document.getElementById('resultsXP') || document.querySelector('.results-xp-value') || document.querySelector('.xp-counter');
   if (xpValEl) {
     xpValEl.innerHTML = '+0 <span class="xp-unit">XP</span>';
-    const duration = 1200;
-    const startTime = performance.now();
-    const finalRoundXP = window.state.currentRoundXP;
-
-    const animateXP = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(1, elapsed / duration);
-      const ease = 1 - Math.pow(1 - progress, 3); // Ease out cubic
-      const currentVal = Math.round(finalRoundXP * ease);
-      xpValEl.innerHTML = `+${currentVal} <span class="xp-unit">XP</span>`;
-
-      if (progress < 1) {
-        requestAnimationFrame(animateXP);
-      } else {
-        xpValEl.innerHTML = `+${finalRoundXP} <span class="xp-unit">XP</span>`;
-        const circle = document.getElementById('resultsXpCircle');
-        if (circle) {
-          circle.style.transform = 'scale(1.06)';
-          setTimeout(() => {
-            circle.style.transform = '';
-          }, 200);
-        }
-      }
-    };
-    requestAnimationFrame(animateXP);
   }
 }
 
@@ -3409,7 +3424,7 @@ function updateDuelCardToWaiting(rivalName = 'Usuario 2') {
   });
 }
 
-function showChallengeDuelResults(round = 1, aciertos = 4) {
+function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false) {
   // 1. Detener temporizadores y alarmas
   clearInterval(state.trivia.timerInterval);
   state.trivia.isPaused = false;
@@ -3421,9 +3436,11 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   const abandonModal = document.getElementById('abandonModal');
   if (abandonModal) abandonModal.style.display = 'none';
 
-  // 2. Parámetros de ronda y aciertos (0 a 5)
-  const currentRound = Math.max(1, Math.min(3, parseInt(round, 10) || 1));
-  const correctCount = Math.max(0, Math.min(5, parseInt(aciertos, 10) !== undefined ? parseInt(aciertos, 10) : 4));
+  // 2. Parámetros de ronda y aciertos
+  const isTieBreaker = (round === 'desempate' || window.state?.isTieBreaker || state.isTieBreaker);
+  const currentRound = isTieBreaker ? 'desempate' : Math.max(1, Math.min(3, parseInt(round, 10) || 1));
+  const maxQuestions = isTieBreaker ? 3 : 5;
+  const correctCount = Math.max(0, Math.min(maxQuestions, parseInt(aciertos, 10) !== undefined ? parseInt(aciertos, 10) : 0));
 
   if (!state.currentDuel) {
     state.currentDuel = {
@@ -3436,59 +3453,77 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   }
   state.currentDuel.currentRound = currentRound;
 
-  // Calcular métricas de la ronda actual
-  const roundXP = correctCount * 60; // 60 XP por respuesta correcta
-  const roundCoins = state.trivia.sessionCoins > 0 ? state.trivia.sessionCoins : (correctCount * 5); // 5 RC por respuesta
+  // Calcular métricas de la ronda actual: Modo Desafíos es el ÚNICO que otorga XP
+  const roundXP = isDirectView ? 0 : (correctCount * 60); // 60 XP por respuesta correcta
+  const roundCoins = isDirectView ? 0 : ((state.trivia && state.trivia.sessionCoins > 0) ? state.trivia.sessionCoins : (correctCount * 5));
 
-  // Puntuación acumulada
-  const prevLocalScore = state.currentDuel.localTotalScore || (currentRound > 1 ? (currentRound - 1) * 200 : 0);
-  const newLocalScore = prevLocalScore + roundXP;
-  state.currentDuel.localTotalScore = newLocalScore;
-
-  // Puntuación del rival simulada
-  let rivalScore = state.currentDuel.rivalTotalScore || (currentRound > 1 ? (currentRound - 1) * 180 : 0);
-  const rivalRoundHits = Math.floor(Math.random() * 3) + 2; // entre 2 y 4 aciertos
-  const rivalRoundXP = rivalRoundHits * 60;
-  rivalScore += rivalRoundXP;
-  state.currentDuel.rivalTotalScore = rivalScore;
-
-  // Actualizar monedas globales y XP
-  state.coins += roundCoins;
-  state.userScore += roundXP;
-  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
-
-  // Sincronizar actualización en Firestore si el usuario está autenticado
-  if (window.db && window.firestoreOps && window.state && window.state.userId) {
-    try {
-      const { doc, updateDoc } = window.firestoreOps;
-      const userRef = doc(window.db, "usuarios", window.state.userId);
-      updateDoc(userRef, {
-        coins: state.coins,
-        xp: state.userScore,
-        updatedAt: new Date()
-      }).catch(err => console.error("Error al actualizar datos en Firestore (showChallengeDuelResults):", err));
-    } catch (err) {
-      console.error("Error al preparar updateDoc en showChallengeDuelResults:", err);
-    }
+  if (state.trivia) {
+    state.trivia.lastRoundXP = roundXP;
+    state.trivia.lastRoundCoins = roundCoins;
   }
+
+  // Datos del desafío en Firestore si están disponibles
+  const chData = state.currentDuel.chData;
+  const currentUid = window.state?.userId;
+  const isCreator = chData ? (chData.fromUid === currentUid) : true;
+  const rivalUid = chData ? (isCreator ? chData.toUid : chData.fromUid) : state.currentDuel.rivalUid;
+
+  const myPrevRoundsCompleted = (chData && chData.scores && currentUid && chData.scores[currentUid]?.roundsCompleted) || 0;
+  const rivalRoundsCompleted = (chData && chData.scores && rivalUid && chData.scores[rivalUid]?.roundsCompleted) || 0;
+
+  // Actualizar monedas globales y XP en memoria
+  if (!isDirectView) {
+    state.coins += roundCoins;
+    state.userScore += roundXP;
+    state.xp = state.userScore;
+    if (window.state) {
+      window.state.coins = state.coins;
+      window.state.userScore = state.userScore;
+      window.state.xp = state.userScore;
+    }
+    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
+  }
+
+  // Puntajes totales acumulados: Puntaje_Jugador = Total_RetroCoins_Ganadas + Total_XP_Ganado
+  let localTotalScore = state.currentDuel.localTotalScore || 0;
+  let rivalTotalScore = state.currentDuel.rivalTotalScore || 0;
+
+  if (!isDirectView) {
+    localTotalScore += (roundCoins + roundXP);
+    state.currentDuel.localTotalScore = localTotalScore;
+  }
+
+  // Comprobar si ambos jugadores han concluido la Ronda 3 (o el desempate)
+  const isFinalResolution = isDirectView || 
+    (chData && chData.status === "completed") || 
+    (currentRound === 3 && (rivalRoundsCompleted >= 3 || (!isCreator && myPrevRoundsCompleted >= 2))) ||
+    (isTieBreaker && chData && chData.scores && chData.scores[rivalUid]?.tieBreakerHits !== undefined);
 
   renderCollectionCardsUI();
 
   // 3. Actualizar HUD Superior
   const badgeEl = document.getElementById('duelResultRoundBadge');
-  if (badgeEl) badgeEl.innerText = `RONDA ${currentRound} DE 3`;
+  if (badgeEl) {
+    if (isTieBreaker) {
+      badgeEl.innerText = 'RONDA DE DESEMPATE';
+    } else if (isFinalResolution) {
+      badgeEl.innerText = 'DUELO FINALIZADO';
+    } else {
+      badgeEl.innerText = `RONDA ${currentRound} DE 3`;
+    }
+  }
 
   const localScoreEl = document.getElementById('duelResultLocalScore');
-  if (localScoreEl) localScoreEl.innerText = `${newLocalScore} pts`;
+  if (localScoreEl) localScoreEl.innerText = `${localTotalScore} pts`;
 
   const rivalNameEl = document.getElementById('duelResultRivalName');
-  if (rivalNameEl) rivalNameEl.innerText = state.currentDuel.rivalName || 'Usuario 2';
+  if (rivalNameEl) rivalNameEl.innerText = state.currentDuel.rivalName || 'Rival';
 
   const rivalAvatarSpan = document.querySelector('#podiumRivalAvatar span');
   if (rivalAvatarSpan) rivalAvatarSpan.innerText = state.currentDuel.rivalAvatar || '🕹️';
 
   const rivalScoreEl = document.getElementById('duelResultRivalScore');
-  if (rivalScoreEl) rivalScoreEl.innerText = `${rivalScore} pts`;
+  if (rivalScoreEl) rivalScoreEl.innerText = `${rivalTotalScore} pts`;
 
   const outcomeTitle = document.getElementById('duelOutcomeTitle');
   const localCrown = document.getElementById('localWinnerCrown');
@@ -3499,15 +3534,15 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   state.correctAnswersCount = correctCount;
 
   const hitsNumEl = document.getElementById('duelHitsNumber');
-  if (hitsNumEl) hitsNumEl.innerText = `${correctCount} / 5`;
+  if (hitsNumEl) hitsNumEl.innerText = `${correctCount} / ${maxQuestions}`;
 
   const timeSpentEl = document.getElementById('duelTimeSpent');
   if (timeSpentEl) {
-    if (state.trivia.duelStartTime) {
+    if (state.trivia && state.trivia.duelStartTime) {
       const elapsed = ((performance.now() - state.trivia.duelStartTime) / 1000).toFixed(1);
       timeSpentEl.innerText = `${elapsed}s`;
     } else {
-      timeSpentEl.innerText = `${(22.0 + Math.random() * 10).toFixed(1)}s`;
+      timeSpentEl.innerText = `18.4s`;
     }
   }
 
@@ -3517,26 +3552,18 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   const coinsEarnedEl = document.getElementById('duelCoinsEarned');
   if (coinsEarnedEl) coinsEarnedEl.innerText = `+${roundCoins} RC`;
 
-  // 5. Botones de Acción según la Ronda (1 & 2 vs 3)
+  // 5. Botones de Acción y Resolución
   const roundActions = document.getElementById('duelRoundActions');
   const finalActions = document.getElementById('duelFinalActions');
 
-  if (currentRound < 3) {
-    if (outcomeTitle) outcomeTitle.innerText = 'RESULTADO DE RONDA';
+  if (!isFinalResolution) {
+    // Rondas Intermedias (1 y 2, o Ronda 3 previa al turno del rival)
+    if (outcomeTitle) outcomeTitle.innerText = `RESULTADOS RONDA ${currentRound}`;
     if (localCrown) localCrown.classList.add('hidden');
     if (rivalCrown) rivalCrown.classList.add('hidden');
 
     if (roundActions) roundActions.style.display = 'flex';
     if (finalActions) finalActions.style.display = 'none';
-
-    // Habilitar botón '💣 ENVIAR ATAQUE AL RIVAL' (#btnOpenAttackModal)
-    const btnOpenAttackModal = document.getElementById('btnOpenAttackModal');
-    if (btnOpenAttackModal) {
-      btnOpenAttackModal.disabled = false;
-      btnOpenAttackModal.removeAttribute('disabled');
-      btnOpenAttackModal.style.pointerEvents = 'auto';
-      btnOpenAttackModal.style.opacity = '1';
-    }
 
     playResultsAudioSequence(correctCount);
   } else {
@@ -3544,19 +3571,28 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
     if (roundActions) roundActions.style.display = 'none';
     if (finalActions) finalActions.style.display = 'flex';
 
-    if (newLocalScore >= rivalScore) {
-      if (outcomeTitle) outcomeTitle.innerText = '🏆 ¡VICTORIA DEFINITIVA!';
+    if (localTotalScore > rivalTotalScore) {
+      if (outcomeTitle) outcomeTitle.innerText = '¡HAS GANADO! 🏆';
       if (localCrown) localCrown.classList.remove('hidden');
       if (rivalCrown) rivalCrown.classList.add('hidden');
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
+      }
       playResultsAudioSequence(correctCount);
-    } else {
-      if (outcomeTitle) outcomeTitle.innerText = '💀 DERROTA DEFINITIVA';
+    } else if (localTotalScore < rivalTotalScore) {
+      if (outcomeTitle) outcomeTitle.innerText = 'HAS PERDIDO 💀';
       if (localCrown) localCrown.classList.add('hidden');
       if (rivalCrown) rivalCrown.classList.remove('hidden');
       if (typeof SoundManager !== 'undefined') {
         SoundManager.stopAllBGM();
       }
       playErrorSound();
+    } else {
+      // Empate
+      if (outcomeTitle) outcomeTitle.innerText = '¡EMPATE! ⚔️';
+      if (localCrown) localCrown.classList.add('hidden');
+      if (rivalCrown) rivalCrown.classList.add('hidden');
+      playResultsAudioSequence(correctCount);
     }
   }
 
@@ -3572,35 +3608,6 @@ function renderResultadosDesafio() {
         ? window.state.trivia.correctAnswersCount 
         : (window.state && window.state.correctAnswersCount ? window.state.correctAnswersCount : 0));
 
-  // 1. Aciertos sobre 5 (ej: 'X / 5' en #duelHitsNumber)
-  const hitsNumEl = document.getElementById('duelHitsNumber');
-  if (hitsNumEl) hitsNumEl.innerText = `${aciertos} / 5`;
-
-  // 2. Puntos obtenidos (+60 XP por respuesta correcta)
-  const roundXP = aciertos * 60;
-  const pointsEarnedEl = document.getElementById('duelPointsEarned');
-  if (pointsEarnedEl) pointsEarnedEl.innerText = `+${roundXP} XP`;
-
-  // Monedas (+5 RC por respuesta correcta o las acumuladas en la tanda)
-  const roundCoins = (state.trivia && state.trivia.sessionCoins > 0) ? state.trivia.sessionCoins : (aciertos * 5);
-  const coinsEarnedEl = document.getElementById('duelCoinsEarned');
-  if (coinsEarnedEl) coinsEarnedEl.innerText = `+${roundCoins} RC`;
-
-  // 3. Habilitar botón '💣 ENVIAR ATAQUE AL RIVAL' (#btnOpenAttackModal)
-  const roundActions = document.getElementById('duelRoundActions');
-  if (roundActions) roundActions.style.display = 'flex';
-  const finalActions = document.getElementById('duelFinalActions');
-  if (finalActions) finalActions.style.display = 'none';
-
-  const btnOpenAttackModal = document.getElementById('btnOpenAttackModal');
-  if (btnOpenAttackModal) {
-    btnOpenAttackModal.disabled = false;
-    btnOpenAttackModal.removeAttribute('disabled');
-    btnOpenAttackModal.style.pointerEvents = 'auto';
-    btnOpenAttackModal.style.opacity = '1';
-  }
-
-  // Sincronizar HUD y puntuación de duelo
   if (typeof showChallengeDuelResults === 'function') {
     showChallengeDuelResults(round, aciertos);
   }
@@ -3670,6 +3677,10 @@ window.openAcceptChallengeModal = function() {
 window.openSendChallengeModal = function() {
   openModal('sendChallengeModal');
 };
+function openChallengeOnboardingModal() {
+  openModal('challengeOnboardingModal');
+}
+window.openChallengeOnboardingModal = openChallengeOnboardingModal;
 window.showRetroToast = showRetroToast;
 window.spinDuelWheel = spinDuelWheel;
 window.triggerChallengeMatchEntranceAnimation = triggerChallengeMatchEntranceAnimation;
@@ -4345,6 +4356,19 @@ function openModal(modalId) {
   if (modalId === 'modalRanking') {
     if (typeof renderRankingUI === 'function') renderRankingUI();
   }
+  if (modalId === 'sendChallengeModal') {
+    const input = document.getElementById('inputSearchUserChallenge');
+    if (input) input.value = '';
+    const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+    if (container) {
+      container.innerHTML = '';
+      container.style.display = 'none';
+    }
+    const confirmBtn = document.getElementById('confirmSendChallengeBtn');
+    if (confirmBtn) confirmBtn.style.display = 'none';
+    if (window.state) window.state.selectedRival = null;
+    if (state) state.selectedRival = null;
+  }
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.add('open');
@@ -4357,21 +4381,23 @@ function closeModal(modalId) {
     closeProfileModal();
     return;
   }
+  if (modalId === 'sendChallengeModal') {
+    const input = document.getElementById('inputSearchUserChallenge');
+    if (input) input.value = '';
+    const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+    if (container) {
+      container.innerHTML = '';
+      container.style.display = 'none';
+    }
+    const confirmBtn = document.getElementById('confirmSendChallengeBtn');
+    if (confirmBtn) confirmBtn.style.display = 'none';
+    if (window.state) window.state.selectedRival = null;
+    if (state) state.selectedRival = null;
+  }
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.remove('open');
     playClickSound();
-    
-    if (modalId === 'sendChallengeModal') {
-      const searchInput = document.getElementById('inputSearchUserChallenge');
-      if (searchInput) searchInput.value = '';
-      const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
-      if (container) container.innerHTML = '';
-      const confirmBtn = document.getElementById('confirmSendChallengeBtn');
-      if (confirmBtn) confirmBtn.style.display = 'none';
-      if (window.state) window.state.selectedRival = null;
-      if (state) state.selectedRival = null;
-    }
     
     if (modalId === 'modalTienda' || modalId === 'modalPerfil') {
       const currentActiveView = document.querySelector('.screen-view.active');
@@ -4539,6 +4565,22 @@ function renderChallengesUI() {
       const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
       const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
       const isMyTurn = (ch.currentTurn === currentUid);
+      const isCompleted = (ch.status === "completed");
+      const roundLabel = (ch.round === 'desempate') ? 'Desempate' : `Ronda ${ch.round || 1}`;
+
+      let statusHtml = '';
+      let buttonHtml = '';
+
+      if (isCompleted) {
+        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> Finalizado</div>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+      } else if (isMyTurn) {
+        statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno! (${roundLabel})</div>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️</button>`;
+      } else {
+        statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled>ESPERANDO RIVAL...</button>`;
+      }
 
       return `
         <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
@@ -4561,13 +4603,9 @@ function renderChallengesUI() {
           </div>
 
           <div class="card-status-col">
-            <div class="status-indicator ${isMyTurn ? 'status-your-turn' : 'status-waiting'}">
-              ${isMyTurn ? '<span class="status-check">🔥</span> ¡Tu turno!' : '<span class="status-clock">⏳</span> Esperando'}
-            </div>
+            ${statusHtml}
             <div class="status-streak">
-              ${isMyTurn 
-                ? `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️</button>` 
-                : `<button class="challenge-play-btn challenge-btn-waiting" disabled>ESPERANDO RIVAL...</button>`}
+              ${buttonHtml}
               <span class="streak-flame" title="Racha activa">🔥</span>
             </div>
           </div>
@@ -4594,8 +4632,11 @@ function renderChallengesUI() {
         const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
         const rivalUid = isCreator ? ch.toUid : ch.fromUid;
 
+        const isTieBreaker = (ch.round === 'desempate');
         window.state.isChallengeMode = true;
         state.isChallengeMode = true;
+        window.state.isTieBreaker = isTieBreaker;
+        state.isTieBreaker = isTieBreaker;
         window.state.currentChallengeId = chId;
         state.currentChallengeId = chId;
 
@@ -4612,7 +4653,9 @@ function renderChallengesUI() {
         setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
         state.currentDuel.challengeId = chId;
         state.currentDuel.rivalUid = rivalUid;
-        state.currentDuel.rivalTotalScore = isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0);
+        state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[rivalUid]?.totalScore) || (isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0));
+        state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || 0;
+        state.currentDuel.chData = ch;
 
         // Hándicap si el rival dejó un ataque
         const handicapPlate = document.getElementById('duelHandicapPlate');
@@ -4629,6 +4672,23 @@ function renderChallengesUI() {
         navigateToScreen('challengeMatchView');
       });
     });
+
+    // Conectar eventos a los botones VER RESULTADO 🏆
+    container.querySelectorAll('.challenge-btn-completed').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else {
+          playClickSound();
+        }
+
+        const chId = btn.getAttribute('data-challenge-id');
+        const ch = (state.challenges || []).find(c => c.id === chId);
+        if (!ch) return;
+        openCompletedChallengeResult(ch);
+      });
+    });
   }
 
   if (typeof updatePendingChallengesBadge === 'function') {
@@ -4636,6 +4696,55 @@ function renderChallengesUI() {
   }
 }
 window.renderChallengesUI = renderChallengesUI;
+
+function openCompletedChallengeResult(ch) {
+  const currentUid = window.state?.userId;
+  const isCreator = (ch.fromUid === currentUid);
+  const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+  const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
+  const rivalUid = isCreator ? ch.toUid : ch.fromUid;
+
+  const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
+  const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
+
+  const myScores = (ch.scores && ch.scores[currentUid]) || {
+    coins: 0,
+    xp: isCreator ? (ch.scores?.fromScore || 0) : (ch.scores?.toScore || 0),
+    totalScore: isCreator ? (ch.scores?.fromScore || 0) : (ch.scores?.toScore || 0)
+  };
+  const rivalScores = (ch.scores && ch.scores[rivalUid]) || {
+    coins: 0,
+    xp: isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0),
+    totalScore: isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0)
+  };
+
+  const localScore = myScores.totalScore || ((myScores.coins || 0) + (myScores.xp || 0));
+  const rivalScore = rivalScores.totalScore || ((rivalScores.coins || 0) + (rivalScores.xp || 0));
+
+  state.currentDuel = {
+    challengeId: ch.id,
+    rivalUid: rivalUid,
+    rivalName: rivalName,
+    rivalAvatar: rivalAvatar,
+    currentRound: 3,
+    localTotalScore: localScore,
+    rivalTotalScore: rivalScore,
+    isCompletedDuel: true,
+    chData: ch
+  };
+
+  window.state.currentChallengeId = ch.id;
+  state.currentChallengeId = ch.id;
+
+  const localNameEl = document.querySelector('.duel-player-local .duel-player-name');
+  if (localNameEl) localNameEl.innerText = currentUsername;
+  const localAvatarImg = document.getElementById('duelUserAvatarImg');
+  if (localAvatarImg && currentAvatar) localAvatarImg.src = currentAvatar;
+
+  setupDuelMatchUI(rivalName, rivalAvatar, 3);
+  showChallengeDuelResults(3, myScores.hits !== undefined ? myScores.hits : 4, true);
+}
+window.openCompletedChallengeResult = openCompletedChallengeResult;
 
 
 async function syncUserProfileWithCloud(uid) {
@@ -5156,7 +5265,9 @@ document.addEventListener('DOMContentLoaded', () => {
                   setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
                   state.currentDuel.challengeId = chId;
                   state.currentDuel.rivalUid = ch.fromUid;
-                  state.currentDuel.rivalTotalScore = ch.scores?.fromScore || 0;
+                  state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[ch.fromUid]?.totalScore) || (ch.scores?.fromScore || 0);
+                  state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || 0;
+                  state.currentDuel.chData = ch;
 
                   // Configuración de Hándicap si el retador activó un ataque
                   const handicapPlate = document.getElementById('duelHandicapPlate');
@@ -5201,11 +5312,11 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // 2. Partidas activas ("Partidas activas (¡continúa!)")
-        // Partidas donde status === "active" OR (status === "pending" && creatorRoundCompleted && fromUid === userId)
+        // 2. Partidas activas y finalizadas ("Partidas activas (¡continúa!)")
+        // Partidas donde status === "active" | "completed" | ("pending" para creador tras jugar R1)
         const activeMatches = allList.filter(ch => 
-          (ch.status === "active" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
-          ch.status !== "rejected" && ch.status !== "completed"
+          (ch.status === "active" || ch.status === "completed" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
+          ch.status !== "rejected"
         );
 
         state.challenges = activeMatches;
@@ -5278,17 +5389,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmBtn = document.getElementById('confirmSendChallengeBtn');
     if (!container) return;
 
-    window.state.selectedRival = null;
-    state.selectedRival = null;
+    // Resetear selección previa
+    if (window.state) window.state.selectedRival = null;
+    if (state) state.selectedRival = null;
     if (confirmBtn) confirmBtn.style.display = 'none';
 
+    container.style.display = 'block';
+
     if (!window.db || !window.firestoreOps) {
-      container.innerHTML = '<div class="challenge-search-empty">Conectando a base de datos...</div>';
+      container.innerHTML = '<div class="search-results-empty-msg">Conectando a base de datos...</div>';
       return;
     }
 
     const { collection, getDocs } = window.firestoreOps;
-    container.innerHTML = '<div class="challenge-search-empty">Buscando jugadores...</div>';
+    container.innerHTML = '<div class="search-results-empty-msg">Buscando jugadores...</div>';
 
     try {
       const usersRef = collection(window.db, "usuarios");
@@ -5306,68 +5420,66 @@ document.addEventListener('DOMContentLoaded', () => {
             id: uid,
             username: username,
             xp: u.xp || 0,
+            bio: u.bio || 'Jugador Retro',
             avatar: u.avatar || '🕹️'
           });
         }
       });
 
       if (matches.length === 0) {
-        container.innerHTML = '<div class="challenge-search-empty">No se encontró a nadie con ese nombre</div>';
-        if (confirmBtn) confirmBtn.style.display = 'none';
+        container.innerHTML = '<div class="search-results-empty-msg">No se encontró a nadie con ese nombre</div>';
         return;
       }
 
-      container.innerHTML = matches.map(user => {
-        const isImgAvatar = user.avatar && (user.avatar.includes('/') || user.avatar.startsWith('data:image'));
-        const avatarContent = isImgAvatar
-          ? `<img src="${user.avatar}" alt="${user.username}" class="user-search-avatar-img" />`
+      container.innerHTML = matches.map((user, idx) => {
+        const isImg = typeof user.avatar === 'string' && (user.avatar.startsWith('http') || user.avatar.startsWith('assets/'));
+        const avatarHtml = isImg
+          ? `<img src="${user.avatar}" alt="${user.username}">`
           : `<span>${user.avatar || '🕹️'}</span>`;
+        const subtitle = user.bio && user.bio.trim() ? user.bio.trim() : 'Jugador Retro';
 
         return `
-          <div class="user-search-card" data-rival-id="${user.id}" data-rival-name="${user.username}" data-rival-avatar="${user.avatar || '🕹️'}">
-            <div class="user-search-avatar">${avatarContent}</div>
-            <span class="user-search-name">${user.username}</span>
-            <div class="user-search-check">✓</div>
+          <div class="user-search-row interactive-press" data-user-index="${idx}" data-rival-id="${user.id}">
+            <div class="search-row-avatar">
+              ${avatarHtml}
+            </div>
+            <div class="search-row-info">
+              <span class="search-row-username">${user.username}</span>
+              <span class="search-row-subtitle">${subtitle}</span>
+            </div>
+            <div class="search-row-check">✓</div>
           </div>
         `;
       }).join('');
 
-      container.querySelectorAll('.user-search-card').forEach(card => {
-        card.addEventListener('click', () => {
-          playClickSound();
-          const rivalId = card.getAttribute('data-rival-id');
-          const rivalName = card.getAttribute('data-rival-name');
-          const rivalAvatar = card.getAttribute('data-rival-avatar');
+      // Interacción de selección por fila (.user-search-row)
+      const rows = container.querySelectorAll('.user-search-row');
+      rows.forEach(row => {
+        row.addEventListener('click', () => {
+          if (typeof playClickSound === 'function') playClickSound();
+          rows.forEach(r => r.classList.remove('selected'));
+          row.classList.add('selected');
 
-          const selectedUser = { id: rivalId, username: rivalName, avatar: rivalAvatar };
-          window.state.selectedRival = selectedUser;
-          state.selectedRival = selectedUser;
-
-          container.querySelectorAll('.user-search-card').forEach(c => c.classList.remove('selected'));
-          card.classList.add('selected');
-
-          if (confirmBtn) {
-            confirmBtn.style.display = 'flex';
+          const idx = parseInt(row.getAttribute('data-user-index'), 10);
+          const selectedUser = matches[idx];
+          if (selectedUser) {
+            if (window.state) window.state.selectedRival = selectedUser;
+            if (state) state.selectedRival = selectedUser;
+            if (confirmBtn) {
+              confirmBtn.style.display = 'flex';
+              confirmBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
           }
         });
       });
     } catch (err) {
       console.error("Error buscando usuarios para reto:", err);
-      container.innerHTML = '<div class="challenge-search-empty">Error al buscar jugadores</div>';
-      if (confirmBtn) confirmBtn.style.display = 'none';
+      container.innerHTML = '<div class="search-results-empty-msg">Error al buscar jugadores</div>';
     }
   }
 
-  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 4) ---
+  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 1 & 5) ---
   async function sendChallengeToUser(rival) {
-    if (!rival) {
-      rival = window.state?.selectedRival || state.selectedRival;
-    }
-    if (!rival) {
-      showRetroToast('Selecciona a un jugador primero', '⚠️');
-      return;
-    }
-
     if (!window.db || !window.firestoreOps || !window.state?.userId) {
       showRetroToast('Inicia sesión para enviar desafíos', '⚠️');
       return;
@@ -5407,11 +5519,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('inputSearchUserChallenge');
       if (searchInput) searchInput.value = '';
       const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
-      if (container) container.innerHTML = '';
+      if (container) {
+        container.innerHTML = '';
+        container.style.display = 'none';
+      }
       const confirmBtn = document.getElementById('confirmSendChallengeBtn');
       if (confirmBtn) confirmBtn.style.display = 'none';
-      window.state.selectedRival = null;
-      state.selectedRival = null;
+      if (window.state) window.state.selectedRival = null;
+      if (state) state.selectedRival = null;
 
       // Redirige al retador de inmediato a #challengeMatchView
       window.state.isChallengeMode = true;
@@ -5441,6 +5556,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.sendChallengeToUser = sendChallengeToUser;
 
+  // Botón de Confirmación de Reto (#confirmSendChallengeBtn)
+  const confirmSendChallengeBtn = document.getElementById('confirmSendChallengeBtn');
+  if (confirmSendChallengeBtn && !confirmSendChallengeBtn.dataset.listenerAttached) {
+    confirmSendChallengeBtn.dataset.listenerAttached = 'true';
+    confirmSendChallengeBtn.addEventListener('click', () => {
+      const selectedRival = window.state?.selectedRival || state?.selectedRival;
+      if (selectedRival) {
+        sendChallengeToUser(selectedRival);
+      } else {
+        showRetroToast('Selecciona a un jugador de la lista', '⚠️');
+      }
+    });
+  }
+
   // Eventos de búsqueda interactiva en #sendChallengeModal
   const inputSearchUserChallenge = document.getElementById('inputSearchUserChallenge');
   if (inputSearchUserChallenge) {
@@ -5451,10 +5580,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
       const confirmBtn = document.getElementById('confirmSendChallengeBtn');
       if (term.length < 2) {
-        if (container) container.innerHTML = '';
+        if (container) {
+          container.innerHTML = '';
+          container.style.display = 'none';
+        }
         if (confirmBtn) confirmBtn.style.display = 'none';
-        window.state.selectedRival = null;
-        state.selectedRival = null;
+        if (window.state) window.state.selectedRival = null;
+        if (state) state.selectedRival = null;
         return;
       }
       searchDebounceTimer = setTimeout(() => {
@@ -5464,20 +5596,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputSearchUserChallenge.addEventListener('input', handleSearch);
     inputSearchUserChallenge.addEventListener('keyup', handleSearch);
-  }
-
-  // Botón Confirmar y Enviar Reto (#confirmSendChallengeBtn)
-  const confirmSendChallengeBtn = document.getElementById('confirmSendChallengeBtn');
-  if (confirmSendChallengeBtn && !confirmSendChallengeBtn.dataset.listenerAttached) {
-    confirmSendChallengeBtn.dataset.listenerAttached = 'true';
-    confirmSendChallengeBtn.addEventListener('click', () => {
-      const selectedRival = window.state?.selectedRival || state.selectedRival;
-      if (!selectedRival) {
-        showRetroToast('Selecciona a un jugador primero', '⚠️');
-        return;
-      }
-      sendChallengeToUser(selectedRival);
-    });
   }
 
   const btnAccessContacts = document.getElementById('btnAccessContacts');
@@ -5491,38 +5609,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const btnShareViralLink = document.getElementById('btnShareViralLink');
+  const btnShareViralLink = document.getElementById('btnShareViralLink') || document.getElementById('shareChallengeLinkBtn');
   if (btnShareViralLink) {
     btnShareViralLink.addEventListener('click', () => {
       playClickSound();
       const shareData = {
         title: '¡Te desafío en RetroQuiz!',
-        text: '¿Crees saber más de cultura pop que yo? Acéptame el duelo:',
-        url: 'https://retroquiz.app/reto/user_demo'
-      };
-
-      const copyFallback = () => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText('https://retroquiz.app/reto/user_demo')
-            .then(() => {
-              showRetroToast('¡Enlace copiado al portapapeles!', '📋');
-            })
-            .catch(() => {
-              showRetroToast('¡Enlace copiado: retroquiz.app/reto/user_demo', '📋');
-            });
-        } else {
-          showRetroToast('¡Enlace copiado al portapapeles!', '📋');
-        }
+        text: '¿Crees saber más de cultura pop y retro que yo? ¡Demuéstralo y acéptame este reto! 🕹️🔥',
+        url: window.location.origin + window.location.pathname
       };
 
       if (navigator.share) {
         navigator.share(shareData).catch((err) => {
-          if (!err || err.name !== 'AbortError') {
-            copyFallback();
-          }
+          if (err.name !== 'AbortError') console.error('Error al compartir:', err);
         });
       } else {
-        copyFallback();
+        // Fallback si el navegador no soporta share: copia el enlace y muestra Toast
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareData.url).then(() => {
+            if (typeof showToast === 'function') {
+              showToast('¡Enlace copiado al portapapeles!');
+            } else if (typeof showRetroToast === 'function') {
+              showRetroToast('¡Enlace copiado al portapapeles!', '📋');
+            } else {
+              alert('¡Enlace copiado al portapapeles!');
+            }
+          }).catch(() => {
+            if (typeof showRetroToast === 'function') {
+              showRetroToast('¡Enlace copiado al portapapeles!', '📋');
+            }
+          });
+        } else {
+          if (typeof showRetroToast === 'function') {
+            showRetroToast('¡Enlace copiado al portapapeles!', '📋');
+          } else if (typeof showToast === 'function') {
+            showToast('¡Enlace copiado al portapapeles!');
+          } else {
+            alert('¡Enlace copiado al portapapeles!');
+          }
+        }
       }
     });
   }
@@ -5545,6 +5670,29 @@ document.addEventListener('DOMContentLoaded', () => {
       navigateToScreen('challengeMatchView');
     });
   });
+
+  // Botón Circular de Ayuda '?' en Encabezado de Desafíos (#btnChallengesHelp)
+  const btnChallengesHelp = document.getElementById('btnChallengesHelp');
+  if (btnChallengesHelp && !btnChallengesHelp.dataset.listenerAttached) {
+    btnChallengesHelp.dataset.listenerAttached = 'true';
+    btnChallengesHelp.addEventListener('click', () => {
+      playClickSound();
+      openChallengeOnboardingModal();
+    });
+  }
+
+  // Botón Inferior en Modal de Onboarding (#btnStartChallengeOnboarding)
+  const btnStartChallengeOnboarding = document.getElementById('btnStartChallengeOnboarding');
+  if (btnStartChallengeOnboarding && !btnStartChallengeOnboarding.dataset.listenerAttached) {
+    btnStartChallengeOnboarding.dataset.listenerAttached = 'true';
+    btnStartChallengeOnboarding.addEventListener('click', () => {
+      playClickSound();
+      try {
+        localStorage.setItem('retroquiz_seen_challenge_intro', 'true');
+      } catch (e) {}
+      closeModal('challengeOnboardingModal');
+    });
+  }
 
   // Botón Volver (<) en Pantalla de Ruleta de Duelo (#challengeMatchView)
   const btnChallengeMatchBack = document.getElementById('btnChallengeMatchBack');
@@ -5574,10 +5722,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- INTERACTIVIDAD PANTALLA RESULTADOS DE DUELO (#challengeResultView) ---
-  // Finalizar turno de desafío y transferir el turno al rival en Firestore (Requirement 1)
+  // Finalizar turno de desafío y transferir el turno al rival en Firestore
   async function finalizeChallengeTurn(attackData = null) {
     const chId = window.state?.currentChallengeId || state.currentChallengeId;
     const currentUid = window.state?.userId;
+
+    const correctCount = (window.state && window.state.correctAnswersCount !== undefined)
+      ? window.state.correctAnswersCount
+      : (state.trivia?.correctAnswersCount || 0);
+    const roundXP = (state.trivia?.lastRoundXP !== undefined) ? state.trivia.lastRoundXP : (correctCount * 60);
+    const roundCoins = (state.trivia?.lastRoundCoins !== undefined) ? state.trivia.lastRoundCoins : ((state.trivia && state.trivia.sessionCoins > 0) ? state.trivia.sessionCoins : (correctCount * 5));
 
     if (chId && window.db && window.firestoreOps && currentUid) {
       try {
@@ -5588,48 +5742,136 @@ document.addEventListener('DOMContentLoaded', () => {
         if (snap.exists()) {
           const ch = snap.data();
           const isCreator = (ch.fromUid === currentUid);
-          const nextTurnUid = isCreator ? ch.toUid : ch.fromUid;
+          const rivalUid = isCreator ? ch.toUid : ch.fromUid;
 
-          const correctCount = (window.state && window.state.correctAnswersCount !== undefined)
-            ? window.state.correctAnswersCount
-            : (state.trivia?.correctAnswersCount || 0);
-          const roundXP = correctCount * 60;
+          // Extraer o inicializar las métricas por jugador
+          const scores = ch.scores || {};
+          const myScore = { ...(scores[currentUid] || {}) };
+          const rivalScore = { ...(scores[rivalUid] || {}) };
 
-          const updateData = {
-            currentTurn: nextTurnUid,
-            updatedAt: new Date().toISOString()
-          };
+          myScore.coins = (myScore.coins || 0) + roundCoins;
+          myScore.xp = (myScore.xp || 0) + roundXP;
+          myScore.totalScore = (myScore.coins || 0) + (myScore.xp || 0);
 
-          if (isCreator) {
-            updateData.creatorRoundCompleted = true;
-            updateData["scores.fromScore"] = (ch.scores?.fromScore || 0) + roundXP;
-            updateData["scores.fromHits"] = (ch.scores?.fromHits || 0) + correctCount;
+          const isTieBreaker = (ch.round === 'desempate' || window.state?.isTieBreaker || state.isTieBreaker);
+
+          if (isTieBreaker) {
+            myScore.tieBreakerHits = correctCount;
+            myScore.tieBreakerTime = Math.round(window.state?.accumulatedAnswerTimeMs || 0);
           } else {
-            updateData["scores.toScore"] = (ch.scores?.toScore || 0) + roundXP;
-            updateData["scores.toHits"] = (ch.scores?.toHits || 0) + correctCount;
+            myScore.roundsCompleted = (myScore.roundsCompleted || 0) + 1;
           }
 
-          if (attackData) {
-            updateData.activeAttack = {
-              id: attackData.id,
-              name: attackData.name,
-              cost: attackData.cost,
-              attackerUid: currentUid
-            };
+          let nextTurnUid;
+          let nextRound = ch.round || 1;
+          let nextStatus = "active";
+          let winnerUid = null;
+
+          if (isTieBreaker) {
+            if (rivalScore.tieBreakerHits !== undefined) {
+              // Ambos jugaron la muerte súbita de desempate
+              nextStatus = "completed";
+              nextTurnUid = null;
+              if (myScore.tieBreakerHits > rivalScore.tieBreakerHits) {
+                winnerUid = currentUid;
+              } else if (rivalScore.tieBreakerHits > myScore.tieBreakerHits) {
+                winnerUid = rivalUid;
+              } else {
+                winnerUid = ((myScore.tieBreakerTime || 99999) <= (rivalScore.tieBreakerTime || 99999)) ? currentUid : rivalUid;
+              }
+            } else {
+              nextTurnUid = rivalUid;
+              nextRound = 'desempate';
+              nextStatus = "active";
+            }
           } else {
-            updateData.activeAttack = null;
+            const roundsFrom = isCreator ? myScore.roundsCompleted : (rivalScore.roundsCompleted || 0);
+            const roundsTo = isCreator ? (rivalScore.roundsCompleted || 0) : myScore.roundsCompleted;
+
+            // Secuencia de 6 turnos en 3 rondas: A1 -> B1 -> A2 -> B2 -> A3 -> B3
+            if (roundsFrom === 1 && roundsTo === 0) {
+              nextTurnUid = ch.toUid;
+              nextRound = 1;
+              nextStatus = (ch.status === "pending") ? "pending" : "active";
+            } else if (roundsFrom === 1 && roundsTo === 1) {
+              nextTurnUid = ch.fromUid;
+              nextRound = 2;
+            } else if (roundsFrom === 2 && roundsTo === 1) {
+              nextTurnUid = ch.toUid;
+              nextRound = 2;
+            } else if (roundsFrom === 2 && roundsTo === 2) {
+              nextTurnUid = ch.fromUid;
+              nextRound = 3;
+            } else if (roundsFrom === 3 && roundsTo === 2) {
+              nextTurnUid = ch.toUid;
+              nextRound = 3;
+            } else if (roundsFrom >= 3 && roundsTo >= 3) {
+              // Ambos concluyeron la Ronda 3: Puntaje = Total_RetroCoins + Total_XP
+              const scoreFrom = (isCreator ? myScore.totalScore : rivalScore.totalScore) || 0;
+              const scoreTo = (isCreator ? rivalScore.totalScore : myScore.totalScore) || 0;
+
+              if (scoreFrom === scoreTo) {
+                // Empate exacto: activar Muerte Súbita ("RONDA DE DESEMPATE")
+                nextRound = 'desempate';
+                nextTurnUid = ch.fromUid;
+                nextStatus = "active";
+              } else {
+                nextRound = 3;
+                nextTurnUid = null;
+                nextStatus = "completed";
+                winnerUid = (scoreFrom > scoreTo) ? ch.fromUid : ch.toUid;
+              }
+            } else {
+              nextTurnUid = rivalUid;
+              nextRound = Math.min(3, Math.max(roundsFrom, roundsTo));
+            }
+          }
+
+          const updateData = {
+            round: nextRound,
+            currentTurn: nextTurnUid,
+            status: nextStatus,
+            updatedAt: new Date().toISOString(),
+            [`scores.${currentUid}`]: myScore,
+            [`scores.${rivalUid}`]: rivalScore,
+            "scores.fromScore": (isCreator ? myScore.totalScore : rivalScore.totalScore) || 0,
+            "scores.toScore": (isCreator ? rivalScore.totalScore : myScore.totalScore) || 0,
+            "scores.fromHits": (ch.scores?.fromHits || 0) + (isCreator ? correctCount : 0),
+            "scores.toHits": (ch.scores?.toHits || 0) + (!isCreator ? correctCount : 0)
+          };
+
+          if (isCreator && (myScore.roundsCompleted || 0) >= 1) {
+            updateData.creatorRoundCompleted = true;
+          }
+          if (winnerUid) {
+            updateData.winnerUid = winnerUid;
           }
 
           await updateDoc(chRef, updateData);
-          console.log("Turno transferido en Firestore a:", nextTurnUid);
+          console.log("Turno sincronizado en Firestore. Siguiente turno:", nextTurnUid, "Ronda:", nextRound, "Estado:", nextStatus);
         }
       } catch (err) {
         console.error("Error finalizando turno de desafío en Firestore:", err);
       }
     }
 
+    // Acreditar monedas y XP al perfil del usuario en Firestore (modo desafío es el único que da XP)
+    if (window.db && window.firestoreOps && window.state && window.state.userId) {
+      try {
+        const { doc, updateDoc } = window.firestoreOps;
+        const userRef = doc(window.db, "usuarios", window.state.userId);
+        updateDoc(userRef, {
+          coins: state.coins,
+          xp: state.userScore,
+          updatedAt: new Date().toISOString()
+        }).catch(err => console.error("Error al actualizar perfil tras turno:", err));
+      } catch (err) {}
+    }
+
     window.state.isChallengeMode = false;
     state.isChallengeMode = false;
+    window.state.isTieBreaker = false;
+    state.isTieBreaker = false;
     window.state.currentChallengeId = null;
     state.currentChallengeId = null;
 
@@ -5637,20 +5879,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.finalizeChallengeTurn = finalizeChallengeTurn;
 
-  // Botón Principal Rondas 1 y 2: 'ENVIAR ATAQUE AL RIVAL'
-  const btnOpenAttackModal = document.getElementById('btnOpenAttackModal');
-  if (btnOpenAttackModal) {
-    btnOpenAttackModal.addEventListener('click', () => {
-      openModal('attackModal');
-    });
-  }
-
-  // Botón Secundario Rondas 1 y 2: 'PASAR TURNO SIN ATACAR'
+  // Botón Principal Rondas 1 y 2: 'PASAR TURNO AL RIVAL'
   const btnPassTurnWithoutAttack = document.getElementById('btnPassTurnWithoutAttack');
   if (btnPassTurnWithoutAttack) {
     btnPassTurnWithoutAttack.addEventListener('click', () => {
       playClickSound();
-      showRetroToast('Turno finalizado sin enviar ataque', 'info');
+      showRetroToast('Turno finalizado y transferido al rival 🚀', 'info');
       finalizeChallengeTurn(null);
     });
   }
@@ -5658,8 +5892,65 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botón 1 Ronda 3 Final: 'SOLICITAR REVANCHA'
   const btnRematchDuel = document.getElementById('btnRematchDuel');
   if (btnRematchDuel) {
-    btnRematchDuel.addEventListener('click', () => {
+    btnRematchDuel.addEventListener('click', async () => {
       playClickSound();
+      const rivalUid = state.currentDuel?.rivalUid;
+      const rivalName = state.currentDuel?.rivalName || 'Rival';
+      const rivalAvatar = state.currentDuel?.rivalAvatar || '🕹️';
+
+      if (rivalUid && window.db && window.firestoreOps && window.state?.userId) {
+        try {
+          const { collection, addDoc } = window.firestoreOps;
+          const currentUsername = window.state.username || localStorage.getItem('retroquiz_username') || "Jugador";
+          const currentAvatar = window.state.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
+          const desafiosRef = collection(window.db, "desafios");
+          const docRef = await addDoc(desafiosRef, {
+            fromUid: window.state.userId,
+            fromUsername: currentUsername,
+            fromAvatar: currentAvatar,
+            toUid: rivalUid,
+            toUsername: rivalName,
+            toAvatar: rivalAvatar,
+            status: "pending",
+            currentTurn: window.state.userId,
+            round: 1,
+            creatorRoundCompleted: false,
+            scores: {
+              [window.state.userId]: { coins: 0, xp: 0, totalScore: 0, roundsCompleted: 0 },
+              [rivalUid]: { coins: 0, xp: 0, totalScore: 0, roundsCompleted: 0 }
+            },
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          });
+
+          window.state.currentChallengeId = docRef.id;
+          state.currentChallengeId = docRef.id;
+          window.state.isChallengeMode = true;
+          state.isChallengeMode = true;
+          window.state.isTieBreaker = false;
+          state.isTieBreaker = false;
+
+          setupDuelMatchUI(rivalName, rivalAvatar, 1);
+          state.currentDuel.challengeId = docRef.id;
+          state.currentDuel.rivalUid = rivalUid;
+          state.currentDuel.localTotalScore = 0;
+          state.currentDuel.rivalTotalScore = 0;
+          state.currentDuel.chData = {
+            id: docRef.id,
+            fromUid: window.state.userId,
+            toUid: rivalUid,
+            round: 1,
+            scores: {}
+          };
+
+          showRetroToast('¡Revancha iniciada! Gira la ruleta ⚔️', 'success');
+          navigateToScreen('challengeMatchView');
+          return;
+        } catch (err) {
+          console.error("Error al crear revancha en Firestore:", err);
+        }
+      }
+
       if (state.currentDuel) {
         state.currentDuel.currentRound = 1;
         state.currentDuel.localTotalScore = 0;
@@ -5679,7 +5970,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         playClickSound();
       }
-      finalizeChallengeTurn(null);
+      window.state.isChallengeMode = false;
+      state.isChallengeMode = false;
+      window.state.isTieBreaker = false;
+      state.isTieBreaker = false;
+      window.state.currentChallengeId = null;
+      state.currentChallengeId = null;
+      navigateToScreen('challengesView');
     });
   }
 

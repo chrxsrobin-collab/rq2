@@ -759,8 +759,10 @@
                 <h1 class="challenges-main-title">DESAFÍOS</h1>
               </div>
 
-              <!-- Espaciador simétrico para centrar título con el botón atrás -->
-              <div class="challenges-header-spacer"></div>
+              <!-- Botón Circular de Ayuda / Onboarding Guía '?' -->
+              <button class="challenges-info-btn interactive-press" id="btnChallengesHelp" aria-label="Ayuda del Modo Desafíos" title="¿Cómo funciona el Modo Desafíos?">
+                <span>?</span>
+              </button>
             </header>
 
             <!-- Tarjeta Superior / Selector de Pestañas (Hero Card) -->
@@ -871,7 +873,7 @@
                   <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#000000"/>
                 </svg>
               </button>
-              <h2 class="duel-screen-title">¡Que comience el reto!</h2>
+              <h2 class="duel-screen-title" id="challengeMatchTitle">RONDA 1</h2>
               <div class="duel-header-spacer"></div>
             </header>
 
@@ -1031,14 +1033,10 @@
 
             <!-- Botones de Acción Inferiores -->
             <footer class="duel-results-footer anim-dr-footer">
-              <!-- Rondas 1 y 2: Opciones de Ataque o Pasar -->
+              <!-- Rondas 1 y 2: Botón Pasar Turno al Rival -->
               <div class="duel-round-actions" id="duelRoundActions">
-                <button class="btn-duel-action btn-send-attack interactive-press" id="btnOpenAttackModal">
-                  <span class="btn-action-icon">💣</span>
-                  <span class="btn-action-text">ENVIAR ATAQUE AL RIVAL</span>
-                </button>
-                <button class="btn-duel-action btn-pass-turn interactive-press" id="btnPassTurnWithoutAttack">
-                  <span>PASAR TURNO SIN ATACAR</span>
+                <button type="button" class="btn-duel-action btn-pass-turn interactive-press" id="btnPassTurnWithoutAttack">
+                  <span>PASAR TURNO AL RIVAL</span>
                 </button>
               </div>
 
@@ -1435,6 +1433,56 @@
           </div>
         </div>
 
+        <!-- Modal ONBOARDING / GUÍA DEL MODO DESAFÍOS (#challengeOnboardingModal) -->
+        <div class="modal-backdrop challenge-onboarding-backdrop" id="challengeOnboardingModal">
+          <div class="challenge-onboarding-card neo-memphis-card">
+            <button class="close-modal-btn challenge-onboarding-close interactive-press" data-close="challengeOnboardingModal" title="Cerrar">&times;</button>
+            
+            <div class="onboarding-header-badge">⚔️ GUÍA RÁPIDA</div>
+            <h2 class="onboarding-main-title">MODO DESAFÍOS</h2>
+            
+            <div class="onboarding-cards-list">
+              <!-- Bloque 1 - Experiencia y Ranking -->
+              <div class="onboarding-card card-rank">
+                <div class="onboarding-card-icon-wrap bg-yellow">
+                  <span class="onboarding-card-icon">🏆</span>
+                </div>
+                <div class="onboarding-card-content">
+                  <h3 class="onboarding-card-title">EXCLUSIVO PARA EL RANKING</h3>
+                  <p class="onboarding-card-desc">Los duelos son el único modo donde ganas Puntos de Experiencia (XP) para escalar en el Top Mundial.</p>
+                </div>
+              </div>
+
+              <!-- Bloque 2 - Monedas y Comunidad Global -->
+              <div class="onboarding-card card-coins">
+                <div class="onboarding-card-icon-wrap bg-teal">
+                  <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="onboarding-coin-icon">
+                </div>
+                <div class="onboarding-card-content">
+                  <h3 class="onboarding-card-title">COMPITE POR RETROCOINS</h3>
+                  <p class="onboarding-card-desc">Gana tambien monedas en cada ronda y vence a jugadores de todo el mundo tras 3 rondas épicas.</p>
+                </div>
+              </div>
+
+              <!-- Bloque 3 - Reta a tus Amigos e Invita -->
+              <div class="onboarding-card card-friends">
+                <div class="onboarding-card-icon-wrap bg-purple">
+                  <span class="onboarding-card-icon">👥</span>
+                </div>
+                <div class="onboarding-card-content">
+                  <h3 class="onboarding-card-title">ENCUENTRA AMIGOS O INVÍTALOS</h3>
+                  <p class="onboarding-card-desc">Búscalos por su apodo. ¿Aún no juegan? ¡Envíales una invitación con tu enlace directo!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botón de Acción Inferior -->
+            <button type="button" class="btn-onboarding-start interactive-press" id="btnStartChallengeOnboarding">
+              ¡A COMPETIR! 🔥
+            </button>
+          </div>
+        </div>
+
         <!-- Modal 2: ENVIAR DESAFÍO (#sendChallengeModal) -->
         <div class="modal-backdrop" id="sendChallengeModal">
           <div class="challenge-modal-card neo-memphis-modal">
@@ -1450,18 +1498,18 @@
               <div class="challenge-search-box">
                 <input type="text" id="inputSearchUserChallenge" class="challenge-search-input" placeholder="🔍 Buscar por nombre de usuario..." autocomplete="off" />
               </div>
-              <!-- Contenedor de Resultados (#searchResultsList) -->
-              <div id="searchResultsList" class="search-results-list challenge-search-results"></div>
+              <!-- Contenedor de Resultados Tipo Lista (#searchResultsList) -->
+              <div id="searchResultsList" class="search-results-list" style="display: none;"></div>
 
-              <!-- Botón Confirmar y Enviar Reto (visible al seleccionar) -->
+              <!-- Botón de Confirmación y Envío de Reto -->
               <button type="button" id="confirmSendChallengeBtn" class="confirm-send-challenge-btn interactive-press" style="display: none;">
-                Confirmar y Enviar Reto 🚀
+                Iniciar reto 🚀
               </button>
 
               <!-- Botón de Acción 1: Contactos -->
               <button class="btn-challenge-action btn-action-contacts interactive-press" id="btnAccessContacts">
                 <span class="action-icon">📱</span>
-                <span class="action-text">Acceder a tus contactos</span>
+                <span class="action-text">Buscar en tus contactos</span>
               </button>
 
               <!-- Divisor sutil -->
@@ -1474,7 +1522,7 @@
               <!-- Botón de Acción 2: Viral Share Link -->
               <button class="btn-challenge-action btn-action-viral-share interactive-press" id="btnShareViralLink">
                 <span class="action-icon">🔗</span>
-                <span class="action-text">Compartir enlace único</span>
+                <span class="action-text">Compartir enlace...</span>
               </button>
             </div>
           </div>
