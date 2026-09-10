@@ -15,7 +15,7 @@
   <!-- FIREBASE MODULAR SDK (FIRESTORE Y AUTH) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     // CREDENCIALES OFICIALES DE RETROQUIZ
@@ -32,7 +32,7 @@
     const app = initializeApp(firebaseConfig);
     window.db = getFirestore(app);
     window.auth = getAuth(app);
-    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot };
+    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit };
 
     // Autenticación anónima silenciosa al cargar la web app
     signInAnonymously(window.auth).catch(err => console.error("Error Auth Firebase:", err));
@@ -1679,33 +1679,33 @@
               <button class="close-modal-btn" data-close="modalRanking">&times;</button>
             </div>
             <div class="modal-body">
-              <div class="ranking-podium">
-                <div class="podium-item podium-2">
+              <div class="ranking-podium" id="rankingPodium">
+                <div class="podium-item podium-2" id="podium2">
                   <div class="podium-avatar">👩‍🎤</div>
-                  <div class="podium-name">SailorMoon</div>
-                  <div class="podium-score">12,850</div>
+                  <div class="podium-name">Jugador 2</div>
+                  <div class="podium-score">0 pts</div>
                   <div class="podium-rank">2</div>
                 </div>
-                <div class="podium-item podium-1">
+                <div class="podium-item podium-1" id="podium1">
                   <div class="podium-crown">👑</div>
                   <div class="podium-avatar">🕹️</div>
-                  <div class="podium-name">MartyMcFly</div>
-                  <div class="podium-score">15,420</div>
+                  <div class="podium-name">Jugador 1</div>
+                  <div class="podium-score">0 pts</div>
                   <div class="podium-rank">1</div>
                 </div>
-                <div class="podium-item podium-3">
+                <div class="podium-item podium-3" id="podium3">
                   <div class="podium-avatar">👾</div>
-                  <div class="podium-name">Goku90s</div>
-                  <div class="podium-score">11,200</div>
+                  <div class="podium-name">Jugador 3</div>
+                  <div class="podium-score">0 pts</div>
                   <div class="podium-rank">3</div>
                 </div>
               </div>
 
-              <!-- Fila del Usuario -->
-              <div class="user-rank-card">
-                <span class="rank-pos">#42</span>
-                <span class="rank-user">Tú (Jugador Retro)</span>
-                <span class="rank-pts" id="rankingUserPts">1,250 pts</span>
+              <!-- Fila Destacada del Usuario Actual -->
+              <div class="user-rank-card" id="userRankCard">
+                <span class="rank-pos" id="userRankPos">#1</span>
+                <span class="rank-user" id="userRankName">Jugador (Tú)</span>
+                <span class="rank-pts" id="rankingUserPts">0 pts</span>
               </div>
             </div>
           </div>

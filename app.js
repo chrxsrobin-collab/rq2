@@ -2130,7 +2130,9 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
     window.state.currentQuestionIndex = 0;
     window.state.lives = 3;
     window.state.correctAnswersCount = 0;
+    window.state.currentRoundXP = 0;
   }
+  state.currentRoundXP = 0;
   state.isChallengeMode = isChallenge;
   if (state.trivia) {
     state.trivia.isDuel = isChallenge;
@@ -2628,6 +2630,10 @@ function handleTriviaAnswer(selectedIndex) {
     if (window.state) window.state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.trivia.sessionXP = (state.trivia.sessionXP || 0) + 15;
+    if (window.state) {
+      window.state.currentRoundXP = (window.state.currentRoundXP || 0) + 15;
+    }
+    state.currentRoundXP = (state.currentRoundXP || 0) + 15;
 
     const remainingSecs = Math.max(1, Math.ceil((state.trivia.remainingMs || 0) / 1000));
     const reward = calculateQuestionReward(remainingSecs, state.trivia.currentStreak);
@@ -3159,13 +3165,21 @@ function showResults(aciertos = 10) {
   if (abandonModal) abandonModal.style.display = 'none';
 
   // 3. Métricas de la Sesión y Cálculo Dinámico de Experiencia (XP)
-  // - Cada respuesta correcta suma automáticamente +15 XP
-  const baseXP = correctCount * 15;
-  // - Bono de victoria por completar la ronda de 10 preguntas: +50 XP
-  const victoryBonus = 50;
-  // - Bono maestro por 10/10 perfectas: +100 XP adicional
-  const perfectBonus = correctCount >= 10 ? 100 : 0;
-  const earnedXP = baseXP + victoryBonus + perfectBonus;
+  if (!window.state) window.state = state;
+
+  // Base XP de aciertos acumulados durante la ronda (+15 XP por acierto)
+  let currentRoundXP = (window.state.currentRoundXP !== undefined && window.state.currentRoundXP !== null)
+    ? window.state.currentRoundXP
+    : (state.currentRoundXP || (correctCount * 15));
+
+  // Bonificaciones: Si el jugador completó las preguntas sin perder sus vidas
+  const livesLeft = (window.state.lives !== undefined) ? window.state.lives : (state.trivia.lives || 0);
+  const victoryBonus = livesLeft > 0 ? 50 : 0;
+  const perfectBonus = (livesLeft > 0 && correctCount >= 10) ? 100 : 0;
+
+  currentRoundXP += (victoryBonus + perfectBonus);
+  window.state.currentRoundXP = currentRoundXP;
+  state.currentRoundXP = currentRoundXP;
 
   // Monedas dinámicas acumuladas en la sesión
   const sessionCoins = (state.trivia.sessionCoins !== undefined && state.trivia.sessionCoins > 0)
@@ -3175,14 +3189,20 @@ function showResults(aciertos = 10) {
   // Incrementar Racha consecutiva (mínimo 1 al ganar/completar)
   state.winStreak = Math.max(1, (state.winStreak || 0) + 1);
 
-  // Actualizar XP y Saldo total del jugador
-  state.userScore += earnedXP;
-  state.coins += sessionCoins;
+  // Acumular la experiencia ganada al total acumulado del perfil
+  const previousTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
+  const newTotalXP = previousTotalXP + currentRoundXP;
+
+  window.state.xp = newTotalXP;
+  state.userScore = newTotalXP;
+  window.state.coins = state.coins + sessionCoins;
+  state.coins = window.state.coins;
+
   if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
 
   // Actualizar progreso en localStorage
   try {
-    localStorage.setItem('retroquiz_xp', String(state.userScore));
+    localStorage.setItem('retroquiz_xp', String(window.state.xp));
     localStorage.setItem('retroquiz_coins', String(state.coins));
   } catch (err) {
     console.warn('Error saving XP/Coins to localStorage:', err);
@@ -3194,9 +3214,9 @@ function showResults(aciertos = 10) {
       const { doc, updateDoc } = window.firestoreOps;
       const userRef = doc(window.db, "usuarios", window.state.userId);
       updateDoc(userRef, {
-        coins: state.coins,
-        xp: state.userScore,
-        updatedAt: new Date()
+        coins: window.state.coins,
+        xp: window.state.xp,
+        updatedAt: new Date().toISOString()
       }).catch(err => console.error("Error al actualizar datos en Firestore (showResults):", err));
     } catch (err) {
       console.error("Error al preparar updateDoc en showResults:", err);
@@ -3218,11 +3238,7 @@ function showResults(aciertos = 10) {
   const rankingUserPts = document.getElementById('rankingUserPts');
   if (rankingUserPts) rankingUserPts.innerText = `${state.userScore.toLocaleString()} pts`;
   
-  const userCoinsEl = document.getElementById('userCoins');
-  if (userCoinsEl) userCoinsEl.innerText = state.coins.toLocaleString();
-
-  const userCoinsCol = document.getElementById('userCoinsCollection');
-  if (userCoinsCol) userCoinsCol.innerText = state.coins.toLocaleString();
+  if (typeof updateHUD === 'function') updateHUD();
 
   renderCollectionCardsUI();
   updateWheelCategoriesUI();
@@ -3257,11 +3273,12 @@ function showResults(aciertos = 10) {
   const playerLevelEl = document.getElementById('resultsPlayerLevel');
   const playerXpEl = document.getElementById('resultsPlayerTotalXp');
   if (playerLevelEl) playerLevelEl.innerText = `Nivel ${playerLevel}`;
-  if (playerXpEl) playerXpEl.innerText = `XP Total: ${state.userScore.toLocaleString()} pts`;
+  if (playerXpEl) playerXpEl.innerText = `XP Total: ${window.state.xp.toLocaleString()} pts`;
 
   // 5. Tarjeta Inferior Dual (Racha y Retrocoins)
   const streakValEl = document.getElementById('resultsStreakVal');
   const coinsSessionEl = document.getElementById('resultsCoinsSessionVal');
+  const coinsTotalEl = document.getElementById('resultsCoinsTotalVal');
   if (streakValEl) streakValEl.innerText = `+${state.winStreak} 🔥`;
   if (coinsSessionEl) {
     if (sessionCoins > 0) {
@@ -3310,24 +3327,25 @@ function showResults(aciertos = 10) {
     }
   }
 
-  // 8. Conteo Animado de XP en Círculo Central (0 a earnedXP en 1200 ms)
-  const xpValEl = document.getElementById('resultsXpVal');
+  // 8. Conteo Animado de XP en Círculo Central (+currentRoundXP XP)
+  const xpValEl = document.getElementById('resultsXpVal') || document.getElementById('resultsXP') || document.querySelector('.results-xp-value') || document.querySelector('.xp-counter');
   if (xpValEl) {
-    xpValEl.innerText = '0';
+    xpValEl.textContent = '+0 XP';
     const duration = 1200;
     const startTime = performance.now();
+    const finalRoundXP = window.state.currentRoundXP;
 
     const animateXP = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(1, elapsed / duration);
       const ease = 1 - Math.pow(1 - progress, 3); // Ease out cubic
-      const currentVal = Math.round(earnedXP * ease);
-      xpValEl.innerText = currentVal.toLocaleString();
+      const currentVal = Math.round(finalRoundXP * ease);
+      xpValEl.textContent = `+${currentVal} XP`;
 
       if (progress < 1) {
         requestAnimationFrame(animateXP);
       } else {
-        xpValEl.innerText = earnedXP.toLocaleString();
+        xpValEl.textContent = `+${finalRoundXP} XP`;
         const circle = document.getElementById('resultsXpCircle');
         if (circle) {
           circle.style.transform = 'scale(1.06)';
@@ -4072,6 +4090,92 @@ function setupProfileNavigationEvents() {
   });
 }
 
+async function renderRankingUI() {
+  const currentUsername = (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || "Jugador";
+  const userScore = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.userScore || 0);
+
+  // 1. Actualizar Tarjeta del Jugador Local ("TÚ")
+  const userRankNameEl = document.getElementById('userRankName');
+  if (userRankNameEl) {
+    userRankNameEl.textContent = `${currentUsername} (Tú)`;
+  }
+  const rankingUserPts = document.getElementById('rankingUserPts');
+  if (rankingUserPts) {
+    rankingUserPts.innerText = `${userScore.toLocaleString()} pts`;
+  }
+
+  let usersList = [];
+
+  // 2. Consulta a Firestore (colección "usuarios" ordenada por XP descendente)
+  if (window.db && window.firestoreOps) {
+    try {
+      const { collection, getDocs, query, orderBy, limit } = window.firestoreOps;
+      if (typeof getDocs === 'function' && typeof query === 'function' && typeof orderBy === 'function') {
+        const usersRef = collection(window.db, "usuarios");
+        const q = query(usersRef, orderBy("xp", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((docSnap) => {
+          const d = docSnap.data();
+          usersList.push({
+            uid: docSnap.id,
+            username: d.username || 'Jugador',
+            xp: typeof d.xp === 'number' ? d.xp : 0,
+            coins: typeof d.coins === 'number' ? d.coins : 0
+          });
+        });
+      }
+    } catch (err) {
+      console.warn("Error al consultar ranking de Firestore:", err);
+    }
+  }
+
+  // Si el usuario local no está en la lista de la nube (offline o recién registrado), agregarlo
+  const currentUid = (window.state && window.state.userId);
+  const alreadyInList = usersList.some(u => (currentUid && u.uid === currentUid) || u.username === currentUsername);
+  if (!alreadyInList) {
+    usersList.push({
+      uid: currentUid || 'local',
+      username: currentUsername,
+      xp: userScore,
+      coins: state.coins || 50,
+      isLocalUser: true
+    });
+  }
+
+  // Ordenar de mayor a menor XP
+  usersList.sort((a, b) => (b.xp - a.xp) || (b.coins - a.coins));
+
+  // Posición real del usuario en la tabla
+  const userIndex = usersList.findIndex(u => (currentUid && u.uid === currentUid) || u.username === currentUsername || u.isLocalUser);
+  const userPosition = userIndex !== -1 ? (userIndex + 1) : 1;
+
+  const userRankPosEl = document.getElementById('userRankPos');
+  if (userRankPosEl) {
+    userRankPosEl.textContent = `#${userPosition}`;
+  }
+
+  // 3. Renderizar Puestos del Podio (1, 2 y 3)
+  const p1 = usersList[0] || { username: `${currentUsername}`, xp: userScore };
+  const p2 = usersList[1] || { username: 'Lugar disponible', xp: 0 };
+  const p3 = usersList[2] || { username: 'Lugar disponible', xp: 0 };
+
+  const p1Name = document.querySelector('#podium1 .podium-name');
+  const p1Score = document.querySelector('#podium1 .podium-score');
+  if (p1Name) p1Name.textContent = p1.username;
+  if (p1Score) p1Score.textContent = `${(p1.xp || 0).toLocaleString()} pts`;
+
+  const p2Name = document.querySelector('#podium2 .podium-name');
+  const p2Score = document.querySelector('#podium2 .podium-score');
+  if (p2Name) p2Name.textContent = p2.username;
+  if (p2Score) p2Score.textContent = `${(p2.xp || 0).toLocaleString()} pts`;
+
+  const p3Name = document.querySelector('#podium3 .podium-name');
+  const p3Score = document.querySelector('#podium3 .podium-score');
+  if (p3Name) p3Name.textContent = p3.username;
+  if (p3Score) p3Score.textContent = `${(p3.xp || 0).toLocaleString()} pts`;
+}
+window.renderRankingUI = renderRankingUI;
+
 // =============================================================================
 // 7. CONTROL DE MODALES INTERACTIVOS
 // =============================================================================
@@ -4079,6 +4183,9 @@ function openModal(modalId) {
   if (modalId === 'profileView' || modalId === 'modalPerfil' || modalId === 'profileModal') {
     openProfileModal();
     return;
+  }
+  if (modalId === 'modalRanking') {
+    if (typeof renderRankingUI === 'function') renderRankingUI();
   }
   const modal = document.getElementById(modalId);
   if (modal) {
