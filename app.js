@@ -46,18 +46,23 @@
 })();
 
 // =============================================================================
-// 1. ESTADO DE LA APLICACIÓN
+// 1. ESTADO DE LA APLICACIÓN (INICIAL VACÍO Y LIMPIO)
 // =============================================================================
 const state = {
   userId: null,
-  coins: 50,
+  username: "",
+  bio: "",
+  coins: 0,
+  xp: 0,
+  userScore: 0, // Puntaje/XP acumulado del usuario
   winStreak: 0, // Racha de victorias consecutivas
   currentStreak: 0, // Racha de respuestas correctas
-  userScore: 0, // Puntaje/XP acumulado del usuario
   allCategoriesUnlocked: false, // Compra IAP o desbloqueo total
   allUnlocked: false, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
-  challenges: [], // Arreglo de desafíos del usuario
+  challenges: [], // Arreglo de desafíos del usuario (sin mock data)
+  playedQuestionIds: new Set(), // Registro de preguntas ya jugadas
+
   wheelNeedsMagicUnlockAnim: false, // Sincronización para disparar humo mágico en la ruleta al volver de la colección
   wheelMagicUnlockSoundPlayed: false, // Control de reproducción única para ruleta_todo.mp3
   sfxEnabled: true,
@@ -3825,48 +3830,50 @@ function setupProfileUserFields() {
   const editBtn = document.getElementById('btnEditUserName');
   const bioInput = document.getElementById('profileBioInput');
 
-  // Cargar nombre guardado
-  try {
-    const savedName = localStorage.getItem('retroquiz_username');
-    if (savedName && nameInput) {
-      nameInput.value = savedName;
-    }
-  } catch (err) {
-    console.warn('Error reading username from localStorage:', err);
-  }
+  // Sincronizar valores actuales
+  const currentUsername = (state && state.username) || (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || '';
+  const currentBio = (state && state.bio) || (window.state && window.state.bio) || localStorage.getItem('retroquiz_bio') || '';
 
-  // Cargar biografía guardada
-  try {
-    const savedBio = localStorage.getItem('retroquiz_bio');
-    if (savedBio && bioInput) {
-      bioInput.value = savedBio;
-    }
-  } catch (err) {
-    console.warn('Error reading bio from localStorage:', err);
+  if (nameInput) {
+    nameInput.value = currentUsername;
+    nameInput.placeholder = "Tu nombre de usuario...";
+  }
+  if (bioInput) {
+    bioInput.value = currentBio;
+    bioInput.placeholder = "Escribe algo sobre ti...";
   }
 
   // Guardar nombre en change y blur
-  if (nameInput) {
-    const saveName = () => {
-      const val = nameInput.value.trim() || 'JugadorRetro';
+  if (nameInput && !nameInput.dataset.listenerAttached) {
+    nameInput.dataset.listenerAttached = 'true';
+    const saveName = async () => {
+      const val = nameInput.value.trim();
+      if (!val) {
+        nameInput.value = state.username || window.state?.username || '';
+        return;
+      }
       nameInput.value = val;
       state.username = val;
+      if (window.state) window.state.username = val;
       try {
         localStorage.setItem('retroquiz_username', val);
       } catch (err) {
         console.warn('Error saving username:', err);
       }
 
+      // Actualizar en Firestore inmediatamente con updateDoc
       if (window.db && window.firestoreOps && window.state && window.state.userId) {
         try {
           const { doc, updateDoc } = window.firestoreOps;
           const userRef = doc(window.db, "usuarios", window.state.userId);
-          updateDoc(userRef, {
+          await updateDoc(userRef, {
             username: val,
             updatedAt: new Date().toISOString()
-          }).catch(err => console.error("Error al actualizar username en Firestore:", err));
+          });
+          console.log("Username actualizado en Firestore:", val);
+          showRetroToast('¡Nombre de usuario actualizado!', '👤');
         } catch (err) {
-          console.error("Error al preparar updateDoc de username:", err);
+          console.error("Error al actualizar username en Firestore:", err);
         }
       }
     };
@@ -3879,7 +3886,8 @@ function setupProfileUserFields() {
     });
   }
 
-  if (editBtn && nameInput) {
+  if (editBtn && nameInput && !editBtn.dataset.listenerAttached) {
+    editBtn.dataset.listenerAttached = 'true';
     editBtn.addEventListener('click', () => {
       nameInput.focus();
       nameInput.select();
@@ -3887,13 +3895,32 @@ function setupProfileUserFields() {
   }
 
   // Guardar bio en change y blur
-  if (bioInput) {
-    const saveBio = () => {
+  if (bioInput && !bioInput.dataset.listenerAttached) {
+    bioInput.dataset.listenerAttached = 'true';
+    const saveBio = async () => {
       const val = bioInput.value.trim();
+      state.bio = val;
+      if (window.state) window.state.bio = val;
       try {
         localStorage.setItem('retroquiz_bio', val);
       } catch (err) {
         console.warn('Error saving bio:', err);
+      }
+
+      // Actualizar en Firestore inmediatamente con updateDoc
+      if (window.db && window.firestoreOps && window.state && window.state.userId) {
+        try {
+          const { doc, updateDoc } = window.firestoreOps;
+          const userRef = doc(window.db, "usuarios", window.state.userId);
+          await updateDoc(userRef, {
+            bio: val,
+            updatedAt: new Date().toISOString()
+          });
+          console.log("Bio actualizada en Firestore:", val);
+          showRetroToast('¡Biografía actualizada!', '📝');
+        } catch (err) {
+          console.error("Error al actualizar bio en Firestore:", err);
+        }
       }
     };
     bioInput.addEventListener('change', saveBio);
@@ -3987,6 +4014,8 @@ window.showView = showView;
 function openProfileModal() {
   const p = document.getElementById('profileView');
   if (!p) return;
+
+  setupProfileUserFields();
 
   // Mantén visible #homeView de fondo si no hay otra vista abierta
   const homeView = document.getElementById('homeView');
@@ -4360,18 +4389,8 @@ function renderChallengesUI() {
         <div class="empty-challenges-icon">⚔️</div>
         <p class="empty-challenges-title">No tienes desafíos pendientes</p>
         <p class="empty-challenges-sub">¡Elige un amigo y lánzale un reto!</p>
-        <button class="btn-primary-retro interactive-press" id="btnLaunchNewChallenge">
-          🚀 Lanza un reto
-        </button>
       </div>
     `;
-    const btnLaunch = document.getElementById('btnLaunchNewChallenge');
-    if (btnLaunch) {
-      btnLaunch.addEventListener('click', () => {
-        if (typeof playClickSound === 'function') playClickSound();
-        openModal('sendChallengeModal');
-      });
-    }
   } else {
     const currentUid = window.state?.userId;
     const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
@@ -4489,29 +4508,57 @@ async function syncUserProfileWithCloud(uid) {
   try {
     const snap = await getDoc(userRef);
     if (!snap.exists()) {
-      const defaultUsername = localStorage.getItem('retroquiz_username') || ("Jugador_" + uid.slice(0, 5));
+      const defaultUsername = localStorage.getItem('retroquiz_username') || ("Jugador_" + uid.slice(0, 4));
+      const defaultBio = localStorage.getItem('retroquiz_bio') || "¡Listo para competir!";
       const initialData = {
         username: defaultUsername,
-        coins: 50,
+        bio: defaultBio,
+        coins: 0,
         xp: 0,
-        challenges: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
       await setDoc(userRef, initialData);
-      state.coins = 50;
+      state.coins = 0;
+      state.xp = 0;
       state.userScore = 0;
       state.username = defaultUsername;
+      state.bio = defaultBio;
       state.challenges = [];
+      if (window.state) {
+        window.state.coins = 0;
+        window.state.xp = 0;
+        window.state.userScore = 0;
+        window.state.username = defaultUsername;
+        window.state.bio = defaultBio;
+        window.state.challenges = [];
+      }
       localStorage.setItem('retroquiz_username', defaultUsername);
+      localStorage.setItem('retroquiz_bio', defaultBio);
       console.log("Perfil de usuario inicial limpio creado en Firestore para:", uid);
     } else {
       const data = snap.data();
-      if (typeof data.coins === "number") state.coins = data.coins;
-      if (typeof data.xp === "number") state.userScore = data.xp;
+      if (typeof data.coins === "number") {
+        state.coins = data.coins;
+        if (window.state) window.state.coins = data.coins;
+      }
+      if (typeof data.xp === "number") {
+        state.userScore = data.xp;
+        state.xp = data.xp;
+        if (window.state) {
+          window.state.userScore = data.xp;
+          window.state.xp = data.xp;
+        }
+      }
       if (data.username) {
         state.username = data.username;
+        if (window.state) window.state.username = data.username;
         localStorage.setItem('retroquiz_username', data.username);
+      }
+      if (data.bio) {
+        state.bio = data.bio;
+        if (window.state) window.state.bio = data.bio;
+        localStorage.setItem('retroquiz_bio', data.bio);
       }
       if (Array.isArray(data.challenges)) {
         state.challenges = data.challenges;
@@ -4522,6 +4569,7 @@ async function syncUserProfileWithCloud(uid) {
     }
     updateHUD();
     renderChallengesUI();
+    setupProfileUserFields();
     if (typeof initRealtimeChallengesListener === 'function') {
       initRealtimeChallengesListener(uid);
     }
