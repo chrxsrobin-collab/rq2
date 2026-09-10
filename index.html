@@ -112,7 +112,7 @@
               <div class="coin-icon-wrapper">
                 <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-img">
               </div>
-              <span class="coin-amount" id="userCoins">1,250</span>
+              <span class="coin-amount" id="userCoins">50</span>
             </div>
 
             <!-- Botón de Ayuda (?) -->
@@ -351,7 +351,7 @@
             <!-- Círculo / Pastilla de Monedas -->
             <div class="collection-coin-circle" id="coinCircleCollection" title="Monedas">
               <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-img mini-coin">
-              <span class="collection-coin-amount" id="userCoinsCollection">1,250</span>
+              <span class="collection-coin-amount" id="userCoinsCollection">50</span>
             </div>
           </header>
 
@@ -767,7 +767,7 @@
                 <!-- Pestaña 1: TUS RETOS / ACEPTAR DESAFÍO -->
                 <button class="challenge-tab-pill tab-aceptar active interactive-press" id="tabAceptarDesafio" data-tab="retos">
                   <span>Aceptar Desafío</span>
-                  <span class="tab-notification-badge">+1</span>
+                  <span class="tab-notification-badge" style="display: none;">+0</span>
                 </button>
 
                 <!-- Pestaña 2: CREAR DESAFÍO / ENVIAR DESAFÍO -->
@@ -784,96 +784,13 @@
 
             <!-- Lista de Desafíos Activos con Scroll Vertical Exclusivo -->
             <div class="challenges-cards-list active-matches-scroll" id="challengesCardsList">
-              <!-- Tarjeta 1 (Tu turno) -->
-              <div class="challenge-card anim-ch-card-1 interactive-press" data-challenge-id="1">
-                <div class="card-vs-group">
-                  <div class="player-slot player-user">
-                    <div class="player-avatar-circle bg-purple">
-                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
-                    </div>
-                    <span class="player-name">Usuario</span>
-                  </div>
-
-                  <span class="vs-badge">vs</span>
-
-                  <div class="player-slot player-rival">
-                    <div class="player-avatar-circle bg-yellow">
-                      <span>👧</span>
-                    </div>
-                    <span class="player-name">Usuario 2</span>
-                  </div>
-                </div>
-
-                <div class="card-status-col">
-                  <div class="status-indicator status-your-turn">
-                    <span class="status-check">✔</span> Continúa!
-                  </div>
-                  <div class="status-streak">
-                    <button class="challenge-play-btn interactive-press">JUGAR</button>
-                    <span class="streak-flame" title="Racha activa">🔥</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tarjeta 2 (Tu turno) -->
-              <div class="challenge-card anim-ch-card-2 interactive-press" data-challenge-id="2">
-                <div class="card-vs-group">
-                  <div class="player-slot player-user">
-                    <div class="player-avatar-circle bg-purple">
-                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
-                    </div>
-                    <span class="player-name">Usuario</span>
-                  </div>
-
-                  <span class="vs-badge">vs</span>
-
-                  <div class="player-slot player-rival">
-                    <div class="player-avatar-circle bg-blue">
-                      <span>👦</span>
-                    </div>
-                    <span class="player-name">Usuario 3</span>
-                  </div>
-                </div>
-
-                <div class="card-status-col">
-                  <div class="status-indicator status-your-turn">
-                    <span class="status-check">✔</span> Continúa!
-                  </div>
-                  <div class="status-streak">
-                    <button class="challenge-play-btn interactive-press">JUGAR</button>
-                    <span class="streak-flame" title="Racha activa">🔥</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tarjeta 3 (Esperando jugada) -->
-              <div class="challenge-card anim-ch-card-3 interactive-press" data-challenge-id="3">
-                <div class="card-vs-group">
-                  <div class="player-slot player-user">
-                    <div class="player-avatar-circle bg-purple">
-                      <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
-                    </div>
-                    <span class="player-name">Usuario</span>
-                  </div>
-
-                  <span class="vs-badge">vs</span>
-
-                  <div class="player-slot player-rival">
-                    <div class="player-avatar-circle bg-pink">
-                      <span>👩‍🎤</span>
-                    </div>
-                    <span class="player-name">PixelQueen</span>
-                  </div>
-                </div>
-
-                <div class="card-status-col">
-                  <div class="status-indicator status-waiting">
-                    <span class="status-clock">⏳</span> Esperando
-                  </div>
-                  <div class="status-streak">
-                    <span class="streak-flame" title="Racha activa">🔥</span>
-                  </div>
-                </div>
+              <div class="empty-challenges-container" id="emptyChallengesContainer">
+                <div class="empty-challenges-icon">⚔️</div>
+                <p class="empty-challenges-title">No tienes desafíos pendientes</p>
+                <p class="empty-challenges-sub">¡Elige un amigo y lánzale un reto!</p>
+                <button class="btn-primary-retro interactive-press" id="btnLaunchNewChallenge">
+                  🚀 Lanza un reto
+                </button>
               </div>
             </div>
           </div>
@@ -1508,54 +1425,12 @@
               <button class="close-modal-btn challenge-popup-close" data-close="acceptChallengeModal" title="Cerrar">&times;</button>
             </div>
             <div class="modal-body challenge-popup-body">
-              <div class="challenge-requests-list" id="acceptChallengeList">
-                <!-- Fila 1 -->
-                <div class="challenge-request-row" data-user="PixelGamer_99">
-                  <div class="challenger-info">
-                    <div class="challenger-avatar bg-purple">
-                      <span>👾</span>
-                    </div>
-                    <div class="challenger-details">
-                      <span class="challenger-name">PixelGamer_99</span>
-                      <span class="challenger-tag">Nivel 14 · Cine & Series</span>
-                    </div>
-                  </div>
-                  <div class="request-actions">
-                    <button class="btn-req-action btn-req-accept interactive-press" title="Aceptar desafío">
-                      <span>✓</span>
-                    </button>
-                    <button class="btn-req-action btn-req-reject interactive-press" title="Rechazar desafío">
-                      <span>✕</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Fila 2 -->
-                <div class="challenge-request-row" data-user="RetroMaster">
-                  <div class="challenger-info">
-                    <div class="challenger-avatar bg-yellow">
-                      <span>🕹️</span>
-                    </div>
-                    <div class="challenger-details">
-                      <span class="challenger-name">RetroMaster</span>
-                      <span class="challenger-tag">Nivel 22 · Videojuegos</span>
-                    </div>
-                  </div>
-                  <div class="request-actions">
-                    <button class="btn-req-action btn-req-accept interactive-press" title="Aceptar desafío">
-                      <span>✓</span>
-                    </button>
-                    <button class="btn-req-action btn-req-reject interactive-press" title="Rechazar desafío">
-                      <span>✕</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <div class="challenge-requests-list" id="acceptChallengeList"></div>
 
               <!-- Estado vacío cuando no hay más solicitudes -->
-              <div class="empty-challenges-msg" id="emptyPendingChallenges" style="display: none;">
+              <div class="empty-challenges-msg" id="emptyPendingChallenges" style="display: block;">
                 <span class="empty-icon">📭</span>
-                <p class="empty-text">No tienes más desafíos pendientes</p>
+                <p class="empty-text">No tienes desafíos pendientes. ¡Elige un amigo y lánzale un reto!</p>
               </div>
             </div>
           </div>

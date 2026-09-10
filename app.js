@@ -50,12 +50,14 @@
 // =============================================================================
 const state = {
   userId: null,
-  coins: 650,
-  winStreak: 1, // Racha de victorias consecutivas
+  coins: 50,
+  winStreak: 0, // Racha de victorias consecutivas
+  currentStreak: 0, // Racha de respuestas correctas
   userScore: 0, // Puntaje/XP acumulado del usuario
   allCategoriesUnlocked: false, // Compra IAP o desbloqueo total
   allUnlocked: false, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
+  challenges: [], // Arreglo de desafíos del usuario
   wheelNeedsMagicUnlockAnim: false, // Sincronización para disparar humo mágico en la ruleta al volver de la colección
   wheelMagicUnlockSoundPlayed: false, // Control de reproducción única para ruleta_todo.mp3
   sfxEnabled: true,
@@ -962,6 +964,7 @@ function buyBooster(type, cost, name) {
   const price = parseInt(cost, 10) || 150;
   if (state.coins >= price) {
     state.coins -= price;
+    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
     if (!state.store) state.store = { boosters: {}, purchasedThemes: ['default'], activeTheme: 'default' };
     if (!state.store.boosters) state.store.boosters = {};
     state.store.boosters[type] = (state.store.boosters[type] || 0) + 1;
@@ -985,6 +988,7 @@ function buyTheme(themeId, cost, name) {
   const price = parseInt(cost, 10) || 2500;
   if (state.coins >= price) {
     state.coins -= price;
+    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
     if (!state.store) state.store = { boosters: {}, purchasedThemes: ['default'], activeTheme: 'default' };
     if (!state.store.purchasedThemes) state.store.purchasedThemes = ['default'];
 
@@ -3174,6 +3178,7 @@ function showResults(aciertos = 10) {
   // Actualizar XP y Saldo total del jugador
   state.userScore += earnedXP;
   state.coins += sessionCoins;
+  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
 
   // Actualizar progreso en localStorage
   try {
@@ -3403,6 +3408,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   // Actualizar monedas globales y XP
   state.coins += roundCoins;
   state.userScore += roundXP;
+  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
 
   // Sincronizar actualización en Firestore si el usuario está autenticado
   if (window.db && window.firestoreOps && window.state && window.state.userId) {
@@ -3822,12 +3828,26 @@ function setupProfileUserFields() {
   // Guardar nombre en change y blur
   if (nameInput) {
     const saveName = () => {
-      const val = nameInput.value.trim() || 'RetroGamer99';
+      const val = nameInput.value.trim() || 'JugadorRetro';
       nameInput.value = val;
+      state.username = val;
       try {
         localStorage.setItem('retroquiz_username', val);
       } catch (err) {
         console.warn('Error saving username:', err);
+      }
+
+      if (window.db && window.firestoreOps && window.state && window.state.userId) {
+        try {
+          const { doc, updateDoc } = window.firestoreOps;
+          const userRef = doc(window.db, "usuarios", window.state.userId);
+          updateDoc(userRef, {
+            username: val,
+            updatedAt: new Date().toISOString()
+          }).catch(err => console.error("Error al actualizar username en Firestore:", err));
+        } catch (err) {
+          console.error("Error al preparar updateDoc de username:", err);
+        }
       }
     };
     nameInput.addEventListener('change', saveName);
@@ -4195,6 +4215,94 @@ function updateHUD() {
   if (profileBadge) profileBadge.innerText = `Nivel ${playerLevel} • Maestro de los 90s`;
 }
 
+function saveCoinsToCloud(nuevasMonedas) {
+  if (typeof nuevasMonedas === 'number') {
+    state.coins = nuevasMonedas;
+  }
+  try {
+    localStorage.setItem('retroquiz_coins', String(state.coins));
+  } catch (err) {}
+
+  updateHUD();
+
+  if (window.db && window.firestoreOps && window.state && window.state.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      const userRef = doc(window.db, "usuarios", window.state.userId);
+      updateDoc(userRef, {
+        coins: state.coins,
+        updatedAt: new Date().toISOString()
+      }).catch(err => console.error("Error al actualizar coins en Firestore:", err));
+    } catch (err) {
+      console.error("Error al preparar saveCoinsToCloud:", err);
+    }
+  }
+}
+window.saveCoinsToCloud = saveCoinsToCloud;
+
+function renderChallengesUI() {
+  const container = document.getElementById('challengesCardsList');
+  if (!container) return;
+
+  const challenges = state.challenges || [];
+  if (challenges.length === 0) {
+    container.innerHTML = `
+      <div class="empty-challenges-container" id="emptyChallengesContainer">
+        <div class="empty-challenges-icon">⚔️</div>
+        <p class="empty-challenges-title">No tienes desafíos pendientes</p>
+        <p class="empty-challenges-sub">¡Elige un amigo y lánzale un reto!</p>
+        <button class="btn-primary-retro interactive-press" id="btnLaunchNewChallenge">
+          🚀 Lanza un reto
+        </button>
+      </div>
+    `;
+    const btnLaunch = document.getElementById('btnLaunchNewChallenge');
+    if (btnLaunch) {
+      btnLaunch.addEventListener('click', () => {
+        if (typeof playClickSound === 'function') playClickSound();
+        openModal('sendChallengeModal');
+      });
+    }
+  } else {
+    container.innerHTML = challenges.map((ch, idx) => `
+      <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
+        <div class="card-vs-group">
+          <div class="player-slot player-user">
+            <div class="player-avatar-circle bg-purple">
+              <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+            </div>
+            <span class="player-name">${state.username || 'Usuario'}</span>
+          </div>
+
+          <span class="vs-badge">vs</span>
+
+          <div class="player-slot player-rival">
+            <div class="player-avatar-circle bg-yellow">
+              <span>${ch.rivalAvatar || '🕹️'}</span>
+            </div>
+            <span class="player-name">${ch.rivalName || 'Rival'}</span>
+          </div>
+        </div>
+
+        <div class="card-status-col">
+          <div class="status-indicator ${ch.isYourTurn ? 'status-your-turn' : 'status-waiting'}">
+            ${ch.isYourTurn ? '<span class="status-check">✔</span> ¡Continúa!' : '<span class="status-clock">⏳</span> Esperando'}
+          </div>
+          <div class="status-streak">
+            ${ch.isYourTurn ? '<button class="challenge-play-btn interactive-press">JUGAR</button>' : ''}
+            <span class="streak-flame" title="Racha activa">🔥</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (typeof updatePendingChallengesBadge === 'function') {
+    updatePendingChallengesBadge();
+  }
+}
+window.renderChallengesUI = renderChallengesUI;
+
 async function syncUserProfileWithCloud(uid) {
   if (!window.db || !window.firestoreOps) return;
   const { doc, getDoc, setDoc } = window.firestoreOps;
@@ -4203,24 +4311,39 @@ async function syncUserProfileWithCloud(uid) {
   try {
     const snap = await getDoc(userRef);
     if (!snap.exists()) {
+      const defaultUsername = localStorage.getItem('retroquiz_username') || ("Jugador_" + uid.slice(0, 5));
       const initialData = {
-        username: "JugadorRetro",
-        coins: 711,
+        username: defaultUsername,
+        coins: 50,
         xp: 0,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        challenges: [],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
       await setDoc(userRef, initialData);
-      state.coins = 711;
+      state.coins = 50;
       state.userScore = 0;
-      console.log("Perfil de usuario inicial creado en Firestore para:", uid);
+      state.username = defaultUsername;
+      state.challenges = [];
+      localStorage.setItem('retroquiz_username', defaultUsername);
+      console.log("Perfil de usuario inicial limpio creado en Firestore para:", uid);
     } else {
       const data = snap.data();
       if (typeof data.coins === "number") state.coins = data.coins;
       if (typeof data.xp === "number") state.userScore = data.xp;
+      if (data.username) {
+        state.username = data.username;
+        localStorage.setItem('retroquiz_username', data.username);
+      }
+      if (Array.isArray(data.challenges)) {
+        state.challenges = data.challenges;
+      } else {
+        state.challenges = [];
+      }
       console.log("Perfil de usuario obtenido de Firestore:", data);
     }
     updateHUD();
+    renderChallengesUI();
   } catch (err) {
     console.error("Error al sincronizar perfil con Firestore:", err);
   }
@@ -4743,6 +4866,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (state.coins >= cost) {
         state.coins -= cost;
+        if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
         renderCollectionCardsUI();
         playCoinSound();
         playSuccessSound();
