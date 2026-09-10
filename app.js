@@ -756,10 +756,15 @@ function triggerStoreEntranceAnimation() {
   }, 850);
 }
 
-function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1) {
+function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1, localName = null, localAvatar = null) {
+  const currentUsername = localName || (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || 'Tú';
+  const currentAvatar = localAvatar || (window.state && (window.state.avatar || window.state.customAvatar)) || localStorage.getItem('retroquiz_avatar') || 'assets/pantalla_inicio/hombre.webp';
+
   state.currentDuel = {
     rivalName: rivalName,
     rivalAvatar: rivalAvatar,
+    localName: currentUsername,
+    localAvatar: currentAvatar,
     currentRound: round,
     localTotalScore: state.currentDuel?.localTotalScore || 0,
     rivalTotalScore: state.currentDuel?.rivalTotalScore || 0,
@@ -767,15 +772,36 @@ function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', roun
     activeAttack: null
   };
 
+  // 1. Jugador Local (Nombre y Avatar en HUD VS)
+  const localNameEl = document.getElementById('duelLocalName') || document.querySelector('.duel-player-local .duel-player-name');
+  if (localNameEl) localNameEl.innerText = `${currentUsername} (Tú)`;
+
+  const localAvatarCircle = document.querySelector('.duel-player-local .duel-avatar-circle');
+  if (localAvatarCircle) {
+    if (typeof currentAvatar === 'string' && (currentAvatar.includes('/') || currentAvatar.startsWith('data:'))) {
+      localAvatarCircle.innerHTML = `<img src="${currentAvatar}" alt="${currentUsername}" class="duel-user-avatar-img user-avatar-sync" id="duelUserAvatarImg">`;
+    } else {
+      localAvatarCircle.innerHTML = `<span>${currentAvatar || '👾'}</span>`;
+    }
+  }
+
+  // 2. Jugador Rival (Nombre y Avatar en HUD VS)
   const nameEl = document.getElementById('duelRivalName');
   if (nameEl) nameEl.innerText = rivalName;
 
-  const avatarEl = document.querySelector('#duelRivalAvatar span');
-  if (avatarEl) avatarEl.innerText = rivalAvatar;
+  const rivalAvatarCircle = document.getElementById('duelRivalAvatar');
+  if (rivalAvatarCircle) {
+    if (typeof rivalAvatar === 'string' && (rivalAvatar.includes('/') || rivalAvatar.startsWith('data:'))) {
+      rivalAvatarCircle.innerHTML = `<img src="${rivalAvatar}" alt="${rivalName}" class="duel-user-avatar-img">`;
+    } else {
+      rivalAvatarCircle.innerHTML = `<span>${rivalAvatar || '🕹️'}</span>`;
+    }
+  }
 
   const handicapRivalEl = document.getElementById('duelHandicapRival');
   if (handicapRivalEl) handicapRivalEl.innerText = rivalName;
 }
+window.setupDuelMatchUI = setupDuelMatchUI;
 
 function triggerWheelEntranceAnimations() {
   const wheelStage = document.querySelector('#wheelView .wheel-stage');
