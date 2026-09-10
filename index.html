@@ -11,6 +11,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
+
+  <!-- FIREBASE MODULAR SDK (FIRESTORE Y AUTH) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // CREDENCIALES OFICIALES DE RETROQUIZ
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNQbCuP9aH0FF9GjRZ_Fa4rmB6Z23ge0s",
+      authDomain: "retroquiz-m2mstudios.firebaseapp.com",
+      projectId: "retroquiz-m2mstudios",
+      storageBucket: "retroquiz-m2mstudios.firebasestorage.app",
+      messagingSenderId: "892576749296",
+      appId: "1:892576749296:web:fc2afde3cdfb83fa8b1435",
+      measurementId: "G-W7KJFFB3FM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    window.db = getFirestore(app);
+    window.auth = getAuth(app);
+    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot };
+
+    // Autenticación anónima silenciosa al cargar la web app
+    signInAnonymously(window.auth).catch(err => console.error("Error Auth Firebase:", err));
+
+    onAuthStateChanged(window.auth, (user) => {
+      if (user) {
+        if (!window.state) window.state = {};
+        window.state.userId = user.uid;
+        console.log("Sesión Firebase iniciada. UID:", user.uid);
+        if (typeof syncUserProfileWithCloud === "function") {
+          syncUserProfileWithCloud(user.uid);
+        }
+      }
+    });
+  </script>
 </head>
 <body>
 

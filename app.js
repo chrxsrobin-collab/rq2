@@ -49,6 +49,7 @@
 // 1. ESTADO DE LA APLICACIÓN
 // =============================================================================
 const state = {
+  userId: null,
   coins: 650,
   winStreak: 1, // Racha de victorias consecutivas
   userScore: 0, // Puntaje/XP acumulado del usuario
@@ -3182,6 +3183,21 @@ function showResults(aciertos = 10) {
     console.warn('Error saving XP/Coins to localStorage:', err);
   }
 
+  // Sincronizar actualización en Firestore si el usuario está autenticado
+  if (window.db && window.firestoreOps && window.state && window.state.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      const userRef = doc(window.db, "usuarios", window.state.userId);
+      updateDoc(userRef, {
+        coins: state.coins,
+        xp: state.userScore,
+        updatedAt: new Date()
+      }).catch(err => console.error("Error al actualizar datos en Firestore (showResults):", err));
+    } catch (err) {
+      console.error("Error al preparar updateDoc en showResults:", err);
+    }
+  }
+
   // Nivel del jugador: Nivel 12 base + 1 nivel cada 250 XP acumulados
   const playerLevel = 12 + Math.floor(state.userScore / 250);
   try {
@@ -3387,6 +3403,22 @@ function showChallengeDuelResults(round = 1, aciertos = 4) {
   // Actualizar monedas globales y XP
   state.coins += roundCoins;
   state.userScore += roundXP;
+
+  // Sincronizar actualización en Firestore si el usuario está autenticado
+  if (window.db && window.firestoreOps && window.state && window.state.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      const userRef = doc(window.db, "usuarios", window.state.userId);
+      updateDoc(userRef, {
+        coins: state.coins,
+        xp: state.userScore,
+        updatedAt: new Date()
+      }).catch(err => console.error("Error al actualizar datos en Firestore (showChallengeDuelResults):", err));
+    } catch (err) {
+      console.error("Error al preparar updateDoc en showChallengeDuelResults:", err);
+    }
+  }
+
   renderCollectionCardsUI();
 
   // 3. Actualizar HUD Superior
@@ -4148,6 +4180,52 @@ function loadStoredPlayerProgress() {
     console.warn('Error loading player progress from localStorage:', err);
   }
 }
+
+function updateHUD() {
+  const userCoinsEl = document.getElementById('userCoins');
+  if (userCoinsEl) userCoinsEl.innerText = state.coins.toLocaleString();
+  const userCoinsCol = document.getElementById('userCoinsCollection');
+  if (userCoinsCol) userCoinsCol.innerText = state.coins.toLocaleString();
+  const storeUserCoins = document.getElementById('storeUserCoins');
+  if (storeUserCoins) storeUserCoins.innerText = state.coins.toLocaleString();
+  const rankingUserPts = document.getElementById('rankingUserPts');
+  if (rankingUserPts) rankingUserPts.innerText = `${state.userScore.toLocaleString()} pts`;
+  const playerLevel = 12 + Math.floor(state.userScore / 250);
+  const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
+  if (profileBadge) profileBadge.innerText = `Nivel ${playerLevel} • Maestro de los 90s`;
+}
+
+async function syncUserProfileWithCloud(uid) {
+  if (!window.db || !window.firestoreOps) return;
+  const { doc, getDoc, setDoc } = window.firestoreOps;
+  const userRef = doc(window.db, "usuarios", uid);
+
+  try {
+    const snap = await getDoc(userRef);
+    if (!snap.exists()) {
+      const initialData = {
+        username: "JugadorRetro",
+        coins: 711,
+        xp: 0,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      await setDoc(userRef, initialData);
+      state.coins = 711;
+      state.userScore = 0;
+      console.log("Perfil de usuario inicial creado en Firestore para:", uid);
+    } else {
+      const data = snap.data();
+      if (typeof data.coins === "number") state.coins = data.coins;
+      if (typeof data.xp === "number") state.userScore = data.xp;
+      console.log("Perfil de usuario obtenido de Firestore:", data);
+    }
+    updateHUD();
+  } catch (err) {
+    console.error("Error al sincronizar perfil con Firestore:", err);
+  }
+}
+window.syncUserProfileWithCloud = syncUserProfileWithCloud;
 
 // =============================================================================
 // 6. INICIALIZACIÓN Y EVENT LISTENERS
