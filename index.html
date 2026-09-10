@@ -15,7 +15,7 @@
   <!-- FIREBASE MODULAR SDK (FIRESTORE Y AUTH) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     // CREDENCIALES OFICIALES DE RETROQUIZ
@@ -32,7 +32,7 @@
     const app = initializeApp(firebaseConfig);
     window.db = getFirestore(app);
     window.auth = getAuth(app);
-    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit };
+    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc };
 
     // Autenticación anónima silenciosa al cargar la web app
     signInAnonymously(window.auth).catch(err => console.error("Error Auth Firebase:", err));
@@ -44,6 +44,9 @@
         console.log("Sesión Firebase iniciada. UID:", user.uid);
         if (typeof syncUserProfileWithCloud === "function") {
           syncUserProfileWithCloud(user.uid);
+        }
+        if (typeof initRealtimeChallengesListener === "function") {
+          initRealtimeChallengesListener(user.uid);
         }
       }
     });
@@ -167,7 +170,7 @@
                   <span class="shimmer-sweep"></span>
                 </button>
                 <!-- Insignia flotante de retos pendientes -->
-                <span class="desafios-badge-count" id="homeDesafiosBadge">+2</span>
+                <span class="desafios-badge-count" id="homeDesafiosBadge" style="display: none;">+0</span>
               </div>
 
               <!-- Botón RANKING -->
@@ -660,9 +663,8 @@
             </div>
 
             <!-- Círculo Central de Experiencia (XP) -->
-            <div class="results-xp-circle" id="resultsXpCircle">
-              <span class="results-xp-value" id="resultsXpVal">0</span>
-              <span class="results-xp-label">PUNTOS XP</span>
+            <div class="results-xp-circle xp-circle-container reward-circle" id="resultsXpCircle">
+              <span class="results-xp-value xp-amount" id="resultsXpVal">+0 <span class="xp-unit">XP</span></span>
             </div>
 
             <!-- Desglose de Nivel y XP del Jugador -->
@@ -1451,6 +1453,7 @@
               <div class="challenge-search-box">
                 <input type="text" id="inputSearchUserChallenge" class="challenge-search-input" placeholder="🔍 Buscar por nombre de usuario..." autocomplete="off" />
               </div>
+              <div id="searchResultsChallenge" class="challenge-search-results"></div>
 
               <!-- Botón de Acción 1: Contactos -->
               <button class="btn-challenge-action btn-action-contacts interactive-press" id="btnAccessContacts">

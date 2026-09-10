@@ -3328,9 +3328,10 @@ function showResults(aciertos = 10) {
   }
 
   // 8. Conteo Animado de XP en Círculo Central (+currentRoundXP XP)
+  document.querySelectorAll('.results-xp-label').forEach(el => el.remove());
   const xpValEl = document.getElementById('resultsXpVal') || document.getElementById('resultsXP') || document.querySelector('.results-xp-value') || document.querySelector('.xp-counter');
   if (xpValEl) {
-    xpValEl.textContent = '+0 XP';
+    xpValEl.innerHTML = '+0 <span class="xp-unit">XP</span>';
     const duration = 1200;
     const startTime = performance.now();
     const finalRoundXP = window.state.currentRoundXP;
@@ -3340,12 +3341,12 @@ function showResults(aciertos = 10) {
       const progress = Math.min(1, elapsed / duration);
       const ease = 1 - Math.pow(1 - progress, 3); // Ease out cubic
       const currentVal = Math.round(finalRoundXP * ease);
-      xpValEl.textContent = `+${currentVal} XP`;
+      xpValEl.innerHTML = `+${currentVal} <span class="xp-unit">XP</span>`;
 
       if (progress < 1) {
         requestAnimationFrame(animateXP);
       } else {
-        xpValEl.textContent = `+${finalRoundXP} XP`;
+        xpValEl.innerHTML = `+${finalRoundXP} <span class="xp-unit">XP</span>`;
         const circle = document.getElementById('resultsXpCircle');
         if (circle) {
           circle.style.transform = 'scale(1.06)';
@@ -4451,6 +4452,9 @@ async function syncUserProfileWithCloud(uid) {
     }
     updateHUD();
     renderChallengesUI();
+    if (typeof initRealtimeChallengesListener === 'function') {
+      initRealtimeChallengesListener(uid);
+    }
   } catch (err) {
     console.error("Error al sincronizar perfil con Firestore:", err);
   }
@@ -4738,34 +4742,157 @@ document.addEventListener('DOMContentLoaded', () => {
     openProfileModal();
   });
 
-  // --- LÓGICA DE SINCRONIZACIÓN DE NOTIFICACIONES DE DESAFÍOS ---
+  // --- LÓGICA DE SINCRONIZACIÓN Y TIEMPO REAL DE DESAFÍOS ---
+  let unsubscribeChallenges = null;
+
+  function initRealtimeChallengesListener(userId) {
+    if (!userId || !window.db || !window.firestoreOps) return;
+    if (unsubscribeChallenges) {
+      try { unsubscribeChallenges(); } catch (e) {}
+      unsubscribeChallenges = null;
+    }
+
+    const { collection, query, where, onSnapshot, doc, updateDoc } = window.firestoreOps;
+    if (!onSnapshot || !query || !where) return;
+
+    try {
+      const desafiosRef = collection(window.db, "desafios");
+      const q = query(desafiosRef, where("toUid", "==", userId), where("status", "==", "pending"));
+
+      unsubscribeChallenges = onSnapshot(q, (snapshot) => {
+        const pendingChallenges = [];
+        snapshot.forEach((docSnap) => {
+          pendingChallenges.push({
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+        });
+
+        const count = pendingChallenges.length;
+
+        // 1. Badge flotante en el botón central "DESAFÍOS" del Home
+        const homeBadge = document.getElementById('homeDesafiosBadge');
+        if (homeBadge) {
+          if (count > 0) {
+            homeBadge.textContent = `+${count}`;
+            homeBadge.style.display = 'flex';
+          } else {
+            homeBadge.style.display = 'none';
+          }
+        }
+
+        // 2. Badge en la pestaña "Aceptar Desafío" dentro de #challengesView
+        const tabBadge = document.querySelector('#tabAceptarDesafio .tab-notification-badge');
+        if (tabBadge) {
+          if (count > 0) {
+            tabBadge.textContent = `+${count}`;
+            tabBadge.style.display = '';
+          } else {
+            tabBadge.style.display = 'none';
+          }
+        }
+
+        // 3. Renderizado de solicitudes en #acceptChallengeModal
+        const acceptList = document.getElementById('acceptChallengeList');
+        const emptyMsg = document.getElementById('emptyPendingChallenges');
+
+        if (acceptList) {
+          if (count === 0) {
+            acceptList.innerHTML = '';
+            if (emptyMsg) emptyMsg.style.display = 'block';
+          } else {
+            if (emptyMsg) emptyMsg.style.display = 'none';
+            acceptList.innerHTML = pendingChallenges.map(ch => `
+              <div class="challenge-request-row" data-challenge-id="${ch.id}" data-user="${ch.fromUsername || 'Retador'}">
+                <div class="challenger-info">
+                  <div class="challenger-avatar bg-purple">
+                    <span>👾</span>
+                  </div>
+                  <div class="challenger-details">
+                    <span class="challenger-name">${ch.fromUsername || 'Retador'}</span>
+                    <span class="challenger-tag">¡Te ha lanzado un reto!</span>
+                  </div>
+                </div>
+                <div class="request-actions">
+                  <button class="btn-req-action btn-req-accept interactive-press" data-challenge-id="${ch.id}" data-from="${ch.fromUsername || 'el retador'}" title="Aceptar desafío">
+                    <span>✓</span>
+                  </button>
+                  <button class="btn-req-action btn-req-reject interactive-press" data-challenge-id="${ch.id}" data-from="${ch.fromUsername || 'el retador'}" title="Rechazar desafío">
+                    <span>✕</span>
+                  </button>
+                </div>
+              </div>
+            `).join('');
+
+            // Listeners para Aceptar / Rechazar retos
+            acceptList.querySelectorAll('.btn-req-accept').forEach(btn => {
+              btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const chId = btn.getAttribute('data-challenge-id');
+                const fromUser = btn.getAttribute('data-from');
+                try {
+                  const challengeRef = doc(window.db, "desafios", chId);
+                  await updateDoc(challengeRef, {
+                    status: "accepted",
+                    acceptedAt: new Date().toISOString()
+                  });
+                  playSuccessSound();
+                  showRetroToast(`¡Desafío aceptado contra ${fromUser}!`, '⚔️');
+                } catch (err) {
+                  console.error("Error aceptando desafío:", err);
+                }
+              });
+            });
+
+            acceptList.querySelectorAll('.btn-req-reject').forEach(btn => {
+              btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const chId = btn.getAttribute('data-challenge-id');
+                try {
+                  const challengeRef = doc(window.db, "desafios", chId);
+                  await updateDoc(challengeRef, {
+                    status: "rejected",
+                    rejectedAt: new Date().toISOString()
+                  });
+                  playClickSound();
+                  showRetroToast('Desafío rechazado.', '👋');
+                } catch (err) {
+                  console.error("Error rechazando desafío:", err);
+                }
+              });
+            });
+          }
+        }
+      }, (err) => {
+        console.warn("Error en onSnapshot de desafíos:", err);
+      });
+    } catch (err) {
+      console.error("Error iniciando escucha de desafíos en tiempo real:", err);
+    }
+  }
+  window.initRealtimeChallengesListener = initRealtimeChallengesListener;
+
+  // Si ya existe sesión activa, inicializar escucha
+  if (window.state && window.state.userId) {
+    initRealtimeChallengesListener(window.state.userId);
+  }
+
   function updatePendingChallengesBadge() {
     const remainingRows = document.querySelectorAll('#acceptChallengeList .challenge-request-row');
     const count = remainingRows.length;
 
-    // 1. Badge flotante en el botón central "DESAFÍOS" del Home
     const homeBadge = document.getElementById('homeDesafiosBadge');
     if (homeBadge) {
-      if (count > 0) {
-        homeBadge.textContent = `+${count}`;
-        homeBadge.style.display = 'flex';
-      } else {
-        homeBadge.style.display = 'none';
-      }
+      homeBadge.textContent = `+${count}`;
+      homeBadge.style.display = count > 0 ? 'flex' : 'none';
     }
 
-    // 2. Badge en la pestaña "Aceptar Desafío" dentro de #challengesView
     const tabBadge = document.querySelector('#tabAceptarDesafio .tab-notification-badge');
     if (tabBadge) {
-      if (count > 0) {
-        tabBadge.textContent = `+${count}`;
-        tabBadge.style.display = '';
-      } else {
-        tabBadge.style.display = 'none';
-      }
+      tabBadge.textContent = `+${count}`;
+      tabBadge.style.display = count > 0 ? '' : 'none';
     }
 
-    // 3. Estado vacío cuando ya no quedan retos pendientes
     const emptyMsg = document.getElementById('emptyPendingChallenges');
     if (emptyMsg) {
       emptyMsg.style.display = count === 0 ? 'block' : 'none';
@@ -4773,55 +4900,128 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.updatePendingChallengesBadge = updatePendingChallengesBadge;
 
-  // --- INTERACTIVIDAD MODAL 1: ACEPTAR DESAFÍO (#acceptChallengeModal) ---
-  document.querySelectorAll('#acceptChallengeList .btn-req-accept').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const row = e.currentTarget.closest('.challenge-request-row');
-      const user = row ? (row.getAttribute('data-user') || 'el retador') : 'el retador';
-      playSuccessSound();
-      showRetroToast(`¡Desafío aceptado contra ${user}!`, '⚔️');
-      if (row) {
-        row.style.transform = 'scale(0.92)';
-        row.style.opacity = '0.4';
-        setTimeout(() => {
-          row.remove();
-          updatePendingChallengesBadge();
-        }, 220);
+  // --- BÚSQUEDA DE JUGADORES EN FIRESTORE (#sendChallengeModal) ---
+  async function searchUsersForChallenge(term) {
+    const container = document.getElementById('searchResultsChallenge');
+    if (!container) return;
+
+    if (!window.db || !window.firestoreOps) {
+      container.innerHTML = '<div class="challenge-search-empty">Conectando a base de datos...</div>';
+      return;
+    }
+
+    const { collection, getDocs } = window.firestoreOps;
+    container.innerHTML = '<div class="challenge-search-empty">Buscando jugadores...</div>';
+
+    try {
+      const usersRef = collection(window.db, "usuarios");
+      const snapshot = await getDocs(usersRef);
+      const currentUid = window.state?.userId;
+
+      const matches = [];
+      snapshot.forEach(docSnap => {
+        const u = docSnap.data();
+        const uid = docSnap.id;
+        if (uid === currentUid) return; // Excluir al propio jugador actual
+        const username = (u.username || '').trim();
+        if (username.toLowerCase().includes(term.toLowerCase())) {
+          matches.push({
+            id: uid,
+            username: username,
+            xp: u.xp || 0,
+            avatar: u.avatar || '🕹️'
+          });
+        }
+      });
+
+      if (matches.length === 0) {
+        container.innerHTML = '<div class="challenge-search-empty">No se encontró a nadie con ese nombre</div>';
+        return;
       }
-      setTimeout(() => {
-        closeModal('acceptChallengeModal');
-      }, 550);
-    });
-  });
 
-  document.querySelectorAll('#acceptChallengeList .btn-req-reject').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const row = e.currentTarget.closest('.challenge-request-row');
-      if (!row) return;
-      playClickSound();
-      row.style.transform = 'translateX(-35px)';
-      row.style.opacity = '0';
-      setTimeout(() => {
-        row.remove();
-        updatePendingChallengesBadge();
-      }, 250);
-    });
-  });
+      container.innerHTML = matches.map(user => `
+        <div class="challenge-search-user-row" data-rival-id="${user.id}" data-rival-name="${user.username}">
+          <div class="challenge-search-user-info">
+            <div class="challenge-search-user-avatar">${user.avatar || '🕹️'}</div>
+            <div class="challenge-search-user-details">
+              <span class="challenge-search-user-name">${user.username}</span>
+            </div>
+          </div>
+          <button type="button" class="btn-arcade-challenge interactive-press" data-rival-id="${user.id}" data-rival-name="${user.username}">
+            RETAR ⚔️
+          </button>
+        </div>
+      `).join('');
 
-  // --- INTERACTIVIDAD MODAL 2: ENVIAR DESAFÍO (#sendChallengeModal) ---
+      container.querySelectorAll('.btn-arcade-challenge').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const rivalId = btn.getAttribute('data-rival-id');
+          const rivalName = btn.getAttribute('data-rival-name');
+          sendChallengeToUser({ id: rivalId, username: rivalName });
+        });
+      });
+    } catch (err) {
+      console.error("Error buscando usuarios para reto:", err);
+      container.innerHTML = '<div class="challenge-search-empty">Error al buscar jugadores</div>';
+    }
+  }
+
+  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" ---
+  async function sendChallengeToUser(rival) {
+    if (!window.db || !window.firestoreOps || !window.state?.userId) {
+      showRetroToast('Inicia sesión para enviar desafíos', '⚠️');
+      return;
+    }
+
+    const { collection, addDoc } = window.firestoreOps;
+    const currentUsername = window.state.username || localStorage.getItem('retroquiz_username') || "Jugador";
+
+    try {
+      const desafiosRef = collection(window.db, "desafios");
+      await addDoc(desafiosRef, {
+        fromUid: window.state.userId,
+        fromUsername: currentUsername,
+        toUid: rival.id,
+        toUsername: rival.username,
+        status: "pending",
+        createdAt: new Date().toISOString()
+      });
+
+      playSuccessSound();
+      showRetroToast(`¡Desafío enviado a ${rival.username}!`, '⚔️');
+      closeModal('sendChallengeModal');
+
+      const searchInput = document.getElementById('inputSearchUserChallenge');
+      if (searchInput) searchInput.value = '';
+      const container = document.getElementById('searchResultsChallenge');
+      if (container) container.innerHTML = '';
+    } catch (err) {
+      console.error("Error enviando desafío:", err);
+      showRetroToast('Error al enviar el desafío', '⚠️');
+    }
+  }
+  window.sendChallengeToUser = sendChallengeToUser;
+
+  // Eventos de búsqueda interactiva en #sendChallengeModal
   const inputSearchUserChallenge = document.getElementById('inputSearchUserChallenge');
   if (inputSearchUserChallenge) {
-    inputSearchUserChallenge.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const query = inputSearchUserChallenge.value.trim();
-        if (query) {
-          playClickSound();
-          showRetroToast(`Buscando a "${query}"...`, '🔍');
-        }
+    let searchDebounceTimer = null;
+    const handleSearch = () => {
+      clearTimeout(searchDebounceTimer);
+      const term = inputSearchUserChallenge.value.trim();
+      const container = document.getElementById('searchResultsChallenge');
+      if (term.length < 2) {
+        if (container) container.innerHTML = '';
+        return;
       }
-    });
+      searchDebounceTimer = setTimeout(() => {
+        searchUsersForChallenge(term);
+      }, 250);
+    };
+
+    inputSearchUserChallenge.addEventListener('input', handleSearch);
+    inputSearchUserChallenge.addEventListener('keyup', handleSearch);
   }
 
   const btnAccessContacts = document.getElementById('btnAccessContacts');
