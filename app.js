@@ -756,15 +756,10 @@ function triggerStoreEntranceAnimation() {
   }, 850);
 }
 
-function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1, localName = null, localAvatar = null) {
-  const currentUsername = localName || (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || 'Tú';
-  const currentAvatar = localAvatar || (window.state && (window.state.avatar || window.state.customAvatar)) || localStorage.getItem('retroquiz_avatar') || 'assets/pantalla_inicio/hombre.webp';
-
+function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1) {
   state.currentDuel = {
     rivalName: rivalName,
     rivalAvatar: rivalAvatar,
-    localName: currentUsername,
-    localAvatar: currentAvatar,
     currentRound: round,
     localTotalScore: state.currentDuel?.localTotalScore || 0,
     rivalTotalScore: state.currentDuel?.rivalTotalScore || 0,
@@ -772,36 +767,15 @@ function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', roun
     activeAttack: null
   };
 
-  // 1. Jugador Local (Nombre y Avatar en HUD VS)
-  const localNameEl = document.getElementById('duelLocalName') || document.querySelector('.duel-player-local .duel-player-name');
-  if (localNameEl) localNameEl.innerText = `${currentUsername} (Tú)`;
-
-  const localAvatarCircle = document.querySelector('.duel-player-local .duel-avatar-circle');
-  if (localAvatarCircle) {
-    if (typeof currentAvatar === 'string' && (currentAvatar.includes('/') || currentAvatar.startsWith('data:'))) {
-      localAvatarCircle.innerHTML = `<img src="${currentAvatar}" alt="${currentUsername}" class="duel-user-avatar-img user-avatar-sync" id="duelUserAvatarImg">`;
-    } else {
-      localAvatarCircle.innerHTML = `<span>${currentAvatar || '👾'}</span>`;
-    }
-  }
-
-  // 2. Jugador Rival (Nombre y Avatar en HUD VS)
   const nameEl = document.getElementById('duelRivalName');
   if (nameEl) nameEl.innerText = rivalName;
 
-  const rivalAvatarCircle = document.getElementById('duelRivalAvatar');
-  if (rivalAvatarCircle) {
-    if (typeof rivalAvatar === 'string' && (rivalAvatar.includes('/') || rivalAvatar.startsWith('data:'))) {
-      rivalAvatarCircle.innerHTML = `<img src="${rivalAvatar}" alt="${rivalName}" class="duel-user-avatar-img">`;
-    } else {
-      rivalAvatarCircle.innerHTML = `<span>${rivalAvatar || '🕹️'}</span>`;
-    }
-  }
+  const avatarEl = document.querySelector('#duelRivalAvatar span');
+  if (avatarEl) avatarEl.innerText = rivalAvatar;
 
   const handicapRivalEl = document.getElementById('duelHandicapRival');
   if (handicapRivalEl) handicapRivalEl.innerText = rivalName;
 }
-window.setupDuelMatchUI = setupDuelMatchUI;
 
 function triggerWheelEntranceAnimations() {
   const wheelStage = document.querySelector('#wheelView .wheel-stage');
@@ -860,6 +834,7 @@ function renderScreenView(screenId) {
       state.activeTab = 'desafios';
       setActiveTab('desafios');
       triggerChallengesEntranceAnimation();
+      if (typeof renderChallengesUI === 'function') renderChallengesUI();
     } else if (targetView.id === 'challengeMatchView') {
       state.activeTab = 'duelo-ruleta';
       updateWheelCategoriesUI();
@@ -4398,37 +4373,105 @@ function renderChallengesUI() {
       });
     }
   } else {
-    container.innerHTML = challenges.map((ch, idx) => `
-      <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
-        <div class="card-vs-group">
-          <div class="player-slot player-user">
-            <div class="player-avatar-circle bg-purple">
-              <img src="assets/pantalla_inicio/hombre.webp" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+    const currentUid = window.state?.userId;
+    const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
+    const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
+
+    container.innerHTML = challenges.map((ch, idx) => {
+      const isCreator = (ch.fromUid === currentUid);
+      const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+      const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
+      const isMyTurn = (ch.currentTurn === currentUid);
+
+      return `
+        <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
+          <div class="card-vs-group">
+            <div class="player-slot player-user">
+              <div class="player-avatar-circle bg-purple">
+                <img src="${currentAvatar}" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+              </div>
+              <span class="player-name">${currentUsername}</span>
             </div>
-            <span class="player-name">${state.username || 'Usuario'}</span>
+
+            <span class="vs-badge">vs</span>
+
+            <div class="player-slot player-rival">
+              <div class="player-avatar-circle bg-yellow">
+                <span>${rivalAvatar}</span>
+              </div>
+              <span class="player-name">${rivalName}</span>
+            </div>
           </div>
 
-          <span class="vs-badge">vs</span>
-
-          <div class="player-slot player-rival">
-            <div class="player-avatar-circle bg-yellow">
-              <span>${ch.rivalAvatar || '🕹️'}</span>
+          <div class="card-status-col">
+            <div class="status-indicator ${isMyTurn ? 'status-your-turn' : 'status-waiting'}">
+              ${isMyTurn ? '<span class="status-check">🔥</span> ¡Tu turno!' : '<span class="status-clock">⏳</span> Esperando'}
             </div>
-            <span class="player-name">${ch.rivalName || 'Rival'}</span>
+            <div class="status-streak">
+              ${isMyTurn 
+                ? `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️</button>` 
+                : `<button class="challenge-play-btn challenge-btn-waiting" disabled>ESPERANDO RIVAL...</button>`}
+              <span class="streak-flame" title="Racha activa">🔥</span>
+            </div>
           </div>
         </div>
+      `;
+    }).join('');
 
-        <div class="card-status-col">
-          <div class="status-indicator ${ch.isYourTurn ? 'status-your-turn' : 'status-waiting'}">
-            ${ch.isYourTurn ? '<span class="status-check">✔</span> ¡Continúa!' : '<span class="status-clock">⏳</span> Esperando'}
-          </div>
-          <div class="status-streak">
-            ${ch.isYourTurn ? '<button class="challenge-play-btn interactive-press">JUGAR</button>' : ''}
-            <span class="streak-flame" title="Racha activa">🔥</span>
-          </div>
-        </div>
-      </div>
-    `).join('');
+    // Conectar eventos a los botones ¡TU TURNO! ⚔️
+    container.querySelectorAll('.challenge-btn-turn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else {
+          playClickSound();
+        }
+
+        const chId = btn.getAttribute('data-challenge-id');
+        const ch = (state.challenges || []).find(c => c.id === chId);
+        if (!ch) return;
+
+        const isCreator = (ch.fromUid === window.state?.userId);
+        const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+        const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
+        const rivalUid = isCreator ? ch.toUid : ch.fromUid;
+
+        window.state.isChallengeMode = true;
+        state.isChallengeMode = true;
+        window.state.currentChallengeId = chId;
+        state.currentChallengeId = chId;
+
+        // Inyectar en el HUD "VS"
+        const localName = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
+        const localNameEl = document.querySelector('.duel-player-local .duel-player-name');
+        if (localNameEl) localNameEl.innerText = localName;
+
+        const localAvatarImg = document.getElementById('duelUserAvatarImg');
+        if (localAvatarImg && (state.customAvatar || window.state?.customAvatar)) {
+          localAvatarImg.src = state.customAvatar || window.state?.customAvatar;
+        }
+
+        setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
+        state.currentDuel.challengeId = chId;
+        state.currentDuel.rivalUid = rivalUid;
+        state.currentDuel.rivalTotalScore = isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0);
+
+        // Hándicap si el rival dejó un ataque
+        const handicapPlate = document.getElementById('duelHandicapPlate');
+        const handicapTextEl = document.getElementById('duelHandicapText');
+        if (ch.activeAttack && ch.activeAttack.attackerUid !== window.state?.userId) {
+          if (handicapTextEl) {
+            handicapTextEl.innerHTML = `<strong>${rivalName}</strong> ha activado: <strong>${ch.activeAttack.name || '-5 segundos por respuesta'}</strong>`;
+          }
+          if (handicapPlate) handicapPlate.style.display = 'flex';
+        } else {
+          if (handicapPlate) handicapPlate.style.display = 'none';
+        }
+
+        navigateToScreen('challengeMatchView');
+      });
+    });
   }
 
   if (typeof updatePendingChallengesBadge === 'function') {
@@ -4436,6 +4479,7 @@ function renderChallengesUI() {
   }
 }
 window.renderChallengesUI = renderChallengesUI;
+
 
 async function syncUserProfileWithCloud(uid) {
   if (!window.db || !window.firestoreOps) return;
@@ -4769,13 +4813,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- LÓGICA DE SINCRONIZACIÓN Y TIEMPO REAL DE DESAFÍOS ---
-  let unsubscribeChallenges = null;
+  let unsubscribeChallengesTo = null;
+  let unsubscribeChallengesFrom = null;
 
   function initRealtimeChallengesListener(userId) {
     if (!userId || !window.db || !window.firestoreOps) return;
-    if (unsubscribeChallenges) {
-      try { unsubscribeChallenges(); } catch (e) {}
-      unsubscribeChallenges = null;
+    if (unsubscribeChallengesTo) {
+      try { unsubscribeChallengesTo(); } catch (e) {}
+      unsubscribeChallengesTo = null;
+    }
+    if (unsubscribeChallengesFrom) {
+      try { unsubscribeChallengesFrom(); } catch (e) {}
+      unsubscribeChallengesFrom = null;
     }
 
     const { collection, query, where, onSnapshot, doc, updateDoc } = window.firestoreOps;
@@ -4783,20 +4832,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const desafiosRef = collection(window.db, "desafios");
-      const q = query(desafiosRef, where("toUid", "==", userId), where("status", "==", "pending"));
+      const qTo = query(desafiosRef, where("toUid", "==", userId));
+      const qFrom = query(desafiosRef, where("fromUid", "==", userId));
 
-      unsubscribeChallenges = onSnapshot(q, (snapshot) => {
-        const pendingChallenges = [];
-        snapshot.forEach((docSnap) => {
-          pendingChallenges.push({
-            id: docSnap.id,
-            ...docSnap.data()
-          });
-        });
+      const toChallengesMap = new Map();
+      const fromChallengesMap = new Map();
+
+      const updateAllChallengesRealtime = () => {
+        const allMap = new Map([...fromChallengesMap, ...toChallengesMap]);
+        const allList = Array.from(allMap.values());
+
+        // 1. Desafíos entrantes pendientes de aceptar
+        // Solo cuentan si toUid === userId, status === "pending", y el retador ya jugó su ronda inicial (currentTurn === userId)
+        const pendingChallenges = allList.filter(ch => 
+          ch.toUid === userId && 
+          ch.status === "pending" && 
+          ch.currentTurn === userId
+        );
 
         const count = pendingChallenges.length;
 
-        // 1. Badge flotante en el botón central "DESAFÍOS" del Home
+        // Badge flotante en el botón central "DESAFÍOS" del Home
         const homeBadge = document.getElementById('homeDesafiosBadge');
         if (homeBadge) {
           if (count > 0) {
@@ -4807,7 +4863,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // 2. Badge en la pestaña "Aceptar Desafío" dentro de #challengesView
+        // Badge en la pestaña "Aceptar Desafío" dentro de #challengesView
         const tabBadge = document.querySelector('#tabAceptarDesafio .tab-notification-badge');
         if (tabBadge) {
           if (count > 0) {
@@ -4818,7 +4874,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // 3. Renderizado de solicitudes en #acceptChallengeModal
+        // Renderizado de solicitudes en #acceptChallengeModal
         const acceptList = document.getElementById('acceptChallengeList');
         const emptyMsg = document.getElementById('emptyPendingChallenges');
 
@@ -4832,7 +4888,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="challenge-request-row" data-challenge-id="${ch.id}" data-user="${ch.fromUsername || 'Retador'}">
                 <div class="challenger-info">
                   <div class="challenger-avatar bg-purple">
-                    <span>👾</span>
+                    <span>${ch.fromAvatar || '👾'}</span>
                   </div>
                   <div class="challenger-details">
                     <span class="challenger-name">${ch.fromUsername || 'Retador'}</span>
@@ -4850,26 +4906,75 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             `).join('');
 
-            // Listeners para Aceptar / Rechazar retos
+            // Listeners para Aceptar retos (Requirement 2)
             acceptList.querySelectorAll('.btn-req-accept').forEach(btn => {
               btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 const chId = btn.getAttribute('data-challenge-id');
-                const fromUser = btn.getAttribute('data-from');
+                const ch = pendingChallenges.find(c => c.id === chId) || allMap.get(chId);
+                if (!ch) return;
+
                 try {
                   const challengeRef = doc(window.db, "desafios", chId);
+                  // 1. Actualiza el estado en Firestore a: status: "active", currentTurn: window.state.userId
                   await updateDoc(challengeRef, {
-                    status: "accepted",
-                    acceptedAt: new Date().toISOString()
+                    status: "active",
+                    currentTurn: window.state.userId,
+                    acceptedAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
                   });
+
                   playSuccessSound();
-                  showRetroToast(`¡Desafío aceptado contra ${fromUser}!`, '⚔️');
+                  showRetroToast(`¡Desafío aceptado contra ${ch.fromUsername || 'el retador'}!`, '⚔️');
+
+                  // 2. Cierra inmediatamente el modal #acceptChallengeModal
+                  closeModal('acceptChallengeModal');
+
+                  // 3. Marca banderas globales
+                  window.state.isChallengeMode = true;
+                  state.isChallengeMode = true;
+                  window.state.currentChallengeId = chId;
+                  state.currentChallengeId = chId;
+
+                  // 4. Inyecta los avatares y nombres reales de ambos contendientes en el HUD "VS"
+                  const localName = window.state.username || localStorage.getItem('retroquiz_username') || 'Tú';
+                  const localNameEl = document.querySelector('.duel-player-local .duel-player-name');
+                  if (localNameEl) localNameEl.innerText = localName;
+
+                  const localAvatarImg = document.getElementById('duelUserAvatarImg');
+                  if (localAvatarImg && (state.customAvatar || window.state.customAvatar)) {
+                    localAvatarImg.src = state.customAvatar || window.state.customAvatar;
+                  }
+
+                  const rivalName = ch.fromUsername || 'Retador';
+                  const rivalAvatar = ch.fromAvatar || '👾';
+                  setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
+                  state.currentDuel.challengeId = chId;
+                  state.currentDuel.rivalUid = ch.fromUid;
+                  state.currentDuel.rivalTotalScore = ch.scores?.fromScore || 0;
+
+                  // Configuración de Hándicap si el retador activó un ataque
+                  const handicapPlate = document.getElementById('duelHandicapPlate');
+                  const handicapTextEl = document.getElementById('duelHandicapText');
+                  if (ch.activeAttack) {
+                    if (handicapTextEl) {
+                      handicapTextEl.innerHTML = `<strong>${rivalName}</strong> ha activado: <strong>${ch.activeAttack.name || '-5 segundos por respuesta'}</strong>`;
+                    }
+                    if (handicapPlate) handicapPlate.style.display = 'flex';
+                  } else {
+                    if (handicapPlate) handicapPlate.style.display = 'none';
+                  }
+
+                  // 5. Oculta #challengesView y muestra directamente la pantalla de ruleta versus (#challengeMatchView)
+                  navigateToScreen('challengeMatchView');
                 } catch (err) {
                   console.error("Error aceptando desafío:", err);
+                  showRetroToast('Error al aceptar desafío', '⚠️');
                 }
               });
             });
 
+            // Listeners para Rechazar retos
             acceptList.querySelectorAll('.btn-req-reject').forEach(btn => {
               btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
@@ -4878,7 +4983,8 @@ document.addEventListener('DOMContentLoaded', () => {
                   const challengeRef = doc(window.db, "desafios", chId);
                   await updateDoc(challengeRef, {
                     status: "rejected",
-                    rejectedAt: new Date().toISOString()
+                    rejectedAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
                   });
                   playClickSound();
                   showRetroToast('Desafío rechazado.', '👋');
@@ -4889,9 +4995,44 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }
         }
+
+        // 2. Partidas activas ("Partidas activas (¡continúa!)")
+        // Partidas donde status === "active" OR (status === "pending" && creatorRoundCompleted && fromUid === userId)
+        const activeMatches = allList.filter(ch => 
+          (ch.status === "active" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
+          ch.status !== "rejected" && ch.status !== "completed"
+        );
+
+        state.challenges = activeMatches;
+        renderChallengesUI();
+      };
+
+      unsubscribeChallengesTo = onSnapshot(qTo, (snapshot) => {
+        toChallengesMap.clear();
+        snapshot.forEach((docSnap) => {
+          toChallengesMap.set(docSnap.id, {
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+        });
+        updateAllChallengesRealtime();
       }, (err) => {
-        console.warn("Error en onSnapshot de desafíos:", err);
+        console.warn("Error en onSnapshot qTo desafíos:", err);
       });
+
+      unsubscribeChallengesFrom = onSnapshot(qFrom, (snapshot) => {
+        fromChallengesMap.clear();
+        snapshot.forEach((docSnap) => {
+          fromChallengesMap.set(docSnap.id, {
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+        });
+        updateAllChallengesRealtime();
+      }, (err) => {
+        console.warn("Error en onSnapshot qFrom desafíos:", err);
+      });
+
     } catch (err) {
       console.error("Error iniciando escucha de desafíos en tiempo real:", err);
     }
@@ -4993,7 +5134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" ---
+  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 1) ---
   async function sendChallengeToUser(rival) {
     if (!window.db || !window.firestoreOps || !window.state?.userId) {
       showRetroToast('Inicia sesión para enviar desafíos', '⚠️');
@@ -5002,26 +5143,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const { collection, addDoc } = window.firestoreOps;
     const currentUsername = window.state.username || localStorage.getItem('retroquiz_username') || "Jugador";
+    const currentAvatar = window.state.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
 
     try {
       const desafiosRef = collection(window.db, "desafios");
-      await addDoc(desafiosRef, {
+      const docRef = await addDoc(desafiosRef, {
         fromUid: window.state.userId,
         fromUsername: currentUsername,
+        fromAvatar: currentAvatar,
         toUid: rival.id,
         toUsername: rival.username,
+        toAvatar: rival.avatar || '🕹️',
         status: "pending",
-        createdAt: new Date().toISOString()
+        currentTurn: window.state.userId, // El retador arranca jugando su Ronda 1
+        round: 1,
+        creatorRoundCompleted: false,
+        scores: {
+          fromScore: 0,
+          fromHits: 0,
+          toScore: 0,
+          toHits: 0
+        },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       });
 
       playSuccessSound();
-      showRetroToast(`¡Desafío enviado a ${rival.username}!`, '⚔️');
+      showRetroToast(`¡Desafío iniciado contra ${rival.username}! Gira la ruleta ⚔️`, '⚔️');
       closeModal('sendChallengeModal');
 
       const searchInput = document.getElementById('inputSearchUserChallenge');
       if (searchInput) searchInput.value = '';
       const container = document.getElementById('searchResultsChallenge');
       if (container) container.innerHTML = '';
+
+      // Redirige al retador de inmediato a #challengeMatchView (Requirement 1)
+      window.state.isChallengeMode = true;
+      state.isChallengeMode = true;
+      window.state.currentChallengeId = docRef.id;
+      state.currentChallengeId = docRef.id;
+
+      // Inyectar contendientes en el HUD "VS"
+      const localNameEl = document.querySelector('.duel-player-local .duel-player-name');
+      if (localNameEl) localNameEl.innerText = currentUsername;
+      const localAvatarImg = document.getElementById('duelUserAvatarImg');
+      if (localAvatarImg && currentAvatar) localAvatarImg.src = currentAvatar;
+
+      setupDuelMatchUI(rival.username, rival.avatar || '🕹️', 1);
+      state.currentDuel.challengeId = docRef.id;
+      state.currentDuel.rivalUid = rival.id;
+
+      // Ocultar hándicap inicial para la ronda 1 del retador
+      const handicapPlate = document.getElementById('duelHandicapPlate');
+      if (handicapPlate) handicapPlate.style.display = 'none';
+
+      navigateToScreen('challengeMatchView');
     } catch (err) {
       console.error("Error enviando desafío:", err);
       showRetroToast('Error al enviar el desafío', '⚠️');
@@ -5144,6 +5320,69 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- INTERACTIVIDAD PANTALLA RESULTADOS DE DUELO (#challengeResultView) ---
+  // Finalizar turno de desafío y transferir el turno al rival en Firestore (Requirement 1)
+  async function finalizeChallengeTurn(attackData = null) {
+    const chId = window.state?.currentChallengeId || state.currentChallengeId;
+    const currentUid = window.state?.userId;
+
+    if (chId && window.db && window.firestoreOps && currentUid) {
+      try {
+        const { doc, getDoc, updateDoc } = window.firestoreOps;
+        const chRef = doc(window.db, "desafios", chId);
+        const snap = await getDoc(chRef);
+
+        if (snap.exists()) {
+          const ch = snap.data();
+          const isCreator = (ch.fromUid === currentUid);
+          const nextTurnUid = isCreator ? ch.toUid : ch.fromUid;
+
+          const correctCount = (window.state && window.state.correctAnswersCount !== undefined)
+            ? window.state.correctAnswersCount
+            : (state.trivia?.correctAnswersCount || 0);
+          const roundXP = correctCount * 60;
+
+          const updateData = {
+            currentTurn: nextTurnUid,
+            updatedAt: new Date().toISOString()
+          };
+
+          if (isCreator) {
+            updateData.creatorRoundCompleted = true;
+            updateData["scores.fromScore"] = (ch.scores?.fromScore || 0) + roundXP;
+            updateData["scores.fromHits"] = (ch.scores?.fromHits || 0) + correctCount;
+          } else {
+            updateData["scores.toScore"] = (ch.scores?.toScore || 0) + roundXP;
+            updateData["scores.toHits"] = (ch.scores?.toHits || 0) + correctCount;
+          }
+
+          if (attackData) {
+            updateData.activeAttack = {
+              id: attackData.id,
+              name: attackData.name,
+              cost: attackData.cost,
+              attackerUid: currentUid
+            };
+          } else {
+            updateData.activeAttack = null;
+          }
+
+          await updateDoc(chRef, updateData);
+          console.log("Turno transferido en Firestore a:", nextTurnUid);
+        }
+      } catch (err) {
+        console.error("Error finalizando turno de desafío en Firestore:", err);
+      }
+    }
+
+    window.state.isChallengeMode = false;
+    state.isChallengeMode = false;
+    window.state.currentChallengeId = null;
+    state.currentChallengeId = null;
+
+    navigateToScreen('challengesView');
+  }
+  window.finalizeChallengeTurn = finalizeChallengeTurn;
+
   // Botón Principal Rondas 1 y 2: 'ENVIAR ATAQUE AL RIVAL'
   const btnOpenAttackModal = document.getElementById('btnOpenAttackModal');
   if (btnOpenAttackModal) {
@@ -5158,8 +5397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPassTurnWithoutAttack.addEventListener('click', () => {
       playClickSound();
       showRetroToast('Turno finalizado sin enviar ataque', 'info');
-      updateDuelCardToWaiting(state.currentDuel?.rivalName || 'Usuario 2');
-      navigateToScreen('challengesView');
+      finalizeChallengeTurn(null);
     });
   }
 
@@ -5187,7 +5425,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         playClickSound();
       }
-      navigateToScreen('challengesView');
+      finalizeChallengeTurn(null);
     });
   }
 
@@ -5196,6 +5434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', () => {
       const cost = parseInt(item.dataset.cost, 10) || 40;
       const attackName = item.dataset.name || 'Ataque';
+      const attackId = item.dataset.attackId || 'time_penalty';
 
       if (state.coins >= cost) {
         state.coins -= cost;
@@ -5205,10 +5444,9 @@ document.addEventListener('DOMContentLoaded', () => {
         playSuccessSound();
         showRetroToast(`¡Ataque "${attackName}" enviado con éxito! (-${cost} RC)`, 'success');
         closeModal('attackModal');
-        updateDuelCardToWaiting(state.currentDuel?.rivalName || 'Usuario 2');
         setTimeout(() => {
-          navigateToScreen('challengesView');
-        }, 450);
+          finalizeChallengeTurn({ id: attackId, name: attackName, cost: cost });
+        }, 350);
       } else {
         playErrorSound();
         showRetroToast(`No tienes suficientes RetroCoins (necesitas ${cost} RC)`, 'warning');
