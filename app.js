@@ -67,6 +67,7 @@ const state = {
   allUnlocked: false, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
   challenges: [], // Arreglo de desafíos del usuario (sin mock data)
+  selectedRival: null, // Rival seleccionado en el modal de desafío
   playedQuestionIds: new Set(), // Registro de preguntas ya jugadas
 
   wheelNeedsMagicUnlockAnim: false, // Sincronización para disparar humo mágico en la ruleta al volver de la colección
@@ -4361,6 +4362,17 @@ function closeModal(modalId) {
     modal.classList.remove('open');
     playClickSound();
     
+    if (modalId === 'sendChallengeModal') {
+      const searchInput = document.getElementById('inputSearchUserChallenge');
+      if (searchInput) searchInput.value = '';
+      const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+      if (container) container.innerHTML = '';
+      const confirmBtn = document.getElementById('confirmSendChallengeBtn');
+      if (confirmBtn) confirmBtn.style.display = 'none';
+      if (window.state) window.state.selectedRival = null;
+      if (state) state.selectedRival = null;
+    }
+    
     if (modalId === 'modalTienda' || modalId === 'modalPerfil') {
       const currentActiveView = document.querySelector('.screen-view.active');
       if (currentActiveView) {
@@ -5262,8 +5274,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- BÚSQUEDA DE JUGADORES EN FIRESTORE (#sendChallengeModal) ---
   async function searchUsersForChallenge(term) {
-    const container = document.getElementById('searchResultsChallenge');
+    const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+    const confirmBtn = document.getElementById('confirmSendChallengeBtn');
     if (!container) return;
+
+    window.state.selectedRival = null;
+    state.selectedRival = null;
+    if (confirmBtn) confirmBtn.style.display = 'none';
 
     if (!window.db || !window.firestoreOps) {
       container.innerHTML = '<div class="challenge-search-empty">Conectando a base de datos...</div>';
@@ -5296,39 +5313,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (matches.length === 0) {
         container.innerHTML = '<div class="challenge-search-empty">No se encontró a nadie con ese nombre</div>';
+        if (confirmBtn) confirmBtn.style.display = 'none';
         return;
       }
 
-      container.innerHTML = matches.map(user => `
-        <div class="challenge-search-user-row" data-rival-id="${user.id}" data-rival-name="${user.username}">
-          <div class="challenge-search-user-info">
-            <div class="challenge-search-user-avatar">${user.avatar || '🕹️'}</div>
-            <div class="challenge-search-user-details">
-              <span class="challenge-search-user-name">${user.username}</span>
-            </div>
-          </div>
-          <button type="button" class="btn-arcade-challenge interactive-press" data-rival-id="${user.id}" data-rival-name="${user.username}">
-            RETAR ⚔️
-          </button>
-        </div>
-      `).join('');
+      container.innerHTML = matches.map(user => {
+        const isImgAvatar = user.avatar && (user.avatar.includes('/') || user.avatar.startsWith('data:image'));
+        const avatarContent = isImgAvatar
+          ? `<img src="${user.avatar}" alt="${user.username}" class="user-search-avatar-img" />`
+          : `<span>${user.avatar || '🕹️'}</span>`;
 
-      container.querySelectorAll('.btn-arcade-challenge').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const rivalId = btn.getAttribute('data-rival-id');
-          const rivalName = btn.getAttribute('data-rival-name');
-          sendChallengeToUser({ id: rivalId, username: rivalName });
+        return `
+          <div class="user-search-card" data-rival-id="${user.id}" data-rival-name="${user.username}" data-rival-avatar="${user.avatar || '🕹️'}">
+            <div class="user-search-avatar">${avatarContent}</div>
+            <span class="user-search-name">${user.username}</span>
+            <div class="user-search-check">✓</div>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.user-search-card').forEach(card => {
+        card.addEventListener('click', () => {
+          playClickSound();
+          const rivalId = card.getAttribute('data-rival-id');
+          const rivalName = card.getAttribute('data-rival-name');
+          const rivalAvatar = card.getAttribute('data-rival-avatar');
+
+          const selectedUser = { id: rivalId, username: rivalName, avatar: rivalAvatar };
+          window.state.selectedRival = selectedUser;
+          state.selectedRival = selectedUser;
+
+          container.querySelectorAll('.user-search-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+
+          if (confirmBtn) {
+            confirmBtn.style.display = 'flex';
+          }
         });
       });
     } catch (err) {
       console.error("Error buscando usuarios para reto:", err);
       container.innerHTML = '<div class="challenge-search-empty">Error al buscar jugadores</div>';
+      if (confirmBtn) confirmBtn.style.display = 'none';
     }
   }
 
-  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 1) ---
+  // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 4) ---
   async function sendChallengeToUser(rival) {
+    if (!rival) {
+      rival = window.state?.selectedRival || state.selectedRival;
+    }
+    if (!rival) {
+      showRetroToast('Selecciona a un jugador primero', '⚠️');
+      return;
+    }
+
     if (!window.db || !window.firestoreOps || !window.state?.userId) {
       showRetroToast('Inicia sesión para enviar desafíos', '⚠️');
       return;
@@ -5367,10 +5406,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const searchInput = document.getElementById('inputSearchUserChallenge');
       if (searchInput) searchInput.value = '';
-      const container = document.getElementById('searchResultsChallenge');
+      const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
       if (container) container.innerHTML = '';
+      const confirmBtn = document.getElementById('confirmSendChallengeBtn');
+      if (confirmBtn) confirmBtn.style.display = 'none';
+      window.state.selectedRival = null;
+      state.selectedRival = null;
 
-      // Redirige al retador de inmediato a #challengeMatchView (Requirement 1)
+      // Redirige al retador de inmediato a #challengeMatchView
       window.state.isChallengeMode = true;
       state.isChallengeMode = true;
       window.state.currentChallengeId = docRef.id;
@@ -5405,9 +5448,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleSearch = () => {
       clearTimeout(searchDebounceTimer);
       const term = inputSearchUserChallenge.value.trim();
-      const container = document.getElementById('searchResultsChallenge');
+      const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+      const confirmBtn = document.getElementById('confirmSendChallengeBtn');
       if (term.length < 2) {
         if (container) container.innerHTML = '';
+        if (confirmBtn) confirmBtn.style.display = 'none';
+        window.state.selectedRival = null;
+        state.selectedRival = null;
         return;
       }
       searchDebounceTimer = setTimeout(() => {
@@ -5417,6 +5464,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputSearchUserChallenge.addEventListener('input', handleSearch);
     inputSearchUserChallenge.addEventListener('keyup', handleSearch);
+  }
+
+  // Botón Confirmar y Enviar Reto (#confirmSendChallengeBtn)
+  const confirmSendChallengeBtn = document.getElementById('confirmSendChallengeBtn');
+  if (confirmSendChallengeBtn && !confirmSendChallengeBtn.dataset.listenerAttached) {
+    confirmSendChallengeBtn.dataset.listenerAttached = 'true';
+    confirmSendChallengeBtn.addEventListener('click', () => {
+      const selectedRival = window.state?.selectedRival || state.selectedRival;
+      if (!selectedRival) {
+        showRetroToast('Selecciona a un jugador primero', '⚠️');
+        return;
+      }
+      sendChallengeToUser(selectedRival);
+    });
   }
 
   const btnAccessContacts = document.getElementById('btnAccessContacts');

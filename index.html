@@ -1450,7 +1450,13 @@
               <div class="challenge-search-box">
                 <input type="text" id="inputSearchUserChallenge" class="challenge-search-input" placeholder="🔍 Buscar por nombre de usuario..." autocomplete="off" />
               </div>
-              <div id="searchResultsChallenge" class="challenge-search-results"></div>
+              <!-- Contenedor de Resultados (#searchResultsList) -->
+              <div id="searchResultsList" class="search-results-list challenge-search-results"></div>
+
+              <!-- Botón Confirmar y Enviar Reto (visible al seleccionar) -->
+              <button type="button" id="confirmSendChallengeBtn" class="confirm-send-challenge-btn interactive-press" style="display: none;">
+                Confirmar y Enviar Reto 🚀
+              </button>
 
               <!-- Botón de Acción 1: Contactos -->
               <button class="btn-challenge-action btn-action-contacts interactive-press" id="btnAccessContacts">
