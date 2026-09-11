@@ -349,131 +349,30 @@
             </button>
 
             <!-- Título Pixelado -->
-            <h1 class="collection-title">TU COLECCIÓN</h1>
+            <h1 class="collection-title">MIS COLECCIONES</h1>
 
             <!-- Círculo / Pastilla de Monedas -->
             <div class="collection-coin-circle" id="coinCircleCollection" title="Monedas">
               <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="global-retrocoin-img mini-coin">
-              <span class="collection-coin-amount" id="userCoinsCollection">50</span>
+              <span class="collection-coin-amount" id="userCoinsCollection">0</span>
             </div>
           </header>
 
           <!-- Subtítulo con estrellas decorativas -->
           <div class="collection-subtitle-wrap">
             <span class="decor-star star-sub-left">★</span>
-            <p class="collection-subtitle">Juega, gana monedas y desbloquea nuevas categorias de preguntas.</p>
+            <p class="collection-subtitle">Domina temáticas exclusivas y completa tus álbumes</p>
             <span class="decor-star star-sub-right">★</span>
           </div>
 
-          <!-- Lista de 5 Tarjetas de Temáticas -->
+          <!-- Lista de 6 Tarjetas de Temáticas -->
           <section class="collection-cards-list" id="collectionCardsList">
-            
-            <!-- 1. Cine -->
-            <div class="collection-card" data-cat="cine" style="--i: 0;">
-              <div class="card-icon-box box-cine">
-                <img src="assets/pantalla_progreso/claqueta.png" alt="Cine" class="cat-card-img">
-              </div>
-              <div class="card-info-col">
-                <span class="card-cat-name">CINE</span>
-                <div class="card-progress-track">
-                  <div class="card-progress-fill fill-cine" style="width: 100%;"></div>
-                  <div class="card-progress-segments">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-status-col">
-                <span class="card-percent-text">100%</span>
-                <div class="card-status-badge badge-unlocked">✓</div>
-              </div>
-            </div>
-
-            <!-- 2. Videojuegos -->
-            <div class="collection-card" data-cat="videojuegos" style="--i: 1;">
-              <div class="card-icon-box box-videojuegos">
-                <img src="assets/pantalla_progreso/mando.png" alt="Videojuegos" class="cat-card-img">
-              </div>
-              <div class="card-info-col">
-                <span class="card-cat-name">VIDEOJUEGOS</span>
-                <div class="card-progress-track">
-                  <div class="card-progress-fill fill-videojuegos" style="width: 40%;"></div>
-                  <div class="card-progress-segments">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-status-col">
-                <span class="card-percent-text">40%</span>
-                <div class="card-status-badge badge-locked">🔒</div>
-              </div>
-            </div>
-
-            <!-- 3. TV -->
-            <div class="collection-card" data-cat="tv" style="--i: 2;">
-              <div class="card-icon-box box-tv">
-                <img src="assets/pantalla_progreso/television.png" alt="TV" class="cat-card-img">
-              </div>
-              <div class="card-info-col">
-                <span class="card-cat-name">TV</span>
-                <div class="card-progress-track">
-                  <div class="card-progress-fill fill-tv" style="width: 0%;"></div>
-                  <div class="card-progress-segments">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-status-col">
-                <span class="card-percent-text">0%</span>
-                <div class="card-status-badge badge-locked">🔒</div>
-              </div>
-            </div>
-
-            <!-- 4. Música -->
-            <div class="collection-card" data-cat="musica" style="--i: 3;">
-              <div class="card-icon-box box-musica">
-                <img src="assets/pantalla_progreso/guitarra.png" alt="Música" class="cat-card-img">
-              </div>
-              <div class="card-info-col">
-                <span class="card-cat-name">MÚSICA</span>
-                <div class="card-progress-track">
-                  <div class="card-progress-fill fill-musica" style="width: 0%;"></div>
-                  <div class="card-progress-segments">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-status-col">
-                <span class="card-percent-text">0%</span>
-                <div class="card-status-badge badge-locked">🔒</div>
-              </div>
-            </div>
-
-            <!-- 5. Todo / Mix -->
-            <div class="collection-card" data-cat="todo" style="--i: 4;">
-              <div class="card-icon-box box-todo">
-                <img src="assets/pantalla_progreso/interrogacion.png" alt="Todo / Mix" class="cat-card-img">
-              </div>
-              <div class="card-info-col">
-                <span class="card-cat-name">TODO / MIX</span>
-                <div class="card-progress-track">
-                  <div class="card-progress-fill fill-todo" style="width: 0%;"></div>
-                  <div class="card-progress-segments">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-status-col">
-                <span class="card-percent-text">0%</span>
-                <div class="card-status-badge badge-locked">🔒</div>
-              </div>
-            </div>
-
           </section>
 
           <!-- Botón de Desbloqueo Completo -->
-          <div class="collection-bottom-action" style="--i: 5;">
+          <div class="collection-bottom-action" style="--i: 6;">
             <button class="btn-unlock-all-collection interactive-press" id="btnUnlockAllCollection">
-              <span>Activa todas las categorías y elimina los anuncios por $us2.99</span>
+              <span>⭐ DESBLOQUEAR TODAS LAS COLECCIONES POR $2.99 USD</span>
             </button>
           </div>
         </div>
@@ -1839,7 +1738,7 @@
                     <input type="text" id="profileUsernameInput" class="profile-name-input" value="" placeholder="Introduce tu nombre de usuario..." maxlength="15" autocomplete="off" spellcheck="false" aria-label="Nombre de usuario" title="Introduce tu nombre de usuario">
                     <button type="button" class="profile-name-edit-btn" id="btnEditUserName" aria-label="Editar nombre" title="Editar nombre">✏️</button>
                   </div>
-                  <span class="profile-badge" id="profileBadge">Nivel 12 • Maestro de los 90s</span>
+                  <span class="profile-badge" id="profileBadge">Novato del Videoclub 📼 • 0 XP</span>
                   <div class="profile-bio-wrap">
                     <input type="text" id="profileBioInput" class="profile-bio-input" placeholder="Escribe algo sobre ti..." maxlength="80" aria-label="Biografía corta" title="Escribe tu biografía">
                   </div>

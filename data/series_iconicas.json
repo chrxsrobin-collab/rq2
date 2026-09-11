@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ser_001",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba la cafetería donde se reunían los protagonistas de 'Friends'?",
+    "emojis": "☕ 🛋️ 🗽",
+    "opciones": ["Central Perk", "Monk's Diner", "MacLaren's", "The Peach Pit"],
+    "respuesta_correcta": "Central Perk"
+  },
+  {
+    "id": "ser_002",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llama la ciudad donde viven Los Simpson?",
+    "emojis": "🍩 👨‍👩‍👧‍👦 📺",
+    "opciones": ["Springfield", "Shelbyville", "Quahog", "South Park"],
+    "respuesta_correcta": "Springfield"
+  },
+  {
+    "id": "ser_003",
+    "categoria": "TV",
+    "pregunta": "¿Quiénes eran los agentes del FBI protagonistas de 'The X-Files'?",
+    "emojis": "👽 🛸 📁",
+    "opciones": ["Mulder y Scully", "Fox y Dana", "Starsky y Hutch", "Benson y Stabler"],
+    "respuesta_correcta": "Mulder y Scully"
+  },
+  {
+    "id": "ser_004",
+    "categoria": "TV",
+    "pregunta": "¿Qué actor protagonizó 'El Príncipe de Bel-Air' (The Fresh Prince)?",
+    "emojis": "👑 🏀 🧢",
+    "opciones": ["Will Smith", "Alfonso Ribeiro", "Martin Lawrence", "Eddie Murphy"],
+    "respuesta_correcta": "Will Smith"
+  },
+  {
+    "id": "ser_005",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llama la cazavampiros interpretada por Sarah Michelle Gellar?",
+    "emojis": "🧛‍♂️ 🗡️ ⚰️",
+    "opciones": ["Buffy Summers", "Sabrina Spellman", "Dana Scully", "Phoebe Halliwell"],
+    "respuesta_correcta": "Buffy Summers"
+  },
+  {
+    "id": "ser_006",
+    "categoria": "TV",
+    "pregunta": "¿Qué serie de los 90 seguía a un grupo de socorristas en las playas de Malibú?",
+    "emojis": "🏖️ 🏊‍♂️ 🛟",
+    "opciones": ["Baywatch", "Beverly Hills 90210", "Melrose Place", "Dawson's Creek"],
+    "respuesta_correcta": "Baywatch"
+  },
+  {
+    "id": "ser_007",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el vecino fastidioso de los Winslow en 'Cosas de casa'?",
+    "emojis": "🤓 👓 👔",
+    "opciones": ["Steve Urkel", "Carlton Banks", "Screech Powers", "Zack Morris"],
+    "respuesta_correcta": "Steve Urkel"
+  },
+  {
+    "id": "ser_008",
+    "categoria": "TV",
+    "pregunta": "¿Quién era el magnate jefe de Homer Simpson en la central nuclear?",
+    "emojis": "👴 🏭 💵",
+    "opciones": ["Mr. Burns", "Waylon Smithers", "Ned Flanders", "Barney Gumble"],
+    "respuesta_correcta": "Mr. Burns"
+  },
+  {
+    "id": "ser_009",
+    "categoria": "TV",
+    "pregunta": "¿Qué serie de misterio surrealista ambientada en Washington fue dirigida por David Lynch?",
+    "emojis": "🌲 🦉 ☕",
+    "opciones": ["Twin Peaks", "The Twilight Zone", "Millennium", "Lost"],
+    "respuesta_correcta": "Twin Peaks"
+  },
+  {
+    "id": "ser_010",
+    "categoria": "TV",
+    "pregunta": "¿Cómo se llamaba el dinosaurio bebé que decía '¡Tú no mami!' en 'Dinosaurios'?",
+    "emojis": "🦖 👶 🍳",
+    "opciones": ["Bebé Sinclair", "Junior", "Earl Jr.", "Dino"],
+    "respuesta_correcta": "Bebé Sinclair"
+  },
+  {
+    "id": "ser_011",
+    "categoria": "TV",
+    "pregunta": "¿Qué famosa serie de ciencia ficción de los 90 ocurría a bordo de la nave Enterprise-D?",
+    "emojis": "🚀 🖖 🌌",
+    "opciones": ["Star Trek: The Next Generation", "Babylon 5", "Stargate SG-1", "Farscape"],
+    "respuesta_correcta": "Star Trek: The Next Generation"
+  },
+  {
+    "id": "ser_012",
+    "categoria": "TV",
+    "pregunta": "¿Qué pandilla de instituto protagonizaba 'Salvados por la campana'?",
+    "emojis": "🔔 🏫 🎒",
+    "opciones": ["Zack, Kelly, Slater y amigos", "Dawson, Joey y Pacey", "Brandon y Brenda", "Ross, Chandler y Joey"],
+    "respuesta_correcta": "Zack, Kelly, Slater y amigos"
+  }
+]

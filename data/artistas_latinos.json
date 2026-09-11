@@ -1,0 +1,98 @@
+[
+  {
+    "id": "lat_001",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante mexicano es conocido como 'El Sol de México'?",
+    "emojis": "☀️ 🎤 🇲🇽",
+    "opciones": ["Luis Miguel", "Alejandro Fernández", "Cristian Castro", "Vicente Fernández"],
+    "respuesta_correcta": "Luis Miguel"
+  },
+  {
+    "id": "lat_002",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué artista colombiana lanzó los álbumes 'Pies Descalzos' (1995) y '¿Dónde están los ladrones?' (1998)?",
+    "emojis": "🎸 💃 🇨🇴",
+    "opciones": ["Shakira", "Soraya", "Fanny Lu", "Paulina Rubio"],
+    "respuesta_correcta": "Shakira"
+  },
+  {
+    "id": "lat_003",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué éxito mundial interpretó Ricky Martin para el Mundial de Fútbol de Francia 1998?",
+    "emojis": "⚽ 🏆 🇵🇷",
+    "opciones": ["La Copa de la Vida", "Livin' la Vida Loca", "María", "She Bangs"],
+    "respuesta_correcta": "La Copa de la Vida"
+  },
+  {
+    "id": "lat_004",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Quién es recordada como la 'Reina del Tex-Mex' con éxitos como 'Amor Prohibido'?",
+    "emojis": "🌹 🎤 💃",
+    "opciones": ["Selena Quintanilla", "Gloria Estefan", "Thalía", "Ana Gabriel"],
+    "respuesta_correcta": "Selena Quintanilla"
+  },
+  {
+    "id": "lat_005",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante puertorriqueño nos puso a bailar con 'Provócame' y 'Torero'?",
+    "emojis": "🕺 🎶 🇵🇷",
+    "opciones": ["Chayanne", "Ricky Martin", "Marc Anthony", "Carlos Vives"],
+    "respuesta_correcta": "Chayanne"
+  },
+  {
+    "id": "lat_006",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué mítica banda argentina de rock lideró Gustavo Cerati?",
+    "emojis": "🎸 ⚡ 🇦🇷",
+    "opciones": ["Soda Stereo", "Los Enanitos Verdes", "Los Fabulosos Cadillacs", "Rata Blanca"],
+    "respuesta_correcta": "Soda Stereo"
+  },
+  {
+    "id": "lat_007",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante cubana lideró la Miami Sound Machine cantando 'Conga'?",
+    "emojis": "🎺 🌴 🇨🇺",
+    "opciones": ["Gloria Estefan", "Celia Cruz", "La Lupe", "Albita"],
+    "respuesta_correcta": "Gloria Estefan"
+  },
+  {
+    "id": "lat_008",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué artista mexicano cantó la icónica balada 'No Me Ames' junto a Jennifer Lopez?",
+    "emojis": "🎙️ 💔 🌹",
+    "opciones": ["Marc Anthony", "Luis Miguel", "Alejandro Sanz", "Marco Antonio Solís"],
+    "respuesta_correcta": "Marc Anthony"
+  },
+  {
+    "id": "lat_009",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué cantante español compuso 'Corazón Partío' en su exitoso álbum 'Más' (1997)?",
+    "emojis": "💔 🎸 🇪🇸",
+    "opciones": ["Alejandro Sanz", "Enrique Iglesias", "Miguel Bosé", "Joaquín Sabina"],
+    "respuesta_correcta": "Alejandro Sanz"
+  },
+  {
+    "id": "lat_010",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué grupo de pop mexicano protagonizado por Thalía y Paulina Rubio fue un fenómeno en los 80/90?",
+    "emojis": "👧 👦 🎤",
+    "opciones": ["Timbiriche", "Menudo", "Parchís", "Onda Vaselina"],
+    "respuesta_correcta": "Timbiriche"
+  },
+  {
+    "id": "lat_011",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Cómo se llamaba la reina de la salsa que popularizó la exclamación '¡Azúcar!'?",
+    "emojis": "👑 🍬 🎺",
+    "opciones": ["Celia Cruz", "La Lupe", "Omara Portuondo", "Olga Tañón"],
+    "respuesta_correcta": "Celia Cruz"
+  },
+  {
+    "id": "lat_012",
+    "categoria": "MÚSICA",
+    "pregunta": "¿Qué banda de rock en español mexicana lanzó el álbum 'Re' en 1994?",
+    "emojis": "🎸 ☕ 🇲🇽",
+    "opciones": ["Café Tacvba", "Maná", "Caifanes", "Molotov"],
+    "respuesta_correcta": "Café Tacvba"
+  }
+]

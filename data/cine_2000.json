@@ -1,0 +1,98 @@
+[
+  {
+    "id": "c2000_001",
+    "categoria": "CINE",
+    "pregunta": "¿Qué director dirigió 'Gladiator' (Gladiador) en el año 2000?",
+    "emojis": "⚔️ 🏛️ 🦁",
+    "opciones": ["Ridley Scott", "Steven Spielberg", "James Cameron", "Peter Jackson"],
+    "respuesta_correcta": "Ridley Scott"
+  },
+  {
+    "id": "c2000_002",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor interpretó al Capitán Jack Sparrow en 'Piratas del Caribe' (2003)?",
+    "emojis": "🏴‍☠️ ⚓ 🦜",
+    "opciones": ["Johnny Depp", "Orlando Bloom", "Geoffrey Rush", "Brad Pitt"],
+    "respuesta_correcta": "Johnny Depp"
+  },
+  {
+    "id": "c2000_003",
+    "categoria": "CINE",
+    "pregunta": "¿Cuál fue la primera película de la trilogía de 'El Señor de los Anillos' (2001)?",
+    "emojis": "💍 🧙‍♂️ 🌋",
+    "opciones": ["La Comunidad del Anillo", "Las Dos Torres", "El Retorno del Rey", "El Hobbit"],
+    "respuesta_correcta": "La Comunidad del Anillo"
+  },
+  {
+    "id": "c2000_004",
+    "categoria": "CINE",
+    "pregunta": "¿Quién interpretó al Joker en 'El Caballero Oscuro' (The Dark Knight, 2008)?",
+    "emojis": "🃏 🦇 🤡",
+    "opciones": ["Heath Ledger", "Jack Nicholson", "Joaquin Phoenix", "Jared Leto"],
+    "respuesta_correcta": "Heath Ledger"
+  },
+  {
+    "id": "c2000_005",
+    "categoria": "CINE",
+    "pregunta": "¿Qué estudio de animación estrenó 'Shrek' en el año 2001?",
+    "emojis": "🧅 🐴 🏰",
+    "opciones": ["DreamWorks", "Pixar", "Disney", "Blue Sky"],
+    "respuesta_correcta": "DreamWorks"
+  },
+  {
+    "id": "c2000_006",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de James Cameron recaudó cifras récord en 2009 con los Na'vi?",
+    "emojis": "🔵 🏹 🌿",
+    "opciones": ["Avatar", "Titanic", "Terminator Salvation", "District 9"],
+    "respuesta_correcta": "Avatar"
+  },
+  {
+    "id": "c2000_007",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor encarnó a Spider-Man en la trilogía dirigida por Sam Raimi (2002-2007)?",
+    "emojis": "🕷️ 🕸️ 🏙️",
+    "opciones": ["Tobey Maguire", "Andrew Garfield", "Tom Holland", "James Franco"],
+    "respuesta_correcta": "Tobey Maguire"
+  },
+  {
+    "id": "c2000_008",
+    "categoria": "CINE",
+    "pregunta": "¿En qué película de 2003 un pez payaso busca a su hijo en Sídney?",
+    "emojis": "🐠 🌊 🐢",
+    "opciones": ["Buscando a Nemo", "El Espantatiburones", "Madagascar", "Happy Feet"],
+    "respuesta_correcta": "Buscando a Nemo"
+  },
+  {
+    "id": "c2000_009",
+    "categoria": "CINE",
+    "pregunta": "¿Quién protagonizó 'Kill Bill: Vol. 1' (2003) vestida con el mítico mono amarillo?",
+    "emojis": "🗡️ 🥋 🩸",
+    "opciones": ["Uma Thurman", "Lucy Liu", "Daryl Hannah", "Vivica A. Fox"],
+    "respuesta_correcta": "Uma Thurman"
+  },
+  {
+    "id": "c2000_010",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de 2001 dirigida por Jean-Pierre Jeunet sigue la vida de una camarera parisina?",
+    "emojis": "🥄 📸 🗼",
+    "opciones": ["Amélie", "Moulin Rouge!", "Chocolat", "La Môme"],
+    "respuesta_correcta": "Amélie"
+  },
+  {
+    "id": "c2000_011",
+    "categoria": "CINE",
+    "pregunta": "¿Qué película de Pixar de 2008 está protagonizada por un pequeño robot compactador de basura?",
+    "emojis": "🤖 🚀 🌿",
+    "opciones": ["WALL-E", "Robots", "Cars", "Up"],
+    "respuesta_correcta": "WALL-E"
+  },
+  {
+    "id": "c2000_012",
+    "categoria": "CINE",
+    "pregunta": "¿Qué actor dio vida a Wolverine por primera vez en 'X-Men' (2000)?",
+    "emojis": "🐺 ⚡ 🦾",
+    "opciones": ["Hugh Jackman", "Russell Crowe", "Patrick Stewart", "Ian McKellen"],
+    "respuesta_correcta": "Hugh Jackman"
+  }
+]

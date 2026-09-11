@@ -1,0 +1,98 @@
+[
+  {
+    "id": "p90_001",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué mascota virtual japonesa en forma de huevo causó furor en 1996?",
+    "emojis": "🥚 🐣 📟",
+    "opciones": ["Tamagotchi", "Furby", "Digimon", "Pikachu"],
+    "respuesta_correcta": "Tamagotchi"
+  },
+  {
+    "id": "p90_002",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué banda liderada por Kurt Cobain popularizó el grunge con 'Smells Like Teen Spirit'?",
+    "emojis": "🎸 ⚡ 🌧️",
+    "opciones": ["Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains"],
+    "respuesta_correcta": "Nirvana"
+  },
+  {
+    "id": "p90_003",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué película de 1997 con Leonardo DiCaprio y Kate Winslet ganó 11 premios Óscar?",
+    "emojis": "🚢 🧊 💎",
+    "opciones": ["Titanic", "Armageddon", "Matrix", "Forrest Gump"],
+    "respuesta_correcta": "Titanic"
+  },
+  {
+    "id": "p90_004",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué popular formato de audio digital comprimido nació en los 90 cambiando la música?",
+    "emojis": "🎵 💾 🎧",
+    "opciones": ["MP3", "WAV", "FLAC", "AAC"],
+    "respuesta_correcta": "MP3"
+  },
+  {
+    "id": "p90_005",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué sistema operativo de Microsoft lanzado en 1995 introdujo el botón 'Inicio'?",
+    "emojis": "💻 🪟 💽",
+    "opciones": ["Windows 95", "Windows 98", "Windows 3.1", "Windows XP"],
+    "respuesta_correcta": "Windows 95"
+  },
+  {
+    "id": "p90_006",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué quinteto femenino británico cantó 'Wannabe' en 1996?",
+    "emojis": "🇬🇧 👠 🎤",
+    "opciones": ["Spice Girls", "TLC", "Destiny's Child", "All Saints"],
+    "respuesta_correcta": "Spice Girls"
+  },
+  {
+    "id": "p90_007",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué juguete robótico peludo con pico y ojos grandes hablaba su propio idioma 'Furbish'?",
+    "emojis": "🧸 🦉 🗣️",
+    "opciones": ["Furby", "Tamagotchi", "Giga Pet", "Tickle Me Elmo"],
+    "respuesta_correcta": "Furby"
+  },
+  {
+    "id": "p90_008",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué famoso programa de mensajería instantánea con flor verde sonaba '¡Uh-oh!'?",
+    "emojis": "🌼 💬 🔔",
+    "opciones": ["ICQ", "MSN Messenger", "AOL Instant Messenger", "Yahoo! Messenger"],
+    "respuesta_correcta": "ICQ"
+  },
+  {
+    "id": "p90_009",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué disco circular de plástico coleccionaban y jugaban los niños en los 90?",
+    "emojis": "💿 💥 🃏",
+    "opciones": ["Tazos (Pogs)", "Canicas", "Yoyos", "Cromos"],
+    "respuesta_correcta": "Tazos (Pogs)"
+  },
+  {
+    "id": "p90_010",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué famoso baile y canción de Los del Río sonó en todo el mundo en 1996?",
+    "emojis": "💃 🇪🇸 🎶",
+    "opciones": ["Macarena", "Aserejé", "Bomba", "Suavemente"],
+    "respuesta_correcta": "Macarena"
+  },
+  {
+    "id": "p90_011",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué oveja fue el primer mamífero clonado a partir de una célula adulta en 1996?",
+    "emojis": "🐑 🧬 🔬",
+    "opciones": ["Dolly", "Molly", "Polly", "Lucy"],
+    "respuesta_correcta": "Dolly"
+  },
+  {
+    "id": "p90_012",
+    "categoria": "ÉPOCA 90s",
+    "pregunta": "¿Qué serie de animación japonesa sobre 'monstruos de bolsillo' se emitió por primera vez en 1997?",
+    "emojis": "⚡ 🧢 🔴",
+    "opciones": ["Pokémon", "Digimon", "Yu-Gi-Oh!", "Dragon Ball Z"],
+    "respuesta_correcta": "Pokémon"
+  }
+]

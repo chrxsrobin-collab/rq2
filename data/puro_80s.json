@@ -1,0 +1,98 @@
+[
+  {
+    "id": "p80_001",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué reproductor portátil de casetes de Sony revolucionó la música en los 80?",
+    "emojis": "📼 🎧 🚶",
+    "opciones": ["Walkman", "Discman", "iPod", "Boombox"],
+    "respuesta_correcta": "Walkman"
+  },
+  {
+    "id": "p80_002",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué icónico videoclip de Michael Jackson contó con zombis bailarines en 1983?",
+    "emojis": "🧟‍♂️ 🕺 🌕",
+    "opciones": ["Thriller", "Billie Jean", "Beat It", "Bad"],
+    "respuesta_correcta": "Thriller"
+  },
+  {
+    "id": "p80_003",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué rompecabezas cúbico tridimensional causó furor mundial en 1980?",
+    "emojis": "🧊 🟩 🟥",
+    "opciones": ["Cubo de Rubik", "Tangram", "Jenga", "Tetris"],
+    "respuesta_correcta": "Cubo de Rubik"
+  },
+  {
+    "id": "p80_004",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿A qué velocidad debía llegar el DeLorean en 'Volver al Futuro' para viajar en el tiempo?",
+    "emojis": "⚡ 🚗 🕰️",
+    "opciones": ["88 mph", "100 mph", "66 mph", "99 mph"],
+    "respuesta_correcta": "88 mph"
+  },
+  {
+    "id": "p80_005",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿A quién llamabas según el lema de la película de 1984 si había algo extraño en tu vecindario?",
+    "emojis": "👻 🚫 📞",
+    "opciones": ["Ghostbusters", "A-Team", "Police Academy", "Men in Black"],
+    "respuesta_correcta": "Ghostbusters"
+  },
+  {
+    "id": "p80_006",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué icónico concierto benéfico simultáneo se celebró en Londres y Filadelfia en 1985?",
+    "emojis": "🎸 🌍 🎤",
+    "opciones": ["Live Aid", "Woodstock", "USA for Africa", "Farm Aid"],
+    "respuesta_correcta": "Live Aid"
+  },
+  {
+    "id": "p80_007",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué automóvil parlante con inteligencia artificial conducía Michael Knight?",
+    "emojis": "🚗 🔴 🕶️",
+    "opciones": ["KITT", "Herbie", "Bumblebee", "Ecto-1"],
+    "respuesta_correcta": "KITT"
+  },
+  {
+    "id": "p80_008",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Cómo se llamaba la banda que cantó 'Sweet Child O' Mine' en 1987?",
+    "emojis": "🌹 🔫 🎸",
+    "opciones": ["Guns N' Roses", "Bon Jovi", "Aerosmith", "Def Leppard"],
+    "respuesta_correcta": "Guns N' Roses"
+  },
+  {
+    "id": "p80_009",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué corte de pelo, corto por delante y largo por detrás, fue ultra popular en los 80?",
+    "emojis": "💇‍♂️ 🎸 🕶️",
+    "opciones": ["Mullet", "Mohawk", "Pompadour", "Afro"],
+    "respuesta_correcta": "Mullet"
+  },
+  {
+    "id": "p80_010",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué pequeño extraterrestre quería 'llamar a casa' en la película de Spielberg de 1982?",
+    "emojis": "🚲 🌕 🛸",
+    "opciones": ["E.T.", "Alfe", "Yoda", "Gizmo"],
+    "respuesta_correcta": "E.T."
+  },
+  {
+    "id": "p80_011",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué bebida de cola cambió su fórmula en 1985 provocando protestas masivas?",
+    "emojis": "🥤 🔴 🇺🇸",
+    "opciones": ["New Coke", "Pepsi Crystal", "RC Cola", "Tab"],
+    "respuesta_correcta": "New Coke"
+  },
+  {
+    "id": "p80_012",
+    "categoria": "ÉPOCA 80s",
+    "pregunta": "¿Qué líder soviético impulsó la 'Perestroika' y 'Glasnost' en la segunda mitad de los 80?",
+    "emojis": "🌍 📜 🕊️",
+    "opciones": ["Mijaíl Gorbachov", "Leonid Brézhnev", "Boris Yeltsin", "Nikita Jrushchov"],
+    "respuesta_correcta": "Mijaíl Gorbachov"
+  }
+]

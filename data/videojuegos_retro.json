@@ -1,0 +1,98 @@
+[
+  {
+    "id": "vj_001",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué año se lanzó el clásico 'Pac-Man' en arcades?",
+    "emojis": "🕹️ 🍒 👻",
+    "opciones": ["1980", "1978", "1983", "1985"],
+    "respuesta_correcta": "1980"
+  },
+  {
+    "id": "vj_002",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cómo se llama el hermano de Mario que viste de verde?",
+    "emojis": "🍄 👨🏻 🟢",
+    "opciones": ["Luigi", "Wario", "Yoshi", "Toad"],
+    "respuesta_correcta": "Luigi"
+  },
+  {
+    "id": "vj_003",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué compañía japonesa creó la consola Mega Drive (Genesis)?",
+    "emojis": "🦔 🎮 🔵",
+    "opciones": ["SEGA", "Nintendo", "Sony", "Atari"],
+    "respuesta_correcta": "SEGA"
+  },
+  {
+    "id": "vj_004",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es el ataque característico de Ryu y Ken en 'Street Fighter'?",
+    "emojis": "🥋 💥 🥊",
+    "opciones": ["Hadouken", "Kamehameha", "Sonic Boom", "Tiger Uppercut"],
+    "respuesta_correcta": "Hadouken"
+  },
+  {
+    "id": "vj_005",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué princesa debe rescatar Link en la saga de Nintendo?",
+    "emojis": "🗡️ 🛡️ 👑",
+    "opciones": ["Zelda", "Peach", "Daisy", "Samus"],
+    "respuesta_correcta": "Zelda"
+  },
+  {
+    "id": "vj_006",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué juego de puzzle de bloques que caen fue creado por Alexey Pajitnov?",
+    "emojis": "🧱 🟦 🇷🇺",
+    "opciones": ["Tetris", "Columns", "Puyo Puyo", "Dr. Mario"],
+    "respuesta_correcta": "Tetris"
+  },
+  {
+    "id": "vj_007",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál es el nombre del gorila rival original de 'Jumpman'?",
+    "emojis": "🦍 🍌 🪜",
+    "opciones": ["Donkey Kong", "King Kong", "Diddy Kong", "Cranky Kong"],
+    "respuesta_correcta": "Donkey Kong"
+  },
+  {
+    "id": "vj_008",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿En qué consola debutó el revolucionario 'Super Mario 64'?",
+    "emojis": "⭐ 🍄 🎮",
+    "opciones": ["Nintendo 64", "Super Nintendo", "PlayStation", "Sega Saturn"],
+    "respuesta_correcta": "Nintendo 64"
+  },
+  {
+    "id": "vj_009",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Quién es la arqueóloga aventurera protagonista de 'Tomb Raider'?",
+    "emojis": "🔫 🏺 🧗‍♀️",
+    "opciones": ["Lara Croft", "Jill Valentine", "Samus Aran", "Chun-Li"],
+    "respuesta_correcta": "Lara Croft"
+  },
+  {
+    "id": "vj_010",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Cuál fue la primera consola doméstica lanzada por Sony en 1994?",
+    "emojis": "💿 🎮 🕹️",
+    "opciones": ["PlayStation", "PlayStation 2", "PlayStation One", "PSP"],
+    "respuesta_correcta": "PlayStation"
+  },
+  {
+    "id": "vj_011",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué erizo azul de Sega colecciona anillos dorados?",
+    "emojis": "🦔 💍 ⚡",
+    "opciones": ["Sonic", "Shadow", "Tails", "Knuckles"],
+    "respuesta_correcta": "Sonic"
+  },
+  {
+    "id": "vj_012",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué criatura eléctrica es la mascota principal de Pokémon?",
+    "emojis": "⚡ 🐭 🔴",
+    "opciones": ["Pikachu", "Charmander", "Squirtle", "Bulbasaur"],
+    "respuesta_correcta": "Pikachu"
+  }
+]

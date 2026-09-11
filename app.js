@@ -46,6 +46,19 @@
 })();
 
 // =============================================================================
+// CATÁLOGO CENTRAL UNIFICADO DE PACKS TEMÁTICOS ("MIS COLECCIONES")
+// =============================================================================
+const THEMATIC_PACKS = [
+  { id: "cine_2000", file: "data/cine_2000.json", name: "Cine 2000s", category: "CINE", icon: "🎬", priceCoins: 5000, priceUSD: "$0.99" },
+  { id: "videojuegos_retro", file: "data/videojuegos_retro.json", name: "Videojuegos Clásicos", category: "VIDEOJUEGOS", icon: "🕹️", priceCoins: 5000, priceUSD: "$0.99" },
+  { id: "series_iconicas", file: "data/series_iconicas.json", name: "Series Icónicas", category: "TV", icon: "📺", priceCoins: 5000, priceUSD: "$0.99" },
+  { id: "puro_80s", file: "data/puro_80s.json", name: "Puro 80s", category: "ÉPOCA 80s", icon: "📼", priceCoins: 5000, priceUSD: "$0.99" },
+  { id: "puro_90s", file: "data/puro_90s.json", name: "Puro 90s", category: "ÉPOCA 90s", icon: "📻", priceCoins: 5000, priceUSD: "$0.99" },
+  { id: "artistas_latinos", file: "data/artistas_latinos.json", name: "Artistas Latinos", category: "MÚSICA", icon: "🎤", priceCoins: 5000, priceUSD: "$0.99" }
+];
+window.THEMATIC_PACKS = THEMATIC_PACKS;
+
+// =============================================================================
 // 1. ESTADO DE LA APLICACIÓN (INICIAL VACÍO Y LIMPIO)
 // =============================================================================
 const state = {
@@ -63,6 +76,9 @@ const state = {
   userScore: 0, // Puntaje/XP acumulado del usuario
   winStreak: 0, // Racha de victorias consecutivas
   currentStreak: 0, // Racha de respuestas correctas
+  unlockedPacks: [], // IDs de packs temáticos adquiridos (ej: ["cine_2000"])
+  packMastery: {}, // Preguntas acertadas por pack temático (ej: { cine_2000: 12 })
+  activeThematicPackId: null, // ID del pack temático en juego directo
   allCategoriesUnlocked: false, // Compra IAP o desbloqueo total
   allUnlocked: false, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
@@ -154,6 +170,45 @@ const state = {
 state.currentView = '#homeView';
 window.state = state;
 window.state.currentView = '#homeView';
+
+// =============================================================================
+// SISTEMA DE PROGRESIÓN Y RANGOS ARCADE (10 RANGOS TEMÁTICOS)
+// =============================================================================
+function getPlayerRank(xp) {
+  const currentXP = (typeof xp === 'number' && !isNaN(xp))
+    ? xp
+    : ((window.state && typeof window.state.xp === 'number')
+        ? window.state.xp
+        : ((state && typeof state.xp === 'number') ? state.xp : (state?.userScore || 0)));
+
+  let rankObj;
+  if (currentXP < 300) {
+    rankObj = { rank: 1, tier: 1, minXP: 0, maxXP: 299, name: "Novato del Videoclub 📼" };
+  } else if (currentXP < 700) {
+    rankObj = { rank: 2, tier: 2, minXP: 300, maxXP: 699, name: "Zapper de Madrugada 📺" };
+  } else if (currentXP < 1200) {
+    rankObj = { rank: 3, tier: 3, minXP: 700, maxXP: 1199, name: "Cazador de Fichas 🕹️" };
+  } else if (currentXP < 1900) {
+    rankObj = { rank: 4, tier: 4, minXP: 1200, maxXP: 1899, name: "Capo del DVD 📀" };
+  } else if (currentXP < 2800) {
+    rankObj = { rank: 5, tier: 5, minXP: 1900, maxXP: 2799, name: "Cinéfago de Culto 🎬" };
+  } else if (currentXP < 3900) {
+    rankObj = { rank: 6, tier: 6, minXP: 2800, maxXP: 3899, name: "Amo del Cartucho 🎮" };
+  } else if (currentXP < 5200) {
+    rankObj = { rank: 7, tier: 7, minXP: 3900, maxXP: 5199, name: "Vocalista de Garaje 🎸" };
+  } else if (currentXP < 6800) {
+    rankObj = { rank: 8, tier: 8, minXP: 5200, maxXP: 6799, name: "Comandante del Rating 📡" };
+  } else if (currentXP < 9000) {
+    rankObj = { rank: 9, tier: 9, minXP: 6800, maxXP: 8999, name: "Campeón del Arcade 🏆" };
+  } else {
+    rankObj = { rank: 10, tier: 10, minXP: 9000, maxXP: Infinity, name: "Leyenda Pop 👑" };
+  }
+
+  rankObj.toString = function() { return this.name; };
+  return rankObj;
+}
+window.getPlayerRank = getPlayerRank;
+
 
 // Cargar estadísticas guardadas del jugador
 try {
@@ -781,13 +836,14 @@ function triggerStoreEntranceAnimation() {
 
 function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1) {
   state.currentDuel = {
+    ...state.currentDuel,
     rivalName: rivalName,
     rivalAvatar: rivalAvatar,
     currentRound: round,
     localTotalScore: state.currentDuel?.localTotalScore || 0,
     rivalTotalScore: state.currentDuel?.rivalTotalScore || 0,
     handicapSeconds: 5,
-    activeAttack: null
+    activeAttack: state.currentDuel?.activeAttack || null
   };
 
   const titleEl = document.getElementById('challengeMatchTitle');
@@ -867,15 +923,11 @@ function renderScreenView(screenId) {
       setActiveTab('desafios');
       triggerChallengesEntranceAnimation();
       if (typeof renderChallengesUI === 'function') renderChallengesUI();
-      try {
-        if (!localStorage.getItem('retroquiz_seen_challenge_intro')) {
-          setTimeout(() => {
-            if (typeof openChallengeOnboardingModal === 'function') {
-              openChallengeOnboardingModal();
-            }
-          }, 350);
+      setTimeout(() => {
+        if (typeof checkChallengeOnboardingTrigger === 'function') {
+          checkChallengeOnboardingTrigger();
         }
-      } catch (e) {}
+      }, 350);
     } else if (targetView.id === 'challengeMatchView') {
       state.activeTab = 'duelo-ruleta';
       updateWheelCategoriesUI();
@@ -895,67 +947,320 @@ function renderScreenView(screenId) {
   }
 }
 
-// Renderizado y actualización dinámica de tarjetas en #collectionView
+// =============================================================================
+// PERSISTENCIA Y MODO DIRECTO DE PACKS TEMÁTICOS ("MIS COLECCIONES")
+// =============================================================================
+function savePackProgressToCloud() {
+  const unlockedPacks = window.state?.unlockedPacks || state.unlockedPacks || [];
+  const packMastery = window.state?.packMastery || state.packMastery || {};
+  try {
+    localStorage.setItem('retroquiz_unlocked_packs', JSON.stringify(unlockedPacks));
+    localStorage.setItem('retroquiz_pack_mastery', JSON.stringify(packMastery));
+  } catch (e) {}
+
+  const uid = window.state?.userId || state.userId;
+  if (window.db && window.firestoreOps && uid) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      const userRef = doc(window.db, "usuarios", uid);
+      updateDoc(userRef, {
+        unlockedPacks: unlockedPacks,
+        packMastery: packMastery,
+        updatedAt: new Date().toISOString()
+      }).catch(err => console.error("Error al actualizar packs en Firestore:", err));
+    } catch (err) {
+      console.error("Error al preparar savePackProgressToCloud:", err);
+    }
+  }
+}
+window.savePackProgressToCloud = savePackProgressToCloud;
+
+// Compra dual de packs temáticos (RetroCoins o IAP $0.99 USD)
+function comprarThematicPack(packId, method = 'coins') {
+  const pack = THEMATIC_PACKS.find(p => p.id === packId);
+  if (!pack) return;
+
+  if (!state.unlockedPacks) state.unlockedPacks = [];
+  if (window.state && !window.state.unlockedPacks) window.state.unlockedPacks = [];
+
+  const currentUnlocked = window.state?.unlockedPacks || state.unlockedPacks;
+  if (currentUnlocked.includes(packId)) {
+    showRetroToast(`¡Ya tienes el pack "${pack.name}"!`, 'info');
+    return;
+  }
+
+  if (method === 'coins') {
+    const cost = pack.priceCoins || 5000;
+    if (state.coins < cost) {
+      if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
+      showRetroToast(`Necesitas 5,000 RetroCoins para desbloquear este pack. ¡Recarga en la Tienda!`, 'warning');
+      return;
+    }
+    state.coins -= cost;
+    if (window.state) window.state.coins = state.coins;
+    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
+  } else {
+    console.log(`[IAP] Compra exitosa simulada de ${pack.name} por ${pack.priceUSD}`);
+  }
+
+  if (!state.unlockedPacks.includes(packId)) state.unlockedPacks.push(packId);
+  if (window.state && !window.state.unlockedPacks.includes(packId)) window.state.unlockedPacks.push(packId);
+
+  savePackProgressToCloud();
+
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('compra_tienda.wav', 0.85);
+  } else if (typeof playCoinSound === 'function') {
+    playCoinSound();
+  }
+  if (typeof triggerCelebrationConfetti === 'function') {
+    triggerCelebrationConfetti();
+  }
+
+  showRetroToast(`¡Pack "${pack.name}" desbloqueado con éxito! 🎉`, 'success');
+
+  renderCollectionCardsUI();
+  updateStoreUI();
+  updateHUD();
+}
+window.comprarThematicPack = comprarThematicPack;
+
+// Desbloqueo de todas las colecciones ($2.99 USD)
+function desbloquearTodasLasColecciones() {
+  if (!state.unlockedPacks) state.unlockedPacks = [];
+  if (window.state && !window.state.unlockedPacks) window.state.unlockedPacks = [];
+
+  THEMATIC_PACKS.forEach(p => {
+    if (!state.unlockedPacks.includes(p.id)) state.unlockedPacks.push(p.id);
+    if (window.state && !window.state.unlockedPacks.includes(p.id)) window.state.unlockedPacks.push(p.id);
+  });
+
+  state.allCategoriesUnlocked = true;
+  state.allUnlocked = true;
+
+  savePackProgressToCloud();
+
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('compra_tienda.wav', 0.85);
+  } else if (typeof playSuccessSound === 'function') {
+    playSuccessSound();
+  }
+  if (typeof triggerCelebrationConfetti === 'function') {
+    triggerCelebrationConfetti();
+  }
+
+  showRetroToast(`¡Todas las colecciones han sido desbloqueadas! ⭐`, 'success');
+
+  renderCollectionCardsUI();
+  updateStoreUI();
+}
+window.desbloquearTodasLasColecciones = desbloquearTodasLasColecciones;
+
+// Modo Directo: JUGAR PACK ▶
+async function jugarThematicPack(packId) {
+  const pack = THEMATIC_PACKS.find(p => p.id === packId);
+  if (!pack) return;
+
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('botones.wav', 0.60);
+  } else if (typeof playClickSound === 'function') {
+    playClickSound();
+  }
+
+  try {
+    const response = await fetch(pack.file + '?v=' + Date.now());
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    let packQuestions = Array.isArray(data) ? data : (data.preguntas || []);
+    if (!packQuestions || packQuestions.length === 0) {
+      showRetroToast('No se pudieron cargar preguntas de este pack', 'error');
+      return;
+    }
+
+    // Shuffle y seleccionar 10 preguntas del pack
+    const shuffled = [...packQuestions].sort(() => 0.5 - Math.random());
+    const roundQuestions = shuffled.slice(0, 10);
+
+    // Asignar al estado global
+    window.state.activeThematicPackId = packId;
+    state.activeThematicPackId = packId;
+    window.state.isChallengeMode = false;
+    window.state.isTieBreaker = false;
+    window.state.currentRoundQuestions = roundQuestions;
+    window.state.currentQuestionIndex = 0;
+    window.state.lives = 3;
+    window.state.correctAnswersCount = 0;
+    window.state.currentRoundXP = 0;
+    window.state.accumulatedAnswerTimeMs = 0;
+
+    state.isChallengeMode = false;
+    state.isTieBreaker = false;
+    state.currentRoundXP = 0;
+    if (state.trivia) {
+      state.trivia.isDuel = false;
+      state.trivia.questions = roundQuestions;
+      state.trivia.totalQuestions = 10;
+      state.trivia.timerSeconds = 15;
+      state.trivia.remainingMs = 15000;
+      state.trivia.duelStartTime = performance.now();
+      state.trivia.questionStartTime = performance.now();
+      state.trivia.lives = 3;
+      state.trivia.sessionCoins = 0;
+      state.trivia.sessionXP = 0;
+      state.trivia.currentStreak = 0;
+      state.trivia.correctAnswersCount = 0;
+      state.trivia.currentQuestionIndex = 0;
+      state.trivia.isAnswering = false;
+      state.trivia.category = pack.category.toLowerCase();
+    }
+    state.correctAnswersCount = 0;
+
+    // Configurar tema visual de trivia según categoría
+    const triviaView = document.getElementById('triviaView');
+    let themeColor = '#7B38E5'; // Cine
+    let catClass = 'cine';
+    const normCat = pack.category.toUpperCase();
+    if (normCat.includes('VIDEO') || normCat.includes('JUEGO')) {
+      themeColor = '#B5DC35';
+      catClass = 'videojuegos';
+    } else if (normCat.includes('TV') || normCat.includes('SERIE')) {
+      themeColor = '#00E5FF';
+      catClass = 'tv';
+    } else if (normCat.includes('MUS') || normCat.includes('MÚS')) {
+      themeColor = '#00FF66';
+      catClass = 'musica';
+    } else if (normCat.includes('80') || normCat.includes('90') || normCat.includes('ÉPOCA')) {
+      themeColor = '#FF5A5F';
+      catClass = 'todo';
+    }
+
+    if (triviaView) {
+      triviaView.style.setProperty('--trivia-theme-color', themeColor);
+      triviaView.dataset.cat = catClass;
+      triviaView.classList.remove('siren-panic', 'cat-cine', 'cat-videojuegos', 'cat-musica', 'cat-tv', 'cat-todo', 'cat-mix');
+      triviaView.classList.add('cat-' + catClass);
+    }
+
+    const abandonModal = document.getElementById('abandonModal');
+    if (abandonModal) abandonModal.style.display = 'none';
+
+    updateTriviaHeartsUI();
+    updateRoundCoinsUI(0);
+
+    const collectionView = document.getElementById('collectionView');
+    if (collectionView) {
+      collectionView.classList.remove('active', 'active-view');
+      collectionView.style.display = 'none';
+    }
+
+    state.activeTab = 'trivia';
+    showView('#triviaView');
+    if (window.location.hash !== '#trivia') {
+      try { history.replaceState(null, '', '#trivia'); } catch(e) { window.location.hash = '#trivia'; }
+    }
+
+    renderizarPreguntaActual();
+
+    if (typeof iniciarTemporizador === 'function') {
+      iniciarTemporizador();
+    }
+  } catch (err) {
+    console.error('Error al iniciar pack temático:', err);
+    showRetroToast('Error al cargar las preguntas del pack', 'error');
+  }
+}
+window.jugarThematicPack = jugarThematicPack;
+
+// Renderizado dinámico de tarjetas en "MIS COLECCIONES" (#collectionView)
 function renderCollectionCardsUI() {
   const coinEl = document.getElementById('userCoinsCollection');
   if (coinEl) {
     coinEl.innerText = state.coins.toLocaleString();
   }
 
-  const cards = document.querySelectorAll('#collectionView .collection-card');
-  const unlocked = getUnlockedCategories();
+  const container = document.getElementById('collectionCardsList');
+  if (!container) return;
 
-  cards.forEach(card => {
-    const cat = card.dataset.cat;
-    const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes(cat);
-    const fillEl = card.querySelector('.card-progress-fill');
-    const percentEl = card.querySelector('.card-percent-text');
-    const badgeEl = card.querySelector('.card-status-badge');
+  if (!state.unlockedPacks) state.unlockedPacks = [];
+  if (window.state && !window.state.unlockedPacks) window.state.unlockedPacks = [];
+  if (!state.packMastery) state.packMastery = {};
+  if (window.state && !window.state.packMastery) window.state.packMastery = {};
 
-    const meta = (state.categoryCoinsThresholds && state.categoryCoinsThresholds[cat] !== undefined)
-      ? state.categoryCoinsThresholds[cat]
-      : 0;
+  const unlockedPacks = window.state?.unlockedPacks || state.unlockedPacks || [];
+  const packMastery = window.state?.packMastery || state.packMastery || {};
 
-    if (isUnlocked) {
-      if (fillEl) fillEl.style.width = '100%';
-      if (percentEl) {
-        percentEl.innerText = meta > 0 ? `${state.coins.toLocaleString()} / ${meta.toLocaleString()} RC` : '0 / 0 RC';
-      }
-      if (badgeEl) {
-        badgeEl.className = 'card-status-badge badge-unlocked';
-        badgeEl.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
-      }
-    } else {
-      const pct = meta > 0 ? Math.min(99, Math.round((state.coins / meta) * 100)) : 0;
-      if (fillEl) fillEl.style.width = `${pct}%`;
-      if (percentEl) percentEl.innerText = `${state.coins.toLocaleString()} / ${meta.toLocaleString()} RC`;
-      if (badgeEl) {
-        badgeEl.className = 'card-status-badge badge-locked';
-        badgeEl.innerText = '🔒';
-      }
-    }
-  });
+  container.innerHTML = THEMATIC_PACKS.map((pack, idx) => {
+    const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id);
+    const masteryCount = Math.min(50, Math.max(0, parseInt(packMastery[pack.id], 10) || 0));
+    const masteryPercent = Math.min(100, Math.round((masteryCount / 50) * 100));
+
+    return `
+      <div class="collection-card ${isUnlocked ? 'pack-unlocked' : 'pack-locked'}" data-pack-id="${pack.id}" style="--i: ${idx};">
+        <div class="pack-card-header">
+          <div class="pack-card-main-info">
+            <div class="pack-icon-box">${pack.icon}</div>
+            <div class="pack-title-info">
+              <span class="pack-cat-pill">${pack.category}</span>
+              <h3 class="pack-name">${pack.name}</h3>
+            </div>
+          </div>
+          <div class="pack-card-badge">
+            ${isUnlocked ? '<span class="pack-badge-unlocked">✓</span>' : '<span class="pack-badge-locked">🔒</span>'}
+          </div>
+        </div>
+
+        ${isUnlocked ? `
+          <div class="pack-unlocked-body">
+            <div class="pack-mastery-wrap">
+              <div class="pack-mastery-header">
+                <span class="pack-mastery-label">Progreso de Dominio</span>
+                <span class="pack-mastery-count">${masteryCount} / 50 Dominadas</span>
+              </div>
+              <div class="pack-mastery-track">
+                <div class="pack-mastery-fill" style="width: ${masteryPercent}%;"></div>
+              </div>
+            </div>
+            <button class="btn-pack-play interactive-press" onclick="jugarThematicPack('${pack.id}')">
+              JUGAR PACK ▶
+            </button>
+          </div>
+        ` : `
+          <div class="pack-locked-body">
+            <div class="pack-dual-buttons">
+              <button class="btn-pack-buy-coins interactive-press" onclick="comprarThematicPack('${pack.id}', 'coins')">
+                <img src="assets/global/retrocoin.webp" alt="RC" class="pack-coin-img">
+                <span>5,000</span>
+              </button>
+              <button class="btn-pack-buy-usd interactive-press" onclick="comprarThematicPack('${pack.id}', 'usd')">
+                <span>💳 $0.99 USD</span>
+              </button>
+            </div>
+          </div>
+        `}
+      </div>
+    `;
+  }).join('');
 
   const btnUnlockAll = document.getElementById('btnUnlockAllCollection');
   if (btnUnlockAll) {
-    if (state.allCategoriesUnlocked || state.allUnlocked) {
-      btnUnlockAll.innerHTML = '<span>¡TODO DESBLOQUEADO!</span>';
+    const allPacksUnlocked = THEMATIC_PACKS.every(p => unlockedPacks.includes(p.id)) || state.allCategoriesUnlocked || state.allUnlocked;
+    if (allPacksUnlocked) {
+      btnUnlockAll.innerHTML = '<span>⭐ ¡TODAS LAS COLECCIONES DESBLOQUEADAS! ✓</span>';
       btnUnlockAll.classList.add('unlocked-done');
       btnUnlockAll.style.pointerEvents = 'none';
       btnUnlockAll.style.opacity = '0.85';
     } else {
-      btnUnlockAll.innerHTML = '<span>Activa todas las categorías y elimina los anuncios por $us2.99</span>';
+      btnUnlockAll.innerHTML = '<span>⭐ DESBLOQUEAR TODAS LAS COLECCIONES POR $2.99 USD</span>';
       btnUnlockAll.classList.remove('unlocked-done');
       btnUnlockAll.style.pointerEvents = 'auto';
       btnUnlockAll.style.opacity = '1';
     }
   }
 
-  // Sincronizar simultáneamente el disco de la ruleta con las categorías desbloqueadas
   updateWheelCategoriesUI();
 }
 
-// Actualización y renderizado dinámico de la tienda (#storeView)
+// Actualización y sincronización de la tienda (#storeView)
 function updateStoreUI() {
   const storeUserCoins = document.getElementById('storeUserCoins');
   if (storeUserCoins) {
@@ -1000,6 +1305,44 @@ function updateStoreUI() {
       `;
     }
   });
+
+  // Sección 1: Packs de Preguntas sincronizados con THEMATIC_PACKS
+  const packsScroll = document.getElementById('storePacksScroll');
+  if (packsScroll && Array.isArray(window.THEMATIC_PACKS)) {
+    const unlocked = window.state?.unlockedPacks || state.unlockedPacks || [];
+    packsScroll.innerHTML = window.THEMATIC_PACKS.map(pack => {
+      const isAcquired = state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes(pack.id);
+      return `
+        <div class="store-pack-card interactive-press" data-pack="${pack.id}">
+          <div class="pack-title-box">
+            <span class="pack-title">${pack.category}</span>
+            <span class="pack-subtitle">${pack.name}</span>
+          </div>
+          <div class="pack-artwork">
+            <span class="pack-art-emoji" style="font-size: 32px;">${pack.icon}</span>
+          </div>
+          <div class="pack-status-badge ${isAcquired ? 'store-badge-acquired' : ''}">
+            <span>${isAcquired ? 'ADQUIRIDO ✓' : 'DISPONIBLE'}</span>
+          </div>
+          ${isAcquired ? `
+            <button class="pack-price-pill" style="background:#2EE2B6; color:#000; border:none; pointer-events:none; font-weight:800;" disabled>
+              <span>ADQUIRIDO ✓</span>
+            </button>
+          ` : `
+            <div style="display:flex; gap:4px; width:100%;">
+              <button class="pack-price-pill interactive-press" style="flex:1; cursor:pointer;" onclick="event.stopPropagation(); comprarThematicPack('${pack.id}', 'coins')">
+                <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+                <span>5,000</span>
+              </button>
+              <button class="pack-price-pill interactive-press" style="flex:1; cursor:pointer; background:#00E5FF; color:#000;" onclick="event.stopPropagation(); comprarThematicPack('${pack.id}', 'usd')">
+                <span>$0.99</span>
+              </button>
+            </div>
+          `}
+        </div>
+      `;
+    }).join('');
+  }
 }
 
 function buyBooster(type, cost, name) {
@@ -2683,6 +3026,22 @@ function handleTriviaAnswer(selectedIndex) {
     if (window.state) window.state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.correctAnswersCount = state.trivia.correctAnswersCount;
 
+    // Sumar dominio de pack si se está jugando un pack temático (+1 hasta 50)
+    const activeThematicPack = window.state?.activeThematicPackId || state.activeThematicPackId;
+    if (activeThematicPack) {
+      if (!state.packMastery) state.packMastery = {};
+      if (window.state && !window.state.packMastery) window.state.packMastery = {};
+      const currentMastery = (window.state?.packMastery?.[activeThematicPack] || state.packMastery?.[activeThematicPack] || 0);
+      if (currentMastery < 50) {
+        const newMastery = currentMastery + 1;
+        state.packMastery[activeThematicPack] = newMastery;
+        if (window.state) window.state.packMastery[activeThematicPack] = newMastery;
+        if (typeof savePackProgressToCloud === 'function') {
+          savePackProgressToCloud();
+        }
+      }
+    }
+
     // Regla de economía: XP ÚNICAMENTE en Modo Desafíos
     if (window.state && window.state.isChallengeMode) {
       state.trivia.sessionXP = (state.trivia.sessionXP || 0) + 15;
@@ -3305,7 +3664,8 @@ function showResults(aciertos = 10) {
 
   const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
   if (profileBadge) {
-    profileBadge.innerText = `Nivel ${playerLevel} • Maestro de los 90s`;
+    const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+    profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
   }
 
   // Actualizar indicadores del usuario y modal ranking
@@ -3471,15 +3831,11 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   const myPrevRoundsCompleted = (chData && chData.scores && currentUid && chData.scores[currentUid]?.roundsCompleted) || 0;
   const rivalRoundsCompleted = (chData && chData.scores && rivalUid && chData.scores[rivalUid]?.roundsCompleted) || 0;
 
-  // Actualizar monedas globales y XP en memoria
+  // Actualizar monedas globales en memoria (la XP fluctúa de forma competitiva al cerrarse el duelo)
   if (!isDirectView) {
     state.coins += roundCoins;
-    state.userScore += roundXP;
-    state.xp = state.userScore;
     if (window.state) {
       window.state.coins = state.coins;
-      window.state.userScore = state.userScore;
-      window.state.xp = state.userScore;
     }
     if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
   }
@@ -3547,7 +3903,12 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   }
 
   const pointsEarnedEl = document.getElementById('duelPointsEarned');
-  if (pointsEarnedEl) pointsEarnedEl.innerText = `+${roundXP} XP`;
+  if (pointsEarnedEl) {
+    pointsEarnedEl.innerText = `+${roundXP} XP`;
+    pointsEarnedEl.classList.remove('duel-xp-winner', 'duel-xp-loser');
+    pointsEarnedEl.classList.add('text-accent-xp');
+    pointsEarnedEl.style.color = '';
+  }
 
   const coinsEarnedEl = document.getElementById('duelCoinsEarned');
   if (coinsEarnedEl) coinsEarnedEl.innerText = `+${roundCoins} RC`;
@@ -3571,15 +3932,163 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
     if (roundActions) roundActions.style.display = 'none';
     if (finalActions) finalActions.style.display = 'flex';
 
-    if (localTotalScore > rivalTotalScore) {
+    const btnRematchDuel = document.getElementById('btnRematchDuel');
+    const btnDuelBackToChallenges = document.getElementById('btnDuelBackToChallenges');
+
+    // Determinar ganador (winnerUid) y perdedor (loserUid)
+    let winnerUid = chData?.winnerUid;
+    let loserUid = chData?.loserUid;
+
+    if (!winnerUid) {
+      if (localTotalScore > rivalTotalScore) {
+        winnerUid = currentUid;
+        loserUid = rivalUid;
+      } else if (localTotalScore < rivalTotalScore) {
+        winnerUid = rivalUid;
+        loserUid = currentUid;
+      }
+    }
+
+    const isLocalWinner = (winnerUid && currentUid && winnerUid === currentUid) || (localTotalScore > rivalTotalScore);
+    const isLocalLoser = (loserUid && currentUid && loserUid === currentUid) || (winnerUid && currentUid && winnerUid === rivalUid) || (localTotalScore < rivalTotalScore);
+
+    const chId = state.currentDuel?.challengeId || chData?.id || window.state?.currentChallengeId;
+    const currentUidVal = currentUid || window.state?.userId || state.userId;
+    const xpAwardedKey = 'retroquiz_duel_xp_awarded_' + (chId || 'duel') + '_' + (currentUidVal || 'local');
+    const alreadyProcessed = (localStorage.getItem(xpAwardedKey) === 'true') || 
+      (chData?.xpFluctuationAwarded && currentUidVal && chData.xpFluctuationAwarded[currentUidVal]);
+
+    const currentXp = (window.state && typeof window.state.xp === 'number') 
+      ? window.state.xp 
+      : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+
+    if (isLocalWinner) {
+      // Feedback visual del ganador: texto verde menta #2ee2b6 "+120 XP"
+      if (pointsEarnedEl) {
+        pointsEarnedEl.innerText = '+120 XP';
+        pointsEarnedEl.classList.remove('text-accent-xp', 'duel-xp-loser');
+        pointsEarnedEl.classList.add('duel-xp-winner');
+        pointsEarnedEl.style.color = '#2ee2b6';
+      }
+
+      // Fluctuación de XP: Suma +120 XP (sin duplicar en visitas repetidas)
+      if (!alreadyProcessed) {
+        const newXP = currentXp + 120;
+        state.xp = newXP;
+        state.userScore = newXP;
+        if (window.state) {
+          window.state.xp = newXP;
+          window.state.userScore = newXP;
+        }
+        try {
+          localStorage.setItem('retroquiz_xp', String(newXP));
+          localStorage.setItem(xpAwardedKey, 'true');
+        } catch (e) {}
+
+        const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
+        if (profileBadge) {
+          profileBadge.innerText = `${getPlayerRank(newXP)} • ${newXP} XP`;
+        }
+        if (typeof updateHUD === 'function') updateHUD();
+
+        // Persistir en Firestore usuarios/{userId}
+        if (window.db && window.firestoreOps && currentUidVal) {
+          try {
+            const { doc, updateDoc } = window.firestoreOps;
+            const userRef = doc(window.db, "usuarios", currentUidVal);
+            updateDoc(userRef, {
+              xp: newXP,
+              updatedAt: new Date().toISOString()
+            }).catch(err => console.error("Error al actualizar XP del ganador en Firestore:", err));
+
+            if (chId) {
+              const chRef = doc(window.db, "desafios", chId);
+              updateDoc(chRef, {
+                [`xpFluctuationAwarded.${currentUidVal}`]: true
+              }).catch(() => {});
+            }
+          } catch (err) {
+            console.error("Error preparando updateDoc de XP:", err);
+          }
+        }
+      }
+
+      // A. SI EL USUARIO LOCAL ES EL GANADOR:
       if (outcomeTitle) outcomeTitle.innerText = '¡HAS GANADO! 🏆';
       if (localCrown) localCrown.classList.remove('hidden');
       if (rivalCrown) rivalCrown.classList.add('hidden');
       if (typeof confetti === 'function') {
         confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
       }
+
+      // Botón disponible: ÚNICAMENTE "VOLVER A DESAFÍOS" (Ocultar revancha por completo)
+      if (btnRematchDuel) {
+        btnRematchDuel.style.display = 'none';
+      }
+      if (btnDuelBackToChallenges) {
+        btnDuelBackToChallenges.style.display = 'flex';
+        btnDuelBackToChallenges.classList.add('winner-single-btn');
+      }
+
       playResultsAudioSequence(correctCount);
-    } else if (localTotalScore < rivalTotalScore) {
+    } else if (isLocalLoser) {
+      const isSafeZone = (currentXp < 700);
+
+      // Feedback visual del perdedor: texto rojo "-60 XP" (o "+0 XP en zona segura" si < 700 XP)
+      if (pointsEarnedEl) {
+        pointsEarnedEl.classList.remove('text-accent-xp', 'duel-xp-winner');
+        pointsEarnedEl.classList.add('duel-xp-loser');
+        pointsEarnedEl.style.color = '#FF3366';
+        if (isSafeZone) {
+          pointsEarnedEl.innerText = '+0 XP en zona segura';
+        } else {
+          pointsEarnedEl.innerText = '-60 XP';
+        }
+      }
+
+      // Fluctuación de XP: Si xp < 700: no pierde XP. Si xp >= 700: resta -60 XP (mínimo 0)
+      if (!alreadyProcessed) {
+        const newXP = isSafeZone ? currentXp : Math.max(0, currentXp - 60);
+        state.xp = newXP;
+        state.userScore = newXP;
+        if (window.state) {
+          window.state.xp = newXP;
+          window.state.userScore = newXP;
+        }
+        try {
+          localStorage.setItem('retroquiz_xp', String(newXP));
+          localStorage.setItem(xpAwardedKey, 'true');
+        } catch (e) {}
+
+        const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
+        if (profileBadge) {
+          profileBadge.innerText = `${getPlayerRank(newXP)} • ${newXP} XP`;
+        }
+        if (typeof updateHUD === 'function') updateHUD();
+
+        // Persistir en Firestore usuarios/{userId}
+        if (window.db && window.firestoreOps && currentUidVal) {
+          try {
+            const { doc, updateDoc } = window.firestoreOps;
+            const userRef = doc(window.db, "usuarios", currentUidVal);
+            updateDoc(userRef, {
+              xp: newXP,
+              updatedAt: new Date().toISOString()
+            }).catch(err => console.error("Error al actualizar XP del perdedor en Firestore:", err));
+
+            if (chId) {
+              const chRef = doc(window.db, "desafios", chId);
+              updateDoc(chRef, {
+                [`xpFluctuationAwarded.${currentUidVal}`]: true
+              }).catch(() => {});
+            }
+          } catch (err) {
+            console.error("Error preparando updateDoc de XP:", err);
+          }
+        }
+      }
+
+      // B. SI EL USUARIO LOCAL ES EL PERDEDOR:
       if (outcomeTitle) outcomeTitle.innerText = 'HAS PERDIDO 💀';
       if (localCrown) localCrown.classList.add('hidden');
       if (rivalCrown) rivalCrown.classList.remove('hidden');
@@ -3587,11 +4096,41 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
         SoundManager.stopAllBGM();
       }
       playErrorSound();
+
+      // Botones disponibles:
+      // * Botón principal destacado: "🔄 SOLICITAR REVANCHA"
+      // * Botón secundario: "VOLVER A DESAFÍOS"
+      if (btnRematchDuel) {
+        btnRematchDuel.style.display = 'flex';
+      }
+      if (btnDuelBackToChallenges) {
+        btnDuelBackToChallenges.style.display = 'flex';
+        btnDuelBackToChallenges.classList.remove('winner-single-btn');
+      }
     } else {
       // Empate
+      if (pointsEarnedEl) {
+        pointsEarnedEl.innerText = '+0 XP';
+        pointsEarnedEl.classList.remove('duel-xp-winner', 'duel-xp-loser');
+        pointsEarnedEl.classList.add('text-accent-xp');
+        pointsEarnedEl.style.color = '';
+      }
+      try {
+        localStorage.setItem(xpAwardedKey, 'true');
+      } catch (e) {}
+
       if (outcomeTitle) outcomeTitle.innerText = '¡EMPATE! ⚔️';
       if (localCrown) localCrown.classList.add('hidden');
       if (rivalCrown) rivalCrown.classList.add('hidden');
+
+      if (btnRematchDuel) {
+        btnRematchDuel.style.display = 'flex';
+      }
+      if (btnDuelBackToChallenges) {
+        btnDuelBackToChallenges.style.display = 'flex';
+        btnDuelBackToChallenges.classList.remove('winner-single-btn');
+      }
+
       playResultsAudioSequence(correctCount);
     }
   }
@@ -3677,10 +4216,55 @@ window.openAcceptChallengeModal = function() {
 window.openSendChallengeModal = function() {
   openModal('sendChallengeModal');
 };
-function openChallengeOnboardingModal() {
+
+function mostrarModalOnboarding() {
   openModal('challengeOnboardingModal');
 }
+window.mostrarModalOnboarding = mostrarModalOnboarding;
+
+function ocultarModalOnboarding() {
+  closeModal('challengeOnboardingModal');
+}
+window.ocultarModalOnboarding = ocultarModalOnboarding;
+
+function openChallengeOnboardingModal() {
+  mostrarModalOnboarding();
+}
 window.openChallengeOnboardingModal = openChallengeOnboardingModal;
+
+function checkChallengeOnboardingTrigger() {
+  const currentView = window.state?.currentView || state.currentView;
+  const isChallengesView = (currentView === '#challengesView' || currentView === 'challengesView' || 
+    document.getElementById('challengesView')?.classList.contains('active-view') || 
+    document.getElementById('challengesView')?.classList.contains('active'));
+
+  if (!isChallengesView) return;
+
+  const activeCount = Array.isArray(state.challenges) ? state.challenges.length : 0;
+  const pendingCount = Array.isArray(state.pendingChallenges) ? state.pendingChallenges.length : 0;
+  const allCount = Array.isArray(state.allChallengesList) ? state.allChallengesList.filter(c => c && c.status !== 'rejected').length : 0;
+  const totalDesafiosActivos = Math.max(activeCount + pendingCount, allCount);
+
+  const hasChallenges = (totalDesafiosActivos > 0);
+  let hasSeenIntro = false;
+  try {
+    hasSeenIntro = localStorage.getItem('retroquiz_seen_challenge_intro') === 'true';
+  } catch (e) {}
+
+  // Solo desplegar automáticamente si:
+  // 1. El usuario NO tiene ningún desafío activo o enviado (bandeja vacía: total === 0).
+  // 2. Y además aún no ha visto la guía explicativa (!hasSeenIntro).
+  if (!hasChallenges && !hasSeenIntro) {
+    mostrarModalOnboarding();
+  } else {
+    // Si ya tiene partidas o invitaciones en curso, NO abrir el modal automáticamente
+    if (!window._isManualHelpOpen) {
+      ocultarModalOnboarding();
+    }
+  }
+}
+window.checkChallengeOnboardingTrigger = checkChallengeOnboardingTrigger;
+
 window.showRetroToast = showRetroToast;
 window.spinDuelWheel = spinDuelWheel;
 window.triggerChallengeMatchEntranceAnimation = triggerChallengeMatchEntranceAnimation;
@@ -3976,6 +4560,12 @@ function setupProfileUserFields() {
   if (bioInput) {
     bioInput.value = currentBio;
     bioInput.placeholder = "Escribe algo sobre ti...";
+  }
+
+  const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
+  if (profileBadge) {
+    const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+    profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
   }
 
   // Guardar nombre en change y blur
@@ -4394,6 +4984,9 @@ function closeModal(modalId) {
     if (window.state) window.state.selectedRival = null;
     if (state) state.selectedRival = null;
   }
+  if (modalId === 'challengeOnboardingModal') {
+    window._isManualHelpOpen = false;
+  }
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.remove('open');
@@ -4486,10 +5079,32 @@ function loadStoredPlayerProgress() {
       }
     }
 
-    const playerLevel = 12 + Math.floor(state.userScore / 250);
+    const savedPacks = localStorage.getItem('retroquiz_unlocked_packs');
+    if (savedPacks) {
+      try {
+        const parsedPacks = JSON.parse(savedPacks);
+        if (Array.isArray(parsedPacks)) {
+          state.unlockedPacks = parsedPacks;
+          if (window.state) window.state.unlockedPacks = parsedPacks;
+        }
+      } catch (e) {}
+    }
+
+    const savedMastery = localStorage.getItem('retroquiz_pack_mastery');
+    if (savedMastery) {
+      try {
+        const parsedMastery = JSON.parse(savedMastery);
+        if (parsedMastery && typeof parsedMastery === 'object') {
+          state.packMastery = parsedMastery;
+          if (window.state) window.state.packMastery = parsedMastery;
+        }
+      } catch (e) {}
+    }
+
     const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
     if (profileBadge) {
-      profileBadge.innerText = `Nivel ${playerLevel} • Maestro de los 90s`;
+      const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+      profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
     }
 
     const userCoinsEl = document.getElementById('userCoins');
@@ -4512,9 +5127,11 @@ function updateHUD() {
   if (storeUserCoins) storeUserCoins.innerText = state.coins.toLocaleString();
   const rankingUserPts = document.getElementById('rankingUserPts');
   if (rankingUserPts) rankingUserPts.innerText = `${state.userScore.toLocaleString()} pts`;
-  const playerLevel = 12 + Math.floor(state.userScore / 250);
   const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
-  if (profileBadge) profileBadge.innerText = `Nivel ${playerLevel} • Maestro de los 90s`;
+  if (profileBadge) {
+    const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+    profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
+  }
 }
 
 function saveCoinsToCloud(nuevasMonedas) {
@@ -4565,7 +5182,7 @@ function renderChallengesUI() {
       const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
       const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
       const isMyTurn = (ch.currentTurn === currentUid);
-      const isCompleted = (ch.status === "completed");
+      const isCompleted = (ch.status === "completed" || ch.status === "finished");
       const roundLabel = (ch.round === 'desempate') ? 'Desempate' : `Ronda ${ch.round || 1}`;
 
       let statusHtml = '';
@@ -4573,7 +5190,7 @@ function renderChallengesUI() {
 
       if (isCompleted) {
         statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> Finalizado</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADOS</button>`;
       } else if (isMyTurn) {
         statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno! (${roundLabel})</div>`;
         buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️</button>`;
@@ -4694,6 +5311,11 @@ function renderChallengesUI() {
   if (typeof updatePendingChallengesBadge === 'function') {
     updatePendingChallengesBadge();
   }
+
+  // Evaluación del modal explicativo de onboarding (#challengeOnboardingModal)
+  if (typeof checkChallengeOnboardingTrigger === 'function') {
+    checkChallengeOnboardingTrigger();
+  }
 }
 window.renderChallengesUI = renderChallengesUI;
 
@@ -4742,6 +5364,12 @@ function openCompletedChallengeResult(ch) {
   if (localAvatarImg && currentAvatar) localAvatarImg.src = currentAvatar;
 
   setupDuelMatchUI(rivalName, rivalAvatar, 3);
+  state.currentDuel.chData = ch;
+  state.currentDuel.challengeId = ch.id;
+  state.currentDuel.rivalUid = rivalUid;
+  state.currentDuel.localTotalScore = localScore;
+  state.currentDuel.rivalTotalScore = rivalScore;
+  state.currentDuel.isCompletedDuel = true;
   showChallengeDuelResults(3, myScores.hits !== undefined ? myScores.hits : 4, true);
 }
 window.openCompletedChallengeResult = openCompletedChallengeResult;
@@ -4829,10 +5457,22 @@ async function syncUserProfileWithCloud(uid) {
       } else {
         state.challenges = [];
       }
+      if (Array.isArray(data.unlockedPacks)) {
+        state.unlockedPacks = data.unlockedPacks;
+        if (window.state) window.state.unlockedPacks = data.unlockedPacks;
+        try { localStorage.setItem('retroquiz_unlocked_packs', JSON.stringify(data.unlockedPacks)); } catch (e) {}
+      }
+      if (data.packMastery && typeof data.packMastery === 'object') {
+        state.packMastery = data.packMastery;
+        if (window.state) window.state.packMastery = data.packMastery;
+        try { localStorage.setItem('retroquiz_pack_mastery', JSON.stringify(data.packMastery)); } catch (e) {}
+      }
       console.log("Perfil de usuario obtenido de Firestore:", data);
     }
     updateHUD();
     renderChallengesUI();
+    renderCollectionCardsUI();
+    updateStoreUI();
     setupProfileUserFields();
     updateProfileStatsUI();
     if (typeof initRealtimeChallengesListener === 'function') {
@@ -4960,78 +5600,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnUnlockAllCollection = document.getElementById('btnUnlockAllCollection');
   if (btnUnlockAllCollection) {
     btnUnlockAllCollection.addEventListener('click', () => {
-      if (state.allUnlocked || state.allCategoriesUnlocked) return;
-
-      // 1. Sincronización Global de Estado
-      state.allCategoriesUnlocked = true;
-      state.allUnlocked = true;
-      state.isVIP = true;
-      state.wheelNeedsMagicUnlockAnim = true; // Activa transformación de ruleta con humo mágico al volver
-      state.wheelMagicUnlockSoundPlayed = false; // Habilita reproducción única para la animación de regreso a la ruleta
-
-      // 2. Efecto sonoro de éxito
-      playSuccessSound();
-      if (typeof SoundManager !== 'undefined') SoundManager.playSFX('compra_tienda.wav', 0.70);
-
-      // 3. Transformación del Botón de Compra: desactiva pulso, texto '¡TODO DESBLOQUEADO!', opacidad 0.85 y deshabilita clics
-      btnUnlockAllCollection.classList.add('unlocked-done');
-      btnUnlockAllCollection.innerHTML = '<span>¡TODO DESBLOQUEADO!</span>';
-      btnUnlockAllCollection.style.pointerEvents = 'none';
-      btnUnlockAllCollection.style.opacity = '0.85';
-
-      // 4. Efecto de Confeti en Toda la Pantalla durante 3 segundos
-      triggerCelebrationConfetti();
-
-      // 5. Animación Progresiva de Barras al 100%, conteo numérico y sustitución secuencial de candados a checks
-      const cards = document.querySelectorAll('#collectionView .collection-card');
-      cards.forEach((card, index) => {
-        const fillEl = card.querySelector('.card-progress-fill');
-        const percentEl = card.querySelector('.card-percent-text');
-        const badgeEl = card.querySelector('.card-status-badge');
-
-        // Transición CSS fluida (transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1))
-        if (fillEl) {
-          fillEl.classList.add('filling-reward');
-          void fillEl.offsetWidth; // Forzar reflow para animación fluida
-          fillEl.style.width = '100%';
-        }
-
-        // Conteo animado de porcentaje a 100% en 1.2s
-        if (percentEl) {
-          const rawText = percentEl.innerText.replace('%', '').trim();
-          const startVal = parseInt(rawText, 10) || 0;
-          const duration = 1200;
-          const startTime = performance.now();
-
-          const animateNumber = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(1, elapsed / duration);
-            const ease = 1 - Math.pow(1 - progress, 3); // Ease out cubic
-            const currentPct = Math.min(100, Math.round(startVal + (100 - startVal) * ease));
-            percentEl.innerText = `${currentPct}%`;
-
-            if (progress < 1) {
-              requestAnimationFrame(animateNumber);
-            } else {
-              percentEl.innerText = '100%';
-            }
-          };
-          requestAnimationFrame(animateNumber);
-        }
-
-        // Reemplazo secuencial de candados por checks con animación pop
-        if (badgeEl && !badgeEl.classList.contains('badge-unlocked')) {
-          const delay = index * 160 + 220; // Stagger secuencial
-          setTimeout(() => {
-            badgeEl.className = 'card-status-badge badge-unlocked badge-pop';
-            badgeEl.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
-            playCoinSound();
-          }, delay);
-        }
-      });
-
-      // Actualizar estado general y sincronizar categorías
-      updateWheelCategoriesUI();
+      desbloquearTodasLasColecciones();
     });
   }
 
@@ -5320,6 +5889,13 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         state.challenges = activeMatches;
+        state.pendingChallenges = pendingChallenges;
+        state.allChallengesList = allList;
+        if (window.state) {
+          window.state.challenges = activeMatches;
+          window.state.pendingChallenges = pendingChallenges;
+          window.state.allChallengesList = allList;
+        }
         renderChallengesUI();
       };
 
@@ -5655,6 +6231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botón 'JUGAR' en tarjetas de desafíos -> Navega a la Ruleta de Duelo (#challengeMatchView)
   document.querySelectorAll('.challenge-play-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      if (btn.classList.contains('challenge-btn-completed') || btn.classList.contains('challenge-btn-waiting') || btn.disabled) return;
       e.stopPropagation();
       if (typeof SoundManager !== 'undefined') {
         SoundManager.playSFX('botones.wav', 0.60);
@@ -5676,8 +6253,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnChallengesHelp && !btnChallengesHelp.dataset.listenerAttached) {
     btnChallengesHelp.dataset.listenerAttached = 'true';
     btnChallengesHelp.addEventListener('click', () => {
+      window._isManualHelpOpen = true;
       playClickSound();
-      openChallengeOnboardingModal();
+      mostrarModalOnboarding();
     });
   }
 
@@ -5690,7 +6268,8 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         localStorage.setItem('retroquiz_seen_challenge_intro', 'true');
       } catch (e) {}
-      closeModal('challengeOnboardingModal');
+      window._isManualHelpOpen = false;
+      ocultarModalOnboarding();
     });
   }
 
@@ -5845,6 +6424,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if (winnerUid) {
             updateData.winnerUid = winnerUid;
+            updateData.loserUid = (winnerUid === ch.fromUid) ? ch.toUid : ch.fromUid;
           }
 
           await updateDoc(chRef, updateData);
@@ -5862,7 +6442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const userRef = doc(window.db, "usuarios", window.state.userId);
         updateDoc(userRef, {
           coins: state.coins,
-          xp: state.userScore,
+          xp: (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0)),
           updatedAt: new Date().toISOString()
         }).catch(err => console.error("Error al actualizar perfil tras turno:", err));
       } catch (err) {}
@@ -5894,34 +6474,44 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnRematchDuel) {
     btnRematchDuel.addEventListener('click', async () => {
       playClickSound();
-      const rivalUid = state.currentDuel?.rivalUid;
-      const rivalName = state.currentDuel?.rivalName || 'Rival';
-      const rivalAvatar = state.currentDuel?.rivalAvatar || '🕹️';
+      const currentUid = window.state?.userId || state.userId;
+      const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || "Jugador";
+      const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
 
-      if (rivalUid && window.db && window.firestoreOps && window.state?.userId) {
+      const chData = state.currentDuel?.chData;
+      const isCreatorPrev = chData ? (chData.fromUid === currentUid || chData.challengerId === currentUid) : false;
+      const rivalUid = state.currentDuel?.rivalUid || (isCreatorPrev ? (chData?.toUid || chData?.targetUserId) : (chData?.fromUid || chData?.challengerId));
+      const rivalName = state.currentDuel?.rivalName || (isCreatorPrev ? (chData?.toUsername || chData?.targetUserName) : (chData?.fromUsername || chData?.challengerName)) || 'Rival';
+      const rivalAvatar = state.currentDuel?.rivalAvatar || (isCreatorPrev ? chData?.toAvatar : chData?.fromAvatar) || '🕹️';
+
+      if (rivalUid && window.db && window.firestoreOps && currentUid) {
         try {
           const { collection, addDoc } = window.firestoreOps;
-          const currentUsername = window.state.username || localStorage.getItem('retroquiz_username') || "Jugador";
-          const currentAvatar = window.state.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
           const desafiosRef = collection(window.db, "desafios");
-          const docRef = await addDoc(desafiosRef, {
-            fromUid: window.state.userId,
+          const newChallengeDoc = {
+            challengerId: currentUid,
+            challengerName: currentUsername,
+            targetUserId: rivalUid,
+            targetUserName: rivalName,
+            fromUid: currentUid,
             fromUsername: currentUsername,
             fromAvatar: currentAvatar,
             toUid: rivalUid,
             toUsername: rivalName,
             toAvatar: rivalAvatar,
-            status: "pending",
-            currentTurn: window.state.userId,
+            status: "active",
             round: 1,
+            currentTurn: currentUid,
             creatorRoundCompleted: false,
             scores: {
-              [window.state.userId]: { coins: 0, xp: 0, totalScore: 0, roundsCompleted: 0 },
+              [currentUid]: { coins: 0, xp: 0, totalScore: 0, roundsCompleted: 0 },
               [rivalUid]: { coins: 0, xp: 0, totalScore: 0, roundsCompleted: 0 }
             },
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
-          });
+          };
+
+          const docRef = await addDoc(desafiosRef, newChallengeDoc);
 
           window.state.currentChallengeId = docRef.id;
           state.currentChallengeId = docRef.id;
@@ -5937,10 +6527,7 @@ document.addEventListener('DOMContentLoaded', () => {
           state.currentDuel.rivalTotalScore = 0;
           state.currentDuel.chData = {
             id: docRef.id,
-            fromUid: window.state.userId,
-            toUid: rivalUid,
-            round: 1,
-            scores: {}
+            ...newChallengeDoc
           };
 
           showRetroToast('¡Revancha iniciada! Gira la ruleta ⚔️', 'success');
@@ -5948,6 +6535,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         } catch (err) {
           console.error("Error al crear revancha en Firestore:", err);
+          showRetroToast('Error al crear revancha', '⚠️');
         }
       }
 
@@ -5956,6 +6544,7 @@ document.addEventListener('DOMContentLoaded', () => {
         state.currentDuel.localTotalScore = 0;
         state.currentDuel.rivalTotalScore = 0;
       }
+      setupDuelMatchUI(rivalName, rivalAvatar, 1);
       showRetroToast('¡Revancha solicitada! Nueva ronda iniciada', 'success');
       navigateToScreen('challengeMatchView');
     });
@@ -6152,18 +6741,14 @@ document.addEventListener('DOMContentLoaded', () => {
     openProfileModal();
   });
 
-  // Botón Ver Todo y Tarjetas de Packs de Preguntas (Próximamente)
+  // Botón Ver Todo en Sección Packs de la Tienda -> Lleva a #collectionView
   document.getElementById('btnStorePacksSeeAll')?.addEventListener('click', () => {
-    playClickSound();
-    showRetroToast('🔒 Los packs temáticos estarán disponibles en la próxima actualización', 'info');
-  });
-
-  document.querySelectorAll('#storePacksScroll .store-pack-card').forEach(card => {
-    card.addEventListener('click', () => {
+    if (typeof SoundManager !== 'undefined') {
+      SoundManager.playSFX('botones.wav', 0.60);
+    } else {
       playClickSound();
-      const packTitle = card.querySelector('.pack-title')?.innerText || 'Pack';
-      showRetroToast(`🔒 El pack "${packTitle}" estará disponible próximamente`, 'info');
-    });
+    }
+    navigateToScreen('collectionView');
   });
 
   // Compra de Potenciadores
