@@ -5896,15 +5896,19 @@ input:checked + .slider:before {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* Lista de Tarjetas de Desafíos con Scroll Vertical Exclusivo */
+/* Lista de Tarjetas de Desafíos con Scroll Vertical Exclusivo y Capas */
+#challengesView .active-matches-scroll,
 .challenges-cards-list,
 .active-matches-scroll {
+  position: relative;
+  z-index: 5 !important; /* Flotan limpiamente sobre los personajes */
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 0;
   flex: 1;
   min-height: 0;
+  max-height: calc(100vh - 280px); /* Ajustar según cabecera */
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -5918,9 +5922,50 @@ input:checked + .slider:before {
   display: none;
 }
 
+/* GESTO DE DESLIZAR A LA IZQUIERDA PARA ELIMINAR (SWIPE-TO-DISMISS) */
+.swipe-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  transition: max-height 0.3s ease, margin 0.3s ease, opacity 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.swipe-delete-bg {
+  position: absolute;
+  inset: 0;
+  background: #FF4757;
+  border: 3px solid #000000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.swipe-delete-text {
+  font-family: 'Futura', var(--font-retro-heavy), var(--font-body), sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  letter-spacing: 0.5px;
+}
+
 .challenge-card,
 .match-card {
-  background: #FFFDF9;
+  position: relative;
+  z-index: 2;
+  background: #FFFFFF;
   border: 3px solid #000000;
   border-radius: 20px;
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
@@ -5933,6 +5978,7 @@ input:checked + .slider:before {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
   will-change: transform, opacity;
+  touch-action: pan-y;
 }
 
 .challenge-card:hover,
@@ -6268,7 +6314,7 @@ input:checked + .slider:before {
 /* Personajes Inferiores Fijos y con Vida Propia */
 .characters-footer {
   position: absolute;
-  bottom: calc(60px + env(safe-area-inset-bottom, 15px));
+  bottom: calc(65px + env(safe-area-inset-bottom, 15px));
   left: 0;
   right: 0;
   display: flex;
@@ -6276,7 +6322,8 @@ input:checked + .slider:before {
   align-items: flex-end;
   padding: 0 6px;
   pointer-events: none;
-  z-index: 10;
+  z-index: 1 !important; /* Capa trasera */
+  opacity: 0.85;
 }
 
 .ch-character {

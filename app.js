@@ -5616,7 +5616,7 @@ function renderChallengesUI() {
   const validChallenges = [];
   rawChallenges.forEach(ch => {
     if (!ch) return;
-    if (ch.status === "rejected" || ch.status === "expired") return;
+    if (ch.status === "rejected" || ch.status === "expired" || ch.status === "archived") return;
 
     const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
     const tiempoTranscurrido = ahora - ultimaActividad;
@@ -5672,6 +5672,26 @@ function renderChallengesUI() {
     }
 
     validChallenges.push(ch);
+  });
+
+  // ORDENAMIENTO DE TURNOS Y PRIORIDAD:
+  // 1. Primero (Arriba): Partidas activas donde es el turno del usuario local (currentTurn === window.state.userId).
+  // 2. Segundo: Partidas activas donde se espera al rival (currentTurn !== window.state.userId).
+  // 3. Tercero: Partidas finalizadas (status === "completed") pendientes de ver resultado.
+  validChallenges.sort((a, b) => {
+    const getPrio = (ch) => {
+      const isCompleted = (ch.status === "completed" || ch.status === "finished");
+      if (!isCompleted && ch.status === "active" && ch.currentTurn === currentUid) return 1;
+      if (!isCompleted && ch.status === "active" && ch.currentTurn !== currentUid) return 2;
+      if (isCompleted) return 3;
+      return 4;
+    };
+    const prioA = getPrio(a);
+    const prioB = getPrio(b);
+    if (prioA !== prioB) return prioA - prioB;
+    const timeA = new Date(a.updatedAt || a.createdAt || 0).getTime();
+    const timeB = new Date(b.updatedAt || b.createdAt || 0).getTime();
+    return timeB - timeA;
   });
 
   if (validChallenges.length === 0) {
@@ -5732,44 +5752,186 @@ function renderChallengesUI() {
       }
 
       return `
-        <div class="challenge-card anim-ch-card-${(idx % 3) + 1}${cardUrgentClass} interactive-press" data-challenge-id="${ch.id || idx}">
-          <!-- FILA 1 (SUPERIOR - ENFRENTAMIENTO VS) -->
-          <div class="card-vs-row">
-            <div class="player-slot player-user">
-              <div class="player-avatar-circle bg-purple">
-                <img src="${currentAvatar}" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
-              </div>
-              <span class="player-name">${currentUsername}</span>
-            </div>
-
-            <div class="vs-badge-container">
-              <span class="vs-badge">VS</span>
-            </div>
-
-            <div class="player-slot player-rival">
-              <span class="player-name">${rivalName}</span>
-              <div class="player-avatar-circle bg-yellow">
-                <span>${rivalAvatar}</span>
-              </div>
-            </div>
+        <div class="swipe-wrapper" data-challenge-id="${ch.id || idx}">
+          <!-- Capa de fondo de borrado (SWIPE-DELETE-BG) -->
+          <div class="swipe-delete-bg">
+            <span class="swipe-delete-text">🗑️ ELIMINAR</span>
           </div>
 
-          <!-- FILA 2 (INFERIOR - ESTADO Y ACCIÓN) -->
-          <div class="card-action-row">
-            <div class="card-status-info">
-              ${statusHtml}
+          <!-- Tarjeta frontal interactiva (.challenge-card) -->
+          <div class="challenge-card anim-ch-card-${(idx % 3) + 1}${cardUrgentClass} interactive-press" data-challenge-id="${ch.id || idx}">
+            <!-- FILA 1 (SUPERIOR - ENFRENTAMIENTO VS) -->
+            <div class="card-vs-row">
+              <div class="player-slot player-user">
+                <div class="player-avatar-circle bg-purple">
+                  <img src="${currentAvatar}" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
+                </div>
+                <span class="player-name">${currentUsername}</span>
+              </div>
+
+              <div class="vs-badge-container">
+                <span class="vs-badge">VS</span>
+              </div>
+
+              <div class="player-slot player-rival">
+                <span class="player-name">${rivalName}</span>
+                <div class="player-avatar-circle bg-yellow">
+                  <span>${rivalAvatar}</span>
+                </div>
+              </div>
             </div>
-            <div class="card-action-btn-wrap">
-              ${buttonHtml}
+
+            <!-- FILA 2 (INFERIOR - ESTADO Y ACCIÓN) -->
+            <div class="card-action-row">
+              <div class="card-status-info">
+                ${statusHtml}
+              </div>
+              <div class="card-action-btn-wrap">
+                ${buttonHtml}
+              </div>
             </div>
           </div>
         </div>
       `;
     }).join('');
 
+    // Controladores de gestos de deslizamiento a la izquierda para eliminar (SWIPE-TO-DISMISS)
+    container.querySelectorAll('.swipe-wrapper').forEach(wrapper => {
+      const card = wrapper.querySelector('.challenge-card');
+      if (!card) return;
+      const challengeId = wrapper.getAttribute('data-challenge-id');
+
+      let startX = 0;
+      let startY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let isSwiping = false;
+      let isHorizontalGesture = null;
+
+      card.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        currentX = startX;
+        currentY = startY;
+        isSwiping = false;
+        isHorizontalGesture = null;
+        card.style.transition = 'none';
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        currentX = e.touches[0].clientX;
+        currentY = e.touches[0].clientY;
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
+
+        if (isHorizontalGesture === null && (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6)) {
+          isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY);
+        }
+
+        if (isHorizontalGesture) {
+          if (deltaX < 0) {
+            // Deslizamiento a la izquierda
+            isSwiping = true;
+            card.style.transform = `translateX(${deltaX}px)`;
+          } else {
+            // Bloquea desplazamientos a la derecha
+            card.style.transform = 'translateX(0px)';
+          }
+        }
+      }, { passive: true });
+
+      card.addEventListener('touchend', () => {
+        const deltaX = currentX - startX;
+        const cardWidth = card.offsetWidth || 300;
+        const threshold = Math.min(90, cardWidth * 0.35);
+
+        // Si el arrastre superó los 90px (o 35% del ancho)
+        if (isSwiping && (deltaX < -threshold || deltaX < -90)) {
+          // 1. Anima salida: transform: translateX(-120%); opacity: 0; en 0.2s
+          card.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+          card.style.transform = 'translateX(-120%)';
+          card.style.opacity = '0';
+
+          if (typeof SoundManager !== 'undefined') {
+            SoundManager.playSFX('botones.wav', 0.40);
+          }
+
+          // 2. Colapsa wrapper (max-height: 0; margin-bottom: 0;) y retíralo del DOM
+          setTimeout(() => {
+            wrapper.style.transition = 'max-height 0.3s ease, margin-bottom 0.3s ease, opacity 0.25s ease';
+            wrapper.style.maxHeight = '0px';
+            wrapper.style.marginBottom = '0px';
+            wrapper.style.opacity = '0';
+
+            setTimeout(() => {
+              wrapper.remove();
+
+              // 3. Borra o archiva el documento en Firestore
+              if (window.db && window.firestoreOps && challengeId) {
+                try {
+                  const { doc, updateDoc, deleteDoc } = window.firestoreOps;
+                  const chRef = doc(window.db, "desafios", challengeId);
+                  if (typeof updateDoc === 'function') {
+                    updateDoc(chRef, {
+                      status: "archived",
+                      archivedAt: new Date().toISOString()
+                    }).catch(() => {
+                      if (typeof deleteDoc === 'function') deleteDoc(chRef).catch(() => {});
+                    });
+                  } else if (typeof deleteDoc === 'function') {
+                    deleteDoc(chRef).catch(() => {});
+                  }
+                } catch (err) {
+                  console.warn("Error eliminando desafío:", err);
+                }
+              }
+
+              if (state.challenges) {
+                state.challenges = state.challenges.filter(c => c.id !== challengeId);
+              }
+              if (window.state?.challenges) {
+                window.state.challenges = window.state.challenges.filter(c => c.id !== challengeId);
+              }
+              if (state.allChallengesList) {
+                state.allChallengesList = state.allChallengesList.filter(c => c.id !== challengeId);
+              }
+
+              // 4. Si la lista queda vacía, muestra la tarjeta de "No tienes desafíos pendientes"
+              const remainingWrappers = container.querySelectorAll('.swipe-wrapper');
+              if (remainingWrappers.length === 0) {
+                container.innerHTML = `
+                  <div class="empty-challenges-container" id="emptyChallengesContainer">
+                    <div class="empty-challenges-icon">⚔️</div>
+                    <p class="empty-challenges-title">No tienes desafíos pendientes</p>
+                    <p class="empty-challenges-sub">¡Elige un amigo y lánzale un reto!</p>
+                  </div>
+                `;
+              }
+            }, 300);
+          }, 200);
+        } else {
+          // Si no superó el umbral: regresa suavemente con transform: translateX(0px); en 0.2s
+          card.style.transition = 'transform 0.2s ease';
+          card.style.transform = 'translateX(0px)';
+        }
+
+        if (isSwiping) {
+          card.setAttribute('data-swiped', 'true');
+          setTimeout(() => {
+            card.removeAttribute('data-swiped');
+          }, 150);
+        }
+      });
+    });
+
     // Conectar eventos a los botones ¡TU TURNO! ⚔️
     container.querySelectorAll('.challenge-btn-turn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        const card = btn.closest('.challenge-card');
+        if (card && card.getAttribute('data-swiped') === 'true') return;
+
         e.stopPropagation();
         if (typeof SoundManager !== 'undefined') {
           SoundManager.playSFX('botones.wav', 0.60);
@@ -5833,6 +5995,9 @@ function renderChallengesUI() {
     // Conectar eventos a los botones VER RESULTADO 🏆
     container.querySelectorAll('.challenge-btn-completed').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        const card = btn.closest('.challenge-card');
+        if (card && card.getAttribute('data-swiped') === 'true') return;
+
         e.stopPropagation();
         if (typeof SoundManager !== 'undefined') {
           SoundManager.playSFX('botones.wav', 0.60);
@@ -6382,6 +6547,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pendingChallenges = allList.filter(ch => 
           ch.toUid === userId && 
           ch.status === "pending" && 
+          ch.status !== "archived" &&
           ch.currentTurn === userId
         );
 
@@ -6563,7 +6729,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeMatches = allList.filter(ch => 
           (ch.status === "active" || ch.status === "completed" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
           ch.status !== "rejected" &&
-          ch.status !== "expired"
+          ch.status !== "expired" &&
+          ch.status !== "archived"
         );
 
         state.challenges = activeMatches;
