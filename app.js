@@ -79,11 +79,12 @@ const state = {
   unlockedPacks: [], // IDs de packs temáticos adquiridos (ej: ["cine_2000"])
   packMastery: {}, // Preguntas acertadas por pack temático (ej: { cine_2000: 12 })
   activeThematicPackId: null, // ID del pack temático en juego directo
-  allCategoriesUnlocked: false, // Compra IAP o desbloqueo total
-  allUnlocked: false, // Estado global de desbloqueo completo
+  allCategoriesUnlocked: true, // Todas las categorías habilitadas por defecto
+  allUnlocked: true, // Estado global de desbloqueo completo
   isVIP: false, // Usuario VIP / Pase adquirido
   challenges: [], // Arreglo de desafíos del usuario (sin mock data)
   playedQuestionIds: new Set(), // Registro de preguntas ya jugadas
+  pendingCollectionUnlockAnim: false, // Bandera de recompensa para la ruleta tras compra completa
 
   wheelNeedsMagicUnlockAnim: false, // Sincronización para disparar humo mágico en la ruleta al volver de la colección
   wheelMagicUnlockSoundPlayed: false, // Control de reproducción única para ruleta_todo.mp3
@@ -94,22 +95,22 @@ const state = {
   claimedChallenge: false,
   answeredQuiz: false,
   
-  // Metas de desbloqueo de categorías por RetroCoins (Colección & Ruleta)
+  // Metas de desbloqueo de categorías por RetroCoins (Todas habilitadas desde el inicio)
   categoryCoinsThresholds: {
-    cine: 0,          // 0 RC - Desbloqueado desde el inicio
-    videojuegos: 1000,// 1,000 RC
-    tv: 2000,         // 2,000 RC
-    musica: 3500,     // 3,500 RC
-    todo: 5000        // 5,000 RC
+    cine: 0,          // Desbloqueado desde el inicio
+    videojuegos: 0,   // Desbloqueado desde el inicio
+    tv: 0,            // Desbloqueado desde el inicio
+    musica: 0,        // Desbloqueado desde el inicio
+    todo: 0           // Desbloqueado desde el inicio
   },
 
   // Umbrales de desbloqueo por puntaje acumulado (compatibilidad)
   categoryThresholds: {
     cine: 0,
-    videojuegos: 100,
-    tv: 250,
-    musica: 500,
-    todo: 800
+    videojuegos: 0,
+    tv: 0,
+    musica: 0,
+    todo: 0
   },
 
   // Estado de la Ruleta (WheelSelectionScreen)
@@ -233,17 +234,9 @@ const categoriesConfig = {
 
 
 
-// Obtener lista de categorías actualmente desbloqueadas por monedas o compra completa
+// Obtener lista de categorías actualmente desbloqueadas (por defecto todas habilitadas desde el principio)
 function getUnlockedCategories() {
-  if (state.allCategoriesUnlocked || state.allUnlocked) {
-    return Object.keys(categoriesConfig);
-  }
-  return Object.keys(categoriesConfig).filter(cat => {
-    const threshold = (state.categoryCoinsThresholds && state.categoryCoinsThresholds[cat] !== undefined)
-      ? state.categoryCoinsThresholds[cat]
-      : (state.categoryThresholds[cat] || 0);
-    return state.coins >= threshold;
-  });
+  return Object.keys(categoriesConfig);
 }
 
 // =============================================================================
@@ -903,10 +896,27 @@ function renderScreenView(screenId) {
       updateWheelCategoriesUI();
       triggerWheelEntranceAnimations();
 
-      if (state.wheelNeedsMagicUnlockAnim) {
+      const hasPendingCollectionAnim = Boolean(
+        (window.state && window.state.pendingCollectionUnlockAnim) ||
+        state.pendingCollectionUnlockAnim
+      );
+
+      if (hasPendingCollectionAnim) {
+        if (window.state) window.state.pendingCollectionUnlockAnim = false;
+        state.pendingCollectionUnlockAnim = false;
+        setTimeout(() => {
+          triggerMagicSmokeUnlockAnimation(true);
+          if (typeof SoundManager !== 'undefined') {
+            SoundManager.playSFX('ruleta_todo.mp3', 0.85);
+          }
+          if (typeof mostrarAvisoFlotanteRuleta === 'function') {
+            mostrarAvisoFlotanteRuleta("¡Todas tus compras se agregaron a la ruleta! 🚀");
+          }
+        }, 350);
+      } else if (state.wheelNeedsMagicUnlockAnim) {
         state.wheelNeedsMagicUnlockAnim = false;
         setTimeout(() => {
-          triggerMagicSmokeUnlockAnimation();
+          triggerMagicSmokeUnlockAnimation(true);
         }, 350);
       }
     } else if (targetView.id === 'collectionView') {
@@ -1037,6 +1047,10 @@ function desbloquearTodasLasColecciones() {
 
   state.allCategoriesUnlocked = true;
   state.allUnlocked = true;
+
+  // Activa la bandera temporal para la secuencia de recompensa en la ruleta
+  state.pendingCollectionUnlockAnim = true;
+  if (window.state) window.state.pendingCollectionUnlockAnim = true;
 
   savePackProgressToCloud();
 
@@ -1449,21 +1463,9 @@ function triggerAppEntranceAnimation() {
 // 4. LÓGICA DE LA RULETA (WHEEL SELECTION SCREEN)
 // =============================================================================
 
-// Obtener el asset de la ruleta con segmentos a color según categorías desbloqueadas
+// Obtener el asset de la ruleta con todos los segmentos a color habilitados por defecto
 function getWheelAssetForUnlocked(unlocked) {
-  if (state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes('todo') || unlocked.length >= 5) {
-    return 'assets/pantalla_ruleta/ruleta_todo.webp';
-  }
-  if (unlocked.includes('musica') || unlocked.length >= 4) {
-    return 'assets/pantalla_ruleta/ruleta_musica.webp';
-  }
-  if (unlocked.includes('tv') || unlocked.length >= 3) {
-    return 'assets/pantalla_ruleta/ruleta_tv.webp';
-  }
-  if (unlocked.includes('videojuegos') || unlocked.length >= 2) {
-    return 'assets/pantalla_ruleta/ruleta_videojuegos.webp';
-  }
-  return 'assets/pantalla_ruleta/ruleta_cine.webp';
+  return 'assets/pantalla_ruleta/ruleta_todo.webp';
 }
 
 function getWheelAssetForLevel(count) {
@@ -1658,6 +1660,30 @@ function triggerMagicSmokeUnlockAnimation(force = false) {
     }, 450);
   }, 800);
 }
+
+// Letrero flotante temporal (Toast de confirmación) sobre la ruleta (#wheelView)
+function mostrarAvisoFlotanteRuleta(texto = "¡Todas tus compras se agregaron a la ruleta! 🚀") {
+  const wheelView = document.getElementById('wheelView');
+  if (!wheelView) return;
+
+  const prevToast = wheelView.querySelector('.wheel-purchase-toast');
+  if (prevToast) prevToast.remove();
+
+  const toast = document.createElement('div');
+  toast.className = 'wheel-purchase-toast';
+  toast.innerText = texto;
+  wheelView.appendChild(toast);
+
+  // Permanece visible durante 3.5 segundos
+  setTimeout(() => {
+    toast.classList.add('toast-fade-out');
+    // Se desvanece suavemente en 300 ms y se remueve del DOM
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 3500);
+}
+window.mostrarAvisoFlotanteRuleta = mostrarAvisoFlotanteRuleta;
 
 // Actualizar contador de tiros y estado del botón GIRAR
 function updateShotsUI() {
@@ -5574,7 +5600,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Botón VER MI PROGRESO en Ruleta -> Abre Pantalla #collectionView
+  // Botón Mi Coleccion en Ruleta -> Abre Pantalla #collectionView
   const btnVerProgreso = document.getElementById('btnVerProgreso');
   if (btnVerProgreso) {
     btnVerProgreso.addEventListener('click', () => {
