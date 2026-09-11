@@ -1,98 +1,452 @@
 [
   {
     "id": "p80_001",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué reproductor portátil de casetes de Sony revolucionó la música en los 80?",
-    "emojis": "📼 🎧 🚶",
-    "opciones": ["Walkman", "Discman", "iPod", "Boombox"],
-    "respuesta_correcta": "Walkman"
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué actor interpretó a Marty McFly en el clásico ochentero 'Back to the Future' (1985)?",
+    "emojis": "⚡ 🛹 🎸",
+    "opciones": ["Michael J. Fox", "Eric Stoltz", "Crispin Glover", "Matthew Broderick"],
+    "respuesta_correcta": "Michael J. Fox"
   },
   {
     "id": "p80_002",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué icónico videoclip de Michael Jackson contó con zombis bailarines en 1983?",
-    "emojis": "🧟‍♂️ 🕺 🌕",
-    "opciones": ["Thriller", "Billie Jean", "Beat It", "Bad"],
-    "respuesta_correcta": "Thriller"
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué artista lanzó en 1982 'Thriller', convirtiéndose en el álbum más vendido de la historia?",
+    "emojis": "🧟 🧤 🕺",
+    "opciones": ["Michael Jackson", "Prince", "Lionel Richie", "Stevie Wonder"],
+    "respuesta_correcta": "Michael Jackson"
   },
   {
     "id": "p80_003",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué rompecabezas cúbico tridimensional causó furor mundial en 1980?",
-    "emojis": "🧊 🟩 🟥",
-    "opciones": ["Cubo de Rubik", "Tangram", "Jenga", "Tetris"],
-    "respuesta_correcta": "Cubo de Rubik"
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿En qué año se lanzó la consola Nintendo Entertainment System (NES) en Norteamérica?",
+    "emojis": "🎮 📺 🕹️",
+    "opciones": ["1985", "1983", "1987", "1989"],
+    "respuesta_correcta": "1985"
   },
   {
     "id": "p80_004",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿A qué velocidad debía llegar el DeLorean en 'Volver al Futuro' para viajar en el tiempo?",
-    "emojis": "⚡ 🚗 🕰️",
-    "opciones": ["88 mph", "100 mph", "66 mph", "99 mph"],
-    "respuesta_correcta": "88 mph"
-  },
-  {
-    "id": "p80_005",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿A quién llamabas según el lema de la película de 1984 si había algo extraño en tu vecindario?",
-    "emojis": "👻 🚫 📞",
-    "opciones": ["Ghostbusters", "A-Team", "Police Academy", "Men in Black"],
-    "respuesta_correcta": "Ghostbusters"
-  },
-  {
-    "id": "p80_006",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué icónico concierto benéfico simultáneo se celebró en Londres y Filadelfia en 1985?",
-    "emojis": "🎸 🌍 🎤",
-    "opciones": ["Live Aid", "Woodstock", "USA for Africa", "Farm Aid"],
-    "respuesta_correcta": "Live Aid"
-  },
-  {
-    "id": "p80_007",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué automóvil parlante con inteligencia artificial conducía Michael Knight?",
-    "emojis": "🚗 🔴 🕶️",
-    "opciones": ["KITT", "Herbie", "Bumblebee", "Ecto-1"],
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Cómo se llamaba el auto inteligente con escáner rojo de Michael Knight en 'Knight Rider'?",
+    "emojis": "🏎️ 🔴 🤖",
+    "opciones": ["KITT", "KARR", "Cobra", "DMC-12"],
     "respuesta_correcta": "KITT"
   },
   {
+    "id": "p80_005",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué criatura adorable pero peligrosa no debía comer después de la medianoche en 1984?",
+    "emojis": "🍗 🕛 👹",
+    "opciones": ["Mogwai (Gizmo)", "E.T.", "Critter", "Furry"],
+    "respuesta_correcta": "Mogwai (Gizmo)"
+  },
+  {
+    "id": "p80_006",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué tema de synthpop noruego de 1985 deslumbró con un video mitad cómic y lápiz?",
+    "emojis": "✏️ 🏃 📻",
+    "opciones": ["Take On Me (a-ha)", "Blue Monday", "True (Spandau Ballet)", "The Sun Always Shines on T.V."],
+    "respuesta_correcta": "Take On Me (a-ha)"
+  },
+  {
+    "id": "p80_007",
+    "categoria": "CULTURA POP",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué rompecabezas tridimensional de seis colores inventado en 1974 se volvió locura en los 80s?",
+    "emojis": "🧩 🟦 🟩",
+    "opciones": ["Cubo de Rubik", "Tetris", "Tangram", "Mastermind"],
+    "respuesta_correcta": "Cubo de Rubik"
+  },
+  {
     "id": "p80_008",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Cómo se llamaba la banda que cantó 'Sweet Child O' Mine' en 1987?",
-    "emojis": "🌹 🔫 🎸",
-    "opciones": ["Guns N' Roses", "Bon Jovi", "Aerosmith", "Def Leppard"],
-    "respuesta_correcta": "Guns N' Roses"
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Cómo se llamaba el cyborg asesino enviado del año 2029 en el clásico de 1984?",
+    "emojis": "🤖 🕶️ 🔫",
+    "opciones": ["Terminator (T-800)", "RoboCop", "Replicante Roy", "Cylon"],
+    "respuesta_correcta": "Terminator (T-800)"
   },
   {
     "id": "p80_009",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué corte de pelo, corto por delante y largo por detrás, fue ultra popular en los 80?",
-    "emojis": "💇‍♂️ 🎸 🕶️",
-    "opciones": ["Mullet", "Mohawk", "Pompadour", "Afro"],
-    "respuesta_correcta": "Mullet"
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué personaje amarillo comelón de puntos causó furor en arcades a partir de 1980?",
+    "emojis": "🟡 👻 🍒",
+    "opciones": ["Pac-Man", "Dig Dug", "Q*bert", "Frogger"],
+    "respuesta_correcta": "Pac-Man"
   },
   {
     "id": "p80_010",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué pequeño extraterrestre quería 'llamar a casa' en la película de Spielberg de 1982?",
-    "emojis": "🚲 🌕 🛸",
-    "opciones": ["E.T.", "Alfe", "Yoda", "Gizmo"],
-    "respuesta_correcta": "E.T."
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué cantante pop sacudió la década con himnos como 'Like a Virgin' y 'Material Girl'?",
+    "emojis": "👑 💃 🎤",
+    "opciones": ["Madonna", "Cyndi Lauper", "Paula Abdul", "Debbie Gibson"],
+    "respuesta_correcta": "Madonna"
   },
   {
     "id": "p80_011",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué bebida de cola cambió su fórmula en 1985 provocando protestas masivas?",
-    "emojis": "🥤 🔴 🇺🇸",
-    "opciones": ["New Coke", "Pepsi Crystal", "RC Cola", "Tab"],
-    "respuesta_correcta": "New Coke"
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿De qué planeta venía el alienígena ALF que aterrizó en el garaje de los Tanner en 1986?",
+    "emojis": "🛸 🐱 🥪",
+    "opciones": ["Melmac", "Krypton", "Vulcano", "Ork"],
+    "respuesta_correcta": "Melmac"
   },
   {
     "id": "p80_012",
-    "categoria": "ÉPOCA 80s",
-    "pregunta": "¿Qué líder soviético impulsó la 'Perestroika' y 'Glasnost' en la segunda mitad de los 80?",
-    "emojis": "🌍 📜 🕊️",
-    "opciones": ["Mijaíl Gorbachov", "Leonid Brézhnev", "Boris Yeltsin", "Nikita Jrushchov"],
-    "respuesta_correcta": "Mijaíl Gorbachov"
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué grupo de científicos de Nueva York capturaba espectros con mochilas de protones en 1984?",
+    "emojis": "👻 ⚡ 🚫",
+    "opciones": ["Ghostbusters", "Gremlins", "The Goonies", "Monster Squad"],
+    "respuesta_correcta": "Ghostbusters"
+  },
+  {
+    "id": "p80_013",
+    "categoria": "CULTURA POP",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué reproductor portátil de casetes lanzado por Sony transformó el consumo de música urbana?",
+    "emojis": "📻 🎧 👟",
+    "opciones": ["Walkman", "Discman", "Boombox", "iPod"],
+    "respuesta_correcta": "Walkman"
+  },
+  {
+    "id": "p80_014",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué banda de hard rock australiana editó en 1980 el histórico álbum 'Back in Black'?",
+    "emojis": "⚡ 🎸 🪨",
+    "opciones": ["AC/DC", "Iron Maiden", "Def Leppard", "Judas Priest"],
+    "respuesta_correcta": "AC/DC"
+  },
+  {
+    "id": "p80_015",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Cuál era la camioneta negra con franja roja conducida por B.A. Baracus en 'The A-Team'?",
+    "emojis": "🚐 💥 🎖️",
+    "opciones": ["GMC Vandura", "Ford Transit", "Chevy Van", "Dodge Caravan"],
+    "respuesta_correcta": "GMC Vandura"
+  },
+  {
+    "id": "p80_016",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué película de Steven Spielberg de 1982 mostró a un niño volando en bicicleta frente a la luna?",
+    "emojis": "🚲 🌕 👽",
+    "opciones": ["E.T. the Extra-Terrestrial", "Close Encounters", "The Goonies", "Explorers"],
+    "respuesta_correcta": "E.T. the Extra-Terrestrial"
+  },
+  {
+    "id": "p80_017",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿En qué juego de 1981 de Nintendo debutó Mario bajo el nombre de 'Jumpman'?",
+    "emojis": "🦍 🔨 🍄",
+    "opciones": ["Donkey Kong", "Mario Bros.", "Popeye", "Wrecking Crew"],
+    "respuesta_correcta": "Donkey Kong"
+  },
+  {
+    "id": "p80_018",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué tema de Bon Jovi lanzado en 1986 narra la historia de Tommy y Gina trabajando duro?",
+    "emojis": "🎸 🎙️ ⚡",
+    "opciones": ["Livin' on a Prayer", "You Give Love a Bad Name", "Wanted Dead or Alive", "Bad Medicine"],
+    "respuesta_correcta": "Livin' on a Prayer"
+  },
+  {
+    "id": "p80_019",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué arqueólogo del látigo y sombrero fedora debutó en 1981 buscando el Arca perdida?",
+    "emojis": "🤠 🐍 🏺",
+    "opciones": ["Indiana Jones", "Allan Quatermain", "Han Solo", "Rick O'Connell"],
+    "respuesta_correcta": "Indiana Jones"
+  },
+  {
+    "id": "p80_020",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué detective con camisa hawaiana y bigote conducía un Ferrari 308 GTS en Hawái?",
+    "emojis": "🏎️ 🌺 👨🏻",
+    "opciones": ["Thomas Magnum", "Sonny Crockett", "Simon Templar", "Remington Steele"],
+    "respuesta_correcta": "Thomas Magnum"
+  },
+  {
+    "id": "p80_021",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿En qué año salió al aire la cadena musical MTV emitiendo 'Video Killed the Radio Star'?",
+    "emojis": "📺 🎸 🚀",
+    "opciones": ["1981", "1983", "1979", "1985"],
+    "respuesta_correcta": "1981"
+  },
+  {
+    "id": "p80_022",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué actor encarnó al policía Alex Murphy transformado en 'RoboCop' (1987)?",
+    "emojis": "🤖 👮‍♂️ 🏙️",
+    "opciones": ["Peter Weller", "Kurt Russell", "Michael Biehn", "Robert Patrick"],
+    "respuesta_correcta": "Peter Weller"
+  },
+  {
+    "id": "p80_023",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué clásico de bloques cayendo al son de música tradicional rusa fue creado en 1984?",
+    "emojis": "🧱 🟦 🇷🇺",
+    "opciones": ["Tetris", "Columns", "Klax", "Puyo Puyo"],
+    "respuesta_correcta": "Tetris"
+  },
+  {
+    "id": "p80_024",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué agentes secretos combatían el narcotráfico vistiendo trajes de lino pastel en 'Miami Vice'?",
+    "emojis": "🌴 🏎️ 🦩",
+    "opciones": ["Crockett y Tubbs", "Starsky y Hutch", "Murtaugh y Riggs", "Fox y Scully"],
+    "respuesta_correcta": "Crockett y Tubbs"
+  },
+  {
+    "id": "p80_025",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué tema bailable de Cyndi Lauper en 1983 proclamó que las chicas solo quieren divertirse?",
+    "emojis": "🎀 👱‍♀️ 💃",
+    "opciones": ["Girls Just Want to Have Fun", "Time After Time", "True Colors", "She Bop"],
+    "respuesta_correcta": "Girls Just Want to Have Fun"
+  },
+  {
+    "id": "p80_026",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué frase inolvidable grita el asesino sádico Freddy Krueger mientras persigue en sueños?",
+    "emojis": "🧤 🔪 💤",
+    "opciones": ["Bienvenido a mi pesadilla", "Te veo en el infierno", "No te duermas", "Dulces sueños, nena"],
+    "respuesta_correcta": "Bienvenido a mi pesadilla"
+  },
+  {
+    "id": "p80_027",
+    "categoria": "CULTURA POP",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué muñecas con certificado de adopción provocaron batallas campales en tiendas en 1983?",
+    "emojis": "👶 🏬 🧸",
+    "opciones": ["Cabbage Patch Kids", "Barbie Rocker", "Bratz", "Care Bears"],
+    "respuesta_correcta": "Cabbage Patch Kids"
+  },
+  {
+    "id": "p80_028",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Cuál fue el álbum debut explosivo de Guns N' Roses lanzado en 1987 con 'Welcome to the Jungle'?",
+    "emojis": "🌹 🔫 🎸",
+    "opciones": ["Appetite for Destruction", "Use Your Illusion I", "G N' R Lies", "The Spaghetti Incident?"],
+    "respuesta_correcta": "Appetite for Destruction"
+  },
+  {
+    "id": "p80_029",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué serie de 1983 mostraba a guerrilleros enfrentándose a alienígenas reptilianos comedores de ratas?",
+    "emojis": "🦎 🛸 🐭",
+    "opciones": ["V (Invasión Extraterrestre)", "Alien Nation", "Galactica", "Starman"],
+    "respuesta_correcta": "V (Invasión Extraterrestre)"
+  },
+  {
+    "id": "p80_030",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué héroe con túnica verde empuñaba espada y escudo en el primer 'Zelda' (1986)?",
+    "emojis": "🧝‍♂️ 🗡️ 🛡️",
+    "opciones": ["Link", "Zelda", "Ganon", "Pit"],
+    "respuesta_correcta": "Link"
+  },
+  {
+    "id": "p80_031",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué película de 1985 reunió a cinco adolescentes muy distintos castigados en la biblioteca?",
+    "emojis": "🏫 🎒 🥪",
+    "opciones": ["The Breakfast Club", "Ferris Bueller's Day Off", "Pretty in Pink", "Sixteen Candles"],
+    "respuesta_correcta": "The Breakfast Club"
+  },
+  {
+    "id": "p80_032",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué clásico vinilo maxi-single de New Order lanzado en 1983 batió todos los récords de ventas?",
+    "emojis": "🎹 🪩 💾",
+    "opciones": ["Blue Monday", "Bizarre Love Triangle", "True Faith", "Temptation"],
+    "respuesta_correcta": "Blue Monday"
+  },
+  {
+    "id": "p80_033",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué agente usaba clips, cinta adhesiva y una navaja suiza para escapar de trampas?",
+    "emojis": "🔧 📎 💣",
+    "opciones": ["MacGyver", "Inspector Gadget", "Michael Knight", "Columbo"],
+    "respuesta_correcta": "MacGyver"
+  },
+  {
+    "id": "p80_034",
+    "categoria": "CULTURA POP",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué línea de juguetes de Hasbro con camiones y jets se transformaban en robots guerreros en 1984?",
+    "emojis": "🤖 🚛 ✈️",
+    "opciones": ["Transformers", "GoBots", "G.I. Joe", "M.A.S.K."],
+    "respuesta_correcta": "Transformers"
+  },
+  {
+    "id": "p80_035",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿En qué rascacielos de Los Ángeles combate John McClane a terroristas en 'Die Hard' (1988)?",
+    "emojis": "🏢 🔫 💥",
+    "opciones": ["Nakatomi Plaza", "Empire State", "Tower Records", "Fox Plaza"],
+    "respuesta_correcta": "Nakatomi Plaza"
+  },
+  {
+    "id": "p80_036",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué tema de Rick Astley de 1987 dio pie décadas después al mítico troleo de internet?",
+    "emojis": "🕺 🎙️ 🔄",
+    "opciones": ["Never Gonna Give You Up", "Together Forever", "Take Me to Your Heart", "Whenever You Need Somebody"],
+    "respuesta_correcta": "Never Gonna Give You Up"
+  },
+  {
+    "id": "p80_037",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué consola portátil monocromática revolucionó el juego callejero en 1989 gracias a Tetris?",
+    "emojis": "🎮 🟩 🔋",
+    "opciones": ["Game Boy", "Game Gear", "Atari Lynx", "Neo Geo Pocket"],
+    "respuesta_correcta": "Game Boy"
+  },
+  {
+    "id": "p80_038",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Cómo se llamaba el cuarteto de ancianas amigas que compartían casa en Miami desde 1985?",
+    "emojis": "👵 🍰 🌴",
+    "opciones": ["The Golden Girls", "Designing Women", "Cheers", "Night Court"],
+    "respuesta_correcta": "The Golden Girls"
+  },
+  {
+    "id": "p80_039",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué película de 1984 popularizó la técnica de 'encerar y pulir' para aprender karate?",
+    "emojis": "🥋 🪰 🚗",
+    "opciones": ["The Karate Kid", "Bloodsport", "No Retreat, No Surrender", "Kickboxer"],
+    "respuesta_correcta": "The Karate Kid"
+  },
+  {
+    "id": "p80_040",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué banda inglesa de heavy metal lanzó en 1982 el influyente álbum 'The Number of the Beast'?",
+    "emojis": "🎸 👹 🇬🇧",
+    "opciones": ["Iron Maiden", "Judas Priest", "Black Sabbath", "Saxon"],
+    "respuesta_correcta": "Iron Maiden"
+  },
+  {
+    "id": "p80_041",
+    "categoria": "CULTURA POP",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué prenda deportiva de abrigo con calentadores en los tobillos se volvió icono de la moda aeróbica?",
+    "emojis": "🧦 🤸‍♀️ 👟",
+    "opciones": ["Calentadores de piernas (Leg warmers)", "Mallas ciclistas", "Bodysuit de cuero", "Hombreras térmicas"],
+    "respuesta_correcta": "Calentadores de piernas (Leg warmers)"
+  },
+  {
+    "id": "p80_042",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Cómo se llama el bio-exorcista alocado del traje a rayas que aparece al nombrarlo tres veces?",
+    "emojis": "🪲 👔 🪦",
+    "opciones": ["Beetlejuice", "Casper", "Pennywise", "Slimer"],
+    "respuesta_correcta": "Beetlejuice"
+  },
+  {
+    "id": "p80_043",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué clásico shooter de arcade de 1981 presentaba naves disparando contra enjambres de insectos espaciales?",
+    "emojis": "🚀 🐝 🌌",
+    "opciones": ["Galaga", "Asteroids", "Centipede", "Defender"],
+    "respuesta_correcta": "Galaga"
+  },
+  {
+    "id": "p80_044",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué dibujo animado de 1985 enfrentaba a Lion-O y los felinos cósmicos contra Mumm-Ra en el Tercer Planeta?",
+    "emojis": "🐱 🗡️ ⚡",
+    "opciones": ["ThunderCats", "He-Man", "SilverHawks", "Voltron"],
+    "respuesta_correcta": "ThunderCats"
+  },
+  {
+    "id": "p80_045",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué tema de 1984 compuesto por Wham! se convirtió en el clásico infaltable de todas las Navidades?",
+    "emojis": "🎄 ❄️ 📻",
+    "opciones": ["Last Christmas", "Careless Whisper", "Wake Me Up Before You Go-Go", "Club Tropicana"],
+    "respuesta_correcta": "Last Christmas"
+  },
+  {
+    "id": "p80_046",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué película de 1986 de Tom Cruise convirtió en fenómeno las gafas de aviador y las cazadoras militares?",
+    "emojis": "✈️ 🕶️ 🏍️",
+    "opciones": ["Top Gun", "Cocktail", "Days of Thunder", "Rain Man"],
+    "respuesta_correcta": "Top Gun"
+  },
+  {
+    "id": "p80_047",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_80s",
+    "pregunta": "¿Cómo se llama el robot azul de Capcom que absorbía los poderes de los Robot Masters en 1987?",
+    "emojis": "🤖 🔵 ⚡",
+    "opciones": ["Mega Man", "Proto Man", "Zero", "Bass"],
+    "respuesta_correcta": "Mega Man"
+  },
+  {
+    "id": "p80_048",
+    "categoria": "MÚSICA",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué dúo británico de synthpop lanzó éxitos inolvidables como 'West End Girls' en 1984/86?",
+    "emojis": "🎹 🏙️ 🎩",
+    "opciones": ["Pet Shop Boys", "Erasure", "Wham!", "Soft Cell"],
+    "respuesta_correcta": "Pet Shop Boys"
+  },
+  {
+    "id": "p80_049",
+    "categoria": "TV",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué príncipe de Eternia blandía la Espada del Poder exclamando '¡Por el poder de Grayskull!'?",
+    "emojis": "🗡️ 🏰 🐅",
+    "opciones": ["Príncipe Adam (He-Man)", "Skeletor", "Lion-O", "Hordak"],
+    "respuesta_correcta": "Príncipe Adam (He-Man)"
+  },
+  {
+    "id": "p80_050",
+    "categoria": "CINE",
+    "pack": "puro_80s",
+    "pregunta": "¿Qué grupo de niños buscaba el tesoro del pirata Willy el Tuerto en 'The Goonies' (1985)?",
+    "emojis": "🏴‍☠️ 🗺️ 🚲",
+    "opciones": ["The Goonies", "The Monster Squad", "The Explorers", "The Sandlot"],
+    "respuesta_correcta": "The Goonies"
   }
 ]

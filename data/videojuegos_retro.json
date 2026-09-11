@@ -1,98 +1,456 @@
 [
   {
-    "id": "vj_001",
+    "id": "vjr_001",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿En qué año se lanzó el clásico 'Pac-Man' en arcades?",
-    "emojis": "🕹️ 🍒 👻",
-    "opciones": ["1980", "1978", "1983", "1985"],
-    "respuesta_correcta": "1980"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llamaba originalmente Mario en el juego arcade 'Donkey Kong' (1981)?",
+    "emojis": "🦍 🔨 🍄",
+    "opciones": ["Jumpman", "Mr. Video", "Plumber Man", "Super Mario"],
+    "respuesta_correcta": "Jumpman"
   },
   {
-    "id": "vj_002",
+    "id": "vjr_002",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Cómo se llama el hermano de Mario que viste de verde?",
-    "emojis": "🍄 👨🏻 🟢",
-    "opciones": ["Luigi", "Wario", "Yoshi", "Toad"],
-    "respuesta_correcta": "Luigi"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué erizo azul debutó en Sega Genesis en 1991 como mascota oficial de Sega?",
+    "emojis": "🦔 💨 💍",
+    "opciones": ["Sonic the Hedgehog", "Shadow", "Knuckles", "Tails"],
+    "respuesta_correcta": "Sonic the Hedgehog"
   },
   {
-    "id": "vj_003",
+    "id": "vjr_003",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Qué compañía japonesa creó la consola Mega Drive (Genesis)?",
-    "emojis": "🦔 🎮 🔵",
-    "opciones": ["SEGA", "Nintendo", "Sony", "Atari"],
-    "respuesta_correcta": "SEGA"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál es la legendaria secuencia del Código Konami introducida en 'Gradius' y 'Contra'?",
+    "emojis": "⬆️ ⬇️ 🕹️",
+    "opciones": [
+      "Arriba Arriba Abajo Abajo Izq Der Izq Der B A",
+      "Arriba Abajo Izq Der Arriba Abajo B A B A",
+      "Arriba Arriba Abajo Abajo A B A B Select Start",
+      "Izq Der Izq Der Arriba Abajo B A Select Start"
+    ],
+    "respuesta_correcta": "Arriba Arriba Abajo Abajo Izq Der Izq Der B A"
   },
   {
-    "id": "vj_004",
+    "id": "vjr_004",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Cuál es el ataque característico de Ryu y Ken en 'Street Fighter'?",
-    "emojis": "🥋 💥 🥊",
-    "opciones": ["Hadouken", "Kamehameha", "Sonic Boom", "Tiger Uppercut"],
-    "respuesta_correcta": "Hadouken"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué personaje esférico amarillo debutó en salas recreativas comiendo puntos en 1980?",
+    "emojis": "🟡 👻 🍒",
+    "opciones": ["Pac-Man", "Q*bert", "Dig Dug", "Frogger"],
+    "respuesta_correcta": "Pac-Man"
   },
   {
-    "id": "vj_005",
+    "id": "vjr_005",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Qué princesa debe rescatar Link en la saga de Nintendo?",
-    "emojis": "🗡️ 🛡️ 👑",
-    "opciones": ["Zelda", "Peach", "Daisy", "Samus"],
-    "respuesta_correcta": "Zelda"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué accesorio para Game Boy permitía imprimir pequeñas fotos en papel térmico?",
+    "emojis": "🎮 📸 🖨️",
+    "opciones": ["Game Boy Printer", "Pocket Photo", "Nintendo Print", "SnapBoy"],
+    "respuesta_correcta": "Game Boy Printer"
   },
   {
-    "id": "vj_006",
+    "id": "vjr_006",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Qué juego de puzzle de bloques que caen fue creado por Alexey Pajitnov?",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué compañía japonesa fabricó el sistema de cartuchos Neo Geo MVS y AES en 1990?",
+    "emojis": "🕹️ 🪙 🇯🇵",
+    "opciones": ["SNK", "Capcom", "Namco", "Taito"],
+    "respuesta_correcta": "SNK"
+  },
+  {
+    "id": "vjr_007",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el pueblo con niebla constante y sirenas del survival horror de 1999?",
+    "emojis": "🌫️ 📻 🔦",
+    "opciones": ["Silent Hill", "Raccoon City", "Bright Falls", "Ravenholm"],
+    "respuesta_correcta": "Silent Hill"
+  },
+  {
+    "id": "vjr_008",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué frase pronuncia el anunciador en 'Mortal Kombat' antes de un remate sangriento?",
+    "emojis": "🥋 🩸 💀",
+    "opciones": ["Finish Him!", "Fatality Now!", "Fight to Death!", "Kill Him!"],
+    "respuesta_correcta": "Finish Him!"
+  },
+  {
+    "id": "vjr_009",
+    "categoria": "VIDEOJUEGOS",
+    "pregunta": "¿Qué mítico juego soviético de bloques que caen fue creado por Alekséi Pázhitnov en 1984?",
     "emojis": "🧱 🟦 🇷🇺",
-    "opciones": ["Tetris", "Columns", "Puyo Puyo", "Dr. Mario"],
+    "opciones": ["Tetris", "Columns", "Puyo Puyo", "Klax"],
     "respuesta_correcta": "Tetris"
   },
   {
-    "id": "vj_007",
+    "id": "vjr_010",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Cuál es el nombre del gorila rival original de 'Jumpman'?",
-    "emojis": "🦍 🍌 🪜",
-    "opciones": ["Donkey Kong", "King Kong", "Diddy Kong", "Cranky Kong"],
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué animal antropomórfico con corbata roja protagonizó un hito gráfico en SNES en 1994?",
+    "emojis": "🦍 👔 🍌",
+    "opciones": ["Donkey Kong", "Diddy Kong", "Cranky Kong", "Funky Kong"],
     "respuesta_correcta": "Donkey Kong"
   },
   {
-    "id": "vj_008",
+    "id": "vjr_011",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿En qué consola debutó el revolucionario 'Super Mario 64'?",
-    "emojis": "⭐ 🍄 🎮",
-    "opciones": ["Nintendo 64", "Super Nintendo", "PlayStation", "Sega Saturn"],
-    "respuesta_correcta": "Nintendo 64"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama la espada gigante de Cloud Strife en 'Final Fantasy VII' (1997)?",
+    "emojis": "⚔️ ⚡ 🪨",
+    "opciones": ["Espada Mortal (Buster Sword)", "Gunblade", "Master Sword", "Masamune"],
+    "respuesta_correcta": "Espada Mortal (Buster Sword)"
   },
   {
-    "id": "vj_009",
+    "id": "vjr_012",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Quién es la arqueóloga aventurera protagonista de 'Tomb Raider'?",
-    "emojis": "🔫 🏺 🧗‍♀️",
-    "opciones": ["Lara Croft", "Jill Valentine", "Samus Aran", "Chun-Li"],
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál es el nombre del protagonista y líder rebelde con una palanca en 'Half-Life' (1998)?",
+    "emojis": "🥼 🪓 🧪",
+    "opciones": ["Gordon Freeman", "Barney Calhoun", "Adrian Shephard", "Eli Vance"],
+    "respuesta_correcta": "Gordon Freeman"
+  },
+  {
+    "id": "vjr_013",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué consola de 128 bits lanzó Sega en 1998 con módem integrado para internet?",
+    "emojis": "🌀 💿 🕹️",
+    "opciones": ["Dreamcast", "Saturn", "Genesis", "Game Gear"],
+    "respuesta_correcta": "Dreamcast"
+  },
+  {
+    "id": "vjr_014",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el zorro de dos colas compañero leal de Sonic debutado en 1992?",
+    "emojis": "🦊 ✈️ 🌀",
+    "opciones": ["Miles 'Tails' Prower", "Knuckles", "Shadow", "Silver"],
+    "respuesta_correcta": "Miles 'Tails' Prower"
+  },
+  {
+    "id": "vjr_015",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué estudio desarrolló originalmente 'Crash Bandicoot' en 1996 para PlayStation?",
+    "emojis": "🦊 🍎 📦",
+    "opciones": ["Naughty Dog", "Insomniac Games", "Rare", "Capcom"],
+    "respuesta_correcta": "Naughty Dog"
+  },
+  {
+    "id": "vjr_016",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué arma legendaria blande Link en la saga de aventuras 'The Legend of Zelda'?",
+    "emojis": "🧝‍♂️ 🗡️ 🛡️",
+    "opciones": ["Espada Maestra (Master Sword)", "Buster Sword", "Soul Edge", "Falchion"],
+    "respuesta_correcta": "Espada Maestra (Master Sword)"
+  },
+  {
+    "id": "vjr_017",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿En qué año se lanzó al mercado la consola original Sony PlayStation en Japón?",
+    "emojis": "💿 🕹️ 🇯🇵",
+    "opciones": ["1994", "1995", "1993", "1996"],
+    "respuesta_correcta": "1994"
+  },
+  {
+    "id": "vjr_018",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál fue el innovador chip que permitió gráficos 3D poligonales en 'Star Fox' en SNES?",
+    "emojis": "🦊 🚀 💾",
+    "opciones": ["Super FX", "DSP-1", "Mode 7", "CX4"],
+    "respuesta_correcta": "Super FX"
+  },
+  {
+    "id": "vjr_019",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué clásico shooter de PC de 1993 desarrollado por id Software revolucionó el género FPS?",
+    "emojis": "👹 🔫 🩸",
+    "opciones": ["DOOM", "Wolfenstein 3D", "Quake", "Duke Nukem 3D"],
+    "respuesta_correcta": "DOOM"
+  },
+  {
+    "id": "vjr_020",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el espía y agente de infiltración táctica en 'Metal Gear Solid' (1998)?",
+    "emojis": "📦 🐍 🚬",
+    "opciones": ["Solid Snake", "Liquid Snake", "Revolver Ocelot", "Big Boss"],
+    "respuesta_correcta": "Solid Snake"
+  },
+  {
+    "id": "vjr_021",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué franquicia de peleas de Capcom popularizó la bola de energía 'Hadoken' en 1987/1991?",
+    "emojis": "🥋 🔵 👊",
+    "opciones": ["Street Fighter", "Darkstalkers", "Fatal Fury", "Tekken"],
+    "respuesta_correcta": "Street Fighter"
+  },
+  {
+    "id": "vjr_022",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál es la moneda oficial del reino ficticio de Hyrule en 'The Legend of Zelda'?",
+    "emojis": "💎 🗡️ 🛡️",
+    "opciones": ["Rupias", "Giles", "Zenny", "Monedas estrella"],
+    "respuesta_correcta": "Rupias"
+  },
+  {
+    "id": "vjr_023",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el robot azul justiciero creado por el Dr. Light en Capcom?",
+    "emojis": "🤖 🔵 ⚡",
+    "opciones": ["Mega Man", "Proto Man", "Bass", "Zero"],
+    "respuesta_correcta": "Mega Man"
+  },
+  {
+    "id": "vjr_024",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué botón del mando de Nintendo 64 estaba situado en la empuñadura trasera central?",
+    "emojis": "🎮 🔴 🕹️",
+    "opciones": ["Gatillo Z", "Botón R", "Botón C-Abajo", "Botón Start"],
+    "respuesta_correcta": "Gatillo Z"
+  },
+  {
+    "id": "vjr_025",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el dragón morado coleccionista de gemas que debutó en PS1 en 1998?",
+    "emojis": "🐲 🟣 💎",
+    "opciones": ["Spyro", "Sparx", "Ripto", "Crash"],
+    "respuesta_correcta": "Spyro"
+  },
+  {
+    "id": "vjr_026",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué consola doméstica pionera de Atari se lanzó al mercado a finales de 1977?",
+    "emojis": "🕹️ 📺 👾",
+    "opciones": ["Atari 2600", "Atari 5200", "Atari 7800", "Atari Jaguar"],
+    "respuesta_correcta": "Atari 2600"
+  },
+  {
+    "id": "vjr_027",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué artefacto o armadura lleva Samus Aran integrado en su brazo derecho en 'Metroid'?",
+    "emojis": "🚀 🤖 💥",
+    "opciones": ["Cañón de plasma (Arm Cannon)", "Gancho magnético", "Láser térmico", "Espada de energía"],
+    "respuesta_correcta": "Cañón de plasma (Arm Cannon)"
+  },
+  {
+    "id": "vjr_028",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál es la profesión inicial de Guybrush Threepwood en 'The Secret of Monkey Island' (1990)?",
+    "emojis": "🏴‍☠️ 🐵 ⚔️",
+    "opciones": ["Aspirante a pirata", "Grumete naval", "Comerciante de ron", "Gobernador"],
+    "respuesta_correcta": "Aspirante a pirata"
+  },
+  {
+    "id": "vjr_029",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué compañía británica desarrolló 'GoldenEye 007' y 'Banjo-Kazooie' para Nintendo 64?",
+    "emojis": "🐻 🧩 🍸",
+    "opciones": ["Rare", "Psygnosis", "Core Design", "DMA Design"],
+    "respuesta_correcta": "Rare"
+  },
+  {
+    "id": "vjr_030",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué objeto de 'Mario Kart 64' persigue implacablemente al jugador que va en primera posición?",
+    "emojis": "🐢 🏎️ 💥",
+    "opciones": ["Caparazón Azul con alas", "Caparazón Rojo", "Bomba Bob-omb", "Plátano Gigante"],
+    "respuesta_correcta": "Caparazón Azul con alas"
+  },
+  {
+    "id": "vjr_031",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál fue la primera consola portátil con cartuchos intercambiables de Nintendo (1989)?",
+    "emojis": "🎮 🟩 🔋",
+    "opciones": ["Game Boy", "Game & Watch", "Game Boy Color", "Virtual Boy"],
+    "respuesta_correcta": "Game Boy"
+  },
+  {
+    "id": "vjr_032",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama la arqueóloga británica aventurera protagonista de 'Tomb Raider' (1996)?",
+    "emojis": "🏺 🔫 🧗‍♀️",
+    "opciones": ["Lara Croft", "Jill Valentine", "Joanna Dark", "Regina"],
     "respuesta_correcta": "Lara Croft"
   },
   {
-    "id": "vj_010",
+    "id": "vjr_033",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Cuál fue la primera consola doméstica lanzada por Sony en 1994?",
-    "emojis": "💿 🎮 🕹️",
-    "opciones": ["PlayStation", "PlayStation 2", "PlayStation One", "PSP"],
-    "respuesta_correcta": "PlayStation"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué histórico juego arcade de disparos espaciales fue creado por Tomohiro Nishikado en 1978?",
+    "emojis": "👾 🚀 🛸",
+    "opciones": ["Space Invaders", "Galaga", "Asteroids", "Defender"],
+    "respuesta_correcta": "Space Invaders"
   },
   {
-    "id": "vj_011",
+    "id": "vjr_034",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Qué erizo azul de Sega colecciona anillos dorados?",
-    "emojis": "🦔 💍 ⚡",
-    "opciones": ["Sonic", "Shadow", "Tails", "Knuckles"],
-    "respuesta_correcta": "Sonic"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿En qué año se lanzó comercialmente 'Super Mario Bros.' para la Famicom/NES en Japón?",
+    "emojis": "🍄 🧱 🇯🇵",
+    "opciones": ["1985", "1983", "1987", "1989"],
+    "respuesta_correcta": "1985"
   },
   {
-    "id": "vj_012",
+    "id": "vjr_035",
     "categoria": "VIDEOJUEGOS",
-    "pregunta": "¿Qué criatura eléctrica es la mascota principal de Pokémon?",
-    "emojis": "⚡ 🐭 🔴",
-    "opciones": ["Pikachu", "Charmander", "Squirtle", "Bulbasaur"],
-    "respuesta_correcta": "Pikachu"
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el antagonista principal y archienemigo reptiliano en la saga Super Mario?",
+    "emojis": "🐢 👑 🔥",
+    "opciones": ["Bowser", "Wario", "Kamek", "Waluigi"],
+    "respuesta_correcta": "Bowser"
+  },
+  {
+    "id": "vjr_036",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué título de estrategia en tiempo real de 1998 de Blizzard enfrentó a Terran, Zerg y Protoss?",
+    "emojis": "🚀 👽 ⚔️",
+    "opciones": ["StarCraft", "Warcraft II", "Command & Conquer", "Age of Empires"],
+    "respuesta_correcta": "StarCraft"
+  },
+  {
+    "id": "vjr_037",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué compañía escocesa creó 'Lemmings' y el primer 'Grand Theft Auto' antes de ser Rockstar North?",
+    "emojis": "🏴󠁧󠁢󠁳󠁣󠁴󠁿 🚗 💾",
+    "opciones": ["DMA Design", "Bungie", "Bullfrog", "Midway"],
+    "respuesta_correcta": "DMA Design"
+  },
+  {
+    "id": "vjr_038",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama la yegua leal que Link cabalga en 'The Legend of Zelda: Ocarina of Time' (1998)?",
+    "emojis": "🗡️ 🛡️ 🐎",
+    "opciones": ["Epona", "Agro", "Roach", "Shadowmere"],
+    "respuesta_correcta": "Epona"
+  },
+  {
+    "id": "vjr_039",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué juego arcade de 1982 tenía como protagonista a una criatura naranja con trompa que saltaba cubos?",
+    "emojis": "🟧 🔺 👾",
+    "opciones": ["Q*bert", "Dig Dug", "BurgerTime", "Joust"],
+    "respuesta_correcta": "Q*bert"
+  },
+  {
+    "id": "vjr_040",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué consola de 16 bits de Sega utilizaba el famoso eslogan publicitario 'Genesis does what Nintendon't'?",
+    "emojis": "⚡ 🎮 📺",
+    "opciones": ["Sega Genesis", "Sega Master System", "Sega Saturn", "Sega CD"],
+    "respuesta_correcta": "Sega Genesis"
+  },
+  {
+    "id": "vjr_041",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el vampiro cazador protagonista y medio vampiro en 'Castlevania: Symphony of the Night'?",
+    "emojis": "🧛‍♂️ ⚔️ 🏰",
+    "opciones": ["Alucard", "Richter Belmont", "Simon Belmont", "Trevor Belmont"],
+    "respuesta_correcta": "Alucard"
+  },
+  {
+    "id": "vjr_042",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué juego de lucha de Midway causó gran controversia en 1992 por sus gráficos digitalizados y sangre?",
+    "emojis": "🩸 🥋 ⚡",
+    "opciones": ["Mortal Kombat", "Killer Instinct", "Primal Rage", "Pit-Fighter"],
+    "respuesta_correcta": "Mortal Kombat"
+  },
+  {
+    "id": "vjr_043",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué princesa debe rescatar el príncipe en el juego cinemático de plataformas 'Prince of Persia' (1989)?",
+    "emojis": "⏳ 🗡️ 🏰",
+    "opciones": ["La Princesa del Sultán", "Farah", "Zelda", "Tamina"],
+    "respuesta_correcta": "La Princesa del Sultán"
+  },
+  {
+    "id": "vjr_044",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿En qué año se lanzó el fenómeno 'Pokémon Edición Roja y Edición Azul' en Norteamérica?",
+    "emojis": "🔴 🔵 🎮",
+    "opciones": ["1998", "1996", "1999", "1997"],
+    "respuesta_correcta": "1998"
+  },
+  {
+    "id": "vjr_045",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué accesorio de pistola óptica utilizaban los jugadores de NES para cazar patos en 'Duck Hunt'?",
+    "emojis": "🦆 🐕 🔫",
+    "opciones": ["NES Zapper", "Super Scope", "Light Phaser", "Menacer"],
+    "respuesta_correcta": "NES Zapper"
+  },
+  {
+    "id": "vjr_046",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama el científico loco villano de la franquicia 'Mega Man'?",
+    "emojis": "👴 🤖 ⚡",
+    "opciones": ["Dr. Wily", "Dr. Eggman", "Dr. Light", "Dr. Neo Cortex"],
+    "respuesta_correcta": "Dr. Wily"
+  },
+  {
+    "id": "vjr_047",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué clásico juego de arcade de Namco de 1981 presentaba una nave disparando a enjambres de insectos espaciales?",
+    "emojis": "🚀 🐝 🌌",
+    "opciones": ["Galaga", "Xevious", "Gyruss", "Centipede"],
+    "respuesta_correcta": "Galaga"
+  },
+  {
+    "id": "vjr_048",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cuál es el título del aclamado juego de rol desarrollado por Squaresoft para Super Nintendo en 1995?",
+    "emojis": "⏳ 🗡️ 🦕",
+    "opciones": ["Chrono Trigger", "Secret of Mana", "EarthBound", "Breath of Fire"],
+    "respuesta_correcta": "Chrono Trigger"
+  },
+  {
+    "id": "vjr_049",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Qué vehículo de carreras antigravitatorio pilotea el Capitán Falcon en 'F-Zero'?",
+    "emojis": "🏎️ ⚡ 🌌",
+    "opciones": ["Blue Falcon", "Fire Stingray", "Golden Fox", "Wild Goose"],
+    "respuesta_correcta": "Blue Falcon"
+  },
+  {
+    "id": "vjr_050",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "videojuegos_retro",
+    "pregunta": "¿Cómo se llama la inteligencia alienígena con apariencia de cerebro dentro de un frasco en 'Metroid'?",
+    "emojis": "🧠 👁️ 🧪",
+    "opciones": ["Mother Brain", "Kraid", "Ridley", "Phantoon"],
+    "respuesta_correcta": "Mother Brain"
   }
 ]

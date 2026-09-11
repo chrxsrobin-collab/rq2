@@ -1,98 +1,457 @@
 [
   {
-    "id": "c2000_001",
+    "id": "c2k_001",
     "categoria": "CINE",
-    "pregunta": "¿Qué director dirigió 'Gladiator' (Gladiador) en el año 2000?",
-    "emojis": "⚔️ 🏛️ 🦁",
-    "opciones": ["Ridley Scott", "Steven Spielberg", "James Cameron", "Peter Jackson"],
-    "respuesta_correcta": "Ridley Scott"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al gladiador Máximo Décimo Meridio en 'Gladiator' (2000)?",
+    "emojis": "🗡️ 🏛️ 🦁",
+    "opciones": ["Russell Crowe", "Joaquin Phoenix", "Mel Gibson", "Gerard Butler"],
+    "respuesta_correcta": "Russell Crowe"
   },
   {
-    "id": "c2000_002",
+    "id": "c2k_002",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor interpretó al Capitán Jack Sparrow en 'Piratas del Caribe' (2003)?",
-    "emojis": "🏴‍☠️ ⚓ 🦜",
-    "opciones": ["Johnny Depp", "Orlando Bloom", "Geoffrey Rush", "Brad Pitt"],
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama la criatura obsesionada con el Anillo Único en 'The Lord of the Rings'?",
+    "emojis": "💍 🐟 🌋",
+    "opciones": ["Gollum", "Dobby", "Sauron", "Saruman"],
+    "respuesta_correcta": "Gollum"
+  },
+  {
+    "id": "c2k_003",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué superhéroe arácnido interpretó Tobey Maguire en el filme de 2002?",
+    "emojis": "🕷️ 🕸️ 🏙️",
+    "opciones": ["Spider-Man", "Daredevil", "Ant-Man", "Nightcrawler"],
+    "respuesta_correcta": "Spider-Man"
+  },
+  {
+    "id": "c2k_004",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película de Pixar de 2003 sigue la búsqueda de un pez payaso en el océano?",
+    "emojis": "🐠 🌊 🦈",
+    "opciones": ["Finding Nemo", "Shark Tale", "A Bug's Life", "Monsters, Inc."],
+    "respuesta_correcta": "Finding Nemo"
+  },
+  {
+    "id": "c2k_005",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama el villano con sierra eléctrica y acertijos macabros de 'Saw' (2004)?",
+    "emojis": "🧩 🩸 🚲",
+    "opciones": ["Jigsaw", "Leatherface", "Ghostface", "Pinhead"],
+    "respuesta_correcta": "Jigsaw"
+  },
+  {
+    "id": "c2k_006",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actriz dio vida a Elle Woods en la comedia 'Legally Blonde' (2001)?",
+    "emojis": "👱‍♀️ 💖 🐶",
+    "opciones": ["Reese Witherspoon", "Cameron Diaz", "Alicia Silverstone", "Drew Barrymore"],
+    "respuesta_correcta": "Reese Witherspoon"
+  },
+  {
+    "id": "c2k_007",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿En qué película de 2001 un ogro verde rescata a la princesa Fiona de una torre?",
+    "emojis": "🧅 🏰 🐴",
+    "opciones": ["Shrek", "Monsters, Inc.", "Ice Age", "Madagascar"],
+    "respuesta_correcta": "Shrek"
+  },
+  {
+    "id": "c2k_008",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al excéntrico pirata Jack Sparrow en 'Pirates of the Caribbean' (2003)?",
+    "emojis": "🏴‍☠️ 🧭 🦜",
+    "opciones": ["Johnny Depp", "Orlando Bloom", "Geoffrey Rush", "Javier Bardem"],
     "respuesta_correcta": "Johnny Depp"
   },
   {
-    "id": "c2000_003",
+    "id": "c2k_009",
     "categoria": "CINE",
-    "pregunta": "¿Cuál fue la primera película de la trilogía de 'El Señor de los Anillos' (2001)?",
-    "emojis": "💍 🧙‍♂️ 🌋",
-    "opciones": ["La Comunidad del Anillo", "Las Dos Torres", "El Retorno del Rey", "El Hobbit"],
-    "respuesta_correcta": "La Comunidad del Anillo"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director lideró la trilogía fantástica de 'The Lord of the Rings' iniciada en 2001?",
+    "emojis": "🧙‍♂️ 🗡️ 👑",
+    "opciones": ["Peter Jackson", "George Lucas", "Christopher Nolan", "Alfonso Cuarón"],
+    "respuesta_correcta": "Peter Jackson"
   },
   {
-    "id": "c2000_004",
+    "id": "c2k_010",
     "categoria": "CINE",
-    "pregunta": "¿Quién interpretó al Joker en 'El Caballero Oscuro' (The Dark Knight, 2008)?",
-    "emojis": "🃏 🦇 🤡",
-    "opciones": ["Heath Ledger", "Jack Nicholson", "Joaquin Phoenix", "Jared Leto"],
-    "respuesta_correcta": "Heath Ledger"
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama el protagonista amnésico con tatuajes en 'Memento' (2000)?",
+    "emojis": "📸 📝 🔍",
+    "opciones": ["Leonard Shelby", "Teddy Gammell", "Patrick Bateman", "John Doe"],
+    "respuesta_correcta": "Leonard Shelby"
   },
   {
-    "id": "c2000_005",
+    "id": "c2k_011",
     "categoria": "CINE",
-    "pregunta": "¿Qué estudio de animación estrenó 'Shrek' en el año 2001?",
-    "emojis": "🧅 🐴 🏰",
-    "opciones": ["DreamWorks", "Pixar", "Disney", "Blue Sky"],
-    "respuesta_correcta": "DreamWorks"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director mexicano estrenó el aclamado filme de fantasía oscura 'El laberinto del fauno' (2006)?",
+    "emojis": "🧚 ⏳ 👁️",
+    "opciones": ["Guillermo del Toro", "Alejandro G. Iñárritu", "Alfonso Cuarón", "Robert Rodriguez"],
+    "respuesta_correcta": "Guillermo del Toro"
   },
   {
-    "id": "c2000_006",
+    "id": "c2k_012",
     "categoria": "CINE",
-    "pregunta": "¿Qué película de James Cameron recaudó cifras récord en 2009 con los Na'vi?",
-    "emojis": "🔵 🏹 🌿",
-    "opciones": ["Avatar", "Titanic", "Terminator Salvation", "District 9"],
-    "respuesta_correcta": "Avatar"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué saga cinematográfica de magos debutó en 2001 con 'La piedra filosofal'?",
+    "emojis": "⚡ 👓 🧙",
+    "opciones": ["Harry Potter", "Percy Jackson", "Las Crónicas de Narnia", "Eragon"],
+    "respuesta_correcta": "Harry Potter"
   },
   {
-    "id": "c2000_007",
+    "id": "c2k_013",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor encarnó a Spider-Man en la trilogía dirigida por Sam Raimi (2002-2007)?",
-    "emojis": "🕷️ 🕸️ 🏙️",
-    "opciones": ["Tobey Maguire", "Andrew Garfield", "Tom Holland", "James Franco"],
-    "respuesta_correcta": "Tobey Maguire"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director estuvo a cargo de la cinta musical 'Moulin Rouge!' (2001)?",
+    "emojis": "💃 🎩 🗼",
+    "opciones": ["Baz Luhrmann", "Rob Marshall", "Damien Chazelle", "Danny Boyle"],
+    "respuesta_correcta": "Baz Luhrmann"
   },
   {
-    "id": "c2000_008",
+    "id": "c2k_014",
     "categoria": "CINE",
-    "pregunta": "¿En qué película de 2003 un pez payaso busca a su hijo en Sídney?",
-    "emojis": "🐠 🌊 🐢",
-    "opciones": ["Buscando a Nemo", "El Espantatiburones", "Madagascar", "Happy Feet"],
-    "respuesta_correcta": "Buscando a Nemo"
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama la criatura peluda azul que asusta niños en 'Monsters, Inc.' (2001)?",
+    "emojis": "🚪 👁️ 💙",
+    "opciones": ["James P. Sullivan", "Mike Wazowski", "Randall Boggs", "George Sanderson"],
+    "respuesta_correcta": "James P. Sullivan"
   },
   {
-    "id": "c2000_009",
+    "id": "c2k_015",
     "categoria": "CINE",
-    "pregunta": "¿Quién protagonizó 'Kill Bill: Vol. 1' (2003) vestida con el mítico mono amarillo?",
-    "emojis": "🗡️ 🥋 🩸",
-    "opciones": ["Uma Thurman", "Lucy Liu", "Daryl Hannah", "Vivica A. Fox"],
-    "respuesta_correcta": "Uma Thurman"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué cineasta dirigió la sangrienta película de artes marciales y venganza 'Kill Bill: Vol. 1' (2003)?",
+    "emojis": "🗡️ 🟡 🩸",
+    "opciones": ["Quentin Tarantino", "Robert Rodriguez", "Guy Ritchie", "David Fincher"],
+    "respuesta_correcta": "Quentin Tarantino"
   },
   {
-    "id": "c2000_010",
+    "id": "c2k_016",
     "categoria": "CINE",
-    "pregunta": "¿Qué película de 2001 dirigida por Jean-Pierre Jeunet sigue la vida de una camarera parisina?",
-    "emojis": "🥄 📸 🗼",
-    "opciones": ["Amélie", "Moulin Rouge!", "Chocolat", "La Môme"],
-    "respuesta_correcta": "Amélie"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al mutante Wolverine en el debut de 'X-Men' en el año 2000?",
+    "emojis": "🐺 ⚔️ 🧬",
+    "opciones": ["Hugh Jackman", "Patrick Stewart", "Ian McKellen", "James Marsden"],
+    "respuesta_correcta": "Hugh Jackman"
   },
   {
-    "id": "c2000_011",
+    "id": "c2k_017",
     "categoria": "CINE",
-    "pregunta": "¿Qué película de Pixar de 2008 está protagonizada por un pequeño robot compactador de basura?",
-    "emojis": "🤖 🚀 🌿",
-    "opciones": ["WALL-E", "Robots", "Cars", "Up"],
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película de carreras callejeras protagonizada por Vin Diesel y Paul Walker inició en 2001?",
+    "emojis": "🏎️ 💨 🔧",
+    "opciones": ["The Fast and the Furious", "Need for Speed", "Gone in 60 Seconds", "2 Fast 2 Furious"],
+    "respuesta_correcta": "The Fast and the Furious"
+  },
+  {
+    "id": "c2k_018",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cuál es el nombre del león en la película animada 'Madagascar' (2005)?",
+    "emojis": "🦁 🦓 🚢",
+    "opciones": ["Alex", "Marty", "Melman", "Gloria"],
+    "respuesta_correcta": "Alex"
+  },
+  {
+    "id": "c2k_019",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor protagonizó al espía Jason Bourne en 'The Bourne Identity' (2002)?",
+    "emojis": "🔫 🏃‍♂️ 🪪",
+    "opciones": ["Matt Damon", "Ben Affleck", "Mark Wahlberg", "Jeremy Renner"],
+    "respuesta_correcta": "Matt Damon"
+  },
+  {
+    "id": "c2k_020",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película animada japonesa de Studio Ghibli ganó el Óscar a Mejor Película de Animación en 2003?",
+    "emojis": "🐉 🏮 🐷",
+    "opciones": ["El viaje de Chihiro", "La princesa Mononoke", "El castillo ambulante", "Ponyo"],
+    "respuesta_correcta": "El viaje de Chihiro"
+  },
+  {
+    "id": "c2k_021",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué cineasta dirigió el reinicio superheroico 'Batman Begins' en 2005?",
+    "emojis": "🦇 🏙️ 🌑",
+    "opciones": ["Christopher Nolan", "Tim Burton", "Zack Snyder", "Sam Raimi"],
+    "respuesta_correcta": "Christopher Nolan"
+  },
+  {
+    "id": "c2k_022",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor encarnó al multimillonario Tony Stark en 'Iron Man' (2008)?",
+    "emojis": "🤖 💥 🕶️",
+    "opciones": ["Robert Downey Jr.", "Tom Cruise", "Edward Norton", "Christian Bale"],
+    "respuesta_correcta": "Robert Downey Jr."
+  },
+  {
+    "id": "c2k_023",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama el entrañable robot compactador de basura de Pixar en el filme de 2008?",
+    "emojis": "🤖 🗑️ 🌱",
+    "opciones": ["WALL-E", "EVE", "Baymax", "Bender"],
     "respuesta_correcta": "WALL-E"
   },
   {
-    "id": "c2000_012",
+    "id": "c2k_024",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor dio vida a Wolverine por primera vez en 'X-Men' (2000)?",
-    "emojis": "🐺 ⚡ 🦾",
-    "opciones": ["Hugh Jackman", "Russell Crowe", "Patrick Stewart", "Ian McKellen"],
-    "respuesta_correcta": "Hugh Jackman"
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al Joker de forma magistral en 'The Dark Knight' (2008)?",
+    "emojis": "🃏 🦇 🤡",
+    "opciones": ["Heath Ledger", "Joaquin Phoenix", "Jack Nicholson", "Jared Leto"],
+    "respuesta_correcta": "Heath Ledger"
+  },
+  {
+    "id": "c2k_025",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película de James Cameron de 2009 revolucionó el cine con su tecnología 3D en el planeta Pandora?",
+    "emojis": "🌿 🏹 🌌",
+    "opciones": ["Avatar", "Titanic", "Alita", "Solaris"],
+    "respuesta_correcta": "Avatar"
+  },
+  {
+    "id": "c2k_026",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama el temible villano con tentáculos mecánicos en 'Spider-Man 2' (2004)?",
+    "emojis": "🐙 👓 ⚡",
+    "opciones": ["Doctor Octopus", "Green Goblin", "Venom", "Sandman"],
+    "respuesta_correcta": "Doctor Octopus"
+  },
+  {
+    "id": "c2k_027",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película de 2006 protagonizada por Anne Hathaway y Meryl Streep retrata el mundo editorial de la moda?",
+    "emojis": "👠 👗 ☕",
+    "opciones": ["The Devil Wears Prada", "Confessions of a Shopaholic", "Sex and the City", "Clueless"],
+    "respuesta_correcta": "The Devil Wears Prada"
+  },
+  {
+    "id": "c2k_028",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cuál es el nombre del oso panda aficionado al kung fu en la película de 2008?",
+    "emojis": "🐼 🥟 🥋",
+    "opciones": ["Po", "Shifu", "Tai Lung", "Oogway"],
+    "respuesta_correcta": "Po"
+  },
+  {
+    "id": "c2k_029",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor protagonizó la comedia fantástica 'Bruce Almighty' (2003) adquiriendo poderes divinos?",
+    "emojis": "⚡ 📺 👔",
+    "opciones": ["Jim Carrey", "Adam Sandler", "Steve Carell", "Ben Stiller"],
+    "respuesta_correcta": "Jim Carrey"
+  },
+  {
+    "id": "c2k_030",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actriz dio vida a Regina George en la película juvenil de culto 'Mean Girls' (2004)?",
+    "emojis": "💅 🎀 💄",
+    "opciones": ["Rachel McAdams", "Lindsay Lohan", "Amanda Seyfried", "Lacey Chabert"],
+    "respuesta_correcta": "Rachel McAdams"
+  },
+  {
+    "id": "c2k_031",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿En qué año se estrenó 'Casino Royale', marcando el debut de Daniel Craig como James Bond?",
+    "emojis": "🍸 🎰 🤵",
+    "opciones": ["2006", "2004", "2008", "2002"],
+    "respuesta_correcta": "2006"
+  },
+  {
+    "id": "c2k_032",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director mexicano estuvo a cargo de 'Harry Potter y el prisionero de Azkaban' (2004)?",
+    "emojis": "🧙‍♂️ 🐺 ⏳",
+    "opciones": ["Alfonso Cuarón", "Guillermo del Toro", "Alejandro G. Iñárritu", "Chris Columbus"],
+    "respuesta_correcta": "Alfonso Cuarón"
+  },
+  {
+    "id": "c2k_033",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama la pequeña rata cocinera prodigio en 'Ratatouille' (2007)?",
+    "emojis": "🐀 🧀 👨‍🍳",
+    "opciones": ["Remy", "Emile", "Linguini", "Gusteau"],
+    "respuesta_correcta": "Remy"
+  },
+  {
+    "id": "c2k_034",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué cinta de terror de 2002 popularizó la cinta VHS maldita y al espectro Samara Morgan?",
+    "emojis": "📼 📺 井",
+    "opciones": ["The Ring", "The Grudge", "Dark Water", "One Missed Call"],
+    "respuesta_correcta": "The Ring"
+  },
+  {
+    "id": "c2k_035",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al líder espartano Leónidas en '300' (2006)?",
+    "emojis": "🛡️ 🗡️ 🩸",
+    "opciones": ["Gerard Butler", "Michael Fassbender", "David Wenham", "Dominic West"],
+    "respuesta_correcta": "Gerard Butler"
+  },
+  {
+    "id": "c2k_036",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actriz encarnó a Bella Swan en la adaptación de 'Twilight' (2008)?",
+    "emojis": "🧛‍♂️ 🌲 🐺",
+    "opciones": ["Kristen Stewart", "Emma Watson", "Dakota Fanning", "Ashley Greene"],
+    "respuesta_correcta": "Kristen Stewart"
+  },
+  {
+    "id": "c2k_037",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama el protagonista anciano que hace volar su casa con globos en 'Up' (2009)?",
+    "emojis": "🎈 🏠 👴",
+    "opciones": ["Carl Fredricksen", "Charles Muntz", "Russell", "Dug"],
+    "respuesta_correcta": "Carl Fredricksen"
+  },
+  {
+    "id": "c2k_038",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Quién dirigió la galardonada cinta policíaca 'The Departed' (2006)?",
+    "emojis": "👮‍♂️ 🐀 ☘️",
+    "opciones": ["Martin Scorsese", "Francis Ford Coppola", "Michael Mann", "Brian De Palma"],
+    "respuesta_correcta": "Martin Scorsese"
+  },
+  {
+    "id": "c2k_039",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué automóvil viviente de carreras protagoniza la película 'Cars' (2006)?",
+    "emojis": "🏎️ ⚡ 🌵",
+    "opciones": ["Lightning McQueen", "Mater", "Doc Hudson", "Chick Hicks"],
+    "respuesta_correcta": "Lightning McQueen"
+  },
+  {
+    "id": "c2k_040",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué película de 2004 trata sobre dos amigos que borran sus recuerdos de una relación amorosa?",
+    "emojis": "🧠 ❄️ 💙",
+    "opciones": [
+      "Eternal Sunshine of the Spotless Mind",
+      "Lost in Translation",
+      "Her",
+      "The Truman Show"
+    ],
+    "respuesta_correcta": "Eternal Sunshine of the Spotless Mind"
+  },
+  {
+    "id": "c2k_041",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor interpretó al boxeador James J. Braddock en 'Cinderella Man' (2005)?",
+    "emojis": "🥊 🏆 🍀",
+    "opciones": ["Russell Crowe", "Mark Wahlberg", "Christian Bale", "Paul Giamatti"],
+    "respuesta_correcta": "Russell Crowe"
+  },
+  {
+    "id": "c2k_042",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director de comedia lideró la parodia policíaca 'Hot Fuzz' y 'Shaun of the Dead'?",
+    "emojis": "🧟‍♂️ 🍺 🏏",
+    "opciones": ["Edgar Wright", "Taika Waititi", "Seth Rogen", "Judd Apatow"],
+    "respuesta_correcta": "Edgar Wright"
+  },
+  {
+    "id": "c2k_043",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué criatura fantástica adopta una familia en la película 'Stuart Little 2' (2002)?",
+    "emojis": "🐭 🚗 🐱",
+    "opciones": ["Margalo (un pájaro)", "Un gato persa", "Un perro callejero", "Un pez dorado"],
+    "respuesta_correcta": "Margalo (un pájaro)"
+  },
+  {
+    "id": "c2k_044",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿En qué cinta de 2007 Javier Bardem interpretó al frío asesino Anton Chigurh?",
+    "emojis": "🪙 🌾 🩸",
+    "opciones": ["No Country for Old Men", "Biutiful", "Vicky Cristina Barcelona", "Collateral"],
+    "respuesta_correcta": "No Country for Old Men"
+  },
+  {
+    "id": "c2k_045",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué cineasta dirigió la adaptación de 'Charlie and the Chocolate Factory' en 2005?",
+    "emojis": "🍫 🎩 🏭",
+    "opciones": ["Tim Burton", "Wes Anderson", "Terry Gilliam", "Sam Raimi"],
+    "respuesta_correcta": "Tim Burton"
+  },
+  {
+    "id": "c2k_046",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Cómo se llama la princesa guerrera que rescata a su pueblo en 'Mulan II' (2004)?",
+    "emojis": "🗡️ 🐉 🌸",
+    "opciones": ["Mulan", "Pocahontas", "Jasmine", "Raya"],
+    "respuesta_correcta": "Mulan"
+  },
+  {
+    "id": "c2k_047",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué director estrenó la épica cinta de acción espacial 'Transformers' en 2007?",
+    "emojis": "🤖 🚗 💥",
+    "opciones": ["Michael Bay", "Roland Emmerich", "J.J. Abrams", "Zack Snyder"],
+    "respuesta_correcta": "Michael Bay"
+  },
+  {
+    "id": "c2k_048",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué actor encarnó a Willy Wonka en la versión cinematográfica de 2005?",
+    "emojis": "🎩 🍬 🍭",
+    "opciones": ["Johnny Depp", "Gene Wilder", "Jim Carrey", "Ewan McGregor"],
+    "respuesta_correcta": "Johnny Depp"
+  },
+  {
+    "id": "c2k_049",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué cinta animada de 2002 presentó a una niña hawaiana y a un experimento extraterrestre azul?",
+    "emojis": "🌺 🛸 🎸",
+    "opciones": ["Lilo & Stitch", "Moana", "Treasure Planet", "Atlantis"],
+    "respuesta_correcta": "Lilo & Stitch"
+  },
+  {
+    "id": "c2k_050",
+    "categoria": "CINE",
+    "pack": "cine_2000",
+    "pregunta": "¿Qué comedia de 2009 sigue las desventuras de cuatro amigos tras una despedida de soltero en Las Vegas?",
+    "emojis": "🎰 🐯 👶",
+    "opciones": ["The Hangover", "Superbad", "Step Brothers", "Old School"],
+    "respuesta_correcta": "The Hangover"
   }
 ]

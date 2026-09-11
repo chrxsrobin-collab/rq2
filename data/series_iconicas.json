@@ -2,7 +2,8 @@
   {
     "id": "ser_001",
     "categoria": "TV",
-    "pregunta": "¿Cómo se llamaba la cafetería donde se reunían los protagonistas de 'Friends'?",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llama la cafetería de Nueva York donde el grupo de 'Friends' se reunía habitualmente?",
     "emojis": "☕ 🛋️ 🗽",
     "opciones": ["Central Perk", "Monk's Diner", "MacLaren's", "The Peach Pit"],
     "respuesta_correcta": "Central Perk"
@@ -10,89 +11,447 @@
   {
     "id": "ser_002",
     "categoria": "TV",
-    "pregunta": "¿Cómo se llama la ciudad donde viven Los Simpson?",
-    "emojis": "🍩 👨‍👩‍👧‍👦 📺",
-    "opciones": ["Springfield", "Shelbyville", "Quahog", "South Park"],
-    "respuesta_correcta": "Springfield"
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué ocupación oficial de fachada tenía Tony Soprano en la serie 'The Sopranos'?",
+    "emojis": "🥩 💼 🚬",
+    "opciones": ["Gestión de residuos", "Club nocturno", "Carnicería familiar", "Constructora urbana"],
+    "respuesta_correcta": "Gestión de residuos"
   },
   {
     "id": "ser_003",
     "categoria": "TV",
-    "pregunta": "¿Quiénes eran los agentes del FBI protagonistas de 'The X-Files'?",
-    "emojis": "👽 🛸 📁",
-    "opciones": ["Mulder y Scully", "Fox y Dana", "Starsky y Hutch", "Benson y Stabler"],
-    "respuesta_correcta": "Mulder y Scully"
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué número de vuelo se estrelló en la misteriosa isla en 'Lost' (2004)?",
+    "emojis": "✈️ 🏝️ 🔢",
+    "opciones": ["Oceanic 815", "Oceanic 777", "Pacific 815", "Ajira 316"],
+    "respuesta_correcta": "Oceanic 815"
   },
   {
     "id": "ser_004",
     "categoria": "TV",
-    "pregunta": "¿Qué actor protagonizó 'El Príncipe de Bel-Air' (The Fresh Prince)?",
-    "emojis": "👑 🏀 🧢",
-    "opciones": ["Will Smith", "Alfonso Ribeiro", "Martin Lawrence", "Eddie Murphy"],
-    "respuesta_correcta": "Will Smith"
+    "pack": "series_iconicas",
+    "pregunta": "¿Cuál era la frase de optimismo alienígena en el póster del agente Fox Mulder en 'The X-Files'?",
+    "emojis": "🛸 👽 🌲",
+    "opciones": ["I Want to Believe", "The Truth is Out There", "Trust No One", "Watch the Skies"],
+    "respuesta_correcta": "I Want to Believe"
   },
   {
     "id": "ser_005",
     "categoria": "TV",
-    "pregunta": "¿Cómo se llama la cazavampiros interpretada por Sarah Michelle Gellar?",
-    "emojis": "🧛‍♂️ 🗡️ ⚰️",
-    "opciones": ["Buffy Summers", "Sabrina Spellman", "Dana Scully", "Phoebe Halliwell"],
-    "respuesta_correcta": "Buffy Summers"
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué químico y profesor de secundaria adopta el alias 'Heisenberg' en 'Breaking Bad' (2008)?",
+    "emojis": "🧪 ⚗️ 🏜️",
+    "opciones": ["Walter White", "Jesse Pinkman", "Hank Schrader", "Saul Goodman"],
+    "respuesta_correcta": "Walter White"
   },
   {
     "id": "ser_006",
     "categoria": "TV",
-    "pregunta": "¿Qué serie de los 90 seguía a un grupo de socorristas en las playas de Malibú?",
-    "emojis": "🏖️ 🏊‍♂️ 🛟",
-    "opciones": ["Baywatch", "Beverly Hills 90210", "Melrose Place", "Dawson's Creek"],
-    "respuesta_correcta": "Baywatch"
+    "pack": "series_iconicas",
+    "pregunta": "¿En qué pueblo boscoso y enigmático transcurre la investigación del agente Cooper en 'Twin Peaks'?",
+    "emojis": "☕ 🌲 🦉",
+    "opciones": ["Twin Peaks", "Wayward Pines", "Silent Hill", "Riverdale"],
+    "respuesta_correcta": "Twin Peaks"
   },
   {
     "id": "ser_007",
     "categoria": "TV",
-    "pregunta": "¿Cómo se llamaba el vecino fastidioso de los Winslow en 'Cosas de casa'?",
-    "emojis": "🤓 👓 👔",
-    "opciones": ["Steve Urkel", "Carlton Banks", "Screech Powers", "Zack Morris"],
-    "respuesta_correcta": "Steve Urkel"
+    "pack": "series_iconicas",
+    "pregunta": "¿A qué adinerado vecindario californiano es enviado Will Smith en 'The Fresh Prince of Bel-Air'?",
+    "emojis": "👑 🏀 🧢",
+    "opciones": ["Bel-Air", "Beverly Hills", "Malibu", "Pasadena"],
+    "respuesta_correcta": "Bel-Air"
   },
   {
     "id": "ser_008",
     "categoria": "TV",
-    "pregunta": "¿Quién era el magnate jefe de Homer Simpson en la central nuclear?",
-    "emojis": "👴 🏭 💵",
-    "opciones": ["Mr. Burns", "Waylon Smithers", "Ned Flanders", "Barney Gumble"],
-    "respuesta_correcta": "Mr. Burns"
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llama la empresa de diseño de modas donde ingresa Beatriz en 'Yo soy Betty, la fea'?",
+    "emojis": "👓 💼 👗",
+    "opciones": ["Ecomoda", "Terramoda", "Moda Express", "Fashion Colombia"],
+    "respuesta_correcta": "Ecomoda"
   },
   {
     "id": "ser_009",
     "categoria": "TV",
-    "pregunta": "¿Qué serie de misterio surrealista ambientada en Washington fue dirigida por David Lynch?",
-    "emojis": "🌲 🦉 ☕",
-    "opciones": ["Twin Peaks", "The Twilight Zone", "Millennium", "Lost"],
-    "respuesta_correcta": "Twin Peaks"
+    "pack": "series_iconicas",
+    "pregunta": "¿Quién era el vecino excéntrico que siempre entraba derrapando al apartamento de Jerry en 'Seinfeld'?",
+    "emojis": "🚪 🥪 🕺",
+    "opciones": ["Cosmo Kramer", "George Costanza", "Newman", "Uncle Leo"],
+    "respuesta_correcta": "Cosmo Kramer"
   },
   {
     "id": "ser_010",
     "categoria": "TV",
-    "pregunta": "¿Cómo se llamaba el dinosaurio bebé que decía '¡Tú no mami!' en 'Dinosaurios'?",
-    "emojis": "🦖 👶 🍳",
-    "opciones": ["Bebé Sinclair", "Junior", "Earl Jr.", "Dino"],
-    "respuesta_correcta": "Bebé Sinclair"
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué vehículo con inteligencia artificial y escáner rojo conducía Michael Knight en 'Knight Rider'?",
+    "emojis": "🏎️ 🔴 🤖",
+    "opciones": ["KITT", "KARR", "DMC-12", "Cobra"],
+    "respuesta_correcta": "KITT"
   },
   {
     "id": "ser_011",
     "categoria": "TV",
-    "pregunta": "¿Qué famosa serie de ciencia ficción de los 90 ocurría a bordo de la nave Enterprise-D?",
-    "emojis": "🚀 🖖 🌌",
-    "opciones": ["Star Trek: The Next Generation", "Babylon 5", "Stargate SG-1", "Farscape"],
-    "respuesta_correcta": "Star Trek: The Next Generation"
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la icónica villana interpretada por Itatí Cantoral en 'María la del Barrio'?",
+    "emojis": "🦽 🔪 🩸",
+    "opciones": ["Soraya Montenegro", "Paola Bracho", "Rubí Pérez", "Catalina Creel"],
+    "respuesta_correcta": "Soraya Montenegro"
   },
   {
     "id": "ser_012",
     "categoria": "TV",
-    "pregunta": "¿Qué pandilla de instituto protagonizaba 'Salvados por la campana'?",
-    "emojis": "🔔 🏫 🎒",
-    "opciones": ["Zack, Kelly, Slater y amigos", "Dawson, Joey y Pacey", "Brandon y Brenda", "Ross, Chandler y Joey"],
-    "respuesta_correcta": "Zack, Kelly, Slater y amigos"
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llama el bar de Boston donde transcurre la comedia donde 'todos saben tu nombre'?",
+    "emojis": "🍻 🥜 🚪",
+    "opciones": ["Cheers", "MacLaren's", "Moe's Tavern", "Paddy's Pub"],
+    "respuesta_correcta": "Cheers"
+  },
+  {
+    "id": "ser_013",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué actor interpretó al doctor diagnosticador cascarrabias Gregory House en 'House M.D.' (2004)?",
+    "emojis": "🩺 💊 🦯",
+    "opciones": ["Hugh Laurie", "Patrick Dempsey", "Bryan Cranston", "David Tennant"],
+    "respuesta_correcta": "Hugh Laurie"
+  },
+  {
+    "id": "ser_014",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba el alienígena del planeta Melmac que vivía oculto con la familia Tanner?",
+    "emojis": "🛸 🐱 🥪",
+    "opciones": ["ALF", "E.T.", "Mork", "Chewbacca"],
+    "respuesta_correcta": "ALF"
+  },
+  {
+    "id": "ser_015",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba el colegio internado de élite en la telenovela argentina 'Rebelde Way' (2002)?",
+    "emojis": "🎒 🎸 🇦🇷",
+    "opciones": ["Elite Way School", "Las Encinas", "Colegio Arrayanes", "San Bartolomé"],
+    "respuesta_correcta": "Elite Way School"
+  },
+  {
+    "id": "ser_016",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué detective de homicidios vestía una clásica gabardina arrugada y preguntaba 'Solo una cosa más...'?",
+    "emojis": "🕵️‍♂️ 🧥 🚬",
+    "opciones": ["Columbo", "Kojak", "Magnum P.I.", "Monk"],
+    "respuesta_correcta": "Columbo"
+  },
+  {
+    "id": "ser_017",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cuál era la furgoneta de combate negra con franja roja utilizada en 'The A-Team'?",
+    "emojis": "🚐 💥 🎖️",
+    "opciones": ["GMC Vandura", "Ford Econoline", "Chevy Van", "Dodge Ram"],
+    "respuesta_correcta": "GMC Vandura"
+  },
+  {
+    "id": "ser_018",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llama la cazavampiros adolescente de Sunnydale interpretada por Sarah Michelle Gellar?",
+    "emojis": "🧛‍♂️ ⚰️ 🗡️",
+    "opciones": ["Buffy Summers", "Willow Rosenberg", "Faith Lehane", "Cordelia Chase"],
+    "respuesta_correcta": "Buffy Summers"
+  },
+  {
+    "id": "ser_019",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué trío de hermanos protagonizaba la exitosa telenovela colombiana 'Pasión de Gavilanes' (2003)?",
+    "emojis": "🤠 🐎 🌾",
+    "opciones": ["Los Hermanos Reyes", "Los Hermanos Elizondo", "Los Hermanos Guerrero", "Los Hermanos Peñalver"],
+    "respuesta_correcta": "Los Hermanos Reyes"
+  },
+  {
+    "id": "ser_020",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué serie de los 80 narraba la convivencia de cuatro mujeres de la tercera edad en Miami?",
+    "emojis": "👵 🍰 🌴",
+    "opciones": ["The Golden Girls", "Designing Women", "Murphy Brown", "Cheers"],
+    "respuesta_correcta": "The Golden Girls"
+  },
+  {
+    "id": "ser_021",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la guardería o empleo donde Fran Fine trabajaba en 'The Nanny' antes de ser niñera?",
+    "emojis": "💄 👗 👠",
+    "opciones": ["Tienda de vestidos de novia", "Secretaría escolar", "Hospital infantil", "Salón de cosméticos"],
+    "respuesta_correcta": "Tienda de vestidos de novia"
+  },
+  {
+    "id": "ser_022",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba el mayordomo refinado y sarcástico de la mansión Banks en 'The Fresh Prince'?",
+    "emojis": "🤵 🍽️ 👑",
+    "opciones": ["Geoffrey", "Alfred", "Niles", "Jeeves"],
+    "respuesta_correcta": "Geoffrey"
+  },
+  {
+    "id": "ser_023",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué actriz encarnó el doble papel de Paulina Martínez y Paola Bracho en 'La Usurpadora' (1998)?",
+    "emojis": "💄 🪞 👠",
+    "opciones": ["Gabriela Spanic", "Adela Noriega", "Thalía", "Lucero"],
+    "respuesta_correcta": "Gabriela Spanic"
+  },
+  {
+    "id": "ser_024",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿En qué ciudad de Florida combatían el crimen con trajes pastel Sonny Crockett y Ricardo Tubbs en 'Miami Vice'?",
+    "emojis": "🌴 🏎️ 🦩",
+    "opciones": ["Miami", "Orlando", "Tampa", "Key West"],
+    "respuesta_correcta": "Miami"
+  },
+  {
+    "id": "ser_025",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cuál era el código de barras y los números malditos que Desmond debía teclear en la escotilla de 'Lost'?",
+    "emojis": "📟 🔢 🏝️",
+    "opciones": ["4, 8, 15, 16, 23, 42", "4, 8, 12, 16, 20, 24", "1, 2, 3, 5, 8, 13", "7, 14, 21, 28, 35, 42"],
+    "respuesta_correcta": "4, 8, 15, 16, 23, 42"
+  },
+  {
+    "id": "ser_026",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué personaje de comedia bailaba 'El Pirulino' con melena larga y botas en 'Pedro el Escamoso'?",
+    "emojis": "🕺 👢 🇨🇴",
+    "opciones": ["Pedro Coral Tavera", "Armando Mendoza", "Juan Reyes", "Hugo Lombardi"],
+    "respuesta_correcta": "Pedro Coral Tavera"
+  },
+  {
+    "id": "ser_027",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿En qué formato televisivo de 24 horas cada temporada ocurría en tiempo real con Jack Bauer?",
+    "emojis": "⏱️ 🔫 💣",
+    "opciones": ["24", "Alias", "Homeland", "Prison Break"],
+    "respuesta_correcta": "24"
+  },
+  {
+    "id": "ser_028",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la prisión de máxima seguridad donde Michael Scofield ingresa en 'Prison Break'?",
+    "emojis": "⛓️ 🗺️ 🏢",
+    "opciones": ["Fox River", "Oswald", "Alcatraz", "San Quentin"],
+    "respuesta_correcta": "Fox River"
+  },
+  {
+    "id": "ser_029",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué actriz interpretó a la reportera Carrie Bradshaw en 'Sex and the City' (1998)?",
+    "emojis": "👠 🍸 🏙️",
+    "opciones": ["Sarah Jessica Parker", "Kim Cattrall", "Kristin Davis", "Cynthia Nixon"],
+    "respuesta_correcta": "Sarah Jessica Parker"
+  },
+  {
+    "id": "ser_030",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cuál era el apodo del grupo íntimo de amigas de Betty en 'Yo soy Betty, la fea'?",
+    "emojis": "👯‍♀️ ☕ 💅",
+    "opciones": ["El Cuartel de las Feas", "Las Chismosas de Ecomoda", "Las Terramodas", "El Club del Café"],
+    "respuesta_correcta": "El Cuartel de las Feas"
+  },
+  {
+    "id": "ser_031",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué agente especial del FBI investiga crímenes paranormales junto a Dana Scully en 'The X-Files'?",
+    "emojis": "🛸 🌲 🪪",
+    "opciones": ["Fox Mulder", "Walter Skinner", "Alex Krycek", "John Doggett"],
+    "respuesta_correcta": "Fox Mulder"
+  },
+  {
+    "id": "ser_032",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿En qué famosa serie de época publicitaria de los años 60 Don Draper es el director creativo?",
+    "emojis": "🥃 🚬 👔",
+    "opciones": ["Mad Men", "Boardwalk Empire", "The Americans", "Pan Am"],
+    "respuesta_correcta": "Mad Men"
+  },
+  {
+    "id": "ser_033",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué serie de socorristas en las playas de Santa Mónica lanzó al estrellato a Pamela Anderson?",
+    "emojis": "🏖️ 🏊‍♂️ 🛟",
+    "opciones": ["Baywatch", "Pacific Blue", "Melrose Place", "Sunset Beach"],
+    "respuesta_correcta": "Baywatch"
+  },
+  {
+    "id": "ser_034",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la matriarca con parche en el ojo y villana temida en 'Cuna de lobos' (1986)?",
+    "emojis": "👁️ 🐺 🩸",
+    "opciones": ["Catalina Creel", "Soraya Montenegro", "Paola Bracho", "Leonora Navarro"],
+    "respuesta_correcta": "Catalina Creel"
+  },
+  {
+    "id": "ser_035",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué serie de ciencia ficción de los 80 mostraba a invasores extraterrestres reptilianos comiendo ratones?",
+    "emojis": "🦎 🛸 🐭",
+    "opciones": ["V (Invasión Extraterrestre)", "Alien Nation", "Stargate", "Babylon 5"],
+    "respuesta_correcta": "V (Invasión Extraterrestre)"
+  },
+  {
+    "id": "ser_036",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba el perro que expresaba sus pensamientos en la telenovela mexicana 'Marimar'?",
+    "emojis": "🐶 💭 🏖️",
+    "opciones": ["Pulgoso", "Chispas", "Firulais", "Dinamita"],
+    "respuesta_correcta": "Pulgoso"
+  },
+  {
+    "id": "ser_037",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué profesión tenía Ross Geller en el grupo de amigos de 'Friends'?",
+    "emojis": "🦖 🦴 👔",
+    "opciones": ["Paleontólogo", "Arqueólogo", "Profesor de literatura", "Actor de comerciales"],
+    "respuesta_correcta": "Paleontólogo"
+  },
+  {
+    "id": "ser_038",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué serie de drama médico creada por Shonda Rhimes debutó en 2005 centrada en el hospital Seattle Grace?",
+    "emojis": "🩺 🏥 💉",
+    "opciones": ["Grey's Anatomy", "ER Emergencias", "Scrubs", "Chicago Med"],
+    "respuesta_correcta": "Grey's Anatomy"
+  },
+  {
+    "id": "ser_039",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llama el diseñador excéntrico de alta costura y rival de Betty en 'Yo soy Betty, la fea'?",
+    "emojis": "✂️ 👗 💅",
+    "opciones": ["Hugo Lombardi", "Armando Mendoza", "Mario Calderón", "Nicolás Mora"],
+    "respuesta_correcta": "Hugo Lombardi"
+  },
+  {
+    "id": "ser_040",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué detective forense de día y asesino justiciero de noche protagonizó la serie 'Dexter' (2006)?",
+    "emojis": "🩸 🔪 🛥️",
+    "opciones": ["Dexter Morgan", "James Doakes", "Angel Batista", "Brian Moser"],
+    "respuesta_correcta": "Dexter Morgan"
+  },
+  {
+    "id": "ser_041",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cuál era la frase de apertura habitual de los misteriosos audios en 'Mission: Impossible'?",
+    "emojis": "📼 💥 🕵️‍♂️",
+    "opciones": [
+      "Este mensaje se autodestruirá en cinco segundos",
+      "Su misión, si decide aceptarla",
+      "El cuartel general negará todo",
+      "Confidencialidad absoluta requerida"
+    ],
+    "respuesta_correcta": "Este mensaje se autodestruirá en cinco segundos"
+  },
+  {
+    "id": "ser_042",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué actor protagonizó al agente secreto e ingenioso que resolvía todo con una navaja suiza en 'MacGyver'?",
+    "emojis": "🔧 📎 💣",
+    "opciones": ["Richard Dean Anderson", "Tom Selleck", "David Hasselhoff", "Don Johnson"],
+    "respuesta_correcta": "Richard Dean Anderson"
+  },
+  {
+    "id": "ser_043",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿En qué pueblo rural transcurre la comedia 'Gilmore Girls' (2000)?",
+    "emojis": "☕ 🍂 🏘️",
+    "opciones": ["Stars Hollow", "Tree Hill", "Capeside", "Bluebell"],
+    "respuesta_correcta": "Stars Hollow"
+  },
+  {
+    "id": "ser_044",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué personaje de 'That '70s Show' solía amenazar a todos con 'poner mi pie en tu trasero'?",
+    "emojis": "👟 📺 💢",
+    "opciones": ["Red Forman", "Bob Pinciotti", "Eric Forman", "Leo"],
+    "respuesta_correcta": "Red Forman"
+  },
+  {
+    "id": "ser_045",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la empresa papelera donde transcurre la versión estadounidense de 'The Office' (2005)?",
+    "emojis": "📄 🏢 👔",
+    "opciones": ["Dunder Mifflin", "Wernham Hogg", "Sabre", "Vance Refrigeration"],
+    "respuesta_correcta": "Dunder Mifflin"
+  },
+  {
+    "id": "ser_046",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué detective privado con bigote y camisa hawaiana conducía un Ferrari rojo en Hawái?",
+    "emojis": "🏎️ 🌺 👨🏻",
+    "opciones": ["Thomas Magnum", "Jim Rockford", "Simon Templar", "Sonny Crockett"],
+    "respuesta_correcta": "Thomas Magnum"
+  },
+  {
+    "id": "ser_047",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba el club de striptease controlado por Tony Soprano en 'The Sopranos'?",
+    "emojis": "💃 🍸 💵",
+    "opciones": ["Bada Bing!", "Satriale's", "The Lollipop Club", "The Chesterfield"],
+    "respuesta_correcta": "Bada Bing!"
+  },
+  {
+    "id": "ser_048",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué actor interpretó al excéntrico jefe Michael Scott en 'The Office'?",
+    "emojis": "☕ 🏆 🏢",
+    "opciones": ["Steve Carell", "Rainn Wilson", "John Krasinski", "Ed Helms"],
+    "respuesta_correcta": "Steve Carell"
+  },
+  {
+    "id": "ser_049",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Qué famosa serie juvenil de misterio de 2004 seguía a una detective adolescente interpretada por Kristen Bell?",
+    "emojis": "📷 🔎 🎒",
+    "opciones": ["Veronica Mars", "Nancy Drew", "Pretty Little Liars", "Gossip Girl"],
+    "respuesta_correcta": "Veronica Mars"
+  },
+  {
+    "id": "ser_050",
+    "categoria": "TV",
+    "pack": "series_iconicas",
+    "pregunta": "¿Cómo se llamaba la serie animada de culto de MTV sobre dos adolescentes fanáticos del heavy metal?",
+    "emojis": "🎸 📺 🛋️",
+    "opciones": ["Beavis and Butt-Head", "Daria", "King of the Hill", "Clone High"],
+    "respuesta_correcta": "Beavis and Butt-Head"
   }
 ]

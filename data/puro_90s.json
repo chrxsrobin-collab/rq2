@@ -1,98 +1,452 @@
 [
   {
     "id": "p90_001",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué mascota virtual japonesa en forma de huevo causó furor en 1996?",
-    "emojis": "🥚 🐣 📟",
-    "opciones": ["Tamagotchi", "Furby", "Digimon", "Pikachu"],
-    "respuesta_correcta": "Tamagotchi"
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué himno del grunge de Nirvana en 1991 revolucionó la música alternativa?",
+    "emojis": "🎸 👶 🏊",
+    "opciones": ["Smells Like Teen Spirit", "Come as You Are", "Lithium", "Heart-Shaped Box"],
+    "respuesta_correcta": "Smells Like Teen Spirit"
   },
   {
     "id": "p90_002",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué banda liderada por Kurt Cobain popularizó el grunge con 'Smells Like Teen Spirit'?",
-    "emojis": "🎸 ⚡ 🌧️",
-    "opciones": ["Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains"],
-    "respuesta_correcta": "Nirvana"
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué director asombró al mundo en 1993 recreando dinosaurios en 'Jurassic Park'?",
+    "emojis": "🦖 🚙 🌴",
+    "opciones": ["Steven Spielberg", "James Cameron", "George Lucas", "Robert Zemeckis"],
+    "respuesta_correcta": "Steven Spielberg"
   },
   {
     "id": "p90_003",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué película de 1997 con Leonardo DiCaprio y Kate Winslet ganó 11 premios Óscar?",
-    "emojis": "🚢 🧊 💎",
-    "opciones": ["Titanic", "Armageddon", "Matrix", "Forrest Gump"],
-    "respuesta_correcta": "Titanic"
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué mascota virtual japonesa en forma de huevo requería cuidados diarios en 1996?",
+    "emojis": "🥚 👾 🍼",
+    "opciones": ["Tamagotchi", "Digimon", "Furby", "Pocket Pikachu"],
+    "respuesta_correcta": "Tamagotchi"
   },
   {
     "id": "p90_004",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué popular formato de audio digital comprimido nació en los 90 cambiando la música?",
-    "emojis": "🎵 💾 🎧",
-    "opciones": ["MP3", "WAV", "FLAC", "AAC"],
-    "respuesta_correcta": "MP3"
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿En qué cafetería neoyorquina pasaban las horas los protagonistas de 'Friends'?",
+    "emojis": "☕ 🛋️ 🗽",
+    "opciones": ["Central Perk", "Monk's Diner", "The Peach Pit", "MacLaren's"],
+    "respuesta_correcta": "Central Perk"
   },
   {
     "id": "p90_005",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué sistema operativo de Microsoft lanzado en 1995 introdujo el botón 'Inicio'?",
-    "emojis": "💻 🪟 💽",
-    "opciones": ["Windows 95", "Windows 98", "Windows 3.1", "Windows XP"],
-    "respuesta_correcta": "Windows 95"
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿En qué año llegó al mercado la consola Super Nintendo (SNES) en Norteamérica?",
+    "emojis": "🎮 📺 🇺🇸",
+    "opciones": ["1991", "1989", "1993", "1990"],
+    "respuesta_correcta": "1991"
   },
   {
     "id": "p90_006",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué quinteto femenino británico cantó 'Wannabe' en 1996?",
-    "emojis": "🇬🇧 👠 🎤",
-    "opciones": ["Spice Girls", "TLC", "Destiny's Child", "All Saints"],
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llamaba el quinteto británico femenino que popularizó 'Wannabe' en 1996?",
+    "emojis": "🇬🇧 ✌️ 👠",
+    "opciones": ["Spice Girls", "All Saints", "TLC", "Destiny's Child"],
     "respuesta_correcta": "Spice Girls"
   },
   {
     "id": "p90_007",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué juguete robótico peludo con pico y ojos grandes hablaba su propio idioma 'Furbish'?",
-    "emojis": "🧸 🦉 🗣️",
-    "opciones": ["Furby", "Tamagotchi", "Giga Pet", "Tickle Me Elmo"],
-    "respuesta_correcta": "Furby"
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué actor protagonizó al amigable y noble 'Forrest Gump' en el clásico de 1994?",
+    "emojis": "🍫 🏃‍♂️ 🪶",
+    "opciones": ["Tom Hanks", "Robin Williams", "John Travolta", "Kevin Costner"],
+    "respuesta_correcta": "Tom Hanks"
   },
   {
     "id": "p90_008",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué famoso programa de mensajería instantánea con flor verde sonaba '¡Uh-oh!'?",
-    "emojis": "🌼 💬 🔔",
-    "opciones": ["ICQ", "MSN Messenger", "AOL Instant Messenger", "Yahoo! Messenger"],
-    "respuesta_correcta": "ICQ"
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué agente del FBI investigaba sucesos paranormales junto a Dana Scully en 'The X-Files'?",
+    "emojis": "🛸 👽 🌲",
+    "opciones": ["Fox Mulder", "Walter Skinner", "John Doggett", "Alex Krycek"],
+    "respuesta_correcta": "Fox Mulder"
   },
   {
     "id": "p90_009",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué disco circular de plástico coleccionaban y jugaban los niños en los 90?",
-    "emojis": "💿 💥 🃏",
-    "opciones": ["Tazos (Pogs)", "Canicas", "Yoyos", "Cromos"],
-    "respuesta_correcta": "Tazos (Pogs)"
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿En qué año debutó la PlayStation original de Sony en el mercado japonés?",
+    "emojis": "💿 🕹️ 🇯🇵",
+    "opciones": ["1994", "1995", "1993", "1996"],
+    "respuesta_correcta": "1994"
   },
   {
     "id": "p90_010",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué famoso baile y canción de Los del Río sonó en todo el mundo en 1996?",
-    "emojis": "💃 🇪🇸 🎶",
-    "opciones": ["Macarena", "Aserejé", "Bomba", "Suavemente"],
-    "respuesta_correcta": "Macarena"
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué discos de cartón o plástico coleccionables se apilaban y golpeaban con un 'slammer'?",
+    "emojis": "⚪ 💥 🧒",
+    "opciones": ["Tazos (Pogs)", "Trading Cards", "Stickers holográficos", "Gogos"],
+    "respuesta_correcta": "Tazos (Pogs)"
   },
   {
     "id": "p90_011",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué oveja fue el primer mamífero clonado a partir de una célula adulta en 1996?",
-    "emojis": "🐑 🧬 🔬",
-    "opciones": ["Dolly", "Molly", "Polly", "Lucy"],
-    "respuesta_correcta": "Dolly"
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué película de 1999 de las hermanas Wachowski popularizó la píldora roja y el tiempo bala?",
+    "emojis": "🕶️ 💊 🟢",
+    "opciones": ["The Matrix", "Dark City", "eXistenZ", "The Thirteenth Floor"],
+    "respuesta_correcta": "The Matrix"
   },
   {
     "id": "p90_012",
-    "categoria": "ÉPOCA 90s",
-    "pregunta": "¿Qué serie de animación japonesa sobre 'monstruos de bolsillo' se emitió por primera vez en 1997?",
-    "emojis": "⚡ 🧢 🔴",
-    "opciones": ["Pokémon", "Digimon", "Yu-Gi-Oh!", "Dragon Ball Z"],
-    "respuesta_correcta": "Pokémon"
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué boy band estadounidense conquistó el mundo en 1999 con 'I Want It That Way'?",
+    "emojis": "✈️ 🕺 📻",
+    "opciones": ["Backstreet Boys", "*NSYNC", "Boyz II Men", "98 Degrees"],
+    "respuesta_correcta": "Backstreet Boys"
+  },
+  {
+    "id": "p90_013",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué comedia seguía a Will Smith mudándose desde Filadelfia a una lujosa mansión?",
+    "emojis": "👑 🏀 🧢",
+    "opciones": ["The Fresh Prince of Bel-Air", "Family Matters", "Full House", "Step by Step"],
+    "respuesta_correcta": "The Fresh Prince of Bel-Air"
+  },
+  {
+    "id": "p90_014",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué icónico shooter en primera persona de id Software aterrorizó los PC en 1993?",
+    "emojis": "👹 🔫 🩸",
+    "opciones": ["DOOM", "Quake", "Duke Nukem 3D", "Unreal"],
+    "respuesta_correcta": "DOOM"
+  },
+  {
+    "id": "p90_015",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Cuál fue la primera película animada completamente por computadora estrenada en 1995?",
+    "emojis": "🤠 🚀 🧸",
+    "opciones": ["Toy Story", "A Bug's Life", "Antz", "Monsters, Inc."],
+    "respuesta_correcta": "Toy Story"
+  },
+  {
+    "id": "p90_016",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué banda británica liderada por los hermanos Gallagher lanzó 'Wonderwall' en 1995?",
+    "emojis": "🎸 🇬🇧 🧱",
+    "opciones": ["Oasis", "Blur", "Pulp", "The Verve"],
+    "respuesta_correcta": "Oasis"
+  },
+  {
+    "id": "p90_017",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué juguete robótico peludo con grandes ojos y lenguaje propio 'Furbish' debutó en 1998?",
+    "emojis": "🦉 🤖 🗣️",
+    "opciones": ["Furby", "Tamagotchi", "Poo-Chi", "Tickle Me Elmo"],
+    "respuesta_correcta": "Furby"
+  },
+  {
+    "id": "p90_018",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llamaba el vecino excéntrico que siempre entraba derrapando a la casa de Seinfeld?",
+    "emojis": "🚪 🥪 🕺",
+    "opciones": ["Cosmo Kramer", "George Costanza", "Newman", "Uncle Leo"],
+    "respuesta_correcta": "Cosmo Kramer"
+  },
+  {
+    "id": "p90_019",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué erizo azul supersónico debutó en 1991 como la gran estrella de Sega Genesis?",
+    "emojis": "🦔 💨 💍",
+    "opciones": ["Sonic the Hedgehog", "Knuckles", "Tails", "Shadow"],
+    "respuesta_correcta": "Sonic the Hedgehog"
+  },
+  {
+    "id": "p90_020",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué romance épico de James Cameron en 1997 igualó el récord de 11 premios Óscar?",
+    "emojis": "🚢 🧊 💎",
+    "opciones": ["Titanic", "Braveheart", "The English Patient", "Shakespeare in Love"],
+    "respuesta_correcta": "Titanic"
+  },
+  {
+    "id": "p90_021",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué artista debutó en 1998 con uniforme colegial y el exitazo '...Baby One More Time'?",
+    "emojis": "👱‍♀️ 🎀 💿",
+    "opciones": ["Britney Spears", "Christina Aguilera", "Jessica Simpson", "Mandy Moore"],
+    "respuesta_correcta": "Britney Spears"
+  },
+  {
+    "id": "p90_022",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué serie de adolescentes y socorristas con trajes de baño rojos arrasó en los 90s?",
+    "emojis": "🏖️ 🏊‍♂️ 🛟",
+    "opciones": ["Baywatch", "Beverly Hills 90210", "Melrose Place", "Pacific Blue"],
+    "respuesta_correcta": "Baywatch"
+  },
+  {
+    "id": "p90_023",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llama el espía táctico que se ocultaba en cajas de cartón en 'Metal Gear Solid' (1998)?",
+    "emojis": "📦 🐍 🚬",
+    "opciones": ["Solid Snake", "Liquid Snake", "Big Boss", "Raiden"],
+    "respuesta_correcta": "Solid Snake"
+  },
+  {
+    "id": "p90_024",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué sonido inconfundible acompañaba la conexión a Internet en los 90 mediante línea telefónica?",
+    "emojis": "📞 💻 🔊",
+    "opciones": ["El pitido y chirrido del módem Dial-up", "Una campana digital", "El tono de ocupado", "Un zumbido de estática"],
+    "respuesta_correcta": "El pitido y chirrido del módem Dial-up"
+  },
+  {
+    "id": "p90_025",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Quién dirigió en 1994 la aclamada cinta de humor negro y relatos cruzados 'Pulp Fiction'?",
+    "emojis": "🍔 💼 🕺",
+    "opciones": ["Quentin Tarantino", "Martin Scorsese", "David Fincher", "Robert Rodriguez"],
+    "respuesta_correcta": "Quentin Tarantino"
+  },
+  {
+    "id": "p90_026",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué banda argentina lanzó en 1990 el histórico disco 'Canción Animal' con 'De música ligera'?",
+    "emojis": "🇦🇷 🎸 📻",
+    "opciones": ["Soda Stereo", "Los Fabulosos Cadillacs", "Enanitos Verdes", "Rata Blanca"],
+    "respuesta_correcta": "Soda Stereo"
+  },
+  {
+    "id": "p90_027",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿En qué año se emitió el episodio final de la comedia 'Seinfeld' reuniendo a 76 millones de personas?",
+    "emojis": "🥣 🚪 🗽",
+    "opciones": ["1998", "1996", "1999", "1997"],
+    "respuesta_correcta": "1998"
+  },
+  {
+    "id": "p90_028",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué juego de lucha causó polémica mundial en 1992 por sus gráficos digitalizados y fatalities?",
+    "emojis": "🩸 🥋 💀",
+    "opciones": ["Mortal Kombat", "Street Fighter II", "Killer Instinct", "Tekken"],
+    "respuesta_correcta": "Mortal Kombat"
+  },
+  {
+    "id": "p90_029",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué peinado icónico popularizado por Jennifer Aniston en 'Friends' copiaron millones de mujeres?",
+    "emojis": "💇‍♀️ 📺 ✨",
+    "opciones": ["The Rachel", "The Monica", "The Pixie 90s", "The Layer Cut"],
+    "respuesta_correcta": "The Rachel"
+  },
+  {
+    "id": "p90_030",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Cuál es la primera regla del club clandestino liderado por Tyler Durden en 'Fight Club' (1999)?",
+    "emojis": "🧼 🥊 🤫",
+    "opciones": ["No hablar del club de la pelea", "Pelear sin camisa ni zapatos", "Traer a un nuevo miembro", "Solo una pelea a la vez"],
+    "respuesta_correcta": "No hablar del club de la pelea"
+  },
+  {
+    "id": "p90_031",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué exitoso formato de audio comprimido digital nació a mediados de los 90 cambiando la música?",
+    "emojis": "💾 🎵 🖥️",
+    "opciones": ["MP3", "WAV", "MIDI", "FLAC"],
+    "respuesta_correcta": "MP3"
+  },
+  {
+    "id": "p90_032",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llamaba la guardería o empleo donde Fran Fine vendía cosméticos en 'The Nanny'?",
+    "emojis": "💄 👗 👠",
+    "opciones": ["Tienda de vestidos de novia", "Salón de belleza", "Escuela preparatoria", "Secretaría escolar"],
+    "respuesta_correcta": "Tienda de vestidos de novia"
+  },
+  {
+    "id": "p90_033",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué entrega legendaria de Zelda para Nintendo 64 introdujo el sistema de fijado de blanco Z en 1998?",
+    "emojis": "🧝‍♂️ 🗡️ 🐎",
+    "opciones": ["Ocarina of Time", "Majora's Mask", "A Link to the Past", "Link's Awakening"],
+    "respuesta_correcta": "Ocarina of Time"
+  },
+  {
+    "id": "p90_034",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué comedia navideña de 1990 dejó a Macaulay Culkin solo defendiendo su casa de ladrones?",
+    "emojis": "🏠 👦 🎄",
+    "opciones": ["Home Alone (Mi pobre angelito)", "The Santa Clause", "Jingle All the Way", "Beethoven"],
+    "respuesta_correcta": "Home Alone (Mi pobre angelito)"
+  },
+  {
+    "id": "p90_035",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué dúo español compuesto por Antonio Romero y Rafael Ruiz puso a bailar al planeta en 1993/95?",
+    "emojis": "💃 🕺 🇪🇸",
+    "opciones": ["Los del Río (Macarena)", "Locomía", "Azúcar Moreno", "Gipsy Kings"],
+    "respuesta_correcta": "Los del Río (Macarena)"
+  },
+  {
+    "id": "p90_036",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué dibujo animado de MTV seguía a dos adolescentes vagos comentando videos de rock en su sillón?",
+    "emojis": "📺 🎸 🛋️",
+    "opciones": ["Beavis and Butt-Head", "Daria", "King of the Hill", "Ren & Stimpy"],
+    "respuesta_correcta": "Beavis and Butt-Head"
+  },
+  {
+    "id": "p90_037",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué pulseras de metal flexibles forradas en tela se enrollaban de golpe en la muñeca al dar un golpe?",
+    "emojis": "📏 💥 🖐️",
+    "opciones": ["Slap Bracelets (Pulseras bofetada)", "Power Bands", "Glow Sticks", "Candi Bracelets"],
+    "respuesta_correcta": "Slap Bracelets (Pulseras bofetada)"
+  },
+  {
+    "id": "p90_038",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué marsupial naranja que rompía cajas de manzanas debutó en PlayStation en 1996?",
+    "emojis": "🦊 🍎 📦",
+    "opciones": ["Crash Bandicoot", "Spyro the Dragon", "Rayman", "Gex"],
+    "respuesta_correcta": "Crash Bandicoot"
+  },
+  {
+    "id": "p90_039",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llama el psiquiatra y caníbal de gustos refinados en 'The Silence of the Lambs' (1991)?",
+    "emojis": "🍷 🥩 🦋",
+    "opciones": ["Hannibal Lecter", "Norman Bates", "John Doe", "Patrick Bateman"],
+    "respuesta_correcta": "Hannibal Lecter"
+  },
+  {
+    "id": "p90_040",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué rapero de la Costa Oeste lanzó en 1995 el éxito ganador del Grammy 'Gangsta's Paradise'?",
+    "emojis": "🕶️ 🎤 🏙️",
+    "opciones": ["Coolio", "Tupac Shakur", "Notorious B.I.G.", "Dr. Dre"],
+    "respuesta_correcta": "Coolio"
+  },
+  {
+    "id": "p90_041",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Cómo se llamaba el colegio de la secundaria de Sunnydale donde Buffy combatía a los vampiros?",
+    "emojis": "🧛‍♂️ ⚰️ 🏫",
+    "opciones": ["Sunnydale High", "Bayside High", "Capeside High", "Shermer High"],
+    "respuesta_correcta": "Sunnydale High"
+  },
+  {
+    "id": "p90_042",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué servicio de mensajería para PC con icono de flor verde y aviso 'Uh-oh!' arrasó en 1996?",
+    "emojis": "🌼 💬 🖥️",
+    "opciones": ["ICQ", "MSN Messenger", "AOL Instant Messenger", "mIRC"],
+    "respuesta_correcta": "ICQ"
+  },
+  {
+    "id": "p90_043",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué fenómeno de monstruos de bolsillo debutó en Game Boy en Norteamérica en 1998?",
+    "emojis": "🔴 🔵 🎒",
+    "opciones": ["Pokémon Rojo y Azul", "Digimon World", "Monster Rancher", "Dragon Quest Monsters"],
+    "respuesta_correcta": "Pokémon Rojo y Azul"
+  },
+  {
+    "id": "p90_044",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué máscara fantasmal blanca con túnica negra aterrorizaba por teléfono en 'Scream' (1996)?",
+    "emojis": "📞 🔪 😱",
+    "opciones": ["Ghostface", "Michael Myers", "Leatherface", "Jigsaw"],
+    "respuesta_correcta": "Ghostface"
+  },
+  {
+    "id": "p90_045",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Quién era la carismática vocalista rubia de la banda de ska-pop No Doubt en 'Don't Speak' (1995)?",
+    "emojis": "👱‍♀️ 🎤 🏁",
+    "opciones": ["Gwen Stefani", "Shirley Manson", "Courtney Love", "Alanis Morissette"],
+    "respuesta_correcta": "Gwen Stefani"
+  },
+  {
+    "id": "p90_046",
+    "categoria": "TV",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué serie de 1990 de David Lynch arrancó con el misterio del cadáver envuelto de Laura Palmer?",
+    "emojis": "☕ 🌲 🦉",
+    "opciones": ["Twin Peaks", "Northern Exposure", "The X-Files", "Millennium"],
+    "respuesta_correcta": "Twin Peaks"
+  },
+  {
+    "id": "p90_047",
+    "categoria": "CULTURA POP",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué famosa muñeca de peluche parlante de Sesame Street provocó histeria en tiendas en 1996?",
+    "emojis": "🔴 🧸 🤣",
+    "opciones": ["Tickle Me Elmo (Elmo Cosquillas)", "Big Bird", "Cookie Monster", "Barney"],
+    "respuesta_correcta": "Tickle Me Elmo (Elmo Cosquillas)"
+  },
+  {
+    "id": "p90_048",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué heroína y arqueóloga británica con dos pistolas protagonizó 'Tomb Raider' en 1996?",
+    "emojis": "🏺 🔫 🧗‍♀️",
+    "opciones": ["Lara Croft", "Jill Valentine", "Regina", "Joanna Dark"],
+    "respuesta_correcta": "Lara Croft"
+  },
+  {
+    "id": "p90_049",
+    "categoria": "CINE",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué clásico animado de Disney de 1994 presentó la trágica traición del tío Scar en la sabana?",
+    "emojis": "🦁 👑 🌅",
+    "opciones": ["The Lion King", "Aladdin", "Tarzan", "Hercules"],
+    "respuesta_correcta": "The Lion King"
+  },
+  {
+    "id": "p90_050",
+    "categoria": "MÚSICA",
+    "pack": "puro_90s",
+    "pregunta": "¿Qué banda de punk rock californiana editó en 1994 el arrollador disco 'Dookie' con 'Basket Case'?",
+    "emojis": "💣 🎸 🎸",
+    "opciones": ["Green Day", "The Offspring", "Blink-182", "Rancid"],
+    "respuesta_correcta": "Green Day"
   }
 ]

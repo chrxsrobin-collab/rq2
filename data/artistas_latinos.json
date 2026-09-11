@@ -2,97 +2,451 @@
   {
     "id": "lat_001",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué cantante mexicano es conocido como 'El Sol de México'?",
-    "emojis": "☀️ 🎤 🇲🇽",
-    "opciones": ["Luis Miguel", "Alejandro Fernández", "Cristian Castro", "Vicente Fernández"],
-    "respuesta_correcta": "Luis Miguel"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda argentina liderada por Gustavo Cerati editó el mítico disco 'Canción Animal' en 1990?",
+    "emojis": "🇦🇷 🎸 📻",
+    "opciones": ["Soda Stereo", "Los Fabulosos Cadillacs", "Enanitos Verdes", "Rata Blanca"],
+    "respuesta_correcta": "Soda Stereo"
   },
   {
     "id": "lat_002",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué artista colombiana lanzó los álbumes 'Pies Descalzos' (1995) y '¿Dónde están los ladrones?' (1998)?",
-    "emojis": "🎸 💃 🇨🇴",
-    "opciones": ["Shakira", "Soraya", "Fanny Lu", "Paulina Rubio"],
-    "respuesta_correcta": "Shakira"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante puertorriqueño conquistó las listas mundiales en 1999 con 'Livin' la Vida Loca'?",
+    "emojis": "🕺 🎺 🇵🇷",
+    "opciones": ["Ricky Martin", "Chayanne", "Enrique Iglesias", "Marc Anthony"],
+    "respuesta_correcta": "Ricky Martin"
   },
   {
     "id": "lat_003",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué éxito mundial interpretó Ricky Martin para el Mundial de Fútbol de Francia 1998?",
-    "emojis": "⚽ 🏆 🇵🇷",
-    "opciones": ["La Copa de la Vida", "Livin' la Vida Loca", "María", "She Bangs"],
-    "respuesta_correcta": "La Copa de la Vida"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Cómo se llamaba la inolvidable 'Reina del Tex-Mex' intérprete de 'Como la flor'?",
+    "emojis": "🌹 🎤 💃",
+    "opciones": ["Selena Quintanilla", "Gloria Estefan", "Jenni Rivera", "Thalía"],
+    "respuesta_correcta": "Selena Quintanilla"
   },
   {
     "id": "lat_004",
     "categoria": "MÚSICA",
-    "pregunta": "¿Quién es recordada como la 'Reina del Tex-Mex' con éxitos como 'Amor Prohibido'?",
-    "emojis": "🌹 🎤 💃",
-    "opciones": ["Selena Quintanilla", "Gloria Estefan", "Thalía", "Ana Gabriel"],
-    "respuesta_correcta": "Selena Quintanilla"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante colombiana alcanzó éxito continental en 1995 con su álbum 'Pies Descalzos'?",
+    "emojis": "👣 🎸 🇨🇴",
+    "opciones": ["Shakira", "Soraya", "Fanny Lu", "Andrea Echeverri"],
+    "respuesta_correcta": "Shakira"
   },
   {
     "id": "lat_005",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué cantante puertorriqueño nos puso a bailar con 'Provócame' y 'Torero'?",
-    "emojis": "🕺 🎶 🇵🇷",
-    "opciones": ["Chayanne", "Ricky Martin", "Marc Anthony", "Carlos Vives"],
-    "respuesta_correcta": "Chayanne"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor mexicano compuso e interpretó himnos como 'Querida' y 'Hasta que te conocí'?",
+    "emojis": "🌹 🎙️ 🇲🇽",
+    "opciones": ["Juan Gabriel", "José José", "Vicente Fernández", "Marco Antonio Solís"],
+    "respuesta_correcta": "Juan Gabriel"
   },
   {
     "id": "lat_006",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué mítica banda argentina de rock lideró Gustavo Cerati?",
-    "emojis": "🎸 ⚡ 🇦🇷",
-    "opciones": ["Soda Stereo", "Los Enanitos Verdes", "Los Fabulosos Cadillacs", "Rata Blanca"],
-    "respuesta_correcta": "Soda Stereo"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante de salsa panameño compuso la crónica urbana 'Pedro Navaja' en 1978?",
+    "emojis": "🗡️ 🎩 🇵🇦",
+    "opciones": ["Rubén Blades", "Héctor Lavoe", "Willie Colón", "Cheo Feliciano"],
+    "respuesta_correcta": "Rubén Blades"
   },
   {
     "id": "lat_007",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué cantante cubana lideró la Miami Sound Machine cantando 'Conga'?",
-    "emojis": "🎺 🌴 🇨🇺",
-    "opciones": ["Gloria Estefan", "Celia Cruz", "La Lupe", "Albita"],
-    "respuesta_correcta": "Gloria Estefan"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda mexicana de rock liderada por Fher Olvera lanzó 'Rayando el sol' en 1990?",
+    "emojis": "☀️ 🎸 🇲🇽",
+    "opciones": ["Maná", "Caifanes", "Café Tacvba", "Maldita Vecindad"],
+    "respuesta_correcta": "Maná"
   },
   {
     "id": "lat_008",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué artista mexicano cantó la icónica balada 'No Me Ames' junto a Jennifer Lopez?",
-    "emojis": "🎙️ 💔 🌹",
-    "opciones": ["Marc Anthony", "Luis Miguel", "Alejandro Sanz", "Marco Antonio Solís"],
-    "respuesta_correcta": "Marc Anthony"
+    "pack": "artistas_latinos",
+    "pregunta": "¿A qué legendario cantante mexicano apodaron universalmente 'El Príncipe de la Canción'?",
+    "emojis": "👑 🎙️ 🥃",
+    "opciones": ["José José", "Pedro Infante", "Armando Manzanero", "Emmanuel"],
+    "respuesta_correcta": "José José"
   },
   {
     "id": "lat_009",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué cantante español compuso 'Corazón Partío' en su exitoso álbum 'Más' (1997)?",
-    "emojis": "💔 🎸 🇪🇸",
-    "opciones": ["Alejandro Sanz", "Enrique Iglesias", "Miguel Bosé", "Joaquín Sabina"],
-    "respuesta_correcta": "Alejandro Sanz"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué artista puertorriqueño puso a todos a bailar con 'Torero' y 'Provócame'?",
+    "emojis": "🕺 🐂 🇵🇷",
+    "opciones": ["Chayanne", "Ricky Martin", "Luis Fonsi", "Carlos Vives"],
+    "respuesta_correcta": "Chayanne"
   },
   {
     "id": "lat_010",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué grupo de pop mexicano protagonizado por Thalía y Paulina Rubio fue un fenómeno en los 80/90?",
-    "emojis": "👧 👦 🎤",
-    "opciones": ["Timbiriche", "Menudo", "Parchís", "Onda Vaselina"],
-    "respuesta_correcta": "Timbiriche"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué famosa cantante cubana popularizó en todo el mundo el grito ¡Azúcar!?",
+    "emojis": "💃 🍬 🇨🇺",
+    "opciones": ["Celia Cruz", "La Lupe", "Gloria Estefan", "Omara Portuondo"],
+    "respuesta_correcta": "Celia Cruz"
   },
   {
     "id": "lat_011",
     "categoria": "MÚSICA",
-    "pregunta": "¿Cómo se llamaba la reina de la salsa que popularizó la exclamación '¡Azúcar!'?",
-    "emojis": "👑 🍬 🎺",
-    "opciones": ["Celia Cruz", "La Lupe", "Omara Portuondo", "Olga Tañón"],
-    "respuesta_correcta": "Celia Cruz"
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda argentina grabó la clásica versión de 'Lamento Boliviano' en 1994?",
+    "emojis": "🎸 🇦🇷 🍻",
+    "opciones": ["Los Enanitos Verdes", "Los Fabulosos Cadillacs", "Rata Blanca", "Vilma Palma e Vampiros"],
+    "respuesta_correcta": "Los Enanitos Verdes"
   },
   {
     "id": "lat_012",
     "categoria": "MÚSICA",
-    "pregunta": "¿Qué banda de rock en español mexicana lanzó el álbum 'Re' en 1994?",
-    "emojis": "🎸 ☕ 🇲🇽",
-    "opciones": ["Café Tacvba", "Maná", "Caifanes", "Molotov"],
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante mexicano es conocido como 'El Sol de México'?",
+    "emojis": "☀️ 🎙️ 🇲🇽",
+    "opciones": ["Luis Miguel", "Alejandro Fernández", "Cristian Castro", "Pedro Fernández"],
+    "respuesta_correcta": "Luis Miguel"
+  },
+  {
+    "id": "lat_013",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda de ska y rock argentina compuso el himno 'Matador' en 1993?",
+    "emojis": "🎺 🥁 🇦🇷",
+    "opciones": ["Los Fabulosos Cadillacs", "Los Auténticos Decadentes", "Bersuit Vergarabat", "Kapanga"],
+    "respuesta_correcta": "Los Fabulosos Cadillacs"
+  },
+  {
+    "id": "lat_014",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor guatemalteco compuso relatos poéticos como 'Señora de las cuatro décadas'?",
+    "emojis": "🎸 🚕 🇬🇹",
+    "opciones": ["Ricardo Arjona", "Franco De Vita", "Alberto Plaza", "Gian Marco"],
+    "respuesta_correcta": "Ricardo Arjona"
+  },
+  {
+    "id": "lat_015",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante cubano-estadounidense lideró la banda Miami Sound Machine en los 80s?",
+    "emojis": "🌴 🎺 💃",
+    "opciones": ["Gloria Estefan", "Celia Cruz", "Albita Rodríguez", "Jon Secada"],
+    "respuesta_correcta": "Gloria Estefan"
+  },
+  {
+    "id": "lat_016",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué legendario salsero puertorriqueño fue conocido como 'El Cantante de los Cantantes'?",
+    "emojis": "🎙️ 🕶️ 🇵🇷",
+    "opciones": ["Héctor Lavoe", "Cheo Feliciano", "Ismael Rivera", "Frankie Ruiz"],
+    "respuesta_correcta": "Héctor Lavoe"
+  },
+  {
+    "id": "lat_017",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor dominicano fusionó el merengue y la bachata con su grupo 4.40?",
+    "emojis": "☕ 🇩🇴 🎶",
+    "opciones": ["Juan Luis Guerra", "Wilfrido Vargas", "Eddy Herrera", "Sergio Vargas"],
+    "respuesta_correcta": "Juan Luis Guerra"
+  },
+  {
+    "id": "lat_018",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Quién era el carismático líder y vocalista de la banda mexicana Caifanes y Jaguares?",
+    "emojis": "🐆 🎸 🇲🇽",
+    "opciones": ["Saúl Hernández", "Sabo Romo", "Alfonso André", "Alejandro Marcovich"],
+    "respuesta_correcta": "Saúl Hernández"
+  },
+  {
+    "id": "lat_019",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante colombiano modernizó el vallenato tradicional con 'Clásicos de la Provincia'?",
+    "emojis": "🪗 🚲 🇨🇴",
+    "opciones": ["Carlos Vives", "Fonseca", "Andrés Cepeda", "Jorge Celedón"],
+    "respuesta_correcta": "Carlos Vives"
+  },
+  {
+    "id": "lat_020",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué grupo pop mexicano juvenil de los 80 integraron Paulina Rubio y Thalía?",
+    "emojis": "🎀 🎤 🇲🇽",
+    "opciones": ["Timbiriche", "Flans", "Fandango", "Parchís"],
+    "respuesta_correcta": "Timbiriche"
+  },
+  {
+    "id": "lat_021",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor ítalo-venezolano compuso baladas como 'Te amo' y 'Solo importas tú'?",
+    "emojis": "🎹 🇻🇪 ❤️",
+    "opciones": ["Franco De Vita", "Ricardo Montaner", "Guillermo Dávila", "Yordano"],
+    "respuesta_correcta": "Franco De Vita"
+  },
+  {
+    "id": "lat_022",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda de rock chilena liderada por Jorge González compuso 'Tren al sur' en 1990?",
+    "emojis": "🚂 🎸 🇨🇱",
+    "opciones": ["Los Prisioneros", "La Ley", "Los Tres", "Lucybell"],
+    "respuesta_correcta": "Los Prisioneros"
+  },
+  {
+    "id": "lat_023",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor venezolano-argentino alcanzó fama con 'Tan enamorados' y 'Castillo azul'?",
+    "emojis": "🏰 🎙️ 🕊️",
+    "opciones": ["Ricardo Montaner", "Franco De Vita", "Puma Rodríguez", "Carlos Baute"],
+    "respuesta_correcta": "Ricardo Montaner"
+  },
+  {
+    "id": "lat_024",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante de salsa puertorriqueño triunfó con el álbum 'Contra la corriente' y 'Vivir lo nuestro'?",
+    "emojis": "🕶️ 🎺 🇵🇷",
+    "opciones": ["Marc Anthony", "Víctor Manuelle", "Gilberto Santa Rosa", "Jerry Rivera"],
+    "respuesta_correcta": "Marc Anthony"
+  },
+  {
+    "id": "lat_025",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda mexicana originaria de Satélite fusionó rock con folclore en 'Ingrata' y 'La chilanga banda'?",
+    "emojis": "🇲🇽 🎸 ☕",
+    "opciones": ["Café Tacvba", "Molotov", "Maldita Vecindad", "Plastilina Mosh"],
     "respuesta_correcta": "Café Tacvba"
+  },
+  {
+    "id": "lat_026",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Cómo se llamaba la boy band puertorriqueña donde inició su carrera Ricky Martin en los 80s?",
+    "emojis": "👦 🕺 🇵🇷",
+    "opciones": ["Menudo", "Los Chicos", "Magneto", "Mercurio"],
+    "respuesta_correcta": "Menudo"
+  },
+  {
+    "id": "lat_027",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante español arrasó en Latinoamérica en los 90s con el disco 'Más' y 'Corazón partío'?",
+    "emojis": "💔 🎸 🇪🇸",
+    "opciones": ["Alejandro Sanz", "David Bisbal", "Enrique Iglesias", "Miguel Bosé"],
+    "respuesta_correcta": "Alejandro Sanz"
+  },
+  {
+    "id": "lat_028",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante de salsa romántica era conocido como 'El Niño de la Salsa' por temas como 'Cara de niño'?",
+    "emojis": "👶 🎺 🇵🇷",
+    "opciones": ["Jerry Rivera", "Frankie Ruiz", "Rey Ruiz", "Tony Vega"],
+    "respuesta_correcta": "Jerry Rivera"
+  },
+  {
+    "id": "lat_029",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda colombiana de rock alternativo liderada por Andrea Echeverri grabó 'Bolero falaz'?",
+    "emojis": "🎸 🇨🇴 🌺",
+    "opciones": ["Aterciopelados", "Kraken", "Los de Adentro", "Ekhymosis"],
+    "respuesta_correcta": "Aterciopelados"
+  },
+  {
+    "id": "lat_030",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante argentino apodado 'El Flaco' fue líder de Almendra, Pescado Rabioso e Invisible?",
+    "emojis": "🇦🇷 🎸 🕊️",
+    "opciones": ["Luis Alberto Spinetta", "Charly García", "Fito Páez", "Pappo"],
+    "respuesta_correcta": "Luis Alberto Spinetta"
+  },
+  {
+    "id": "lat_031",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante mexicano interpretó la balada ranchera 'Mujeres divinas' y 'El rey'?",
+    "emojis": "🤠 🎺 🇲🇽",
+    "opciones": ["Vicente Fernández", "Antonio Aguilar", "Javier Solís", "Pedro Infante"],
+    "respuesta_correcta": "Vicente Fernández"
+  },
+  {
+    "id": "lat_032",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué artista colombiano lideró la banda Ekhymosis antes de iniciar su exitosa etapa pop-rock solista?",
+    "emojis": "🎸 🇨🇴 👕",
+    "opciones": ["Juanes", "Fonseca", "Sebastián Yatra", "Andrés Cabas"],
+    "respuesta_correcta": "Juanes"
+  },
+  {
+    "id": "lat_033",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué prolífico músico argentino de oído absoluto integró Sui Generis y Serú Girán?",
+    "emojis": "🎹 🇦🇷 👓",
+    "opciones": ["Charly García", "Fito Páez", "Pedro Aznar", "Andrés Calamaro"],
+    "respuesta_correcta": "Charly García"
+  },
+  {
+    "id": "lat_034",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué artista puertorriqueño lanzó en 1998 el superéxito de salsa 'Suavemente'?",
+    "emojis": "🕺 🎺 🍌",
+    "opciones": ["Elvis Crespo", "Manny Manuel", "Eddy Herrera", "Toño Rosario"],
+    "respuesta_correcta": "Elvis Crespo"
+  },
+  {
+    "id": "lat_035",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor rosarino compuso 'El amor después del amor' (1992), el disco más vendido del rock argentino?",
+    "emojis": "🎹 🇦🇷 💖",
+    "opciones": ["Fito Páez", "Andrés Calamaro", "Charly García", "León Gieco"],
+    "respuesta_correcta": "Fito Páez"
+  },
+  {
+    "id": "lat_036",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué grupo de rock mexicano causó polémica a finales de los 90 con 'Gimme Tha Power' y 'Frijolero'?",
+    "emojis": "💣 🎸 🇲🇽",
+    "opciones": ["Molotov", "Control Machete", "Panteón Rococó", "Resorte"],
+    "respuesta_correcta": "Molotov"
+  },
+  {
+    "id": "lat_037",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante español cosechó enormes éxitos pop en los 90s con 'Experiencia religiosa' y 'Bailamos'?",
+    "emojis": "🎙️ 🇪🇸 ✈️",
+    "opciones": ["Enrique Iglesias", "Julio Iglesias", "David Bisbal", "Ricky Martin"],
+    "respuesta_correcta": "Enrique Iglesias"
+  },
+  {
+    "id": "lat_038",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda chilena de rock liderada por Beto Cuevas ganó gran repercusión con 'El Duelo'?",
+    "emojis": "🎸 🇨🇱 🕶️",
+    "opciones": ["La Ley", "Los Tres", "Lucybell", "Saiko"],
+    "respuesta_correcta": "La Ley"
+  },
+  {
+    "id": "lat_039",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué trío femenino mexicano conquistó la radio en 1985 con 'No controles' y 'Bazar'?",
+    "emojis": "👗 📻 🇲🇽",
+    "opciones": ["Flans", "Pandora", "Fandango", "Jeans"],
+    "respuesta_correcta": "Flans"
+  },
+  {
+    "id": "lat_040",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor mexicano fundó Los Bukis antes de triunfar como solista con baladas románticas?",
+    "emojis": "🌹 🎙️ 🧔",
+    "opciones": ["Marco Antonio Solís", "Joan Sebastian", "Juan Gabriel", "Manuel Mijares"],
+    "respuesta_correcta": "Marco Antonio Solís"
+  },
+  {
+    "id": "lat_041",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor argentino formó parte de Los Abuelos de la Nada y Los Rodríguez antes de 'Flaca'?",
+    "emojis": "🎸 🇦🇷 🕶️",
+    "opciones": ["Andrés Calamaro", "Fito Páez", "Gustavo Cerati", "Vicentico"],
+    "respuesta_correcta": "Andrés Calamaro"
+  },
+  {
+    "id": "lat_042",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda mexicana de rock y ska combinó ritmos urbanos en 'Kumbala' y 'Pachuco'?",
+    "emojis": "🎷 🎺 🇲🇽",
+    "opciones": ["Maldita Vecindad", "Panteón Rococó", "Inspector", "Tijuana No!"],
+    "respuesta_correcta": "Maldita Vecindad"
+  },
+  {
+    "id": "lat_043",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante brasileño es conocido como 'El Rey de la Música Latina' por temas como 'El gato que está triste y azul'?",
+    "emojis": "🐱 🇧🇷 🎙️",
+    "opciones": ["Roberto Carlos", "Caetano Veloso", "Gilberto Gil", "Chitãozinho"],
+    "respuesta_correcta": "Roberto Carlos"
+  },
+  {
+    "id": "lat_044",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante puertorriqueña debutó en los 80s y es apodada 'La Mujer de Fuego'?",
+    "emojis": "🔥 💃 🇵🇷",
+    "opciones": ["Olga Tañón", "Giselle", "Melina León", "Yolandita Monge"],
+    "respuesta_correcta": "Olga Tañón"
+  },
+  {
+    "id": "lat_045",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué banda argentina de heavy metal liderada por Walter Giardino compuso 'Mujer amante'?",
+    "emojis": "🎸 ⚡ 🇦🇷",
+    "opciones": ["Rata Blanca", "Hermética", "V8", "Malón"],
+    "respuesta_correcta": "Rata Blanca"
+  },
+  {
+    "id": "lat_046",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor venezolano apodado 'El Puma' triunfó internacionalmente con 'Pavo real'?",
+    "emojis": "🦚 🎙️ 🇻🇪",
+    "opciones": ["José Luis Rodríguez", "Guillermo Dávila", "Rudy La Scala", "Carlos Mata"],
+    "respuesta_correcta": "José Luis Rodríguez"
+  },
+  {
+    "id": "lat_047",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantante mexicana protagonizó la 'Trilogía de las Marías' e interpretó 'Amor a la mexicana'?",
+    "emojis": "👒 🇲🇽 💃",
+    "opciones": ["Thalía", "Paulina Rubio", "Lucero", "Yuri"],
+    "respuesta_correcta": "Thalía"
+  },
+  {
+    "id": "lat_048",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué grupo argentino de cumbia y pop liderado por Mario 'Pájaro' Gómez grabó 'La pachanga'?",
+    "emojis": "🧛‍♂️ 🍻 🇦🇷",
+    "opciones": ["Vilma Palma e Vampiros", "Los Calzones Rotos", "Los Ladrones Sueltos", "Comanche"],
+    "respuesta_correcta": "Vilma Palma e Vampiros"
+  },
+  {
+    "id": "lat_049",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué cantautor dominicano popularizó la bachata romántica en los 90s con 'Burbujas de amor'?",
+    "emojis": "🐟 🇩🇴 ❤️",
+    "opciones": ["Juan Luis Guerra", "Víctor Víctor", "Antony Santos", "Zacarías Ferreira"],
+    "respuesta_correcta": "Juan Luis Guerra"
+  },
+  {
+    "id": "lat_050",
+    "categoria": "MÚSICA",
+    "pack": "artistas_latinos",
+    "pregunta": "¿Qué frase inolvidable pronunció Gustavo Cerati al despedir el último concierto de Soda Stereo en 1997?",
+    "emojis": "🇦🇷 🎸 🙏",
+    "opciones": ["¡Gracias... totales!", "¡Hasta siempre, amigos!", "¡Por siempre Soda!", "¡Fuerza natural!"],
+    "respuesta_correcta": "¡Gracias... totales!"
   }
 ]
