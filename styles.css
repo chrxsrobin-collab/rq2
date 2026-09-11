@@ -6323,7 +6323,7 @@ input:checked + .slider:before {
   padding: 0 6px;
   pointer-events: none;
   z-index: 1 !important; /* Capa trasera */
-  opacity: 0.85;
+  opacity: 1 !important;
 }
 
 .ch-character {
