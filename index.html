@@ -561,9 +561,9 @@
               <p class="results-subtitle" id="resultsSubtitle">Respuestas correctas: 10/10</p>
             </div>
 
-            <!-- Círculo Central de Experiencia (XP) -->
-            <div class="results-xp-circle xp-circle-container reward-circle" id="resultsXpCircle">
-              <span class="results-xp-value xp-amount" id="resultsXpVal">+0 <span class="xp-unit">XP</span></span>
+            <!-- Marco de Avatar Circular Destacado en Solitario -->
+            <div class="results-xp-circle xp-circle-container reward-circle results-avatar-container" id="resultsXpCircle">
+              <img id="resultsUserAvatar" class="results-user-avatar-img user-avatar-sync" src="assets/pantalla_inicio/hombre.webp" alt="Avatar">
             </div>
 
             <!-- Desglose de Nivel y XP del Jugador -->
@@ -772,7 +772,7 @@
                   <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#000000"/>
                 </svg>
               </button>
-              <h2 class="duel-screen-title" id="challengeMatchTitle">RONDA 1</h2>
+              <h2 class="duel-screen-title round-title" id="challengeMatchTitle">RONDA 1</h2>
               <div class="duel-header-spacer"></div>
             </header>
 
@@ -858,9 +858,10 @@
                 <span class="duel-round-badge" id="duelResultRoundBadge">RONDA 1 DE 3</span>
               </div>
               <h2 class="duel-outcome-title" id="duelOutcomeTitle">RESULTADO DE RONDA</h2>
+              <p class="duel-outcome-subtitle" id="duelOutcomeSubtitle" style="display: none;"></p>
 
-              <!-- Podio Compacto con los 2 Avatares Enfrentados -->
-              <div class="duel-result-podium">
+              <!-- Podio Compacto con los 2 Avatares Enfrentados (Rondas 1, 2 o Empate) -->
+              <div class="duel-result-podium" id="duelResultPodiumVersus">
                 <!-- Jugador Local -->
                 <div class="podium-player player-local" id="podiumLocalPlayer">
                   <div class="podium-avatar-wrap">
@@ -874,7 +875,7 @@
                 </div>
 
                 <!-- Tag Central VS -->
-                <div class="podium-vs-tag">VS</div>
+                <div class="podium-vs-tag" id="podiumVsTag">VS</div>
 
                 <!-- Rival -->
                 <div class="podium-player player-rival" id="podiumRivalPlayer">
@@ -886,6 +887,21 @@
                   </div>
                   <span class="podium-name" id="duelResultRivalName">Usuario 2</span>
                   <span class="podium-score" id="duelResultRivalScore">210 pts</span>
+                </div>
+              </div>
+
+              <!-- Podio Central del Ganador Definitivo (Ronda 3 Final) -->
+              <div class="winner-podium-container" id="duelWinnerPodiumContainer" style="display: none;">
+                <div class="winner-podium-wrap">
+                  <span class="winner-podium-crown" id="challengeWinnerCrown">👑</span>
+                  <div class="winner-podium-frame">
+                    <img id="challengeWinnerAvatar" class="winner-avatar-img" src="assets/pantalla_inicio/hombre.webp" alt="Ganador">
+                  </div>
+                  <!-- Overlay de Humo Mágico para la Revelación del Ganador -->
+                  <div class="magic-smoke-overlay winner-smoke-overlay" id="winnerMagicSmokeOverlay"></div>
+                </div>
+                <div class="winner-info-badge">
+                  <span class="winner-name-label" id="challengeWinnerName">Ganador</span>
                 </div>
               </div>
             </header>

@@ -3781,11 +3781,12 @@ function showResults(aciertos = 10) {
     }
   }
 
-  // 8. Círculo Central en Solitario: muestra fijo "+0 XP"
+  // 8. Marco Central de Avatar en Solitario (#resultsUserAvatar)
   document.querySelectorAll('.results-xp-label').forEach(el => el.remove());
-  const xpValEl = document.getElementById('resultsXpVal') || document.getElementById('resultsXP') || document.querySelector('.results-xp-value') || document.querySelector('.xp-counter');
-  if (xpValEl) {
-    xpValEl.innerHTML = '+0 <span class="xp-unit">XP</span>';
+  const resultsAvatarImg = document.getElementById('resultsUserAvatar');
+  const activeAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
+  if (resultsAvatarImg) {
+    resultsAvatarImg.src = activeAvatar;
   }
 }
 
@@ -3809,6 +3810,122 @@ function updateDuelCardToWaiting(rivalName = 'Usuario 2') {
     }
   });
 }
+
+// =============================================================================
+// REVELACIÓN MÁGICA CON HUMO DEL GANADOR EN DUELOS (#challengeResultView)
+// =============================================================================
+function triggerWinnerPodiumMagicSmoke(soyGanador, correctCount = 5) {
+  const overlay = document.getElementById('winnerMagicSmokeOverlay');
+  const frame = document.querySelector('#challengeResultView .winner-podium-frame');
+  const crown = document.getElementById('challengeWinnerCrown');
+  const nameEl = document.getElementById('challengeWinnerName');
+
+  if (!frame) return;
+
+  // Paso 1: Reproduce de inmediato el sonido del estallido oficial
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('ruleta_todo.mp3', 0.80);
+  }
+
+  // Preparar estado inicial: opacidad 0 y escala reducida
+  frame.classList.remove('reveal-pop');
+  frame.style.opacity = '0';
+  frame.style.transform = 'scale(0.3)';
+  if (crown) crown.classList.remove('revealed');
+  if (nameEl) nameEl.classList.remove('revealed');
+
+  // Paso 2: Detona animación de partículas/humo mágico sobre .winner-podium-frame
+  if (overlay) {
+    overlay.innerHTML = '';
+    overlay.classList.remove('fade-out');
+
+    // Nube expansiva de partículas circulares translúcidas (lila, cian, amarillo neón y chispas blancas)
+    const smokeColors = [
+      'rgba(194, 125, 248, 0.85)', // Lila
+      'rgba(168, 85, 247, 0.85)',  // Violeta
+      'rgba(84, 219, 230, 0.85)',  // Cian
+      'rgba(46, 226, 182, 0.85)',  // Menta
+      'rgba(255, 230, 0, 0.85)'    // Amarillo neón
+    ];
+    const sparkColors = ['#FFFFFF', '#FFE600', '#A5F3FC', '#FDE047'];
+
+    for (let i = 0; i < 24; i++) {
+      const p = document.createElement('div');
+      p.className = 'smoke-particle';
+      const size = Math.floor(Math.random() * 26 + 28);
+      const color = smokeColors[Math.floor(Math.random() * smokeColors.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 65 + 15;
+      const dx = Math.cos(angle) * dist + 'px';
+      const dy = Math.sin(angle) * dist + 'px';
+      const scale = (Math.random() * 0.8 + 1.4).toFixed(2);
+      const duration = (Math.random() * 0.2 + 0.65).toFixed(2) + 's';
+
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.backgroundColor = color;
+      p.style.setProperty('--dx', dx);
+      p.style.setProperty('--dy', dy);
+      p.style.setProperty('--target-scale', scale);
+      p.style.setProperty('--duration', duration);
+
+      overlay.appendChild(p);
+    }
+
+    for (let i = 0; i < 16; i++) {
+      const s = document.createElement('div');
+      s.className = 'spark-particle';
+      const size = Math.floor(Math.random() * 5 + 4);
+      const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 75 + 20;
+      const dx = Math.cos(angle) * dist + 'px';
+      const dy = Math.sin(angle) * dist + 'px';
+      const duration = (Math.random() * 0.2 + 0.55).toFixed(2) + 's';
+
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.backgroundColor = color;
+      s.style.setProperty('--dx', dx);
+      s.style.setProperty('--dy', dy);
+      s.style.setProperty('--duration', duration);
+
+      overlay.appendChild(s);
+    }
+  }
+
+  // Paso 3: Revelación elástica en el pico del humo a los 300 ms
+  setTimeout(() => {
+    frame.classList.add('reveal-pop');
+    if (crown) crown.classList.add('revealed');
+    if (nameEl) nameEl.classList.add('revealed');
+
+    if (soyGanador) {
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
+      }
+      playResultsAudioSequence(correctCount);
+    }
+  }, 300);
+
+  // Paso 4: A los 600 ms, el humo se desvanece por completo
+  setTimeout(() => {
+    if (overlay) overlay.classList.add('fade-out');
+  }, 600);
+
+  // Si perdió: exactamente 1 segundo después (cuando se asimila la derrota), suena 'gameover.mp3'
+  if (!soyGanador) {
+    setTimeout(() => {
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.stopAllBGM();
+        SoundManager.playSFX('gameover.mp3', 0.85);
+      } else {
+        playErrorSound();
+      }
+    }, 1000);
+  }
+}
+window.triggerWinnerPodiumMagicSmoke = triggerWinnerPodiumMagicSmoke;
 
 function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false) {
   // 1. Detener temporizadores y alarmas
@@ -3942,10 +4059,16 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   // 5. Botones de Acción y Resolución
   const roundActions = document.getElementById('duelRoundActions');
   const finalActions = document.getElementById('duelFinalActions');
+  const versusPodium = document.getElementById('duelResultPodiumVersus');
+  const winnerPodium = document.getElementById('duelWinnerPodiumContainer');
+  const outcomeSubtitle = document.getElementById('duelOutcomeSubtitle');
 
   if (!isFinalResolution) {
     // Rondas Intermedias (1 y 2, o Ronda 3 previa al turno del rival)
     if (outcomeTitle) outcomeTitle.innerText = `RESULTADOS RONDA ${currentRound}`;
+    if (outcomeSubtitle) outcomeSubtitle.style.display = 'none';
+    if (versusPodium) versusPodium.style.display = 'flex';
+    if (winnerPodium) winnerPodium.style.display = 'none';
     if (localCrown) localCrown.classList.add('hidden');
     if (rivalCrown) rivalCrown.classList.add('hidden');
 
@@ -3961,22 +4084,25 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
     const btnRematchDuel = document.getElementById('btnRematchDuel');
     const btnDuelBackToChallenges = document.getElementById('btnDuelBackToChallenges');
 
-    // Determinar ganador (winnerUid) y perdedor (loserUid)
-    let winnerUid = chData?.winnerUid;
-    let loserUid = chData?.loserUid;
+    // 1. LÓGICA DE DETECCIÓN DEL GANADOR:
+    const miPuntaje = localTotalScore;
+    const rivalPuntaje = rivalTotalScore;
+    const esEmpate = (miPuntaje === rivalPuntaje);
+    const soyGanador = (miPuntaje > rivalPuntaje);
+    const soyPerdedor = (miPuntaje < rivalPuntaje);
 
-    if (!winnerUid) {
-      if (localTotalScore > rivalTotalScore) {
-        winnerUid = currentUid;
-        loserUid = rivalUid;
-      } else if (localTotalScore < rivalTotalScore) {
-        winnerUid = rivalUid;
-        loserUid = currentUid;
-      }
+    const localUsername = window.state?.username || localStorage.getItem('retroquiz_username') || "Tú";
+    const localAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
+
+    const rivalUsername = state.currentDuel?.rivalName || (isCreator ? (chData?.toUsername || chData?.targetUserName) : (chData?.fromUsername || chData?.challengerName)) || 'Rival';
+    let rivalAvatar = state.currentDuel?.rivalAvatar || (isCreator ? chData?.toAvatar : chData?.fromAvatar) || 'assets/pantalla_inicio/hombre.webp';
+    if (!rivalAvatar || (!rivalAvatar.includes('/') && !rivalAvatar.startsWith('data:'))) {
+      rivalAvatar = 'assets/pantalla_inicio/hombre.webp';
     }
 
-    const isLocalWinner = (winnerUid && currentUid && winnerUid === currentUid) || (localTotalScore > rivalTotalScore);
-    const isLocalLoser = (loserUid && currentUid && loserUid === currentUid) || (winnerUid && currentUid && winnerUid === rivalUid) || (localTotalScore < rivalTotalScore);
+    const datosGanador = soyGanador
+      ? { nombre: localUsername, avatar: localAvatar, puntaje: miPuntaje }
+      : { nombre: rivalUsername, avatar: rivalAvatar, puntaje: rivalPuntaje };
 
     const chId = state.currentDuel?.challengeId || chData?.id || window.state?.currentChallengeId;
     const currentUidVal = currentUid || window.state?.userId || state.userId;
@@ -3988,7 +4114,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       ? window.state.xp 
       : (state.xp !== undefined ? state.xp : (state.userScore || 0));
 
-    if (isLocalWinner) {
+    if (soyGanador) {
       // Feedback visual del ganador: texto verde menta #2ee2b6 "+120 XP"
       if (pointsEarnedEl) {
         pointsEarnedEl.innerText = '+120 XP';
@@ -4030,6 +4156,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
             if (chId) {
               const chRef = doc(window.db, "desafios", chId);
               updateDoc(chRef, {
+                winnerUid: currentUidVal,
                 [`xpFluctuationAwarded.${currentUidVal}`]: true
               }).catch(() => {});
             }
@@ -4039,25 +4166,35 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
         }
       }
 
-      // A. SI EL USUARIO LOCAL ES EL GANADOR:
-      if (outcomeTitle) outcomeTitle.innerText = '¡HAS GANADO! 🏆';
-      if (localCrown) localCrown.classList.remove('hidden');
-      if (rivalCrown) rivalCrown.classList.add('hidden');
-      if (typeof confetti === 'function') {
-        confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
+      // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL GANADOR
+      if (outcomeTitle) outcomeTitle.innerText = '🏆 ¡VICTORIA DEFINITIVA!';
+      if (outcomeSubtitle) {
+        outcomeSubtitle.innerText = '¡Has dominado el duelo frente a tu rival!';
+        outcomeSubtitle.style.display = 'block';
       }
 
-      // Botón disponible: ÚNICAMENTE "VOLVER A DESAFÍOS" (Ocultar revancha por completo)
+      // Marco central del podio con foto del ganador y corona
+      if (winnerPodium) winnerPodium.style.display = 'flex';
+      if (versusPodium) versusPodium.style.display = 'none';
+
+      const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
+      if (winnerAvatarImg) winnerAvatarImg.src = datosGanador.avatar;
+      const winnerNameEl = document.getElementById('challengeWinnerName');
+      if (winnerNameEl) winnerNameEl.textContent = datosGanador.nombre;
+
+      // Botón principal: "VOLVER A DESAFÍOS" en amarillo neón (ocultar revancha)
       if (btnRematchDuel) {
         btnRematchDuel.style.display = 'none';
       }
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
-        btnDuelBackToChallenges.classList.add('winner-single-btn');
+        btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-winner-back interactive-press';
       }
 
-      playResultsAudioSequence(correctCount);
-    } else if (isLocalLoser) {
+      // Secuencia de revelación con humo mágico, 'ruleta_todo.mp3' y fanfarria con confeti
+      triggerWinnerPodiumMagicSmoke(true, correctCount);
+    } else if (soyPerdedor) {
       const isSafeZone = (currentXp < 700);
 
       // Feedback visual del perdedor: texto rojo "-60 XP" (o "+0 XP en zona segura" si < 700 XP)
@@ -4105,6 +4242,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
             if (chId) {
               const chRef = doc(window.db, "desafios", chId);
               updateDoc(chRef, {
+                loserUid: currentUidVal,
                 [`xpFluctuationAwarded.${currentUidVal}`]: true
               }).catch(() => {});
             }
@@ -4114,27 +4252,38 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
         }
       }
 
-      // B. SI EL USUARIO LOCAL ES EL PERDEDOR:
-      if (outcomeTitle) outcomeTitle.innerText = 'HAS PERDIDO 💀';
-      if (localCrown) localCrown.classList.add('hidden');
-      if (rivalCrown) rivalCrown.classList.remove('hidden');
-      if (typeof SoundManager !== 'undefined') {
-        SoundManager.stopAllBGM();
+      // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL PERDEDOR
+      if (outcomeTitle) outcomeTitle.innerText = 'HAS PERDIDO';
+      if (outcomeSubtitle) {
+        outcomeSubtitle.innerText = `${datosGanador.nombre} se lleva la victoria por esta vez`;
+        outcomeSubtitle.style.display = 'block';
       }
-      playErrorSound();
 
-      // Botones disponibles:
-      // * Botón principal destacado: "🔄 SOLICITAR REVANCHA"
-      // * Botón secundario: "VOLVER A DESAFÍOS"
+      // El círculo central sigue mostrando la foto del RIVAL con su corona
+      if (winnerPodium) winnerPodium.style.display = 'flex';
+      if (versusPodium) versusPodium.style.display = 'none';
+
+      const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
+      if (winnerAvatarImg) winnerAvatarImg.src = datosGanador.avatar;
+      const winnerNameEl = document.getElementById('challengeWinnerName');
+      if (winnerNameEl) winnerNameEl.textContent = datosGanador.nombre;
+
+      // Botón principal: "🔄 SOLICITAR REVANCHA" (destacado en naranja/rojo Neo-Memphis) y botón secundario "VOLVER"
       if (btnRematchDuel) {
         btnRematchDuel.style.display = 'flex';
+        btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
+        btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-highlight interactive-press';
       }
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
-        btnDuelBackToChallenges.classList.remove('winner-single-btn');
+        btnDuelBackToChallenges.innerText = 'VOLVER';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-secondary-back interactive-press';
       }
+
+      // Secuencia de revelación con humo mágico para el rival y 'gameover.mp3' a 1s
+      triggerWinnerPodiumMagicSmoke(false, correctCount);
     } else {
-      // Empate
+      // 4. EMPATE (CASO BORDE)
       if (pointsEarnedEl) {
         pointsEarnedEl.innerText = '+0 XP';
         pointsEarnedEl.classList.remove('duel-xp-winner', 'duel-xp-loser');
@@ -4145,16 +4294,29 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
         localStorage.setItem(xpAwardedKey, 'true');
       } catch (e) {}
 
-      if (outcomeTitle) outcomeTitle.innerText = '¡EMPATE! ⚔️';
+      if (outcomeTitle) outcomeTitle.innerText = '¡EMPATE ÉPICO!';
+      if (outcomeSubtitle) {
+        outcomeSubtitle.innerText = '¡Duelo reñido! Ambos demostraron gran nivel.';
+        outcomeSubtitle.style.display = 'block';
+      }
+
+      // Muestra ambos avatares lado a lado, sin corona única
+      if (winnerPodium) winnerPodium.style.display = 'none';
+      if (versusPodium) versusPodium.style.display = 'flex';
       if (localCrown) localCrown.classList.add('hidden');
       if (rivalCrown) rivalCrown.classList.add('hidden');
+      const podiumVsTag = document.getElementById('podiumVsTag');
+      if (podiumVsTag) podiumVsTag.innerText = 'EMPATE';
 
       if (btnRematchDuel) {
         btnRematchDuel.style.display = 'flex';
+        btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
+        btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-highlight interactive-press';
       }
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
-        btnDuelBackToChallenges.classList.remove('winner-single-btn');
+        btnDuelBackToChallenges.innerText = 'VOLVER';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-secondary-back interactive-press';
       }
 
       playResultsAudioSequence(correctCount);
@@ -4314,6 +4476,11 @@ window.resetTheme = resetTheme;
 function updateUserAvatarAcrossApp(imgSrc) {
   if (!imgSrc) return;
   state.customAvatar = imgSrc;
+  state.userAvatar = imgSrc;
+  if (window.state) {
+    window.state.customAvatar = imgSrc;
+    window.state.userAvatar = imgSrc;
+  }
 
   // Actualiza todos los elementos de avatar sincronizados en la app
   document.querySelectorAll('.user-avatar-sync').forEach(el => {
@@ -5218,16 +5385,17 @@ function renderChallengesUI() {
         statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> Finalizado</div>`;
         buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADOS</button>`;
       } else if (isMyTurn) {
-        statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno! (${roundLabel})</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️</button>`;
+        statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno de atacar!</div>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡JUGAR! ⚔️</button>`;
       } else {
         statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled>ESPERANDO RIVAL...</button>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled><span class="btn-waiting-icon">🔥</span> ESPERANDO RIVAL...</button>`;
       }
 
       return `
         <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
-          <div class="card-vs-group">
+          <!-- FILA 1 (SUPERIOR - ENFRENTAMIENTO VS) -->
+          <div class="card-vs-row">
             <div class="player-slot player-user">
               <div class="player-avatar-circle bg-purple">
                 <img src="${currentAvatar}" alt="Usuario" class="challenge-user-avatar-img user-avatar-sync">
@@ -5235,21 +5403,25 @@ function renderChallengesUI() {
               <span class="player-name">${currentUsername}</span>
             </div>
 
-            <span class="vs-badge">vs</span>
+            <div class="vs-badge-container">
+              <span class="vs-badge">VS</span>
+            </div>
 
             <div class="player-slot player-rival">
+              <span class="player-name">${rivalName}</span>
               <div class="player-avatar-circle bg-yellow">
                 <span>${rivalAvatar}</span>
               </div>
-              <span class="player-name">${rivalName}</span>
             </div>
           </div>
 
-          <div class="card-status-col">
-            ${statusHtml}
-            <div class="status-streak">
+          <!-- FILA 2 (INFERIOR - ESTADO Y ACCIÓN) -->
+          <div class="card-action-row">
+            <div class="card-status-info">
+              ${statusHtml}
+            </div>
+            <div class="card-action-btn-wrap">
               ${buttonHtml}
-              <span class="streak-flame" title="Racha activa">🔥</span>
             </div>
           </div>
         </div>
