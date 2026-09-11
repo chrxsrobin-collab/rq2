@@ -3994,7 +3994,8 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
 
   // Comprobar si ambos jugadores han concluido la Ronda 3 (o el desempate)
   const isFinalResolution = isDirectView || 
-    (chData && chData.status === "completed") || 
+    (chData && (chData.status === "completed" || chData.status === "finished")) || 
+    (chData && chData.round3_p1 !== undefined && chData.round3_p2 !== undefined) ||
     (currentRound === 3 && (rivalRoundsCompleted >= 3 || (!isCreator && myPrevRoundsCompleted >= 2))) ||
     (isTieBreaker && chData && chData.scores && chData.scores[rivalUid]?.tieBreakerHits !== undefined);
 
@@ -4087,9 +4088,26 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
     // 1. LÓGICA DE DETECCIÓN DEL GANADOR:
     const miPuntaje = localTotalScore;
     const rivalPuntaje = rivalTotalScore;
-    const esEmpate = (miPuntaje === rivalPuntaje);
-    const soyGanador = (miPuntaje > rivalPuntaje);
-    const soyPerdedor = (miPuntaje < rivalPuntaje);
+    const currentUidVal = currentUid || window.state?.userId || state.userId;
+    let esEmpate = (miPuntaje === rivalPuntaje);
+    let soyGanador = (miPuntaje > rivalPuntaje);
+    let soyPerdedor = (miPuntaje < rivalPuntaje);
+
+    if (chData?.winnerId) {
+      if (chData.winnerId === "empate") {
+        esEmpate = true;
+        soyGanador = false;
+        soyPerdedor = false;
+      } else if (chData.winnerId === currentUidVal) {
+        soyGanador = true;
+        soyPerdedor = false;
+        esEmpate = false;
+      } else {
+        soyGanador = false;
+        soyPerdedor = true;
+        esEmpate = false;
+      }
+    }
 
     const localUsername = window.state?.username || localStorage.getItem('retroquiz_username') || "Tú";
     const localAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
@@ -4105,7 +4123,6 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       : { nombre: rivalUsername, avatar: rivalAvatar, puntaje: rivalPuntaje };
 
     const chId = state.currentDuel?.challengeId || chData?.id || window.state?.currentChallengeId;
-    const currentUidVal = currentUid || window.state?.userId || state.userId;
     const xpAwardedKey = 'retroquiz_duel_xp_awarded_' + (chId || 'duel') + '_' + (currentUidVal || 'local');
     const alreadyProcessed = (localStorage.getItem(xpAwardedKey) === 'true') || 
       (chData?.xpFluctuationAwarded && currentUidVal && chData.xpFluctuationAwarded[currentUidVal]);
@@ -4327,25 +4344,248 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   navigateToScreen('challengeResultView');
 }
 
+let _isSavingChallengeRound = false;
+async function guardarPuntosRondaDesafio(correctCount = 0) {
+  if (_isSavingChallengeRound) return;
+  _isSavingChallengeRound = true;
+
+  const chId = window.state?.currentChallengeId || state.currentChallengeId;
+  const currentUid = window.state?.userId;
+
+  const roundXP = correctCount * 60;
+  const roundCoins = (state.trivia && state.trivia.sessionCoins > 0) ? state.trivia.sessionCoins : (correctCount * 5);
+  const roundTotalPoints = roundXP + roundCoins;
+
+  if (state.trivia) {
+    state.trivia.lastRoundXP = roundXP;
+    state.trivia.lastRoundCoins = roundCoins;
+  }
+
+  // Sumar monedas al estado local y persistir
+  state.coins += roundCoins;
+  if (window.state) window.state.coins = state.coins;
+  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
+
+  // Si no hay datos en Firestore o no hay chId, fallback local
+  if (!chId || !window.db || !window.firestoreOps || !currentUid) {
+    window.state.isChallengeRoundActive = false;
+    showChallengeDuelResults(state.currentDuel?.currentRound || 1, correctCount, false);
+    showView('#challengeResultView');
+    _isSavingChallengeRound = false;
+    return;
+  }
+
+  try {
+    const { doc, getDoc, updateDoc } = window.firestoreOps;
+    const chRef = doc(window.db, "desafios", chId);
+    const snap = await getDoc(chRef);
+
+    if (!snap.exists()) {
+      window.state.isChallengeRoundActive = false;
+      showChallengeDuelResults(state.currentDuel?.currentRound || 1, correctCount, false);
+      showView('#challengeResultView');
+      _isSavingChallengeRound = false;
+      return;
+    }
+
+    const desafio = snap.data();
+    const challengerId = desafio.challengerId || desafio.fromUid;
+    const targetUserId = desafio.targetUserId || desafio.toUid;
+    const esCreador = (challengerId === currentUid);
+    const rivalUid = esCreador ? targetUserId : challengerId;
+    const rondaActual = desafio.currentRound || desafio.round || 1;
+
+    const rivalName = esCreador ? (desafio.toUsername || desafio.targetUserName || 'Rival') : (desafio.fromUsername || desafio.challengerName || 'Retador');
+    const rivalAvatar = esCreador ? (desafio.toAvatar || '🕹️') : (desafio.fromAvatar || '👾');
+
+    const roundData = {
+      coins: roundCoins,
+      xp: roundXP,
+      hits: correctCount,
+      points: roundTotalPoints,
+      completedAt: new Date().toISOString()
+    };
+
+    const prevScores = desafio.scores || {};
+    let p1Total = (typeof prevScores.p1Total === 'number')
+      ? prevScores.p1Total
+      : ((prevScores[challengerId]?.totalScore) || prevScores.fromScore || 0);
+
+    let p2Total = (typeof prevScores.p2Total === 'number')
+      ? prevScores.p2Total
+      : ((prevScores[targetUserId]?.totalScore) || prevScores.toScore || 0);
+
+    if (esCreador) {
+      p1Total += roundTotalPoints;
+    } else {
+      p2Total += roundTotalPoints;
+    }
+
+    // Condición de FIN ABSOLUTO DE PARTIDA:
+    // Si estamos en Ronda 3 y el jugador actual es el SEGUNDO en responder esa ronda:
+    const ambosCompletaronRonda3 = (rondaActual === 3) && (esCreador ? (desafio.round3_p2 !== undefined) : (desafio.round3_p1 !== undefined));
+
+    if (ambosCompletaronRonda3) {
+      // SI LA PARTIDA TERMINÓ:
+      // - NO asignes currentTurn a ningún jugador (null)
+      // - Calcula el puntaje total acumulado de las 3 rondas para Jugador 1 y Jugador 2
+      // - Determina winnerId (o "empate")
+      let winnerId;
+      if (p1Total > p2Total) {
+        winnerId = challengerId;
+      } else if (p2Total > p1Total) {
+        winnerId = targetUserId;
+      } else {
+        winnerId = "empate";
+      }
+
+      const updateData = {
+        status: "completed",
+        currentTurn: null,
+        winnerId: winnerId,
+        winnerUid: winnerId,
+        scores: {
+          ...prevScores,
+          p1Total: p1Total,
+          p2Total: p2Total,
+          fromScore: p1Total,
+          toScore: p2Total,
+          [challengerId]: {
+            ...(prevScores[challengerId] || {}),
+            totalScore: p1Total,
+            roundsCompleted: 3
+          },
+          [targetUserId]: {
+            ...(prevScores[targetUserId] || {}),
+            totalScore: p2Total,
+            roundsCompleted: 3
+          }
+        },
+        round: 3,
+        currentRound: 3,
+        [esCreador ? 'round3_p1' : 'round3_p2']: roundData,
+        completedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      window._justCompletedChallengeId = chId;
+      await updateDoc(chRef, updateData);
+
+      // Limpieza de banderas locales (Requirement 3)
+      window.state.isChallengeRoundActive = false;
+      window.state.isChallengeMode = false;
+      state.isChallengeMode = false;
+
+      state.currentDuel = {
+        challengeId: chId,
+        rivalUid: rivalUid,
+        rivalName: rivalName,
+        rivalAvatar: rivalAvatar,
+        currentRound: 3,
+        localTotalScore: esCreador ? p1Total : p2Total,
+        rivalTotalScore: esCreador ? p2Total : p1Total,
+        isCompletedDuel: true,
+        chData: {
+          ...desafio,
+          ...updateData
+        }
+      };
+
+      // Navega inmediatamente a showView('#challengeResultView') cargando la pantalla con la animación de humo, corona y audios
+      showChallengeDuelResults(3, correctCount, true);
+      showView('#challengeResultView');
+    } else {
+      // SI LA PARTIDA CONTINÚA (Rondas 1 o 2, o Ronda 3 Jugador 1):
+      // - Transfiere el turno al rival: currentTurn = rivalUid
+      // - Incrementa currentRound solo cuando ambos hayan completado la ronda activa
+      const currentRoundKey = `round${rondaActual}_${esCreador ? 'p1' : 'p2'}`;
+
+      const rivalCompletedThisRound = esCreador
+        ? (desafio[`round${rondaActual}_p2`] !== undefined)
+        : (desafio[`round${rondaActual}_p1`] !== undefined);
+
+      let nextRound = rondaActual;
+      if (rivalCompletedThisRound && rondaActual < 3) {
+        nextRound = rondaActual + 1;
+      }
+
+      const updateData = {
+        status: (desafio.status === "pending" && esCreador && rondaActual === 1) ? "pending" : "active",
+        currentRound: nextRound,
+        round: nextRound,
+        currentTurn: rivalUid,
+        [currentRoundKey]: roundData,
+        creatorRoundCompleted: esCreador ? true : (desafio.creatorRoundCompleted || false),
+        scores: {
+          ...prevScores,
+          p1Total: p1Total,
+          p2Total: p2Total,
+          fromScore: p1Total,
+          toScore: p2Total,
+          [challengerId]: {
+            ...(prevScores[challengerId] || {}),
+            totalScore: p1Total,
+            roundsCompleted: esCreador ? rondaActual : (desafio.scores?.[challengerId]?.roundsCompleted || 0)
+          },
+          [targetUserId]: {
+            ...(prevScores[targetUserId] || {}),
+            totalScore: p2Total,
+            roundsCompleted: !esCreador ? rondaActual : (desafio.scores?.[targetUserId]?.roundsCompleted || 0)
+          }
+        },
+        updatedAt: new Date().toISOString()
+      };
+
+      await updateDoc(chRef, updateData);
+
+      // Limpieza de banderas locales de la ronda
+      window.state.isChallengeRoundActive = false;
+
+      state.currentDuel = {
+        challengeId: chId,
+        rivalUid: rivalUid,
+        rivalName: rivalName,
+        rivalAvatar: rivalAvatar,
+        currentRound: rondaActual,
+        localTotalScore: esCreador ? p1Total : p2Total,
+        rivalTotalScore: esCreador ? p2Total : p1Total,
+        isCompletedDuel: false,
+        chData: {
+          ...desafio,
+          ...updateData
+        }
+      };
+
+      showChallengeDuelResults(rondaActual, correctCount, false);
+      showView('#challengeResultView');
+    }
+  } catch (err) {
+    console.error("Error guardando puntos de ronda de desafío en Firestore:", err);
+    window.state.isChallengeRoundActive = false;
+    showChallengeDuelResults(state.currentDuel?.currentRound || 1, correctCount, false);
+    showView('#challengeResultView');
+  } finally {
+    _isSavingChallengeRound = false;
+  }
+}
+window.guardarPuntosRondaDesafio = guardarPuntosRondaDesafio;
+
 function renderResultadosDesafio() {
-  const round = (state.currentDuel && state.currentDuel.currentRound) ? state.currentDuel.currentRound : 1;
   const aciertos = (state.trivia && state.trivia.correctAnswersCount !== undefined) 
     ? state.trivia.correctAnswersCount 
     : ((window.state && window.state.trivia && window.state.trivia.correctAnswersCount !== undefined) 
         ? window.state.trivia.correctAnswersCount 
         : (window.state && window.state.correctAnswersCount ? window.state.correctAnswersCount : 0));
 
-  if (typeof showChallengeDuelResults === 'function') {
-    showChallengeDuelResults(round, aciertos);
-  }
+  guardarPuntosRondaDesafio(aciertos);
 }
 window.renderResultadosDesafio = renderResultadosDesafio;
 
 function completeTriviaRound() {
-  const isDuel = state.trivia.isDuel;
+  const isDuel = state.trivia.isDuel || window.state.isChallengeMode;
   const correctCount = state.trivia.correctAnswersCount !== undefined ? state.trivia.correctAnswersCount : (isDuel ? 4 : 10);
   if (isDuel) {
-    showChallengeDuelResults(state.currentDuel?.currentRound || 1, correctCount);
+    guardarPuntosRondaDesafio(correctCount);
   } else {
     showResults(correctCount);
   }
@@ -5371,22 +5611,23 @@ function renderChallengesUI() {
     const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
 
     container.innerHTML = challenges.map((ch, idx) => {
-      const isCreator = (ch.fromUid === currentUid);
-      const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+      const isCreator = (ch.fromUid === currentUid || ch.challengerId === currentUid);
+      const rivalName = isCreator ? (ch.toUsername || ch.targetUserName || 'Rival') : (ch.fromUsername || ch.challengerName || 'Retador');
       const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
       const isMyTurn = (ch.currentTurn === currentUid);
       const isCompleted = (ch.status === "completed" || ch.status === "finished");
-      const roundLabel = (ch.round === 'desempate') ? 'Desempate' : `Ronda ${ch.round || 1}`;
+      const currentRoundNum = ch.currentRound || ch.round || 1;
+      const roundLabel = (ch.round === 'desempate' || ch.currentRound === 'desempate') ? 'Desempate' : `Ronda ${currentRoundNum}`;
 
       let statusHtml = '';
       let buttonHtml = '';
 
       if (isCompleted) {
-        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> ¡Duelo finalizado!</div>`;
+        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> 🏆 PARTIDA FINALIZADA</div>`;
         buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
       } else if (isMyTurn) {
         statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno de atacar!</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡JUGAR! ⚔️</button>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️ (${roundLabel})</button>`;
       } else {
         statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
         buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled><span class="btn-waiting-icon">🔥</span> ESPERANDO RIVAL...</button>`;
@@ -5439,17 +5680,19 @@ function renderChallengesUI() {
         }
 
         const chId = btn.getAttribute('data-challenge-id');
-        const ch = (state.challenges || []).find(c => c.id === chId);
+        const ch = (state.challenges || []).find(c => c.id === chId) || (state.allChallengesList || []).find(c => c.id === chId);
         if (!ch) return;
 
-        const isCreator = (ch.fromUid === window.state?.userId);
-        const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+        const isCreator = (ch.fromUid === window.state?.userId || ch.challengerId === window.state?.userId);
+        const rivalName = isCreator ? (ch.toUsername || ch.targetUserName || 'Rival') : (ch.fromUsername || ch.challengerName || 'Retador');
         const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
-        const rivalUid = isCreator ? ch.toUid : ch.fromUid;
+        const rivalUid = isCreator ? (ch.toUid || ch.targetUserId) : (ch.fromUid || ch.challengerId);
 
-        const isTieBreaker = (ch.round === 'desempate');
+        const isTieBreaker = (ch.round === 'desempate' || ch.currentRound === 'desempate');
         window.state.isChallengeMode = true;
         state.isChallengeMode = true;
+        window.state.isChallengeRoundActive = true;
+        state.isChallengeRoundActive = true;
         window.state.isTieBreaker = isTieBreaker;
         state.isTieBreaker = isTieBreaker;
         window.state.currentChallengeId = chId;
@@ -5465,11 +5708,12 @@ function renderChallengesUI() {
           localAvatarImg.src = state.customAvatar || window.state?.customAvatar;
         }
 
-        setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
+        const activeRoundNum = ch.currentRound || ch.round || 1;
+        setupDuelMatchUI(rivalName, rivalAvatar, activeRoundNum);
         state.currentDuel.challengeId = chId;
         state.currentDuel.rivalUid = rivalUid;
-        state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[rivalUid]?.totalScore) || (isCreator ? (ch.scores?.toScore || 0) : (ch.scores?.fromScore || 0));
-        state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || 0;
+        state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[rivalUid]?.totalScore) || (isCreator ? (ch.scores?.toScore || ch.scores?.p2Total || 0) : (ch.scores?.fromScore || ch.scores?.p1Total || 0));
+        state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || (isCreator ? (ch.scores?.fromScore || ch.scores?.p1Total || 0) : (ch.scores?.toScore || ch.scores?.p2Total || 0));
         state.currentDuel.chData = ch;
 
         // Hándicap si el rival dejó un ataque
@@ -5518,6 +5762,7 @@ function renderChallengesUI() {
   }
 }
 window.renderChallengesUI = renderChallengesUI;
+window.renderMatchCards = renderChallengesUI;
 
 function openCompletedChallengeResult(ch) {
   const currentUid = window.state?.userId;
@@ -6573,8 +6818,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnGirarDuelWheel) {
     btnGirarDuelWheel.addEventListener('click', () => {
       if (state.duelWheel.isSpinning) return;
+      if (window.state.isChallengeMode && window.state.isChallengeRoundActive === false) {
+        showRetroToast('Ronda ya completada. Espera el turno del rival.', '⏳');
+        navigateToScreen('challengesView');
+        return;
+      }
       window.state.isChallengeMode = true;
       state.isChallengeMode = true;
+      window.state.isChallengeRoundActive = true;
       if (typeof SoundManager !== 'undefined') {
         SoundManager.playSFX('ruleta.mp3', 0.70);
       }
@@ -6736,6 +6987,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.state.isChallengeMode = false;
     state.isChallengeMode = false;
+    window.state.isChallengeRoundActive = false;
+    state.isChallengeRoundActive = false;
     window.state.isTieBreaker = false;
     state.isTieBreaker = false;
     window.state.currentChallengeId = null;
@@ -6847,6 +7100,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       window.state.isChallengeMode = false;
       state.isChallengeMode = false;
+      window.state.isChallengeRoundActive = false;
+      state.isChallengeRoundActive = false;
       window.state.isTieBreaker = false;
       state.isTieBreaker = false;
       window.state.currentChallengeId = null;
