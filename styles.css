@@ -8231,6 +8231,43 @@ input:checked + .slider:before {
 }
 
 /* =============================================================================
+   MICROINTERACCIÓN: BOTÓN "VOLVER A DESAFÍOS" (#challengeResultView)
+   ============================================================================= */
+
+@keyframes challengeBtnBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-5px) scale(1.04);
+  }
+  50% {
+    transform: translateY(0) scale(1.02);
+  }
+  70% {
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
+#challengeResultView .btn-return-challenges,
+#challengeResultView .btn-back-challenges,
+#challengeResultView #btnDuelBackToChallenges,
+.btn-winner-back {
+  animation: challengeBtnBounce 2s ease-in-out infinite;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+#challengeResultView .btn-return-challenges:active,
+#challengeResultView .btn-back-challenges:active,
+#challengeResultView #btnDuelBackToChallenges:active,
+.btn-winner-back:active {
+  animation: none !important;
+  transform: scale(0.96) !important;
+}
+
+
+/* =============================================================================
    MODAL DE ATAQUES (#attackModal)
    ============================================================================= */
 

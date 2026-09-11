@@ -4210,7 +4210,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
         btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
-        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-winner-back interactive-press';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-winner-back interactive-press';
       }
 
       // Secuencia de revelación con humo mágico, 'ruleta_todo.mp3' y fanfarria con confeti
@@ -4300,7 +4300,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
         btnDuelBackToChallenges.innerText = 'VOLVER';
-        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-secondary-back interactive-press';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-secondary-back interactive-press';
       }
 
       // Secuencia de revelación con humo mágico para el rival y 'gameover.mp3' a 1s
@@ -4339,7 +4339,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
         btnDuelBackToChallenges.innerText = 'VOLVER';
-        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-secondary-back interactive-press';
+        btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-secondary-back interactive-press';
       }
 
       playResultsAudioSequence(correctCount);
