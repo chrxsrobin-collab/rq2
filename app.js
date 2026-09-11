@@ -4093,12 +4093,13 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
     let soyGanador = (miPuntaje > rivalPuntaje);
     let soyPerdedor = (miPuntaje < rivalPuntaje);
 
-    if (chData?.winnerId) {
-      if (chData.winnerId === "empate") {
+    if (chData?.winnerId || chData?.winnerUid) {
+      const wId = chData.winnerId || chData.winnerUid;
+      if (wId === "empate") {
         esEmpate = true;
         soyGanador = false;
         soyPerdedor = false;
-      } else if (chData.winnerId === currentUidVal) {
+      } else if (wId === currentUidVal) {
         soyGanador = true;
         soyPerdedor = false;
         esEmpate = false;
@@ -4184,9 +4185,12 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       }
 
       // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL GANADOR
-      if (outcomeTitle) outcomeTitle.innerText = '🏆 ¡VICTORIA DEFINITIVA!';
+      const isTimeoutFinish = (chData?.finishReason === "timeout" || state.currentDuel?.chData?.finishReason === "timeout");
+      if (outcomeTitle) {
+        outcomeTitle.innerText = isTimeoutFinish ? '🏆 ¡VICTORIA POR ABANDONO!' : '🏆 ¡VICTORIA DEFINITIVA!';
+      }
       if (outcomeSubtitle) {
-        outcomeSubtitle.innerText = '¡Has dominado el duelo frente a tu rival!';
+        outcomeSubtitle.innerText = isTimeoutFinish ? 'Tu contrincante no respondió a tiempo su turno.' : '¡Has dominado el duelo frente a tu rival!';
         outcomeSubtitle.style.display = 'block';
       }
 
@@ -4270,9 +4274,11 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       }
 
       // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL PERDEDOR
-      if (outcomeTitle) outcomeTitle.innerText = 'HAS PERDIDO';
+      if (outcomeTitle) {
+        outcomeTitle.innerText = isTimeoutFinish ? '⌛ TIEMPO AGOTADO' : 'HAS PERDIDO';
+      }
       if (outcomeSubtitle) {
-        outcomeSubtitle.innerText = `${datosGanador.nombre} se lleva la victoria por esta vez`;
+        outcomeSubtitle.innerText = isTimeoutFinish ? 'No respondiste a tiempo tu turno.' : `${datosGanador.nombre} se lleva la victoria por esta vez`;
         outcomeSubtitle.style.display = 'block';
       }
 
@@ -5596,8 +5602,79 @@ function renderChallengesUI() {
   const container = document.getElementById('challengesCardsList');
   if (!container) return;
 
-  const challenges = state.challenges || [];
-  if (challenges.length === 0) {
+  const MAX_INVITATION_TIME = 48 * 60 * 60 * 1000; // 48 horas para aceptar solicitud
+  const MAX_TURN_TIME = 36 * 60 * 60 * 1000;       // 36 horas para responder turno
+  const WARNING_TIME = 10 * 60 * 60 * 1000;        // Últimas 10 horas (Zona de alerta)
+
+  const rawChallenges = state.challenges || [];
+  const ahora = Date.now();
+
+  const currentUid = window.state?.userId;
+  const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
+  const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
+
+  const validChallenges = [];
+  rawChallenges.forEach(ch => {
+    if (!ch) return;
+    if (ch.status === "rejected" || ch.status === "expired") return;
+
+    const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
+    const tiempoTranscurrido = ahora - ultimaActividad;
+
+    // A. SI ES SOLICITUD PENDIENTE (status === "pending"):
+    if (ch.status === "pending") {
+      if (tiempoTranscurrido > MAX_INVITATION_TIME) {
+        if (window.db && window.firestoreOps && ch.id) {
+          try {
+            const { doc, updateDoc } = window.firestoreOps;
+            updateDoc(doc(window.db, "desafios", ch.id), {
+              status: "expired",
+              expiredAt: new Date().toISOString()
+            }).catch(() => {});
+          } catch (e) {}
+        }
+        ch.status = "expired";
+        return; // Oculta la tarjeta de las partidas activas
+      }
+    }
+
+    // B. SI ES PARTIDA ACTIVA (status === "active"):
+    if (ch.status === "active") {
+      if (tiempoTranscurrido > MAX_TURN_TIME) {
+        const challengerUid = ch.challengerId || ch.fromUid;
+        const targetUid = ch.targetUserId || ch.toUid;
+        const winnerUid = (ch.currentTurn === challengerUid ? targetUid : challengerUid);
+        const loserUid = (ch.currentTurn === challengerUid ? challengerUid : targetUid);
+
+        ch.status = "completed";
+        ch.winnerId = winnerUid;
+        ch.winnerUid = winnerUid;
+        ch.loserUid = loserUid;
+        ch.finishReason = "timeout";
+        ch.currentTurn = null;
+        ch.completedAt = new Date().toISOString();
+
+        if (window.db && window.firestoreOps && ch.id) {
+          try {
+            const { doc, updateDoc } = window.firestoreOps;
+            updateDoc(doc(window.db, "desafios", ch.id), {
+              status: "completed",
+              winnerId: winnerUid,
+              winnerUid: winnerUid,
+              loserUid: loserUid,
+              finishReason: "timeout",
+              currentTurn: null,
+              completedAt: new Date().toISOString()
+            }).catch(() => {});
+          } catch (e) {}
+        }
+      }
+    }
+
+    validChallenges.push(ch);
+  });
+
+  if (validChallenges.length === 0) {
     container.innerHTML = `
       <div class="empty-challenges-container" id="emptyChallengesContainer">
         <div class="empty-challenges-icon">⚔️</div>
@@ -5606,11 +5683,7 @@ function renderChallengesUI() {
       </div>
     `;
   } else {
-    const currentUid = window.state?.userId;
-    const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
-    const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
-
-    container.innerHTML = challenges.map((ch, idx) => {
+    container.innerHTML = validChallenges.map((ch, idx) => {
       const isCreator = (ch.fromUid === currentUid || ch.challengerId === currentUid);
       const rivalName = isCreator ? (ch.toUsername || ch.targetUserName || 'Rival') : (ch.fromUsername || ch.challengerName || 'Retador');
       const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
@@ -5619,22 +5692,47 @@ function renderChallengesUI() {
       const currentRoundNum = ch.currentRound || ch.round || 1;
       const roundLabel = (ch.round === 'desempate' || ch.currentRound === 'desempate') ? 'Desempate' : `Ronda ${currentRoundNum}`;
 
+      const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
+      const tiempoTranscurrido = ahora - ultimaActividad;
+      const isAlertZone = (tiempoTranscurrido > (MAX_TURN_TIME - WARNING_TIME));
+
       let statusHtml = '';
       let buttonHtml = '';
+      let cardUrgentClass = '';
 
       if (isCompleted) {
-        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> 🏆 PARTIDA FINALIZADA</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+        if (ch.finishReason === "timeout") {
+          const soyGanadorTimeout = (ch.winnerId === currentUid || ch.winnerUid === currentUid);
+          if (soyGanadorTimeout) {
+            statusHtml = `<div class="status-indicator status-forfeit"><span class="status-check">🏆</span> ¡Victoria por abandono!</div>`;
+            buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">RECLAMAR VICTORIA 🏆</button>`;
+          } else {
+            statusHtml = `<div class="status-indicator status-timeout"><span class="status-clock">⌛</span> Tiempo agotado</div>`;
+            buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+          }
+        } else {
+          statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> 🏆 PARTIDA FINALIZADA</div>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+        }
       } else if (isMyTurn) {
-        statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno de atacar!</div>`;
+        if (isAlertZone) {
+          cardUrgentClass = ' card-urgent';
+          statusHtml = `<div class="status-indicator status-urgent"><span class="status-check">⚠️</span> ¡Por expirar!</div>`;
+        } else {
+          statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">⚔️</span> ¡Tu turno!</div>`;
+        }
         buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡TU TURNO! ⚔️ (${roundLabel})</button>`;
       } else {
-        statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
+        if (isAlertZone) {
+          statusHtml = `<div class="status-indicator status-waiting-urgent"><span class="status-clock">⏳</span> Rival en tiempo límite...</div>`;
+        } else {
+          statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
+        }
         buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled><span class="btn-waiting-icon">🔥</span> ESPERANDO RIVAL...</button>`;
       }
 
       return `
-        <div class="challenge-card anim-ch-card-${(idx % 3) + 1} interactive-press" data-challenge-id="${ch.id || idx}">
+        <div class="challenge-card anim-ch-card-${(idx % 3) + 1}${cardUrgentClass} interactive-press" data-challenge-id="${ch.id || idx}">
           <!-- FILA 1 (SUPERIOR - ENFRENTAMIENTO VS) -->
           <div class="card-vs-row">
             <div class="player-slot player-user">
@@ -6227,6 +6325,58 @@ document.addEventListener('DOMContentLoaded', () => {
         const allMap = new Map([...fromChallengesMap, ...toChallengesMap]);
         const allList = Array.from(allMap.values());
 
+        const MAX_INVITATION_TIME = 48 * 60 * 60 * 1000; // 48 horas para aceptar solicitud
+        const MAX_TURN_TIME = 36 * 60 * 60 * 1000;       // 36 horas para responder turno
+        const WARNING_TIME = 10 * 60 * 60 * 1000;        // Últimas 10 horas (Zona de alerta)
+        const ahora = Date.now();
+
+        allList.forEach(ch => {
+          if (!ch) return;
+          const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
+          const tiempoTranscurrido = ahora - ultimaActividad;
+
+          if (ch.status === "pending" && tiempoTranscurrido > MAX_INVITATION_TIME) {
+            ch.status = "expired";
+            if (window.db && window.firestoreOps && ch.id) {
+              try {
+                const { doc, updateDoc } = window.firestoreOps;
+                updateDoc(doc(window.db, "desafios", ch.id), {
+                  status: "expired",
+                  expiredAt: new Date().toISOString()
+                }).catch(() => {});
+              } catch (e) {}
+            }
+          } else if (ch.status === "active" && tiempoTranscurrido > MAX_TURN_TIME) {
+            const challengerUid = ch.challengerId || ch.fromUid;
+            const targetUid = ch.targetUserId || ch.toUid;
+            const winnerUid = (ch.currentTurn === challengerUid ? targetUid : challengerUid);
+            const loserUid = (ch.currentTurn === challengerUid ? challengerUid : targetUid);
+
+            ch.status = "completed";
+            ch.winnerId = winnerUid;
+            ch.winnerUid = winnerUid;
+            ch.loserUid = loserUid;
+            ch.finishReason = "timeout";
+            ch.currentTurn = null;
+            ch.completedAt = new Date().toISOString();
+
+            if (window.db && window.firestoreOps && ch.id) {
+              try {
+                const { doc, updateDoc } = window.firestoreOps;
+                updateDoc(doc(window.db, "desafios", ch.id), {
+                  status: "completed",
+                  winnerId: winnerUid,
+                  winnerUid: winnerUid,
+                  loserUid: loserUid,
+                  finishReason: "timeout",
+                  currentTurn: null,
+                  completedAt: new Date().toISOString()
+                }).catch(() => {});
+              } catch (e) {}
+            }
+          }
+        });
+
         // 1. Desafíos entrantes pendientes de aceptar
         // Solo cuentan si toUid === userId, status === "pending", y el retador ya jugó su ronda inicial (currentTurn === userId)
         const pendingChallenges = allList.filter(ch => 
@@ -6412,7 +6562,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Partidas donde status === "active" | "completed" | ("pending" para creador tras jugar R1)
         const activeMatches = allList.filter(ch => 
           (ch.status === "active" || ch.status === "completed" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
-          ch.status !== "rejected"
+          ch.status !== "rejected" &&
+          ch.status !== "expired"
         );
 
         state.challenges = activeMatches;
