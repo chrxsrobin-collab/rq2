@@ -6069,8 +6069,9 @@ input:checked + .slider:before {
 }
 
 .status-completed {
-  color: #059669;
+  color: #00FF66;
   font-weight: 800;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.35);
 }
 
 .status-check,
@@ -6129,18 +6130,22 @@ input:checked + .slider:before {
 }
 
 .challenge-btn-completed {
-  background: #2EE2B6;
-  color: #000000;
+  background: #FFE600 !important;
+  color: #000000 !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 
 .challenge-btn-completed:hover {
   transform: translateY(-1px);
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: 3px 3px 0px #000000 !important;
 }
 
 .challenge-btn-completed:active {
   transform: translate(2px, 2px);
-  box-shadow: 0px 0px 0px #000000;
+  box-shadow: 0px 0px 0px #000000 !important;
 }
 
 /* =============================================================================
@@ -7061,6 +7066,62 @@ input:checked + .slider:before {
   opacity: 1;
   transform: translateX(-50%) translateY(0) scale(1);
   pointer-events: auto;
+}
+
+/* Neo-Memphis Top Toast para Partidas Finalizadas en Vivo */
+.challenge-completed-toast {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30px) scale(0.9);
+  background: #181414;
+  color: #FFFFFF;
+  border: 2.5px solid #FFE600;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #000000;
+  padding: 12px 18px;
+  font-family: 'Futura', var(--font-retro-heavy), sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+  width: 90%;
+  max-width: 360px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.challenge-completed-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.challenge-completed-toast:active {
+  transform: translateX(-50%) translateY(2px) scale(0.98);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.challenge-completed-toast .toast-duel-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.challenge-completed-toast .toast-duel-text {
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+.challenge-completed-toast .toast-duel-text strong {
+  color: #FFE600;
+  font-weight: 900;
 }
 
 /* =============================================================================

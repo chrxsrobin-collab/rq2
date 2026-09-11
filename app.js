@@ -5382,8 +5382,8 @@ function renderChallengesUI() {
       let buttonHtml = '';
 
       if (isCompleted) {
-        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> Finalizado</div>`;
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADOS</button>`;
+        statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> ¡Duelo finalizado!</div>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
       } else if (isMyTurn) {
         statusHtml = `<div class="status-indicator status-your-turn"><span class="status-check">🔥</span> ¡Tu turno de atacar!</div>`;
         buttonHtml = `<button class="challenge-play-btn challenge-btn-turn interactive-press" data-challenge-id="${ch.id}">¡JUGAR! ⚔️</button>`;
@@ -5499,8 +5499,10 @@ function renderChallengesUI() {
         }
 
         const chId = btn.getAttribute('data-challenge-id');
-        const ch = (state.challenges || []).find(c => c.id === chId);
+        const ch = (state.challenges || []).find(c => c.id === chId) || (state.allChallengesList || []).find(c => c.id === chId);
         if (!ch) return;
+        window.state.currentChallengeId = ch.id;
+        state.currentChallengeId = ch.id;
         openCompletedChallengeResult(ch);
       });
     });
@@ -5569,8 +5571,64 @@ function openCompletedChallengeResult(ch) {
   state.currentDuel.rivalTotalScore = rivalScore;
   state.currentDuel.isCompletedDuel = true;
   showChallengeDuelResults(3, myScores.hits !== undefined ? myScores.hits : 4, true);
+  if (typeof showView === 'function') {
+    showView('#challengeResultView');
+  }
 }
 window.openCompletedChallengeResult = openCompletedChallengeResult;
+
+// Aviso flotante interactivo (Toast Neo-Memphis en la parte superior) para partidas concluidas por el rival
+function showChallengeCompletedToast(ch, rivalName) {
+  let toast = document.getElementById('challengeCompletedToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'challengeCompletedToast';
+    toast.className = 'challenge-completed-toast interactive-press';
+    const container = document.getElementById('gameScreen') || document.body;
+    container.appendChild(toast);
+  }
+
+  toast.innerHTML = `<span class="toast-duel-icon">⚔️</span> <span class="toast-duel-text">¡Partida terminada contra <strong>${rivalName}</strong>! Descubre al ganador</span>`;
+
+  let autoNavigateTimer = null;
+  const navigateToResult = () => {
+    if (autoNavigateTimer) {
+      clearTimeout(autoNavigateTimer);
+      autoNavigateTimer = null;
+    }
+    toast.classList.remove('show');
+    window.state.currentChallengeId = ch.id;
+    state.currentChallengeId = ch.id;
+    openCompletedChallengeResult(ch);
+  };
+
+  toast.onclick = (e) => {
+    e.stopPropagation();
+    navigateToResult();
+  };
+
+  toast.classList.remove('show');
+  void toast.offsetWidth;
+  toast.classList.add('show');
+
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('botones.wav', 0.60);
+  }
+
+  if (toast._timer) clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    const isChallengesActive = (window.state?.currentView === '#challengesView') || 
+      (document.getElementById('challengesView')?.classList.contains('active')) ||
+      (document.getElementById('challengesView')?.style.display === 'flex');
+
+    if (isChallengesActive) {
+      navigateToResult();
+    } else {
+      toast.classList.remove('show');
+    }
+  }, 2000);
+}
+window.showChallengeCompletedToast = showChallengeCompletedToast;
 
 
 async function syncUserProfileWithCloud(uid) {
@@ -5918,6 +5976,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const toChallengesMap = new Map();
       const fromChallengesMap = new Map();
+      const knownChallengeStatusMap = new Map();
 
       const updateAllChallengesRealtime = () => {
         const allMap = new Map([...fromChallengesMap, ...toChallengesMap]);
@@ -6079,7 +6138,32 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // 2. Partidas activas y finalizadas ("Partidas activas (¡continúa!)")
+        // 2. Detección en vivo de partidas finalizadas por el rival
+        allList.forEach(ch => {
+          const prevStatus = knownChallengeStatusMap.get(ch.id);
+          const currentStatus = ch.status;
+
+          if (prevStatus && prevStatus !== 'completed' && currentStatus === 'completed') {
+            if (window._justCompletedChallengeId !== ch.id) {
+              const isCreator = (ch.fromUid === userId);
+              const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
+              const isChallengesActive = (window.state?.currentView === '#challengesView') || 
+                (document.getElementById('challengesView')?.classList.contains('active')) ||
+                (document.getElementById('challengesView')?.style.display === 'flex');
+
+              if (isChallengesActive) {
+                if (typeof showChallengeCompletedToast === 'function') {
+                  showChallengeCompletedToast(ch, rivalName);
+                }
+              }
+            } else {
+              window._justCompletedChallengeId = null;
+            }
+          }
+          knownChallengeStatusMap.set(ch.id, currentStatus);
+        });
+
+        // 3. Partidas activas y finalizadas ("Partidas activas (¡continúa!)")
         // Partidas donde status === "active" | "completed" | ("pending" para creador tras jugar R1)
         const activeMatches = allList.filter(ch => 
           (ch.status === "active" || ch.status === "completed" || (ch.status === "pending" && ch.creatorRoundCompleted && ch.fromUid === userId)) &&
@@ -6623,6 +6707,10 @@ document.addEventListener('DOMContentLoaded', () => {
           if (winnerUid) {
             updateData.winnerUid = winnerUid;
             updateData.loserUid = (winnerUid === ch.fromUid) ? ch.toUid : ch.fromUid;
+          }
+
+          if (nextStatus === "completed") {
+            window._justCompletedChallengeId = chId;
           }
 
           await updateDoc(chRef, updateData);
