@@ -10097,6 +10097,39 @@ body.theme-verano {
   box-shadow: 3px 3px 0px #000000 !important;
 }
 
+/* --- TARJETAS DE DESAFÍOS FINALIZADOS (VICTORIA Y DERROTA) --- */
+.status-indicator.status-victory {
+  color: #00FF66 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.4) !important;
+}
+
+.status-indicator.status-defeat {
+  color: #FF3B30 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 8px rgba(255, 59, 48, 0.35) !important;
+}
+
+.challenge-play-btn.challenge-btn-completed.challenge-btn-victory {
+  background: #FFE600 !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+.challenge-play-btn.challenge-btn-completed.challenge-btn-defeat {
+  background: #FF5E00 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+.challenge-play-btn.challenge-btn-completed.challenge-btn-defeat:hover {
+  background: #ff4500 !important;
+}
+
 /* ==========================================================================
    MODAL DE INSPECCIÓN / DETALLE DE PACKS TEMÁTICOS (#packDetailModal)
    ========================================================================== */

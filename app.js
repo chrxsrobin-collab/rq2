@@ -1000,6 +1000,8 @@ function showView(targetId) {
       triggerDuelResultsEntranceAnimation();
     } else if (targetSelector === '#challengesView') {
       if (typeof updateActiveChallengesBadge === 'function') updateActiveChallengesBadge();
+    } else if (targetSelector === '#homeView') {
+      if (typeof setRandomHomeCharacters === 'function') setRandomHomeCharacters();
     }
   }
 
@@ -1435,6 +1437,9 @@ function renderScreenView(screenId) {
     if (targetView.id === 'homeView') {
       state.activeTab = 'inicio';
       setActiveTab('inicio');
+      if (typeof setRandomHomeCharacters === 'function') {
+        setRandomHomeCharacters();
+      }
       triggerAppEntranceAnimation();
     } else if (targetView.id === 'wheelView') {
       state.activeTab = 'ruleta';
@@ -2620,10 +2625,53 @@ function initStoredTheme() {
   }
 }
 window.initStoredTheme = initStoredTheme;
+
+const COSPLAYS_HOMBRE = [
+  'assets/pantalla_inicio/hombre.webp',
+  'assets/pantalla_inicio/hombre01.webp',
+  'assets/pantalla_inicio/hombre02.webp',
+  'assets/pantalla_inicio/hombre03.webp',
+  'assets/pantalla_inicio/hombre04.webp',
+  'assets/pantalla_inicio/hombre05.webp',
+  'assets/pantalla_inicio/hombre06.webp'
+];
+
+const COSPLAYS_MUJER = [
+  'assets/pantalla_inicio/mujer.webp',
+  'assets/pantalla_inicio/mujer01.webp',
+  'assets/pantalla_inicio/mujer02.webp',
+  'assets/pantalla_inicio/mujer03.webp',
+  'assets/pantalla_inicio/mujer04.webp',
+  'assets/pantalla_inicio/mujer05.webp',
+  'assets/pantalla_inicio/mujer06.webp'
+];
+
+function setRandomHomeCharacters() {
+  const imgHombre = document.querySelector('.char-hombre-wrap img');
+  const imgMujer = document.querySelector('.char-mujer-wrap img');
+
+  if (imgHombre && COSPLAYS_HOMBRE.length > 0) {
+    const randomIndexH = Math.floor(Math.random() * COSPLAYS_HOMBRE.length);
+    imgHombre.src = COSPLAYS_HOMBRE[randomIndexH];
+  }
+
+  if (imgMujer && COSPLAYS_MUJER.length > 0) {
+    const randomIndexM = Math.floor(Math.random() * COSPLAYS_MUJER.length);
+    imgMujer.src = COSPLAYS_MUJER[randomIndexM];
+  }
+}
+window.COSPLAYS_HOMBRE = COSPLAYS_HOMBRE;
+window.COSPLAYS_MUJER = COSPLAYS_MUJER;
+window.setRandomHomeCharacters = setRandomHomeCharacters;
+
 window.initApp = function() {
   initStoredTheme();
+  setRandomHomeCharacters();
 };
 initStoredTheme();
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setRandomHomeCharacters();
+}
 
 function handleHashChange() {
   const currentHash = window.location.hash || '#home';
@@ -10120,18 +10168,30 @@ function renderChallengesUI() {
       let cardUrgentClass = '';
 
       if (isCompleted) {
-        if (ch.finishReason === "timeout") {
-          const soyGanadorTimeout = (ch.winnerId === currentUid || ch.winnerUid === currentUid);
-          if (soyGanadorTimeout) {
-            statusHtml = `<div class="status-indicator status-forfeit"><span class="status-check">🏆</span> ¡Victoria por abandono!</div>`;
-            buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">RECLAMAR VICTORIA 🏆</button>`;
-          } else {
-            statusHtml = `<div class="status-indicator status-timeout"><span class="status-clock">⌛</span> Tiempo agotado</div>`;
-            buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
-          }
+        // 1. DETERMINAR RESULTADO POR JUGADOR (app.js - renderMatchCards):
+        const currentUserId = window.state?.userId || currentUid;
+        if (!ch.winnerId && ch.scores) {
+          const rivalUid = isCreator ? (ch.toUid || ch.targetUserId) : (ch.fromUid || ch.challengerId);
+          const myScore = (ch.scores[currentUserId]?.totalScore) ?? (isCreator ? (ch.scores.fromScore ?? ch.scores.p1Total ?? 0) : (ch.scores.toScore ?? ch.scores.p2Total ?? 0));
+          const rivalScore = (ch.scores[rivalUid]?.totalScore) ?? (isCreator ? (ch.scores.toScore ?? ch.scores.p2Total ?? 0) : (ch.scores.fromScore ?? ch.scores.p1Total ?? 0));
+          if (myScore > rivalScore) ch.winnerId = currentUserId;
+          else if (rivalScore > myScore) ch.winnerId = rivalUid;
+          else ch.winnerId = "empate";
+        }
+        const soyGanador = ch.winnerId === window.state.userId;
+        const esEmpate = ch.winnerId === "empate";
+
+        // 2. TRANSFORMAR LA TARJETA SEGÚN EL ROL DEL USUARIO:
+        if (soyGanador) {
+          statusHtml = `<div class="status-indicator status-victory" style="color: #00FF66; font-weight: 800; text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);">👑 ¡VICTORIA DEFINITIVA!</div>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed challenge-btn-victory interactive-press" data-challenge-id="${ch.id}" style="background: #FFE600; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESUMEN 🏆</button>`;
+        } else if (esEmpate) {
+          statusHtml = `<div class="status-indicator status-tie" style="color: #FFCC00; font-weight: 800;"><span class="status-tie-icon">🤝</span> ¡EMPATE!</div>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}" style="background: #FFE600; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESULTADO 🏆</button>`;
         } else {
-          statusHtml = `<div class="status-indicator status-completed"><span class="status-check">🏆</span> 🏆 PARTIDA FINALIZADA</div>`;
-          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}">VER RESULTADO 🏆</button>`;
+          // Si soyGanador === false (Perdedor)
+          statusHtml = `<div class="status-indicator status-defeat" style="color: #FF3B30; font-weight: 800; text-shadow: 0 0 8px rgba(255, 59, 48, 0.35);">💀 DERROTA</div>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed challenge-btn-defeat interactive-press" data-challenge-id="${ch.id}" style="background: #FF5E00; border: 3px solid #000; font-weight: 800; color: #FFF; box-shadow: 2px 2px 0 #000;">VER QUÉ PASÓ 👀</button>`;
         }
       } else if (isMyTurn) {
         if (isAlertZone) {
@@ -10434,6 +10494,7 @@ function renderChallengesUI() {
 }
 window.renderChallengesUI = renderChallengesUI;
 window.renderMatchCards = renderChallengesUI;
+const renderMatchCards = renderChallengesUI;
 
 function openCompletedChallengeResult(ch) {
   const currentUid = window.state?.userId;
@@ -10497,7 +10558,7 @@ function openCompletedChallengeResult(ch) {
 window.openCompletedChallengeResult = openCompletedChallengeResult;
 
 // Aviso flotante interactivo (Toast Neo-Memphis en la parte superior) para partidas concluidas por el rival
-function showChallengeCompletedToast(ch, rivalName) {
+function showChallengeCompletedToast(ch, rivalName, customMsg) {
   let toast = document.getElementById('challengeCompletedToast');
   if (!toast) {
     toast = document.createElement('div');
@@ -10507,7 +10568,10 @@ function showChallengeCompletedToast(ch, rivalName) {
     container.appendChild(toast);
   }
 
-  toast.innerHTML = `<span class="toast-duel-icon">⚔️</span> <span class="toast-duel-text">¡Partida terminada contra <strong>${rivalName}</strong>! Descubre al ganador</span>`;
+  const icon = customMsg ? (customMsg.includes('🏆') ? '🏆' : '⚔️') : '⚔️';
+  const cleanMsg = customMsg ? customMsg.replace(/^[\p{Emoji}\u200d\uFE0F]+\s*/u, '') : `¡Partida terminada contra <strong>${rivalName}</strong>! Descubre al ganador`;
+
+  toast.innerHTML = `<span class="toast-duel-icon">${icon}</span> <span class="toast-duel-text">${cleanMsg}</span>`;
 
   let autoNavigateTimer = null;
   const navigateToResult = () => {
@@ -10536,16 +10600,8 @@ function showChallengeCompletedToast(ch, rivalName) {
 
   if (toast._timer) clearTimeout(toast._timer);
   toast._timer = setTimeout(() => {
-    const isChallengesActive = (window.state?.currentView === '#challengesView') || 
-      (document.getElementById('challengesView')?.classList.contains('active')) ||
-      (document.getElementById('challengesView')?.style.display === 'flex');
-
-    if (isChallengesActive) {
-      navigateToResult();
-    } else {
-      toast.classList.remove('show');
-    }
-  }, 2000);
+    toast.classList.remove('show');
+  }, 4000);
 }
 window.showChallengeCompletedToast = showChallengeCompletedToast;
 
@@ -10714,6 +10770,9 @@ window.syncUserProfileWithCloud = syncUserProfileWithCloud;
 
 function initHomeButtons() {
   try {
+    if (typeof setRandomHomeCharacters === 'function') {
+      setRandomHomeCharacters();
+    }
     // 1. Botón JUGAR: selecciona (#homeView .btn-play, #homeView .btn-jugar, #btnPlay, #btnJugar)
     const playBtns = document.querySelectorAll('#homeView .btn-play, #homeView .btn-jugar, #btnPlay, #btnJugar');
     playBtns.forEach(btn => {
@@ -11322,8 +11381,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 (document.getElementById('challengesView')?.style.display === 'flex');
 
               if (isChallengesActive) {
+                const currentUserId = window.state?.userId || userId;
+                if (!ch.winnerId && ch.scores) {
+                  const rivalUid = isCreator ? (ch.toUid || ch.targetUserId) : (ch.fromUid || ch.challengerId);
+                  const myScore = (ch.scores[currentUserId]?.totalScore) ?? (isCreator ? (ch.scores.fromScore ?? ch.scores.p1Total ?? 0) : (ch.scores.toScore ?? ch.scores.p2Total ?? 0));
+                  const rivalScore = (ch.scores[rivalUid]?.totalScore) ?? (isCreator ? (ch.scores.toScore ?? ch.scores.p2Total ?? 0) : (ch.scores.fromScore ?? ch.scores.p1Total ?? 0));
+                  if (myScore > rivalScore) ch.winnerId = currentUserId;
+                  else if (rivalScore > myScore) ch.winnerId = rivalUid;
+                  else ch.winnerId = "empate";
+                }
+                const soyGanador = ch.winnerId === window.state.userId;
+
+                const toastMessage = soyGanador 
+                  ? "🏆 ¡Tu rival terminó su ronda y has GANADO el desafío!" 
+                  : "⚔️ ¡Tu rival terminó su ronda! Descubre el desenlace";
+
                 if (typeof showChallengeCompletedToast === 'function') {
-                  showChallengeCompletedToast(ch, rivalName);
+                  showChallengeCompletedToast(ch, rivalName, toastMessage);
+                } else if (typeof showRetroToast === 'function') {
+                  showRetroToast(toastMessage, soyGanador ? '🏆' : '⚔️');
+                }
+
+                if (typeof renderMatchCards === 'function') {
+                  renderMatchCards();
+                } else if (typeof renderChallengesUI === 'function') {
+                  renderChallengesUI();
                 }
               }
             } else {
