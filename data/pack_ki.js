@@ -450,5 +450,455 @@ window.KI_QUESTIONS_FALLBACK = [
     "emojis": "🤖 🏆 🌌",
     "opciones": ["Androide 17", "Gokū", "Freezer", "Jiren"],
     "respuesta_correcta": "Androide 17"
+  },
+  {
+    "id": "ki_051",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué ataque insignia de Yamcha concentra una esfera de Ki teledirigida con los dedos?",
+    "emojis": "🐺 ⚾ 🌀",
+    "opciones": ["Sokidan", "Roga Fufuken", "Kafuken", "Dodonpa"],
+    "respuesta_correcta": "Sokidan"
+  },
+  {
+    "id": "ki_052",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el báculo rojo extensible que perteneció a Son Gokū durante su infancia?",
+    "emojis": "🔴 🦯 🥋",
+    "opciones": ["Nyoibo (Báculo Sagrado)", "Vara Divina", "Bastón Karin", "Báculo Kaio"],
+    "respuesta_correcta": "Nyoibo (Báculo Sagrado)"
+  },
+  {
+    "id": "ki_053",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero namekiano del tipo guerrero se fusionó con Piccolo durante la batalla contra Freezer?",
+    "emojis": "🟢 🥋 🩹",
+    "opciones": ["Nail", "Cargo", "Dende", "Katats"],
+    "respuesta_correcta": "Nail"
+  },
+  {
+    "id": "ki_054",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el ataque característico que Vegeta usó para chocar con el Kamehameha de Gokū en la Tierra?",
+    "emojis": "🟣 👐 💥",
+    "opciones": ["Galick Ho", "Big Bang Attack", "Final Flash", "Ataque Big Bang"],
+    "respuesta_correcta": "Galick Ho"
+  },
+  {
+    "id": "ki_055",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica de la Escuela Grulla dispara un rayo punzante de Ki desde el dedo índice?",
+    "emojis": "☝️ 💥 🦅",
+    "opciones": ["Dodonpa", "Kikoho", "Kafuken", "Taiyoken"],
+    "respuesta_correcta": "Dodonpa"
+  },
+  {
+    "id": "ki_056",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué pequeño namekiano con poderes curativos se convirtió en el nuevo Kamisama de la Tierra?",
+    "emojis": "🟢 🩺 🐉",
+    "opciones": ["Dende", "Nail", "Cargo", "Moori"],
+    "respuesta_correcta": "Dende"
+  },
+  {
+    "id": "ki_057",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el siervo milenario de piel oscura y turbante que atiende el Palacio de Kamisama?",
+    "emojis": "👳‍♂️ 🧞 🏰",
+    "opciones": ["Mr. Popo", "Karin", "Enma Daio", "Upa"],
+    "respuesta_correcta": "Mr. Popo"
+  },
+  {
+    "id": "ki_058",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué juez colosal y de piel roja decide el destino de las almas en el Más Allá?",
+    "emojis": "👹 🪵 ⚖️",
+    "opciones": ["Enma Daio-sama", "Kaio-sama", "Kibito", "Gran Kaio"],
+    "respuesta_correcta": "Enma Daio-sama"
+  },
+  {
+    "id": "ki_059",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es la transformación en la que el cabello dorado de los Saiyajines crece hasta la cintura sin cejas?",
+    "emojis": "⚡ 👱‍♂️ 🦁",
+    "opciones": ["Super Saiyajin 3", "Super Saiyajin 2", "Super Saiyajin Dios", "Modo Bestia"],
+    "respuesta_correcta": "Super Saiyajin 3"
+  },
+  {
+    "id": "ki_060",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién es el creador de la Danza de la Fusión que enseñó a Gokū en el Otro Mundo?",
+    "emojis": "🕺 💫 🥋",
+    "opciones": ["Los Metamoranos", "Los Yardrats", "Los Supremos Kaio", "Los Shinjin"],
+    "respuesta_correcta": "Los Metamoranos"
+  },
+  {
+    "id": "ki_061",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el guerrero nacido de la fusión Pothala entre Gokū y Vegeta?",
+    "emojis": "👂 ⚡ 💥",
+    "opciones": ["Vegetto", "Gogeta", "Gotenks", "Veku"],
+    "respuesta_correcta": "Vegetto"
+  },
+  {
+    "id": "ki_062",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué artefacto inventado por Bulma detecta las ondas electromagnéticas emitidas por las esferas?",
+    "emojis": "🧭 🟢 📍",
+    "opciones": ["Radar del Dragón", "Scouter", "Detector Ki", "Brújula Shenlong"],
+    "respuesta_correcta": "Radar del Dragón"
+  },
+  {
+    "id": "ki_063",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué dispositivo ocular utilizaban los soldados de Freezer para medir el nivel de pelea de sus rivales?",
+    "emojis": "👓 🔴 🔢",
+    "opciones": ["Scouter (Rastreador)", "Visor Saiyajin", "Ojo de Ki", "Scanner Imperial"],
+    "respuesta_correcta": "Scouter (Rastreador)"
+  },
+  {
+    "id": "ki_064",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero diminuto y de piel blanca se autodestruyó en vano contra Nappa?",
+    "emojis": "🤡 💣 💥",
+    "opciones": ["Chaoz", "Yajirobe", "Upa", "Oolong"],
+    "respuesta_correcta": "Chaoz"
+  },
+  {
+    "id": "ki_065",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién cortó la cola del mono gigante Vegeta con su katana salvando a Gokū en la Tierra?",
+    "emojis": "🗡️ 🥩 🐵",
+    "opciones": ["Yajirobe", "Krilin", "Gohan", "Tenshinhan"],
+    "respuesta_correcta": "Yajirobe"
+  },
+  {
+    "id": "ki_066",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el líder sabio que despertó el potencial oculto de Krilin y Gohan en Namek?",
+    "emojis": "👴 🟢 🪑",
+    "opciones": ["El Gran Patriarca (Saichoro)", "Kamisama", "Moori", "Katats"],
+    "respuesta_correcta": "El Gran Patriarca (Saichoro)"
+  },
+  {
+    "id": "ki_067",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué transformación divina de cabello rojizo requiere la unión de 6 Saiyajines de corazón puro?",
+    "emojis": "🔴 👱‍♂️ ✨",
+    "opciones": ["Super Saiyajin Dios", "Super Saiyajin Blue", "Ultra Instinto", "Super Saiyajin 4"],
+    "respuesta_correcta": "Super Saiyajin Dios"
+  },
+  {
+    "id": "ki_068",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero alienígena del Universo 11 es candidato a Dios de la Destrucción y domina el Hakai?",
+    "emojis": "🦹‍♂️ 🟣 💥",
+    "opciones": ["Toppo", "Jiren", "Dyspo", "Belmod"],
+    "respuesta_correcta": "Toppo"
+  },
+  {
+    "id": "ki_069",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el gato blanco ermitaño que vive en lo alto de la torre sagrada custodiando el agua divina?",
+    "emojis": "🐱 🦯 ☁️",
+    "opciones": ["Karin", "Popo", "Beerus", "Tama"],
+    "respuesta_correcta": "Karin"
+  },
+  {
+    "id": "ki_070",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué líder de la Patrulla de la Galaxia es un alienígena enano de piel morada con gran ego?",
+    "emojis": "👽 🔫 🚀",
+    "opciones": ["Jaco", "Merus", "Irico", "King Cold"],
+    "respuesta_correcta": "Jaco"
+  },
+  {
+    "id": "ki_071",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica destructiva emplean los Dioses de la Destrucción para desintegrar la existencia de cualquier ser?",
+    "emojis": "🟣 ✋ 💥",
+    "opciones": ["Hakai", "Final Flash", "Kafuken", "Makankosappo"],
+    "respuesta_correcta": "Hakai"
+  },
+  {
+    "id": "ki_072",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el nombre de la madre biológica de Son Gokū vista en Dragon Ball Super: Broly?",
+    "emojis": "👩 🥩 🚀",
+    "opciones": ["Gine", "Fasha", "Selypar", "Kala"],
+    "respuesta_correcta": "Gine"
+  },
+  {
+    "id": "ki_073",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué perro leal salvó Mr. Satán ayudando a que Majin Buu Gordo expulsara su lado maligno?",
+    "emojis": "🐶 🍖 💖",
+    "opciones": ["Bee", "Puar", "Shu", "Fang"],
+    "respuesta_correcta": "Bee"
+  },
+  {
+    "id": "ki_074",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué metal cósmico es considerado el material más denso y duro de todo el universo en Dragon Ball?",
+    "emojis": "🪨 💎 ⚔️",
+    "opciones": ["Kachi Katchin", "Beskar", "Adamantio", "Vibranio"],
+    "respuesta_correcta": "Kachi Katchin"
+  },
+  {
+    "id": "ki_075",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero humano con tres ojos era el mejor amigo de Chaoz y dominó el Kikoho?",
+    "emojis": "👁️ 🥋 🔺",
+    "opciones": ["Tenshinhan", "Yamcha", "Krilin", "Bora"],
+    "respuesta_correcta": "Tenshinhan"
+  },
+  {
+    "id": "ki_076",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama la deidad Suprema que es padre de todos los ángeles guía del multiverso?",
+    "emojis": "👼 👑 🌌",
+    "opciones": ["El Gran Sacerdote (Daishinkan)", "Zeno-sama", "Zalama", "Kusu"],
+    "respuesta_correcta": "El Gran Sacerdote (Daishinkan)"
+  },
+  {
+    "id": "ki_077",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es la espada legendaria enterrada en el Sagrado Mundo de los Kaio-shin que Gohan extrajo?",
+    "emojis": "🗡️ 🪨 ⛰️",
+    "opciones": ["La Espada Z", "La Espada del Augurio", "El Filo Divino", "La Espada Brave"],
+    "respuesta_correcta": "La Espada Z"
+  },
+  {
+    "id": "ki_078",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué monstruo rosado y elástico absorbía guerreros para modificar su cuerpo e inteligencia?",
+    "emojis": "🍬 🟪 😈",
+    "opciones": ["Majin Buu", "Cell", "Janemba", "Hirudegarn"],
+    "respuesta_correcta": "Majin Buu"
+  },
+  {
+    "id": "ki_079",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué androide femenina rubia se casó con Krilin y tuvo una hija llamada Marron?",
+    "emojis": "🤖 👱‍♀️ 💍",
+    "opciones": ["Androide 18 (Lázuli)", "Androide 21", "Lunch", "Videl"],
+    "respuesta_correcta": "Androide 18 (Lázuli)"
+  },
+  {
+    "id": "ki_080",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el nombre real humano del Androide 17 antes de ser modificado por el Dr. Gero?",
+    "emojis": "🤖 🌲 🧣",
+    "opciones": ["Lapis", "Lázuli", "Mark", "Gero"],
+    "respuesta_correcta": "Lapis"
+  },
+  {
+    "id": "ki_081",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué emperador galáctico y padre de Freezer viajó a la Tierra buscando venganza cibernética?",
+    "emojis": "👑 🟣 🛸",
+    "opciones": ["King Cold", "Cooler", "Chilled", "Kuriza"],
+    "respuesta_correcta": "King Cold"
+  },
+  {
+    "id": "ki_082",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién partió por la mitad a Mecha Freezer con una espada al llegar del futuro?",
+    "emojis": "🗡️ 👱‍♂️ ⏳",
+    "opciones": ["Trunks del Futuro", "Gokū", "Vegeta", "Piccolo"],
+    "respuesta_correcta": "Trunks del Futuro"
+  },
+  {
+    "id": "ki_083",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué criatura mutante verde nació de los embriones de los mejores guerreros incubados por la computadora de Gero?",
+    "emojis": "🦗 🟢 🧬",
+    "opciones": ["Cell", "Saibaman", "Bio-Broly", "Hatchiyack"],
+    "respuesta_correcta": "Cell"
+  },
+  {
+    "id": "ki_084",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica de ataque de Gohan fue aprendida directamente de Piccolo en su entrenamiento?",
+    "emojis": "🧒 👐 ⚡",
+    "opciones": ["Masenko", "Makankosappo", "Kamehameha", "Kikoho"],
+    "respuesta_correcta": "Masenko"
+  },
+  {
+    "id": "ki_085",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama la pequeña criatura mágica capaz de transformarse en cualquier objeto que acompaña a Yamcha?",
+    "emojis": "🐱 🌀 🎩",
+    "opciones": ["Puar", "Oolong", "Shu", "Korin"],
+    "respuesta_correcta": "Puar"
+  },
+  {
+    "id": "ki_086",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué cerdo parlante y pervertido pidió el primer deseo a Shenlong para salvar al mundo de Pilaf?",
+    "emojis": "🐷 🩲 🐉",
+    "opciones": ["Oolong", "Puar", "Karin", "Giran"],
+    "respuesta_correcta": "Oolong"
+  },
+  {
+    "id": "ki_087",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué campeona de artes marciales e hija de Mr. Satán aprendió a volar con el Ki gracias a Gohan?",
+    "emojis": "👧 🥋 💨",
+    "opciones": ["Videl", "Erasa", "Chi-Chi", "Mai"],
+    "respuesta_correcta": "Videl"
+  },
+  {
+    "id": "ki_088",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué princesa del Monte Flypan se casó con Son Gokū cumpliendo una promesa de infancia?",
+    "emojis": "👰 🥋 🍳",
+    "opciones": ["Chi-Chi (Milk)", "Bulma", "Lunch", "Ranfan"],
+    "respuesta_correcta": "Chi-Chi (Milk)"
+  },
+  {
+    "id": "ki_089",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué mujer de doble personalidad cambiaba de cabello azul dulce a rubia armada con un simple estornudo?",
+    "emojis": "🤧 👱‍♀️ 🔫",
+    "opciones": ["Lunch", "Mai", "Bulma", "Marion"],
+    "respuesta_correcta": "Lunch"
+  },
+  {
+    "id": "ki_090",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el nombre de la técnica de Vegeta que expulsa una gigantesca esfera de energía pura concentrada con una sola mano?",
+    "emojis": "✋ 🔵 💥",
+    "opciones": ["Big Bang Attack", "Final Flash", "Galick Ho", "Renzoku Energy Dan"],
+    "respuesta_correcta": "Big Bang Attack"
+  },
+  {
+    "id": "ki_091",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero nació de la Danza de la Fusión infantil entre Goten y Trunks?",
+    "emojis": "🧒 🧒 💫",
+    "opciones": ["Gotenks", "Gogeta", "Vegetto", "Trunten"],
+    "respuesta_correcta": "Gotenks"
+  },
+  {
+    "id": "ki_092",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica cómica inventó Gotenks en Super Saiyajin 3 creando copias fantasmales explosivas?",
+    "emojis": "👻 💥 🧒",
+    "opciones": ["Super Ataque Kamikaze de los Fantasmas", "Dona Galáctica", "Misil Die Die", "Globo Ki"],
+    "respuesta_correcta": "Super Ataque Kamikaze de los Fantasmas"
+  },
+  {
+    "id": "ki_093",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el Dios de la Destrucción del Universo 6 y hermano gemelo de Bills?",
+    "emojis": "🐱 🟣 🥊",
+    "opciones": ["Champa", "Beerus", "Belmod", "Quitela"],
+    "respuesta_correcta": "Champa"
+  },
+  {
+    "id": "ki_094",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién es el ángel guardián de Champa y hermana mayor de Whis?",
+    "emojis": "👼 🦯 💜",
+    "opciones": ["Vados", "Marcarita", "Kusu", "Martinu"],
+    "respuesta_correcta": "Vados"
+  },
+  {
+    "id": "ki_095",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el nombre del saiyajin de élite que llegó a la Tierra junto a Vegeta y fue derrotado por Gokū?",
+    "emojis": "🪖 👨‍🦲 ⚡",
+    "opciones": ["Nappa", "Raditz", "Turles", "Paragus"],
+    "respuesta_correcta": "Nappa"
+  },
+  {
+    "id": "ki_096",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué semillas alienígenas plantaba Nappa en la tierra para hacer brotar soldados monstruosos?",
+    "emojis": "🌱 🟢 👹",
+    "opciones": ["Saibaman", "Cell Jr.", "Senzu", "Biotron"],
+    "respuesta_correcta": "Saibaman"
+  },
+  {
+    "id": "ki_097",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué guerrero veloz de las Fuerzas Especiales Ginyu presumía ser el más rápido del universo?",
+    "emojis": "🔵 💨 🪖",
+    "opciones": ["Burter", "Jeice", "Recoome", "Guldo"],
+    "respuesta_correcta": "Burter"
+  },
+  {
+    "id": "ki_098",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el planeta original donde la raza Saiyajin vivía pacíficamente en el Universo 6?",
+    "emojis": "🪐 🥋 🛡️",
+    "opciones": ["Planeta Sadala", "Planeta Vegeta", "Planeta Plant", "Planeta Namek"],
+    "respuesta_correcta": "Planeta Sadala"
+  },
+  {
+    "id": "ki_099",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué transformación dominada por Vegeta en el manga y anime canaliza el poder ilimitado del Dios de la Destrucción?",
+    "emojis": "🟣 😈 ⚡",
+    "opciones": ["Ultra Ego (Doctrina de la Destrucción)", "Ultra Instinto", "Super Saiyajin Blue Evolution", "Modo Berserker"],
+    "respuesta_correcta": "Ultra Ego (Doctrina de la Destrucción)"
+  },
+  {
+    "id": "ki_100",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué deseo pidió el emperador Pilaf a Shenlong antes de que Gokū y sus amigos pudieran impedirlo?",
+    "emojis": "👑 🩲 🐉",
+    "opciones": ["Oolong se interpuso y pidió unas bragas cómodas", "Dominar el mundo entero", "La juventud eterna", "Tener riquezas infinitas"],
+    "respuesta_correcta": "Oolong se interpuso y pidió unas bragas cómodas"
   }
 ];

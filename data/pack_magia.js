@@ -455,5 +455,460 @@ window.MAGIA_QUESTIONS_FALLBACK = [
     "emojis": "🦌 🖤 💬",
     "opciones": ["Siempre (Always)", "Eternamente", "Por ella", "Jamás"],
     "respuesta_correcta": "Siempre (Always)"
+  },
+  {
+    "id": "mag_051",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es el encantamiento de apertura utilizado para desbloquear puertas y ventanas cerradas?",
+    "emojis": "🚪 🗝️ 🪄",
+    "opciones": ["Alohomora", "Colloportus", "Aparecium", "Portus"],
+    "respuesta_correcta": "Alohomora"
+  },
+  {
+    "id": "mag_052",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué periódico mágico británico tiene su sede en el Callejón Diagon y fotos con movimiento?",
+    "emojis": "📰 🧙‍♂️ 📸",
+    "opciones": ["El Profeta (The Daily Prophet)", "El Quisquilloso", "La Gaceta Mágica", "El Heraldo de Hechicería"],
+    "respuesta_correcta": "El Profeta (The Daily Prophet)"
+  },
+  {
+    "id": "mag_053",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal representativo adopta el escudo de la casa Ravenclaw?",
+    "emojis": "🦅 🔵 🪶",
+    "opciones": ["Águila", "Cuervo", "Búho", "Halcón"],
+    "respuesta_correcta": "Águila"
+  },
+  {
+    "id": "mag_054",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama la prisión mágica de máxima seguridad ubicada en una isla del Mar del Norte?",
+    "emojis": "🏰 🌊 ⛓️",
+    "opciones": ["Azkaban", "Nurmengard", "Gringotts", "Dartmoor"],
+    "respuesta_correcta": "Azkaban"
+  },
+  {
+    "id": "mag_055",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento de levitación básica hace flotar objetos pronunciando 'wing-GAR-dium levi-O-sa'?",
+    "emojis": "🪶 🪄 ⬆️",
+    "opciones": ["Wingardium Leviosa", "Ascendio", "Levicorpus", "Mobilicorpus"],
+    "respuesta_correcta": "Wingardium Leviosa"
+  },
+  {
+    "id": "mag_056",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué objeto de vidrio esférico se llena de humo rojo cuando a su dueño se le ha olvidado algo?",
+    "emojis": "🔮 🔴 🧠",
+    "opciones": ["La Recordadora", "El Chivatoscopio", "El Sensor de Ocultamiento", "El Ojo Espectral"],
+    "respuesta_correcta": "La Recordadora"
+  },
+  {
+    "id": "mag_057",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la moneda de oro de mayor valor en el sistema económico mágico británico?",
+    "emojis": "🪙 🟡 💰",
+    "opciones": ["Galleon", "Sickle", "Knut", "Dracma"],
+    "respuesta_correcta": "Galleon"
+  },
+  {
+    "id": "mag_058",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura mitad caballo y mitad humano habita en el Bosque Prohibido estudiando las estrellas?",
+    "emojis": "🏹 🐴 🌌",
+    "opciones": ["Centauro", "Sátiro", "Minotauro", "Thestral"],
+    "respuesta_correcta": "Centauro"
+  },
+  {
+    "id": "mag_059",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué pelota de hierro oscura en Quidditch vuela buscando golpear a los jugadores para derribarlos?",
+    "emojis": "🧹 ⛓️ ⚾",
+    "opciones": ["Bludger", "Quaffle", "Snitch", "Orbe Plomo"],
+    "respuesta_correcta": "Bludger"
+  },
+  {
+    "id": "mag_060",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la fórmula mágica utilizada para apagar la luz creada por Lumos en una varita?",
+    "emojis": "🪄 🌑 🕯️",
+    "opciones": ["Nox", "Silencio", "Finita", "Obscuro"],
+    "respuesta_correcta": "Nox"
+  },
+  {
+    "id": "mag_061",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué poción medicinal de sabor atroz hace que los huesos rotos o desaparecidos vuelvan a crecer?",
+    "emojis": "🧪 🦴 🤮",
+    "opciones": ["Eskele-Gro (Crece-huesos)", "Poción Reconstituyente", "Esencia de Murtlap", "Filtro Vigorizador"],
+    "respuesta_correcta": "Eskele-Gro (Crece-huesos)"
+  },
+  {
+    "id": "mag_062",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama el gato atigrado de la profesora McGonagall que representa su forma animaga?",
+    "emojis": "🐈 👓 🧙‍♀️",
+    "opciones": ["Es la misma McGonagall transformada", "Crookshanks", "Señora Norris", "Tibbles"],
+    "respuesta_correcta": "Es la misma McGonagall transformada"
+  },
+  {
+    "id": "mag_063",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué monstruo peludo con cara aplastada y cola de cepillo es la mascota de Hermione Granger?",
+    "emojis": "🐱 🧶 🟤",
+    "opciones": ["Crookshanks", "Trevor", "Scabbers", "Fang"],
+    "respuesta_correcta": "Crookshanks"
+  },
+  {
+    "id": "mag_064",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué fundador del colegio seleccionaba solo a magos de 'sangre pura' y astucia?",
+    "emojis": "🐍 🟢 🏰",
+    "opciones": ["Salazar Slytherin", "Godric Gryffindor", "Rowena Ravenclaw", "Helga Hufflepuff"],
+    "respuesta_correcta": "Salazar Slytherin"
+  },
+  {
+    "id": "mag_065",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué juego de ajedrez mágico tiene piezas de piedra vivas que se destrozan entre sí?",
+    "emojis": "♟️ 🗿 ⚔️",
+    "opciones": ["Ajedrez Mágico", "Gobstones", "Naipes Explosivos", "Damas de Fuego"],
+    "respuesta_correcta": "Ajedrez Mágico"
+  },
+  {
+    "id": "mag_066",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento congela o paraliza completamente el cuerpo del oponente de pies a cabeza?",
+    "emojis": "🪄 🧊 🧍",
+    "opciones": ["Petrificus Totalus", "Stupefy", "Impedimenta", "Incarcerous"],
+    "respuesta_correcta": "Petrificus Totalus"
+  },
+  {
+    "id": "mag_067",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura gigante arácnida criada por Hagrid vivía en el corazón del Bosque Prohibido?",
+    "emojis": "🕷️ 🌲 🕸️",
+    "opciones": ["Aragog", "Mosag", "Shelob", "Karkinos"],
+    "respuesta_correcta": "Aragog"
+  },
+  {
+    "id": "mag_068",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la forma del boggart cuando se enfrenta al profesor Remus Lupin?",
+    "emojis": "🌕 🐺 🌑",
+    "opciones": ["La luna llena", "Un dementor", "Un ataúd", "Lord Voldemort"],
+    "respuesta_correcta": "La luna llena"
+  },
+  {
+    "id": "mag_069",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué examen oficial de nivel mágico rinden los estudiantes al finalizar su quinto año escolar?",
+    "emojis": "📜 ✍️ 🏫",
+    "opciones": ["T.I.M.O. (O.W.L.)", "É.X.T.A.S.I.S.", "G.O.B.L.E.T.", "C.A.L.I.Z."],
+    "respuesta_correcta": "T.I.M.O. (O.W.L.)"
+  },
+  {
+    "id": "mag_070",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué tienda de bromas y trucos abrieron Fred y George Weasley en el Callejón Diagon?",
+    "emojis": "🤡 💥 🍬",
+    "opciones": ["Sortilegios Weasley (Weasleys' Wizard Wheezes)", "Zonko", "Borgin y Burkes", "Dervish y Banges"],
+    "respuesta_correcta": "Sortilegios Weasley (Weasleys' Wizard Wheezes)"
+  },
+  {
+    "id": "mag_071",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué árbol tenebroso del bosque oculta bajo sus raíces el túnel secreto que conduce a la Casa de los Gritos?",
+    "emojis": "🌳 🕳️ 🏚️",
+    "opciones": ["El Sauce Boxeador", "El Tejo de Godric", "El Roble de Merlín", "El Fresno Colgante"],
+    "respuesta_correcta": "El Sauce Boxeador"
+  },
+  {
+    "id": "mag_072",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento imperdonable somete por completo la voluntad de otra persona?",
+    "emojis": "🧠 🎭 🪄",
+    "opciones": ["Imperio", "Crucio", "Legeremens", "Confundo"],
+    "respuesta_correcta": "Imperio"
+  },
+  {
+    "id": "mag_073",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué copa de madera sagrada selecciona imparcialmente a los campeones del Torneo de los Tres Magos?",
+    "emojis": "🏆 🔥 📜",
+    "opciones": ["El Cáliz de Fuego", "La Copa de Helga", "El Caldero Dorado", "El Ánfora Sagrada"],
+    "respuesta_correcta": "El Cáliz de Fuego"
+  },
+  {
+    "id": "mag_074",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal animago era Peter Pettigrew (Colagusano) viviendo durante doce años con los Weasley?",
+    "emojis": "🐀 🧀 🟤",
+    "opciones": ["Rata (Scabbers)", "Sapo", "Comadreja", "Hurón"],
+    "respuesta_correcta": "Rata (Scabbers)"
+  },
+  {
+    "id": "mag_075",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué escoba de carreras profesional de última generación recibió Harry de Sirius Black en su tercer año?",
+    "emojis": "🧹 ⚡ 📦",
+    "opciones": ["Saeta de Fuego (Firebolt)", "Nimbus 2000", "Nimbus 2001", "Cometa 260"],
+    "respuesta_correcta": "Saeta de Fuego (Firebolt)"
+  },
+  {
+    "id": "mag_076",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento aturdidor lanza un chorro de luz roja que deja inconsciente al oponente?",
+    "emojis": "🪄 🔴 💤",
+    "opciones": ["Stupefy (Desmaius)", "Expelliarmus", "Reducto", "Tarantallegra"],
+    "respuesta_correcta": "Stupefy (Desmaius)"
+  },
+  {
+    "id": "mag_077",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la casa de Hogwarts cuyo fantasma residente es el Barón Sanguinario?",
+    "emojis": "👻 ⛓️ 🩸",
+    "opciones": ["Slytherin", "Gryffindor", "Ravenclaw", "Hufflepuff"],
+    "respuesta_correcta": "Slytherin"
+  },
+  {
+    "id": "mag_078",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué fantasma alegre casi decapitado representa a los estudiantes de Gryffindor?",
+    "emojis": "👻 🪓 🦁",
+    "opciones": ["Nick Casi Decapitado", "El Fraile Gordo", "La Dama Gris", "Peeves"],
+    "respuesta_correcta": "Nick Casi Decapitado"
+  },
+  {
+    "id": "mag_079",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué poltergeist travieso y destructor habita en el castillo lanzando tiza y gastando bromas pesadas?",
+    "emojis": "🤡 💥 🏰",
+    "opciones": ["Peeves", "Nick", "Barón Sanguinario", "Myrtle la Llorona"],
+    "respuesta_correcta": "Peeves"
+  },
+  {
+    "id": "mag_080",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué fantasma de una niña habita en el baño de chicas del segundo piso lamentándose de su muerte?",
+    "emojis": "👻 🚽 😭",
+    "opciones": ["Myrtle la Llorona", "Helena Ravenclaw", "Winky", "Fat Lady"],
+    "respuesta_correcta": "Myrtle la Llorona"
+  },
+  {
+    "id": "mag_081",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la espada de plata con rubíes incrustados forjada por duendes que absorbe aquello que la hace más fuerte?",
+    "emojis": "🗡️ 💎 🦁",
+    "opciones": ["La Espada de Godric Gryffindor", "El Filo de Salazar", "La Daga de Ravenclaw", "La Espada de Merlín"],
+    "respuesta_correcta": "La Espada de Godric Gryffindor"
+  },
+  {
+    "id": "mag_082",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué objeto de las Reliquias de la Muerte perteneció a la familia Gaunt montado en un anillo?",
+    "emojis": "💍 💀 🪨",
+    "opciones": ["La Piedra de la Resurrección", "La Varita de Saúco", "La Capa de Invisibilidad", "El Espejo Negro"],
+    "respuesta_correcta": "La Piedra de la Resurrección"
+  },
+  {
+    "id": "mag_083",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento explosivo hace estallar objetos sólidos en pedazos?",
+    "emojis": "💣 💥 🪄",
+    "opciones": ["Bombarda", "Incendio", "Diffindo", "Aguamenti"],
+    "respuesta_correcta": "Bombarda"
+  },
+  {
+    "id": "mag_084",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué polvo mágico brillante se arroja a las chimeneas conectadas a la red para transportarse?",
+    "emojis": "🔥 🟢 💨",
+    "opciones": ["Polvos Flu", "Ceniza de Fénix", "Polvo de Estrellas", "Sal de Quimera"],
+    "respuesta_correcta": "Polvos Flu"
+  },
+  {
+    "id": "mag_085",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento invoca agua pura desde la punta de la varita?",
+    "emojis": "💧 🌊 🪄",
+    "opciones": ["Aguamenti", "Glisseo", "Diffindo", "Episkey"],
+    "respuesta_correcta": "Aguamenti"
+  },
+  {
+    "id": "mag_086",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama la madre de dragones noruega que Hagrid cuidó clandestinamente en su cabaña?",
+    "emojis": "🐲 🥚 🛖",
+    "opciones": ["Norberto (Norberta)", "Fang", "Buckbeak", "Fluffy"],
+    "respuesta_correcta": "Norberto (Norberta)"
+  },
+  {
+    "id": "mag_087",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué objeto de plata en forma de vasija usa Dumbledore para almacenar y examinar recuerdos?",
+    "emojis": "🥣 🧠 ✨",
+    "opciones": ["El Pensadero", "El Caldero del Alma", "El Espejo Mental", "La Pila de la Sabiduría"],
+    "respuesta_correcta": "El Pensadero"
+  },
+  {
+    "id": "mag_088",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué posición en el juego de Quidditch tiene como objetivo anotar puntos arrojando la Quaffle a los aros?",
+    "emojis": "🧹 🔴 🥅",
+    "opciones": ["Cazador (Chaser)", "Buscador", "Guardián", "Golpeador"],
+    "respuesta_correcta": "Cazador (Chaser)"
+  },
+  {
+    "id": "mag_089",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento imperdonable causa un dolor físico insoportable y tortura a quien lo recibe?",
+    "emojis": "⚡ 🩸 💀",
+    "opciones": ["Crucio", "Imperio", "Avada Kedavra", "Sectumsempra"],
+    "respuesta_correcta": "Crucio"
+  },
+  {
+    "id": "mag_090",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué diadema perdida perteneció a una de las fundadoras y otorgaba sabiduría suprema a quien la portara?",
+    "emojis": "👑 💎 🦅",
+    "opciones": ["La Diadema de Rowena Ravenclaw", "La Corona de Helga", "La Tiara de Slytherin", "El Broche de Gryffindor"],
+    "respuesta_correcta": "La Diadema de Rowena Ravenclaw"
+  },
+  {
+    "id": "mag_091",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la marca tenebrosa que llevan tatuada en el antebrazo izquierdo los Mortífagos seguidores de Voldemort?",
+    "emojis": "🐍 💀 🖤",
+    "opciones": ["Una calavera con una serpiente saliendo de la boca", "Un triángulo con ojo", "Un dragón alado negro", "Una daga cruzada"],
+    "respuesta_correcta": "Una calavera con una serpiente saliendo de la boca"
+  },
+  {
+    "id": "mag_092",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura parecida a un mono con pelaje plateado puede volverse invisible y predecir el futuro inmediato?",
+    "emojis": "🐒 ⚪ 👁️",
+    "opciones": ["Demiguise", "Niffler", "Bowtruckle", "Erumpent"],
+    "respuesta_correcta": "Demiguise"
+  },
+  {
+    "id": "mag_093",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento de atracción hace volar objetos distantes directamente hacia la mano del invocador?",
+    "emojis": "🧲 🪄 📦",
+    "opciones": ["Accio", "Depulso", "Portus", "Locomotor"],
+    "respuesta_correcta": "Accio"
+  },
+  {
+    "id": "mag_094",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué guardabosques semigigante y guardián de las llaves del castillo vive en una cabaña al borde del bosque?",
+    "emojis": "🧔‍♂️ 🪓 🐕",
+    "opciones": ["Rubeus Hagrid", "Argus Filch", "Gilderoy Lockhart", "Quirinus Quirrell"],
+    "respuesta_correcta": "Rubeus Hagrid"
+  },
+  {
+    "id": "mag_095",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama el conserje no mágico (Squib) del colegio que patrulla los pasillos junto a su gata?",
+    "emojis": "🧹 👴 🐈",
+    "opciones": ["Argus Filch", "Rubeus Hagrid", "Cornelius Fudge", "Amos Diggory"],
+    "respuesta_correcta": "Argus Filch"
+  },
+  {
+    "id": "mag_096",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento reparador arregla de inmediato objetos rotos o destrozados como gafas o vajillas?",
+    "emojis": "👓 🪄 🔨",
+    "opciones": ["Reparo", "Reducto", "Tergeo", "Scourgify"],
+    "respuesta_correcta": "Reparo"
+  },
+  {
+    "id": "mag_097",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal animago adoptaba James Potter cuando era estudiante en Hogwarts?",
+    "emojis": "🦌 🌲 🐾",
+    "opciones": ["Un ciervo astado (Cornamenta)", "Un perro negro", "Un tejón", "Un águila real"],
+    "respuesta_correcta": "Un ciervo astado (Cornamenta)"
+  },
+  {
+    "id": "mag_098",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura mágica con cuerpo de caballo y alas emplumadas tiraba de los carruajes escolares sin que la mayoría pudiera verla?",
+    "emojis": "🐴 🪽 💀",
+    "opciones": ["Thestral", "Hipogrifo", "Abraxan", "Pegaso"],
+    "respuesta_correcta": "Thestral"
+  },
+  {
+    "id": "mag_099",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué flor o ingrediente mágico también conocido como acónito o luparia se enseña en la primera clase de Snape?",
+    "emojis": "🌿 🧪 🐺",
+    "opciones": ["Acónito (Aconitum)", "Branquialga", "Asfódelo", "Mandrágora"],
+    "respuesta_correcta": "Acónito (Aconitum)"
+  },
+  {
+    "id": "mag_100",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la frase célebre que se pronuncia para borrar y bloquear el contenido del Mapa del Merodeador?",
+    "emojis": "📜 🪄 🤫",
+    "opciones": [
+      "Travesura realizada (Mischief managed)",
+      "Mapa cerrado",
+      "Silencio en los pasillos",
+      "Secretos a salvo"
+    ],
+    "respuesta_correcta": "Travesura realizada (Mischief managed)"
   }
 ];

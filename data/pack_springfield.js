@@ -460,5 +460,455 @@ window.SPRINGFIELD_QUESTIONS_FALLBACK = [
     "emojis": "💼 😰 📉",
     "opciones": ["Gil Gunderson", "Lionel Hutz", "Kirk Van Houten", "Hans Moleman"],
     "respuesta_correcta": "Gil Gunderson"
+  },
+  {
+    "id": "spr_051",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué tienda especializada abrió Ned Flanders en el centro comercial para personas zurdas?",
+    "emojis": "✋ 🏬 👓",
+    "opciones": ["El Leftorium (Zurdorium)", "Todo para Zurdos", "Left Hand Shop", "Ned's Lefties"],
+    "respuesta_correcta": "El Leftorium (Zurdorium)"
+  },
+  {
+    "id": "spr_052",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el conserje escocés pelirrojo de la Escuela Primaria de Springfield?",
+    "emojis": "🧹 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🪓",
+    "opciones": ["Jardinero Willie", "Angus MacGyver", "Seamus", "Gordie"],
+    "respuesta_correcta": "Jardinero Willie"
+  },
+  {
+    "id": "spr_053",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el nombre del mejor amigo de Homero en la taberna caracterizado por sus constantes eructos de cerveza?",
+    "emojis": "🍺 🥴 🛋️",
+    "opciones": ["Barney Gumble", "Lenny Leonard", "Carl Carlson", "Sam"],
+    "respuesta_correcta": "Barney Gumble"
+  },
+  {
+    "id": "spr_054",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué frase célebre pronuncia Bart Simpson ante una sorpresa o travesura?",
+    "emojis": "🛹 👦 🗯️",
+    "opciones": ["¡Ay, caramba!", "¡D'oh!", "¡Come mi polvo!", "¡Yo no fui!"],
+    "respuesta_correcta": "¡Ay, caramba!"
+  },
+  {
+    "id": "spr_055",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el jefe de policía incompetente y glotón de Springfield?",
+    "emojis": "👮‍♂️ 🍩 🚔",
+    "opciones": ["Jefe Clancy Gorgory (Wiggum)", "Oficial Lou", "Oficial Eddie", "Rex Banner"],
+    "respuesta_correcta": "Jefe Clancy Gorgory (Wiggum)"
+  },
+  {
+    "id": "spr_056",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el nombre del hijo del Jefe Gorgory, conocido por meterse lápices por la nariz y comer pegamento?",
+    "emojis": "🧒 🖍️ 👃",
+    "opciones": ["Rafa Gorgory (Ralph Wiggum)", "Milhouse", "Nelson", "Kearney"],
+    "respuesta_correcta": "Rafa Gorgory (Ralph Wiggum)"
+  },
+  {
+    "id": "spr_057",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué héroe de acción de cine ficticio es interpretado por Rainier Wolfcastle?",
+    "emojis": "🎬 💥 🕶️",
+    "opciones": ["McBain", "Radioactive Man", "Mendoza", "Scorpio"],
+    "respuesta_correcta": "McBain"
+  },
+  {
+    "id": "spr_058",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el superhéroe de historietas cuyo lema es '¡A ellos hacia el infinito!' y viste de rojo?",
+    "emojis": "☢️ 🦸‍♂️ ⚡",
+    "opciones": ["El Hombre Radiactivo", "Fallout Boy", "Hombre Pie", "Capitán Springfield"],
+    "respuesta_correcta": "El Hombre Radiactivo"
+  },
+  {
+    "id": "spr_059",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué personaje diminuto, anciano y con lentes gruesos suele ser víctima de continuos accidentes absurdos?",
+    "emojis": "👴 🦯 💥",
+    "opciones": ["Hans Topo (Hans Moleman)", "Jasper", "Abuelo Simpson", "Viejo Judío"],
+    "respuesta_correcta": "Hans Topo (Hans Moleman)"
+  },
+  {
+    "id": "spr_060",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué juguete de muñeca con múltiples accesorios es la favorita de Lisa Simpson?",
+    "emojis": "👧 🎀 👗",
+    "opciones": ["Stacy Malibú", "Lisa Corazón de León", "Barbie Springfield", "Princesa Penny"],
+    "respuesta_correcta": "Stacy Malibú"
+  },
+  {
+    "id": "spr_061",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el científico excéntrico que inventa máquinas imposibles y emite sonidos agudos al hablar?",
+    "emojis": "👨‍🔬 👓 ⚡",
+    "opciones": ["Profesor John Frink", "Dr. Monroe", "Dr. Zweig", "Herbert Powell"],
+    "respuesta_correcta": "Profesor John Frink"
+  },
+  {
+    "id": "spr_062",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué bebida congelada ultra azucarada compran los niños en el Kwik-E-Mart?",
+    "emojis": "🥤 🍧 🏪",
+    "opciones": ["Squishee (Fresisui)", "Slurpee", "Duff Ice", "Buzz Freeze"],
+    "respuesta_correcta": "Squishee (Fresisui)"
+  },
+  {
+    "id": "spr_063",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué banda cuarteto vocal de barbería formó Homero junto a Apu, Barney y Skinner ganando un Grammy?",
+    "emojis": "🎶 💈 🏆",
+    "opciones": ["Los Borbotones (The Be Sharps)", "Los Magios", "Cuarteto Springfield", "Los Gordos Suaves"],
+    "respuesta_correcta": "Los Borbotones (The Be Sharps)"
+  },
+  {
+    "id": "spr_064",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el cerdo mascota que Homero adoptó en la película y paseaba por el techo?",
+    "emojis": "🐷 🥓 🏠",
+    "opciones": ["Puerco Araña (Spider-Pig / Harry Popote)", "Tenacitas", "Bacon", "Porky"],
+    "respuesta_correcta": "Puerco Araña (Spider-Pig / Harry Popote)"
+  },
+  {
+    "id": "spr_065",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué político corrupto y mujeriego es el alcalde perenne de Springfield?",
+    "emojis": "🏛️ 👔 💵",
+    "opciones": ["Alcalde Joe Quimby (Diamante)", "Rex Banner", "Bob Patiño", "Juez Snyder"],
+    "respuesta_correcta": "Alcalde Joe Quimby (Diamante)"
+  },
+  {
+    "id": "spr_066",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llaman las dos hermanas gemelas fumadoras empedernidas de Marge que odian a Homero?",
+    "emojis": "👩‍🦱 👩‍🦱 🚬",
+    "opciones": ["Patty y Selma Bouvier", "Agnes y Luann", "Maude y Helen", "Sherri y Terri"],
+    "respuesta_correcta": "Patty y Selma Bouvier"
+  },
+  {
+    "id": "spr_067",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué actor de la serie MacGyver es la gran obsesión romántica de Patty y Selma?",
+    "emojis": "📺 💘 👱‍♂️",
+    "opciones": ["Richard Dean Anderson", "Troy McClure", "Rainier Wolfcastle", "David Hasselhoff"],
+    "respuesta_correcta": "Richard Dean Anderson"
+  },
+  {
+    "id": "spr_068",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el apellido de soltera de Marge Simpson?",
+    "emojis": "👵 💙 👰",
+    "opciones": ["Bouvier", "Powell", "Gumble", "Vanderbilt"],
+    "respuesta_correcta": "Bouvier"
+  },
+  {
+    "id": "spr_069",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el compañero de trabajo afroamericano de Homero en la planta que siempre anda con Lenny?",
+    "emojis": "🏭 👓 👷‍♂️",
+    "opciones": ["Carl Carlson", "Lenny Leonard", "Charlie", "Smithers"],
+    "respuesta_correcta": "Carl Carlson"
+  },
+  {
+    "id": "spr_070",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué plato quemado o humeante inventó Skinner para engañar al Superintendente Chalmers en el almuerzo?",
+    "emojis": "🍔 💨 👨‍🏫",
+    "opciones": ["Jamones al vapor (Steamed Hams)", "Almejas al vapor", "Costillas nucleares", "Asado Albany"],
+    "respuesta_correcta": "Jamones al vapor (Steamed Hams)"
+  },
+  {
+    "id": "spr_071",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué fenómeno meteorológico afirmó Skinner que ocurría exclusivamente dentro de su cocina?",
+    "emojis": "🌌 🍳 🚪",
+    "opciones": ["Aurora Boreal", "Tormenta solar", "Rayo globular", "Cometa Kohoutek"],
+    "respuesta_correcta": "Aurora Boreal"
+  },
+  {
+    "id": "spr_072",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el presentador de noticias arrogante del Canal 6 de Springfield?",
+    "emojis": "📺 📰 🎙️",
+    "opciones": ["Kent Brockman", "Arnie Pye", "Scott Christian", "Troy McClure"],
+    "respuesta_correcta": "Kent Brockman"
+  },
+  {
+    "id": "spr_073",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué pez mutante con tres ojos fue pescado por Bart cerca de los vertidos de la planta nuclear?",
+    "emojis": "🐟 👁️ ☢️",
+    "opciones": ["Blinky", "Three-Eyes", "Mutant Carp", "Inky"],
+    "respuesta_correcta": "Blinky"
+  },
+  {
+    "id": "spr_074",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el perro con actitud extrema y lentes de sol que agregaron a Tomy y Daly para subir audiencia?",
+    "emojis": "🐕 🕶️ 🛹",
+    "opciones": ["Poochie", "Laddie", "Scrappy", "Rad Dog"],
+    "respuesta_correcta": "Poochie"
+  },
+  {
+    "id": "spr_075",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué personaje le dio su voz a Poochie en el doblaje dentro del show de Tomy y Daly?",
+    "emojis": "🎙️ 🐕 🍩",
+    "opciones": ["Homero Simpson", "Otto Mann", "Krusty", "Sideshow Bob"],
+    "respuesta_correcta": "Homero Simpson"
+  },
+  {
+    "id": "spr_076",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la primera esposa de Ned Flanders que falleció trágicamente por un cañón de camisetas?",
+    "emojis": "👚 💔 ⛪",
+    "opciones": ["Maude Flanders", "Edna Krabappel", "Rachel Jordan", "Luann Van Houten"],
+    "respuesta_correcta": "Maude Flanders"
+  },
+  {
+    "id": "spr_077",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué pastor protestante lidera los servicios dominicales en la Primera Iglesia de Springfield?",
+    "emojis": "⛪ 📖 👔",
+    "opciones": ["Reverendo Timothy Alegría (Lovejoy)", "Reverendo Frink", "Padre Sean", "Diácono Flanders"],
+    "respuesta_correcta": "Reverendo Timothy Alegría (Lovejoy)"
+  },
+  {
+    "id": "spr_078",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué juguete parlante y misterioso con ojos saltones se burlaba de Krusty en su propio show?",
+    "emojis": "🪵 🎩 📺",
+    "opciones": ["Gabbo", "Funzo", "Happy Little Elf", "Bobo"],
+    "respuesta_correcta": "Gabbo"
+  },
+  {
+    "id": "spr_079",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué juguete robot interactivo diseñado para espiar y destruir juguetes rivales invadió Springfield en Navidad?",
+    "emojis": "🧸 🤖 🎄",
+    "opciones": ["Funzo", "Gabbo", "Robo-Krusty", "Stacy Bot"],
+    "respuesta_correcta": "Funzo"
+  },
+  {
+    "id": "spr_080",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué día festivo tradicional de Springfield consiste en apalear serpientes con garrotes en la calle?",
+    "emojis": "🐍 🪵 📅",
+    "opciones": ["Día del Garrote (Whacking Day)", "Día del Fundador", "Fiesta de Jebediah", "Día Verde"],
+    "respuesta_correcta": "Día del Garrote (Whacking Day)"
+  },
+  {
+    "id": "spr_081",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué cantante legendario de soul y R&B prestó su voz a sí mismo para salvar a las serpientes en el Día del Garrote?",
+    "emojis": "🎤 🕶️ 🎹",
+    "opciones": ["Barry White", "Stevie Wonder", "Ray Charles", "James Brown"],
+    "respuesta_correcta": "Barry White"
+  },
+  {
+    "id": "spr_082",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál era la verdadera identidad pirata del fundador del pueblo, venerado falsamente como Jebediah Springfield?",
+    "emojis": "🗿 🏴‍☠️ 👅",
+    "opciones": ["Hans Sprungfeld", "Chester J. Lampwick", "Lyle Lanley", "Cyrus Vance"],
+    "respuesta_correcta": "Hans Sprungfeld"
+  },
+  {
+    "id": "spr_083",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué parte de la estatua de Jebediah Springfield cortó Bart provocando indignación en toda la ciudad?",
+    "emojis": "🗿 🪓 👦",
+    "opciones": ["La cabeza", "El brazo", "El sombrero", "La espada"],
+    "respuesta_correcta": "La cabeza"
+  },
+  {
+    "id": "spr_084",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el estudiante superdotado de la escuela que siempre saca notas perfectas y es víctima de los bravucones?",
+    "emojis": "🤓 📚 🎒",
+    "opciones": ["Martin Prince", "Milhouse Van Houten", "Database", "Wendell"],
+    "respuesta_correcta": "Martin Prince"
+  },
+  {
+    "id": "spr_085",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué bravucón de chaqueta de cuero de la escuela es conocido por ser mayor de edad, calvo y padre de familia?",
+    "emojis": "🦲 🥊 🧥",
+    "opciones": ["Kearney Zzyzwicz", "Jimbo Jones", "Dolph Starbeam", "Nelson Muntz"],
+    "respuesta_correcta": "Kearney Zzyzwicz"
+  },
+  {
+    "id": "spr_086",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué bravucón viste siempre un gorro morado de lana para ocultar su calvicie prematura?",
+    "emojis": "🧢 💜 😈",
+    "opciones": ["Jimbo Jones", "Kearney", "Dolph", "Nelson"],
+    "respuesta_correcta": "Jimbo Jones"
+  },
+  {
+    "id": "spr_087",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué objeto de vajilla y galleta intentó vender Kirk Van Houten tras divorciarse de Luann?",
+    "emojis": "🍪 💼 📉",
+    "opciones": ["Galletas de la fábrica del sur de Springfield", "Cojines para autos", "Dignidad dibujada en papel", "Cintas de autoayuda"],
+    "respuesta_correcta": "Dignidad dibujada en papel"
+  },
+  {
+    "id": "spr_088",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué canción de demostración grabó Kirk Van Houten en un casete tratando de volver con su esposa?",
+    "emojis": "📼 🎶 🥺",
+    "opciones": ["¿Puedo pedir prestado un sentimiento? (Can I Borrow a Feeling?)", "Vuelve a mí", "Dignidad de amor", "Amor en la cama auto"],
+    "respuesta_correcta": "¿Puedo pedir prestado un sentimiento? (Can I Borrow a Feeling?)"
+  },
+  {
+    "id": "spr_089",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿En qué tipo de cama infantil dormía Kirk Van Houten tras mudarse al complejo para solteros?",
+    "emojis": "🛏️ 🏎️ 🏠",
+    "opciones": ["Una cama con forma de auto de carreras", "Un catre plegable", "Una litera espacial", "Un colchón inflable"],
+    "respuesta_correcta": "Una cama con forma de auto de carreras"
+  },
+  {
+    "id": "spr_090",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el gato negro de la familia Simpson?",
+    "emojis": "🐱 🖤 🐾",
+    "opciones": ["Bola de Nieve II (Snowball II)", "Bolas de Nieve I", "Colita de Nieve", "Felix"],
+    "respuesta_correcta": "Bola de Nieve II (Snowball II)"
+  },
+  {
+    "id": "spr_091",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué empleado diligente y honesto se volvió loco y murió electrocutado por la envidia al éxito absurdo de Homero?",
+    "emojis": "⚡ 👓 💀",
+    "opciones": ["Frank Grimes (Grimito)", "Karl", "Herbert Powell", "Artie Ziff"],
+    "respuesta_correcta": "Frank Grimes (Grimito)"
+  },
+  {
+    "id": "spr_092",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llamaba la bolera donde jugaban 'Los Amigos del Pino' liderados por Homero?",
+    "emojis": "🎳 👞 🏆",
+    "opciones": ["Barney's Bowl-A-Rama", "Bowlarama de Moe", "Springfield Bowling Alley", "Pin Pal Lanes"],
+    "respuesta_correcta": "Barney's Bowl-A-Rama"
+  },
+  {
+    "id": "spr_093",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué multimillonario tejano con sombrero blanco dispara al aire dos revólveres cuando celebra alegremente?",
+    "emojis": "🤠 🔫 💰",
+    "opciones": ["El Rico Texano (The Rich Texan)", "Chester Lampwick", "Arthur Fortune", "Bill Gates"],
+    "respuesta_correcta": "El Rico Texano (The Rich Texan)"
+  },
+  {
+    "id": "spr_094",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el restaurante de mariscos buffet atendido por el Capitán McCallister?",
+    "emojis": "🦞 ⚓ 🍽️",
+    "opciones": ["El Holandés Cocinero (The Frying Dutchman)", "El Crustáceo Cascarudo", "Mariscos Springfield", "La Ballena Hambrienta"],
+    "respuesta_correcta": "El Holandés Cocinero (The Frying Dutchman)"
+  },
+  {
+    "id": "spr_095",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué frase célebre de marinero repite constantemente el Capitán Horatio McCallister con pipa y parche?",
+    "emojis": "⚓ 🪝 🗣️",
+    "opciones": ["¡Yarr!", "¡Ahoy!", "¡Aye aye!", "¡Por las barbas de Neptuno!"],
+    "respuesta_correcta": "¡Yarr!"
+  },
+  {
+    "id": "spr_096",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la madre biológica fugitiva y activista hippie de Homero Simpson?",
+    "emojis": "☮️ 👵 🌸",
+    "opciones": ["Mona Simpson", "Agnes Simpson", "Jacqueline Bouvier", "Amber"],
+    "respuesta_correcta": "Mona Simpson"
+  },
+  {
+    "id": "spr_097",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué sándwich de cerdo procesado de Krusty Burger causaba adicción extrema estilo narcótico en Homero?",
+    "emojis": "🍔 🥩 🤤",
+    "opciones": ["Ribwich (Costillita)", "Krusty Deluxe", "Super Burger", "McRibby"],
+    "respuesta_correcta": "Ribwich (Costillita)"
+  },
+  {
+    "id": "spr_098",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué asistente pelirrojo de Krusty el Payaso se comunica soplando un silbato deslizante y lleva un hueso en el pelo?",
+    "emojis": "🦴 🤡 🪈",
+    "opciones": ["Sideshow Mel (Mel Patiño)", "Sideshow Bob", "Mr. Teeny", "Gabbo"],
+    "respuesta_correcta": "Sideshow Mel (Mel Patiño)"
+  },
+  {
+    "id": "spr_099",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el chimpancé fumador y malhumorado que acompaña a Krusty el Payaso en sus sketches?",
+    "emojis": "🐒 🚬 🎩",
+    "opciones": ["Señor Teeny (Mr. Teeny)", "Mojo", "Lancelot", "Bubbles"],
+    "respuesta_correcta": "Señor Teeny (Mr. Teeny)"
+  },
+  {
+    "id": "spr_100",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué frase célebre grabó Homero en la lápida de su abuelo mientras aún seguía vivo en el asilo?",
+    "emojis": "🪦 👴 🤣",
+    "opciones": ["Viejo cascarrabias pero rendidor", "Regresará pronto", "Descansa en paz, papá", "D'oh"],
+    "respuesta_correcta": "Viejo cascarrabias pero rendidor"
   }
 ];

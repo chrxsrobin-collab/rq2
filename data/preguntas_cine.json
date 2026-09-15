@@ -44,7 +44,7 @@
     "categoria": "CINE",
     "pregunta": "¿En qué película de los 80 usan mochilas de protones para atrapar espectros?",
     "emojis": "👻 ⚡ 🚫",
-    "opciones": ["Ghostbusters", "Gremlins", "The Goonies", "Beetlejuice"],
+    "opciones": ["Cazafantasmas", "Gremlins", "The Goonies", "Beetlejuice"],
     "respuesta_correcta": "Ghostbusters"
   },
   {
@@ -66,7 +66,7 @@
   {
     "id": "cine_009",
     "categoria": "CINE",
-    "pregunta": "¿Cómo se llama el villano con guante de cuchillas en 'A Nightmare on Elm Street'?",
+    "pregunta": "¿Cómo se llama el villano con guante de cuchillas en 'Pesadilla en Elm Street'?",
     "emojis": "🧤 🔪 💤",
     "opciones": ["Freddy Krueger", "Jason Voorhees", "Michael Myers", "Leatherface"],
     "respuesta_correcta": "Freddy Krueger"
@@ -82,7 +82,7 @@
   {
     "id": "cine_011",
     "categoria": "CINE",
-    "pregunta": "¿Qué director estuvo a cargo de la trilogía original de 'The Lord of the Rings'?",
+    "pregunta": "¿Qué director estuvo a cargo de la trilogía original de 'El Señor de los Anillos'?",
     "emojis": "💍 🧙‍♂️ 🌋",
     "opciones": ["Peter Jackson", "George Lucas", "Steven Spielberg", "Ridley Scott"],
     "respuesta_correcta": "Peter Jackson"
@@ -90,7 +90,7 @@
   {
     "id": "cine_012",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor protagonizó a Forrest Gump en el filme de 1994?",
+    "pregunta": "¿Qué actor protagonizó a Forrest Gump en 1994?",
     "emojis": "🍫 🏃‍♂️ 🪶",
     "opciones": ["Tom Hanks", "Robin Williams", "John Travolta", "Bill Murray"],
     "respuesta_correcta": "Tom Hanks"
@@ -98,7 +98,7 @@
   {
     "id": "cine_013",
     "categoria": "CINE",
-    "pregunta": "¿Cómo se llama la inteligencia artificial rebelde de la nave en '2001: A Space Odyssey'?",
+    "pregunta": "¿Cómo se llama la inteligencia artificial rebelde de la nave en '2001: Odisea del Espacio'?",
     "emojis": "🔴 🚀 👁️",
     "opciones": ["HAL 9000", "Skynet", "GLaDOS", "Auto"],
     "respuesta_correcta": "HAL 9000"
@@ -106,7 +106,7 @@
   {
     "id": "cine_014",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor interpretó al policía John McClane en 'Die Hard' (1988)?",
+    "pregunta": "¿Qué actor interpretó al policía John McClane en 'Duri de Matar' (1988)?",
     "emojis": "🏢 🔫 💥",
     "opciones": ["Bruce Willis", "Sylvester Stallone", "Arnold Schwarzenegger", "Mel Gibson"],
     "respuesta_correcta": "Bruce Willis"
@@ -114,7 +114,7 @@
   {
     "id": "cine_015",
     "categoria": "CINE",
-    "pregunta": "¿Cómo se llama el reino ficticio gobernado por Simba en 'The Lion King'?",
+    "pregunta": "¿Cómo se llama el reino ficticio gobernado por Simba en 'El Rey León'?",
     "emojis": "🦁 👑 🌅",
     "opciones": ["Las Tierras del Orgullo", "La Sabana Real", "Kenia Central", "El Valle Sombrío"],
     "respuesta_correcta": "Las Tierras del Orgullo"
@@ -138,7 +138,7 @@
   {
     "id": "cine_018",
     "categoria": "CINE",
-    "pregunta": "¿Qué frase dice Jack Torrance mientras rompe la puerta con un hacha en 'The Shining'?",
+    "pregunta": "¿Qué frase dice Jack Torrance mientras rompe la puerta con un hacha en 'El Resplandor'?",
     "emojis": "🪓 🚪 ❄️",
     "opciones": ["Here's Johnny!", "I found you!", "Open up!", "Ready or not!"],
     "respuesta_correcta": "Here's Johnny!"
@@ -154,7 +154,7 @@
   {
     "id": "cine_020",
     "categoria": "CINE",
-    "pregunta": "¿Cómo se llama el caníbal psiquiatra en 'The Silence of the Lambs' (1991)?",
+    "pregunta": "¿Cómo se llama el caníbal psiquiatra en 'El Silencio de los Inocentes' (1991)?",
     "emojis": "🍷 🥩 🦋",
     "opciones": ["Hannibal Lecter", "Norman Bates", "Patrick Bateman", "John Doe"],
     "respuesta_correcta": "Hannibal Lecter"
@@ -162,10 +162,10 @@
   {
     "id": "cine_021",
     "categoria": "CINE",
-    "pregunta": "¿Qué película de 1982 popularizó la frase 'E.T. phone home'?",
+    "pregunta": "¿Qué película de 1982 popularizó la frase 'E.T. teléfono casa'?",
     "emojis": "🚲 🌕 👽",
     "opciones": ["E.T. the Extra-Terrestrial", "Close Encounters", "Alien", "Cocoon"],
-    "respuesta_correcta": "E.T. the Extra-Terrestrial"
+    "respuesta_correcta": "E.T. el Extraterrestre"
   },
   {
     "id": "cine_022",
@@ -202,7 +202,7 @@
   {
     "id": "cine_026",
     "categoria": "CINE",
-    "pregunta": "¿Qué objeto mágico busca Indiana Jones en 'Raiders of the Lost Ark'?",
+    "pregunta": "¿Qué objeto mágico busca Indiana Jones en 'Los Cazadores del Arca Perdida'?",
     "emojis": "🏺 🐍 ⚡",
     "opciones": ["El Arca de la Alianza", "El Santo Grial", "Las Piedras de Sankara", "La Calavera de Cristal"],
     "respuesta_correcta": "El Arca de la Alianza"
@@ -234,7 +234,7 @@
   {
     "id": "cine_030",
     "categoria": "CINE",
-    "pregunta": "¿Qué profesión tiene el personaje de Leonardo DiCaprio en 'Catch Me If You Can'?",
+    "pregunta": "¿Qué profesión tiene el personaje de Leonardo DiCaprio en 'Atrapame si Puedes?",
     "emojis": "✈️ 💳 👮‍♂️",
     "opciones": ["Falsificador y estafador", "Piloto de guerra", "Abogado fiscal", "Médico cirujano"],
     "respuesta_correcta": "Falsificador y estafador"
@@ -250,7 +250,7 @@
   {
     "id": "cine_032",
     "categoria": "CINE",
-    "pregunta": "¿Cómo se llama la muñeca poseída que aterroriza a una familia en 'Child's Play' (1988)?",
+    "pregunta": "¿Cómo se llama la muñeca poseída que aterroriza a una familia en 'El Muñeco Diabólico' (1988)?",
     "emojis": "🔪 🧸 ⚡",
     "opciones": ["Chucky", "Annabelle", "Billy", "Slappy"],
     "respuesta_correcta": "Chucky"
@@ -258,7 +258,7 @@
   {
     "id": "cine_033",
     "categoria": "CINE",
-    "pregunta": "¿Qué cineasta dirigió 'Edward Scissorhands' y 'Beetlejuice'?",
+    "pregunta": "¿Qué cineasta dirigió 'El Joven Manos de Tijera' y 'Beetlejuice'?",
     "emojis": "✂️ 🧤 🏰",
     "opciones": ["Tim Burton", "Guillermo del Toro", "Sam Raimi", "Terry Gilliam"],
     "respuesta_correcta": "Tim Burton"
@@ -290,7 +290,7 @@
   {
     "id": "cine_037",
     "categoria": "CINE",
-    "pregunta": "¿Qué actor interpretó al pirata Jack Sparrow en 'Pirates of the Caribbean'?",
+    "pregunta": "¿Qué actor interpretó al pirata Jack Sparrow en 'Piratas del Caribe'?",
     "emojis": "🏴‍☠️ 🧭 🦜",
     "opciones": ["Johnny Depp", "Orlando Bloom", "Geoffrey Rush", "Javier Bardem"],
     "respuesta_correcta": "Johnny Depp"
@@ -314,7 +314,7 @@
   {
     "id": "cine_040",
     "categoria": "CINE",
-    "pregunta": "¿Quién interpretó a Marty McFly en la trilogía 'Back to the Future'?",
+    "pregunta": "¿Quién interpretó a Marty McFly en la trilogía 'Volver al Futuro'?",
     "emojis": "🛹 🎸 ⚡",
     "opciones": ["Michael J. Fox", "Eric Stoltz", "Crispin Glover", "Matthew Broderick"],
     "respuesta_correcta": "Michael J. Fox"

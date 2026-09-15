@@ -268,14 +268,6 @@
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#000000"/>
               </svg>
             </button>
-
-            <!-- Título Editable Nativo -->
-            <h1 class="wheel-title">QUE TANTO SABES DE...</h1>
-
-            <!-- Botón Información 'i' (Abre Modal de Reglas) -->
-            <button class="wheel-btn-info interactive-press" id="btnWheelInfo" aria-label="Instrucciones de Juego" title="Cómo jugar">
-              <span>i</span>
-            </button>
           </header>
 
           <!-- Escenario de la Ruleta -->
@@ -1529,7 +1521,7 @@
             </p>
 
             <div class="pack-detail-counter" id="packDetailQuestionCount">
-              Total: 50 Preguntas Exclusivas
+              Total: 100 Preguntas Exclusivas
             </div>
 
             <div class="pack-detail-action-wrap" id="packDetailActionContainer">
@@ -1780,7 +1772,81 @@
                 </div>
               </div>
 
+              <!-- Fila de Utilidad: Créditos y Feedback -->
+              <div class="profile-utility-row">
+                <button id="btnOpenCredits" class="btn-profile-utility">📜 Créditos</button>
+                <button id="btnOpenFeedback" class="btn-profile-utility">✉️ Feedback</button>
+              </div>
+
             </div>
+          </div>
+        </div>
+
+        <!-- MODAL DE CRÉDITOS (#creditsModal) -->
+        <div id="creditsModal" class="modal-overlay" style="display: none;">
+          <div class="credits-card">
+            <button id="btnCloseCredits" class="modal-close-circle-btn" aria-label="Cerrar créditos">✕</button>
+            <div class="credits-content-wrapper">
+              <div class="credits-header-title">SUPERQUIZ!</div>
+              <div class="credits-subtitle">"El Quiz Definitivo de la Cultura Pop Retro"</div>
+
+              <div class="credits-section-title">--- DIRECCIÓN Y DESARROLLO ---</div>
+              <div class="credits-text-block">
+                <strong>Creado y Producido por:</strong><br>
+                Christian Mendez | M2M Studios
+              </div>
+
+              <div class="credits-section-title">--- ARTE Y AUDIO ---</div>
+              <div class="credits-text-block">
+                <strong>Diseño UI/UX Neo-Memphis:</strong> Christian Mendez<br>
+                <strong>Banda Sonora y Efectos:</strong> Producido en Logic Pro por Christian Mendez
+              </div>
+
+              <div class="credits-section-title">--- AGRADECIMIENTOS ESPECIALES ---</div>
+              <div class="credits-text-block">
+                <strong>Beta Testers:</strong><br>
+                Favio Mendez<br>
+                Gonzalo Riera<br>
+                Yamil Perez<br><br>
+                <em>Un agradecimiento especial a ti, por jugar.</em>
+              </div>
+
+              <div class="credits-section-title">--- TECNOLOGÍA ---</div>
+              <div class="credits-text-block">
+                <strong>Motor:</strong> JavaScript / Web Audio API<br>
+                <strong>Tipografía:</strong> Futura Family<br>
+                <strong>Efectos:</strong> Canvas-Confetti
+              </div>
+
+              <div class="credits-version-tag">SuperQuiz! v1.0.0 (2026)</div>
+
+              <!-- EASTER EGG DE MONEDAS -->
+              <div id="creditsEasterEgg" class="credits-easter-egg">
+                🍕 <em>Toca aquí si te gusta la pizza de las Tortugas Ninja...</em>
+              </div>
+            </div>
+            <button id="btnCloseCreditsFooter" class="btn-credits-close">CERRAR</button>
+          </div>
+        </div>
+
+        <!-- MODAL DE FORMULARIO DE FEEDBACK (#feedbackModal) -->
+        <div id="feedbackModal" class="modal-overlay" style="display: none;">
+          <div class="feedback-card">
+            <button id="btnCloseFeedback" class="modal-close-circle-btn" aria-label="Cerrar feedback">✕</button>
+            <div class="feedback-title">¡TU OPINIÓN CUENTA! 💬</div>
+            <div class="feedback-subtitle">Ayúdanos a hacer Super Quiz aún mejor</div>
+
+            <div class="feedback-chips-container">
+              <button type="button" class="feedback-chip active" data-type="Sugerencia">💡 Sugerencia</button>
+              <button type="button" class="feedback-chip" data-type="Bug">🐛 Bug</button>
+              <button type="button" class="feedback-chip" data-type="Pregunta">❓ Pregunta</button>
+              <button type="button" class="feedback-chip" data-type="Opinión">❤️ Opinión</button>
+            </div>
+
+            <textarea id="feedbackMessageInput" class="feedback-textarea" placeholder="Cuéntanos tus ideas o errores que encontraste..."></textarea>
+            <input type="email" id="feedbackEmailInput" class="feedback-email-input" placeholder="Tu correo (opcional si deseas respuesta)">
+
+            <button id="btnSendFeedback" class="btn-send-feedback">ENVIAR FEEDBACK 🚀</button>
           </div>
         </div>
 
@@ -1878,7 +1944,7 @@
                 </div>
                 <div class="cat-progress-item" id="progTodo">
                   <span class="cat-icon">🔀</span>
-                  <span class="cat-name">TODO</span>
+                  <span class="cat-name">MIX</span>
                   <button class="btn-unlock-cat" data-unlock="todo">🔒 Desbloquear (400 🟡)</button>
                 </div>
                 <div class="cat-progress-item" id="progVideojuegos">
@@ -1916,63 +1982,61 @@
     </div>
   </div>
 
-  <!-- Modal ¿CÓMO SE JUEGA? (#howToPlayModal) -->
+  <!-- Modal ¿CÓMO JUGAR? (#howToPlayModal) -->
   <div class="how-to-play-overlay" id="howToPlayModal" style="display:none;" aria-modal="true" role="dialog">
     <div class="how-to-play-box">
 
       <!-- Botón cerrar (✕) esquina superior derecha -->
-      <button class="htp-close-btn interactive-press" id="btnCloseHowToPlay" aria-label="Cerrar">✕</button>
+      <button class="htp-close-btn modal-close-circle-btn interactive-press" id="btnCloseHowToPlay" aria-label="Cerrar">✕</button>
 
       <!-- Título -->
-      <h2 class="htp-title">¿CÓMO SE JUEGA?</h2>
+      <h2 class="htp-title">¿CÓMO JUGAR?</h2>
 
       <!-- Tarjetas de instrucciones -->
       <div class="htp-cards">
 
-        <div class="htp-card">
+        <!-- Tarjeta/Bloque 1 (Ruleta) -->
+        <div class="htp-card" data-title="🎯 GIRA LA RULETA">
           <span class="htp-card-icon">🎯</span>
           <div class="htp-card-text">
             <strong>GIRA LA RULETA</strong>
-            <span>Elige tu categoría diaria: Cine, Videojuegos, TV o Música.</span>
+            <span>Escoge una categoría al azar o elige una de tu colección.</span>
           </div>
         </div>
 
-        <div class="htp-card">
+        <!-- Tarjeta/Bloque 2 (Temporizador) -->
+        <div class="htp-card" data-title="⏱️ 20 SEGUNDOS">
           <span class="htp-card-icon">⏱️</span>
           <div class="htp-card-text">
-            <strong>15 SEGUNDOS</strong>
-            <span>Piensa rápido. ¡El fondo se pone rojo cuando el tiempo se acaba!</span>
+            <strong>20 SEGUNDOS</strong>
+            <span>Piensa rápido: tienes 20 segundos por pregunta.</span>
           </div>
         </div>
 
-        <div class="htp-card">
-          <span class="htp-card-icon">❤️</span>
+        <!-- Tarjeta/Bloque 3 (Vidas y Monedas) -->
+        <div class="htp-card" data-title="VIDAS Y MONEDAS">
+          <span class="htp-card-icon">
+            <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="how-to-play-coin" style="width: 22px; height: 22px; vertical-align: middle; object-fit: contain;">
+          </span>
           <div class="htp-card-text">
-            <strong>CUIDA TUS VIDAS</strong>
-            <span>Tienes 3 oportunidades por ronda para acumular RetroCoins.</span>
+            <strong>VIDAS Y MONEDAS</strong>
+            <span>Cuida tus 3 vidas por ronda y acumula RetroCoins <img src="assets/global/retrocoin.webp" alt="RetroCoin" class="how-to-play-coin" style="width: 22px; height: 22px; vertical-align: middle; object-fit: contain;"> para desbloquear sorpresas y mejoras.</span>
           </div>
         </div>
 
-        <div class="htp-card">
-          <span class="htp-card-icon">🪙</span>
-          <div class="htp-card-text">
-            <strong>RETROCOINS</strong>
-            <span>Sirven para desbloquear temáticas, mejoras y ataques en modo desafío.</span>
-          </div>
-        </div>
-
-        <div class="htp-card">
-          <span class="htp-card-icon">🔥</span>
+        <!-- Tarjeta/Bloque 4 (Desafíos) -->
+        <div class="htp-card" data-title="⚔️ DESAFÍOS">
+          <span class="htp-card-icon">⚔️</span>
           <div class="htp-card-text">
             <strong>DESAFÍOS</strong>
-            <span>Juega contra amigos en rondas especiales y envía ataques al rival.</span>
+            <span>Juega contra amigos o gente de todo el mundo para ganar puntos de experiencia y entrar en el top mundial.</span>
           </div>
         </div>
 
       </div><!-- /htp-cards -->
 
       <!-- Botón inferior "¡ENTENDIDO!" -->
-      <button class="htp-understood-btn interactive-press" id="btnHtpUnderstood">¡ENTENDIDO!</button>
+      <button class="htp-understood-btn btn-understood interactive-press" id="btnUnderstoodHowToPlay">¡ENTENDIDO!</button>
 
     </div><!-- /how-to-play-box -->
   </div><!-- /#howToPlayModal -->

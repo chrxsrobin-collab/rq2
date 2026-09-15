@@ -455,5 +455,455 @@ window.MULTIVERSO_QUESTIONS_FALLBACK = [
     "emojis": "👑 🟢 🌳",
     "opciones": ["Loki", "Sylvie", "Thor", "Kang"],
     "respuesta_correcta": "Loki"
+  },
+  {
+    "id": "hdm_051",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama la nave estelar principal utilizada por los Guardianes de la Galaxia bautizada en honor a una actriz ochentera?",
+    "emojis": "🚀 🦝 🎵",
+    "opciones": ["Milano", "Benatar", "Bowie", "Centurión"],
+    "respuesta_correcta": "Milano"
+  },
+  {
+    "id": "hdm_052",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué metal extraterrestre ultra denso recubre las garras y el esqueleto de Wolverine?",
+    "emojis": "🐺 ⚔️ 🧬",
+    "opciones": ["Adamantium", "Vibranium", "Carbonadio", "Uru"],
+    "respuesta_correcta": "Adamantium"
+  },
+  {
+    "id": "hdm_053",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué hechicera antigua fue revelada como la vecina entrometida Agnes en el pueblo de Westview?",
+    "emojis": "🧙‍♀️ 🟣 🎶",
+    "opciones": ["Agatha Harkness", "Morgan le Fay", "Clea", "Jennifer Kale"],
+    "respuesta_correcta": "Agatha Harkness"
+  },
+  {
+    "id": "hdm_054",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es la capital del imperio Kree gobernada por la Inteligencia Suprema?",
+    "emojis": "🪐 🔵 🏛️",
+    "opciones": ["Hala", "Xandar", "Kree-Lar", "Sakaar"],
+    "respuesta_correcta": "Hala"
+  },
+  {
+    "id": "hdm_055",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué arma mística empuñaba Ronan el Acusador donde incrustó la Gema del Poder?",
+    "emojis": "🔨 🟣 ⚡",
+    "opciones": ["Cosmi-Rod (Arma Universal)", "Stormbreaker", "Mjolnir", "Lanza Kree"],
+    "respuesta_correcta": "Cosmi-Rod (Arma Universal)"
+  },
+  {
+    "id": "hdm_056",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué objeto de tecnología Stark entregó Nick Fury a Peter Parker con acceso a satélites tácticos?",
+    "emojis": "👓 🛰️ 📱",
+    "opciones": ["E.D.I.T.H.", "F.R.I.D.A.Y.", "K.A.R.E.N.", "J.A.R.V.I.S."],
+    "respuesta_correcta": "E.D.I.T.H."
+  },
+  {
+    "id": "hdm_057",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el reino místico secreto en China protegido por un laberinto de bambú donde habitan criaturas mitológicas?",
+    "emojis": "🎋 🐉 🥋",
+    "opciones": ["Ta Lo", "Kamar-Taj", "K'un-Lun", "Madripoor"],
+    "respuesta_correcta": "Ta Lo"
+  },
+  {
+    "id": "hdm_058",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué villano con pecera en la cabeza utilizó drones de proyección holográfica en Londres?",
+    "emojis": "🔮 💨 🤖",
+    "opciones": ["Mysterio (Quentin Beck)", "El Buitre", "Shocker", "Chameleon"],
+    "respuesta_correcta": "Mysterio (Quentin Beck)"
+  },
+  {
+    "id": "hdm_059",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué variante de Kang el Conquistador fundó la TVA y habitaba en la Ciudadela del Fin del Tiempo?",
+    "emojis": "⏳ 🍏 🏰",
+    "opciones": ["Aquel Que Permanece (He Who Remains)", "Victor Timely", "Rama-Tut", "Immortus"],
+    "respuesta_correcta": "Aquel Que Permanece (He Who Remains)"
+  },
+  {
+    "id": "hdm_060",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué héroe ciego ejerce como abogado defensor de día y justiciero de Hell's Kitchen de noche?",
+    "emojis": "🦯 ⚖️ 🔴",
+    "opciones": ["Matt Murdock (Daredevil)", "Danny Rand", "Luke Cage", "Frank Castle"],
+    "respuesta_correcta": "Matt Murdock (Daredevil)"
+  },
+  {
+    "id": "hdm_061",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el reino enano cuyo rey Eitri ayudó a forjar el Guantelete del Infinito para Thanos?",
+    "emojis": "👑 🔨 🪐",
+    "opciones": ["Nidavellir", "Jotunheim", "Svartalfheim", "Vanaheim"],
+    "respuesta_correcta": "Nidavellir"
+  },
+  {
+    "id": "hdm_062",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué archienemigo de Daredevil es el imponente señor del crimen de Nueva York?",
+    "emojis": "👔 🦯 💎",
+    "opciones": ["Wilson Fisk (Kingpin)", "Hammerhead", "Tombstone", "Bullseye"],
+    "respuesta_correcta": "Wilson Fisk (Kingpin)"
+  },
+  {
+    "id": "hdm_063",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué reliquia mística de tela levita y eligió al Doctor Strange como su portador?",
+    "emojis": "🧥 ✨ 🧙‍♂️",
+    "opciones": ["La Capa de Levitación", "El Manto de Cyttorak", "La Túnica de Vishanti", "La Capa Astral"],
+    "respuesta_correcta": "La Capa de Levitación"
+  },
+  {
+    "id": "hdm_064",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué nave colosal en forma de disco o anillo utilizaba la Orden Negra para invadir la Tierra?",
+    "emojis": "🛸 🍩 🏙️",
+    "opciones": ["Nave Q (Q-Ship)", "El Santuario II", "Dreadnought", "Leviathan"],
+    "respuesta_correcta": "Nave Q (Q-Ship)"
+  },
+  {
+    "id": "hdm_065",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué princesa de Wakanda y genio científica rediseñó el traje de Pantera Negra con nanotecnología?",
+    "emojis": "👩‍🔬 🟣 🐾",
+    "opciones": ["Shuri", "Nakia", "Okoye", "Ramonda"],
+    "respuesta_correcta": "Shuri"
+  },
+  {
+    "id": "hdm_066",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre del planeta prisión de máxima seguridad donde los Guardianes de la Galaxia conocieron a Rocket y Groot?",
+    "emojis": "🛸 ⛓️ 🦝",
+    "opciones": ["El Kyln", "Sakaar", "Contraxia", "Kree-Lar"],
+    "respuesta_correcta": "El Kyln"
+  },
+  {
+    "id": "hdm_067",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué héroe marino mutante puede volar gracias a pequeñas alas en sus tobillos?",
+    "emojis": "🪽 🦶 🔱",
+    "opciones": ["Namor", "Attuma", "Kukulkán", "Aquaman"],
+    "respuesta_correcta": "Namor"
+  },
+  {
+    "id": "hdm_068",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué dimensión fractal usan los hechiceros para entrenar o contener amenazas sin alterar el mundo real?",
+    "emojis": "🪞 🌀 🏢",
+    "opciones": ["Dimensión Espejo", "Dimensión Oscura", "Reino Cuántico", "Plano Astral"],
+    "respuesta_correcta": "Dimensión Espejo"
+  },
+  {
+    "id": "hdm_069",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué villano con alas metálicas construidas con restos chitauri era el suegro de Peter Parker?",
+    "emojis": "🦅 ⚙️ 🏙️",
+    "opciones": ["El Buitre (Adrian Toomes)", "Mysterio", "Tinkerer", "Duende Verde"],
+    "respuesta_correcta": "El Buitre (Adrian Toomes)"
+  },
+  {
+    "id": "hdm_070",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre de la ciudadela submarina iluminada por vibranium en el océano Atlántico gobernada por Namor?",
+    "emojis": "🌊 🪸 🏛️",
+    "opciones": ["Talokan", "Atlántida", "Lemuria", "Xibalbá"],
+    "respuesta_correcta": "Talokan"
+  },
+  {
+    "id": "hdm_071",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué miembro de la Orden Negra con poderes telequinéticos torturó a Doctor Strange en su nave?",
+    "emojis": "👽 🪄 🧠",
+    "opciones": ["Ebony Maw", "Corvus Glaive", "Cull Obsidian", "Proxima Midnight"],
+    "respuesta_correcta": "Ebony Maw"
+  },
+  {
+    "id": "hdm_072",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el perro telequinético soviético con traje de cosmonauta que se unió a los Guardianes?",
+    "emojis": "🐶 🚀 🧠",
+    "opciones": ["Cosmo", "Laika", "Lucky", "Lockjaw"],
+    "respuesta_correcta": "Cosmo"
+  },
+  {
+    "id": "hdm_073",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué líder rebelde de la TVA y cazadora B-15 ayudó a Loki a descubrir la verdad sobre los Guardianes del Tiempo?",
+    "emojis": "🪖 ⏳ 🏢",
+    "opciones": ["Cazadora B-15", "Ravonna Renslayer", "Casey", "Mobius"],
+    "respuesta_correcta": "Cazadora B-15"
+  },
+  {
+    "id": "hdm_074",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué libro luminoso de magia blanca es la contraparte benévola del maldito Darkhold?",
+    "emojis": "📖 ✨ 🪄",
+    "opciones": ["El Libro de Vishanti", "El Códice Caelum", "El Tomo de Agamotto", "El Grimorio Dorado"],
+    "respuesta_correcta": "El Libro de Vishanti"
+  },
+  {
+    "id": "hdm_075",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué grupo de élite de superhumanos secretos gobernaba la Tierra-838 incluyendo a Charles Xavier y Reed Richards?",
+    "emojis": "👁️ 🏛️ 🧠",
+    "opciones": ["Los Iluminati", "Los Vengadores", "La Cábala", "Los Defensores"],
+    "respuesta_correcta": "Los Iluminati"
+  },
+  {
+    "id": "hdm_076",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama la pequeña criatura arborícola que acompaña a Rocket Raccoon?",
+    "emojis": "🌱 🪵 🗣️",
+    "opciones": ["Groot", "Treant", "Bark", "Flora"],
+    "respuesta_correcta": "Groot"
+  },
+  {
+    "id": "hdm_077",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué suero experimental desarrollado por el Dr. Abraham Erskine transformó al frágil Steve Rogers?",
+    "emojis": "🧪 💉 🇺🇸",
+    "opciones": ["El Suero del Súper Soldado", "Fórmula Extremis", "Compuesto Pym", "Radiación Vita"],
+    "respuesta_correcta": "El Suero del Súper Soldado"
+  },
+  {
+    "id": "hdm_078",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué villano cibernético de piel amarilla y cabeza flotante gigante lideraba A.I.M. en el Reino Cuántico?",
+    "emojis": "🧠 🤖 🪑",
+    "opciones": ["M.O.D.O.K.", "Arnim Zola", "Ultron", "Kang"],
+    "respuesta_correcta": "M.O.D.O.K."
+  },
+  {
+    "id": "hdm_079",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué flecha teledirigida controlada por silbidos utilizaba el saqueador Yondu Udonta?",
+    "emojis": "🏹 🔴 🎵",
+    "opciones": ["Flecha Yaka", "Saeta Uru", "Dardo Centauri", "Flecha Nova"],
+    "respuesta_correcta": "Flecha Yaka"
+  },
+  {
+    "id": "hdm_080",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama la hermana adoptiva cibernética de Gamora que finalmente se rebeló contra Thanos?",
+    "emojis": "🤖 🔵 🗡️",
+    "opciones": ["Nebula", "Proxima Midnight", "Mantissa", "Phyla"],
+    "respuesta_correcta": "Nebula"
+  },
+  {
+    "id": "hdm_081",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué héroe acrobático de Queens fue reclutado por Tony Stark en Alemania durante la Guerra Civil?",
+    "emojis": "🕷️ 🕸️ 🏙️",
+    "opciones": ["Spider-Man (Peter Parker)", "Ant-Man", "Falcon", "Daredevil"],
+    "respuesta_correcta": "Spider-Man (Peter Parker)"
+  },
+  {
+    "id": "hdm_082",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué dios asgardiano del engaño fue adoptado por Odín tras la guerra contra los Gigantes de Hielo?",
+    "emojis": "👑 🟢 🗡️",
+    "opciones": ["Loki", "Balder", "Tyr", "Hermod"],
+    "respuesta_correcta": "Loki"
+  },
+  {
+    "id": "hdm_083",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué tecnología de modificación genética con nanobots provocaba calor extremo y regeneración en Iron Man 3?",
+    "emojis": "🔥 🧬 💥",
+    "opciones": ["Extremis", "Partículas Pym", "Centinela", "Cyber-X"],
+    "respuesta_correcta": "Extremis"
+  },
+  {
+    "id": "hdm_084",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre del leal amigo de Peter Parker que descubrió accidentalmente su identidad secreta?",
+    "emojis": "🧑‍💻 🍕 🎒",
+    "opciones": ["Ned Leeds", "Harry Osborn", "Flash Thompson", "Miles Morales"],
+    "respuesta_correcta": "Ned Leeds"
+  },
+  {
+    "id": "hdm_085",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué raza cósmica de gigantes dorados e inmortales fue enviada a la Tierra para proteger a la humanidad de los Desviantes?",
+    "emojis": "✨ 🗿 🌌",
+    "opciones": ["Los Eternos", "Los Celestiales", "Los Inhumanos", "Los Kree"],
+    "respuesta_correcta": "Los Eternos"
+  },
+  {
+    "id": "hdm_086",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué hechicero supremo británico y compañero fiel de Doctor Strange custodiaba el Sanctum de Nueva York?",
+    "emojis": "🍵 🥋 🪄",
+    "opciones": ["Wong", "Mordo", "Kaecilius", "Daniel Drumm"],
+    "respuesta_correcta": "Wong"
+  },
+  {
+    "id": "hdm_087",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama la inteligencia artificial del traje Iron Spider que Peter Parker llamó cariñosamente?",
+    "emojis": "🕷️ 🎙️ 🤖",
+    "opciones": ["Karen", "Friday", "Edith", "Jarvis"],
+    "respuesta_correcta": "Karen"
+  },
+  {
+    "id": "hdm_088",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué líder celestial rojo con seis ojos juzga si los mundos merecen sobrevivir o extinguirse?",
+    "emojis": "🔴 👁️ 🌌",
+    "opciones": ["Arishem el Juez", "Eson el Buscador", "Tiamut", "Nezarr"],
+    "respuesta_correcta": "Arishem el Juez"
+  },
+  {
+    "id": "hdm_089",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué arquero letal adoptó la identidad de Ronin tras perder a su familia por el chasquido de Thanos?",
+    "emojis": "🏹 🗡️ 🌧️",
+    "opciones": ["Clint Barton (Hawkeye)", "Bucky Barnes", "Sam Wilson", "Frank Castle"],
+    "respuesta_correcta": "Clint Barton (Hawkeye)"
+  },
+  {
+    "id": "hdm_090",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es la prisión balsa sumergida de máxima seguridad donde encerraron a los Vengadores rebeldes en Civil War?",
+    "emojis": "🌊 ⛓️ 🏛️",
+    "opciones": ["La Balsa (The Raft)", "El Kyln", "Vault 42", "Alcatraz Cósmico"],
+    "respuesta_correcta": "La Balsa (The Raft)"
+  },
+  {
+    "id": "hdm_091",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué variante femenina de Loki usaba magia de encantamiento mental para derribar a la TVA?",
+    "emojis": "🗡️ 👱‍♀️ 🪄",
+    "opciones": ["Sylvie", "Hela", "Lorelei", "Frigga"],
+    "respuesta_correcta": "Sylvie"
+  },
+  {
+    "id": "hdm_092",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué armadura pesada y masiva modular diseñó Tony Stark para frenar los ataques de furia de Hulk?",
+    "emojis": "🤖 🟢 🥊",
+    "opciones": ["Hulkbuster", "Mark I", "Silver Centurion", "War Machine"],
+    "respuesta_correcta": "Hulkbuster"
+  },
+  {
+    "id": "hdm_093",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué guerrero tribal de Wakanda usaba una placa labial tradicional y lideraba a los jinetes de rinocerontes?",
+    "emojis": "🦏 🌾 🛡️",
+    "opciones": ["W'Kabi", "M'Baku", "Zuri", "T'Chaka"],
+    "respuesta_correcta": "W'Kabi"
+  },
+  {
+    "id": "hdm_094",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué científico loco de Industrias Hammer intentó emular los trajes de Iron Man con látigos de plasma?",
+    "emojis": "⚡ 🦜 🦾",
+    "opciones": ["Ivan Vanko (Whiplash)", "Justin Hammer", "Aldrich Killian", "Obadiah Stane"],
+    "respuesta_correcta": "Ivan Vanko (Whiplash)"
+  },
+  {
+    "id": "hdm_095",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué ciudadela o santuario en Nepal es la sede de entrenamiento para los Maestros de las Artes Místicas?",
+    "emojis": "🏔️ 📜 🪄",
+    "opciones": ["Kamar-Taj", "Ta Lo", "K'un-Lun", "Shamballa"],
+    "respuesta_correcta": "Kamar-Taj"
+  },
+  {
+    "id": "hdm_096",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué héroe con alas mecánicas de alta tecnología heredó el escudo y el manto del Capitán América?",
+    "emojis": "🦅 🛡️ 🇺🇸",
+    "opciones": ["Sam Wilson (Falcon)", "Bucky Barnes", "John Walker", "James Rhodes"],
+    "respuesta_correcta": "Sam Wilson (Falcon)"
+  },
+  {
+    "id": "hdm_097",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué temible arma asgardiana forjada con Uru fue diseñada específicamente para matar a Thanos en Wakanda?",
+    "emojis": "🪓 ⚡ 🌳",
+    "opciones": ["Stormbreaker", "Mjolnir", "Gungnir", "La Espada del Crepúsculo"],
+    "respuesta_correcta": "Stormbreaker"
+  },
+  {
+    "id": "hdm_098",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué monstruo genético gigante fue creado a partir de la sangre de Hulk por Samuel Sterns y Emil Blonsky?",
+    "emojis": "👹 🟢 🦴",
+    "opciones": ["Abominación", "Hulk Rojo", "Juggernaut", "Coloso"],
+    "respuesta_correcta": "Abominación"
+  },
+  {
+    "id": "hdm_099",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué androide blanca fue reconstruida por S.W.O.R.D. a partir del cuerpo original de Visión sin sus recuerdos?",
+    "emojis": "🤖 ⚪ 🧠",
+    "opciones": ["White Vision", "Ultron Prime", "Victor Mancha", "Jocasta"],
+    "respuesta_correcta": "White Vision"
+  },
+  {
+    "id": "hdm_100",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál fue la última frase que pronunció Tony Stark antes de chasquear los dedos con las Gemas del Infinito?",
+    "emojis": "🦾 💎 💥",
+    "opciones": ["Yo soy Iron Man", "Y yo... soy inevitable", "Por todos nosotros", "Fin del juego"],
+    "respuesta_correcta": "Yo soy Iron Man"
   }
 ];

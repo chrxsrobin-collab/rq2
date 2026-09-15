@@ -15,6 +15,7 @@ const SoundManager = {
   sfxResultados: new Audio('assets/audio/resultados.mp3'),
   sfxResultadosAplausos: new Audio('assets/audio/pantalla_resultados_aplausos.mp3'),
   sfxResultados10: new Audio('assets/audio/pantalla_resultados_10.mp3'),
+  sfxBoo: new Audio('assets/audio/boo.mp3'),
   _lastBtnSound: 0,
   _lastResultadosSound: 0,
   isMuted: localStorage.getItem('retroquiz_sound_muted') === 'true',
@@ -32,6 +33,7 @@ const SoundManager = {
     this.sfxResultados.loop = false;
     this.sfxResultadosAplausos.loop = false;
     this.sfxResultados10.loop = false;
+    this.sfxBoo.loop = false;
 
     // Calibración de volumen
     this.bgmMenu.volume = 0.35;
@@ -47,6 +49,7 @@ const SoundManager = {
     this.sfxResultados.volume = 0.75;
     this.sfxResultadosAplausos.volume = 0.80;
     this.sfxResultados10.volume = 0.85;
+    this.sfxBoo.volume = 0.85;
   },
 
   stopAllBGM() {
@@ -67,6 +70,10 @@ const SoundManager = {
     if (this.sfxResultados10) {
       this.sfxResultados10.pause();
       this.sfxResultados10.currentTime = 0;
+    }
+    if (this.sfxBoo) {
+      this.sfxBoo.pause();
+      this.sfxBoo.currentTime = 0;
     }
   },
 
@@ -179,6 +186,16 @@ const SoundManager = {
         this.sfxResultados10.currentTime = 0;
         this.sfxResultados10.play().catch(() => {});
         return this.sfxResultados10;
+      }
+    }
+    if (actualFile === 'boo.mp3' || actualFile === 'boo' || actualFile === 'Boo.mp3') {
+      if (this.sfxBoo) {
+        this.sfxBoo.volume = (volume !== 0.7) ? volume : 0.85;
+        this.sfxBoo.loop = false;
+        this.sfxBoo.pause();
+        this.sfxBoo.currentTime = 0;
+        this.sfxBoo.play().catch(() => {});
+        return this.sfxBoo;
       }
     }
     const sfx = new Audio(`assets/audio/${actualFile}`);

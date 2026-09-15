@@ -586,6 +586,10 @@ body.theme-verano {
   pointer-events: auto !important;
 }
 
+.how-to-play-overlay[style*="display: none"],
+.how-to-play-overlay[style*="display:none"],
+#howToPlayModal[style*="display: none"],
+#howToPlayModal[style*="display:none"],
 .how-to-play-overlay:not(.open)[style*="display: none"],
 .how-to-play-overlay:not(.open)[style*="display:none"],
 #howToPlayModal:not(.open)[style*="display: none"],
@@ -678,7 +682,7 @@ body.theme-verano {
   background: #ffffff;
   border: 3px solid #000000;
   border-radius: 16px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 0 #000000;
   padding: 10px 14px;
   box-sizing: border-box;
 }
@@ -713,13 +717,15 @@ body.theme-verano {
 }
 
 /* Botón ¡ENTENDIDO! */
-.htp-understood-btn {
+.htp-understood-btn,
+.btn-understood,
+#btnUnderstoodHowToPlay {
   width: 100%;
   height: 50px;
   background: #ffed31;
   border: 3px solid #000000;
   border-radius: 9999px;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 0 #000000;
   font-family: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
   font-weight: 700;
   font-size: 16px;
@@ -730,9 +736,19 @@ body.theme-verano {
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.htp-understood-btn:active {
+.htp-understood-btn:active,
+.btn-understood:active,
+#btnUnderstoodHowToPlay:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0 #000000;
+}
+
+.how-to-play-coin {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  object-fit: contain;
+  display: inline-block;
 }
 
 /* ==========================================================================
@@ -2425,6 +2441,276 @@ input:checked + .slider:before {
   background-color: #181414;
 }
 
+/* ==========================================================================
+   UTILIDADES DE PERFIL: CRÉDITOS Y FEEDBACK (#profileView, #creditsModal, #feedbackModal)
+   ========================================================================== */
+.profile-utility-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  box-sizing: border-box;
+}
+
+.btn-profile-utility {
+  flex: 1;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 2.5px solid #000000;
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 #000000;
+  font-family: var(--font-main, 'Futura', sans-serif);
+  font-weight: 800;
+  font-size: 13px;
+  color: #000000;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-sizing: border-box;
+}
+
+.btn-profile-utility:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* Overlays para Modales de Créditos y Feedback */
+#creditsModal.modal-overlay,
+#feedbackModal.modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Botón Circular de Cierre para Modales */
+.modal-close-circle-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: #FFE600;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  z-index: 10;
+}
+
+.modal-close-circle-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* Modal de Créditos (#creditsModal) */
+.credits-card {
+  background: #FDFBF7;
+  border: 3px solid #000;
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 #000;
+  padding: 22px 18px;
+  width: 90%;
+  max-width: 350px;
+  max-height: 82vh;
+  overflow-y: auto;
+  text-align: center;
+  position: relative;
+  font-family: var(--font-main, 'Futura', sans-serif);
+  color: #111;
+  box-sizing: border-box;
+}
+
+.credits-header-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.credits-subtitle {
+  font-size: 13px;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.credits-section-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #7B2CBF;
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
+.credits-text-block {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #222;
+}
+
+.credits-version-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: #666;
+  margin-top: 14px;
+}
+
+.credits-easter-egg {
+  font-size: 12px;
+  font-weight: 800;
+  color: #E63946;
+  background: rgba(230, 57, 70, 0.08);
+  border: 1.5px dashed #E63946;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin: 14px auto 8px;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.credits-easter-egg:active {
+  transform: scale(0.96);
+}
+
+.credits-easter-egg.claimed {
+  border-color: #2ECC71;
+  color: #27AE60;
+  background: rgba(46, 204, 113, 0.1);
+  cursor: default;
+}
+
+.btn-credits-close {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  background: #FFE600;
+  border: 2.5px solid #000;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 #000;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: var(--font-main, 'Futura', sans-serif);
+  color: #000;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-credits-close:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* Modal de Formulario de Feedback (#feedbackModal) */
+.feedback-card {
+  background: #FFFFFF;
+  border: 3px solid #000;
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 #000;
+  padding: 22px 18px;
+  width: 90%;
+  max-width: 350px;
+  position: relative;
+  font-family: var(--font-main, 'Futura', sans-serif);
+  box-sizing: border-box;
+}
+
+.feedback-title {
+  font-size: 19px;
+  font-weight: 900;
+  text-align: center;
+  color: #000;
+}
+
+.feedback-subtitle {
+  font-size: 12px;
+  text-align: center;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.feedback-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  justify-content: center;
+}
+
+.feedback-chip {
+  background: #F0F0F0;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.feedback-chip.active {
+  background: #FFE600;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.feedback-textarea {
+  width: 100%;
+  height: 95px;
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  box-sizing: border-box;
+  resize: none;
+  margin-bottom: 8px;
+}
+
+.feedback-email-input {
+  width: 100%;
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.btn-send-feedback {
+  width: 100%;
+  background: #00FF66;
+  border: 2.5px solid #000;
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 900;
+  font-size: 14px;
+  box-shadow: 3px 3px 0 #000;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-send-feedback:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
 /* Sincronización de Avatares en toda la app */
 .challenge-user-avatar-img,
 .duel-user-avatar-img,
@@ -2898,8 +3184,9 @@ input:checked + .slider:before {
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
+  min-height: 44px;
   margin-top: 2px;
   margin-bottom: 6px;
 }
@@ -2915,7 +3202,7 @@ input:checked + .slider:before {
   background: var(--color-ivory);
   border: 3px solid #000000;
   border-radius: 50%;
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 0px #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2925,7 +3212,7 @@ input:checked + .slider:before {
 
 .wheel-btn-back:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 0 #000000;
 }
 
 .wheel-btn-back .back-icon-svg {
@@ -2945,53 +3232,12 @@ input:checked + .slider:before {
   display: block;
 }
 
-.wheel-title {
-  font-family: var(--font-retro-heavy);
-  font-size: 24px;
-  color: #181414;
-  letter-spacing: 0.5px;
-  text-align: center;
-  margin: 20px 8px 0;
-  line-height: 1.1;
-  text-transform: none;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
-}
-
+.wheel-title,
 .wheel-btn-info {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  aspect-ratio: 1 / 1;
-  flex-shrink: 0;
-  padding: 0;
-  background: var(--color-ivory);
-  border: 3px solid #000000;
-  border-radius: 50%;
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  color: #000000;
-  cursor: pointer;
-  line-height: 1;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.wheel-btn-info span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  transform: translateY(-1px);
-}
-
-.wheel-btn-info:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* ==========================================================================
@@ -5609,9 +5855,25 @@ input:checked + .slider:before {
   inset: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background: var(--bg-main, var(--bg-gradient-atom));
+  background-image: url('assets/pantalla_resultados/fondo_resultados.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex-direction: column;
+}
+
+/* Limpieza de capas residuales de mosaico en loop / marcas de agua */
+.results-bg-pattern,
+.bg-watermark-pattern,
+#resultsView .results-bg-pattern,
+#resultsView .bg-watermark-pattern {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Partículas y Confeti de Fondo */
@@ -5729,7 +5991,8 @@ input:checked + .slider:before {
 .results-header-box {
   text-align: center;
   margin-bottom: 6px;
-  z-index: 4;
+  position: relative;
+  z-index: 2;
 }
 
 .results-main-title {
@@ -5752,15 +6015,15 @@ input:checked + .slider:before {
   margin-bottom: 0;
 }
 
-/* 2. Marco de Avatar Circular Destacado en Solitario (#resultsView) (132px x 132px con borde y sombra limpia) */
+/* 2. Marco de Avatar Circular Destacado en Solitario (#resultsView) (112px x 112px con borde 3px y sombra limpia) */
 .results-xp-circle,
 .xp-circle-container,
 #resultsView .reward-circle,
 .results-avatar-container {
-  width: 132px;
-  height: 132px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
-  border: 3.5px solid #000000;
+  border: 3px solid #000000;
   box-shadow: 4px 4px 0px #000000;
   background: #FFFFFF;
   overflow: hidden;
@@ -5771,7 +6034,7 @@ input:checked + .slider:before {
   box-sizing: border-box;
   padding: 0;
   position: relative;
-  z-index: 5;
+  z-index: 2;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -5800,7 +6063,8 @@ input:checked + .slider:before {
   gap: 4px;
   margin: 2px 0 8px 0;
   user-select: none;
-  z-index: 4;
+  position: relative;
+  z-index: 2;
 }
 
 .results-level-badge-row {
@@ -5863,7 +6127,8 @@ input:checked + .slider:before {
   padding: 12px 14px;
   box-sizing: border-box;
   margin-bottom: 8px;
-  z-index: 4;
+  position: relative;
+  z-index: 2;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -5966,7 +6231,8 @@ input:checked + .slider:before {
   align-items: stretch;
   box-sizing: border-box;
   margin-bottom: 10px; /* Sube los botones ~10px más arriba */
-  z-index: 5;
+  position: relative;
+  z-index: 2;
 }
 
 .btn-results {
@@ -6172,12 +6438,11 @@ input:checked + .slider:before {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 12% 12%, rgba(46, 226, 182, 0.85) 0%, transparent 45%),
-              radial-gradient(circle at 92% 10%, rgba(255, 237, 49, 0.85) 0%, transparent 45%),
-              radial-gradient(circle at 10% 70%, rgba(46, 226, 182, 0.75) 0%, transparent 50%),
-              radial-gradient(circle at 85% 85%, rgba(224, 119, 204, 0.80) 0%, transparent 55%),
-              linear-gradient(var(--challenges-gradient-angle, 168deg), #2ee2b6 0%, #ffed31 32%, #2ee2b6 60%, #e077cc 85%, #9d4edd 100%);
-  animation: challengesGradientShift 16s ease-in-out infinite;
+  background-image: url('assets/pantalla_desafio/fondo_desafio.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: transparent;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6684,43 +6949,23 @@ input:checked + .slider:before {
   display: none;
 }
 
-/* GESTO DE DESLIZAR A LA IZQUIERDA PARA ELIMINAR (SWIPE-TO-DISMISS) */
+/* GESTO DE DESLIZAMIENTO CON EXPLOSIÓN DE HUMO (SWIPE-TO-DISMISS) */
 .swipe-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 20px;
   margin-bottom: 12px;
-  transition: max-height 0.3s ease, margin 0.3s ease, opacity 0.25s ease;
+  transition: max-height 0.25s ease, margin-bottom 0.25s ease, opacity 0.25s ease;
   width: 100%;
   box-sizing: border-box;
   flex-shrink: 0;
 }
 
-.swipe-delete-bg {
-  position: absolute;
-  inset: 0;
-  background: #FF4757;
-  border: 3px solid #000000;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 20px;
-  box-sizing: border-box;
-  z-index: 1;
-}
-
-.swipe-delete-text {
-  font-family: 'Futura', var(--font-retro-heavy), var(--font-body), sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  color: #FFFFFF;
-  text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  user-select: none;
-  letter-spacing: 0.5px;
+.card-dismiss-smoke-overlay {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: visible;
 }
 
 .challenge-card,
@@ -7892,7 +8137,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 8px;
-  z-index: 200;
+  z-index: 10005;
   opacity: 0;
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
@@ -8423,6 +8668,106 @@ input:checked + .slider:before {
   box-sizing: border-box;
 }
 
+#challengeResultView.is-defeat {
+  /* Fondo con tono más oscuro y dramático */
+  background: radial-gradient(circle, #2A0845 0%, #0B0014 100%) !important;
+}
+
+#challengeResultView.is-defeat .winner-podium-frame {
+  filter: drop-shadow(0 0 12px rgba(255, 59, 48, 0.4));
+}
+
+#challengeResultView.is-defeat .duel-outcome-title {
+  color: #FF3B30 !important;
+  text-shadow: 2px 2px 0 #000000, 4px 4px 0 #000000 !important;
+}
+
+#challengeResultView.is-defeat .duel-outcome-subtitle {
+  color: #DDD6FE !important;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+#challengeResultView.is-victory {
+  background: var(--bg-gradient-atom) !important;
+}
+
+#challengeResultView.is-victory .duel-outcome-title {
+  color: #FFE600 !important;
+  text-shadow: 2px 2px 0 #000000, 3px 3px 0 #000000 !important;
+}
+
+/* Bloque Comparativo de Puntuación en la Resolución Definitiva */
+.duel-score-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px #000000;
+  width: fit-content;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+.score-pill {
+  font-family: var(--font-data-pixel, monospace);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.score-pill.my-score-loser {
+  color: #FF3B30 !important;
+  text-shadow: 0 0 8px rgba(255, 59, 48, 0.45);
+}
+
+.score-pill.rival-score-winner {
+  color: #00FF66 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.45);
+}
+
+.score-pill.my-score-winner {
+  color: #00FF66 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.45);
+}
+
+.score-pill.rival-score-loser {
+  color: #FF3B30 !important;
+  text-shadow: 0 0 8px rgba(255, 59, 48, 0.45);
+}
+
+.score-vs-divider {
+  font-family: 'Futura', var(--font-retro-heavy), sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: #FFE600;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+/* Botones en Pantalla de Derrota - Lado a Lado */
+#challengeResultView.is-defeat #btnRematchDuel {
+  display: flex !important;
+  flex: 1 1 0 !important;
+  background: #FF5E00 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+#challengeResultView.is-defeat #btnDuelBackToChallenges {
+  display: flex !important;
+  flex: 1 1 0 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
 .duel-results-bg {
   position: absolute;
   inset: 0;
@@ -8871,12 +9216,37 @@ input:checked + .slider:before {
   will-change: transform, opacity;
 }
 
-.duel-round-actions,
-.duel-final-actions {
+.duel-round-actions {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
+}
+
+.duel-final-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.duel-final-actions .btn-duel-action {
+  flex: 1 1 0;
+  width: auto !important;
+  min-width: 0;
+  padding: 12px 10px !important;
+  font-size: 13px !important;
+  text-align: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.duel-final-actions #btnRematchDuel,
+.duel-final-actions #btnDuelBackToChallenges {
+  flex: 1 1 0;
+  width: auto !important;
 }
 
 .btn-duel-action {

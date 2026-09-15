@@ -60,7 +60,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_springfield.webp",
     icon: "🍩 🍺 📺",
     description: "Demuestra cuánto sabes sobre la familia amarilla de la televisión, sus vecinos y sus locuras cotidianas en Springfield.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   },
@@ -75,7 +75,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_multiverso.webp",
     icon: "🛡️ ⚡ 🌌",
     description: "Preguntas sobre vengadores heroicos, villanos cósmicos, batallas épicas y leyendas multiversales.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   },
@@ -90,7 +90,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_galaxias.webp",
     icon: "🚀 ⚔️ 🌌",
     description: "Enfrenta el lore definitivo sobre sables de luz, órdenes espaciales, imperios galácticos y planetas remotos.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   },
@@ -105,7 +105,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_ki.webp",
     icon: "🐉 🥋 ⚡",
     description: "Pon a prueba tu poder sobre torneos de artes marciales, guerreros legendarios, esferas mágicas y transformaciones cósmicas.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   },
@@ -120,7 +120,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_reino.webp",
     icon: "🍄 👑 🐢",
     description: "Desafía tu memoria en plataformas retro: fontaneros valientes, princesas en apuros, castillos y carreras de karts.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   },
@@ -135,7 +135,7 @@ const THEMATIC_PACKS = [
     boxImage: "assets/pantalla_colecciones/caja_magia.webp",
     icon: "🪄 🏰 ⚡",
     description: "Pon a prueba tus hechizos y conocimientos del mundo mágico, colegios de hechicería y criaturas fantásticas.",
-    totalQuestions: 50,
+    totalQuestions: 100,
     price: 5000,
     priceCoins: 5000
   }
@@ -332,9 +332,10 @@ const categoriesConfig = {
   animacion: { name: 'ANIMACIÓN', icon: '✨', color: '#00FF66', centerAngle: 252 },
   videojuegos: { name: 'VIDEOJUEGOS', icon: '🎮', color: '#e2dd5f', centerAngle: 324 },
   tv: { name: 'TV', icon: '📺', color: '#5fe2df', centerAngle: 36 },
-  todo: { name: 'TODO / MIX', icon: '❓', color: '#FF5A5F', centerAngle: 108 }
+  todo: { name: 'MIX', icon: '❓', color: '#FF5A5F', centerAngle: 108 }
 };
 categoriesConfig.musica = categoriesConfig.animacion; // Alias de compatibilidad
+categoriesConfig.mix = categoriesConfig.todo; // Alias de compatibilidad
 
 // Obtener lista de categorías actualmente desbloqueadas (por defecto todas habilitadas desde el principio)
 function getUnlockedCategories() {
@@ -1026,8 +1027,10 @@ function showView(targetId) {
     } else if (targetSelector === '#gameOverView') {
       SoundManager.stopAllBGM();
       // En #gameOverView se elimina la reproducción simultánea o previa de gameover.mp3
-    } else if (targetSelector === '#resultsView' || targetSelector === '#challengeResultView') {
+    } else if (targetSelector === '#resultsView') {
       playResultsAudioSequence();
+    } else if (targetSelector === '#challengeResultView') {
+      // En #challengeResultView, el audio se gestiona dinámicamente según resultado (Victoria / Derrota / Ronda)
     }
   }
 }
@@ -1699,7 +1702,7 @@ function openPackDetailModal(rawPackId) {
   // Contador total
   const counterEl = document.getElementById('packDetailQuestionCount');
   if (counterEl) {
-    counterEl.innerText = `Total: ${pack.totalQuestions || 50} Preguntas Exclusivas`;
+    counterEl.innerText = `Total: ${pack.totalQuestions || 100} Preguntas Exclusivas`;
   }
 
   // Botón de acción
@@ -2199,7 +2202,7 @@ function renderCollectionCardsUI() {
       else if (pack.id === 'reino_champinon') rawMastery = packMastery['puro_90s'] || packMastery['pack_puro_90s'];
       else if (pack.id === 'castillo_magia') rawMastery = packMastery['puro_80s'] || packMastery['pack_puro_80s'];
     }
-    const totalQuestions = pack.totalQuestions || 50;
+    const totalQuestions = pack.totalQuestions || 100;
     const masteryCount = Array.isArray(rawMastery)
       ? Math.min(totalQuestions, rawMastery.length)
       : Math.min(totalQuestions, Math.max(0, parseInt(rawMastery, 10) || 0));
@@ -6453,7 +6456,7 @@ function getCategoryMeta(cat) {
   if (c === 'ANIMACIÓN' || c === 'ANIMACION' || c.includes('ANIM') || c === 'MÚSICA' || c === 'MUSICA' || c.includes('MUS') || c.includes('MÚS')) {
     return categoriesConfig.animacion || { name: 'ANIMACIÓN', icon: '✨', color: '#00FF66' };
   }
-  return categoriesConfig.todo || { name: 'TODO / MIX', icon: '❓', color: '#FF5A5F' };
+  return categoriesConfig.todo || { name: 'MIX', icon: '❓', color: '#FF5A5F' };
 }
 window.getCategoryMeta = getCategoryMeta;
 
@@ -7371,7 +7374,7 @@ function handleTriviaAnswer(selectedIndex) {
     if (window.state) window.state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.correctAnswersCount = state.trivia.correctAnswersCount;
 
-    // Sumar dominio de pack si se está jugando un pack temático (array de preguntas dominadas hasta 50)
+    // Sumar dominio de pack si se está jugando un pack temático (array de preguntas dominadas hasta 100)
     const activeThematicPack = window.state?.activeThematicPackId || state.activeThematicPackId;
     if (activeThematicPack) {
       if (!state.packMastery) state.packMastery = {};
@@ -7382,12 +7385,12 @@ function handleTriviaAnswer(selectedIndex) {
       if (Array.isArray(currentMastery)) {
         masteryArr = [...currentMastery];
       } else if (typeof currentMastery === 'number' && currentMastery > 0) {
-        masteryArr = Array.from({ length: Math.min(50, currentMastery) }, (_, i) => `prev_${i + 1}`);
+        masteryArr = Array.from({ length: Math.min(100, currentMastery) }, (_, i) => `prev_${i + 1}`);
       }
 
       // ID único de la pregunta (ej: "spr_001") o texto de la pregunta
       const qId = q?.id || (q?.pregunta ? String(q.pregunta).trim() : null);
-      if (qId && !masteryArr.includes(qId) && masteryArr.length < 50) {
+      if (qId && !masteryArr.includes(qId) && masteryArr.length < 100) {
         masteryArr.push(qId);
       }
 
@@ -8146,6 +8149,35 @@ function updateDuelCardToWaiting(rivalName = 'Usuario 2') {
 }
 
 // =============================================================================
+// REPRODUCCIÓN DEL SONIDO DE DERROTA EN DUELOS (assets/audio/boo.mp3 - UNA SOLA VEZ)
+// =============================================================================
+let _lastDefeatBooTimestamp = 0;
+let _lastDefeatBooChallengeId = null;
+
+function playDefeatBooSound(chId = '') {
+  const now = Date.now();
+  // Garantiza que suena estrictamente una sola vez
+  if (now - _lastDefeatBooTimestamp < 3500) {
+    return;
+  }
+  _lastDefeatBooTimestamp = now;
+  _lastDefeatBooChallengeId = chId || 'duel-defeat';
+
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.stopAllBGM();
+    SoundManager.playSFX('boo.mp3', 0.85);
+  } else {
+    try {
+      const audio = new Audio('assets/audio/boo.mp3');
+      audio.loop = false;
+      audio.volume = 0.85;
+      audio.play().catch(() => {});
+    } catch (e) {}
+  }
+}
+window.playDefeatBooSound = playDefeatBooSound;
+
+// =============================================================================
 // REVELACIÓN MÁGICA CON HUMO DEL GANADOR EN DUELOS (#challengeResultView)
 // =============================================================================
 function triggerWinnerPodiumMagicSmoke(soyGanador, correctCount = 5) {
@@ -8247,15 +8279,10 @@ function triggerWinnerPodiumMagicSmoke(soyGanador, correctCount = 5) {
     if (overlay) overlay.classList.add('fade-out');
   }, 600);
 
-  // Si perdió: exactamente 1 segundo después (cuando se asimila la derrota), suena 'gameover.mp3'
+  // Si perdió: exactamente 1 segundo después (cuando se asimila la derrota), suena 'boo.mp3' una sola vez
   if (!soyGanador) {
     setTimeout(() => {
-      if (typeof SoundManager !== 'undefined') {
-        SoundManager.stopAllBGM();
-        SoundManager.playSFX('gameover.mp3', 0.85);
-      } else {
-        playErrorSound();
-      }
+      playDefeatBooSound();
     }, 1000);
   }
 }
@@ -8551,9 +8578,18 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       }
 
       // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL GANADOR
+      const challengeResultView = document.getElementById('challengeResultView');
+      if (challengeResultView) {
+        challengeResultView.classList.remove('is-defeat');
+        challengeResultView.classList.add('is-victory');
+      }
+
+      const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
       const isTimeoutFinish = (chData?.finishReason === "timeout" || state.currentDuel?.chData?.finishReason === "timeout");
       if (outcomeTitle) {
-        outcomeTitle.innerText = isTimeoutFinish ? '🏆 ¡VICTORIA POR ABANDONO!' : '🏆 ¡VICTORIA DEFINITIVA!';
+        outcomeTitle.innerText = "¡HAS GANADO! 🏆";
+        outcomeTitle.style.color = "#FFE600";
+        outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000";
       }
       if (outcomeSubtitle) {
         outcomeSubtitle.innerText = isTimeoutFinish ? 'Tu contrincante no respondió a tiempo su turno.' : '¡Has dominado el duelo frente a tu rival!';
@@ -8572,6 +8608,25 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       if (winnerNameEl) winnerNameEl.textContent = `${datosGanador.nombre} ${winnerFlag}`;
       const winnerCountryBadge = document.getElementById('challengeWinnerCountryBadge');
       if (winnerCountryBadge) winnerCountryBadge.innerText = winnerFlag;
+      if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
+
+      // Bloque de puntuación comparativo
+      let scoreCompEl = document.getElementById('duelScoreComparison');
+      if (!scoreCompEl) {
+        scoreCompEl = document.createElement('div');
+        scoreCompEl.id = 'duelScoreComparison';
+        scoreCompEl.className = 'duel-score-comparison';
+        const infoBadge = document.querySelector('.winner-info-badge');
+        if (infoBadge) infoBadge.appendChild(scoreCompEl);
+      }
+      if (scoreCompEl) {
+        scoreCompEl.style.display = 'flex';
+        scoreCompEl.innerHTML = `
+          <span class="score-pill my-score-winner">${localUsername}: ${miPuntaje} pts</span>
+          <span class="score-vs-divider">VS</span>
+          <span class="score-pill rival-score-loser">${rivalUsername}: ${rivalPuntaje} pts</span>
+        `;
+      }
 
       // Botón principal: "VOLVER A DESAFÍOS" en amarillo neón (ocultar revancha)
       if (btnRematchDuel) {
@@ -8586,6 +8641,17 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       // Secuencia de revelación con humo mágico, 'ruleta_todo.mp3' y fanfarria con confeti
       triggerWinnerPodiumMagicSmoke(true, correctCount);
     } else if (soyPerdedor) {
+      const challengeResultView = document.getElementById('challengeResultView');
+      if (challengeResultView) {
+        challengeResultView.classList.remove('is-victory');
+        challengeResultView.classList.add('is-defeat');
+      }
+      if (typeof confetti?.reset === 'function') {
+        confetti.reset();
+      }
+      playDefeatBooSound(chId);
+
+      const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
       const isSafeZone = (currentXp < 700);
 
       // Feedback visual del perdedor: texto rojo "-60 XP" (o "+0 XP en zona segura" si < 700 XP)
@@ -8645,10 +8711,12 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
 
       // 3. ESTADOS DE LA PANTALLA SEGÚN EL ROL: SI SOY EL PERDEDOR
       if (outcomeTitle) {
-        outcomeTitle.innerText = isTimeoutFinish ? '⌛ TIEMPO AGOTADO' : 'HAS PERDIDO';
+        outcomeTitle.innerText = "HAS PERDIDO 💀";
+        outcomeTitle.style.color = "#FF3B30";
+        outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000, 4px 4px 0 #000000";
       }
       if (outcomeSubtitle) {
-        outcomeSubtitle.innerText = isTimeoutFinish ? 'No respondiste a tiempo tu turno.' : `${datosGanador.nombre} se lleva la victoria por esta vez`;
+        outcomeSubtitle.innerText = `${rivalUsername} se lleva la corona en esta ocasión`;
         outcomeSubtitle.style.display = 'block';
       }
 
@@ -8659,21 +8727,47 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
       if (winnerAvatarImg) winnerAvatarImg.src = datosGanador.avatar;
       const winnerNameEl = document.getElementById('challengeWinnerName');
-      if (winnerNameEl) winnerNameEl.textContent = datosGanador.nombre;
+      if (winnerNameEl) winnerNameEl.textContent = `${datosGanador.nombre} ${rivalFlag}`;
+      const winnerCountryBadge = document.getElementById('challengeWinnerCountryBadge');
+      if (winnerCountryBadge) winnerCountryBadge.innerText = rivalFlag;
+      if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
 
-      // Botón principal: "🔄 SOLICITAR REVANCHA" (destacado en naranja/rojo Neo-Memphis) y botón secundario "VOLVER"
+      // Bloque de puntuación comparativo
+      let scoreCompEl = document.getElementById('duelScoreComparison');
+      if (!scoreCompEl) {
+        scoreCompEl = document.createElement('div');
+        scoreCompEl.id = 'duelScoreComparison';
+        scoreCompEl.className = 'duel-score-comparison';
+        const infoBadge = document.querySelector('.winner-info-badge');
+        if (infoBadge) infoBadge.appendChild(scoreCompEl);
+      }
+      if (scoreCompEl) {
+        scoreCompEl.style.display = 'flex';
+        scoreCompEl.innerHTML = `
+          <span class="score-pill my-score-loser">${localUsername}: ${miPuntaje} pts</span>
+          <span class="score-vs-divider">VS</span>
+          <span class="score-pill rival-score-winner">${rivalUsername}: ${rivalPuntaje} pts</span>
+        `;
+      }
+
+      // Botones de acción lado a lado:
+      // Botón principal: "🔄 SOLICITAR REVANCHA" (fondo naranja fuego #FF5E00)
       if (btnRematchDuel) {
         btnRematchDuel.style.display = 'flex';
+        btnRematchDuel.style.flex = '1 1 0';
         btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
-        btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-highlight interactive-press';
+        btnRematchDuel.style.cssText = 'display: flex !important; flex: 1 1 0 !important; background: #FF5E00 !important; color: #FFFFFF !important; border: 3px solid #000000 !important; font-weight: 800 !important; box-shadow: 3px 3px 0 #000000 !important;';
+        btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-defeat interactive-press';
       }
+      // Botón secundario: "VOLVER A DESAFÍOS"
       if (btnDuelBackToChallenges) {
         btnDuelBackToChallenges.style.display = 'flex';
-        btnDuelBackToChallenges.innerText = 'VOLVER';
+        btnDuelBackToChallenges.style.flex = '1 1 0';
+        btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
         btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-secondary-back interactive-press';
       }
 
-      // Secuencia de revelación con humo mágico para el rival y 'gameover.mp3' a 1s
+      // Secuencia de revelación con humo mágico para el rival y sonido boo.mp3 a 1s
       triggerWinnerPodiumMagicSmoke(false, correctCount);
     } else {
       // 4. EMPATE (CASO BORDE)
@@ -8954,6 +9048,155 @@ function renderResultadosDesafio() {
         : (window.state && window.state.correctAnswersCount ? window.state.correctAnswersCount : 0));
 
   guardarPuntosRondaDesafio(aciertos);
+
+  // Estados dinámicos de Victoria / Derrota en #challengeResultView:
+  const container = document.getElementById('challengeResultView');
+  const outcomeTitle = document.getElementById('duelOutcomeTitle');
+  const outcomeSubtitle = document.getElementById('duelOutcomeSubtitle');
+  const winnerPodium = document.getElementById('duelWinnerPodiumContainer');
+  const versusPodium = document.getElementById('duelResultPodiumVersus');
+  const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
+  const winnerNameEl = document.getElementById('challengeWinnerName');
+  const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
+  const btnRematchDuel = document.getElementById('btnRematchDuel');
+  const btnDuelBackToChallenges = document.getElementById('btnDuelBackToChallenges');
+
+  const miPuntajeTotal = state.currentDuel?.localTotalScore || 0;
+  const rivalPuntajeTotal = state.currentDuel?.rivalTotalScore || 0;
+  const rivalName = state.currentDuel?.rivalName || 'Rival';
+  const localName = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
+  const localAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
+  let rivalAvatar = state.currentDuel?.rivalAvatar || 'assets/pantalla_inicio/hombre.webp';
+  if (!rivalAvatar || (!rivalAvatar.includes('/') && !rivalAvatar.startsWith('data:'))) {
+    rivalAvatar = 'assets/pantalla_inicio/hombre.webp';
+  }
+
+  const chData = state.currentDuel?.chData;
+  const currentUidVal = window.state?.userId || state.userId;
+  let soyGanador = (miPuntajeTotal > rivalPuntajeTotal);
+  if (chData?.winnerId || chData?.winnerUid) {
+    const wId = chData.winnerId || chData.winnerUid;
+    if (wId === currentUidVal) soyGanador = true;
+    else if (wId && wId !== "empate") soyGanador = false;
+  }
+
+  // Compara miPuntajeTotal vs rivalPuntajeTotal
+  if (soyGanador) {
+    if (container) {
+      container.classList.remove('is-defeat');
+      container.classList.add('is-victory');
+    }
+    if (outcomeTitle) {
+      outcomeTitle.innerText = "¡HAS GANADO! 🏆";
+      outcomeTitle.style.color = "#FFE600";
+      outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000";
+    }
+    if (outcomeSubtitle) {
+      outcomeSubtitle.innerText = '¡Has dominado el duelo frente a tu rival!';
+      outcomeSubtitle.style.display = 'block';
+    }
+    if (winnerPodium) winnerPodium.style.display = 'flex';
+    if (versusPodium) versusPodium.style.display = 'none';
+    if (winnerAvatarImg) winnerAvatarImg.src = localAvatar;
+    if (winnerNameEl) winnerNameEl.textContent = localName;
+    if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
+
+    // Bloque de puntuación
+    let scoreCompEl = document.getElementById('duelScoreComparison');
+    if (!scoreCompEl) {
+      scoreCompEl = document.createElement('div');
+      scoreCompEl.id = 'duelScoreComparison';
+      scoreCompEl.className = 'duel-score-comparison';
+      const infoBadge = document.querySelector('.winner-info-badge');
+      if (infoBadge) infoBadge.appendChild(scoreCompEl);
+    }
+    if (scoreCompEl) {
+      scoreCompEl.style.display = 'flex';
+      scoreCompEl.innerHTML = `
+        <span class="score-pill my-score-winner">${localName}: ${miPuntajeTotal} pts</span>
+        <span class="score-vs-divider">VS</span>
+        <span class="score-pill rival-score-loser">${rivalName}: ${rivalPuntajeTotal} pts</span>
+      `;
+    }
+
+    if (btnRematchDuel) btnRematchDuel.style.display = 'none';
+    if (btnDuelBackToChallenges) {
+      btnDuelBackToChallenges.style.display = 'flex';
+      btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
+      btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-winner-back interactive-press';
+    }
+
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
+    }
+    if (typeof playResultsAudioSequence === 'function') {
+      playResultsAudioSequence(aciertos);
+    }
+  } else {
+    // Usuario local es el PERDEDOR (¡HAS PERDIDO!)
+    if (container) {
+      container.classList.remove('is-victory');
+      container.classList.add('is-defeat');
+    }
+    // Detén y cancela cualquier confeti activo
+    if (typeof confetti?.reset === 'function') {
+      confetti.reset();
+    }
+    // Audio: Reproduce boo.mp3 una sola vez
+    playDefeatBooSound(chData?.id || '');
+    // Título principal: "HAS PERDIDO 💀" (color #FF3B30 con sombra negra profunda)
+    if (outcomeTitle) {
+      outcomeTitle.innerText = "HAS PERDIDO 💀";
+      outcomeTitle.style.color = "#FF3B30";
+      outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000, 4px 4px 0 #000000";
+    }
+    // Subtítulo: `${rivalName} se lleva la corona en esta ocasión`
+    if (outcomeSubtitle) {
+      outcomeSubtitle.innerText = `${rivalName} se lleva la corona en esta ocasión`;
+      outcomeSubtitle.style.display = 'block';
+    }
+    // Podio central: Muestra el avatar y nombre del RIVAL con el marco dorado y la corona 👑
+    if (winnerPodium) winnerPodium.style.display = 'flex';
+    if (versusPodium) versusPodium.style.display = 'none';
+    if (winnerAvatarImg) winnerAvatarImg.src = rivalAvatar;
+    if (winnerNameEl) winnerNameEl.textContent = rivalName;
+    if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
+
+    // Bloque de puntuación: Muestra el comparativo de puntos (Mi puntaje vs Puntaje rival) destacando en rojo mis puntos y en verde los del rival
+    let scoreCompEl = document.getElementById('duelScoreComparison');
+    if (!scoreCompEl) {
+      scoreCompEl = document.createElement('div');
+      scoreCompEl.id = 'duelScoreComparison';
+      scoreCompEl.className = 'duel-score-comparison';
+      const infoBadge = document.querySelector('.winner-info-badge');
+      if (infoBadge) infoBadge.appendChild(scoreCompEl);
+    }
+    if (scoreCompEl) {
+      scoreCompEl.style.display = 'flex';
+      scoreCompEl.innerHTML = `
+        <span class="score-pill my-score-loser">${localName}: ${miPuntajeTotal} pts</span>
+        <span class="score-vs-divider">VS</span>
+        <span class="score-pill rival-score-winner">${rivalName}: ${rivalPuntajeTotal} pts</span>
+      `;
+    }
+
+    // Botones de acción lado a lado:
+    // Botón 1 (Principal): "🔄 SOLICITAR REVANCHA" (fondo naranja fuego #FF5E00, texto blanco, borde 3px solid #000, font-weight: 800, box-shadow: 3px 3px 0 #000)
+    if (btnRematchDuel) {
+      btnRematchDuel.style.display = 'flex';
+      btnRematchDuel.style.flex = '1 1 0';
+      btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
+      btnRematchDuel.style.cssText = 'display: flex !important; flex: 1 1 0 !important; background: #FF5E00 !important; color: #FFFFFF !important; border: 3px solid #000000 !important; font-weight: 800 !important; box-shadow: 3px 3px 0 #000000 !important;';
+      btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-defeat interactive-press';
+    }
+    // Botón 2 (Secundario): "VOLVER A DESAFÍOS" (botón de texto o pastilla discreta)
+    if (btnDuelBackToChallenges) {
+      btnDuelBackToChallenges.style.display = 'flex';
+      btnDuelBackToChallenges.style.flex = '1 1 0';
+      btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
+      btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-secondary-back interactive-press';
+    }
+  }
 }
 window.renderResultadosDesafio = renderResultadosDesafio;
 
@@ -9653,13 +9896,257 @@ function setupProfileNavigationEvents() {
   // 4. CERRAR CON TECLA ESCAPE:
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      const cred = document.getElementById('creditsModal');
+      if (cred && cred.style.display === 'flex') {
+        cred.style.display = 'none';
+        return;
+      }
+      const fdb = document.getElementById('feedbackModal');
+      if (fdb && fdb.style.display === 'flex') {
+        fdb.style.display = 'none';
+        return;
+      }
       const p = document.getElementById('profileView');
       if (p && (p.classList.contains('open') || p.style.display === 'flex') && !p.classList.contains('closing')) {
         closeProfileModal();
       }
     }
   });
+
+  // 5. INICIALIZAR MODALES DE CRÉDITOS Y FEEDBACK:
+  try {
+    setupCreditsAndFeedbackModals();
+  } catch (e) {
+    console.warn("Error al inicializar modales de créditos y feedback:", e);
+  }
 }
+
+// =============================================================================
+// MODALES DE CRÉDITOS Y FEEDBACK (#creditsModal, #feedbackModal)
+// =============================================================================
+function setupCreditsAndFeedbackModals() {
+  const btnOpenCredits = document.getElementById('btnOpenCredits');
+  const creditsModal = document.getElementById('creditsModal');
+  const btnCloseCredits = document.getElementById('btnCloseCredits');
+  const btnCloseCreditsFooter = document.getElementById('btnCloseCreditsFooter');
+  const creditsEasterEgg = document.getElementById('creditsEasterEgg');
+
+  const btnOpenFeedback = document.getElementById('btnOpenFeedback');
+  const feedbackModal = document.getElementById('feedbackModal');
+  const btnCloseFeedback = document.getElementById('btnCloseFeedback');
+  const btnSendFeedback = document.getElementById('btnSendFeedback');
+  const feedbackMessageInput = document.getElementById('feedbackMessageInput');
+  const feedbackEmailInput = document.getElementById('feedbackEmailInput');
+  const feedbackChips = document.querySelectorAll('.feedback-chip');
+
+  // Estado visual del Easter Egg
+  function updateCreditsEasterEggUI() {
+    if (!creditsEasterEgg) return;
+    if (localStorage.getItem('superquiz_egg_tmnt') === 'true') {
+      creditsEasterEgg.classList.add('claimed');
+      creditsEasterEgg.innerHTML = "✓ ¡PIZZA COBRADA! +10 🪙";
+    }
+  }
+
+  // 1. APERTURA Y CIERRE DE CRÉDITOS
+  if (btnOpenCredits && creditsModal) {
+    btnOpenCredits.onclick = (e) => {
+      e.preventDefault();
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('pantallas_emergentes.mp3');
+      }
+      updateCreditsEasterEggUI();
+      creditsModal.style.display = 'flex';
+    };
+  }
+
+  function closeCreditsModal() {
+    if (creditsModal) creditsModal.style.display = 'none';
+    if (typeof SoundManager !== 'undefined') {
+      SoundManager.playSFX('botones.wav');
+    }
+  }
+
+  if (btnCloseCredits) {
+    btnCloseCredits.onclick = (e) => {
+      e.preventDefault();
+      closeCreditsModal();
+    };
+  }
+
+  if (btnCloseCreditsFooter) {
+    btnCloseCreditsFooter.onclick = (e) => {
+      e.preventDefault();
+      closeCreditsModal();
+    };
+  }
+
+  if (creditsModal) {
+    creditsModal.onclick = (e) => {
+      if (e.target === creditsModal) {
+        closeCreditsModal();
+      }
+    };
+  }
+
+  // 2. LÓGICA DEL EASTER EGG EN LOS CRÉDITOS (Pizza TMNT +10 RetroCoins)
+  if (creditsEasterEgg) {
+    updateCreditsEasterEggUI();
+    creditsEasterEgg.onclick = (e) => {
+      e.preventDefault();
+      const alreadyClaimed = (localStorage.getItem('superquiz_egg_tmnt') === 'true');
+      if (alreadyClaimed) {
+        showToast("¡Ya te comiste esa pizza! 🍕 (+10 RetroCoins ya cobradas)", '🍕');
+        return;
+      }
+
+      // Reclamar premio de 10 monedas
+      localStorage.setItem('superquiz_egg_tmnt', 'true');
+      const currentCoins = (window.state && typeof window.state.coins === 'number') ? window.state.coins : (state.coins || 0);
+      const newCoins = currentCoins + 10;
+      if (window.state) window.state.coins = newCoins;
+      state.coins = newCoins;
+      try {
+        localStorage.setItem('retroquiz_coins', String(newCoins));
+      } catch (err) {}
+
+      if (typeof window.saveCoinsToCloud === 'function') {
+        window.saveCoinsToCloud(newCoins);
+      } else if (typeof saveCoinsToCloud === 'function') {
+        saveCoinsToCloud(newCoins);
+      }
+
+      if (typeof updateHUD === 'function') {
+        updateHUD();
+      }
+
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('retrocoin.wav');
+      }
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 } });
+      }
+
+      showToast("¡Cowabunga! 🐢🍕 Encontraste un secreto: +10 RetroCoins", '🍕');
+      creditsEasterEgg.classList.add('claimed');
+      creditsEasterEgg.innerHTML = "✓ ¡PIZZA COBRADA! +10 🪙";
+    };
+  }
+
+  // 3. APERTURA Y CIERRE DE FEEDBACK
+  let selectedFeedbackType = 'Sugerencia';
+
+  if (btnOpenFeedback && feedbackModal) {
+    btnOpenFeedback.onclick = (e) => {
+      e.preventDefault();
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('pantallas_emergentes.mp3');
+      }
+      feedbackModal.style.display = 'flex';
+    };
+  }
+
+  function closeFeedbackModal() {
+    if (feedbackModal) feedbackModal.style.display = 'none';
+    if (typeof SoundManager !== 'undefined') {
+      SoundManager.playSFX('botones.wav');
+    }
+  }
+
+  if (btnCloseFeedback) {
+    btnCloseFeedback.onclick = (e) => {
+      e.preventDefault();
+      closeFeedbackModal();
+    };
+  }
+
+  if (feedbackModal) {
+    feedbackModal.onclick = (e) => {
+      if (e.target === feedbackModal) {
+        closeFeedbackModal();
+      }
+    };
+  }
+
+  // 4. CHIPS INTERACTIVOS DE FEEDBACK
+  feedbackChips.forEach(chip => {
+    chip.onclick = (e) => {
+      e.preventDefault();
+      feedbackChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      selectedFeedbackType = chip.getAttribute('data-type') || 'Sugerencia';
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('botones.wav', 0.4);
+      }
+    };
+  });
+
+  // 5. ENVÍO DE FEEDBACK A FIRESTORE
+  if (btnSendFeedback) {
+    btnSendFeedback.onclick = async (e) => {
+      e.preventDefault();
+      const mensajeTexto = feedbackMessageInput ? feedbackMessageInput.value.trim() : '';
+      if (!mensajeTexto || mensajeTexto.length < 5) {
+        showToast("Por favor escribe un mensaje detallado", '⚠️');
+        if (feedbackMessageInput) feedbackMessageInput.focus();
+        return;
+      }
+
+      const emailTexto = feedbackEmailInput ? feedbackEmailInput.value.trim() : '';
+      btnSendFeedback.innerText = "Enviando...";
+      btnSendFeedback.disabled = true;
+
+      const feedbackPayload = {
+        userId: window.state?.userId || "anonimo",
+        username: localStorage.getItem('retroquiz_username') || "Jugador",
+        tipo: selectedFeedbackType,
+        mensaje: mensajeTexto,
+        email: emailTexto || null,
+        appVersion: "Super Quiz v1.0.0",
+        deviceInfo: navigator.userAgent,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        if (window.db && window.firestoreOps) {
+          if (typeof window.firestoreOps.addDoc === 'function') {
+            await window.firestoreOps.addDoc(window.firestoreOps.collection(window.db, "feedback"), feedbackPayload);
+          } else if (typeof window.firestoreOps.setDoc === 'function' && typeof window.firestoreOps.doc === 'function') {
+            const newDocRef = window.firestoreOps.doc(window.firestoreOps.collection(window.db, "feedback"));
+            await window.firestoreOps.setDoc(newDocRef, feedbackPayload);
+          }
+        } else {
+          // Backup offline en localStorage si firestore no está disponible
+          const offlineQueue = JSON.parse(localStorage.getItem('retroquiz_offline_feedback') || '[]');
+          offlineQueue.push(feedbackPayload);
+          localStorage.setItem('retroquiz_offline_feedback', JSON.stringify(offlineQueue));
+        }
+
+        if (feedbackMessageInput) feedbackMessageInput.value = '';
+        if (feedbackEmailInput) feedbackEmailInput.value = '';
+        if (feedbackModal) feedbackModal.style.display = 'none';
+        showToast("¡Mensaje recibido! Muchas gracias por tus sugerencias 🕹️", '🚀');
+      } catch (err) {
+        console.error("Error al guardar feedback en Firestore:", err);
+        try {
+          const offlineQueue = JSON.parse(localStorage.getItem('retroquiz_offline_feedback') || '[]');
+          offlineQueue.push(feedbackPayload);
+          localStorage.setItem('retroquiz_offline_feedback', JSON.stringify(offlineQueue));
+        } catch (e2) {}
+
+        if (feedbackMessageInput) feedbackMessageInput.value = '';
+        if (feedbackEmailInput) feedbackEmailInput.value = '';
+        if (feedbackModal) feedbackModal.style.display = 'none';
+        showToast("¡Mensaje recibido! Muchas gracias por tus sugerencias 🕹️", '🚀');
+      } finally {
+        btnSendFeedback.innerText = "ENVIAR FEEDBACK 🚀";
+        btnSendFeedback.disabled = false;
+      }
+    };
+  }
+}
+window.setupCreditsAndFeedbackModals = setupCreditsAndFeedbackModals;
 
 async function renderRankingUI() {
   const currentUsername = (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || "Jugador";
@@ -9858,6 +10345,11 @@ function showRetroToast(message, icon = '✨') {
     toast.classList.remove('show');
   }, 2300);
 }
+function showToast(message, icon = '✨') {
+  showRetroToast(message, icon);
+}
+window.showToast = showToast;
+window.showRetroToast = showRetroToast;
 
 function updateCoinsDisplay(amountToAdd) {
   const coinEl = document.getElementById('userCoins');
@@ -10042,6 +10534,80 @@ function triggerActiveMatchesShake() {
 }
 window.triggerActiveMatchesShake = triggerActiveMatchesShake;
 
+// =============================================================================
+// EXPLOSIÓN CÓMICA DE PARTÍCULAS/HUMO AL DESCARTAR TARJETA DE DESAFÍO
+// =============================================================================
+function triggerCardDismissSmoke(rect) {
+  if (!rect) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'card-dismiss-smoke-overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.left = rect.left + 'px';
+  overlay.style.top = rect.top + 'px';
+  overlay.style.width = rect.width + 'px';
+  overlay.style.height = rect.height + 'px';
+  overlay.style.pointerEvents = 'none';
+  overlay.style.zIndex = '99999';
+  overlay.style.overflow = 'visible';
+
+  const smokeColors = [
+    'rgba(194, 125, 248, 0.85)', // Lila
+    'rgba(84, 219, 230, 0.85)',  // Cian
+    'rgba(255, 230, 0, 0.85)',   // Amarillo
+    'rgba(255, 107, 129, 0.8)',  // Coral
+    'rgba(240, 240, 240, 0.9)'   // Humo blanco/gris
+  ];
+  const sparkColors = ['#FFD700', '#FFFFFF', '#A5F3FC', '#FFE600'];
+
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div');
+    p.className = 'smoke-particle';
+    const size = Math.floor(Math.random() * 36 + 28);
+    const color = smokeColors[Math.floor(Math.random() * smokeColors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = Math.random() * 85 + 20;
+    const dx = Math.cos(angle) * dist + 'px';
+    const dy = Math.sin(angle) * dist + 'px';
+    const scale = (Math.random() * 1.0 + 1.5).toFixed(2);
+    const duration = (Math.random() * 0.2 + 0.65).toFixed(2) + 's';
+
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.backgroundColor = color;
+    p.style.setProperty('--dx', dx);
+    p.style.setProperty('--dy', dy);
+    p.style.setProperty('--target-scale', scale);
+    p.style.setProperty('--duration', duration);
+    overlay.appendChild(p);
+  }
+
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('div');
+    s.className = 'spark-particle';
+    const size = Math.floor(Math.random() * 6 + 4);
+    const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = Math.random() * 105 + 25;
+    const dx = Math.cos(angle) * dist + 'px';
+    const dy = Math.sin(angle) * dist + 'px';
+    const duration = (Math.random() * 0.2 + 0.55).toFixed(2) + 's';
+
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.backgroundColor = color;
+    s.style.setProperty('--dx', dx);
+    s.style.setProperty('--dy', dy);
+    s.style.setProperty('--duration', duration);
+    overlay.appendChild(s);
+  }
+
+  document.body.appendChild(overlay);
+  setTimeout(() => {
+    overlay.remove();
+  }, 900);
+}
+window.triggerCardDismissSmoke = triggerCardDismissSmoke;
+
 function renderChallengesUI() {
   updateActiveChallengesBadge();
   const container = document.getElementById('challengesCardsList');
@@ -10212,11 +10778,6 @@ function renderChallengesUI() {
 
       return `
         <div class="swipe-wrapper" data-challenge-id="${ch.id || idx}">
-          <!-- Capa de fondo de borrado (SWIPE-DELETE-BG) -->
-          <div class="swipe-delete-bg">
-            <span class="swipe-delete-text">🗑️ ELIMINAR</span>
-          </div>
-
           <!-- Tarjeta frontal interactiva (.challenge-card) -->
           <div class="challenge-card anim-ch-card-${(idx % 3) + 1}${cardUrgentClass} interactive-press" data-challenge-id="${ch.id || idx}">
             <!-- FILA 1 (SUPERIOR - ENFRENTAMIENTO VS) -->
@@ -10254,7 +10815,7 @@ function renderChallengesUI() {
       `;
     }).join('');
 
-    // Controladores de gestos de deslizamiento a la izquierda para eliminar (SWIPE-TO-DISMISS)
+    // Controladores de gestos de deslizamiento a la izquierda con explosión cómica (SWIPE-TO-DISMISS)
     container.querySelectorAll('.swipe-wrapper').forEach(wrapper => {
       const card = wrapper.querySelector('.challenge-card');
       if (!card) return;
@@ -10266,9 +10827,12 @@ function renderChallengesUI() {
       let currentY = 0;
       let isSwiping = false;
       let isHorizontalGesture = null;
+      let touchTargetIsButton = false;
 
       card.addEventListener('touchstart', (e) => {
         if (e.touches.length !== 1) return;
+        const target = e.target;
+        touchTargetIsButton = !!(target && target.closest('button, .challenge-play-btn, .btn-action-view, a'));
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         currentX = startX;
@@ -10285,49 +10849,57 @@ function renderChallengesUI() {
         const deltaX = currentX - startX;
         const deltaY = currentY - startY;
 
-        if (isHorizontalGesture === null && (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6)) {
+        // Si el toque se originó en un botón y el movimiento es leve, no activar swipe para permitir el click normal
+        if (touchTargetIsButton && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+          return;
+        }
+
+        if (isHorizontalGesture === null && (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8)) {
           isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY);
         }
 
         if (isHorizontalGesture) {
           if (deltaX < 0) {
-            // Deslizamiento a la izquierda
             isSwiping = true;
-            card.style.transform = `translateX(${deltaX}px)`;
+            card.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.04}deg)`;
           } else {
-            // Bloquea desplazamientos a la derecha
-            card.style.transform = 'translateX(0px)';
+            card.style.transform = 'translateX(0px) rotate(0deg)';
           }
         }
       }, { passive: true });
 
       card.addEventListener('touchend', () => {
         const deltaX = currentX - startX;
-        const cardWidth = card.offsetWidth || 300;
-        const threshold = Math.min(90, cardWidth * 0.35);
 
-        // Si el arrastre superó los 90px (o 35% del ancho)
-        if (isSwiping && (deltaX < -threshold || deltaX < -90)) {
-          // 1. Anima salida: transform: translateX(-120%); opacity: 0; en 0.2s
-          card.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
-          card.style.transform = 'translateX(-120%)';
-          card.style.opacity = '0';
-
+        // Si deltaX < -85px (superó el umbral de descarte)
+        if (isSwiping && deltaX < -85) {
+          // 1. Sonido de impacto
           if (typeof SoundManager !== 'undefined') {
-            SoundManager.playSFX('botones.wav', 0.40);
+            SoundManager.playSFX('ruleta_todo.mp3');
           }
 
-          // 2. Colapsa wrapper (max-height: 0; margin-bottom: 0;) y retíralo del DOM
+          // 2. Explosión cómica de partículas/humo
+          const rect = card.getBoundingClientRect();
+          triggerCardDismissSmoke(rect);
+
+          // 3. Desaparición inmediata de la tarjeta
+          card.style.transition = 'transform 0.15s ease, opacity 0.15s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.3)';
+
+          // 4. Colapso del espacio (all 0.25s ease) y remoción del DOM
           setTimeout(() => {
-            wrapper.style.transition = 'max-height 0.3s ease, margin-bottom 0.3s ease, opacity 0.25s ease';
+            wrapper.style.transition = 'all 0.25s ease';
             wrapper.style.maxHeight = '0px';
             wrapper.style.marginBottom = '0px';
+            wrapper.style.padding = '0px';
             wrapper.style.opacity = '0';
+            wrapper.style.overflow = 'hidden';
 
             setTimeout(() => {
               wrapper.remove();
 
-              // 3. Borra o archiva el documento en Firestore
+              // 5. Base de datos: Elimina o archiva en Firestore
               if (window.db && window.firestoreOps && challengeId) {
                 try {
                   const { doc, updateDoc, deleteDoc } = window.firestoreOps;
@@ -10364,7 +10936,7 @@ function renderChallengesUI() {
               }
               if (typeof updateActiveChallengesBadge === 'function') updateActiveChallengesBadge();
 
-              // 4. Si la lista queda vacía, muestra la tarjeta de "No tienes desafíos pendientes"
+              // Si no quedan más partidas, renderiza la tarjeta blanca de estado vacío
               const remainingWrappers = container.querySelectorAll('.swipe-wrapper');
               if (remainingWrappers.length === 0) {
                 container.innerHTML = `
@@ -10375,20 +10947,22 @@ function renderChallengesUI() {
                   </div>
                 `;
               }
-            }, 300);
-          }, 200);
+            }, 250);
+          }, 120);
         } else {
-          // Si no superó el umbral: regresa suavemente con transform: translateX(0px); en 0.2s
-          card.style.transition = 'transform 0.2s ease';
-          card.style.transform = 'translateX(0px)';
+          // Si NO superó el umbral: regresa con rebote elástico suave a transform: translateX(0) rotate(0deg) en 0.2s
+          card.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          card.style.transform = 'translateX(0px) rotate(0deg)';
         }
 
         if (isSwiping) {
           card.setAttribute('data-swiped', 'true');
           setTimeout(() => {
             card.removeAttribute('data-swiped');
-          }, 150);
+          }, 200);
         }
+        touchTargetIsButton = false;
+        isSwiping = false;
       });
     });
 
@@ -10940,6 +11514,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try { updateProfileStatsUI(); } catch (e) { console.warn(e); }
   try { setupAudioSettingsPersistence(); } catch (e) { console.warn(e); }
   try { setupProfileNavigationEvents(); } catch (e) { console.warn(e); }
+  try { setupCreditsAndFeedbackModals(); } catch (e) { console.warn(e); }
   try { updatePendingChallengesBadge(); } catch (e) { console.warn(e); }
 
   // --- NAVEGACIÓN PRINCIPAL ---
@@ -10955,14 +11530,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       navigateToScreen('homeView');
     };
-  }
-
-  // Botón Información ('i') en Ruleta -> Abre Modal de Reglas
-  const btnWheelInfo = document.getElementById('btnWheelInfo');
-  if (btnWheelInfo) {
-    btnWheelInfo.addEventListener('click', () => {
-      openModal('modalRulesInfo');
-    });
   }
 
   // Botón GIRAR Ruleta (Modo Clásico)
@@ -12274,32 +12841,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Botón de Ayuda (?) — abre modal ¿Cómo se juega?
   const btnHelp = document.getElementById('btnHelp');
-  const howToPlayModal = document.getElementById('howToPlayModal');
+  const modalHowToPlay = document.getElementById('howToPlayModal');
+  const howToPlayModal = modalHowToPlay;
 
   function openHowToPlay() {
-    if (howToPlayModal) {
-      howToPlayModal.classList.remove('btn-exit-reverse');
-      const box = howToPlayModal.querySelector('.how-to-play-box');
+    if (modalHowToPlay) {
+      modalHowToPlay.classList.remove('btn-exit-reverse');
+      const box = modalHowToPlay.querySelector('.how-to-play-box');
       if (box) box.classList.remove('btn-exit-reverse');
-      howToPlayModal.style.display = 'flex';
+      modalHowToPlay.style.display = 'flex';
+      modalHowToPlay.classList.add('open');
       playModalOpenSound();
-    }
-  }
-
-  function closeHowToPlay() {
-    if (howToPlayModal && howToPlayModal.style.display !== 'none') {
-      const box = howToPlayModal.querySelector('.how-to-play-box');
-      const closeBtn = document.getElementById('btnCloseHowToPlay');
-      if (closeBtn) closeBtn.classList.add('btn-exit-reverse');
-      if (box) box.classList.add('btn-exit-reverse');
-      howToPlayModal.classList.add('btn-exit-reverse');
-
-      setTimeout(() => {
-        howToPlayModal.style.display = 'none';
-        howToPlayModal.classList.remove('btn-exit-reverse');
-        if (box) box.classList.remove('btn-exit-reverse');
-        if (closeBtn) closeBtn.classList.remove('btn-exit-reverse');
-      }, 250);
     }
   }
 
@@ -12321,20 +12873,26 @@ document.addEventListener('DOMContentLoaded', () => {
     btnHelp.addEventListener('click', openHowToPlay);
   }
 
-  const btnCloseHowToPlay = document.getElementById('btnCloseHowToPlay');
-  if (btnCloseHowToPlay) {
-    btnCloseHowToPlay.addEventListener('click', closeHowToPlay);
-  }
+  const btnCloseModal = document.getElementById('btnCloseHowToPlay') || (modalHowToPlay ? modalHowToPlay.querySelector('.modal-close-circle-btn') : null);
+  const btnUnderstood = document.getElementById('btnUnderstoodHowToPlay') || document.getElementById('btnHtpUnderstood') || (modalHowToPlay ? modalHowToPlay.querySelector('.btn-understood') : null);
 
-  const btnHtpUnderstood = document.getElementById('btnHtpUnderstood');
-  if (btnHtpUnderstood) {
-    btnHtpUnderstood.addEventListener('click', closeHowToPlay);
+  function cerrarModalGuia() {
+    if (modalHowToPlay) {
+      modalHowToPlay.classList.remove('open');
+      modalHowToPlay.style.display = 'none';
+      if (typeof SoundManager !== 'undefined') SoundManager.playSFX('pantallas_emergentes.mp3');
+    }
   }
+  window.cerrarModalGuia = cerrarModalGuia;
+  window.closeHowToPlay = cerrarModalGuia;
+
+  if (btnCloseModal) btnCloseModal.onclick = cerrarModalGuia;
+  if (btnUnderstood) btnUnderstood.onclick = cerrarModalGuia;
 
   // Cerrar al hacer clic en el overlay (fuera del box)
-  if (howToPlayModal) {
-    howToPlayModal.addEventListener('click', (e) => {
-      if (e.target === howToPlayModal) closeHowToPlay();
+  if (modalHowToPlay) {
+    modalHowToPlay.addEventListener('click', (e) => {
+      if (e.target === modalHowToPlay) cerrarModalGuia();
     });
   }
 

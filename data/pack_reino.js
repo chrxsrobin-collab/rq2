@@ -455,5 +455,470 @@ window.REINO_QUESTIONS_FALLBACK = [
       "El camino sigue en el próximo reino"
     ],
     "respuesta_correcta": "Gracias, pero nuestra princesa está en otro castillo"
+  },
+  {
+    "id": "rch_051",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué actor interpretó al fontanero protagonista en la película live-action de culto de 1993?",
+    "emojis": "🎬 👨🏻 🪠",
+    "opciones": ["Bob Hoskins", "Danny DeVito", "John Leguizamo", "Dennis Hopper"],
+    "respuesta_correcta": "Bob Hoskins"
+  },
+  {
+    "id": "rch_052",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la canción de amor y piano tocada por Bowser en la película animada de 2023?",
+    "emojis": "🎹 🐢 💖",
+    "opciones": ["Peaches", "My Mushroom Queen", "Bowser's Ballad", "Princess Love"],
+    "respuesta_correcta": "Peaches"
+  },
+  {
+    "id": "rch_053",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué actor interpretó al villano Presidente Koopa con peinado rubio y lengua reptil en el filme de 1993?",
+    "emojis": "🦎 👔 ⚡",
+    "opciones": ["Dennis Hopper", "Christopher Walken", "Willem Dafoe", "Jack Nicholson"],
+    "respuesta_correcta": "Dennis Hopper"
+  },
+  {
+    "id": "rch_054",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿En qué distrito de Nueva York residían y fundaron su negocio de plomería los hermanos en el filme animado de 2023?",
+    "emojis": "🏙️ 🪠 🚚",
+    "opciones": ["Brooklyn", "Queens", "Manhattan", "Bronx"],
+    "respuesta_correcta": "Brooklyn"
+  },
+  {
+    "id": "rch_055",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo eran representados físicamente los Goombas en la película live-action de 1993?",
+    "emojis": "🦖 🧥 🤏",
+    "opciones": [
+      "Reptiles humanoides gigantes con cabezas diminutas",
+      "Setas marrones caminantes con botas",
+      "Soldados cibernéticos con armadura",
+      "Enanos carnívoros con colmillos"
+    ],
+    "respuesta_correcta": "Reptiles humanoides gigantes con cabezas diminutas"
+  },
+  {
+    "id": "rch_056",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué estrella de cine y músico dio voz a Bowser en inglés en la película animada de 2023?",
+    "emojis": "🎙️ 🎸 🐢",
+    "opciones": ["Jack Black", "Chris Pratt", "Seth Rogen", "Charlie Day"],
+    "respuesta_correcta": "Jack Black"
+  },
+  {
+    "id": "rch_057",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la dimensión paralela subterránea dominada por Koopa en la película de 1993?",
+    "emojis": "🚇 🦕 🏙️",
+    "opciones": ["Dinohattan", "Mushroom City", "Reino Reptil", "Neo Brooklyn"],
+    "respuesta_correcta": "Dinohattan"
+  },
+  {
+    "id": "rch_058",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Quién era el antiguo jefe de los hermanos en la empresa de demolición que se burlaba de su anuncio en el filme de 2023?",
+    "emojis": "🔨 🧢 😠",
+    "opciones": ["Foreman Spike", "Wario", "Donkey Kong", "Swanky"],
+    "respuesta_correcta": "Foreman Spike"
+  },
+  {
+    "id": "rch_059",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué artefacto o calzado usaban los protagonistas para saltar alto por los aires en la película de 1993?",
+    "emojis": "🥾 💨 🚀",
+    "opciones": ["Botas Thwomp (Stompers)", "Botas Goomba", "Botas Salto P", "Zapatos Resorte"],
+    "respuesta_correcta": "Botas Thwomp (Stompers)"
+  },
+  {
+    "id": "rch_060",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pequeño Luma azul depresivo y nihilista estaba enjaulado en la fortaleza de Bowser en la película animada?",
+    "emojis": "⭐ 🔵 🕳️",
+    "opciones": ["Lumalee", "Polari", "Co-Luma", "Starlow"],
+    "respuesta_correcta": "Lumalee"
+  },
+  {
+    "id": "rch_061",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué personaje femenino era una estudiante de arqueología huérfana de quien se enamora Luigi en la película de 1993?",
+    "emojis": "🦴 👸 🦖",
+    "opciones": ["Princesa Daisy", "Princesa Peach", "Pauline", "Wendy"],
+    "respuesta_correcta": "Princesa Daisy"
+  },
+  {
+    "id": "rch_062",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder adquiere el fontanero al comer la flor en la arena de entrenamiento de la Princesa Peach en el filme de 2023?",
+    "emojis": "🔥 🥋 🌼",
+    "opciones": ["Flor de Fuego", "Traje Tanooki", "Super Campana", "Flor Boomerang"],
+    "respuesta_correcta": "Flor de Fuego"
+  },
+  {
+    "id": "rch_063",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿En qué arma usaba Koopa una pistola des-evolutiva para degradar a los humanos en monos y limos en 1993?",
+    "emojis": "🔫 ⚡ 🐵",
+    "opciones": ["Pistola De-Evolutiva", "Rayo Primario", "Cañón Genético", "Pistola Dino"],
+    "respuesta_correcta": "Pistola De-Evolutiva"
+  },
+  {
+    "id": "rch_064",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué reino polar con pequeños soldados de nieve es invadido por Bowser al inicio de la película animada de 2023?",
+    "emojis": "🐧 ❄️ 🏰",
+    "opciones": ["El Reino Pingüino", "Isla Congelada", "Reino Hielo", "Monte Carámbano"],
+    "respuesta_correcta": "El Reino Pingüino"
+  },
+  {
+    "id": "rch_065",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba el primo torpe de Koopa que cantaba y ayudaba a los fontaneros en el filme de 1993?",
+    "emojis": "🎸 🦎 🧥",
+    "opciones": ["Iggy y Spike", "Larry y Morton", "Lemmy y Roy", "Ludwig y Wendy"],
+    "respuesta_correcta": "Iggy y Spike"
+  },
+  {
+    "id": "rch_066",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué transformación obtiene el protagonista durante el combate en el Coliseo de los Kong contra Donkey Kong?",
+    "emojis": "🐱 🔔 🥊",
+    "opciones": ["Traje Felino (Cat Mario)", "Flor de Hielo", "Mario Tanooki", "Mario Metal"],
+    "respuesta_correcta": "Traje Felino (Cat Mario)"
+  },
+  {
+    "id": "rch_067",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué fragmento colgante de meteorito portaba Daisy en su cuello como llave dimensional en el filme de 1993?",
+    "emojis": "🪨 💎 ☄️",
+    "opciones": ["Fragmento del Meteorito", "Gema Koopa", "Cristal de Fuego", "Piedra Champiñón"],
+    "respuesta_correcta": "Fragmento del Meteorito"
+  },
+  {
+    "id": "rch_068",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué canción clásica de rap ochentero sonaba de fondo en el comercial de televisión de los fontaneros en el filme de 2023?",
+    "emojis": "📺 🧢 🎶",
+    "opciones": ["Mario Brothers Rap (de Super Show)", "Jump Up, Super Star!", "Peaches", "Do the Mario"],
+    "respuesta_correcta": "Mario Brothers Rap (de Super Show)"
+  },
+  {
+    "id": "rch_069",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué aspecto tenía Yoshi en la película de imagen real de 1993?",
+    "emojis": "🦖 👅 ⛓️",
+    "opciones": [
+      "Un velociraptor animatrónico realista pequeño",
+      "Un dinosaurio de plastilina verde gigante",
+      "Un lagarto digital parlante con silla",
+      "Un cocodrilo con cresta roja"
+    ],
+    "respuesta_correcta": "Un velociraptor animatrónico realista pequeño"
+  },
+  {
+    "id": "rch_070",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pista construida en el espacio recorren los héroes montados en karts en la película de 2023?",
+    "emojis": "🏎️ 🌈 🌌",
+    "opciones": ["Senda Arcoíris (Rainbow Road)", "Autopista Espacial", "Circuito Estelar", "Ruta Galáctica"],
+    "respuesta_correcta": "Senda Arcoíris (Rainbow Road)"
+  },
+  {
+    "id": "rch_071",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la pareja del fontanero mayor en la película de 1993 interpretada por Dana Kaminski?",
+    "emojis": "👩 🍝 🗽",
+    "opciones": ["Daniella", "Pauline", "Maria", "Rosa"],
+    "respuesta_correcta": "Daniella"
+  },
+  {
+    "id": "rch_072",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué monarca simio gobernaba el Reino de la Jungla y padre de Donkey Kong en el filme de 2023?",
+    "emojis": "🦍 👑 🌴",
+    "opciones": ["Cranky Kong", "Funky Kong", "Diddy Kong", "Wrinkly Kong"],
+    "respuesta_correcta": "Cranky Kong"
+  },
+  {
+    "id": "rch_073",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿En qué ser fue convertido el rey legítimo del mundo subterráneo por Koopa en la película de 1993?",
+    "emojis": "🍄 🟢 🦠",
+    "opciones": [
+      "Una masa gigante de hongo y moho inteligente",
+      "Un mono tití enjaulado",
+      "Una estatua de piedra en la plaza",
+      "Un fósil de dinosaurio gigante"
+    ],
+    "respuesta_correcta": "Una masa gigante de hongo y moho inteligente"
+  },
+  {
+    "id": "rch_074",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder combinaron los dos hermanos al final de la película animada de 2023 para derrotar a Bowser?",
+    "emojis": "⭐ 👬 🌈",
+    "opciones": ["La Super Estrella compartida", "Doble Flor de Fuego", "Super Hoja Dorada", "El Mega Champiñón"],
+    "respuesta_correcta": "La Super Estrella compartida"
+  },
+  {
+    "id": "rch_075",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba el vehículo policial con el que los protagonistas escapaban en Dinohattan en 1993?",
+    "emojis": "🚔 ⚡ 🏙️",
+    "opciones": ["Coche de policía eléctrico desrielado", "Patrulla Koopa", "Dino Car 400", "Taxi Saurio"],
+    "respuesta_correcta": "Coche de policía eléctrico desrielado"
+  },
+  {
+    "id": "rch_076",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor otorga a Peach la capacidad de disparar llamaradas con un vestido blanco en el filme animado?",
+    "emojis": "🌼 🔥 👗",
+    "opciones": ["Flor de Fuego", "Flor Solar", "Flor Magma", "Campana Ígnea"],
+    "respuesta_correcta": "Flor de Fuego"
+  },
+  {
+    "id": "rch_077",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué actor de raíces colombianas interpretó a Luigi en la película de 1993?",
+    "emojis": "🎬 🟢 🪠",
+    "opciones": ["John Leguizamo", "Benicio del Toro", "Pedro Pascal", "Al Pacino"],
+    "respuesta_correcta": "John Leguizamo"
+  },
+  {
+    "id": "rch_078",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué perro travieso de Brooklyn causaba destrozos en la primera casa que fueron a reparar en el filme animado?",
+    "emojis": "🐶 🛁 💥",
+    "opciones": ["Francis", "Buster", "Lucky", "Spike Jr."],
+    "respuesta_correcta": "Francis"
+  },
+  {
+    "id": "rch_079",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué cantante y guitarrista interpretaba a Toad transformado en Goomba cantante callejero en 1993?",
+    "emojis": "🎸 🍄 🦖",
+    "opciones": ["Mojo Nixon", "Iggy Pop", "Alice Cooper", "Flea"],
+    "respuesta_correcta": "Mojo Nixon"
+  },
+  {
+    "id": "rch_080",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto de miniaturización forzada comió Bowser al final de la película animada de 2023?",
+    "emojis": "🍄 🔵 🤏",
+    "opciones": ["Champiñón Azul (Minichampiñón)", "Hongo Reductor", "Brote Enano", "Píldora Mini"],
+    "respuesta_correcta": "Champiñón Azul (Minichampiñón)"
+  },
+  {
+    "id": "rch_081",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué misteriosa huevo con manchas verdes eclosiona en las alcantarillas en la escena post-créditos de la película animada?",
+    "emojis": "🥚 🟢 🦖",
+    "opciones": ["Huevo de Yoshi", "Huevo de Birdo", "Huevo de Rex", "Huevo Koopa"],
+    "respuesta_correcta": "Huevo de Yoshi"
+  },
+  {
+    "id": "rch_082",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la hechicera anciana mano derecha de Koopa en la película de 1993?",
+    "emojis": "🧙‍♀️ 🦖 👠",
+    "opciones": ["Lena", "Kammy", "Wendy", "Clawdia"],
+    "respuesta_correcta": "Lena"
+  },
+  {
+    "id": "rch_083",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder permite al fontanero volar con traje completo marrón y orejas en el filme de 2023?",
+    "emojis": "🦝 🍃 ✈️",
+    "opciones": ["Super Hoja / Traje Tanooki", "Pluma Capa", "Gorra Alada", "Flor Nube"],
+    "respuesta_correcta": "Super Hoja / Traje Tanooki"
+  },
+  {
+    "id": "rch_084",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿En qué bar y club nocturno de Dinohattan bailaban los hermanos con mujeres grandes en 1993?",
+    "emojis": "🍸 💃 🦖",
+    "opciones": ["Boomerang Lounge", "Dino Club", "Koopa Bar", "Mushroom Inn"],
+    "respuesta_correcta": "Boomerang Lounge"
+  },
+  {
+    "id": "rch_085",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el color del kart y traje de motociclista que usa la Princesa Peach en la película de 2023?",
+    "emojis": "🏍️ 💖 👑",
+    "opciones": ["Mono de cuero rosa sobre moto rosa", "Mono blanco con azul", "Vestido tradicional amarillo", "Traje dorado brillante"],
+    "respuesta_correcta": "Mono de cuero rosa sobre moto rosa"
+  },
+  {
+    "id": "rch_086",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto tecnológico de construcción utilizaban los fontaneros para deslizarse por cables en la película de 1993?",
+    "emojis": "🔧 🪠 ⚡",
+    "opciones": ["Cinturones de herramientas y llaves inglesas", "Ganchos antigravedad", "Mochilas propulsoras", "Cables retráctiles"],
+    "respuesta_correcta": "Cinturones de herramientas y llaves inglesas"
+  },
+  {
+    "id": "rch_087",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué general con caparazón azul y alas lideraba el ejército de Bowser en el filme animado de 2023?",
+    "emojis": "🐢 🔵 🪽",
+    "opciones": ["General Koopa (Koopa Azul)", "Kamek", "Boom Boom", "Pom Pom"],
+    "respuesta_correcta": "General Koopa (Koopa Azul)"
+  },
+  {
+    "id": "rch_088",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba el rascacielos gemelo donde Koopa tenía su oficina central en la película de 1993?",
+    "emojis": "🏢 🏢 ⚡",
+    "opciones": ["Koopa Square Towers", "Dinohattan Center", "Twin Dino Plaza", "World Koopa Center"],
+    "respuesta_correcta": "Koopa Square Towers"
+  },
+  {
+    "id": "rch_089",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿En qué vehículo esférico transparente conduce Cranky Kong por la jungla en el filme animado?",
+    "emojis": "🛞 🦍 🍌",
+    "opciones": ["Un kart todoterreno con motor de barril", "Una rueda monociclo mecánica", "Un mecha con forma de gorila", "Un avión con hélices de plátano"],
+    "respuesta_correcta": "Un kart todoterreno con motor de barril"
+  },
+  {
+    "id": "rch_090",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué frase inolvidable grita Luigi al saltar desde la camioneta en la película de 1993?",
+    "emojis": "🟢 🥾 🗣️",
+    "opciones": ["¡Mario, espera!", "¡Por el poder de los fontaneros!", "¡Mamma mia!", "¡Esto es Dinohattan!"],
+    "respuesta_correcta": "¡Mario, espera!"
+  },
+  {
+    "id": "rch_091",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la pequeña criatura con mochila y linterna en la cabeza que protagonizó su propio juego de acertijos?",
+    "emojis": "🍄 🎒 🔦",
+    "opciones": ["Capitán Toad", "Toadette", "Toadsworth", "Blue Toad"],
+    "respuesta_correcta": "Capitán Toad"
+  },
+  {
+    "id": "rch_092",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué compañera femenina de Toad tiene coletas rosas con puntos blancos y corona?",
+    "emojis": "🍄 🎀 💖",
+    "opciones": ["Toadette", "Peachette", "Starlow", "Toadstool"],
+    "respuesta_correcta": "Toadette"
+  },
+  {
+    "id": "rch_093",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué anciano mayordomo con bigote y gafas cuidaba a Peach en Super Mario Sunshine?",
+    "emojis": "👴 🍄 👓",
+    "opciones": ["Maestro Kinopio (Toadsworth)", "Capitán Toad", "Profesor E. Gadd", "Kamek"],
+    "respuesta_correcta": "Maestro Kinopio (Toadsworth)"
+  },
+  {
+    "id": "rch_094",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué científico loco anciano inventó la aspiradora Poltergust y el sistema F.L.U.D.D.?",
+    "emojis": "👨‍🔬 👓 ☕",
+    "opciones": ["Profesor E. Gadd (Fesor)", "Dr. Mario", "Dr. Crygor", "Profesor Sycamore"],
+    "respuesta_correcta": "Profesor E. Gadd (Fesor)"
+  },
+  {
+    "id": "rch_095",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto de Mario Kart 8 gira alrededor del vehículo protegiéndolo de ataques y golpeando rivales?",
+    "emojis": "🎺 🏎️ 💥",
+    "opciones": ["Super Bocina (Super Horn)", "Flor Bumerán", "Planta Piraña en maceta", "Ocho Loco"],
+    "respuesta_correcta": "Super Bocina (Super Horn)"
+  },
+  {
+    "id": "rch_096",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué corona especial introducida en New Super Mario Bros. U Deluxe transforma a Toadette en Peachette?",
+    "emojis": "👑 🍄 👸",
+    "opciones": ["Supercorona (Super Crown)", "Corona Estelar", "Tiara Mágica", "Gema Real"],
+    "respuesta_correcta": "Supercorona (Super Crown)"
+  },
+  {
+    "id": "rch_097",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el reino con temática de desierto y ruinas mayas gobernado por calaveras danzantes en Odyssey?",
+    "emojis": "🏜️ 💀  пирамида",
+    "opciones": ["Reino de las Arenas (Sand Kingdom)", "Reino Perdido", "Reino Bowser", "Reino Cascada"],
+    "respuesta_correcta": "Reino de las Arenas (Sand Kingdom)"
+  },
+  {
+    "id": "rch_098",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura acuática rosada con gafas de natación y cola de delfín habita en Isla Delfino?",
+    "emojis": "🐬 👓 🌊",
+    "opciones": ["Pianta (Pueblerinos)", "Noki", "Delfín Isla", "Toad Marino"],
+    "respuesta_correcta": "Noki"
+  },
+  {
+    "id": "rch_099",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué juego de rol para Super Nintendo de 1996 fue desarrollado en colaboración entre Nintendo y Squaresoft?",
+    "emojis": "⚔️ 🍄 🛡️",
+    "opciones": ["Super Mario RPG: Legend of the Seven Stars", "Paper Mario", "Mario & Luigi: Superstar Saga", "Chrono Trigger"],
+    "respuesta_correcta": "Super Mario RPG: Legend of the Seven Stars"
+  },
+  {
+    "id": "rch_100",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el nombre de la flor parlante que transforma el entorno con efectos psicodélicos en Super Mario Bros. Wonder?",
+    "emojis": "🌸 ✨ 🌀",
+    "opciones": ["Flor Maravilla (Wonder Flower)", "Flor Onírica", "Flor Astral", "Brote Mágico"],
+    "respuesta_correcta": "Flor Maravilla (Wonder Flower)"
   }
 ];
