@@ -1,0 +1,402 @@
+[
+  {
+    "id": "ani_001",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué técnica de artes marciales y energía aprendió Gokū del Maestro Roshi en 'Dragon Ball'?",
+    "emojis": "🐉 🥋 💥",
+    "opciones": ["Kamehameha", "Masenko", "Kienzan", "Makankosappo"],
+    "respuesta_correcta": "Kamehameha"
+  },
+  {
+    "id": "ani_002",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál era la frase célebre de Buzz Lightyear al prepararse para despegar en 'Toy Story'?",
+    "emojis": "🚀 🤠 🪐",
+    "opciones": ["Al infinito y más allá", "Hacia las estrellas", "Por la galaxia y el más allá", "Misión estelar activada"],
+    "respuesta_correcta": "Al infinito y más allá"
+  },
+  {
+    "id": "ani_003",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llamaba la unidad biomecánica gigante de color morado piloteada por Shinji Ikari?",
+    "emojis": "🤖 🟣 🩸",
+    "opciones": ["EVA-01", "EVA-00", "EVA-02", "Gunbuster"],
+    "respuesta_correcta": "EVA-01"
+  },
+  {
+    "id": "ani_004",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿En qué película de DreamWorks un ogro verde y un burro parlante rescatan a la princesa Fiona?",
+    "emojis": "🧅 🏰 🐴",
+    "opciones": ["Shrek", "Monsters, Inc.", "Madagascar", "El príncipe de Egipto"],
+    "respuesta_correcta": "Shrek"
+  },
+  {
+    "id": "ani_005",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué comida es la gran obsesión de Homero Simpson?",
+    "emojis": "🍩 🍺 📺",
+    "opciones": ["Rosquillas glaseadas (Donuts)", "Pastel de manzana", "Pizza de pepperoni", "Costillas a la barbacoa"],
+    "respuesta_correcta": "Rosquillas glaseadas (Donuts)"
+  },
+  {
+    "id": "ani_006",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el gato robótico azul del siglo XXII que viaja en el tiempo para ayudar a Nobita?",
+    "emojis": "🐱 🔵 🚪",
+    "opciones": ["Doraemon", "Hello Kitty", "Pikachu", "Jibanyan"],
+    "respuesta_correcta": "Doraemon"
+  },
+  {
+    "id": "ani_007",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué tres ingredientes usó el Profesor Utonio para crear a 'Las Chicas Superpoderosas'?",
+    "emojis": "🧪 👧 🍬",
+    "opciones": ["Azúcar, flores y muchos colores", "Miel, especias y cosas bellas", "Polvo de estrellas, azúcar y flores", "Amor, dulzura y diamantina"],
+    "respuesta_correcta": "Azúcar, flores y muchos colores"
+  },
+  {
+    "id": "ani_008",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué criatura fantástica acompaña a Chihiro en forma de dragón blanco en 'El viaje de Chihiro'?",
+    "emojis": "🐉 🏮 🌊",
+    "opciones": ["Haku", "Kamaji", "Sin Cara", "Calcifer"],
+    "respuesta_correcta": "Haku"
+  },
+  {
+    "id": "ani_009",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál es el nombre del ratón científico egocéntrico que quería conquistar el mundo cada noche?",
+    "emojis": "🐭 🧠 🌍",
+    "opciones": ["Cerebro", "Pinky", "Mighty Mouse", "Jerry"],
+    "respuesta_correcta": "Cerebro"
+  },
+  {
+    "id": "ani_010",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué pirata de goma busca convertirse en el Rey de los Piratas en 'One Piece'?",
+    "emojis": "🏴‍☠️ 👒 🍖",
+    "opciones": ["Monkey D. Luffy", "Roronoa Zoro", "Portgas D. Ace", "Sanji"],
+    "respuesta_correcta": "Monkey D. Luffy"
+  },
+  {
+    "id": "ani_011",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el fiel tigre de Bengala mascota de la princesa Jasmín en 'Aladdín' (1992)?",
+    "emojis": "🐅 🕌 🧞",
+    "opciones": ["Rajah", "Abu", "Iago", "Shere Khan"],
+    "respuesta_correcta": "Rajah"
+  },
+  {
+    "id": "ani_012",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál es la frase habitual de bienvenida de Bugs Bunny al masticar una zanahoria?",
+    "emojis": "🐰 🥕 🎩",
+    "opciones": ["¿Qué hay de nuevo, viejo?", "¿Qué pasa por aquí?", "¿Eso es todo, amigos?", "¿Buscaban a un conejo?"],
+    "respuesta_correcta": "¿Qué hay de nuevo, viejo?"
+  },
+  {
+    "id": "ani_013",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué espíritu zorro con múltiples colas fue sellado dentro de Naruto Uzumaki?",
+    "emojis": "🦊 🍥 ⚡",
+    "opciones": ["Zorro de Nueve Colas (Kurama)", "Shukaku de Una Cola", "Gyūki de Ocho Colas", "Matatabi"],
+    "respuesta_correcta": "Zorro de Nueve Colas (Kurama)"
+  },
+  {
+    "id": "ani_014",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué robot de cocina alcohólico y charlatán acompaña a Fry en la serie 'Futurama'?",
+    "emojis": "🤖 🍺 🚀",
+    "opciones": ["Bender", "Calculón", "Roberto", "Flexo"],
+    "respuesta_correcta": "Bender"
+  },
+  {
+    "id": "ani_015",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el maestro rata que entrenó a las Tortugas Ninja en las alcantarillas?",
+    "emojis": "🐀 🍕 🥷",
+    "opciones": ["Splinter (Astilla)", "Shredder", "Krang", "Bebop"],
+    "respuesta_correcta": "Splinter (Astilla)"
+  },
+  {
+    "id": "ani_016",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué artefacto cósmico concede deseos al juntar sus 7 esferas doradas?",
+    "emojis": "🐉 🟠 ⭐",
+    "opciones": ["Esferas del Dragón", "Cristales de Poder", "Piedras del Infinito", "Talismanes de Shendu"],
+    "respuesta_correcta": "Esferas del Dragón"
+  },
+  {
+    "id": "ani_017",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué pequeño extraterrestre azul fugitivo finge ser perro en Hawái junto a Lilo?",
+    "emojis": "🌺 👽 🎸",
+    "opciones": ["Stitch (Experimento 626)", "Jumba", "Pleakley", "Gantu"],
+    "respuesta_correcta": "Stitch (Experimento 626)"
+  },
+  {
+    "id": "ani_018",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el cuaderno sobrenatural con el que Light Yagami puede eliminar a personas?",
+    "emojis": "🍎 📓 💀",
+    "opciones": ["Death Note", "Shadow Book", "Necronomicon", "Kira Diary"],
+    "respuesta_correcta": "Death Note"
+  },
+  {
+    "id": "ani_019",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿En qué tipo de restaurante submarino trabaja Bob Esponja preparando cangreburgers?",
+    "emojis": "🍍 🌊 🍔",
+    "opciones": ["El Crustáceo Cascarudo", "El Balde de Carnada", "El Barco Hundido", "La Choza de Algas"],
+    "respuesta_correcta": "El Crustáceo Cascarudo"
+  },
+  {
+    "id": "ani_020",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué princesa guerrera del bosque cabalga lobos gigantes en el filme de Hayao Miyazaki?",
+    "emojis": "🐺 🗡️ 🌲",
+    "opciones": ["San (La Princesa Mononoke)", "Nausicaä", "Kiki", "Sheeta"],
+    "respuesta_correcta": "San (La Princesa Mononoke)"
+  },
+  {
+    "id": "ani_021",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Quién es el archienemigo felino que siempre persigue al canario Piolín?",
+    "emojis": "🐱 🐤  cage",
+    "opciones": ["Silvestre", "Tom", "Félix", "Garfield"],
+    "respuesta_correcta": "Silvestre"
+  },
+  {
+    "id": "ani_022",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el perro miedoso que vivía en Ningún Lugar con Justo y Muriel?",
+    "emojis": "🐶 🏚️ 👻",
+    "opciones": ["Coraje", "Odie", "Ren", "Spunky"],
+    "respuesta_correcta": "Coraje"
+  },
+  {
+    "id": "ani_023",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué armadura dorada porta Seiya de Pegaso en momentos críticos en 'Los Caballeros del Zodiaco'?",
+    "emojis": "🛡️ ♐ ⚡",
+    "opciones": ["Sagitario", "Leo", "Géminis", "Aries"],
+    "respuesta_correcta": "Sagitario"
+  },
+  {
+    "id": "ani_024",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama la pequeña ratita prodigio que guía al cocinero Linguini en 'Ratatouille'?",
+    "emojis": "🐀 🧀 👨‍🍳",
+    "opciones": ["Remy", "Emile", "Gusteau", "Django"],
+    "respuesta_correcta": "Remy"
+  },
+  {
+    "id": "ani_025",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué shinigami adicto a las manzanas acompaña al portador del Death Note?",
+    "emojis": "🍎 📓 🪽",
+    "opciones": ["Ryuk", "Rem", "Sidoh", "Jealous"],
+    "respuesta_correcta": "Ryuk"
+  },
+  {
+    "id": "ani_026",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál es la identidad secreta del justiciero con antifaz y capa en 'Darkwing Duck'?",
+    "emojis": "🦆 🕶️ 🎩",
+    "opciones": ["Drake Mallard", "Launchpad McQuack", "Scrooge McDuck", "Fenton Crackshell"],
+    "respuesta_correcta": "Drake Mallard"
+  },
+  {
+    "id": "ani_027",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué robot de basura se enamora de la sonda espacial EVE en la película de Pixar de 2008?",
+    "emojis": "🤖 🗑️ 🌱",
+    "opciones": ["WALL-E", "Baymax", "Bender", "Iron Giant"],
+    "respuesta_correcta": "WALL-E"
+  },
+  {
+    "id": "ani_028",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué objeto mágico usa Serena Tsukino (Usagi) para transformarse en Sailor Moon?",
+    "emojis": "🌙 🎀 💫",
+    "opciones": ["El Broche de Transformación", "La Tiara Lunar", "El Báculo Sagrado", "El Cetro de la Rosa"],
+    "respuesta_correcta": "El Broche de Transformación"
+  },
+  {
+    "id": "ani_029",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el villano con cabeza de cerebro que habita en el Tecmódromo con Destructor?",
+    "emojis": "🧠 🤖 🏙️",
+    "opciones": ["Krang", "Bebop", "Rocksteady", "Baxter Stockman"],
+    "respuesta_correcta": "Krang"
+  },
+  {
+    "id": "ani_030",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué ley primordial de la Alquimia rige la serie 'Fullmetal Alchemist'?",
+    "emojis": "⚗️ 🦾 ⚡",
+    "opciones": ["El Intercambio Equivalente", "La Conservación Cósmica", "La Transmutación Absoluta", "El Principio Elemental"],
+    "respuesta_correcta": "El Intercambio Equivalente"
+  },
+  {
+    "id": "ani_031",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué instrumento toca Calamardo Tentáculos con pésimo talento musical?",
+    "emojis": "🐙 🎵 🌊",
+    "opciones": ["Clarinete", "Saxofón", "Flauta traversa", "Oboe"],
+    "respuesta_correcta": "Clarinete"
+  },
+  {
+    "id": "ani_032",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué caza-recompensas espacial viaja en la nave Bebop escuchando jazz?",
+    "emojis": "🚀 🎷 🚬",
+    "opciones": ["Spike Spiegel", "Jet Black", "Faye Valentine", "Dandy"],
+    "respuesta_correcta": "Spike Spiegel"
+  },
+  {
+    "id": "ani_033",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál es el nombre de la pandilla de bebés exploradores liderada por Tommy Pickles?",
+    "emojis": "🍼 🧸 👶",
+    "opciones": ["Rugrats (Aventuras en pañales)", "Los Chicos del Barrio", "Recreo", "Oye Arnold"],
+    "respuesta_correcta": "Rugrats (Aventuras en pañales)"
+  },
+  {
+    "id": "ani_034",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué príncipe león es presentado en la Roca del Rey al sonar 'El Ciclo Sin Fin'?",
+    "emojis": "🦁 👑 🌅",
+    "opciones": ["Simba", "Mufasa", "Kovu", "Scar"],
+    "respuesta_correcta": "Simba"
+  },
+  {
+    "id": "ani_035",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el demonio del fuego que impulsa 'El castillo ambulante' de Howl?",
+    "emojis": "🔥 🏰 🍳",
+    "opciones": ["Calcifer", "Haku", "Jiji", "No-Face"],
+    "respuesta_correcta": "Calcifer"
+  },
+  {
+    "id": "ani_036",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué niño con cabeza de balón vive con sus abuelos en una casa de huéspedes?",
+    "emojis": "🏈 🏙️ 📻",
+    "opciones": ["Arnold", "Gerald", "Helga", "Sid"],
+    "respuesta_correcta": "Arnold"
+  },
+  {
+    "id": "ani_037",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué espíritu del bosque gigante y peludo solo puede ser visto por corazones puros en Studio Ghibli?",
+    "emojis": "🌳 ☔ 🚌",
+    "opciones": ["Totoro", "Catbus", "Kodama", "Ponyo"],
+    "respuesta_correcta": "Totoro"
+  },
+  {
+    "id": "ani_038",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cuál es la debilidad cómica del vanidoso y musculoso galán Johnny Bravo?",
+    "emojis": "🕶️ 👱‍♂️ 💥",
+    "opciones": ["Las mujeres siempre lo rechazan a golpes", "Le teme a los espejos", "No sabe peinarse solo", "Es alérgico al fijador"],
+    "respuesta_correcta": "Las mujeres siempre lo rechazan a golpes"
+  },
+  {
+    "id": "ani_039",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué guerrero androide del futuro viaja en una máquina del tiempo para salvar a Gokū de una enfermedad?",
+    "emojis": "🗡️ ⏳ ⚡",
+    "opciones": ["Trunks del Futuro", "Gohan del Futuro", "Androide 17", "Cell"],
+    "respuesta_correcta": "Trunks del Futuro"
+  },
+  {
+    "id": "ani_040",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿En qué película de Disney de 1997 un semidiós entrena con el sátiro Phil para ser un héroe?",
+    "emojis": "⚡ 🏛️ 🏺",
+    "opciones": ["Hércules", "Tarzán", "Mulan", "Atlantis"],
+    "respuesta_correcta": "Hércules"
+  },
+  {
+    "id": "ani_041",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el arqueólogo y aventurero milenario protagonista de 'Yu-Gi-Oh!'?",
+    "emojis": "🃏 👁️ 🔺",
+    "opciones": ["Yugi Muto (Yami Yugi)", "Seto Kaiba", "Joey Wheeler", "Bakura"],
+    "respuesta_correcta": "Yugi Muto (Yami Yugi)"
+  },
+  {
+    "id": "ani_042",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué vehículo clásico de misterio conduce el grupo de Scooby-Doo?",
+    "emojis": "🚐 👻 🦴",
+    "opciones": ["La Máquina del Misterio", "El Furgón Fantasma", "El Móvil del Misterio", "Cazadores Express"],
+    "respuesta_correcta": "La Máquina del Misterio"
+  },
+  {
+    "id": "ani_043",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué villano espacial destruyó el Planeta Vegeta, hogar de la raza Saiyajin?",
+    "emojis": "🟣 👽 💥",
+    "opciones": ["Freezer", "Cell", "Majin Buu", "Broly"],
+    "respuesta_correcta": "Freezer"
+  },
+  {
+    "id": "ani_044",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el entrañable monstruo azul peludo que trabaja asustando niños en 'Monsters, Inc.'?",
+    "emojis": "🚪 👁️ 💙",
+    "opciones": ["James P. Sullivan (Sulley)", "Mike Wazowski", "Randall Boggs", "George Sanderson"],
+    "respuesta_correcta": "James P. Sullivan (Sulley)"
+  },
+  {
+    "id": "ani_045",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué superhéroe gótico patrulla Ciudad Gótica en la aclamada serie animada de 1992?",
+    "emojis": "🦇 🌧️ 🏙️",
+    "opciones": ["Batman", "Robin", "Nightwing", "Batgirl"],
+    "respuesta_correcta": "Batman"
+  },
+  {
+    "id": "ani_046",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué chica pelirroja con poderes psíquicos y ropa de combate lidera 'Neon Genesis Evangelion' como Segundo Niño?",
+    "emojis": "🤖 🔴 ⚡",
+    "opciones": ["Asuka Langley Soryu", "Rei Ayanami", "Misato Katsuragi", "Ritsuko Akagi"],
+    "respuesta_correcta": "Asuka Langley Soryu"
+  },
+  {
+    "id": "ani_047",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué objeto busca incansablemente la ardilla Scrat en la saga 'Ice Age'?",
+    "emojis": "🐿️ 🌰 ❄️",
+    "opciones": ["Una bellota", "Una nuez dorada", "Una piña de pino", "Un coco fósil"],
+    "respuesta_correcta": "Una bellota"
+  },
+  {
+    "id": "ani_048",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llamaba el mono de nieve mágico guardián de la montaña en 'Ranma ½'?",
+    "emojis": "🥋 🐼 ♨️",
+    "opciones": ["P-Chan", "Genma", "Ryoga", "Mousse"],
+    "respuesta_correcta": "P-Chan"
+  },
+  {
+    "id": "ani_049",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Qué joven guerrera china se disfraza de soldado varón para salvar a su padre anciano del ejército?",
+    "emojis": "🗡️ 🐉 🌸",
+    "opciones": ["Mulan", "Pocahontas", "Jasmine", "Kida"],
+    "respuesta_correcta": "Mulan"
+  },
+  {
+    "id": "ani_050",
+    "categoria": "ANIMACIÓN",
+    "pregunta": "¿Cómo se llama el líder felino de los ThunderCats que empuña la Espada del Augurio?",
+    "emojis": "🗡️ 🐱 ⚡",
+    "opciones": ["Leono (Lion-O)", "Tigro", "Panthro", "Chitara"],
+    "respuesta_correcta": "Leono (Lion-O)"
+  }
+]

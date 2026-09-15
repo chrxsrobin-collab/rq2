@@ -15,7 +15,7 @@
   <!-- FIREBASE MODULAR SDK (FIRESTORE Y AUTH) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     // CREDENCIALES OFICIALES DE RETROQUIZ
@@ -32,7 +32,7 @@
     const app = initializeApp(firebaseConfig);
     window.db = getFirestore(app);
     window.auth = getAuth(app);
-    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc };
+    window.firestoreOps = { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, getDocs, query, orderBy, limit, where, addDoc, increment };
 
     // Autenticación anónima silenciosa al cargar la web app
     signInAnonymously(window.auth).catch(err => console.error("Error Auth Firebase:", err));
@@ -270,7 +270,7 @@
             </button>
 
             <!-- Título Editable Nativo -->
-            <h1 class="wheel-title">¿Que tanto sabes de antes?</h1>
+            <h1 class="wheel-title">QUE TANTO SABES DE...</h1>
 
             <!-- Botón Información 'i' (Abre Modal de Reglas) -->
             <button class="wheel-btn-info interactive-press" id="btnWheelInfo" aria-label="Instrucciones de Juego" title="Cómo jugar">
@@ -312,7 +312,7 @@
             <!-- Recarga Temporizador (Visible solo cuando tiros = 0) -->
             <div class="reload-timer-box hidden" id="reloadTimerBox">
               <span class="timer-icon">⏳</span>
-              <span class="timer-text">Recarga en: <strong id="reloadTimerCountdown">23:59:58</strong></span>
+              <span class="timer-text"><strong id="reloadTimerCountdown">Recarga en: 03:00:00</strong></span>
             </div>
 
             <!-- Botón Anuncio Recompensado (Rewarded Ad) -->
@@ -325,7 +325,7 @@
           <!-- Botón Inferior Mi Coleccion -->
           <footer class="wheel-footer-section">
             <button class="btn-ver-progreso interactive-press" id="btnVerProgreso">
-              Mi Coleccion
+              MI COLECCIÓN
             </button>
           </footer>
         </div>
@@ -368,13 +368,6 @@
           <!-- Lista de 6 Tarjetas de Temáticas -->
           <section class="collection-cards-list" id="collectionCardsList">
           </section>
-
-          <!-- Botón de Desbloqueo Completo -->
-          <div class="collection-bottom-action" style="--i: 6;">
-            <button class="btn-unlock-all-collection interactive-press" id="btnUnlockAllCollection">
-              <span>⭐ DESBLOQUEAR TODAS LAS COLECCIONES POR $2.99 USD</span>
-            </button>
-          </div>
         </div>
 
         <!-- VISTA 4: PANTALLA DE TRIVIA / PREGUNTAS (#triviaView) -->
@@ -469,7 +462,10 @@
 
           <!-- Contenedor 3D de la Tarjeta Central (Efecto Cómic) -->
           <div class="trivia-card-viewport">
-            <div class="trivia-card" id="triviaCard">
+            <div class="trivia-card card-question" id="triviaCard">
+              <!-- Etiqueta Superior de Categoría -->
+              <div class="trivia-category-tag" id="triviaCategoryTag">CINE</div>
+
               <!-- Pregunta Central -->
               <h2 class="trivia-question-text" id="triviaQuestionText">
                 ¿Quién interpretó a Alan Grant en Jurassic Park?
@@ -567,10 +563,13 @@
             </div>
 
             <!-- Desglose de Nivel y XP del Jugador -->
-            <div class="results-level-badge-row" id="resultsLevelRow">
-              <span class="results-player-level-tag" id="resultsPlayerLevel">Nivel 12</span>
-              <span class="results-player-divider">•</span>
-              <span class="results-player-xp-tag" id="resultsPlayerTotalXp">XP Total: 0 pts</span>
+            <div class="results-level-badge-container" id="resultsLevelRow">
+              <div class="results-level-badge-row">
+                <span class="results-player-level-tag" id="resultsPlayerLevel">Novato del Videoclub 📼</span>
+                <span class="results-player-divider">•</span>
+                <span class="results-player-xp-tag" id="resultsPlayerTotalXp">XP: 0 pts</span>
+              </div>
+              <p class="results-level-hint" id="resultsLevelHint">Desafía a un rival para ganar puntos de experiencia</p>
             </div>
 
             <!-- Tarjeta Inferior Dual (Racha y Retrocoins) -->
@@ -598,12 +597,12 @@
             </div>
 
             <!-- Botones de Acción de Navegación -->
-            <div class="results-actions-row">
-              <button class="btn-results btn-results-ranking interactive-press" id="btnResultsRanking">
-                <span>VER RANKING</span>
+            <div class="results-actions-row" id="resultsActionsRow">
+              <button class="btn-results btn-results-continue btn-continue interactive-press" id="btnResultsContinue">
+                <span>JUEGA DE NUEVO</span>
               </button>
-              <button class="btn-results btn-results-again interactive-press" id="btnResultsPlayAgain">
-                <span>JUGAR DE NUEVO</span>
+              <button class="btn-results btn-results-challenge interactive-press" id="btnResultsChallenge">
+                <span>DESAFIAR RIVAL</span>
               </button>
             </div>
           </div>
@@ -682,7 +681,10 @@
 
             <!-- Título de Sección -->
             <div class="challenges-section-header anim-ch-section-title">
-              <h2 class="challenges-section-title">Partidas activas (¡continúa!)</h2>
+              <h2 class="challenges-section-title">
+                <span>Partidas activas (¡continúa!)</span>
+                <span id="activeChallengesCounter" class="badge-challenge-limit">0 / 3 ACTIVAS</span>
+              </h2>
             </div>
 
             <!-- Lista de Desafíos Activos con Scroll Vertical Exclusivo -->
@@ -693,12 +695,6 @@
                 <p class="empty-challenges-sub">¡Elige un amigo y lánzale un reto!</p>
               </div>
             </div>
-          </div>
-
-          <!-- Personajes Inferiores Fijos y con Vida Propia -->
-          <div class="characters-footer">
-            <img src="assets/pantalla_desafios/chico.webp" alt="Chico Retro" class="ch-character ch-chico">
-            <img src="assets/pantalla_desafios/chica.webp" alt="Chica Retro" class="ch-character ch-chica">
           </div>
 
           <!-- Barra de Navegación Inferior en Desafíos -->
@@ -801,8 +797,9 @@
                 <div class="duel-player-box duel-player-local">
                   <div class="duel-avatar-circle bg-purple">
                     <img src="assets/pantalla_inicio/hombre.webp" alt="Tú" class="duel-user-avatar-img user-avatar-sync" id="duelUserAvatarImg">
+                    <span class="duel-country-badge" id="duelLocalCountryBadge">🌎</span>
                   </div>
-                  <span class="duel-player-name">Tú</span>
+                  <span class="duel-player-name" id="duelLocalName">Tú</span>
                 </div>
 
                 <!-- VS central -->
@@ -814,6 +811,7 @@
                 <div class="duel-player-box duel-player-rival">
                   <div class="duel-avatar-circle bg-yellow" id="duelRivalAvatar">
                     <span>🕹️</span>
+                    <span class="duel-country-badge" id="duelRivalCountryBadge">🌎</span>
                   </div>
                   <span class="duel-player-name" id="duelRivalName">Usuario 2</span>
                 </div>
@@ -868,9 +866,10 @@
                     <span class="winner-crown-icon hidden" id="localWinnerCrown">👑</span>
                     <div class="podium-avatar-circle bg-purple">
                       <img src="assets/pantalla_inicio/hombre.webp" alt="Tú" class="podium-user-avatar-img user-avatar-sync" id="podiumUserAvatarImg">
+                      <span class="duel-country-badge" id="podiumLocalCountryBadge">🌎</span>
                     </div>
                   </div>
-                  <span class="podium-name">Tú</span>
+                  <span class="podium-name" id="duelResultLocalName">Tú</span>
                   <span class="podium-score" id="duelResultLocalScore">280 pts</span>
                 </div>
 
@@ -883,6 +882,7 @@
                     <span class="winner-crown-icon hidden" id="rivalWinnerCrown">👑</span>
                     <div class="podium-avatar-circle bg-yellow" id="podiumRivalAvatar">
                       <span>🕹️</span>
+                      <span class="duel-country-badge" id="podiumRivalCountryBadge">🌎</span>
                     </div>
                   </div>
                   <span class="podium-name" id="duelResultRivalName">Usuario 2</span>
@@ -896,6 +896,7 @@
                   <span class="winner-podium-crown" id="challengeWinnerCrown">👑</span>
                   <div class="winner-podium-frame">
                     <img id="challengeWinnerAvatar" class="winner-avatar-img" src="assets/pantalla_inicio/hombre.webp" alt="Ganador">
+                    <span class="duel-country-badge winner-country-badge" id="challengeWinnerCountryBadge">🌎</span>
                   </div>
                   <!-- Overlay de Humo Mágico para la Revelación del Ganador -->
                   <div class="magic-smoke-overlay winner-smoke-overlay" id="winnerMagicSmokeOverlay"></div>
@@ -907,7 +908,7 @@
             </header>
 
             <!-- Tarjeta Central de Desempeño -->
-            <main class="duel-performance-card neo-memphis-card anim-dr-card">
+            <section class="duel-performance-card neo-memphis-card anim-dr-card">
               <div class="perf-card-header">
                 <span class="perf-card-tag">DESEMPEÑO EN ESTA RONDA</span>
                 <div class="perf-hits-badge" id="duelHitsBadge">
@@ -944,7 +945,7 @@
                   </div>
                 </div>
               </div>
-            </main>
+            </section>
 
             <!-- Botones de Acción Inferiores -->
             <footer class="duel-results-footer anim-dr-footer">
@@ -998,112 +999,88 @@
 
               <!-- Carrusel Horizontal de Packs -->
               <div class="store-packs-scroll" id="storePacksScroll">
-                <!-- Pack 1: Cine 2000s -->
-                <div class="store-pack-card pack-purple interactive-press" data-pack="cine_2000s">
-                  <div class="pack-title-box">
-                    <span class="pack-title">CINE</span>
-                    <span class="pack-subtitle">2000s</span>
+                <!-- Pack 1: Vecinos de Springfield -->
+                <div class="store-pack-card pack-yellow interactive-press pack-springfield" data-pack="vecinos_springfield" onclick="openPackDetailModal('vecinos_springfield')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #00F0FF;">ANIMACIÓN</span>
                   </div>
-                  <div class="pack-artwork">
-                    <img src="assets/pantalla_progreso/claqueta.png" alt="Cine" class="pack-art-img">
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_springfield.webp" alt="Vecinos de Springfield" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('vecinos_springfield')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>120</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
 
-                <!-- Pack 2: Videojuegos Clásicos -->
-                <div class="store-pack-card pack-red interactive-press" data-pack="videojuegos_clasicos">
-                  <div class="pack-title-box">
-                    <span class="pack-title">VIDEOJUEGOS</span>
-                    <span class="pack-subtitle">CLÁSICOS</span>
+                <!-- Pack 2: Héroes del Multiverso -->
+                <div class="store-pack-card pack-red interactive-press pack-multiverso" data-pack="heroes_multiverso" onclick="openPackDetailModal('heroes_multiverso')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #FF2A55; color: #FFFFFF;">CINE & SERIES</span>
                   </div>
-                  <div class="pack-artwork">
-                    <img src="assets/pantalla_progreso/mando.png" alt="Videojuegos" class="pack-art-img">
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_multiverso.webp" alt="Héroes del Multiverso" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('heroes_multiverso')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>120</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
 
-                <!-- Pack 3: Series Icónicas -->
-                <div class="store-pack-card pack-blue interactive-press" data-pack="series_iconicas">
-                  <div class="pack-title-box">
-                    <span class="pack-title">SERIES</span>
-                    <span class="pack-subtitle">ICÓNICAS</span>
+                <!-- Pack 3: Galaxias Lejanas -->
+                <div class="store-pack-card pack-blue interactive-press pack-galaxias" data-pack="galaxias_lejanas" onclick="openPackDetailModal('galaxias_lejanas')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #00D2FF; color: #000000;">CINE & SERIES</span>
                   </div>
-                  <div class="pack-artwork">
-                    <img src="assets/pantalla_progreso/television.png" alt="Series" class="pack-art-img">
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_galaxias.webp" alt="Galaxias Lejanas" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('galaxias_lejanas')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>120</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
 
-                <!-- Pack 4: Puro 80s -->
-                <div class="store-pack-card pack-orange interactive-press" data-pack="puro_80s">
-                  <div class="pack-title-box">
-                    <span class="pack-title">PURO</span>
-                    <span class="pack-subtitle">80s</span>
+                <!-- Pack 4: Castillo de Magia -->
+                <div class="store-pack-card pack-purple interactive-press pack-magia" data-pack="castillo_magia" onclick="openPackDetailModal('castillo_magia')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #7928CA; color: #FFFFFF;">CINE & LITERATURA</span>
                   </div>
-                  <div class="pack-artwork">
-                    <span class="pack-art-emoji">📻</span>
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_magia.webp" alt="Castillo de Magia" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('castillo_magia')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>150</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
 
-                <!-- Pack 5: Puro 90s -->
-                <div class="store-pack-card pack-teal interactive-press" data-pack="puro_90s">
-                  <div class="pack-title-box">
-                    <span class="pack-title">PURO</span>
-                    <span class="pack-subtitle">90s</span>
+                <!-- Pack 5: Reino Champiñón -->
+                <div class="store-pack-card pack-teal interactive-press pack-reino" data-pack="reino_champinon" onclick="openPackDetailModal('reino_champinon')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #00E676; color: #000000;">VIDEOJUEGOS</span>
                   </div>
-                  <div class="pack-artwork">
-                    <span class="pack-art-emoji">🛹</span>
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_reino.webp" alt="Reino Champiñón" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('reino_champinon')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>150</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
 
-                <!-- Pack 6: Artistas Latinos -->
-                <div class="store-pack-card pack-pink interactive-press" data-pack="artistas_latinos">
-                  <div class="pack-title-box">
-                    <span class="pack-title">ARTISTAS</span>
-                    <span class="pack-subtitle">LATINOS</span>
+                <!-- Pack 6: Guerreros del Ki -->
+                <div class="store-pack-card pack-orange interactive-press pack-ki" data-pack="guerreros_ki" onclick="openPackDetailModal('guerreros_ki')">
+                  <div class="pack-cat-pill-wrap">
+                    <span class="store-pack-cat-pill" style="background: #FF6600; color: #FFFFFF;">ANIMACIÓN</span>
                   </div>
-                  <div class="pack-artwork">
-                    <img src="assets/pantalla_progreso/guitarra.png" alt="Artistas Latinos" class="pack-art-img">
+                  <div class="pack-artwork-container">
+                    <img src="assets/pantalla_colecciones/caja_ki.webp" alt="Guerreros del Ki" class="pack-box-3d-img">
                   </div>
-                  <div class="pack-status-badge">
-                    <span>🔒 PRÓXIMAMENTE</span>
-                  </div>
-                  <div class="pack-price-pill">
+                  <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('guerreros_ki')">
                     <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                    <span>150</span>
-                  </div>
+                    <span>🪙 5,000</span>
+                  </button>
                 </div>
               </div>
             </section>
@@ -1409,6 +1386,11 @@
               <button class="close-modal-btn challenge-popup-close" data-close="sendChallengeModal" title="Cerrar">&times;</button>
             </div>
             <div class="modal-body challenge-popup-body">
+              <!-- Botón Rival Aleatorio -->
+              <button id="btnRandomRival" class="btn-random-rival interactive-press">
+                <span>🎲</span> RIVAL ALEATORIO
+              </button>
+
               <!-- Barra de Búsqueda -->
               <div class="challenge-search-box">
                 <input type="text" id="inputSearchUserChallenge" class="challenge-search-input" placeholder="🔍 Buscar por nombre de usuario..." autocomplete="off" />
@@ -1527,58 +1509,37 @@
           </div>
         </div>
 
-        <!-- Modal JUGAR / SELECCIÓN DE MODO -->
-        <div class="modal-backdrop" id="modalJugar">
-          <div class="retro-modal">
-            <div class="modal-header yellow-header">
-              <span class="modal-title">🕹️ ¡A JUGAR!</span>
-              <button class="close-modal-btn" data-close="modalJugar">&times;</button>
+        <!-- Modal DETALLE / INSPECCIÓN DE PACK TEMÁTICO (#packDetailModal) -->
+        <div class="modal-backdrop" id="packDetailModal">
+          <div class="pack-detail-card">
+            <button class="pack-detail-close-btn close-modal-btn" id="btnClosePackDetail" data-close="packDetailModal" onclick="closePackDetailModal()">&times;</button>
+            
+            <div class="pack-detail-pill-wrap">
+              <span class="pack-detail-pill" id="packDetailPill">CATEGORÍA</span>
             </div>
-            <div class="modal-body">
-              <p class="modal-subtitle">Elige tu modo favorito de trivia retro:</p>
-              
-              <div class="mode-cards">
-                <div class="mode-card mode-classic" data-mode="classic">
-                  <div class="mode-icon">📻</div>
-                  <div class="mode-info">
-                    <h4>Modo Clásico</h4>
-                    <p>80s, 90s y 2000s al azar</p>
-                  </div>
-                  <span class="mode-badge">¡Popular!</span>
-                </div>
 
-                <div class="mode-card mode-blitz" data-mode="blitz">
-                  <div class="mode-icon">⚡</div>
-                  <div class="mode-info">
-                    <h4>Contrarreloj</h4>
-                    <p>60 segundos de pura adrenalina</p>
-                  </div>
-                </div>
+            <div class="pack-detail-box-wrap">
+              <img src="" alt="Caja Pack" id="packDetailBoxImg" class="pack-detail-box-img">
+            </div>
 
-                <div class="mode-card mode-duel" data-mode="duel">
-                  <div class="mode-icon">👾</div>
-                  <div class="mode-info">
-                    <h4>Duelo de Épocas</h4>
-                    <p>Demuestra qué década fue la mejor</p>
-                  </div>
-                </div>
-              </div>
+            <h3 class="pack-detail-title" id="packDetailTitle">NOMBRE DEL PACK</h3>
 
-              <!-- Mini Juego Rápido -->
-              <div class="quick-quiz-box" id="quickQuizBox">
-                <div class="quiz-question-tag">PREGUNTA RETRO EXPRESS</div>
-                <div class="quiz-question-text" id="quizQuestionText">¿En qué año se lanzó al mercado la consola Super Nintendo (SNES)?</div>
-                <div class="quiz-options-grid" id="quizOptionsGrid">
-                  <button class="quiz-opt-btn" data-correct="false">1985</button>
-                  <button class="quiz-opt-btn" data-correct="true">1990</button>
-                  <button class="quiz-opt-btn" data-correct="false">1994</button>
-                  <button class="quiz-opt-btn" data-correct="false">1998</button>
-                </div>
-                <div class="quiz-feedback" id="quizFeedback"></div>
-              </div>
+            <p class="pack-detail-desc" id="packDetailDesc">
+              Descripción del pack temático...
+            </p>
+
+            <div class="pack-detail-counter" id="packDetailQuestionCount">
+              Total: 50 Preguntas Exclusivas
+            </div>
+
+            <div class="pack-detail-action-wrap" id="packDetailActionContainer">
+              <button class="pack-detail-action-btn btn-buy interactive-press" id="btnPackDetailAction">
+                COMPRAR POR 🪙 5,000
+              </button>
             </div>
           </div>
         </div>
+
 
         <!-- Modal DESAFÍOS -->
         <div class="modal-backdrop" id="modalDesafios">
@@ -1734,7 +1695,7 @@
         <div class="modal-backdrop profile-modal-overlay" id="profileView" style="display: none;">
           <div class="profile-modal-card" id="profileModalCard">
             <div class="modal-header yellow-header profile-modal-header">
-              <span class="modal-title">👤 PERFIL DE JUGADOR</span>
+              <span class="modal-title">MI PERFIL</span>
               <button class="close-modal-btn profile-close-btn interactive-press" id="btnCloseProfile" aria-label="Cerrar perfil">✕</button>
             </div>
             <div class="modal-body profile-modal-body">
@@ -1750,13 +1711,32 @@
                   <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="profile-details">
-                  <div class="profile-name-edit-wrap">
-                    <input type="text" id="profileUsernameInput" class="profile-name-input" value="" placeholder="Introduce tu nombre de usuario..." maxlength="15" autocomplete="off" spellcheck="false" aria-label="Nombre de usuario" title="Introduce tu nombre de usuario">
-                    <button type="button" class="profile-name-edit-btn" id="btnEditUserName" aria-label="Editar nombre" title="Editar nombre">✏️</button>
+                  <div class="username-edit-row">
+                    <input type="text" id="profileUsernameInput" class="profile-name-input" maxlength="15" placeholder="Tu nombre de usuario..." autocomplete="off">
+                    <button id="btnConfirmUsername" class="btn-confirm-name">✓ Guardar</button>
                   </div>
                   <span class="profile-badge" id="profileBadge">Novato del Videoclub 📼 • 0 XP</span>
                   <div class="profile-bio-wrap">
                     <input type="text" id="profileBioInput" class="profile-bio-input" placeholder="Escribe algo sobre ti..." maxlength="80" aria-label="Biografía corta" title="Escribe tu biografía">
+                  </div>
+                  <!-- Selector de País con Bandera -->
+                  <div class="country-picker-container">
+                    <label for="profileCountrySelect">PAÍS:</label>
+                    <select id="profileCountrySelect">
+                      <option value="BO">🇧🇴 Bolivia</option>
+                      <option value="PE">🇵🇪 Perú</option>
+                      <option value="MX">🇲🇽 México</option>
+                      <option value="AR">🇦🇷 Argentina</option>
+                      <option value="CL">🇨🇱 Chile</option>
+                      <option value="CO">🇨🇴 Colombia</option>
+                      <option value="ES">🇪🇸 España</option>
+                      <option value="EC">🇪🇨 Ecuador</option>
+                      <option value="UY">🇺🇾 Uruguay</option>
+                      <option value="PY">🇵🇾 Paraguay</option>
+                      <option value="VE">🇻🇪 Venezuela</option>
+                      <option value="US">🇺🇸 Estados Unidos</option>
+                      <option value="WORLD">🌎 Otro / Global</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -1768,34 +1748,13 @@
                   <span class="stat-lbl">Precisión</span>
                 </div>
                 <div class="stat-box">
-                  <span class="stat-num" id="profileCorrectCount">0</span>
-                  <span class="stat-lbl">Aciertos</span>
+                  <span class="stat-num" id="profileChallengesWon">0</span>
+                  <span class="stat-lbl">DESAFÍOS GANADOS</span>
                 </div>
                 <div class="stat-box">
                   <span class="stat-num" id="profileMaxStreak">0</span>
                   <span class="stat-lbl">Racha Máx</span>
                 </div>
-              </div>
-
-              <!-- BANNER DE COMPRA: ELIMINAR PUBLICIDAD -->
-              <div class="profile-no-ads-banner interactive-press" id="btnRemoveAds" role="button" tabindex="0" title="Eliminar anuncios por $0.99 USD">
-                <div class="no-ads-icon-col">
-                  <span class="no-ads-icon" id="noAdsIcon">📵</span>
-                </div>
-                <div class="no-ads-info-col">
-                  <span class="no-ads-title" id="noAdsTitle">ELIMINAR PUBLICIDAD</span>
-                  <span class="no-ads-sub" id="noAdsSub">Disfruta de RetroQuiz sin anuncios por $0.99</span>
-                </div>
-                <div class="no-ads-price-col">
-                  <span class="no-ads-price-pill" id="noAdsPriceBadge">$0.99</span>
-                </div>
-              </div>
-
-              <!-- Botón discreto para reiniciar compra y probar -->
-              <div class="profile-reset-ads-wrap" id="wrapResetAds" style="display: none;">
-                <button type="button" class="profile-reset-ads-btn" id="btnResetNoAdsTest">
-                  🔄 Probar compra de nuevo
-                </button>
               </div>
 
               <!-- Ajustes de Audio -->
@@ -1907,10 +1866,10 @@
                   <span class="cat-name">CINE</span>
                   <span class="cat-status-badge">¡Desbloqueado!</span>
                 </div>
-                <div class="cat-progress-item" id="progMusica">
-                  <span class="cat-icon">🎧</span>
-                  <span class="cat-name">MÚSICA</span>
-                  <button class="btn-unlock-cat" data-unlock="musica">🔒 Desbloquear (200 🟡)</button>
+                <div class="cat-progress-item unlocked" id="progAnimacion">
+                  <span class="cat-icon">✨</span>
+                  <span class="cat-name">ANIMACIÓN</span>
+                  <span class="cat-status-badge">¡Desbloqueado!</span>
                 </div>
                 <div class="cat-progress-item" id="progTv">
                   <span class="cat-icon">📺</span>
@@ -1934,7 +1893,7 @@
         </div>
 
         <!-- OVERLAY DE CONTEO Y RESULTADO DE RULETA (3, 2, 1) -->
-        <div class="landing-countdown-overlay" id="wheelLandingOverlay">
+        <div class="landing-countdown-overlay countdown-overlay" id="wheelLandingOverlay">
           <div class="landing-box">
             <div class="landing-category-badge" id="landingCatBadge">
               <span class="landing-icon" id="landingCatIcon">🎬</span>
@@ -1943,7 +1902,7 @@
             
             <div class="countdown-display-wrap">
               <span class="countdown-label">LA TRIVIA COMIENZA EN</span>
-              <div class="countdown-number" id="landingCountNumber">3</div>
+              <div class="countdown-number countdown-text" id="landingCountNumber">3</div>
             </div>
           </div>
         </div>
@@ -2018,9 +1977,166 @@
     </div><!-- /how-to-play-box -->
   </div><!-- /#howToPlayModal -->
 
+  <!-- ========================================================================= -->
+  <!-- CONSOLA FLOTANTE DE REVISIÓN DIRECTA DE PANTALLAS Y MODALES               -->
+  <!-- ========================================================================= -->
+  <button class="screen-console-toggle-btn interactive-press" id="btnToggleScreenConsole" title="Abrir Consola de Pantallas">
+    <span class="sct-icon">🛠️</span>
+    <span class="sct-text">VISTAS</span>
+  </button>
+
+  <div class="screen-console-overlay" id="screenReviewConsoleOverlay" style="display: none;">
+    <div class="screen-console-card">
+      <div class="screen-console-header">
+        <div class="sch-title-wrap">
+          <span class="sch-badge">DEV TOOL</span>
+          <h3 class="sch-title">REVISIÓN DE PANTALLAS</h3>
+        </div>
+        <button class="screen-console-close-btn" id="btnCloseScreenConsole" aria-label="Cerrar Consola">&times;</button>
+      </div>
+
+      <div class="screen-console-status">
+        <span class="scs-label">ACTIVA:</span>
+        <span class="scs-val" id="screenConsoleActiveIndicator">homeView (#home)</span>
+      </div>
+
+      <div class="screen-console-scroll">
+        <!-- SECCIÓN 1: PANTALLAS PRINCIPALES -->
+        <div class="screen-console-section">
+          <h4 class="sc-section-title">📺 PANTALLAS PRINCIPALES (10 Vistas)</h4>
+          <div class="sc-grid">
+            <button class="sc-btn sc-btn-home interactive-press" onclick="debugNavigateScreen('homeView')">
+              <span class="sc-icon">🏠</span>
+              <span class="sc-name">Inicio</span>
+              <span class="sc-hash">#home</span>
+            </button>
+            <button class="sc-btn sc-btn-wheel interactive-press" onclick="debugNavigateScreen('wheelView')">
+              <span class="sc-icon">🎡</span>
+              <span class="sc-name">Ruleta</span>
+              <span class="sc-hash">#ruleta</span>
+            </button>
+            <button class="sc-btn sc-btn-collection interactive-press" onclick="debugNavigateScreen('collectionView')">
+              <span class="sc-icon">📦</span>
+              <span class="sc-name">Colecciones</span>
+              <span class="sc-hash">#coleccion</span>
+            </button>
+            <button class="sc-btn sc-btn-store interactive-press" onclick="debugNavigateScreen('storeView')">
+              <span class="sc-icon">🛒</span>
+              <span class="sc-name">Tienda</span>
+              <span class="sc-hash">#tienda</span>
+            </button>
+            <button class="sc-btn sc-btn-challenges interactive-press" onclick="debugNavigateScreen('challengesView')">
+              <span class="sc-icon">⚔️</span>
+              <span class="sc-name">Desafíos</span>
+              <span class="sc-hash">#desafios</span>
+            </button>
+            <button class="sc-btn sc-btn-trivia interactive-press" onclick="debugNavigateScreen('triviaView')">
+              <span class="sc-icon">❓</span>
+              <span class="sc-name">Trivia / Qs</span>
+              <span class="sc-hash">#trivia</span>
+            </button>
+            <button class="sc-btn sc-btn-results interactive-press" onclick="debugNavigateScreen('resultsView')">
+              <span class="sc-icon">🏆</span>
+              <span class="sc-name">Resultados</span>
+              <span class="sc-hash">#resultados</span>
+            </button>
+            <button class="sc-btn sc-btn-gameover interactive-press" onclick="debugNavigateScreen('gameOverView')">
+              <span class="sc-icon">💀</span>
+              <span class="sc-name">Game Over</span>
+              <span class="sc-hash">#gameover</span>
+            </button>
+            <button class="sc-btn sc-btn-duel-match interactive-press" onclick="debugNavigateScreen('challengeMatchView')">
+              <span class="sc-icon">⚡</span>
+              <span class="sc-name">Duelo Ruleta</span>
+              <span class="sc-hash">#duelo-ruleta</span>
+            </button>
+            <button class="sc-btn sc-btn-duel-res interactive-press" onclick="debugNavigateScreen('challengeResultView')">
+              <span class="sc-icon">🏅</span>
+              <span class="sc-name">Duelo Fin</span>
+              <span class="sc-hash">#duelo-resultados</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 2: MODALES Y POPUPS -->
+        <div class="screen-console-section">
+          <h4 class="sc-section-title">🪟 MODALES Y POPUPS (10 Ventanas)</h4>
+          <div class="sc-grid">
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('profileView')">
+              <span class="sc-icon">👤</span>
+              <span class="sc-name">Perfil</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalRanking')">
+              <span class="sc-icon">🏆</span>
+              <span class="sc-name">Ranking</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalRulesInfo')">
+              <span class="sc-icon">ℹ️</span>
+              <span class="sc-name">Reglas ('i')</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalSettings')">
+              <span class="sc-icon">⚙️</span>
+              <span class="sc-name">Ajustes</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('sendChallengeModal')">
+              <span class="sc-icon">✉️</span>
+              <span class="sc-name">Enviar Desafío</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('challengeOnboardingModal')">
+              <span class="sc-icon">📖</span>
+              <span class="sc-name">Onboarding</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('abandonModal')">
+              <span class="sc-icon">🚪</span>
+              <span class="sc-name">Abandonar</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalWatchAd')">
+              <span class="sc-icon">📺</span>
+              <span class="sc-name">+1 Tiro Extra</span>
+            </button>
+            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugTestCountdown()">
+              <span class="sc-icon">⏱️</span>
+              <span class="sc-name">Conteo 3-2-1-YA</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 3: INSPECCIÓN MODAL DE PACKS TEMÁTICOS -->
+        <div class="screen-console-section">
+          <h4 class="sc-section-title">📦 INSPECCIÓN MODAL DE PACKS TEMÁTICOS</h4>
+          <div class="sc-packs-row">
+            <button class="sc-pill-btn pack-yellow interactive-press" onclick="debugOpenPack('vecinos_springfield')">Springfield</button>
+            <button class="sc-pill-btn pack-red interactive-press" onclick="debugOpenPack('heroes_multiverso')">Multiverso</button>
+            <button class="sc-pill-btn pack-blue interactive-press" onclick="debugOpenPack('galaxias_lejanas')">Galaxias</button>
+            <button class="sc-pill-btn pack-orange interactive-press" onclick="debugOpenPack('guerreros_ki')">Guerreros Ki</button>
+            <button class="sc-pill-btn pack-teal interactive-press" onclick="debugOpenPack('reino_champinon')">Champiñón</button>
+            <button class="sc-pill-btn pack-purple interactive-press" onclick="debugOpenPack('castillo_magia')">Magia</button>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 4: ACCIONES RÁPIDAS DE ESTADO -->
+        <div class="screen-console-section">
+          <h4 class="sc-section-title">⚡ ACCIONES RÁPIDAS DE ESTADO</h4>
+          <div class="sc-actions-row">
+            <button class="sc-action-btn interactive-press" onclick="debugAddCoins(5000)">🪙 +5,000 Coins</button>
+            <button class="sc-action-btn interactive-press" onclick="debugToggleAllPacks()">🔓 Toggle Packs</button>
+            <button class="sc-action-btn interactive-press" onclick="debugResetShots()">🔄 3 Tiros Ruleta</button>
+            <button class="sc-action-btn interactive-press" onclick="debugCloseAllModals()">❌ Cerrar Modales</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Confetti Canvas Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="soundManager.js"></script>
+  <script src="data/pack_springfield.js"></script>
+  <script src="data/pack_multiverso.js"></script>
+  <script src="data/pack_galaxias.js"></script>
+  <script src="data/pack_ki.js"></script>
+  <script src="data/pack_reino.js"></script>
+  <script src="data/pack_magia.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

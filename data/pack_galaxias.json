@@ -1,0 +1,452 @@
+[
+  {
+    "id": "glx_001",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué cristal sintonizado con la Fuerza es el corazón energético de un sable de luz?",
+    "emojis": "💎 ⚔️ ✨",
+    "opciones": ["Cristal Kyber", "Cristal Coaxium", "Piedra Beskar", "Cristal Nova"],
+    "respuesta_correcta": "Cristal Kyber"
+  },
+  {
+    "id": "glx_002",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el planeta desértico con dos soles gemelos donde crecieron Anakin y Luke Skywalker?",
+    "emojis": "🏜️ ☀️ 🪐",
+    "opciones": ["Tatooine", "Jakku", "Geonosis", "Korriban"],
+    "respuesta_correcta": "Tatooine"
+  },
+  {
+    "id": "glx_003",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué orden secreta ejecutaron los soldados clon para exterminar a los caballeros Jedi?",
+    "emojis": "🪖 📜 💀",
+    "opciones": ["Orden 66", "Orden 99", "Protocolo Imperial", "Orden 37"],
+    "respuesta_correcta": "Orden 66"
+  },
+  {
+    "id": "glx_004",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿De qué metal casi indestructible está forjada la armadura tradicional de los mandalorianos?",
+    "emojis": "🛡️ 🪖 🦾",
+    "opciones": ["Beskar", "Duracero", "Cortosis", "Titanio"],
+    "respuesta_correcta": "Beskar"
+  },
+  {
+    "id": "glx_005",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el cazarrecompensas que sirvió como plantilla genética para el Gran Ejército Clon?",
+    "emojis": "🔫 🧬 🎯",
+    "opciones": ["Jango Fett", "Boba Fett", "Cad Bane", "Din Djarin"],
+    "respuesta_correcta": "Jango Fett"
+  },
+  {
+    "id": "glx_006",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era la designación numérica del droide astromecánico que acompañó a Luke Skywalker?",
+    "emojis": "🤖 🔵 🚀",
+    "opciones": ["R2-D2", "C-3PO", "BB-8", "Chopper"],
+    "respuesta_correcta": "R2-D2"
+  },
+  {
+    "id": "glx_007",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué maestro Sith y gobernante de Naboo manipuló la República bajo el alter ego de Canciller Palpatine?",
+    "emojis": "⚡ 👑 😈",
+    "opciones": ["Darth Sidious", "Darth Plagueis", "Darth Maul", "Darth Tyranus"],
+    "respuesta_correcta": "Darth Sidious"
+  },
+  {
+    "id": "glx_008",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta volcánico de lava pura tuvo lugar el duelo definitivo entre Obi-Wan y Anakin?",
+    "emojis": "🌋 🔥 ⚔️",
+    "opciones": ["Mustafar", "Sullust", "Exegol", "Moraband"],
+    "respuesta_correcta": "Mustafar"
+  },
+  {
+    "id": "glx_009",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué temible arma imperial esférica era capaz de pulverizar un planeta entero de un solo disparo?",
+    "emojis": "🌕 💥 🌌",
+    "opciones": ["La Estrella de la Muerte", "La Base Starkiller", "El Eclipse Imperial", "El Destructor Estelar"],
+    "respuesta_correcta": "La Estrella de la Muerte"
+  },
+  {
+    "id": "glx_010",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el contrabandista wookiee copiloto del Halcón Milenario?",
+    "emojis": "🐻 🚀 🏹",
+    "opciones": ["Chewbacca", "Tarfful", "Black Krrsantan", "Zaalbar"],
+    "respuesta_correcta": "Chewbacca"
+  },
+  {
+    "id": "glx_011",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué cúpula flotante en la atmósfera de Bespin era administrada por Lando Calrissian?",
+    "emojis": "☁️ 🏙️ 🪐",
+    "opciones": ["Ciudad de las Nubes", "Coruscant Superior", "Estación Nube", "Kamino Flotante"],
+    "respuesta_correcta": "Ciudad de las Nubes"
+  },
+  {
+    "id": "glx_012",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué sustancia criogénica metálica fue congelado Han Solo para ser transportado ante Jabba?",
+    "emojis": "🧊 ⛓️ 🪙",
+    "opciones": ["Carbonita", "Beskar fundido", "Cromita", "Plastiacero"],
+    "respuesta_correcta": "Carbonita"
+  },
+  {
+    "id": "glx_013",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué pequeñas criaturas peludas y primitivas del bosque de Endor ayudaron a destruir el generador de escudo?",
+    "emojis": "🐻 🌲 🏹",
+    "opciones": ["Ewoks", "Jawas", "Ugnaughts", "Wookiees"],
+    "respuesta_correcta": "Ewoks"
+  },
+  {
+    "id": "glx_014",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era la especie del cazador de recompensas Greedo en la cantina de Mos Eisley?",
+    "emojis": "👽 🔫 🍺",
+    "opciones": ["Rodiano", "Trandoshano", "Duros", "Bith"],
+    "respuesta_correcta": "Rodiano"
+  },
+  {
+    "id": "glx_015",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué aprendiz togruta tuvo Anakin Skywalker durante las Guerras Clon?",
+    "emojis": "⚔️ ⚪ 👧",
+    "opciones": ["Ahsoka Tano", "Barriss Offee", "Aayla Secura", "Shaak Ti"],
+    "respuesta_correcta": "Ahsoka Tano"
+  },
+  {
+    "id": "glx_016",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué carrera de vainas de Tatooine ganó Anakin su libertad como esclavo?",
+    "emojis": "🏎️ ⚡ 🏁",
+    "opciones": ["El Clásico de Boonta Eve", "El Circuito de Mos Espa", "El Gran Premio de Kessel", "El Reto de Beggar's Canyon"],
+    "respuesta_correcta": "El Clásico de Boonta Eve"
+  },
+  {
+    "id": "glx_017",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué gobernante criminal de la especie Hutt residía en un opulento palacio en Tatooine?",
+    "emojis": "🐌 💰 🐸",
+    "opciones": ["Jabba el Hutt", "Rotta el Hutt", "Ziro el Hutt", "Gardulla"],
+    "respuesta_correcta": "Jabba el Hutt"
+  },
+  {
+    "id": "glx_018",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el nombre del planeta pantanoso donde el Maestro Yoda vivió su exilio?",
+    "emojis": "🐸 🌿 🛖",
+    "opciones": ["Dagobah", "Naboo", "Kashyyyk", "Dathomir"],
+    "respuesta_correcta": "Dagobah"
+  },
+  {
+    "id": "glx_019",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué título ostentaba el Conde Dooku en la Orden Sith bajo el mando de Sidious?",
+    "emojis": "🗡️ 🔴 👴",
+    "opciones": ["Darth Tyranus", "Darth Maul", "Darth Bane", "Darth Malak"],
+    "respuesta_correcta": "Darth Tyranus"
+  },
+  {
+    "id": "glx_020",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué comandante ciborg de cuatro brazos lideraba el ejército de droides separatista?",
+    "emojis": "🤖 ⚔️ 🫁",
+    "opciones": ["General Grievous", "Wat Tambor", "Almirante Trench", "Nute Gunray"],
+    "respuesta_correcta": "General Grievous"
+  },
+  {
+    "id": "glx_021",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué nave estelar completó la famosa Carrera de Kessel en menos de doce pársecs?",
+    "emojis": "🚀 🌌 ⏱️",
+    "opciones": ["El Halcón Milenario", "El Fantasma (Ghost)", "El Caza TIE Avanzado", "El Esclavo I"],
+    "respuesta_correcta": "El Halcón Milenario"
+  },
+  {
+    "id": "glx_022",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era el nombre del sabueso zabrak que blandía un sable de luz de doble hoja roja en Naboo?",
+    "emojis": "👹 ⚔️ 🔴",
+    "opciones": ["Darth Maul", "Savage Opress", "Pre Vizsla", "Darth Malgus"],
+    "respuesta_correcta": "Darth Maul"
+  },
+  {
+    "id": "glx_023",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué planeta helado albergó la base Eco de la Alianza Rebelde atacada por caminantes AT-AT?",
+    "emojis": "❄️ 🏔️ 🦣",
+    "opciones": ["Hoth", "Ilum", "Kijimi", "Canto Bight"],
+    "respuesta_correcta": "Hoth"
+  },
+  {
+    "id": "glx_024",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba la madre biológica de Luke Skywalker y Leia Organa?",
+    "emojis": "👑 👸 🌺",
+    "opciones": ["Padmé Amidala", "Shmi Skywalker", "Satine Kryze", "Breha Organa"],
+    "respuesta_correcta": "Padmé Amidala"
+  },
+  {
+    "id": "glx_025",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué pozo monstruoso en el Mar de Dunas digiere a sus víctimas a lo largo de mil años?",
+    "emojis": "🕳️ 🦷 🏜️",
+    "opciones": ["El Gran Foso de Carkoon (Sarlacc)", "La Cueva del Rancor", "El Abismo de Kessel", "El Nido del Krayt"],
+    "respuesta_correcta": "El Gran Foso de Carkoon (Sarlacc)"
+  },
+  {
+    "id": "glx_026",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué sable ancestral de hoja negra simboliza el liderazgo supremo sobre los clanes de Mandalore?",
+    "emojis": "🗡️ 🖤 👑",
+    "opciones": ["El Darksaber (Sable Oscuro)", "El Sable Sombrío", "La Espada de Mandalore", "El Filo Nocturno"],
+    "respuesta_correcta": "El Darksaber (Sable Oscuro)"
+  },
+  {
+    "id": "glx_027",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el planeta acuático donde los científicos nativos clonaron el ejército de la República?",
+    "emojis": "🌊 🌧️ 🧬",
+    "opciones": ["Kamino", "Mon Cala", "Manaan", "Ahch-To"],
+    "respuesta_correcta": "Kamino"
+  },
+  {
+    "id": "glx_028",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué entidad militar fanática surgió de los restos del Imperio en las Regiones Desconocidas?",
+    "emojis": "🦅 🔴 ⚔️",
+    "opciones": ["La Primera Orden", "El Remanente Carmesí", "El Consejo Separatista", "La Nueva Alianza"],
+    "respuesta_correcta": "La Primera Orden"
+  },
+  {
+    "id": "glx_029",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el estratega chiss de piel azul y ojos rojos que lideró las fuerzas del Imperio?",
+    "emojis": "🔵 👁️ 🎖️",
+    "opciones": ["Gran Almirante Thrawn", "Gobernador Tarkin", "Almirante Piett", "Moff Gideon"],
+    "respuesta_correcta": "Gran Almirante Thrawn"
+  },
+  {
+    "id": "glx_030",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué microscópicas formas de vida intracelulares determinan la afinidad biológica con la Fuerza?",
+    "emojis": "🔬 ✨ 🧬",
+    "opciones": ["Midiclorianos", "Cristales internos", "Células Kyber", "Esporas astrales"],
+    "respuesta_correcta": "Midiclorianos"
+  },
+  {
+    "id": "glx_031",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué planeta pacífico de la realeza fue completamente vaporizado por la primera Estrella de la Muerte?",
+    "emojis": "🪐 💥 👸",
+    "opciones": ["Alderaan", "Chandrila", "Hosnian Prime", "Naboo"],
+    "respuesta_correcta": "Alderaan"
+  },
+  {
+    "id": "glx_032",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el código sagrado de respuesta habitual entre los mandalorianos ortodoxos?",
+    "emojis": "🪖 🛡️ 🗣️",
+    "opciones": ["Este es el camino (This is the Way)", "Gloria a Mandalore", "La Fuerza nos guía", "Por el Beskar"],
+    "respuesta_correcta": "Este es el camino (This is the Way)"
+  },
+  {
+    "id": "glx_033",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta cubierto por una ciudad colosal se encontraba el Senado Galáctico y el Templo Jedi?",
+    "emojis": "🏙️ 🏛️ 🪐",
+    "opciones": ["Coruscant", "Corellia", "Kuat", "Taris"],
+    "respuesta_correcta": "Coruscant"
+  },
+  {
+    "id": "glx_034",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué color característico tenía el sable de luz empuñado por el Maestro Mace Windu?",
+    "emojis": "🟣 ⚔️ ⚡",
+    "opciones": ["Púrpura / Morado", "Amarillo dorado", "Cian", "Verde esmeralda"],
+    "respuesta_correcta": "Púrpura / Morado"
+  },
+  {
+    "id": "glx_035",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el verdadero nombre de 'El Niño', el infante sensible a la Fuerza rescatado por Din Djarin?",
+    "emojis": "👶 🟢 🥣",
+    "opciones": ["Grogu", "Gregar", "Yaddle", "Gork"],
+    "respuesta_correcta": "Grogu"
+  },
+  {
+    "id": "glx_036",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué inquisidores o cazadores imperiales fueron entrenados para cazar a los Jedi supervivientes de la Purga?",
+    "emojis": "🚁 ⚔️ 🔴",
+    "opciones": ["Los Inquisidores Imperiales", "La Guardia Carmesí", "Los Soldados de la Purga", "Los Caballeros de Ren"],
+    "respuesta_correcta": "Los Inquisidores Imperiales"
+  },
+  {
+    "id": "glx_037",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta remoto cubierto de agua e islas rocosas se fundó el primer Templo de la Orden Jedi?",
+    "emojis": "🌊 🪨 📜",
+    "opciones": ["Ahch-To", "Tython", "Jedha", "Ossus"],
+    "respuesta_correcta": "Ahch-To"
+  },
+  {
+    "id": "glx_038",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era el nombre del capitán clon al mando de la venerada Legión 501 junto a Anakin?",
+    "emojis": "🪖 🔵 🔫",
+    "opciones": ["Rex (CT-7567)", "Cody", "Fives", "Wolffe"],
+    "respuesta_correcta": "Rex (CT-7567)"
+  },
+  {
+    "id": "glx_039",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué especie reptiliana carroñera viaja por el desierto de Tatooine en gigantescos Sandcrawlers?",
+    "emojis": "🟫 👁️ ⚙️",
+    "opciones": ["Jawas", "Moradores de las Arenas", "Hutts", "Weequays"],
+    "respuesta_correcta": "Jawas"
+  },
+  {
+    "id": "glx_040",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué científico diseñó deliberadamente la falla térmica en la Estrella de la Muerte para los rebeldes?",
+    "emojis": "📐 💥 📡",
+    "opciones": ["Galen Erso", "Orson Krennic", "Bevel Lemelisk", "Bodhi Rook"],
+    "respuesta_correcta": "Galen Erso"
+  },
+  {
+    "id": "glx_041",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es la regla Sith establecida por Darth Bane que limita su orden a solo dos miembros simultáneos?",
+    "emojis": "👥 ⚖️ 🔴",
+    "opciones": ["La Regla de Dos", "El Pacto Sombrío", "La Doctrina del Maestro", "El Código Rojo"],
+    "respuesta_correcta": "La Regla de Dos"
+  },
+  {
+    "id": "glx_042",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta tropical de archivos imperiales se libró la batalla para transmitir los planos de la Estrella?",
+    "emojis": "🌴 🌊 📡",
+    "opciones": ["Scarif", "Eadu", "Jedha", "Lothal"],
+    "respuesta_correcta": "Scarif"
+  },
+  {
+    "id": "glx_043",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué coto minero y luna helada fue el centro de extracción masiva de cristales kyber para el Imperio?",
+    "emojis": "❄️ ⛏️ 💎",
+    "opciones": ["Ilum", "Kessel", "Mygeeto", "Dantooine"],
+    "respuesta_correcta": "Ilum"
+  },
+  {
+    "id": "glx_044",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba el clan de hechiceras que dominaban la magia oscura y la Fuerza en Dathomir?",
+    "emojis": "🧙‍♀️ 🟢 🗡️",
+    "opciones": ["Las Hermanas de la Noche", "Las Hijas del Lado Oscuro", "El Aquelarre Sith", "Las Brujas de Kessel"],
+    "respuesta_correcta": "Las Hermanas de la Noche"
+  },
+  {
+    "id": "glx_045",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué caza estelar rebelde cuenta con cuatro alas móviles que se despliegan en posición de 'X'?",
+    "emojis": "🚀 ⚔️ 🌌",
+    "opciones": ["Ala-X (X-Wing)", "Ala-Y (Y-Wing)", "Ala-A (A-Wing)", "Ala-B (B-Wing)"],
+    "respuesta_correcta": "Ala-X (X-Wing)"
+  },
+  {
+    "id": "glx_046",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba la fortaleza personal construida por Darth Vader sobre una cueva Sith en Mustafar?",
+    "emojis": "🏰 🌋 🖤",
+    "opciones": ["Castillo Bast", "Palacio Imperial", "Fortaleza Inquisitorial", "Ciudadela Sombría"],
+    "respuesta_correcta": "Castillo Bast"
+  },
+  {
+    "id": "glx_047",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es la designación numérica del droide de protocolo dorado con dominio de más de seis millones de formas de comunicación?",
+    "emojis": "🤖 🟡 🗣️",
+    "opciones": ["C-3PO", "TC-14", "0-0-0", "K-2SO"],
+    "respuesta_correcta": "C-3PO"
+  },
+  {
+    "id": "glx_048",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué mineral escaso de color rojo se extrae en las minas de Crait revelándose bajo una costra blanca de sal?",
+    "emojis": "🧂 🔴 🦊",
+    "opciones": ["Rhodio / Cristales rojos", "Beskar", "Coaxium", "Tibanna"],
+    "respuesta_correcta": "Rhodio / Cristales rojos"
+  },
+  {
+    "id": "glx_049",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué bestia carnívora con colmillos habitaba en el foso bajo la sala del trono de Jabba el Hutt?",
+    "emojis": "👹 🍖 ⛓️",
+    "opciones": ["Rancor", "Wampa", "Acklay", "Nexu"],
+    "respuesta_correcta": "Rancor"
+  },
+  {
+    "id": "glx_050",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta secreto del Lado Oscuro se ocultó la Flota Sith de Destructores Estelares en la Batalla de Exegol?",
+    "emojis": "⚡ 💀 🌌",
+    "opciones": ["Exegol", "Korriban", "Malachor", "Byss"],
+    "respuesta_correcta": "Exegol"
+  }
+]

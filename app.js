@@ -49,12 +49,96 @@
 // CATÁLOGO CENTRAL UNIFICADO DE PACKS TEMÁTICOS ("MIS COLECCIONES")
 // =============================================================================
 const THEMATIC_PACKS = [
-  { id: "cine_2000", file: "data/cine_2000.json", name: "Cine 2000s", category: "CINE", icon: "🎬", priceCoins: 5000, priceUSD: "$0.99" },
-  { id: "videojuegos_retro", file: "data/videojuegos_retro.json", name: "Videojuegos Clásicos", category: "VIDEOJUEGOS", icon: "🕹️", priceCoins: 5000, priceUSD: "$0.99" },
-  { id: "series_iconicas", file: "data/series_iconicas.json", name: "Series Icónicas", category: "TV", icon: "📺", priceCoins: 5000, priceUSD: "$0.99" },
-  { id: "puro_80s", file: "data/puro_80s.json", name: "Puro 80s", category: "ÉPOCA 80s", icon: "📼", priceCoins: 5000, priceUSD: "$0.99" },
-  { id: "puro_90s", file: "data/puro_90s.json", name: "Puro 90s", category: "ÉPOCA 90s", icon: "📻", priceCoins: 5000, priceUSD: "$0.99" },
-  { id: "artistas_latinos", file: "data/artistas_latinos.json", name: "Artistas Latinos", category: "MÚSICA", icon: "🎤", priceCoins: 5000, priceUSD: "$0.99" }
+  {
+    id: "vecinos_springfield",
+    name: "Vecinos de Springfield",
+    category: "ANIMACIÓN",
+    badge: "FAMILIA AMARILLA",
+    subtitle: "FAMILIA AMARILLA",
+    file: "data/pack_springfield.json",
+    coverImage: "assets/pantalla_colecciones/caja_springfield.webp",
+    boxImage: "assets/pantalla_colecciones/caja_springfield.webp",
+    icon: "🍩 🍺 📺",
+    description: "Demuestra cuánto sabes sobre la familia amarilla de la televisión, sus vecinos y sus locuras cotidianas en Springfield.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  },
+  {
+    id: "heroes_multiverso",
+    name: "Héroes del Multiverso",
+    category: "CINE & SERIES",
+    badge: "CÓMICS & CINE",
+    subtitle: "CÓMICS & CINE",
+    file: "data/pack_multiverso.json",
+    coverImage: "assets/pantalla_colecciones/caja_multiverso.webp",
+    boxImage: "assets/pantalla_colecciones/caja_multiverso.webp",
+    icon: "🛡️ ⚡ 🌌",
+    description: "Preguntas sobre vengadores heroicos, villanos cósmicos, batallas épicas y leyendas multiversales.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  },
+  {
+    id: "galaxias_lejanas",
+    name: "Galaxias Lejanas",
+    category: "CINE & SERIES",
+    badge: "SAGA ESPACIAL",
+    subtitle: "SAGA ESPACIAL",
+    file: "data/pack_galaxias.json",
+    coverImage: "assets/pantalla_colecciones/caja_galaxias.webp",
+    boxImage: "assets/pantalla_colecciones/caja_galaxias.webp",
+    icon: "🚀 ⚔️ 🌌",
+    description: "Enfrenta el lore definitivo sobre sables de luz, órdenes espaciales, imperios galácticos y planetas remotos.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  },
+  {
+    id: "guerreros_ki",
+    name: "Guerreros del Ki",
+    category: "ANIMACIÓN",
+    badge: "ANIME SHŌNEN",
+    subtitle: "ANIME SHŌNEN",
+    file: "data/pack_ki.json",
+    coverImage: "assets/pantalla_colecciones/caja_ki.webp",
+    boxImage: "assets/pantalla_colecciones/caja_ki.webp",
+    icon: "🐉 🥋 ⚡",
+    description: "Pon a prueba tu poder sobre torneos de artes marciales, guerreros legendarios, esferas mágicas y transformaciones cósmicas.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  },
+  {
+    id: "reino_champinon",
+    name: "Reino Champiñón",
+    category: "VIDEOJUEGOS",
+    badge: "PLATAFORMAS RETRO",
+    subtitle: "PLATAFORMAS RETRO",
+    file: "data/pack_reino.json",
+    coverImage: "assets/pantalla_colecciones/caja_reino.webp",
+    boxImage: "assets/pantalla_colecciones/caja_reino.webp",
+    icon: "🍄 👑 🐢",
+    description: "Desafía tu memoria en plataformas retro: fontaneros valientes, princesas en apuros, castillos y carreras de karts.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  },
+  {
+    id: "castillo_magia",
+    name: "Castillo de Magia",
+    category: "CINE & LITERATURA",
+    badge: "FANTASÍA & HECHIZOS",
+    subtitle: "FANTASÍA & HECHIZOS",
+    file: "data/pack_magia.json",
+    coverImage: "assets/pantalla_colecciones/caja_magia.webp",
+    boxImage: "assets/pantalla_colecciones/caja_magia.webp",
+    icon: "🪄 🏰 ⚡",
+    description: "Pon a prueba tus hechizos y conocimientos del mundo mágico, colegios de hechicería y criaturas fantásticas.",
+    totalQuestions: 50,
+    price: 5000,
+    priceCoins: 5000
+  }
 ];
 window.THEMATIC_PACKS = THEMATIC_PACKS;
 
@@ -76,8 +160,8 @@ const state = {
   userScore: 0, // Puntaje/XP acumulado del usuario
   winStreak: 0, // Racha de victorias consecutivas
   currentStreak: 0, // Racha de respuestas correctas
-  unlockedPacks: [], // IDs de packs temáticos adquiridos (ej: ["cine_2000"])
-  packMastery: {}, // Preguntas acertadas por pack temático (ej: { cine_2000: 12 })
+  unlockedPacks: [], // IDs de packs temáticos adquiridos (ej: ["vecinos_springfield"])
+  packMastery: {}, // Preguntas dominadas por pack temático (ej: { vecinos_springfield: ["spr_001", "spr_002"] })
   activeThematicPackId: null, // ID del pack temático en juego directo
   allCategoriesUnlocked: true, // Todas las categorías habilitadas por defecto
   allUnlocked: true, // Estado global de desbloqueo completo
@@ -98,15 +182,17 @@ const state = {
   // Metas de desbloqueo de categorías por RetroCoins (Todas habilitadas desde el inicio)
   categoryCoinsThresholds: {
     cine: 0,          // Desbloqueado desde el inicio
+    animacion: 0,     // Desbloqueado desde el inicio
     videojuegos: 0,   // Desbloqueado desde el inicio
     tv: 0,            // Desbloqueado desde el inicio
-    musica: 0,        // Desbloqueado desde el inicio
+    musica: 0,        // Compatibilidad
     todo: 0           // Desbloqueado desde el inicio
   },
 
   // Umbrales de desbloqueo por puntaje acumulado (compatibilidad)
   categoryThresholds: {
     cine: 0,
+    animacion: 0,
     videojuegos: 0,
     tv: 0,
     musica: 0,
@@ -120,7 +206,7 @@ const state = {
     isSpinning: false,
     currentRotation: 0,
     reloadInterval: null,
-    secondsUntilReload: 23 * 3600 + 59 * 60 + 58
+    secondsUntilReload: 3 * 3600
   },
 
   // Estado de la Ruleta de Duelo (#challengeMatchView)
@@ -144,8 +230,8 @@ const state = {
     currentQuestionIndex: 0,
     totalQuestions: 10,
     lives: 3,
-    timerSeconds: 15,
-    remainingMs: 15000,
+    timerSeconds: 20,
+    remainingMs: 20000,
     isPaused: false,
     timerInterval: null,
     sessionCoins: 0,
@@ -156,6 +242,13 @@ const state = {
     questions: []
   },
   isChallengeMode: false,
+  challenges: [],
+  activeMatchesList: [],
+
+  themes: {
+    unlocked: ["default"],
+    active: "default"
+  },
 
   // Estado de la Tienda (#storeView)
   store: {
@@ -171,6 +264,16 @@ const state = {
 state.currentView = '#homeView';
 window.state = state;
 window.state.currentView = '#homeView';
+window.state.activeMatchesList = state.activeMatchesList;
+window.state.themes = state.themes;
+
+const THEME_SKINS = {
+  navidad: { name: "Navidad Retro", cost: 3000, bodyClass: "theme-navidad" },
+  halloween: { name: "Noche Halloween", cost: 3000, bodyClass: "theme-halloween" },
+  pascua: { name: "Pascua Arcade", cost: 2500, bodyClass: "theme-pascua" },
+  verano: { name: "Verano Synth", cost: 2500, bodyClass: "theme-verano" }
+};
+window.THEME_SKINS = THEME_SKINS;
 
 // =============================================================================
 // SISTEMA DE PROGRESIÓN Y RANGOS ARCADE (10 RANGOS TEMÁTICOS)
@@ -223,20 +326,19 @@ try {
   }
 } catch (e) {}
 
-// Categorías y configuración de ángulos en ruleta_musica_todo.webp
+// Categorías y configuración de ángulos en la ruleta
 const categoriesConfig = {
   cine: { name: 'CINE', icon: '🎬', color: '#7b38e5', centerAngle: 180 },
-  musica: { name: 'MÚSICA', icon: '🎸', color: '#00FF66', centerAngle: 252 },
+  animacion: { name: 'ANIMACIÓN', icon: '✨', color: '#00FF66', centerAngle: 252 },
   videojuegos: { name: 'VIDEOJUEGOS', icon: '🎮', color: '#e2dd5f', centerAngle: 324 },
   tv: { name: 'TV', icon: '📺', color: '#5fe2df', centerAngle: 36 },
   todo: { name: 'TODO / MIX', icon: '❓', color: '#FF5A5F', centerAngle: 108 }
 };
-
-
+categoriesConfig.musica = categoriesConfig.animacion; // Alias de compatibilidad
 
 // Obtener lista de categorías actualmente desbloqueadas (por defecto todas habilitadas desde el principio)
 function getUnlockedCategories() {
-  return Object.keys(categoriesConfig);
+  return ['cine', 'animacion', 'videojuegos', 'tv', 'todo'];
 }
 
 // =============================================================================
@@ -569,6 +671,7 @@ const routesMap = {
   '#home': 'homeView',
   '#inicio': 'homeView',
   '#ruleta': 'wheelView',
+  '#wheel': 'wheelView',
   '#coleccion': 'collectionView',
   '#collection': 'collectionView',
   '#trivia': 'triviaView',
@@ -582,7 +685,8 @@ const routesMap = {
   '#tienda': 'storeView',
   '#store': 'storeView',
   '#perfil': 'profileView',
-  '#profile': 'profileView'
+  '#profile': 'profileView',
+  '#ranking': 'modalRanking'
 };
 
 const screenToHashMap = {
@@ -596,7 +700,8 @@ const screenToHashMap = {
   'challengeMatchView': '#duelo-ruleta',
   'challengeResultView': '#duelo-resultados',
   'storeView': '#tienda',
-  'profileView': '#perfil'
+  'profileView': '#perfil',
+  'modalRanking': '#ranking'
 };
 
 let isNavigating = false;
@@ -683,6 +788,160 @@ function playResultsAudioSequence(customCorrectas = null) {
 }
 window.playResultsAudioSequence = playResultsAudioSequence;
 
+// --- MICRO-SONIDO RÍTMICO Y CONTEO PROGRESIVO DE RETROCOINS (#resultsView) ---
+function playCoinTick() {
+  if (typeof SoundManager !== 'undefined' && SoundManager.isMuted) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) {
+      if (!window._coinAudioCtx) {
+        window._coinAudioCtx = new AudioCtx();
+      }
+      const ctx = window._coinAudioCtx;
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(987.77, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1318.51, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.045);
+      return;
+    }
+  } catch (e) {}
+
+  if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
+    SoundManager.playSFX('retrocoin.wav', 0.18);
+  }
+}
+window.playCoinTick = playCoinTick;
+
+function startResultsCoinsCounter(customSessionCoins, customPrevCoins, customFinalCoins) {
+  const coinsSessionEl = document.getElementById('resultsCoinsSessionVal');
+  const coinsTotalEl = document.getElementById('resultsCoinsTotalVal');
+  const dualCardEl = document.querySelector('#resultsView .results-dual-card');
+
+  const earned = (typeof customSessionCoins === 'number')
+    ? customSessionCoins
+    : (typeof window._lastResultsSessionCoins === 'number'
+        ? window._lastResultsSessionCoins
+        : (state.trivia?.sessionCoins || (state.correctAnswersCount ? state.correctAnswersCount * 5 : 50)));
+
+  const startTotal = (typeof customPrevCoins === 'number')
+    ? customPrevCoins
+    : (typeof window._lastResultsPrevCoins === 'number'
+        ? window._lastResultsPrevCoins
+        : Math.max(0, (state.coins || 0) - earned));
+
+  const endTotal = (typeof customFinalCoins === 'number')
+    ? customFinalCoins
+    : (typeof window._lastResultsFinalCoins === 'number'
+        ? window._lastResultsFinalCoins
+        : (state.coins || startTotal + earned));
+
+  if (coinsSessionEl) coinsSessionEl.innerText = '+0';
+  if (coinsTotalEl) coinsTotalEl.innerText = startTotal.toLocaleString();
+
+  if (earned <= 0) {
+    if (coinsSessionEl) coinsSessionEl.innerText = '+0';
+    if (coinsTotalEl) coinsTotalEl.innerText = endTotal.toLocaleString();
+    return;
+  }
+
+  const duration = 1200; // ~1.2s total
+  const startTime = performance.now();
+  let lastDisplayed = -1;
+  let lastAudioTick = 0;
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(1, elapsed / duration);
+    // Progreso acelerado (ease-out cuadrático)
+    const currentVal = Math.round((1 - Math.pow(1 - progress, 2)) * earned);
+
+    if (currentVal !== lastDisplayed) {
+      lastDisplayed = currentVal;
+      if (coinsSessionEl) coinsSessionEl.innerText = `+${currentVal}`;
+
+      // Reproducir micro-sonido 'coin_tick' rítmico
+      if (now - lastAudioTick >= 40) {
+        lastAudioTick = now;
+        playCoinTick();
+      }
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      if (coinsSessionEl) coinsSessionEl.innerText = `+${earned}`;
+      if (coinsTotalEl) coinsTotalEl.innerText = endTotal.toLocaleString();
+      const hudUserCoins = document.getElementById('userCoins');
+      if (hudUserCoins) hudUserCoins.innerText = endTotal.toLocaleString();
+
+      // Efecto destello/resplandor en la tarjeta de monedas (goldenGleam 450ms)
+      if (dualCardEl) {
+        dualCardEl.classList.remove('golden-gleam-active');
+        void dualCardEl.offsetWidth;
+        dualCardEl.classList.add('golden-gleam-active');
+        setTimeout(() => {
+          dualCardEl.classList.remove('golden-gleam-active');
+        }, 450);
+      }
+
+      // Confeti leve
+      if (typeof confetti === 'function') {
+        try {
+          confetti({
+            particleCount: 28,
+            spread: 55,
+            origin: { y: 0.65 },
+            colors: ['#FFE600', '#FFD700', '#FFA500', '#FFFFFF']
+          });
+        } catch (e) {}
+      }
+    }
+  }
+
+  requestAnimationFrame(tick);
+}
+window.startResultsCoinsCounter = startResultsCoinsCounter;
+
+// 5. Animación de Entrada Escalonada (Staggered Assembly)
+function triggerResultsEntranceAnimation() {
+  const resultsView = document.getElementById('resultsView');
+  if (!resultsView) return;
+
+  resultsView.classList.remove('anim-results-stagger');
+  void resultsView.offsetWidth;
+  resultsView.classList.add('anim-results-stagger');
+
+  setTimeout(() => {
+    resultsView.classList.remove('anim-results-stagger');
+  }, 1000);
+
+  // Sincronizar esquema de rangos temáticos del jugador
+  const playerLevelEl = document.getElementById('resultsPlayerLevel');
+  const playerXpEl = document.getElementById('resultsPlayerTotalXp');
+  const userXP = (window.state && typeof window.state.xp === 'number')
+    ? window.state.xp
+    : ((state && typeof state.xp === 'number') ? state.xp : (state?.userScore || 0));
+  const currentRank = (typeof getPlayerRank === 'function') ? getPlayerRank(userXP) : { name: 'Novato del Videoclub 📼' };
+  if (playerLevelEl) playerLevelEl.innerText = currentRank.name || currentRank.toString();
+  if (playerXpEl) playerXpEl.innerText = `${userXP.toLocaleString()} pts`;
+
+  // Paso 3 (280ms): La tarjeta contenedora sube desde abajo y detona el conteo progresivo
+  setTimeout(() => {
+    startResultsCoinsCounter();
+  }, 280);
+}
+window.triggerResultsEntranceAnimation = triggerResultsEntranceAnimation;
+
 function showView(targetId) {
   const targetSelector = targetId.startsWith('#') ? targetId : '#' + targetId;
   window.state.currentView = targetSelector;
@@ -730,6 +989,18 @@ function showView(targetId) {
     targetView.style.display = 'flex';
     targetView.classList.add('active-view', 'active');
     targetView.scrollTop = 0; // Resetea el scroll interno
+
+    if (targetSelector === '#wheelView') {
+      triggerWheelEntranceAnimations();
+    } else if (targetSelector === '#challengeMatchView') {
+      triggerChallengeMatchEntranceAnimation();
+    } else if (targetSelector === '#resultsView') {
+      triggerResultsEntranceAnimation();
+    } else if (targetSelector === '#challengeResultView') {
+      triggerDuelResultsEntranceAnimation();
+    } else if (targetSelector === '#challengesView') {
+      if (typeof updateActiveChallengesBadge === 'function') updateActiveChallengesBadge();
+    }
   }
 
   // Conexión de música por pantallas (transiciones y rutas)
@@ -792,26 +1063,271 @@ function triggerChallengeMatchEntranceAnimation() {
   const matchView = document.getElementById('challengeMatchView');
   if (!matchView) return;
 
-  matchView.classList.remove('anim-assembling');
-  void matchView.offsetWidth;
-  matchView.classList.add('anim-assembling');
+  matchView.classList.remove('run-stagger-assembly', 'anim-assembling');
+  void matchView.offsetWidth; // Forzar reflow para reiniciar la animación
+  matchView.classList.add('run-stagger-assembly');
 
+  // Pasados 800ms (al concluir la coreografía completa), retira las clases de animación
+  // para asegurar que el disco de la ruleta pueda rotar con total libertad al hacer clic en "GIRAR" sin bloqueos de CSS
   setTimeout(() => {
-    matchView.classList.remove('anim-assembling');
-  }, 850);
+    matchView.classList.remove('run-stagger-assembly', 'anim-assembling');
+  }, 800);
 }
 
 function triggerDuelResultsEntranceAnimation() {
   const resultsView = document.getElementById('challengeResultView');
   if (!resultsView) return;
 
+  // Cancelar temporizadores o animaciones de conteo previas si existían
+  if (window._duelResultsAnimTimers && Array.isArray(window._duelResultsAnimTimers)) {
+    window._duelResultsAnimTimers.forEach(t => clearTimeout(t));
+  }
+  if (window._duelResultsAnimRafs && Array.isArray(window._duelResultsAnimRafs)) {
+    window._duelResultsAnimRafs.forEach(id => cancelAnimationFrame(id));
+  }
+  window._duelResultsAnimTimers = [];
+  window._duelResultsAnimRafs = [];
+
+  const addTimer = (fn, delay) => {
+    const t = setTimeout(fn, delay);
+    window._duelResultsAnimTimers.push(t);
+    return t;
+  };
+
+  // 1. Reset de estados al ingresar a la vista
+  // Oculta el overflow temporalmente en el contenedor principal para evitar barras de desplazamiento
+  resultsView.style.overflow = 'hidden';
+
+  // Identificar los elementos clave
+  const podiumVs = document.getElementById('duelResultPodiumVersus');
+  const podiumWinner = document.getElementById('duelWinnerPodiumContainer');
+  const activePodium = (podiumWinner && podiumWinner.style.display !== 'none') ? podiumWinner : podiumVs;
+
+  const roundBadgeWrap = resultsView.querySelector('.duel-round-badge-wrap');
+  const outcomeTitle = document.getElementById('duelOutcomeTitle');
+  const perfCard = resultsView.querySelector('.duel-performance-card');
+
+  const timeSpentEl = document.getElementById('duelTimeSpent');
+  const pointsEarnedEl = document.getElementById('duelPointsEarned');
+  const coinsEarnedEl = document.getElementById('duelCoinsEarned');
+
+  const btnPassTurn = document.getElementById('btnPassTurnWithoutAttack');
+  const finalActions = document.getElementById('duelFinalActions');
+  const activeActionButton = (finalActions && finalActions.style.display !== 'none') ? finalActions : btnPassTurn;
+
+  // Capturar valores objetivos reales
+  let targetTimeSec = 24.5;
+  if (timeSpentEl && timeSpentEl.innerText) {
+    const parsedT = parseFloat(timeSpentEl.innerText.replace(/[^\d.]/g, ''));
+    if (!isNaN(parsedT) && parsedT > 0) targetTimeSec = parsedT;
+  }
+
+  let targetXP = 240;
+  if (pointsEarnedEl && pointsEarnedEl.innerText) {
+    const parsedXP = parseInt(pointsEarnedEl.innerText.replace(/[^\d]/g, ''), 10);
+    if (!isNaN(parsedXP)) targetXP = parsedXP;
+  }
+
+  let targetCoins = 20;
+  if (coinsEarnedEl && coinsEarnedEl.innerText) {
+    const parsedCoins = parseInt(coinsEarnedEl.innerText.replace(/[^\d]/g, ''), 10);
+    if (!isNaN(parsedCoins)) targetCoins = parsedCoins;
+  }
+
+  // Inicializar textos en 0 para conteo progresivo
+  if (timeSpentEl) timeSpentEl.innerText = '0.0s';
+  const isNegativeXP = pointsEarnedEl && (pointsEarnedEl.classList.contains('duel-xp-loser') || pointsEarnedEl.innerText.includes('-'));
+  const xpPrefix = isNegativeXP ? '-' : '+';
+  if (pointsEarnedEl) pointsEarnedEl.innerText = `${xpPrefix}0 XP`;
+  if (coinsEarnedEl) coinsEarnedEl.innerText = '+0 RC';
+
+  // Limpiar clases de animación previas de elementos
+  [activePodium, podiumVs, podiumWinner, roundBadgeWrap, outcomeTitle, perfCard, activeActionButton, btnPassTurn, finalActions].forEach(el => {
+    if (el) {
+      el.classList.remove('drop-from-ceiling', 'fade-in-micro-scale', 'rise-from-floor', 'rise-from-floor-fast', 'pop-highlight', 'btn-attention-pulse', 'golden-gleam-pill');
+    }
+  });
+
+  // Limpiar emojis flotantes previos
+  resultsView.querySelectorAll('.float-emoji-up').forEach(em => em.remove());
+
+  // Activar ensamblado (opacity: 0 inicial en CSS)
   resultsView.classList.remove('anim-assembling');
   void resultsView.offsetWidth;
   resultsView.classList.add('anim-assembling');
 
-  setTimeout(() => {
+  // A. PASO 1 (0ms): Contenedor central VS cae desde arriba con dropFromCeiling (duración: 420ms)
+  if (activePodium) {
+    activePodium.classList.add('drop-from-ceiling');
+  }
+
+  // B. PASO 2 (180ms): Píldora superior y título aparecen en fade-in con micro-escala
+  addTimer(() => {
+    if (roundBadgeWrap) roundBadgeWrap.classList.add('fade-in-micro-scale');
+    if (outcomeTitle) outcomeTitle.classList.add('fade-in-micro-scale');
+  }, 180);
+
+  // C. PASO 3 (350ms): Tarjeta blanca sube desde abajo usando riseFromFloor (duración: 450ms)
+  addTimer(() => {
+    if (perfCard) perfCard.classList.add('rise-from-floor');
+  }, 350);
+
+  // D. PASO 4 (Contabilización de TIEMPO EMPLEADO - 700ms): 0.0s a real en 500ms
+  addTimer(() => {
+    if (!timeSpentEl) return;
+    const duration = 500;
+    const startT = performance.now();
+
+    function stepTime(now) {
+      const elapsed = now - startT;
+      const progress = Math.min(1, elapsed / duration);
+      const currentVal = (progress * targetTimeSec).toFixed(1);
+      timeSpentEl.innerText = `${currentVal}s`;
+
+      if (progress < 1) {
+        const id = requestAnimationFrame(stepTime);
+        window._duelResultsAnimRafs.push(id);
+      } else {
+        timeSpentEl.innerText = `${targetTimeSec.toFixed(1)}s`;
+
+        // Emoji flotante según el tiempo empleado:
+        // <= 20s: ⚡ | 20s-35s: ⏱️ | > 35s: 🐢
+        let emoji = '⚡';
+        if (targetTimeSec <= 20) {
+          emoji = '⚡';
+        } else if (targetTimeSec <= 35) {
+          emoji = '⏱️';
+        } else {
+          emoji = '🐢';
+        }
+
+        const timeBox = timeSpentEl.closest('.perf-stat-box');
+        if (timeBox) {
+          const emojiSpan = document.createElement('span');
+          emojiSpan.className = 'float-emoji-up';
+          emojiSpan.innerText = emoji;
+          timeBox.appendChild(emojiSpan);
+          setTimeout(() => {
+            emojiSpan.remove();
+          }, 1050);
+        }
+      }
+    }
+    const id = requestAnimationFrame(stepTime);
+    window._duelResultsAnimRafs.push(id);
+  }, 700);
+
+  // E. PASO 5 (Contabilización de PUNTOS GANADOS - 1300ms): 0 a total en 450ms
+  addTimer(() => {
+    if (!pointsEarnedEl) return;
+    const duration = 450;
+    const startT = performance.now();
+
+    function stepXP(now) {
+      const elapsed = now - startT;
+      const progress = Math.min(1, elapsed / duration);
+      const currentXP = Math.round((1 - Math.pow(1 - progress, 2)) * targetXP);
+      pointsEarnedEl.innerText = `${xpPrefix}${currentXP} XP`;
+
+      if (progress < 1) {
+        const id = requestAnimationFrame(stepXP);
+        window._duelResultsAnimRafs.push(id);
+      } else {
+        pointsEarnedEl.innerText = `${xpPrefix}${targetXP} XP`;
+        const xpBox = pointsEarnedEl.closest('.perf-stat-box');
+        if (xpBox) {
+          xpBox.classList.remove('pop-highlight');
+          void xpBox.offsetWidth;
+          xpBox.classList.add('pop-highlight');
+          setTimeout(() => xpBox.classList.remove('pop-highlight'), 500);
+        }
+
+        // Sonido sutil de ganancia/pop
+        if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
+          SoundManager.playSFX('compra_tienda.wav', 0.25);
+        }
+      }
+    }
+    const id = requestAnimationFrame(stepXP);
+    window._duelResultsAnimRafs.push(id);
+  }, 1300);
+
+  // F. PASO 6 (Contabilización de RETROCOINS - 1800ms): 0 a total en 400ms con 'coin_tick'
+  addTimer(() => {
+    if (!coinsEarnedEl) return;
+    const duration = 400;
+    const startT = performance.now();
+    let lastDisplayed = -1;
+    let lastAudioTick = 0;
+
+    function stepCoins(now) {
+      const elapsed = now - startT;
+      const progress = Math.min(1, elapsed / duration);
+      const currentCoins = Math.round((1 - Math.pow(1 - progress, 2)) * targetCoins);
+
+      if (currentCoins !== lastDisplayed) {
+        lastDisplayed = currentCoins;
+        coinsEarnedEl.innerText = `+${currentCoins} RC`;
+
+        if (now - lastAudioTick >= 45) {
+          lastAudioTick = now;
+          if (typeof playCoinTick === 'function') {
+            playCoinTick();
+          }
+        }
+      }
+
+      if (progress < 1) {
+        const id = requestAnimationFrame(stepCoins);
+        window._duelResultsAnimRafs.push(id);
+      } else {
+        coinsEarnedEl.innerText = `+${targetCoins} RC`;
+        const coinBox = coinsEarnedEl.closest('.perf-stat-box');
+        if (coinBox) {
+          coinBox.classList.remove('golden-gleam-pill', 'pop-highlight');
+          void coinBox.offsetWidth;
+          coinBox.classList.add('golden-gleam-pill');
+          setTimeout(() => coinBox.classList.remove('golden-gleam-pill'), 500);
+        }
+      }
+    }
+    const id = requestAnimationFrame(stepCoins);
+    window._duelResultsAnimRafs.push(id);
+  }, 1800);
+
+  // G. PASO 7 (Aparición del BOTÓN - 2300ms): Entra subiendo con riseFromFloor (350ms)
+  addTimer(() => {
+    if (activeActionButton) {
+      activeActionButton.classList.add('rise-from-floor-fast');
+    }
+  }, 2300);
+
+  // A los 2650ms: Activa de forma permanente la clase .btn-attention-pulse
+  addTimer(() => {
+    if (btnPassTurn) {
+      btnPassTurn.classList.remove('rise-from-floor-fast');
+      btnPassTurn.classList.add('btn-attention-pulse');
+    }
+    if (finalActions) {
+      const btnRematch = document.getElementById('btnRematchDuel');
+      if (btnRematch) {
+        btnRematch.classList.remove('rise-from-floor-fast');
+        btnRematch.classList.add('btn-attention-pulse');
+      }
+    }
+  }, 2650);
+
+  // 4. MANTENER INTERACTIVIDAD (2700ms): Remueve clases temporales para clicks inmediatos
+  addTimer(() => {
     resultsView.classList.remove('anim-assembling');
-  }, 850);
+    resultsView.style.overflow = '';
+
+    if (activePodium) activePodium.classList.remove('drop-from-ceiling');
+    if (roundBadgeWrap) roundBadgeWrap.classList.remove('fade-in-micro-scale');
+    if (outcomeTitle) outcomeTitle.classList.remove('fade-in-micro-scale');
+    if (perfCard) perfCard.classList.remove('rise-from-floor');
+    if (activeActionButton) activeActionButton.classList.remove('rise-from-floor-fast');
+  }, 2700);
 }
 
 function triggerStoreEntranceAnimation() {
@@ -827,11 +1343,38 @@ function triggerStoreEntranceAnimation() {
   }, 850);
 }
 
-function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1) {
+function getCountryFlag(code) {
+  if (!code) return '🌎';
+  const flags = {
+    'BO': '🇧🇴',
+    'PE': '🇵🇪',
+    'MX': '🇲🇽',
+    'AR': '🇦🇷',
+    'CL': '🇨🇱',
+    'CO': '🇨🇴',
+    'ES': '🇪🇸',
+    'EC': '🇪🇨',
+    'UY': '🇺🇾',
+    'PY': '🇵🇾',
+    'VE': '🇻🇪',
+    'US': '🇺🇸',
+    'WORLD': '🌎'
+  };
+  return flags[String(code).toUpperCase()] || '🌎';
+}
+window.getCountryFlag = getCountryFlag;
+
+function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', round = 1, rivalCountry = null) {
+  const localCountry = window.state?.userCountry || localStorage.getItem('retroquiz_user_country') || 'BO';
+  const rivalCountryCode = rivalCountry || state.currentDuel?.rivalCountry || 'WORLD';
+  const localFlag = getCountryFlag(localCountry);
+  const rivalFlag = getCountryFlag(rivalCountryCode);
+
   state.currentDuel = {
     ...state.currentDuel,
     rivalName: rivalName,
     rivalAvatar: rivalAvatar,
+    rivalCountry: rivalCountryCode,
     currentRound: round,
     localTotalScore: state.currentDuel?.localTotalScore || 0,
     rivalTotalScore: state.currentDuel?.rivalTotalScore || 0,
@@ -848,36 +1391,38 @@ function setupDuelMatchUI(rivalName = 'Usuario 2', rivalAvatar = '🕹️', roun
     }
   }
 
+  const localNameEl = document.getElementById('duelLocalName') || document.querySelector('.duel-player-local .duel-player-name');
+  if (localNameEl) localNameEl.innerText = `${window.state?.username || state.username || localStorage.getItem('retroquiz_username') || 'Tú'} ${localFlag}`;
+
+  const localBadge = document.getElementById('duelLocalCountryBadge');
+  if (localBadge) localBadge.innerText = localFlag;
+
   const nameEl = document.getElementById('duelRivalName');
-  if (nameEl) nameEl.innerText = rivalName;
+  if (nameEl) nameEl.innerText = `${rivalName} ${rivalFlag}`;
+
+  const rivalBadge = document.getElementById('duelRivalCountryBadge');
+  if (rivalBadge) rivalBadge.innerText = rivalFlag;
 
   const avatarEl = document.querySelector('#duelRivalAvatar span');
   if (avatarEl) avatarEl.innerText = rivalAvatar;
 
   const handicapRivalEl = document.getElementById('duelHandicapRival');
-  if (handicapRivalEl) handicapRivalEl.innerText = rivalName;
+  if (handicapRivalEl) handicapRivalEl.innerText = `${rivalName} ${rivalFlag}`;
 }
 
 function triggerWheelEntranceAnimations() {
-  const wheelStage = document.querySelector('#wheelView .wheel-stage');
-  const shotsSection = document.querySelector('#wheelView .shots-system-section');
+  const wheelView = document.getElementById('wheelView');
+  if (!wheelView) return;
 
-  if (wheelStage) {
-    wheelStage.classList.remove('wheel-pop-in');
-    void wheelStage.offsetWidth; // Force reflow
-    wheelStage.classList.add('wheel-pop-in');
-  }
+  wheelView.classList.remove('run-stagger-assembly', 'anim-assembling');
+  void wheelView.offsetWidth; // Forzar reflow para reiniciar la animación
+  wheelView.classList.add('run-stagger-assembly');
 
-  if (shotsSection) {
-    shotsSection.classList.remove('slide-up-in');
-    void shotsSection.offsetWidth; // Force reflow
-    shotsSection.classList.add('slide-up-in');
-  }
-
+  // Pasados 800ms (al concluir la coreografía completa), retira las clases de animación
+  // para asegurar que el disco de la ruleta pueda rotar con total libertad al hacer clic en "GIRAR" sin bloqueos de CSS
   setTimeout(() => {
-    if (wheelStage) wheelStage.classList.remove('wheel-pop-in');
-    if (shotsSection) shotsSection.classList.remove('slide-up-in');
-  }, 600);
+    wheelView.classList.remove('run-stagger-assembly', 'anim-assembling');
+  }, 800);
 }
 
 function renderScreenView(screenId) {
@@ -893,6 +1438,7 @@ function renderScreenView(screenId) {
       triggerAppEntranceAnimation();
     } else if (targetView.id === 'wheelView') {
       state.activeTab = 'ruleta';
+      updateShotsUI();
       updateWheelCategoriesUI();
       triggerWheelEntranceAnimations();
 
@@ -928,6 +1474,7 @@ function renderScreenView(screenId) {
       state.activeTab = 'gameover';
     } else if (targetView.id === 'resultsView') {
       state.activeTab = 'resultados';
+      triggerResultsEntranceAnimation();
     } else if (targetView.id === 'challengesView') {
       state.activeTab = 'desafios';
       setActiveTab('desafios');
@@ -985,10 +1532,31 @@ function savePackProgressToCloud() {
 }
 window.savePackProgressToCloud = savePackProgressToCloud;
 
-// Compra dual de packs temáticos (RetroCoins o IAP $0.99 USD)
-function comprarThematicPack(packId, method = 'coins') {
+// Compra exclusiva de packs temáticos con moneda virtual interna (RetroCoins)
+function comprarThematicPack(packId) {
+  if (packId === 'cine_2000' || packId === 'pack_cine_2000') {
+    packId = 'vecinos_springfield';
+  }
+  if (packId === 'videojuegos_retro' || packId === 'videojuegos_clasicos') {
+    packId = 'heroes_multiverso';
+  }
+  if (packId === 'series_iconicas' || packId === 'tv_series') {
+    packId = 'galaxias_lejanas';
+  }
+  if (packId === 'artistas_latinos' || packId === 'musica_latina') {
+    packId = 'guerreros_ki';
+  }
+  if (packId === 'puro_90s' || packId === 'pack_puro_90s') {
+    packId = 'reino_champinon';
+  }
+  if (packId === 'puro_80s' || packId === 'pack_puro_80s') {
+    packId = 'castillo_magia';
+  }
   const pack = THEMATIC_PACKS.find(p => p.id === packId);
   if (!pack) return;
+
+  const currentCoins = (window.state && window.state.coins !== undefined) ? window.state.coins : (state.coins || 0);
+  const cost = pack.price || pack.priceCoins || 5000;
 
   if (!state.unlockedPacks) state.unlockedPacks = [];
   if (window.state && !window.state.unlockedPacks) window.state.unlockedPacks = [];
@@ -999,20 +1567,24 @@ function comprarThematicPack(packId, method = 'coins') {
     return;
   }
 
-  if (method === 'coins') {
-    const cost = pack.priceCoins || 5000;
-    if (state.coins < cost) {
-      if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
-      showRetroToast(`Necesitas 5,000 RetroCoins para desbloquear este pack. ¡Recarga en la Tienda!`, 'warning');
-      return;
-    }
-    state.coins -= cost;
-    if (window.state) window.state.coins = state.coins;
-    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
-  } else {
-    console.log(`[IAP] Compra exitosa simulada de ${pack.name} por ${pack.priceUSD}`);
+  // 1. Verificar saldo de RetroCoins
+  if (currentCoins < cost) {
+    if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
+    showRetroToast(`Necesitas ${cost.toLocaleString()} RetroCoins para desbloquear este pack. ¡Gánalas jugando!`, 'warning');
+    return;
   }
 
+  // 2. Descontar saldo con saveCoinsToCloud
+  const newBalance = currentCoins - cost;
+  state.coins = newBalance;
+  if (window.state) window.state.coins = newBalance;
+  if (typeof saveCoinsToCloud === 'function') {
+    saveCoinsToCloud(newBalance);
+  } else if (typeof window.saveCoinsToCloud === 'function') {
+    window.saveCoinsToCloud(newBalance);
+  }
+
+  // 3. Agregar el ID a unlockedPacks y guardar en Firestore
   if (!state.unlockedPacks.includes(packId)) state.unlockedPacks.push(packId);
   if (window.state && !window.state.unlockedPacks.includes(packId)) window.state.unlockedPacks.push(packId);
 
@@ -1032,117 +1604,409 @@ function comprarThematicPack(packId, method = 'coins') {
   renderCollectionCardsUI();
   updateStoreUI();
   updateHUD();
+  return true;
 }
 window.comprarThematicPack = comprarThematicPack;
 
-// Desbloqueo de todas las colecciones ($2.99 USD)
-function desbloquearTodasLasColecciones() {
-  if (!state.unlockedPacks) state.unlockedPacks = [];
-  if (window.state && !window.state.unlockedPacks) window.state.unlockedPacks = [];
-
-  THEMATIC_PACKS.forEach(p => {
-    if (!state.unlockedPacks.includes(p.id)) state.unlockedPacks.push(p.id);
-    if (window.state && !window.state.unlockedPacks.includes(p.id)) window.state.unlockedPacks.push(p.id);
-  });
-
-  state.allCategoriesUnlocked = true;
-  state.allUnlocked = true;
-
-  // Activa la bandera temporal para la secuencia de recompensa en la ruleta
-  state.pendingCollectionUnlockAnim = true;
-  if (window.state) window.state.pendingCollectionUnlockAnim = true;
-
-  savePackProgressToCloud();
-
-  if (typeof SoundManager !== 'undefined') {
-    SoundManager.playSFX('compra_tienda.wav', 0.85);
-  } else if (typeof playSuccessSound === 'function') {
-    playSuccessSound();
-  }
-  if (typeof triggerCelebrationConfetti === 'function') {
-    triggerCelebrationConfetti();
-  }
-
-  showRetroToast(`¡Todas las colecciones han sido desbloqueadas! ⭐`, 'success');
-
-  renderCollectionCardsUI();
-  updateStoreUI();
+// =============================================================================
+// MODAL DE DETALLE / INSPECCIÓN DE PACKS TEMÁTICOS (#packDetailModal)
+// =============================================================================
+function resolveThematicPackId(rawPackId) {
+  if (rawPackId === 'cine_2000' || rawPackId === 'pack_cine_2000') return 'vecinos_springfield';
+  if (rawPackId === 'videojuegos_retro' || rawPackId === 'videojuegos_clasicos') return 'heroes_multiverso';
+  if (rawPackId === 'series_iconicas' || rawPackId === 'tv_series') return 'galaxias_lejanas';
+  if (rawPackId === 'artistas_latinos' || rawPackId === 'musica_latina') return 'guerreros_ki';
+  if (rawPackId === 'puro_90s' || rawPackId === 'pack_puro_90s') return 'reino_champinon';
+  if (rawPackId === 'puro_80s' || rawPackId === 'pack_puro_80s') return 'castillo_magia';
+  return rawPackId;
 }
-window.desbloquearTodasLasColecciones = desbloquearTodasLasColecciones;
 
-// Modo Directo: JUGAR PACK ▶
-async function jugarThematicPack(packId) {
-  const pack = THEMATIC_PACKS.find(p => p.id === packId);
+function openPackDetailModal(rawPackId) {
+  const packId = resolveThematicPackId(rawPackId);
+  const pack = (window.THEMATIC_PACKS || THEMATIC_PACKS).find(p => p.id === packId);
   if (!pack) return;
 
-  if (typeof SoundManager !== 'undefined') {
+  const modal = document.getElementById('packDetailModal');
+  if (!modal) return;
+
+  const unlockedPacks = window.state?.unlockedPacks || state.unlockedPacks || [];
+  const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id) ||
+    (pack.id === 'vecinos_springfield' && unlockedPacks.includes('cine_2000')) ||
+    (pack.id === 'heroes_multiverso' && (unlockedPacks.includes('videojuegos_retro') || unlockedPacks.includes('videojuegos_clasicos'))) ||
+    (pack.id === 'galaxias_lejanas' && (unlockedPacks.includes('series_iconicas') || unlockedPacks.includes('tv_series'))) ||
+    (pack.id === 'guerreros_ki' && (unlockedPacks.includes('artistas_latinos') || unlockedPacks.includes('musica_latina'))) ||
+    (pack.id === 'reino_champinon' && (unlockedPacks.includes('puro_90s') || unlockedPacks.includes('pack_puro_90s'))) ||
+    (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')));
+
+  // Título
+  const titleEl = document.getElementById('packDetailTitle');
+  if (titleEl) titleEl.innerText = pack.name;
+
+  // Pill temática / categoría
+  const pillEl = document.getElementById('packDetailPill');
+  if (pillEl) {
+    pillEl.innerText = pack.badge || pack.category || 'PACK TEMÁTICO';
+    let catBg = '#FFE600';
+    let catTextColor = '#000000';
+    if (pack.id === 'castillo_magia' || pack.category === 'CINE & LITERATURA') {
+      catBg = '#7928CA';
+      catTextColor = '#FFFFFF';
+    } else if (pack.id === 'reino_champinon') {
+      catBg = '#00E676';
+      catTextColor = '#000000';
+    } else if (pack.id === 'guerreros_ki') {
+      catBg = '#FF6600';
+      catTextColor = '#FFFFFF';
+    } else if (pack.category === 'ANIMACIÓN' || pack.id === 'vecinos_springfield') {
+      catBg = '#00F0FF';
+      catTextColor = '#000000';
+    } else if (pack.id === 'galaxias_lejanas') {
+      catBg = '#00D2FF';
+      catTextColor = '#000000';
+    } else if (pack.category === 'CINE & SERIES' || pack.id === 'heroes_multiverso') {
+      catBg = '#FF2A55';
+      catTextColor = '#FFFFFF';
+    }
+    pillEl.style.background = catBg;
+    pillEl.style.color = catTextColor;
+  }
+
+  // Imagen de la caja 3D
+  const imgEl = document.getElementById('packDetailBoxImg');
+  if (imgEl) {
+    const isSpringfield = pack.id === 'vecinos_springfield';
+    const isMultiverso = pack.id === 'heroes_multiverso';
+    const isGalaxias = pack.id === 'galaxias_lejanas';
+    const isKi = pack.id === 'guerreros_ki';
+    const isReino = pack.id === 'reino_champinon';
+    const isMagia = pack.id === 'castillo_magia';
+    const boxImg = pack.coverImage || pack.boxImage || (isSpringfield ? 'assets/pantalla_colecciones/caja_springfield.webp' : (isMultiverso ? 'assets/pantalla_colecciones/caja_multiverso.webp' : (isGalaxias ? 'assets/pantalla_colecciones/caja_galaxias.webp' : (isKi ? 'assets/pantalla_colecciones/caja_ki.webp' : (isReino ? 'assets/pantalla_colecciones/caja_reino.webp' : (isMagia ? 'assets/pantalla_colecciones/caja_magia.webp' : ''))))));
+    imgEl.src = boxImg;
+    imgEl.alt = pack.name;
+  }
+
+  // Descripción
+  const descEl = document.getElementById('packDetailDesc');
+  if (descEl) {
+    descEl.innerText = pack.description || '';
+  }
+
+  // Contador total
+  const counterEl = document.getElementById('packDetailQuestionCount');
+  if (counterEl) {
+    counterEl.innerText = `Total: ${pack.totalQuestions || 50} Preguntas Exclusivas`;
+  }
+
+  // Botón de acción
+  const actionContainer = document.getElementById('packDetailActionContainer');
+  if (actionContainer) {
+    if (isUnlocked) {
+      actionContainer.innerHTML = `
+        <button class="pack-detail-action-btn btn-play interactive-press" id="btnPackDetailAction" onclick="closePackDetailModal(); iniciarJuegoPack('${pack.id}');">
+          JUGAR PACK ▶
+        </button>
+      `;
+    } else {
+      actionContainer.innerHTML = `
+        <button class="pack-detail-action-btn btn-buy interactive-press" id="btnPackDetailAction" onclick="handleBuyPackFromModal('${pack.id}')">
+          COMPRAR POR 🪙 ${(pack.price || pack.priceCoins || 5000).toLocaleString()}
+        </button>
+      `;
+    }
+  }
+
+  modal.classList.add('open');
+  if (typeof playModalOpenSound === 'function') {
+    playModalOpenSound();
+  } else if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
+    SoundManager.playSFX('modal_pop.wav', 0.5);
+  }
+}
+
+function closePackDetailModal() {
+  const modal = document.getElementById('packDetailModal');
+  if (modal) {
+    modal.classList.remove('open');
+    if (typeof playClickSound === 'function') playClickSound();
+  }
+}
+
+function handleBuyPackFromModal(rawPackId) {
+  const packId = resolveThematicPackId(rawPackId);
+  const pack = (window.THEMATIC_PACKS || THEMATIC_PACKS).find(p => p.id === packId);
+  const cost = pack ? (pack.price || pack.priceCoins || 5000) : 5000;
+  const currentCoins = (window.state && window.state.coins !== undefined) ? window.state.coins : (state.coins || 0);
+
+  if (currentCoins < cost) {
+    if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
+    showRetroToast(`Necesitas ${cost.toLocaleString()} RetroCoins para desbloquear este pack. ¡Gánalas jugando!`, 'warning');
+    return;
+  }
+
+  comprarThematicPack(packId);
+
+  const unlockedPacks = window.state?.unlockedPacks || state.unlockedPacks || [];
+  if (unlockedPacks.includes(packId)) {
+    const actionContainer = document.getElementById('packDetailActionContainer');
+    if (actionContainer) {
+      actionContainer.innerHTML = `
+        <button class="pack-detail-action-btn btn-play interactive-press" id="btnPackDetailAction" onclick="closePackDetailModal(); iniciarJuegoPack('${packId}');">
+          JUGAR PACK ▶
+        </button>
+      `;
+    }
+  }
+}
+
+window.resolveThematicPackId = resolveThematicPackId;
+window.openPackDetailModal = openPackDetailModal;
+window.closePackDetailModal = closePackDetailModal;
+window.handleBuyPackFromModal = handleBuyPackFromModal;
+
+// Modo Directo: JUGAR PACK ▶ (Ultra-blindado: fetch multiruta, soporte local file://, banco integrado 100% resiliente)
+async function iniciarJuegoPack(packId) {
+  if (packId === 'cine_2000' || packId === 'pack_cine_2000') {
+    packId = 'vecinos_springfield';
+  }
+  if (packId === 'videojuegos_retro' || packId === 'videojuegos_clasicos') {
+    packId = 'heroes_multiverso';
+  }
+  if (packId === 'series_iconicas' || packId === 'tv_series') {
+    packId = 'galaxias_lejanas';
+  }
+  if (packId === 'artistas_latinos' || packId === 'musica_latina') {
+    packId = 'guerreros_ki';
+  }
+  if (packId === 'puro_90s' || packId === 'pack_puro_90s') {
+    packId = 'reino_champinon';
+  }
+  if (packId === 'puro_80s' || packId === 'pack_puro_80s') {
+    packId = 'castillo_magia';
+  }
+  
+  if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
     SoundManager.playSFX('botones.wav', 0.60);
   } else if (typeof playClickSound === 'function') {
     playClickSound();
   }
 
   try {
-    const response = await fetch(pack.file + '?v=' + Date.now());
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    let packQuestions = Array.isArray(data) ? data : (data.preguntas || []);
-    if (!packQuestions || packQuestions.length === 0) {
-      showRetroToast('No se pudieron cargar preguntas de este pack', 'error');
-      return;
+    const pack = THEMATIC_PACKS.find(p => p.id === packId);
+    if (!pack) throw new Error("Pack no encontrado: " + packId);
+
+    let preguntas = null;
+
+    // 1. Intentar carga por fetch probando múltiples variaciones de ruta (con y sin query string)
+    const candidateUrls = [
+      `${pack.file}?v=${Date.now()}`,
+      pack.file,
+      `./${pack.file}`
+    ];
+    if (pack.id === 'vecinos_springfield') {
+      candidateUrls.push(
+        'data/pack_springfield.json',
+        `data/pack_springfield.json?v=${Date.now()}`,
+        './data/pack_springfield.json',
+        'data/vecinos_springfield.json',
+        `data/vecinos_springfield.json?v=${Date.now()}`
+      );
+    } else if (pack.id === 'heroes_multiverso') {
+      candidateUrls.push(
+        'data/pack_multiverso.json',
+        `data/pack_multiverso.json?v=${Date.now()}`,
+        './data/pack_multiverso.json'
+      );
+    } else if (pack.id === 'galaxias_lejanas') {
+      candidateUrls.push(
+        'data/pack_galaxias.json',
+        `data/pack_galaxias.json?v=${Date.now()}`,
+        './data/pack_galaxias.json'
+      );
+    } else if (pack.id === 'guerreros_ki') {
+      candidateUrls.push(
+        'data/pack_ki.json',
+        `data/pack_ki.json?v=${Date.now()}`,
+        './data/pack_ki.json'
+      );
+    } else if (pack.id === 'reino_champinon') {
+      candidateUrls.push(
+        'data/pack_reino.json',
+        `data/pack_reino.json?v=${Date.now()}`,
+        './data/pack_reino.json'
+      );
+    } else if (pack.id === 'castillo_magia') {
+      candidateUrls.push(
+        'data/pack_magia.json',
+        `data/pack_magia.json?v=${Date.now()}`,
+        './data/pack_magia.json'
+      );
     }
 
-    // Shuffle y seleccionar 10 preguntas del pack
-    const shuffled = [...packQuestions].sort(() => 0.5 - Math.random());
-    const roundQuestions = shuffled.slice(0, 10);
+    for (const testUrl of candidateUrls) {
+      try {
+        const res = await fetch(testUrl, { cache: 'no-store' });
+        if (res && res.ok) {
+          const json = await res.json();
+          const list = Array.isArray(json) ? json : (json && json.preguntas);
+          if (Array.isArray(list) && list.length > 0) {
+            preguntas = list;
+            break;
+          }
+        }
+      } catch (fetchErr) {
+        // Fallo de red o bloqueo CORS en file:// (continuar intentando)
+      }
+    }
 
-    // Asignar al estado global
-    window.state.activeThematicPackId = packId;
-    state.activeThematicPackId = packId;
-    window.state.isChallengeMode = false;
-    window.state.isTieBreaker = false;
+    // 2. Si fetch no pudo obtener preguntas (ej: protocolo file://, sin servidor local, offline), usar el banco integrado
+    if (!preguntas || preguntas.length === 0) {
+      if (pack.id === 'vecinos_springfield') {
+        const fallbackBank = (typeof window !== 'undefined' && window.SPRINGFIELD_QUESTIONS_FALLBACK)
+          ? window.SPRINGFIELD_QUESTIONS_FALLBACK
+          : (typeof SPRINGFIELD_QUESTIONS_FALLBACK !== 'undefined' ? SPRINGFIELD_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Springfield desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      } else if (pack.id === 'heroes_multiverso') {
+        const fallbackBank = (typeof window !== 'undefined' && window.MULTIVERSO_QUESTIONS_FALLBACK)
+          ? window.MULTIVERSO_QUESTIONS_FALLBACK
+          : (typeof MULTIVERSO_QUESTIONS_FALLBACK !== 'undefined' ? MULTIVERSO_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Héroes del Multiverso desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      } else if (pack.id === 'galaxias_lejanas') {
+        const fallbackBank = (typeof window !== 'undefined' && window.GALAXIAS_QUESTIONS_FALLBACK)
+          ? window.GALAXIAS_QUESTIONS_FALLBACK
+          : (typeof GALAXIAS_QUESTIONS_FALLBACK !== 'undefined' ? GALAXIAS_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Galaxias Lejanas desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      } else if (pack.id === 'guerreros_ki') {
+        const fallbackBank = (typeof window !== 'undefined' && window.KI_QUESTIONS_FALLBACK)
+          ? window.KI_QUESTIONS_FALLBACK
+          : (typeof KI_QUESTIONS_FALLBACK !== 'undefined' ? KI_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Guerreros del Ki desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      } else if (pack.id === 'reino_champinon') {
+        const fallbackBank = (typeof window !== 'undefined' && window.REINO_QUESTIONS_FALLBACK)
+          ? window.REINO_QUESTIONS_FALLBACK
+          : (typeof REINO_QUESTIONS_FALLBACK !== 'undefined' ? REINO_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Reino Champiñón desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      } else if (pack.id === 'castillo_magia') {
+        const fallbackBank = (typeof window !== 'undefined' && window.MAGIA_QUESTIONS_FALLBACK)
+          ? window.MAGIA_QUESTIONS_FALLBACK
+          : (typeof MAGIA_QUESTIONS_FALLBACK !== 'undefined' ? MAGIA_QUESTIONS_FALLBACK : null);
+
+        if (Array.isArray(fallbackBank) && fallbackBank.length > 0) {
+          console.info("Cargando preguntas de Castillo de Magia desde el banco integrado local (100% disponible)...");
+          preguntas = JSON.parse(JSON.stringify(fallbackBank));
+        }
+      }
+
+      if (!preguntas || preguntas.length === 0) {
+        if (typeof getEmergencyQuestionsForCategory === 'function') {
+          const catName = (pack.category && pack.category.includes('ANIM')) ? 'ANIMACIÓN' : (pack.category && pack.category.includes('VIDEO') ? 'VIDEOJUEGOS' : 'CINE');
+          preguntas = JSON.parse(JSON.stringify(getEmergencyQuestionsForCategory(catName, false)));
+        }
+      }
+    }
+
+    if (!preguntas || preguntas.length === 0) {
+      throw new Error("No se pudieron cargar preguntas del pack desde la red ni desde el banco integrado");
+    }
+
+    // Barajar preguntas con Fisher-Yates
+    for (let i = preguntas.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [preguntas[i], preguntas[j]] = [preguntas[j], preguntas[i]];
+    }
+
+    // Configurar estado de la trivia temática (10 preguntas por tanda)
+    const roundQuestions = preguntas.slice(0, 10);
+    if (!window.state) window.state = (typeof state !== 'undefined' ? state : {});
+    window.state.activeThematicPack = pack.id;
+    window.state.activeThematicPackId = pack.id;
+    state.activeThematicPack = pack.id;
+    state.activeThematicPackId = pack.id;
     window.state.currentRoundQuestions = roundQuestions;
     window.state.currentQuestionIndex = 0;
     window.state.lives = 3;
     window.state.correctAnswersCount = 0;
     window.state.currentRoundXP = 0;
     window.state.accumulatedAnswerTimeMs = 0;
+    window.state.isChallengeMode = false;
+    window.state.isTieBreaker = false;
 
     state.isChallengeMode = false;
     state.isTieBreaker = false;
     state.currentRoundXP = 0;
-    if (state.trivia) {
-      state.trivia.isDuel = false;
-      state.trivia.questions = roundQuestions;
-      state.trivia.totalQuestions = 10;
-      state.trivia.timerSeconds = 15;
-      state.trivia.remainingMs = 15000;
-      state.trivia.duelStartTime = performance.now();
-      state.trivia.questionStartTime = performance.now();
-      state.trivia.lives = 3;
-      state.trivia.sessionCoins = 0;
-      state.trivia.sessionXP = 0;
-      state.trivia.currentStreak = 0;
-      state.trivia.correctAnswersCount = 0;
-      state.trivia.currentQuestionIndex = 0;
-      state.trivia.isAnswering = false;
-      state.trivia.category = pack.category.toLowerCase();
-    }
     state.correctAnswersCount = 0;
+
+    if (!state.trivia) state.trivia = {};
+    state.trivia.isDuel = false;
+    state.trivia.questions = roundQuestions;
+    state.trivia.totalQuestions = roundQuestions.length;
+    const tiempoBase = 20;
+    window.state.timeLeft = tiempoBase;
+    state.trivia.timerSeconds = tiempoBase;
+    state.trivia.remainingMs = tiempoBase * 1000;
+    state.trivia.duelStartTime = performance.now();
+    state.trivia.questionStartTime = performance.now();
+    state.trivia.lives = 3;
+    state.trivia.sessionCoins = 0;
+    state.trivia.sessionXP = 0;
+    state.trivia.currentStreak = 0;
+    state.trivia.correctAnswersCount = 0;
+    state.trivia.currentQuestionIndex = 0;
+    state.trivia.isAnswering = false;
+    state.trivia.category = (pack.category || 'CINE & LITERATURA').toLowerCase();
 
     // Configurar tema visual de trivia según categoría
     const triviaView = document.getElementById('triviaView');
-    let themeColor = '#7B38E5'; // Cine
-    let catClass = 'cine';
-    const normCat = pack.category.toUpperCase();
-    if (normCat.includes('VIDEO') || normCat.includes('JUEGO')) {
+    const triviaCard = document.getElementById('triviaCard');
+    let themeColor = '#00FF66'; // Animación por defecto
+    let catClass = 'animacion';
+    const normCat = (pack.category || '').toUpperCase();
+    if (pack.id === 'castillo_magia') {
+      themeColor = '#7928CA'; // Púrpura magia / hechicería
+      catClass = 'cine';
+    } else if (pack.id === 'reino_champinon') {
+      themeColor = '#00E676'; // Verde esmeralda Reino Champiñón
+      catClass = 'videojuegos';
+    } else if (pack.id === 'guerreros_ki') {
+      themeColor = '#FF6600'; // Naranja vibrante Ki / Super Saiyajin
+      catClass = 'animacion';
+    } else if (pack.id === 'galaxias_lejanas') {
+      themeColor = '#00D2FF'; // Azul/cian espacial Galaxias Lejanas
+      catClass = 'cine';
+    } else if (pack.id === 'heroes_multiverso' || normCat.includes('CINE & SERIES') || (normCat.includes('CINE') && normCat.includes('SERIE'))) {
+      themeColor = '#FF2A55'; // Carmesí arcade héroes
+      catClass = 'cine';
+    } else if (normCat.includes('VIDEO') || normCat.includes('JUEGO')) {
       themeColor = '#B5DC35';
       catClass = 'videojuegos';
-    } else if (normCat.includes('TV') || normCat.includes('SERIE')) {
+    } else if (normCat.includes('TV')) {
       themeColor = '#00E5FF';
       catClass = 'tv';
+    } else if (normCat.includes('ANIM') || normCat.includes('DIBUJ') || normCat.includes('ANIME')) {
+      themeColor = '#00FF66';
+      catClass = 'animacion';
     } else if (normCat.includes('MUS') || normCat.includes('MÚS')) {
       themeColor = '#00FF66';
-      catClass = 'musica';
+      catClass = 'animacion';
     } else if (normCat.includes('80') || normCat.includes('90') || normCat.includes('ÉPOCA')) {
       themeColor = '#FF5A5F';
       catClass = 'todo';
@@ -1151,41 +2015,149 @@ async function jugarThematicPack(packId) {
     if (triviaView) {
       triviaView.style.setProperty('--trivia-theme-color', themeColor);
       triviaView.dataset.cat = catClass;
-      triviaView.classList.remove('siren-panic', 'cat-cine', 'cat-videojuegos', 'cat-musica', 'cat-tv', 'cat-todo', 'cat-mix');
+      triviaView.classList.remove('siren-panic', 'cat-cine', 'cat-videojuegos', 'cat-musica', 'cat-tv', 'cat-todo', 'cat-mix', 'cat-animacion', 'theme-animacion');
       triviaView.classList.add('cat-' + catClass);
+      if (catClass === 'animacion') {
+        triviaView.classList.add('theme-animacion');
+      }
+    }
+
+    if (triviaCard) {
+      triviaCard.classList.remove('theme-animacion');
+      if (catClass === 'animacion') {
+        triviaCard.classList.add('theme-animacion');
+      }
+    }
+
+    const catTag = document.getElementById('triviaCategoryTag');
+    if (catTag) {
+      catTag.textContent = (pack.id === 'castillo_magia') ? 'CINE & LITERATURA' : ((pack.id === 'heroes_multiverso' || pack.id === 'galaxias_lejanas') ? 'CINE & SERIES' : (pack.id === 'reino_champinon' ? 'VIDEOJUEGOS' : (((catClass === 'animacion') || pack.id === 'guerreros_ki') ? 'ANIMACIÓN' : (pack.category || 'TRIVIA').toUpperCase())));
+      if (catClass === 'animacion') {
+        catTag.classList.add('theme-animacion');
+      } else {
+        catTag.classList.remove('theme-animacion');
+      }
     }
 
     const abandonModal = document.getElementById('abandonModal');
     if (abandonModal) abandonModal.style.display = 'none';
 
-    updateTriviaHeartsUI();
-    updateRoundCoinsUI(0);
+    if (typeof updateTriviaHeartsUI === 'function') updateTriviaHeartsUI();
+    if (typeof updateRoundCoinsUI === 'function') updateRoundCoinsUI(0);
 
-    const collectionView = document.getElementById('collectionView');
-    if (collectionView) {
-      collectionView.classList.remove('active', 'active-view');
-      collectionView.style.display = 'none';
+    // Cerrar cualquier modal abierto (incluyendo #packDetailModal)
+    if (typeof closePackDetailModal === 'function') closePackDetailModal();
+    document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+
+    // Detener música previa para dar paso al conteo
+    if (typeof SoundManager !== 'undefined') {
+      if (typeof SoundManager.stopSpinSound === 'function') SoundManager.stopSpinSound();
+      if (typeof SoundManager.stopAllBGM === 'function') SoundManager.stopAllBGM();
     }
 
-    state.activeTab = 'trivia';
-    showView('#triviaView');
-    if (window.location.hash !== '#trivia') {
-      try { history.replaceState(null, '', '#trivia'); } catch(e) { window.location.hash = '#trivia'; }
+    // OVERLAY DEL CONTEO REGRESIVO (3 -> 2 -> 1 -> ¡YA!)
+    const overlay = document.getElementById('wheelLandingOverlay');
+    const badge = document.getElementById('landingCatBadge');
+    const iconEl = document.getElementById('landingCatIcon');
+    const nameEl = document.getElementById('landingCatName');
+    const numEl = document.getElementById('landingCountNumber');
+
+    const packIcon = (pack.icon ? pack.icon.split(' ')[0] : '🕹️');
+    if (iconEl) iconEl.innerText = packIcon;
+    if (nameEl) {
+      nameEl.innerText = pack.name.toUpperCase();
+      const isBrightColor = (themeColor === '#FFE600' || themeColor === '#00E676' || themeColor === '#00F0FF' || themeColor === '#00D2FF');
+      nameEl.style.color = isBrightColor ? '#000000' : '#FFFFFF';
+      nameEl.style.textShadow = isBrightColor ? 'none' : '2px 2px 0px #000000';
+    }
+    if (badge) badge.style.backgroundColor = themeColor;
+
+    if (overlay) overlay.classList.add('show');
+
+    const setNumberWithPop = (val, beepFreq) => {
+      if (!numEl) return;
+      numEl.innerText = val;
+      numEl.classList.remove('pop');
+      void numEl.offsetWidth; // Forzar reflow para reiniciar la animación pop / scale-in
+      numEl.classList.add('pop');
+      if (beepFreq && typeof playCountdownBeep === 'function') {
+        playCountdownBeep(beepFreq);
+      }
+    };
+
+    // Segundo 1: Muestra "3" con sonido beep
+    let count = 3;
+    setNumberWithPop('3', 600);
+
+    if (window._packCountdownInterval) {
+      clearInterval(window._packCountdownInterval);
+      window._packCountdownInterval = null;
     }
 
-    renderizarPreguntaActual();
+    window._packCountdownInterval = setInterval(() => {
+      count--;
+      if (count === 2) {
+        // Segundo 2: Muestra "2"
+        setNumberWithPop('2', 800);
+      } else if (count === 1) {
+        // Segundo 3: Muestra "1"
+        setNumberWithPop('1', 1000);
+      } else if (count === 0) {
+        // Muestra "¡YA!"
+        setNumberWithPop('¡YA!', 1200);
+      } else {
+        clearInterval(window._packCountdownInterval);
+        window._packCountdownInterval = null;
 
-    if (typeof iniciarTemporizador === 'function') {
-      iniciarTemporizador();
-    }
+        // Ocultar overlay del conteo
+        if (overlay) overlay.classList.remove('show');
+
+        // Ocultar colecciones y tienda
+        const collectionView = document.getElementById('collectionView') || document.getElementById('collectionsView');
+        if (collectionView) {
+          collectionView.classList.remove('active', 'active-view');
+          collectionView.style.display = 'none';
+        }
+        const storeView = document.getElementById('storeView');
+        if (storeView) {
+          storeView.classList.remove('active', 'active-view');
+          storeView.style.display = 'none';
+        }
+
+        // Transición e inicio de la partida de trivia
+        state.activeTab = 'trivia';
+        if (typeof showView === 'function') {
+          showView('#triviaView');
+        }
+        if (window.location.hash !== '#trivia') {
+          try { history.replaceState(null, '', '#trivia'); } catch(e) { window.location.hash = '#trivia'; }
+        }
+
+        renderizarPreguntaActual();
+
+        if (typeof iniciarTemporizador === 'function') {
+          iniciarTemporizador();
+        }
+        if (window.SoundManager && typeof window.SoundManager.playBGM === 'function') {
+          window.SoundManager.playBGM('trivia');
+        }
+      }
+    }, 950);
+
   } catch (err) {
-    console.error('Error al iniciar pack temático:', err);
-    showRetroToast('Error al cargar las preguntas del pack', 'error');
+    console.error("Fallo detallado cargando pack:", err);
+    if (typeof showToast === 'function') {
+      showToast("Error al cargar las preguntas del pack");
+    } else if (typeof showRetroToast === 'function') {
+      showRetroToast("Error al cargar las preguntas del pack", '⚠️');
+    }
   }
 }
-window.jugarThematicPack = jugarThematicPack;
+window.iniciarJuegoPack = iniciarJuegoPack;
+window.jugarPack = iniciarJuegoPack;
+window.jugarThematicPack = iniciarJuegoPack;
 
-// Renderizado dinámico de tarjetas en "MIS COLECCIONES" (#collectionView)
+// Renderizado dinámico de tarjetas en "MIS COLECCIONES" (#collectionView / #collectionsView)
 function renderCollectionCardsUI() {
   const coinEl = document.getElementById('userCoinsCollection');
   if (coinEl) {
@@ -1204,72 +2176,108 @@ function renderCollectionCardsUI() {
   const packMastery = window.state?.packMastery || state.packMastery || {};
 
   container.innerHTML = THEMATIC_PACKS.map((pack, idx) => {
-    const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id);
-    const masteryCount = Math.min(50, Math.max(0, parseInt(packMastery[pack.id], 10) || 0));
-    const masteryPercent = Math.min(100, Math.round((masteryCount / 50) * 100));
+    const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id) ||
+      (pack.id === 'vecinos_springfield' && unlockedPacks.includes('cine_2000')) ||
+      (pack.id === 'heroes_multiverso' && (unlockedPacks.includes('videojuegos_retro') || unlockedPacks.includes('videojuegos_clasicos'))) ||
+      (pack.id === 'galaxias_lejanas' && (unlockedPacks.includes('series_iconicas') || unlockedPacks.includes('tv_series'))) ||
+      (pack.id === 'guerreros_ki' && (unlockedPacks.includes('artistas_latinos') || unlockedPacks.includes('musica_latina'))) ||
+      (pack.id === 'reino_champinon' && (unlockedPacks.includes('puro_90s') || unlockedPacks.includes('pack_puro_90s'))) ||
+      (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')));
+    
+    // Lectura de dominio acumulado (soporta array de preguntas dominadas o conteo numérico)
+    let rawMastery = packMastery[pack.id];
+    if (rawMastery === undefined || rawMastery === null) {
+      if (pack.id === 'vecinos_springfield') rawMastery = packMastery['cine_2000'];
+      else if (pack.id === 'heroes_multiverso') rawMastery = packMastery['videojuegos_retro'] || packMastery['videojuegos_clasicos'];
+      else if (pack.id === 'galaxias_lejanas') rawMastery = packMastery['series_iconicas'] || packMastery['tv_series'];
+      else if (pack.id === 'guerreros_ki') rawMastery = packMastery['artistas_latinos'] || packMastery['musica_latina'];
+      else if (pack.id === 'reino_champinon') rawMastery = packMastery['puro_90s'] || packMastery['pack_puro_90s'];
+      else if (pack.id === 'castillo_magia') rawMastery = packMastery['puro_80s'] || packMastery['pack_puro_80s'];
+    }
+    const totalQuestions = pack.totalQuestions || 50;
+    const masteryCount = Array.isArray(rawMastery)
+      ? Math.min(totalQuestions, rawMastery.length)
+      : Math.min(totalQuestions, Math.max(0, parseInt(rawMastery, 10) || 0));
+    const masteryPercent = Math.min(100, Math.round((masteryCount / totalQuestions) * 100));
+
+    const isSpringfield = pack.id === 'vecinos_springfield';
+    const isMultiverso = pack.id === 'heroes_multiverso';
+    const isGalaxias = pack.id === 'galaxias_lejanas';
+    const isKi = pack.id === 'guerreros_ki';
+    const isReino = pack.id === 'reino_champinon';
+    const isMagia = pack.id === 'castillo_magia';
+    const boxImg = pack.coverImage || pack.boxImage || (isSpringfield ? 'assets/pantalla_colecciones/caja_springfield.webp' : (isMultiverso ? 'assets/pantalla_colecciones/caja_multiverso.webp' : (isGalaxias ? 'assets/pantalla_colecciones/caja_galaxias.webp' : (isKi ? 'assets/pantalla_colecciones/caja_ki.webp' : (isReino ? 'assets/pantalla_colecciones/caja_reino.webp' : (isMagia ? 'assets/pantalla_colecciones/caja_magia.webp' : null))))));
+    
+    let catBg = '#FFE600';
+    let catTextColor = '#000000';
+    if (isMagia || pack.category === 'CINE & LITERATURA') {
+      catBg = '#7928CA';
+      catTextColor = '#FFFFFF';
+    } else if (isReino) {
+      catBg = '#00E676';
+      catTextColor = '#000000';
+    } else if (isKi) {
+      catBg = '#FF6600';
+      catTextColor = '#FFFFFF';
+    } else if (pack.category === 'ANIMACIÓN' || isSpringfield) {
+      catBg = '#00F0FF';
+      catTextColor = '#000000';
+    } else if (isGalaxias) {
+      catBg = '#00D2FF';
+      catTextColor = '#000000';
+    } else if (pack.category === 'CINE & SERIES' || isMultiverso) {
+      catBg = '#FF2A55';
+      catTextColor = '#FFFFFF';
+    }
+
+    const fillClass = isSpringfield ? 'fill-springfield' : (isMultiverso ? 'fill-multiverso' : (isGalaxias ? 'fill-galaxias' : (isKi ? 'fill-ki' : (isReino ? 'fill-reino' : (isMagia ? 'fill-magia' : '')))));
 
     return `
-      <div class="collection-card ${isUnlocked ? 'pack-unlocked' : 'pack-locked'}" data-pack-id="${pack.id}" style="--i: ${idx};">
-        <div class="pack-card-header">
-          <div class="pack-card-main-info">
-            <div class="pack-icon-box">${pack.icon}</div>
-            <div class="pack-title-info">
-              <span class="pack-cat-pill">${pack.category}</span>
-              <h3 class="pack-name">${pack.name}</h3>
+      <div class="collection-card interactive-press ${isUnlocked ? 'pack-unlocked' : 'pack-locked'} ${isSpringfield ? 'pack-springfield' : ''} ${isMultiverso ? 'pack-multiverso' : ''} ${isGalaxias ? 'pack-galaxias' : ''} ${isKi ? 'pack-ki' : ''} ${isReino ? 'pack-reino' : ''} ${isMagia ? 'pack-magia' : ''}" data-pack-id="${pack.id}" style="--i: ${idx};" onclick="openPackDetailModal('${pack.id}')">
+        <!-- Columna Izquierda: Caja 3D del Pack -->
+        <div class="collection-card-left">
+          ${boxImg ? `
+            <img src="${boxImg}" alt="${pack.name}" class="collection-pack-box-img">
+          ` : `
+            <div class="collection-pack-box-placeholder">
+              <span class="pack-placeholder-icon">${pack.icon}</span>
             </div>
-          </div>
-          <div class="pack-card-badge">
-            ${isUnlocked ? '<span class="pack-badge-unlocked">✓</span>' : '<span class="pack-badge-locked">🔒</span>'}
-          </div>
+          `}
         </div>
 
-        ${isUnlocked ? `
-          <div class="pack-unlocked-body">
-            <div class="pack-mastery-wrap">
-              <div class="pack-mastery-header">
-                <span class="pack-mastery-label">Progreso de Dominio</span>
-                <span class="pack-mastery-count">${masteryCount} / 50 Dominadas</span>
-              </div>
-              <div class="pack-mastery-track">
-                <div class="pack-mastery-fill" style="width: ${masteryPercent}%;"></div>
-              </div>
+        <!-- Columna Derecha: Información y Controles -->
+        <div class="collection-card-right">
+          <!-- Fila Superior: Categoría + Estado -->
+          <div class="collection-card-top-row">
+            <span class="collection-cat-pill" style="background: ${catBg}; color: ${catTextColor};">${pack.category || 'CINE & LITERATURA'}</span>
+            <div class="collection-status-badge">
+              ${isUnlocked ? '<span class="collection-badge-check">✓</span>' : '<span class="collection-badge-lock">🔒</span>'}
             </div>
-            <button class="btn-pack-play interactive-press" onclick="jugarThematicPack('${pack.id}')">
+          </div>
+
+          <!-- Fila de Dominio: Texto + Barra horizontal compacta -->
+          <div class="collection-mastery-block">
+            <span class="collection-mastery-text">Progreso: ${masteryCount} / ${totalQuestions} Dominadas</span>
+            <div class="collection-mastery-track">
+              <div class="collection-mastery-fill ${fillClass}" style="width: ${masteryPercent}%;"></div>
+            </div>
+          </div>
+
+          <!-- Botón de Acción Inferior a ancho completo -->
+          ${isUnlocked ? `
+            <button class="btn-collection-action interactive-press" onclick="event.stopPropagation(); iniciarJuegoPack('${pack.id}')">
               JUGAR PACK ▶
             </button>
-          </div>
-        ` : `
-          <div class="pack-locked-body">
-            <div class="pack-dual-buttons">
-              <button class="btn-pack-buy-coins interactive-press" onclick="comprarThematicPack('${pack.id}', 'coins')">
-                <img src="assets/global/retrocoin.webp" alt="RC" class="pack-coin-img">
-                <span>5,000</span>
-              </button>
-              <button class="btn-pack-buy-usd interactive-press" onclick="comprarThematicPack('${pack.id}', 'usd')">
-                <span>💳 $0.99 USD</span>
-              </button>
-            </div>
-          </div>
-        `}
+          ` : `
+            <button class="btn-collection-action interactive-press" onclick="event.stopPropagation(); openPackDetailModal('${pack.id}')">
+              <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+              <span>🪙 ${(pack.price || pack.priceCoins || 5000).toLocaleString()} RetroCoins</span>
+            </button>
+          `}
+        </div>
       </div>
     `;
   }).join('');
-
-  const btnUnlockAll = document.getElementById('btnUnlockAllCollection');
-  if (btnUnlockAll) {
-    const allPacksUnlocked = THEMATIC_PACKS.every(p => unlockedPacks.includes(p.id)) || state.allCategoriesUnlocked || state.allUnlocked;
-    if (allPacksUnlocked) {
-      btnUnlockAll.innerHTML = '<span>⭐ ¡TODAS LAS COLECCIONES DESBLOQUEADAS! ✓</span>';
-      btnUnlockAll.classList.add('unlocked-done');
-      btnUnlockAll.style.pointerEvents = 'none';
-      btnUnlockAll.style.opacity = '0.85';
-    } else {
-      btnUnlockAll.innerHTML = '<span>⭐ DESBLOQUEAR TODAS LAS COLECCIONES POR $2.99 USD</span>';
-      btnUnlockAll.classList.remove('unlocked-done');
-      btnUnlockAll.style.pointerEvents = 'auto';
-      btnUnlockAll.style.opacity = '1';
-    }
-  }
 
   updateWheelCategoriesUI();
 }
@@ -1290,31 +2298,51 @@ function updateStoreUI() {
   if (b5050) b5050.innerText = `x${state.store?.boosters?.fiftyFifty || 0}`;
   if (bDouble) bDouble.innerText = `x${state.store?.boosters?.double || 0}`;
 
-  // Actualizar botones de temas estacionales
+  // Actualizar botones de temas estacionales y botón POR DEFECTO
+  const resetBtn = document.getElementById('btnStoreResetTheme');
+  const activeTheme = window.state?.themes?.active || state?.themes?.active || 'default';
+  const unlockedThemes = window.state?.themes?.unlocked || state?.themes?.unlocked || ['default'];
+
+  if (resetBtn) {
+    if (activeTheme === 'default') {
+      resetBtn.classList.add('is-active');
+      resetBtn.style.opacity = '0.7';
+      resetBtn.style.pointerEvents = 'none';
+    } else {
+      resetBtn.classList.remove('is-active');
+      resetBtn.style.opacity = '1';
+      resetBtn.style.pointerEvents = 'auto';
+    }
+  }
+
   const themeCards = document.querySelectorAll('.store-theme-card');
   themeCards.forEach(card => {
     const themeId = card.dataset.theme;
-    const cost = card.dataset.cost;
+    const skin = THEME_SKINS[themeId];
+    const cost = skin ? skin.cost : (parseInt(card.dataset.cost, 10) || 2500);
     const btn = card.querySelector('.btn-theme-action');
     if (!btn) return;
 
-    const isPurchased = state.store?.purchasedThemes?.includes(themeId);
-    const isEquipped = state.store?.activeTheme === themeId;
+    const isUnlocked = unlockedThemes.includes(themeId);
+    const isEquipped = (activeTheme === themeId);
 
     btn.classList.remove('is-equipped', 'is-purchased');
 
     if (isEquipped) {
       btn.classList.add('is-equipped');
-      btn.innerHTML = '<span>✓ EQUIPADO</span>';
-    } else if (isPurchased) {
+      btn.style.pointerEvents = 'none';
+      btn.innerHTML = '<span>EQUIPADO ✓</span>';
+    } else if (isUnlocked) {
       btn.classList.add('is-purchased');
+      btn.style.pointerEvents = 'auto';
       btn.innerHTML = '<span>EQUIPAR</span>';
     } else {
+      btn.style.pointerEvents = 'auto';
       btn.innerHTML = `
         <span class="btn-theme-label">COMPRAR</span>
         <span class="btn-theme-price">
           <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-          <span>${parseInt(cost, 10).toLocaleString()}</span>
+          <span>${cost.toLocaleString()}</span>
         </span>
       `;
     }
@@ -1325,33 +2353,67 @@ function updateStoreUI() {
   if (packsScroll && Array.isArray(window.THEMATIC_PACKS)) {
     const unlocked = window.state?.unlockedPacks || state.unlockedPacks || [];
     packsScroll.innerHTML = window.THEMATIC_PACKS.map(pack => {
-      const isAcquired = state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes(pack.id);
+      const isSpringfield = pack.id === 'vecinos_springfield';
+      const isMultiverso = pack.id === 'heroes_multiverso';
+      const isGalaxias = pack.id === 'galaxias_lejanas';
+      const isKi = pack.id === 'guerreros_ki';
+      const isReino = pack.id === 'reino_champinon';
+      const isMagia = pack.id === 'castillo_magia';
+      const isAcquired = state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes(pack.id) ||
+        (pack.id === 'vecinos_springfield' && unlocked.includes('cine_2000')) ||
+        (pack.id === 'heroes_multiverso' && (unlocked.includes('videojuegos_retro') || unlocked.includes('videojuegos_clasicos'))) ||
+        (pack.id === 'galaxias_lejanas' && (unlocked.includes('series_iconicas') || unlocked.includes('tv_series'))) ||
+        (pack.id === 'guerreros_ki' && (unlocked.includes('artistas_latinos') || unlocked.includes('musica_latina'))) ||
+        (pack.id === 'reino_champinon' && (unlocked.includes('puro_90s') || unlocked.includes('pack_puro_90s'))) ||
+        (pack.id === 'castillo_magia' && (unlocked.includes('puro_80s') || unlocked.includes('pack_puro_80s')));
+      
+      const boxImg = pack.coverImage || pack.boxImage || (isSpringfield ? 'assets/pantalla_colecciones/caja_springfield.webp' : (isMultiverso ? 'assets/pantalla_colecciones/caja_multiverso.webp' : (isGalaxias ? 'assets/pantalla_colecciones/caja_galaxias.webp' : (isKi ? 'assets/pantalla_colecciones/caja_ki.webp' : (isReino ? 'assets/pantalla_colecciones/caja_reino.webp' : (isMagia ? 'assets/pantalla_colecciones/caja_magia.webp' : null))))));
+      
+      let catBg = '#FFE600';
+      let catTextColor = '#000000';
+      if (isMagia || pack.category === 'CINE & LITERATURA') {
+        catBg = '#7928CA';
+        catTextColor = '#FFFFFF';
+      } else if (isReino) {
+        catBg = '#00E676';
+        catTextColor = '#000000';
+      } else if (isKi) {
+        catBg = '#FF6600';
+        catTextColor = '#FFFFFF';
+      } else if (pack.category === 'ANIMACIÓN' || isSpringfield) {
+        catBg = '#00F0FF';
+        catTextColor = '#000000';
+      } else if (isGalaxias) {
+        catBg = '#00D2FF';
+        catTextColor = '#000000';
+      } else if (pack.category === 'CINE & SERIES' || isMultiverso) {
+        catBg = '#FF2A55';
+        catTextColor = '#FFFFFF';
+      }
+
       return `
-        <div class="store-pack-card interactive-press" data-pack="${pack.id}">
-          <div class="pack-title-box">
-            <span class="pack-title">${pack.category}</span>
-            <span class="pack-subtitle">${pack.name}</span>
+        <div class="store-pack-card interactive-press ${isSpringfield ? 'pack-springfield pack-yellow' : ''} ${isMultiverso ? 'pack-multiverso pack-red' : ''} ${isGalaxias ? 'pack-galaxias pack-blue' : ''} ${isKi ? 'pack-ki pack-orange' : ''} ${isReino ? 'pack-reino pack-green' : ''} ${isMagia ? 'pack-magia pack-purple' : ''}" data-pack="${pack.id}" onclick="openPackDetailModal('${pack.id}')">
+          <div class="pack-cat-pill-wrap">
+            <span class="store-pack-cat-pill" style="background: ${catBg}; color: ${catTextColor};">${pack.category || 'CINE & LITERATURA'}</span>
           </div>
-          <div class="pack-artwork">
-            <span class="pack-art-emoji" style="font-size: 32px;">${pack.icon}</span>
+
+          <div class="pack-artwork-container">
+            ${boxImg ? `
+              <img src="${boxImg}" alt="${pack.name}" class="pack-box-3d-img">
+            ` : `
+              <span class="pack-art-emoji" style="font-size: 38px;">${pack.icon}</span>
+            `}
           </div>
-          <div class="pack-status-badge ${isAcquired ? 'store-badge-acquired' : ''}">
-            <span>${isAcquired ? 'ADQUIRIDO ✓' : 'DISPONIBLE'}</span>
-          </div>
+
           ${isAcquired ? `
-            <button class="pack-price-pill" style="background:#2EE2B6; color:#000; border:none; pointer-events:none; font-weight:800;" disabled>
+            <button class="btn-pack-solapado btn-acquired" onclick="event.stopPropagation(); openPackDetailModal('${pack.id}')">
               <span>ADQUIRIDO ✓</span>
             </button>
           ` : `
-            <div style="display:flex; gap:4px; width:100%;">
-              <button class="pack-price-pill interactive-press" style="flex:1; cursor:pointer;" onclick="event.stopPropagation(); comprarThematicPack('${pack.id}', 'coins')">
-                <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                <span>5,000</span>
-              </button>
-              <button class="pack-price-pill interactive-press" style="flex:1; cursor:pointer; background:#00E5FF; color:#000;" onclick="event.stopPropagation(); comprarThematicPack('${pack.id}', 'usd')">
-                <span>$0.99</span>
-              </button>
-            </div>
+            <button class="btn-pack-solapado btn-buy interactive-press" onclick="event.stopPropagation(); openPackDetailModal('${pack.id}')">
+              <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
+              <span>🪙 ${(pack.price || pack.priceCoins || 5000).toLocaleString()}</span>
+            </button>
           `}
         </div>
       `;
@@ -1383,53 +2445,194 @@ function buyBooster(type, cost, name) {
   }
 }
 
-function buyTheme(themeId, cost, name) {
-  const price = parseInt(cost, 10) || 2500;
-  if (state.coins >= price) {
-    state.coins -= price;
-    if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
-    if (!state.store) state.store = { boosters: {}, purchasedThemes: ['default'], activeTheme: 'default' };
-    if (!state.store.purchasedThemes) state.store.purchasedThemes = ['default'];
+function applyTheme(themeKey) {
+  const allThemeClasses = ['theme-navidad', 'theme-halloween', 'theme-pascua', 'theme-verano'];
+  document.body.classList.remove(...allThemeClasses);
 
-    if (!state.store.purchasedThemes.includes(themeId)) {
-      state.store.purchasedThemes.push(themeId);
-    }
-    equipTheme(themeId);
-    triggerCelebrationConfetti();
-    playCoinSound();
-    playWheelWinSound();
-    if (typeof SoundManager !== 'undefined') SoundManager.playSFX('compra_tienda.wav', 0.70);
-    showRetroToast(`¡Tema "${name}" desbloqueado y equipado! (-${price} RC)`, '🎨');
-  } else {
-    playErrorSound();
-    showRetroToast(`No tienes suficientes RetroCoins (necesitas ${price} RC)`, '⚠️');
+  if (themeKey && themeKey !== 'default' && THEME_SKINS[themeKey]) {
+    document.body.classList.add(THEME_SKINS[themeKey].bodyClass);
   }
 }
+window.applyTheme = applyTheme;
+
+function buyTheme(themeId, cost, name) {
+  const skin = THEME_SKINS[themeId];
+  const price = skin ? skin.cost : (parseInt(cost, 10) || 2500);
+  const themeName = skin ? skin.name : (name || 'Tema');
+
+  const currentCoins = (window.state && typeof window.state.coins === 'number')
+    ? window.state.coins
+    : (state.coins || 0);
+
+  if (currentCoins >= price) {
+    const newCoins = currentCoins - price;
+    state.coins = newCoins;
+    if (window.state) window.state.coins = newCoins;
+
+    if (typeof saveCoinsToCloud === 'function') {
+      saveCoinsToCloud(newCoins);
+    } else {
+      try { localStorage.setItem('retroquiz_coins', String(newCoins)); } catch (e) {}
+      if (typeof updateHUD === 'function') updateHUD();
+    }
+
+    if (!window.state.themes) {
+      window.state.themes = { unlocked: ["default"], active: "default" };
+    }
+    if (!window.state.themes.unlocked.includes(themeId)) {
+      window.state.themes.unlocked.push(themeId);
+    }
+    if (state.themes) {
+      state.themes.unlocked = window.state.themes.unlocked;
+    }
+    if (!state.store) state.store = {};
+    state.store.purchasedThemes = window.state.themes.unlocked;
+
+    try {
+      localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(window.state.themes.unlocked));
+    } catch (e) {}
+
+    if (window.db && window.firestoreOps && window.state?.userId) {
+      try {
+        const { doc, updateDoc } = window.firestoreOps;
+        updateDoc(doc(window.db, "usuarios", window.state.userId), {
+          themes: window.state.themes,
+          coins: newCoins,
+          updatedAt: new Date().toISOString()
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
+    if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
+      SoundManager.playSFX('compra_tienda.wav');
+    }
+
+    updateStoreUI();
+    showRetroToast(`¡${themeName} desbloqueado! (-${price.toLocaleString()} RC)`, '🪙');
+  } else {
+    playErrorSound();
+    showRetroToast('RetroCoins insuficientes', '⚠️');
+  }
+}
+window.buyTheme = buyTheme;
 
 function equipTheme(themeId) {
-  if (!state.store) state.store = { boosters: {}, purchasedThemes: ['default'], activeTheme: 'default' };
-  state.store.activeTheme = themeId;
+  const targetTheme = (themeId && (themeId === 'default' || THEME_SKINS[themeId])) ? themeId : 'default';
 
-  // Remover temas previos aplicados al body
-  document.body.classList.remove('theme-navidad', 'theme-halloween', 'theme-pascua', 'theme-verano');
+  if (!window.state.themes) {
+    window.state.themes = { unlocked: ["default"], active: "default" };
+  }
+  if (!state.themes) {
+    state.themes = window.state.themes;
+  }
 
-  if (themeId && themeId !== 'default') {
-    document.body.classList.add(`theme-${themeId}`);
+  if (!window.state.themes.unlocked.includes(targetTheme)) {
+    window.state.themes.unlocked.push(targetTheme);
+  }
+
+  applyTheme(targetTheme);
+
+  window.state.themes.active = targetTheme;
+  state.themes.active = targetTheme;
+  if (!state.store) state.store = {};
+  state.store.activeTheme = targetTheme;
+  state.store.purchasedThemes = window.state.themes.unlocked;
+
+  try {
+    localStorage.setItem('retroquiz_active_theme', targetTheme);
+    localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(window.state.themes.unlocked));
+  } catch (e) {}
+
+  if (window.db && window.firestoreOps && window.state?.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      updateDoc(doc(window.db, "usuarios", window.state.userId), {
+        themes: window.state.themes,
+        updatedAt: new Date().toISOString()
+      }).catch(() => {});
+    } catch (e) {}
   }
 
   updateStoreUI();
   playClickSound();
 }
+window.equipTheme = equipTheme;
 
 function resetTheme() {
-  equipTheme('default');
-  showRetroToast('Tema original por defecto restaurado', '✨');
+  const allThemeClasses = ['theme-navidad', 'theme-halloween', 'theme-pascua', 'theme-verano'];
+  document.body.classList.remove(...allThemeClasses);
+
+  if (!window.state.themes) {
+    window.state.themes = { unlocked: ["default"], active: "default" };
+  }
+  window.state.themes.active = 'default';
+  if (state.themes) state.themes.active = 'default';
+  if (!state.store) state.store = {};
+  state.store.activeTheme = 'default';
+
+  try {
+    localStorage.setItem('retroquiz_active_theme', 'default');
+  } catch (e) {}
+
+  if (window.db && window.firestoreOps && window.state?.userId) {
+    try {
+      const { doc, updateDoc } = window.firestoreOps;
+      updateDoc(doc(window.db, "usuarios", window.state.userId), {
+        'themes.active': 'default',
+        updatedAt: new Date().toISOString()
+      }).catch(() => {});
+    } catch (e) {}
+  }
+
+  updateStoreUI();
+  showRetroToast('Tema por defecto restaurado 🎨', '🎨');
 }
+window.resetTheme = resetTheme;
+
+function initStoredTheme() {
+  try {
+    const savedActive = localStorage.getItem('retroquiz_active_theme') || 'default';
+    let savedUnlocked = ['default'];
+    try {
+      const raw = localStorage.getItem('retroquiz_unlocked_themes');
+      if (raw) savedUnlocked = JSON.parse(raw);
+    } catch (e) {}
+    if (!Array.isArray(savedUnlocked)) savedUnlocked = ['default'];
+    if (!savedUnlocked.includes('default')) savedUnlocked.unshift('default');
+
+    if (!window.state) window.state = {};
+    window.state.themes = {
+      unlocked: savedUnlocked,
+      active: savedActive
+    };
+    if (typeof state !== 'undefined') {
+      state.themes = window.state.themes;
+      if (!state.store) state.store = {};
+      state.store.purchasedThemes = savedUnlocked;
+      state.store.activeTheme = savedActive;
+    }
+
+    if (savedActive !== 'default') {
+      applyTheme(savedActive);
+    }
+  } catch (err) {
+    console.warn('initStoredTheme error:', err);
+  }
+}
+window.initStoredTheme = initStoredTheme;
+window.initApp = function() {
+  initStoredTheme();
+};
+initStoredTheme();
 
 function handleHashChange() {
   const currentHash = window.location.hash || '#home';
   const targetScreenId = routesMap[currentHash] || 'homeView';
-  renderScreenView(targetScreenId);
+  if (targetScreenId === 'modalRanking') {
+    openModal('modalRanking');
+  } else {
+    renderScreenView(targetScreenId);
+  }
 }
 
 function navigateToScreen(screenId) {
@@ -1507,7 +2710,7 @@ function updateWheelCategoriesUI() {
       btnIap.style.pointerEvents = 'none';
       btnIap.style.opacity = '1';
     } else {
-      btnIap.innerText = '⭐ DESBLOQUEAR TODO POR $0.99';
+      btnIap.innerText = '⭐ DESBLOQUEAR TODO';
       btnIap.classList.remove('unlocked-all', 'hidden');
       btnIap.style.pointerEvents = 'auto';
       btnIap.style.opacity = '1';
@@ -1685,6 +2888,49 @@ function mostrarAvisoFlotanteRuleta(texto = "¡Todas tus compras se agregaron a 
 }
 window.mostrarAvisoFlotanteRuleta = mostrarAvisoFlotanteRuleta;
 
+// Constante de tiempo para recarga pasiva (3 horas)
+const COOLDOWN_TIROS = 3 * 60 * 60 * 1000; // 3 horas en ms
+
+// Lógica de cálculo en segundo plano / al abrir la app para recarga de tiros
+function checkWheelPassiveReload() {
+  let savedShots = localStorage.getItem('retroquiz_wheel_shots');
+  let currentShots = savedShots !== null ? parseInt(savedShots, 10) : state.wheel.shots;
+  if (isNaN(currentShots)) currentShots = 3;
+
+  const rawTimestamp = localStorage.getItem('retroquiz_last_shot_timestamp');
+  const lastShotTimestamp = rawTimestamp ? parseInt(rawTimestamp, 10) : null;
+
+  // El contador de recarga opera e inicia ÚNICAMENTE cuando el jugador se queda sin tiros (currentShots <= 0)
+  if (currentShots <= 0) {
+    currentShots = 0;
+    if (lastShotTimestamp) {
+      const elapsed = Date.now() - lastShotTimestamp;
+      if (elapsed >= COOLDOWN_TIROS) {
+        // Ha transcurrido el bloque de 3 horas: restaura los 3 tiros completos
+        currentShots = 3;
+        localStorage.setItem('retroquiz_wheel_shots', '3');
+        localStorage.removeItem('retroquiz_last_shot_timestamp');
+        state.wheel.secondsUntilReload = 3 * 3600;
+      } else {
+        const remainingMs = COOLDOWN_TIROS - elapsed;
+        state.wheel.secondsUntilReload = Math.ceil(remainingMs / 1000);
+      }
+    } else {
+      // Se quedó sin tiros y aún no tenía timestamp registrado: iniciar temporizador ahora
+      localStorage.setItem('retroquiz_last_shot_timestamp', Date.now().toString());
+      state.wheel.secondsUntilReload = 3 * 3600;
+    }
+  } else {
+    // Si aún le quedan tiros (> 0), no hay recarga en curso
+    localStorage.removeItem('retroquiz_last_shot_timestamp');
+    state.wheel.secondsUntilReload = 3 * 3600;
+  }
+
+  state.wheel.shots = currentShots;
+  return currentShots;
+}
+window.checkWheelPassiveReload = checkWheelPassiveReload;
+
 // Actualizar contador de tiros y estado del botón GIRAR
 function updateShotsUI() {
   const shotsEl = document.getElementById('shotsAvailable');
@@ -1692,10 +2938,15 @@ function updateShotsUI() {
   const labelEl = document.getElementById('btnGirarLabel');
   const reloadBox = document.getElementById('reloadTimerBox');
 
+  // Evaluar recarga pasiva de 3 horas
+  checkWheelPassiveReload();
+
   if (shotsEl) shotsEl.innerText = state.wheel.shots;
   if (labelEl) labelEl.innerText = 'GIRAR'; // Siempre mantiene la palabra GIRAR
 
+  // El contador de recarga en la ruleta debe iniciar cuando el jugador se queda sin tiros
   if (state.wheel.shots <= 0) {
+    state.wheel.shots = 0;
     if (btnGirar) {
       btnGirar.disabled = true;
       btnGirar.style.opacity = '0.5';
@@ -1709,7 +2960,12 @@ function updateShotsUI() {
       btnGirar.style.opacity = '1';
       btnGirar.style.pointerEvents = 'auto';
     }
+    // Si aún tiene tiros (> 0), ocultar el contador de recarga y detener el intervalo
     if (reloadBox) reloadBox.classList.add('hidden');
+    if (state.wheel.reloadInterval) {
+      clearInterval(state.wheel.reloadInterval);
+      state.wheel.reloadInterval = null;
+    }
   }
 
   // Estado de Alerta en +1 TIRO EXTRA cuando queda exactamente 1 tiro (1/3)
@@ -1723,30 +2979,71 @@ function updateShotsUI() {
   }
 }
 
-// Temporizador de recarga de 24 horas
+// Temporizador de recarga de 3 horas (activo únicamente cuando tiros === 0)
 function startReloadTimer() {
   if (state.wheel.reloadInterval) return;
 
   const timerEl = document.getElementById('reloadTimerCountdown');
 
-  state.wheel.reloadInterval = setInterval(() => {
-    state.wheel.secondsUntilReload--;
-    if (state.wheel.secondsUntilReload <= 0) {
-      clearInterval(state.wheel.reloadInterval);
-      state.wheel.reloadInterval = null;
-      state.wheel.shots = state.wheel.maxShots;
-      state.wheel.secondsUntilReload = 24 * 3600;
-      updateShotsUI();
+  const updateCountdownDisplay = () => {
+    // Si el jugador recuperó tiros, cancelar el contador
+    if (state.wheel.shots > 0) {
+      if (state.wheel.reloadInterval) {
+        clearInterval(state.wheel.reloadInterval);
+        state.wheel.reloadInterval = null;
+      }
+      const reloadBox = document.getElementById('reloadTimerBox');
+      if (reloadBox) reloadBox.classList.add('hidden');
       return;
     }
 
-    const h = Math.floor(state.wheel.secondsUntilReload / 3600);
-    const m = Math.floor((state.wheel.secondsUntilReload % 3600) / 60);
-    const s = state.wheel.secondsUntilReload % 60;
+    const rawTimestamp = localStorage.getItem('retroquiz_last_shot_timestamp');
+    const lastShotTimestamp = rawTimestamp ? parseInt(rawTimestamp, 10) : null;
+    let remainingMs = 0;
+
+    if (lastShotTimestamp) {
+      const elapsed = Date.now() - lastShotTimestamp;
+      if (elapsed >= COOLDOWN_TIROS) {
+        state.wheel.shots = 3;
+        localStorage.setItem('retroquiz_wheel_shots', '3');
+        localStorage.removeItem('retroquiz_last_shot_timestamp');
+        state.wheel.secondsUntilReload = 3 * 3600;
+        if (state.wheel.reloadInterval) {
+          clearInterval(state.wheel.reloadInterval);
+          state.wheel.reloadInterval = null;
+        }
+        updateShotsUI();
+        return;
+      }
+      remainingMs = COOLDOWN_TIROS - elapsed;
+    } else {
+      remainingMs = (state.wheel.secondsUntilReload || (3 * 3600)) * 1000;
+    }
+
+    const totalSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+    state.wheel.secondsUntilReload = totalSeconds;
+
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    const formatted = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 
     if (timerEl) {
-      timerEl.innerText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      timerEl.innerText = `Recarga en: ${formatted}`;
     }
+  };
+
+  updateCountdownDisplay();
+
+  state.wheel.reloadInterval = setInterval(() => {
+    if (state.wheel.shots > 0) {
+      clearInterval(state.wheel.reloadInterval);
+      state.wheel.reloadInterval = null;
+      const reloadBox = document.getElementById('reloadTimerBox');
+      if (reloadBox) reloadBox.classList.add('hidden');
+      return;
+    }
+    updateCountdownDisplay();
   }, 1000);
 }
 
@@ -1759,6 +3056,12 @@ function spinWheel(forcedCatKey = null) {
 
   // Consumir 1 tiro
   state.wheel.shots--;
+  // El contador de recarga inicia cuando el jugador se queda sin tiros (shots === 0)
+  if (state.wheel.shots <= 0) {
+    state.wheel.shots = 0;
+    localStorage.setItem('retroquiz_last_shot_timestamp', Date.now().toString());
+  }
+  localStorage.setItem('retroquiz_wheel_shots', state.wheel.shots.toString());
   state.wheel.isSpinning = true;
   updateShotsUI();
 
@@ -1772,6 +3075,10 @@ function spinWheel(forcedCatKey = null) {
   }
   const catConfig = categoriesConfig[chosenCatKey] || categoriesConfig.cine;
 
+  // 5. PRECARGA ASÍNCRONA INMEDIATA DE PREGUNTAS (Cero lag durante el giro)
+  window.state.pendingQuestionsPromise = cargarBancoExclusivo(chosenCatKey);
+  preloadedRoundQuestionsPromise = window.state.pendingQuestionsPromise;
+
   console.log(`🎡 Giro de Ruleta - Categorías elegibles (${unlocked.length}):`, unlocked, `-> Seleccionada: ${chosenCatKey}`);
 
   // Cálculo de rotación para ruleta_musica_todo.webp (el indicador superior está a 270°)
@@ -1784,8 +3091,25 @@ function spinWheel(forcedCatKey = null) {
 
   state.wheel.currentRotation += fullSpins + angleDelta;
 
+  // Limpieza de transforms y clases de animación conflictivas antes de rotar
+  const wheelView = document.getElementById('wheelView');
+  if (wheelView) {
+    wheelView.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+  }
+  const wheelStage = document.querySelector('#wheelView .wheel-stage') || document.querySelector('#wheelView .wheel-container');
+  if (wheelStage) {
+    wheelStage.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+    wheelStage.style.transform = 'none';
+  }
+  const wheelWrapper = document.querySelector('#wheelView .wheel-disc-wrapper') || document.querySelector('#wheelView .wheel-container');
+  if (wheelWrapper) {
+    wheelWrapper.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+    wheelWrapper.style.transform = 'none';
+  }
+
   const wheelDisc = document.getElementById('wheelDisc');
   if (wheelDisc) {
+    wheelDisc.classList.remove('micro-bounce', 'wheel-pop-in', 'wheelZoomPop', 'anim-wheel-zoom');
     wheelDisc.style.transform = `rotate(${state.wheel.currentRotation}deg)`;
   }
 
@@ -1831,6 +3155,10 @@ function spinDuelWheel(forcedCatKey = null) {
   }
   const catConfig = categoriesConfig[chosenCatKey] || categoriesConfig.cine;
 
+  // 5. PRECARGA ASÍNCRONA INMEDIATA DE PREGUNTAS (Cero lag durante el giro de duelo)
+  window.state.pendingQuestionsPromise = cargarBancoExclusivo(chosenCatKey);
+  preloadedRoundQuestionsPromise = window.state.pendingQuestionsPromise;
+
   console.log(`⚔️ Giro de Ruleta Duelo - Categorías elegibles (${unlocked.length}):`, unlocked, `-> Seleccionada: ${chosenCatKey}`);
 
   const fullSpins = 5 * 360;
@@ -1841,8 +3169,25 @@ function spinDuelWheel(forcedCatKey = null) {
 
   state.duelWheel.currentRotation += fullSpins + angleDelta;
 
+  // Limpieza de transforms y clases de animación conflictivas antes de rotar en Duelo
+  const matchView = document.getElementById('challengeMatchView');
+  if (matchView) {
+    matchView.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+  }
+  const duelStage = document.querySelector('#challengeMatchView .duel-wheel-stage') || document.querySelector('#challengeMatchView .wheel-stage');
+  if (duelStage) {
+    duelStage.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+    duelStage.style.transform = 'none';
+  }
+  const duelWrapper = document.querySelector('#challengeMatchView .wheel-disc-wrapper') || document.querySelector('#challengeMatchView .wheel-container');
+  if (duelWrapper) {
+    duelWrapper.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+    duelWrapper.style.transform = 'none';
+  }
+
   const duelDisc = document.getElementById('duelWheelDisc');
   if (duelDisc) {
+    duelDisc.classList.remove('micro-bounce', 'wheel-pop-in', 'wheelZoomPop', 'anim-wheel-zoom');
     duelDisc.style.transform = `rotate(${state.duelWheel.currentRotation}deg)`;
   }
 
@@ -1872,17 +3217,31 @@ function triggerLandingCountdown(catKey, isDuelMode = false) {
 
 // Simulación de Anuncio Recompensado (Rewarded Ad)
 function watchRewardedAd() {
-  if (state.noAds || localStorage.getItem('retroquiz_no_ads') === 'true') {
+  const addOneShot = () => {
     state.wheel.shots += 1;
+    if (state.wheel.shots >= 3) {
+      state.wheel.shots = 3;
+    }
+    localStorage.removeItem('retroquiz_last_shot_timestamp');
+    state.wheel.secondsUntilReload = 3 * 3600;
+    if (state.wheel.reloadInterval) {
+      clearInterval(state.wheel.reloadInterval);
+      state.wheel.reloadInterval = null;
+    }
+    localStorage.setItem('retroquiz_wheel_shots', state.wheel.shots.toString());
     updateShotsUI();
     playSuccessSound();
-    showRetroToast('¡Tiro extra añadido! (Sin anuncios)', '⚡');
 
     const pill = document.getElementById('shotsPill');
     if (pill) {
       pill.style.transform = 'scale(1.2)';
       setTimeout(() => pill.style.transform = '', 200);
     }
+  };
+
+  if (state.noAds || localStorage.getItem('retroquiz_no_ads') === 'true') {
+    addOneShot();
+    showRetroToast('¡Tiro extra añadido! (Sin anuncios)', '⚡');
     return;
   }
 
@@ -1899,15 +3258,7 @@ function watchRewardedAd() {
 
   setTimeout(() => {
     closeModal('modalAdLoader');
-    state.wheel.shots += 1;
-    updateShotsUI();
-    playSuccessSound();
-
-    const pill = document.getElementById('shotsPill');
-    if (pill) {
-      pill.style.transform = 'scale(1.2)';
-      setTimeout(() => pill.style.transform = '', 200);
-    }
+    addOneShot();
   }, 2100);
 }
 
@@ -1930,7 +3281,8 @@ const categoryFiles = {
   cine: 'data/preguntas_cine.json',
   videojuegos: 'data/preguntas_videojuegos.json',
   tv: 'data/preguntas_tv.json',
-  musica: 'data/preguntas_musica.json'
+  animacion: 'data/preguntas_animacion.json',
+  musica: 'data/preguntas_animacion.json'
 };
 
 // 1. MAPEO ROBUSTO Y NORMALIZACIÓN DE CATEGORÍAS
@@ -1943,8 +3295,8 @@ function getJsonPath(catKey) {
     return 'data/preguntas_videojuegos.json';
   } else if (cat === 'TV' || cat.includes('SERIE')) {
     return 'data/preguntas_tv.json';
-  } else if (cat === 'MÚSICA' || cat === 'MUSICA') {
-    return 'data/preguntas_musica.json';
+  } else if (cat === 'ANIMACIÓN' || cat === 'ANIMACION' || cat.includes('ANIM') || cat === 'MÚSICA' || cat === 'MUSICA') {
+    return 'data/preguntas_animacion.json';
   } else if (cat === 'TODO' || cat === 'MIX') {
     return 'MIX';
   } else {
@@ -1956,13 +3308,13 @@ window.getJsonPath = getJsonPath;
 // Carga asíncrona combinada en paralelo para la categoría TODO / MIX (compatibilidad)
 async function loadTodoMixQuestions() {
   const timestamp = Date.now();
-  const [cine, juegos, tv, musica] = await Promise.all([
+  const [cine, juegos, tv, animacion] = await Promise.all([
     fetch('data/preguntas_cine.json?t=' + timestamp, { cache: 'no-store' }).then(r => r.json()),
     fetch('data/preguntas_videojuegos.json?t=' + timestamp, { cache: 'no-store' }).then(r => r.json()),
     fetch('data/preguntas_tv.json?t=' + timestamp, { cache: 'no-store' }).then(r => r.json()),
-    fetch('data/preguntas_musica.json?t=' + timestamp, { cache: 'no-store' }).then(r => r.json())
+    fetch('data/preguntas_animacion.json?t=' + timestamp, { cache: 'no-store' }).then(r => r.json())
   ]);
-  return shuffleArray([...cine, ...juegos, ...tv, ...musica]);
+  return shuffleArray([...cine, ...juegos, ...tv, ...animacion]);
 }
 window.loadTodoMixQuestions = loadTodoMixQuestions;
 
@@ -2226,98 +3578,2821 @@ const emergencyTV = [
   }
 ];
 
-const emergencyMusica = [
+const emergencyAnimacion = [
   {
-    id: "mus_emg_01",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué artista lanzó el álbum 'Thriller' en 1982, el disco más vendido de la historia?",
-    emojis: "🧟 🕺 🎤",
-    opciones: ["Michael Jackson", "Prince", "David Bowie", "Freddie Mercury"],
-    respuesta_correcta: "Michael Jackson"
+    id: "ani_emg_01",
+    categoria: "ANIMACIÓN",
+    pregunta: "¿Qué técnica de artes marciales y energía aprendió Gokū del Maestro Roshi en 'Dragon Ball'?",
+    emojis: "🐉 🥋 💥",
+    opciones: ["Kamehameha", "Masenko", "Kienzan", "Makankosappo"],
+    respuesta_correcta: "Kamehameha"
   },
   {
-    id: "mus_emg_02",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué legendaria banda de rock británica lideró Freddie Mercury hasta 1991?",
-    emojis: "👑 🎸 🎹",
-    opciones: ["Queen", "The Beatles", "Pink Floyd", "Led Zeppelin"],
-    respuesta_correcta: "Queen"
+    id: "ani_emg_02",
+    categoria: "ANIMACIÓN",
+    pregunta: "¿Cuál era la frase célebre de Buzz Lightyear al prepararse para despegar en 'Toy Story'?",
+    emojis: "🚀 🤠 🪐",
+    opciones: ["Al infinito y más allá", "Hacia las estrellas", "Por la galaxia y el más allá", "Misión estelar activada"],
+    respuesta_correcta: "Al infinito y más allá"
   },
   {
-    id: "mus_emg_03",
-    categoria: "MÚSICA",
-    pregunta: "¿Quién es considerada mundialmente como la 'Reina del Pop'?",
-    emojis: "👑 💃 🎤",
-    opciones: ["Madonna", "Cyndi Lauper", "Whitney Houston", "Tina Turner"],
-    respuesta_correcta: "Madonna"
+    id: "ani_emg_03",
+    categoria: "ANIMACIÓN",
+    pregunta: "¿Cómo se llamaba la unidad biomecánica gigante piloteada por Shinji Ikari en Evangelion?",
+    emojis: "🤖 🟣 🩸",
+    opciones: ["EVA-01", "EVA-00", "EVA-02", "Gunbuster"],
+    respuesta_correcta: "EVA-01"
   },
   {
-    id: "mus_emg_04",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué banda de Seattle liderada por Kurt Cobain lanzó el histórico álbum 'Nevermind'?",
-    emojis: "🎸 🌊 👶",
-    opciones: ["Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains"],
-    respuesta_correcta: "Nirvana"
+    id: "ani_emg_04",
+    categoria: "ANIMACIÓN",
+    pregunta: "¿Cuál es el nombre del ratón eléctrico más famoso y fiel compañero de Ash Ketchum?",
+    emojis: "⚡ 🐭 🎒",
+    opciones: ["Pikachu", "Raichu", "Pichu", "Pachirisu"],
+    respuesta_correcta: "Pikachu"
   },
   {
-    id: "mus_emg_05",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué dúo francés de música electrónica revolucionó el house con cascos futuristas?",
-    emojis: "🤖 🎧 🪩",
-    opciones: ["Daft Punk", "Justice", "Air", "Cassius"],
-    respuesta_correcta: "Daft Punk"
-  },
-  {
-    id: "mus_emg_06",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué banda de rock compuso 'Sweet Child O' Mine' y 'Welcome to the Jungle'?",
-    emojis: "🌹 🔫 🎸",
-    opciones: ["Guns N' Roses", "Aerosmith", "Bon Jovi", "Mötley Crüe"],
-    respuesta_correcta: "Guns N' Roses"
-  },
-  {
-    id: "mus_emg_07",
-    categoria: "MÚSICA",
-    pregunta: "¿Quién cantaba el clásico de pop 'Girls Just Want to Have Fun' en los años 80?",
-    emojis: "🎀 💃 🎵",
-    opciones: ["Cyndi Lauper", "Madonna", "Paula Abdul", "Debbie Gibson"],
-    respuesta_correcta: "Cyndi Lauper"
-  },
-  {
-    id: "mus_emg_08",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué grupo pop británico de chicas de los 90 popularizó el 'Girl Power'?",
-    emojis: "🇬🇧 👠 🎤",
-    opciones: ["Spice Girls", "All Saints", "Atomic Kitten", "Bananarama"],
-    respuesta_correcta: "Spice Girls"
-  },
-  {
-    id: "mus_emg_09",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué cantante y guitarrista de rock interpretaba vestido de colegial con pantalones cortos?",
-    emojis: "⚡ 🎸 🎒",
-    opciones: ["Angus Young (AC/DC)", "Slash", "Eddie Van Halen", "Brian May"],
-    respuesta_correcta: "Angus Young (AC/DC)"
-  },
-  {
-    id: "mus_emg_10",
-    categoria: "MÚSICA",
-    pregunta: "¿Qué clásico tema disco de 1978 de Gloria Gaynor se convirtió en un himno de resiliencia?",
-    emojis: "🪩 🎤 ✨",
-    opciones: ["I Will Survive", "Stayin' Alive", "Le Freak", "Disco Inferno"],
-    respuesta_correcta: "I Will Survive"
+    id: "ani_emg_05",
+    categoria: "ANIMACIÓN",
+    pregunta: "¿En qué ciudad ficticia viven Homero, Marge, Bart, Lisa y Maggie en 'Los Simpson'?",
+    emojis: "🍩 🍺 👨‍👩‍👧‍👦",
+    opciones: ["Springfield", "Shelbyville", "Quahog", "South Park"],
+    respuesta_correcta: "Springfield"
   }
 ];
 
+// Banco embebido garantizado de Springfield (50 preguntas completas)
+const SPRINGFIELD_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.SPRINGFIELD_QUESTIONS_FALLBACK && window.SPRINGFIELD_QUESTIONS_FALLBACK.length >= 50)
+  ? window.SPRINGFIELD_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "spr_001",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la comida y obsesión favorita de Homero Simpson?",
+    "emojis": "🍩 🍺 🤤",
+    "opciones": ["Rosquillas glaseadas (Donuts)", "Pastel de manzana", "Costillas de cerdo", "Pizza de pepperoni"],
+    "respuesta_correcta": "Rosquillas glaseadas (Donuts)"
+  },
+  {
+    "id": "spr_002",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la taberna clandestina y oscura atendida por Moe Szyslak?",
+    "emojis": "🍺 🥃 🚪",
+    "opciones": ["Taberna de Moe", "El Bar de Barney", "Springfield Pub", "El Flamingo Dorado"],
+    "respuesta_correcta": "Taberna de Moe"
+  },
+  {
+    "id": "spr_003",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué instrumento musical de viento toca Lisa Simpson con enorme pasión?",
+    "emojis": "🎷 🎵 👧",
+    "opciones": ["Saxofón barítono", "Clarinete", "Trompeta jazz", "Flauta dulce"],
+    "respuesta_correcta": "Saxofón barítono"
+  },
+  {
+    "id": "spr_004",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la marca de cerveza más popular y consumida en todo Springfield?",
+    "emojis": "🍺 🏭 🧢",
+    "opciones": ["Duff", "Fudd", "Buzz Beer", "Pabst"],
+    "respuesta_correcta": "Duff"
+  },
+  {
+    "id": "spr_005",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el multimillonario y decrépito dueño de la Planta Nuclear de Springfield?",
+    "emojis": "👴 💰 🏭",
+    "opciones": ["Montgomery Burns", "Waylon Smithers", "Artie Ziff", "Hank Scorpio"],
+    "respuesta_correcta": "Montgomery Burns"
+  },
+  {
+    "id": "spr_006",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué frase célebre dice el vecino Ned Flanders casi en cada conversación?",
+    "emojis": "👓 👨 🏘️",
+    "opciones": ["¡Hola, holita, vecinito!", "¿Qué hay de nuevo, viejo?", "¡Ay, caramba!", "¡Excelente!"],
+    "respuesta_correcta": "¡Hola, holita, vecinito!"
+  },
+  {
+    "id": "spr_007",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la exclamación de queja o dolor característica de Homero Simpson?",
+    "emojis": "🤦‍♂️ 💥 💢",
+    "opciones": ["¡D'oh! (¡Ouch!)", "¡Ay, caramba!", "¡Rayos y centellas!", "¡Por qué a mí!"],
+    "respuesta_correcta": "¡D'oh! (¡Ouch!)"
+  },
+  {
+    "id": "spr_008",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el payaso de televisión ídolo de Bart y conductor del show infantil?",
+    "emojis": "🤡 📺 🎈",
+    "opciones": ["Krusty el Payaso", "Sideshow Bob", "Gabbo", "Bozo"],
+    "respuesta_correcta": "Krusty el Payaso"
+  },
+  {
+    "id": "spr_009",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué medio de transporte público defectuoso le vendió Lyle Lanley a Springfield?",
+    "emojis": "🚝 🎶 🏙️",
+    "opciones": ["El Monorriel", "El Tranvía Solar", "El Metro Express", "El Tren Bala"],
+    "respuesta_correcta": "El Monorriel"
+  },
+  {
+    "id": "spr_010",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el leal asistente personal del señor Burns?",
+    "emojis": "👓 💼 👴",
+    "opciones": ["Waylon Smithers", "Karl", "Hans Moleman", "Frank Grimes"],
+    "respuesta_correcta": "Waylon Smithers"
+  },
+  {
+    "id": "spr_011",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la tienda de conveniencia atendida por Apu Nahasapeemapetilon?",
+    "emojis": "🏪 🌭 🥤",
+    "opciones": ["El Kwik-E-Mart (Minisúper)", "7-Eleven", "Springfield Market", "El Bodegón"],
+    "respuesta_correcta": "El Kwik-E-Mart (Minisúper)"
+  },
+  {
+    "id": "spr_012",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué actor y criminal de cabello rizado intenta repetidamente acabar con Bart Simpson?",
+    "emojis": "🎭 🔪 🌴",
+    "opciones": ["Sideshow Bob (Bob Patiño)", "Sideshow Mel", "Snake Jailbird", "Fat Tony"],
+    "respuesta_correcta": "Sideshow Bob (Bob Patiño)"
+  },
+  {
+    "id": "spr_013",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el perro galgo marrón adoptado por la familia Simpson en Navidad?",
+    "emojis": "🐶 🎄 🦴",
+    "opciones": ["Ayudante de Santa (Huesos)", "Prócer", "Laddie", "Bolas de Nieve"],
+    "respuesta_correcta": "Ayudante de Santa (Huesos)"
+  },
+  {
+    "id": "spr_014",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué director escolar autoritario vive aún bajo el estricto control de su madre Agnes?",
+    "emojis": "🏫 👩‍👦 👔",
+    "opciones": ["Seymour Skinner", "Superintendente Chalmers", "Otto Mann", "Dewey Largo"],
+    "respuesta_correcta": "Seymour Skinner"
+  },
+  {
+    "id": "spr_015",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el verdadero nombre original del director Seymour Skinner revelado en la temporada 9?",
+    "emojis": "🪖 📄 🤫",
+    "opciones": ["Armin Tamzarian", "Roy Snyder", "Hank Kingsley", "Artie Ziff"],
+    "respuesta_correcta": "Armin Tamzarian"
+  },
+  {
+    "id": "spr_016",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué villano superinteligente y carismático dirigió la empresa Globex Corporation?",
+    "emojis": "💼 💣 👞",
+    "opciones": ["Hank Scorpio", "Herbert Powell", "Rex Banner", "Frank Grimes"],
+    "respuesta_correcta": "Hank Scorpio"
+  },
+  {
+    "id": "spr_017",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el chofer amante del rock pesado que conduce el autobús escolar?",
+    "emojis": "🚌 🎸 🎧",
+    "opciones": ["Otto Mann", "Bleeding Gums Murphy", "Disco Stu", "Gil Gunderson"],
+    "respuesta_correcta": "Otto Mann"
+  },
+  {
+    "id": "spr_018",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué ingrediente secreto incendió Homero para crear el cóctel 'Llamarada Homero'?",
+    "emojis": "🔥 🍸 🧪",
+    "opciones": ["Jarabe para la tos de Krusty", "Tabasco picante", "Licor de menta", "Gasolina pura"],
+    "respuesta_correcta": "Jarabe para la tos de Krusty"
+  },
+  {
+    "id": "spr_019",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la ciudad vecina y rival histórica de Springfield?",
+    "emojis": "🌳 🍋 ⚔️",
+    "opciones": ["Shelbyville", "Capital City", "Ogdenville", "North Haverbrook"],
+    "respuesta_correcta": "Shelbyville"
+  },
+  {
+    "id": "spr_020",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué árbol sagrado fue robado por los niños de Shelbyville desatando una expedición de rescate?",
+    "emojis": "🍋 🌳 👦",
+    "opciones": ["El limonero", "El manzano", "El naranjo", "El roble milenario"],
+    "respuesta_correcta": "El limonero"
+  },
+  {
+    "id": "spr_021",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Quién le disparó al señor Burns en el misterio en dos partes más famoso de la serie?",
+    "emojis": "🔫 👶 🍼",
+    "opciones": ["Maggie Simpson", "Waylon Smithers", "Homero Simpson", "Tito Puente"],
+    "respuesta_correcta": "Maggie Simpson"
+  },
+  {
+    "id": "spr_022",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué peluche de la infancia busca con desesperación el señor Burns durante años?",
+    "emojis": "🧸 ❄️ 👴",
+    "opciones": ["Bobo", "Teddy", "Peppy", "Barnaby"],
+    "respuesta_correcta": "Bobo"
+  },
+  {
+    "id": "spr_023",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el abogado incompetente y charlatán con traje azul?",
+    "emojis": "👨‍⚖️ 💼 📜",
+    "opciones": ["Lionel Hutz", "Gil Gunderson", "El Abogado del Pelo Azul", "Profesor Frink"],
+    "respuesta_correcta": "Lionel Hutz"
+  },
+  {
+    "id": "spr_024",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el médico negligente que siempre saluda diciendo '¡Hola a todos!'?",
+    "emojis": "🩺 👨‍⚕️ 😁",
+    "opciones": ["Dr. Nick Riviera", "Dr. Julius Hibbert", "Dr. Marvin Monroe", "Dr. Foster"],
+    "respuesta_correcta": "Dr. Nick Riviera"
+  },
+  {
+    "id": "spr_025",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué alias usaba Bart cuando llamaba a la taberna de Moe para hacer bromas telefónicas?",
+    "emojis": "📞  prank 🍺",
+    "opciones": ["Aquiles Baeza / Bartolo", "Señor Thompson", "Cosme Fulanito", "Homero Thompson"],
+    "respuesta_correcta": "Aquiles Baeza / Bartolo"
+  },
+  {
+    "id": "spr_026",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llamaba el doble idéntico y distinguido de Homero que fue expulsado del bar de Moe?",
+    "emojis": "🥸 🍸 🎩",
+    "opciones": ["Cosme Fulanito (Guy Incognito)", "Homero Thompson", "Max Power", "Karl"],
+    "respuesta_correcta": "Cosme Fulanito (Guy Incognito)"
+  },
+  {
+    "id": "spr_027",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el nombre del ratón y el gato ultraviolentos de los dibujos animados dentro del show?",
+    "emojis": "🐭 🐱 🪓",
+    "opciones": ["Tomy y Daly (Itchy & Scratchy)", "Pica y Rasca", "Worker and Parasite", "Gabby & Scrappy"],
+    "respuesta_correcta": "Tomy y Daly (Itchy & Scratchy)"
+  },
+  {
+    "id": "spr_028",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué nombre adoptó Homero Simpson inspirado en un secador de cabello?",
+    "emojis": "⚡ 🕶️ 👔",
+    "opciones": ["Max Power", "Hércules Rockefeller", "Chester Turbo", "Lance Murdock"],
+    "respuesta_correcta": "Max Power"
+  },
+  {
+    "id": "spr_029",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué personaje es el dueño de la tienda 'La Mazmorra del Androide'?",
+    "emojis": "📚 🍔 👓",
+    "opciones": ["El Chico de las Historietas (Jeff Albertson)", "Profesor Frink", "Hans Moleman", "Disco Stu"],
+    "respuesta_correcta": "El Chico de las Historietas (Jeff Albertson)"
+  },
+  {
+    "id": "spr_030",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la frase típica de decepción del Chico de las Historietas?",
+    "emojis": "🗯️ 😒 👎",
+    "opciones": ["El peor episodio de la historia", "Esto no tiene lógica", "Totalmente sobrevalorado", "Un fracaso absoluto"],
+    "respuesta_correcta": "El peor episodio de la historia"
+  },
+  {
+    "id": "spr_031",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué sociedad secreta ancestral gobernaba el pueblo y tenía como líder al Número Uno?",
+    "emojis": "👁️ 📜 🍻",
+    "opciones": ["Los Magios (Stonecutters)", "Los Masones", "La Hermandad del Anillo", "Los Iluminados"],
+    "respuesta_correcta": "Los Magios (Stonecutters)"
+  },
+  {
+    "id": "spr_032",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el mejor amigo inseparable de Bart Simpson, con anteojos y cabello azul?",
+    "emojis": "👓 👦 🔵",
+    "opciones": ["Milhouse Van Houten", "Martin Prince", "Nelson Muntz", "Sherri"],
+    "respuesta_correcta": "Milhouse Van Houten"
+  },
+  {
+    "id": "spr_033",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué risa burlona de dos tonos emite Nelson Muntz al reírse de las desgracias ajenas?",
+    "emojis": "👉 😆 💢",
+    "opciones": ["¡Ha-ha!", "¡Je-je!", "¡Uh-uh!", "¡Ja-ja-ja!"],
+    "respuesta_correcta": "¡Ha-ha!"
+  },
+  {
+    "id": "spr_034",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la profesora de Bart que fumaba constantemente y tuvo un romance con Skinner?",
+    "emojis": "🚬 👩‍🏫  chalk",
+    "opciones": ["Edna Krabappel", "Elizabeth Hoover", "Brunella Pommelhorst", "Lurleen Lumpkin"],
+    "respuesta_correcta": "Edna Krabappel"
+  },
+  {
+    "id": "spr_035",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué animal salvaje fue criado secretamente por Homero bajo el nombre de 'Tenacitas'?",
+    "emojis": "🦞 🧈 🍽️",
+    "opciones": ["Una langosta", "Un mono", "Un mapache", "Un oso negro"],
+    "respuesta_correcta": "Una langosta"
+  },
+  {
+    "id": "spr_036",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el hermano multimillonario perdido de Homero dedicado a la industria automotriz?",
+    "emojis": "🚗 💰 👨‍💼",
+    "opciones": ["Herbert Powell", "Hank Scorpio", "Artie Ziff", "Cyrus Simpson"],
+    "respuesta_correcta": "Herbert Powell"
+  },
+  {
+    "id": "spr_037",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué híbrido vegetal adictivo de tabaco y tomate cultivó la familia Simpson en su granja?",
+    "emojis": "🍅 🚬 🐑",
+    "opciones": ["Tomaco", "Tobamate", "Nicotomate", "Agrotom"],
+    "respuesta_correcta": "Tomaco"
+  },
+  {
+    "id": "spr_038",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el nombre del perro que reemplazó temporalmente a Huesos con habilidades extraordinarias?",
+    "emojis": "🐕 🎩 ✨",
+    "opciones": ["Laddie", "Prócer", "Fidelski", "Scraps"],
+    "respuesta_correcta": "Laddie"
+  },
+  {
+    "id": "spr_039",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el líder de la mafia italiana de Springfield custodiado por piernas cruzadas?",
+    "emojis": "🍝 🔫 🕶️",
+    "opciones": ["Fat Tony (El Gordo Tony)", "Don Vittorio", "Legs", "Louie"],
+    "respuesta_correcta": "Fat Tony (El Gordo Tony)"
+  },
+  {
+    "id": "spr_040",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es el empleo oficial de Homero Simpson en la Planta de Energía Nuclear?",
+    "emojis": "☢️ 🍩 🎛️",
+    "opciones": [
+      "Inspector de seguridad en el sector 7G",
+      "Jefe de reactores nucleares",
+      "Técnico de mantenimiento térmico",
+      "Operador auxiliar de turbinas"
+    ],
+    "respuesta_correcta": "Inspector de seguridad en el sector 7G"
+  },
+  {
+    "id": "spr_041",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué objeto cilíndrico de metal inerte ganó el premio al empleado del mes superando a Homero?",
+    "emojis": "🔩 🏆 🏭",
+    "opciones": ["La barra inanimada de carbón", "Un tornillo de titanio", "El fusible maestro", "La tuerca de cobre"],
+    "respuesta_correcta": "La barra inanimada de carbón"
+  },
+  {
+    "id": "spr_042",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el mentor y saxofonista de jazz que inspiró la carrera musical de Lisa?",
+    "emojis": "🎷 🕶️ 🏥",
+    "opciones": ["Encías Sangrantes Murphy", "Dexter Coltrane", "Sonny Jazz", "Marcus Miller"],
+    "respuesta_correcta": "Encías Sangrantes Murphy"
+  },
+  {
+    "id": "spr_043",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué frase célebre le dedicaba el actor Troy McClure al público al inicio de sus videos?",
+    "emojis": "🎬 📺 🐟",
+    "opciones": [
+      "Tal vez me recuerden de películas como...",
+      "Hola amigos del cine y la televisión",
+      "Bienvenidos a una nueva lección",
+      "Soy la estrella que todos conocen"
+    ],
+    "respuesta_correcta": "Tal vez me recuerden de películas como..."
+  },
+  {
+    "id": "spr_044",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el parque de diversiones con temática de Tomy y Daly repleto de robots asesinos?",
+    "emojis": "🎢 🤖 🎟️",
+    "opciones": ["La Tierra de Tomy y Daly", "Krustyland", "Duff Gardens", "Daly World"],
+    "respuesta_correcta": "La Tierra de Tomy y Daly"
+  },
+  {
+    "id": "spr_045",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué vehículo todoterreno gigante y peligroso compró Homero tras un comercial publicitario?",
+    "emojis": "🚙 🛞 🔥",
+    "opciones": ["Canyonero", "The Beast 4x4", "Guzzler XL", "Thunder Road"],
+    "respuesta_correcta": "Canyonero"
+  },
+  {
+    "id": "spr_046",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cuál es la comida que Marge Simpson prepara con orgullo diciendo '¡A comer chuletas!'?",
+    "emojis": "🥩 👩‍🍳 🍽️",
+    "opciones": ["Chuletas de cerdo", "Pollo frito", "Lasaña casera", "Guiso de carne"],
+    "respuesta_correcta": "Chuletas de cerdo"
+  },
+  {
+    "id": "spr_047",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama la zarigüeya madre que vivía dentro del Monorriel de Springfield?",
+    "emojis": "🦝 🚝 🍼",
+    "opciones": ["Cuca (Mordisquitos en España)", "Pelusa", "Rosita", "Molly"],
+    "respuesta_correcta": "Cuca (Mordisquitos en España)"
+  },
+  {
+    "id": "spr_048",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué número de calle tiene la icónica casa de dos pisos de la familia Simpson?",
+    "emojis": "🏡 📬 🌲",
+    "opciones": ["742 Evergreen Terrace", "740 Elm Street", "1042 Evergreen Terrace", "742 Oak Street"],
+    "respuesta_correcta": "742 Evergreen Terrace"
+  },
+  {
+    "id": "spr_049",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Qué exótico pez venenoso comió Homero creyendo que le quedaban solo 24 horas de vida?",
+    "emojis": "🐡 🍣 ⏱️",
+    "opciones": ["Fugu (Pez globo)", "Pez piedra", "Pez león", "Barracuda negra"],
+    "respuesta_correcta": "Fugu (Pez globo)"
+  },
+  {
+    "id": "spr_050",
+    "categoria": "ANIMACIÓN",
+    "pack": "vecinos_springfield",
+    "pregunta": "¿Cómo se llama el vendedor deprimido que nunca logra cerrar un trato y ruega por una venta?",
+    "emojis": "💼 😰 📉",
+    "opciones": ["Gil Gunderson", "Lionel Hutz", "Kirk Van Houten", "Hans Moleman"],
+    "respuesta_correcta": "Gil Gunderson"
+  }
+];
+window.SPRINGFIELD_QUESTIONS_FALLBACK = SPRINGFIELD_QUESTIONS_FALLBACK;
+
+// Banco embebido garantizado de Héroes del Multiverso (50 preguntas completas)
+const MULTIVERSO_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.MULTIVERSO_QUESTIONS_FALLBACK && window.MULTIVERSO_QUESTIONS_FALLBACK.length >= 50)
+  ? window.MULTIVERSO_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "hdm_001",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿De qué metal ficticio indestructible de Wakanda está fabricado el escudo del Capitán América?",
+    "emojis": "🛡️ 🌟 🦾",
+    "opciones": ["Vibranium", "Adamantium", "Uru", "Carbonadio"],
+    "respuesta_correcta": "Vibranium"
+  },
+  {
+    "id": "hdm_002",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué gema del infinito albergaba en su interior el Ojo de Agamotto custodiado por Doctor Strange?",
+    "emojis": "👁️ ⌛ 🧙‍♂️",
+    "opciones": ["Gema del Tiempo", "Gema del Espacio", "Gema de la Mente", "Gema de la Realidad"],
+    "respuesta_correcta": "Gema del Tiempo"
+  },
+  {
+    "id": "hdm_003",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el reino enano forjador donde Thor construyó su hacha Stormbreaker?",
+    "emojis": "🔨 ⚡ 🪐",
+    "opciones": ["Nidavellir", "Svartalfheim", "Jotunheim", "Muspelheim"],
+    "respuesta_correcta": "Nidavellir"
+  },
+  {
+    "id": "hdm_004",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué artefacto cúbico resguardaba originalmente la Gema del Espacio?",
+    "emojis": "🟦 🧊 🌌",
+    "opciones": ["El Teseracto", "El Orbe", "El Éter", "El Ojo de Agamotto"],
+    "respuesta_correcta": "El Teseracto"
+  },
+  {
+    "id": "hdm_005",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿En qué planeta desolado custodiaba Cráneo Rojo la Gema del Alma?",
+    "emojis": "🪐 💀 🧡",
+    "opciones": ["Vormir", "Morag", "Titán", "Knowhere"],
+    "respuesta_correcta": "Vormir"
+  },
+  {
+    "id": "hdm_006",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué inteligencia artificial reemplazó a J.A.R.V.I.S. en el traje de Tony Stark tras la creación de Visión?",
+    "emojis": "🤖 🎙️ 🦾",
+    "opciones": ["F.R.I.D.A.Y.", "E.D.I.T.H.", "KAREN", "JOCASTA"],
+    "respuesta_correcta": "F.R.I.D.A.Y."
+  },
+  {
+    "id": "hdm_007",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el demonio de fuego gigante que destruyó Asgard para cumplir la profecía del Ragnarok?",
+    "emojis": "🔥 👑 🗡️",
+    "opciones": ["Surtur", "Malekith", "Laufey", "Gorr"],
+    "respuesta_correcta": "Surtur"
+  },
+  {
+    "id": "hdm_008",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué organización científica clandestina se infiltró en S.H.I.E.L.D. desde su propia fundación?",
+    "emojis": "🐙 🛡️ 🕵️",
+    "opciones": ["HYDRA", "A.I.M.", "Los Diez Anillos", "La Mano"],
+    "respuesta_correcta": "HYDRA"
+  },
+  {
+    "id": "hdm_009",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es la frase de tres palabras que pronunció Steve Rogers para liderar el contraataque final ante Thanos?",
+    "emojis": "🛡️ ⚡ 🗣️",
+    "opciones": ["Vengadores, unidos", "Pelearemos juntos", "Hasta el final", "Vengadores, al ataque"],
+    "respuesta_correcta": "Vengadores, unidos"
+  },
+  {
+    "id": "hdm_010",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué flor otorga los poderes sobrehumanos y la conexión astral a las Panteras Negras?",
+    "emojis": "🌸 🟣 🐾",
+    "opciones": ["Hierba de corazón", "Flor de loto astral", "Orquídea de Bast", "Raíz de Wakanda"],
+    "respuesta_correcta": "Hierba de corazón"
+  },
+  {
+    "id": "hdm_011",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el puente de energía arcoíris que conecta Asgard con los Nueve Reinos?",
+    "emojis": "🌈 ⚔️ 🌌",
+    "opciones": ["El Bifrost", "El Yggdrasil", "El Puente Astral", "El Portal Cósmico"],
+    "respuesta_correcta": "El Bifrost"
+  },
+  {
+    "id": "hdm_012",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué partícula subatómica descubierta por Hank Pym permite reducir o agrandar la materia?",
+    "emojis": "🐜 🧪 🔴",
+    "opciones": ["Partículas Pym", "Partículas cuánticas", "Radiación Gamma", "Células Uru"],
+    "respuesta_correcta": "Partículas Pym"
+  },
+  {
+    "id": "hdm_013",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es la verdadera especie biológica de Loki revelada en su juventud?",
+    "emojis": "❄️ 👹 👑",
+    "opciones": ["Gigante de Hielo", "Elfo Oscuro", "Asgardiano puro", "Titán menor"],
+    "respuesta_correcta": "Gigante de Hielo"
+  },
+  {
+    "id": "hdm_014",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué objeto contenía la Gema del Poder antes de que los Guardianes de la Galaxia la interceptaran?",
+    "emojis": "🟣 🔮 🦝",
+    "opciones": ["El Orbe", "El Cetro", "El Éter", "El Teseracto"],
+    "respuesta_correcta": "El Orbe"
+  },
+  {
+    "id": "hdm_015",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿En qué planeta basurero cósmico gobernaba El Gran Maestro celebrando batallas de gladiadores?",
+    "emojis": "🪐 🪓 🥊",
+    "opciones": ["Sakaar", "Xandar", "Kree-Lar", "Hala"],
+    "respuesta_correcta": "Sakaar"
+  },
+  {
+    "id": "hdm_016",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el reactor miniaturizado que mantenía con vida a Tony Stark y alimentaba su primer traje?",
+    "emojis": "⚙️ 💡 🦾",
+    "opciones": ["Reactor Arc", "Generador Cuántico", "Núcleo de Fusión Pym", "Batería de Iones"],
+    "respuesta_correcta": "Reactor Arc"
+  },
+  {
+    "id": "hdm_017",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué dios egipcio de la Luna eligió a Marc Spector como su avatar y puño de venganza?",
+    "emojis": "🌙 🦅 🧻",
+    "opciones": ["Khonshu", "Ammit", "Anubis", "Osiris"],
+    "respuesta_correcta": "Khonshu"
+  },
+  {
+    "id": "hdm_018",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál era la designación numérica oficial del universo principal de los Vengadores según Christine Palmer en la Tierra-838?",
+    "emojis": "🌌 🔢 🚪",
+    "opciones": ["Tierra-616", "Tierra-199999", "Tierra-838", "Tierra-1610"],
+    "respuesta_correcta": "Tierra-616"
+  },
+  {
+    "id": "hdm_019",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué gema del infinito estaba incrustada en la frente del androide Visión otorgándole conciencia?",
+    "emojis": "🤖 🟡 🧠",
+    "opciones": ["Gema de la Mente", "Gema del Alma", "Gema del Espacio", "Gema de la Realidad"],
+    "respuesta_correcta": "Gema de la Mente"
+  },
+  {
+    "id": "hdm_020",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama la hermana mayor de Thor y Diosa Asgardiana de la Muerte?",
+    "emojis": "🗡️ 👑 💀",
+    "opciones": ["Hela", "Frigga", "Sif", "Brunnhilde"],
+    "respuesta_correcta": "Hela"
+  },
+  {
+    "id": "hdm_021",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué tratado internacional de la ONU buscaba regular y registrar a los Vengadores desatando la Guerra Civil?",
+    "emojis": "📜 🏛️ ⚖️",
+    "opciones": ["Los Acuerdos de Sokovia", "El Tratado de Ginebra", "El Acta de Wakanda", "El Protocolo Ultron"],
+    "respuesta_correcta": "Los Acuerdos de Sokovia"
+  },
+  {
+    "id": "hdm_022",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué raza alienígena metamorfa cambia de forma imitando el ADN y aspecto de cualquier ser vivo?",
+    "emojis": "👽 🦎 👥",
+    "opciones": ["Skrulls", "Kree", "Chitauri", "Sovereign"],
+    "respuesta_correcta": "Skrulls"
+  },
+  {
+    "id": "hdm_023",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué entidad ancestral creó el Darkhold, el infame libro maldito de magia oscura?",
+    "emojis": "📖 🪄 😈",
+    "opciones": ["Chthon", "Dormammu", "Mephisto", "Agatha Harkness"],
+    "respuesta_correcta": "Chthon"
+  },
+  {
+    "id": "hdm_024",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el grupo de élite de guerreras encargadas de la guardia personal del rey en Wakanda?",
+    "emojis": "🛡️ 🗡️ 👑",
+    "opciones": ["Dora Milaje", "Jabari", "Hermanas de Bast", "Valkirias"],
+    "respuesta_correcta": "Dora Milaje"
+  },
+  {
+    "id": "hdm_025",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué dimensión de tiempo y espacio infinitesimal permitió a los Vengadores ejecutar su viaje en el tiempo?",
+    "emojis": "⏳ 🌀 ⚛️",
+    "opciones": ["Reino Cuántico", "Dimensión Espejo", "Dimensión Oscura", "Vacío del Fin de los Tiempos"],
+    "respuesta_correcta": "Reino Cuántico"
+  },
+  {
+    "id": "hdm_026",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre de la colosal estación espacial minera construida dentro de la cabeza cercenada de un Celestial?",
+    "emojis": "💀 🌌 ⛏️",
+    "opciones": ["Knowhere", "El Santuario", "Xandar", "Kyln"],
+    "respuesta_correcta": "Knowhere"
+  },
+  {
+    "id": "hdm_027",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué mineral mitológico asgardiano se empleó para forjar el martillo Mjolnir?",
+    "emojis": "🔨 ⚡ 🛡️",
+    "opciones": ["Uru", "Vibranium", "Titanio dorado", "Beskar"],
+    "respuesta_correcta": "Uru"
+  },
+  {
+    "id": "hdm_028",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el pueblo ficticio de Nueva Jersey donde Wanda Maximoff creó su anomalía de comedia clásica?",
+    "emojis": "📺 🪄 🏘️",
+    "opciones": ["Westview", "Rosewood", "Eastview", "Greendale"],
+    "respuesta_correcta": "Westview"
+  },
+  {
+    "id": "hdm_029",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué criatura con aspecto de gato doméstico adoptó Carol Danvers descubriéndose que era un temible Flerken?",
+    "emojis": "🐱 🐙 🚀",
+    "opciones": ["Goose", "Chewie", "Lucky", "Salem"],
+    "respuesta_correcta": "Goose"
+  },
+  {
+    "id": "hdm_030",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Quién fue el mentor y maestro místico de Stephen Strange en Kamar-Taj?",
+    "emojis": "🧙‍♀️ 📜 🍵",
+    "opciones": ["Ancient One (Ancestral)", "Wong", "Kaecilius", "Mordo"],
+    "respuesta_correcta": "Ancient One (Ancestral)"
+  },
+  {
+    "id": "hdm_031",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué general militar de Wakanda y líder tribal vivía en las montañas nevadas adorando al dios gorila Hanuman?",
+    "emojis": "🦍 ❄️ 🛡️",
+    "opciones": ["M'Baku", "W'Kabi", "Killmonger", "Zuri"],
+    "respuesta_correcta": "M'Baku"
+  },
+  {
+    "id": "hdm_032",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué emperatriz de la soberanía genética alienígena dorada ordenó la creación artificial de Adam Warlock?",
+    "emojis": "✨ 👑 🟡",
+    "opciones": ["Ayesha", "Proxima Midnight", "Hela", "Ravonna"],
+    "respuesta_correcta": "Ayesha"
+  },
+  {
+    "id": "hdm_033",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué entidad cósmica devoradora gobernaba la Dimensión Oscura antes de quedar atrapada en un bucle temporal?",
+    "emojis": "🌀 😈 ⌛",
+    "opciones": ["Dormammu", "Galactus", "Ego", "Gorr"],
+    "respuesta_correcta": "Dormammu"
+  },
+  {
+    "id": "hdm_034",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llamaba el programa soviético de espías que entrenó a Natasha Romanoff y Yelena Belova?",
+    "emojis": "🕷️ 🩰 🩸",
+    "opciones": ["La Habitación Roja", "Proyecto Centinela", "Iniciativa Fantasma", "Sala Escarlata"],
+    "respuesta_correcta": "La Habitación Roja"
+  },
+  {
+    "id": "hdm_035",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué organización burocrática atemporal controla y poda las ramas de la Sagrada Línea Temporal?",
+    "emojis": "⏳ 🏢 📜",
+    "opciones": ["TVA (Autoridad de Variación Temporal)", "S.W.O.R.D.", "Los Iluminati", "Cabal Cósmico"],
+    "respuesta_correcta": "TVA (Autoridad de Variación Temporal)"
+  },
+  {
+    "id": "hdm_036",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre del planeta natal viviente de Peter Quill que resultó ser su propio padre biológico?",
+    "emojis": "🪐 🧬 🌌",
+    "opciones": ["Ego el Planeta Viviente", "Hala", "Contraxia", "Krylor"],
+    "respuesta_correcta": "Ego el Planeta Viviente"
+  },
+  {
+    "id": "hdm_037",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué tipo de energía radiactiva transformó las células de Bruce Banner en el gigante verde Hulk?",
+    "emojis": "🧪 🟢 💥",
+    "opciones": ["Radiación Gamma", "Rayos Cósmicos", "Fusión Nuclear Beta", "Partículas Pym"],
+    "respuesta_correcta": "Radiación Gamma"
+  },
+  {
+    "id": "hdm_038",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llamaba el vehículo militar volador con doble hélice y camuflaje óptico usado por S.H.I.E.L.D.?",
+    "emojis": "🚁 ✈️ 🛡️",
+    "opciones": ["Quinjet", "Helicarrier", "Milano", "Benatar"],
+    "respuesta_correcta": "Quinjet"
+  },
+  {
+    "id": "hdm_039",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué villano robótico inteligente intentó elevar la ciudad entera de Sokovia para provocar la extinción humana?",
+    "emojis": "🤖 🏙️ 💥",
+    "opciones": ["Ultron", "Vision", "Kang", "Zola"],
+    "respuesta_correcta": "Ultron"
+  },
+  {
+    "id": "hdm_040",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué arma mística empuñaba Gorr para masacrar a las divinidades del cosmos?",
+    "emojis": "🗡️ 🖤 ⚡",
+    "opciones": ["Necroespada Todonegra", "Stormbreaker", "Espada del Dragón", "Lanza de Odín"],
+    "respuesta_correcta": "Necroespada Todonegra"
+  },
+  {
+    "id": "hdm_041",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el reino submarino mesoamericano gobernado por Namor, el rey con alas en los tobillos?",
+    "emojis": "🌊 🪸 🔱",
+    "opciones": ["Talokan", "Atlántida", "Lemuria", "Xibalbá"],
+    "respuesta_correcta": "Talokan"
+  },
+  {
+    "id": "hdm_042",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué forma líquida viscosa y roja adoptaba la Gema de la Realidad en el cuerpo de Jane Foster?",
+    "emojis": "🩸 🔴 🌌",
+    "opciones": ["El Éter", "El Teseracto", "El Orbe", "El Vórtice"],
+    "respuesta_correcta": "El Éter"
+  },
+  {
+    "id": "hdm_043",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el guardián de ojos dorados que vigila las puertas de Asgard y ve todo en el cosmos?",
+    "emojis": "🗡️ 👁️ 🌈",
+    "opciones": ["Heimdall", "Volstagg", "Fandral", "Hogun"],
+    "respuesta_correcta": "Heimdall"
+  },
+  {
+    "id": "hdm_044",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué poder único posee la joven América Chavez para recorrer el multiverso?",
+    "emojis": "⭐ 🚪 🌌",
+    "opciones": [
+      "Abrir portales interdimensionales con forma de estrella",
+      "Controlar la línea temporal con el Darkhold",
+      "Duplicar su cuerpo en distintas realidades",
+      "Absorber la energía cósmica de las variantes"
+    ],
+    "respuesta_correcta": "Abrir portales interdimensionales con forma de estrella"
+  },
+  {
+    "id": "hdm_045",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué bestia colosal de humo y ceniza devoraba variantes en El Vacío antes de la llegada de Loki?",
+    "emojis": "🐉 🌪️ ⚡",
+    "opciones": ["Alioth", "Jormungandr", "Fin Fang Foom", "Chitauri Leviathan"],
+    "respuesta_correcta": "Alioth"
+  },
+  {
+    "id": "hdm_046",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué palabra de activación psicológica final completaba el control mental de Bucky Barnes como Soldado del Invierno?",
+    "emojis": "📖 🦾 ❄️",
+    "opciones": ["Vagón de carga", "Amanecer", "Diecisiete", "Nueve"],
+    "respuesta_correcta": "Vagón de carga"
+  },
+  {
+    "id": "hdm_047",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cuál es el nombre del Celestial gigante cuyo embrión petrificado emergió del océano de la Tierra?",
+    "emojis": "🗿 🌊 🌌",
+    "opciones": ["Tiamut", "Arishem", "Eson", "Jemiah"],
+    "respuesta_correcta": "Tiamut"
+  },
+  {
+    "id": "hdm_048",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué diez artefactos circulares milenarios otorgaron inmortalidad y poder místico a Wenwu durante siglos?",
+    "emojis": "💍 🥋 ⚡",
+    "opciones": ["Los Diez Anillos", "Las Pulseras Kree", "Los Aros de Cyttorak", "Las Coronas de Ta Lo"],
+    "respuesta_correcta": "Los Diez Anillos"
+  },
+  {
+    "id": "hdm_049",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Qué héroe sacrificó su propia alma en Vormir para que Clint Barton obtuviera la Gema del Alma?",
+    "emojis": "🕷️ 🧗‍♀️ 🧡",
+    "opciones": ["Natasha Romanoff (Black Widow)", "Gamora", "Nebula", "Wanda Maximoff"],
+    "respuesta_correcta": "Natasha Romanoff (Black Widow)"
+  },
+  {
+    "id": "hdm_050",
+    "categoria": "CINE & SERIES",
+    "pack": "heroes_del_multiverso",
+    "pregunta": "¿Cómo se llama el dios del engaño que en el final de su serie tejió las ramas del multiverso con sus propias manos formando un árbol cósmico?",
+    "emojis": "👑 🟢 🌳",
+    "opciones": ["Loki", "Sylvie", "Thor", "Kang"],
+    "respuesta_correcta": "Loki"
+  }
+];
+window.MULTIVERSO_QUESTIONS_FALLBACK = MULTIVERSO_QUESTIONS_FALLBACK;
+
+const GALAXIAS_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.GALAXIAS_QUESTIONS_FALLBACK && window.GALAXIAS_QUESTIONS_FALLBACK.length >= 50)
+  ? window.GALAXIAS_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "glx_001",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué cristal sintonizado con la Fuerza es el corazón energético de un sable de luz?",
+    "emojis": "💎 ⚔️ ✨",
+    "opciones": ["Cristal Kyber", "Cristal Coaxium", "Piedra Beskar", "Cristal Nova"],
+    "respuesta_correcta": "Cristal Kyber"
+  },
+  {
+    "id": "glx_002",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el planeta desértico con dos soles gemelos donde crecieron Anakin y Luke Skywalker?",
+    "emojis": "🏜️ ☀️ 🪐",
+    "opciones": ["Tatooine", "Jakku", "Geonosis", "Korriban"],
+    "respuesta_correcta": "Tatooine"
+  },
+  {
+    "id": "glx_003",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué orden secreta ejecutaron los soldados clon para exterminar a los caballeros Jedi?",
+    "emojis": "🪖 📜 💀",
+    "opciones": ["Orden 66", "Orden 99", "Protocolo Imperial", "Orden 37"],
+    "respuesta_correcta": "Orden 66"
+  },
+  {
+    "id": "glx_004",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿De qué metal casi indestructible está forjada la armadura tradicional de los mandalorianos?",
+    "emojis": "🛡️ 🪖 🦾",
+    "opciones": ["Beskar", "Duracero", "Cortosis", "Titanio"],
+    "respuesta_correcta": "Beskar"
+  },
+  {
+    "id": "glx_005",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el cazarrecompensas que sirvió como plantilla genética para el Gran Ejército Clon?",
+    "emojis": "🔫 🧬 🎯",
+    "opciones": ["Jango Fett", "Boba Fett", "Cad Bane", "Din Djarin"],
+    "respuesta_correcta": "Jango Fett"
+  },
+  {
+    "id": "glx_006",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era la designación numérica del droide astromecánico que acompañó a Luke Skywalker?",
+    "emojis": "🤖 🔵 🚀",
+    "opciones": ["R2-D2", "C-3PO", "BB-8", "Chopper"],
+    "respuesta_correcta": "R2-D2"
+  },
+  {
+    "id": "glx_007",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué maestro Sith y gobernante de Naboo manipuló la República bajo el alter ego de Canciller Palpatine?",
+    "emojis": "⚡ 👑 😈",
+    "opciones": ["Darth Sidious", "Darth Plagueis", "Darth Maul", "Darth Tyranus"],
+    "respuesta_correcta": "Darth Sidious"
+  },
+  {
+    "id": "glx_008",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta volcánico de lava pura tuvo lugar el duelo definitivo entre Obi-Wan y Anakin?",
+    "emojis": "🌋 🔥 ⚔️",
+    "opciones": ["Mustafar", "Sullust", "Exegol", "Moraband"],
+    "respuesta_correcta": "Mustafar"
+  },
+  {
+    "id": "glx_009",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué temible arma imperial esférica era capaz de pulverizar un planeta entero de un solo disparo?",
+    "emojis": "🌕 💥 🌌",
+    "opciones": ["La Estrella de la Muerte", "La Base Starkiller", "El Eclipse Imperial", "El Destructor Estelar"],
+    "respuesta_correcta": "La Estrella de la Muerte"
+  },
+  {
+    "id": "glx_010",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el contrabandista wookiee copiloto del Halcón Milenario?",
+    "emojis": "🐻 🚀 🏹",
+    "opciones": ["Chewbacca", "Tarfful", "Black Krrsantan", "Zaalbar"],
+    "respuesta_correcta": "Chewbacca"
+  },
+  {
+    "id": "glx_011",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué cúpula flotante en la atmósfera de Bespin era administrada por Lando Calrissian?",
+    "emojis": "☁️ 🏙️ 🪐",
+    "opciones": ["Ciudad de las Nubes", "Coruscant Superior", "Estación Nube", "Kamino Flotante"],
+    "respuesta_correcta": "Ciudad de las Nubes"
+  },
+  {
+    "id": "glx_012",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué sustancia criogénica metálica fue congelado Han Solo para ser transportado ante Jabba?",
+    "emojis": "🧊 ⛓️ 🪙",
+    "opciones": ["Carbonita", "Beskar fundido", "Cromita", "Plastiacero"],
+    "respuesta_correcta": "Carbonita"
+  },
+  {
+    "id": "glx_013",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué pequeñas criaturas peludas y primitivas del bosque de Endor ayudaron a destruir el generador de escudo?",
+    "emojis": "🐻 🌲 🏹",
+    "opciones": ["Ewoks", "Jawas", "Ugnaughts", "Wookiees"],
+    "respuesta_correcta": "Ewoks"
+  },
+  {
+    "id": "glx_014",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era la especie del cazador de recompensas Greedo en la cantina de Mos Eisley?",
+    "emojis": "👽 🔫 🍺",
+    "opciones": ["Rodiano", "Trandoshano", "Duros", "Bith"],
+    "respuesta_correcta": "Rodiano"
+  },
+  {
+    "id": "glx_015",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué aprendiz togruta tuvo Anakin Skywalker durante las Guerras Clon?",
+    "emojis": "⚔️ ⚪ 👧",
+    "opciones": ["Ahsoka Tano", "Barriss Offee", "Aayla Secura", "Shaak Ti"],
+    "respuesta_correcta": "Ahsoka Tano"
+  },
+  {
+    "id": "glx_016",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué carrera de vainas de Tatooine ganó Anakin su libertad como esclavo?",
+    "emojis": "🏎️ ⚡ 🏁",
+    "opciones": ["El Clásico de Boonta Eve", "El Circuito de Mos Espa", "El Gran Premio de Kessel", "El Reto de Beggar's Canyon"],
+    "respuesta_correcta": "El Clásico de Boonta Eve"
+  },
+  {
+    "id": "glx_017",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué gobernante criminal de la especie Hutt residía en un opulento palacio en Tatooine?",
+    "emojis": "🐌 💰 🐸",
+    "opciones": ["Jabba el Hutt", "Rotta el Hutt", "Ziro el Hutt", "Gardulla"],
+    "respuesta_correcta": "Jabba el Hutt"
+  },
+  {
+    "id": "glx_018",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el nombre del planeta pantanoso donde el Maestro Yoda vivió su exilio?",
+    "emojis": "🐸 🌿 🛖",
+    "opciones": ["Dagobah", "Naboo", "Kashyyyk", "Dathomir"],
+    "respuesta_correcta": "Dagobah"
+  },
+  {
+    "id": "glx_019",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué título ostentaba el Conde Dooku en la Orden Sith bajo el mando de Sidious?",
+    "emojis": "🗡️ 🔴 👴",
+    "opciones": ["Darth Tyranus", "Darth Maul", "Darth Bane", "Darth Malak"],
+    "respuesta_correcta": "Darth Tyranus"
+  },
+  {
+    "id": "glx_020",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué comandante ciborg de cuatro brazos lideraba el ejército de droides separatista?",
+    "emojis": "🤖 ⚔️ 🫁",
+    "opciones": ["General Grievous", "Wat Tambor", "Almirante Trench", "Nute Gunray"],
+    "respuesta_correcta": "General Grievous"
+  },
+  {
+    "id": "glx_021",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué nave estelar completó la famosa Carrera de Kessel en menos de doce pársecs?",
+    "emojis": "🚀 🌌 ⏱️",
+    "opciones": ["El Halcón Milenario", "El Fantasma (Ghost)", "El Caza TIE Avanzado", "El Esclavo I"],
+    "respuesta_correcta": "El Halcón Milenario"
+  },
+  {
+    "id": "glx_022",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era el nombre del sabueso zabrak que blandía un sable de luz de doble hoja roja en Naboo?",
+    "emojis": "👹 ⚔️ 🔴",
+    "opciones": ["Darth Maul", "Savage Opress", "Pre Vizsla", "Darth Malgus"],
+    "respuesta_correcta": "Darth Maul"
+  },
+  {
+    "id": "glx_023",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué planeta helado albergó la base Eco de la Alianza Rebelde atacada por caminantes AT-AT?",
+    "emojis": "❄️ 🏔️ 🦣",
+    "opciones": ["Hoth", "Ilum", "Kijimi", "Canto Bight"],
+    "respuesta_correcta": "Hoth"
+  },
+  {
+    "id": "glx_024",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba la madre biológica de Luke Skywalker y Leia Organa?",
+    "emojis": "👑 👸 🌺",
+    "opciones": ["Padmé Amidala", "Shmi Skywalker", "Satine Kryze", "Breha Organa"],
+    "respuesta_correcta": "Padmé Amidala"
+  },
+  {
+    "id": "glx_025",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué pozo monstruoso en el Mar de Dunas digiere a sus víctimas a lo largo de mil años?",
+    "emojis": "🕳️ 🦷 🏜️",
+    "opciones": ["El Gran Foso de Carkoon (Sarlacc)", "La Cueva del Rancor", "El Abismo de Kessel", "El Nido del Krayt"],
+    "respuesta_correcta": "El Gran Foso de Carkoon (Sarlacc)"
+  },
+  {
+    "id": "glx_026",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué sable ancestral de hoja negra simboliza el liderazgo supremo sobre los clanes de Mandalore?",
+    "emojis": "🗡️ 🖤 👑",
+    "opciones": ["El Darksaber (Sable Oscuro)", "El Sable Sombrío", "La Espada de Mandalore", "El Filo Nocturno"],
+    "respuesta_correcta": "El Darksaber (Sable Oscuro)"
+  },
+  {
+    "id": "glx_027",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el planeta acuático donde los científicos nativos clonaron el ejército de la República?",
+    "emojis": "🌊 🌧️ 🧬",
+    "opciones": ["Kamino", "Mon Cala", "Manaan", "Ahch-To"],
+    "respuesta_correcta": "Kamino"
+  },
+  {
+    "id": "glx_028",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué entidad militar fanática surgió de los restos del Imperio en las Regiones Desconocidas?",
+    "emojis": "🦅 🔴 ⚔️",
+    "opciones": ["La Primera Orden", "El Remanente Carmesí", "El Consejo Separatista", "La Nueva Alianza"],
+    "respuesta_correcta": "La Primera Orden"
+  },
+  {
+    "id": "glx_029",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llama el estratega chiss de piel azul y ojos rojos que lideró las fuerzas del Imperio?",
+    "emojis": "🔵 👁️ 🎖️",
+    "opciones": ["Gran Almirante Thrawn", "Gobernador Tarkin", "Almirante Piett", "Moff Gideon"],
+    "respuesta_correcta": "Gran Almirante Thrawn"
+  },
+  {
+    "id": "glx_030",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué microscópicas formas de vida intracelulares determinan la afinidad biológica con la Fuerza?",
+    "emojis": "🔬 ✨ 🧬",
+    "opciones": ["Midiclorianos", "Cristales internos", "Células Kyber", "Esporas astrales"],
+    "respuesta_correcta": "Midiclorianos"
+  },
+  {
+    "id": "glx_031",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué planeta pacífico de la realeza fue completamente vaporizado por la primera Estrella de la Muerte?",
+    "emojis": "🪐 💥 👸",
+    "opciones": ["Alderaan", "Chandrila", "Hosnian Prime", "Naboo"],
+    "respuesta_correcta": "Alderaan"
+  },
+  {
+    "id": "glx_032",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el código sagrado de respuesta habitual entre los mandalorianos ortodoxos?",
+    "emojis": "🪖 🛡️ 🗣️",
+    "opciones": ["Este es el camino (This is the Way)", "Gloria a Mandalore", "La Fuerza nos guía", "Por el Beskar"],
+    "respuesta_correcta": "Este es el camino (This is the Way)"
+  },
+  {
+    "id": "glx_033",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta cubierto por una ciudad colosal se encontraba el Senado Galáctico y el Templo Jedi?",
+    "emojis": "🏙️ 🏛️ 🪐",
+    "opciones": ["Coruscant", "Corellia", "Kuat", "Taris"],
+    "respuesta_correcta": "Coruscant"
+  },
+  {
+    "id": "glx_034",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué color característico tenía el sable de luz empuñado por el Maestro Mace Windu?",
+    "emojis": "🟣 ⚔️ ⚡",
+    "opciones": ["Púrpura / Morado", "Amarillo dorado", "Cian", "Verde esmeralda"],
+    "respuesta_correcta": "Púrpura / Morado"
+  },
+  {
+    "id": "glx_035",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es el verdadero nombre de 'El Niño', el infante sensible a la Fuerza rescatado por Din Djarin?",
+    "emojis": "👶 🟢 🥣",
+    "opciones": ["Grogu", "Gregar", "Yaddle", "Gork"],
+    "respuesta_correcta": "Grogu"
+  },
+  {
+    "id": "glx_036",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué inquisidores o cazadores imperiales fueron entrenados para cazar a los Jedi supervivientes de la Purga?",
+    "emojis": "🚁 ⚔️ 🔴",
+    "opciones": ["Los Inquisidores Imperiales", "La Guardia Carmesí", "Los Soldados de la Purga", "Los Caballeros de Ren"],
+    "respuesta_correcta": "Los Inquisidores Imperiales"
+  },
+  {
+    "id": "glx_037",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta remoto cubierto de agua e islas rocosas se fundó el primer Templo de la Orden Jedi?",
+    "emojis": "🌊 🪨 📜",
+    "opciones": ["Ahch-To", "Tython", "Jedha", "Ossus"],
+    "respuesta_correcta": "Ahch-To"
+  },
+  {
+    "id": "glx_038",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál era el nombre del capitán clon al mando de la venerada Legión 501 junto a Anakin?",
+    "emojis": "🪖 🔵 🔫",
+    "opciones": ["Rex (CT-7567)", "Cody", "Fives", "Wolffe"],
+    "respuesta_correcta": "Rex (CT-7567)"
+  },
+  {
+    "id": "glx_039",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué especie reptiliana carroñera viaja por el desierto de Tatooine en gigantescos Sandcrawlers?",
+    "emojis": "🟫 👁️ ⚙️",
+    "opciones": ["Jawas", "Moradores de las Arenas", "Hutts", "Weequays"],
+    "respuesta_correcta": "Jawas"
+  },
+  {
+    "id": "glx_040",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué científico diseñó deliberadamente la falla térmica en la Estrella de la Muerte para los rebeldes?",
+    "emojis": "📐 💥 📡",
+    "opciones": ["Galen Erso", "Orson Krennic", "Bevel Lemelisk", "Bodhi Rook"],
+    "respuesta_correcta": "Galen Erso"
+  },
+  {
+    "id": "glx_041",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es la regla Sith establecida por Darth Bane que limita su orden a solo dos miembros simultáneos?",
+    "emojis": "👥 ⚖️ 🔴",
+    "opciones": ["La Regla de Dos", "El Pacto Sombrío", "La Doctrina del Maestro", "El Código Rojo"],
+    "respuesta_correcta": "La Regla de Dos"
+  },
+  {
+    "id": "glx_042",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta tropical de archivos imperiales se libró la batalla para transmitir los planos de la Estrella?",
+    "emojis": "🌴 🌊 📡",
+    "opciones": ["Scarif", "Eadu", "Jedha", "Lothal"],
+    "respuesta_correcta": "Scarif"
+  },
+  {
+    "id": "glx_043",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué coto minero y luna helada fue el centro de extracción masiva de cristales kyber para el Imperio?",
+    "emojis": "❄️ ⛏️ 💎",
+    "opciones": ["Ilum", "Kessel", "Mygeeto", "Dantooine"],
+    "respuesta_correcta": "Ilum"
+  },
+  {
+    "id": "glx_044",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba el clan de hechiceras que dominaban la magia oscura y la Fuerza en Dathomir?",
+    "emojis": "🧙‍♀️ 🟢 🗡️",
+    "opciones": ["Las Hermanas de la Noche", "Las Hijas del Lado Oscuro", "El Aquelarre Sith", "Las Brujas de Kessel"],
+    "respuesta_correcta": "Las Hermanas de la Noche"
+  },
+  {
+    "id": "glx_045",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué caza estelar rebelde cuenta con cuatro alas móviles que se despliegan en posición de 'X'?",
+    "emojis": "🚀 ⚔️ 🌌",
+    "opciones": ["Ala-X (X-Wing)", "Ala-Y (Y-Wing)", "Ala-A (A-Wing)", "Ala-B (B-Wing)"],
+    "respuesta_correcta": "Ala-X (X-Wing)"
+  },
+  {
+    "id": "glx_046",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cómo se llamaba la fortaleza personal construida por Darth Vader sobre una cueva Sith en Mustafar?",
+    "emojis": "🏰 🌋 🖤",
+    "opciones": ["Castillo Bast", "Palacio Imperial", "Fortaleza Inquisitorial", "Ciudadela Sombría"],
+    "respuesta_correcta": "Castillo Bast"
+  },
+  {
+    "id": "glx_047",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Cuál es la designación numérica del droide de protocolo dorado con dominio de más de seis millones de formas de comunicación?",
+    "emojis": "🤖 🟡 🗣️",
+    "opciones": ["C-3PO", "TC-14", "0-0-0", "K-2SO"],
+    "respuesta_correcta": "C-3PO"
+  },
+  {
+    "id": "glx_048",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué mineral escaso de color rojo se extrae en las minas de Crait revelándose bajo una costra blanca de sal?",
+    "emojis": "🧂 🔴 🦊",
+    "opciones": ["Rhodio / Cristales rojos", "Beskar", "Coaxium", "Tibanna"],
+    "respuesta_correcta": "Rhodio / Cristales rojos"
+  },
+  {
+    "id": "glx_049",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿Qué bestia carnívora con colmillos habitaba en el foso bajo la sala del trono de Jabba el Hutt?",
+    "emojis": "👹 🍖 ⛓️",
+    "opciones": ["Rancor", "Wampa", "Acklay", "Nexu"],
+    "respuesta_correcta": "Rancor"
+  },
+  {
+    "id": "glx_050",
+    "categoria": "CINE & SERIES",
+    "pack": "galaxias_lejanas",
+    "pregunta": "¿En qué planeta secreto del Lado Oscuro se ocultó la Flota Sith de Destructores Estelares en la Batalla de Exegol?",
+    "emojis": "⚡ 💀 🌌",
+    "opciones": ["Exegol", "Korriban", "Malachor", "Byss"],
+    "respuesta_correcta": "Exegol"
+  }
+];
+window.GALAXIAS_QUESTIONS_FALLBACK = GALAXIAS_QUESTIONS_FALLBACK;
+
+const KI_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.KI_QUESTIONS_FALLBACK && window.KI_QUESTIONS_FALLBACK.length >= 50)
+  ? window.KI_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "ki_001",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica destructiva de energía aprendió Gokū del Maestro Roshi tras verla una sola vez?",
+    "emojis": "🐉 🥋 💥",
+    "opciones": ["Kamehameha", "Kafuken", "Kienzan", "Masenko"],
+    "respuesta_correcta": "Kamehameha"
+  },
+  {
+    "id": "ki_002",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuántas estrellas tiene la esfera del dragón que el abuelo Gohan le heredó a Gokū?",
+    "emojis": "🟠 ⭐ 👴",
+    "opciones": ["Cuatro estrellas", "Una estrella", "Siete estrellas", "Tres estrellas"],
+    "respuesta_correcta": "Cuatro estrellas"
+  },
+  {
+    "id": "ki_003",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué deidad ancestral habita al final del Camino de la Serpiente y enseñó el Kaio-ken?",
+    "emojis": "🐍 🪐 🥋",
+    "opciones": ["Kaio-sama del Norte", "Kamisama", "Gran Patriarca", "Kibito"],
+    "respuesta_correcta": "Kaio-sama del Norte"
+  },
+  {
+    "id": "ki_004",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el verdadero nombre de nacimiento saiyajin de Son Gokū?",
+    "emojis": "👶 🚀 🐵",
+    "opciones": ["Kakarotto", "Bardock", "Raditz", "Turles"],
+    "respuesta_correcta": "Kakarotto"
+  },
+  {
+    "id": "ki_005",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué alimento milagroso cultivado por el maestro Karin cura heridas letales y repone la energía al instante?",
+    "emojis": "🐱 🫘 ⚡",
+    "opciones": ["Semilla del Ermitaño (Senzu)", "Fruto sagrado", "Brote de Namek", "Hierba celestial"],
+    "respuesta_correcta": "Semilla del Ermitaño (Senzu)"
+  },
+  {
+    "id": "ki_006",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el dragón sagrado invocado al reunir las 7 esferas de la Tierra?",
+    "emojis": "🐉 🟠 ⚡",
+    "opciones": ["Shenlong", "Porunga", "Super Shenlong", "Zalama"],
+    "respuesta_correcta": "Shenlong"
+  },
+  {
+    "id": "ki_007",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica mortal en forma de disco cortante de Ki fue inventada por Krilin?",
+    "emojis": "💿 💥 👨‍🦲",
+    "opciones": ["Kienzan", "Taiyoken", "Rokkaken", "Sokidan"],
+    "respuesta_correcta": "Kienzan"
+  },
+  {
+    "id": "ki_008",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el planeta natal original de Piccolo y Kamisama destruido por un cataclismo climático?",
+    "emojis": "🪐 🟢 💧",
+    "opciones": ["Namekusei (Namek)", "Planeta Vegeta", "Sadala", "Yardrat"],
+    "respuesta_correcta": "Namekusei (Namek)"
+  },
+  {
+    "id": "ki_009",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué muerte desató por primera vez la transformación de Gokū en Super Saiyajin legendario?",
+    "emojis": "⚡ 👱‍♂️ 🩸",
+    "opciones": ["La muerte de Krilin a manos de Freezer", "El sacrificio de Piccolo", "La caída de Vegeta", "La muerte de Yamcha"],
+    "respuesta_correcta": "La muerte de Krilin a manos de Freezer"
+  },
+  {
+    "id": "ki_010",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién derrotó a Cell Perfecto alcanzando por primera vez la fase de Super Saiyajin 2?",
+    "emojis": "⚡ 🧒 💥",
+    "opciones": ["Gohan", "Gokū", "Vegeta", "Trunks del Futuro"],
+    "respuesta_correcta": "Gohan"
+  },
+  {
+    "id": "ki_011",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué artefactos mágicos de los Supremos Kaio-shin permiten una fusión permanente o de una hora?",
+    "emojis": "👂 🟣 💫",
+    "opciones": ["Aretes Pothala", "Anillos del Tiempo", "Brazaletes Metamoranos", "Cristales Ki"],
+    "respuesta_correcta": "Aretes Pothala"
+  },
+  {
+    "id": "ki_012",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el nombre del guerrero fusionado resultante de la Danza de la Fusión entre Gokū y Vegeta?",
+    "emojis": "🕺 💥 ⚡",
+    "opciones": ["Gogeta", "Vegetto", "Gotenks", "Gokhan"],
+    "respuesta_correcta": "Gogeta"
+  },
+  {
+    "id": "ki_013",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el Dios de la Destrucción felino del Universo 7 amante de la comida gourmet?",
+    "emojis": "🐱 🟣 🍜",
+    "opciones": ["Bills (Beerus)", "Champa", "Quitela", "Belmod"],
+    "respuesta_correcta": "Bills (Beerus)"
+  },
+  {
+    "id": "ki_014",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica suprema donde el cuerpo esquiva y contraataca por puro instinto dominó Gokū en el Torneo de la Fuerza?",
+    "emojis": "⚪ 🧘 🌌",
+    "opciones": ["Ultra Instinto (Doctrina Egoísta)", "Ultra Ego", "Kaioken x20", "Puño del Dragón"],
+    "respuesta_correcta": "Ultra Instinto (Doctrina Egoísta)"
+  },
+  {
+    "id": "ki_015",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué habitáculo en el templo de Kamisama permite entrenar el equivalente a un año en solo un día terrestre?",
+    "emojis": "⏳ 🚪 🏔️",
+    "opciones": ["Habitación del Tiempo", "Cámara de Gravedad", "Palacio de Enma", "Cueva Espiritual"],
+    "respuesta_correcta": "Habitación del Tiempo"
+  },
+  {
+    "id": "ki_016",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el capitán de las Fuerzas Especiales Ginyu capaz de cambiar de cuerpo con su rival?",
+    "emojis": "🐸 🟣 🔁",
+    "opciones": ["Capitán Ginyu", "Jeice", "Burter", "Recoome"],
+    "respuesta_correcta": "Capitán Ginyu"
+  },
+  {
+    "id": "ki_017",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué androide pacífico amante de la naturaleza fue aplastado por Cell despertando la furia de Gohan?",
+    "emojis": "🤖 🐦 💥",
+    "opciones": ["Androide 16", "Androide 17", "Androide 18", "Androide 8"],
+    "respuesta_correcta": "Androide 16"
+  },
+  {
+    "id": "ki_018",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica de cegamiento temporal utiliza la energía lumínica del sol reflejada en el rostro?",
+    "emojis": "☀️ 🕶️ 🥋",
+    "opciones": ["Taiyoken", "Kafuken", "Sokidan", "Masenko"],
+    "respuesta_correcta": "Taiyoken"
+  },
+  {
+    "id": "ki_019",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿En qué planeta aprendió Gokū la técnica de la Teletransportación tras sobrevivir a Namek?",
+    "emojis": "🌌 🌀 🥋",
+    "opciones": ["Yardrat", "Metamor", "Cereal", "Vampa"],
+    "respuesta_correcta": "Yardrat"
+  },
+  {
+    "id": "ki_020",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el dragón gigante de Namekusei que concede hasta tres deseos en idioma namekiano?",
+    "emojis": "🐉 🟢 💧",
+    "opciones": ["Porunga", "Shenlong", "Zalama", "Toronbo"],
+    "respuesta_correcta": "Porunga"
+  },
+  {
+    "id": "ki_021",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué hechicero malvado revivió al demonio Majin Buu usando la energía de las batallas?",
+    "emojis": "🧙‍♂️ 🟣 📜",
+    "opciones": ["Babidi", "Bibidi", "Moro", "Hoi"],
+    "respuesta_correcta": "Babidi"
+  },
+  {
+    "id": "ki_022",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el ataque insignia de Piccolo que concentra un taladro de energía letal en dos dedos?",
+    "emojis": "🟣 🌀 🎯",
+    "opciones": ["Makankosappo", "Masenko", "Hellzone Grenade", "Kikohu"],
+    "respuesta_correcta": "Makankosappo"
+  },
+  {
+    "id": "ki_023",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el ángel guardián y maestro de artes marciales de Bills?",
+    "emojis": "👼 🦯 🌀",
+    "opciones": ["Whis", "Vados", "Daishinkan", "Merus"],
+    "respuesta_correcta": "Whis"
+  },
+  {
+    "id": "ki_024",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué mortal silencioso y justiciero del Universo 11 llevó a Gokū hasta sus límites en el Torneo de la Fuerza?",
+    "emojis": "👽 🔴 💥",
+    "opciones": ["Jiren", "Toppo", "Dyspo", "Hit"],
+    "respuesta_correcta": "Jiren"
+  },
+  {
+    "id": "ki_025",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica devastadora de Tenshinhan consume su propia fuerza vital al disparar un triángulo de choque?",
+    "emojis": "🔺 💥 👁️",
+    "opciones": ["Kikoho", "Dodonpa", "Taiyoken", "Haikyuken"],
+    "respuesta_correcta": "Kikoho"
+  },
+  {
+    "id": "ki_026",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama la nube voladora mágica que solo permite montar a personas de corazón puro?",
+    "emojis": "☁️ 🟡 💨",
+    "opciones": ["Kinto'un (Nube Voladora)", "Nube Nimbus", "Kame Cloud", "Nube Astral"],
+    "respuesta_correcta": "Kinto'un (Nube Voladora)"
+  },
+  {
+    "id": "ki_027",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué asesino legendario del Universo 6 domina la técnica del Salto Temporal (Tokitobashi)?",
+    "emojis": "⏱️ 🟣 🧥",
+    "opciones": ["Hit", "Frost", "Cabba", "Magetta"],
+    "respuesta_correcta": "Hit"
+  },
+  {
+    "id": "ki_028",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué padre saiyajin de Gokū lideró una rebelión solitaria contra Freezer al descubrir su traición?",
+    "emojis": "🪖 🔴 🚀",
+    "opciones": ["Bardock", "Rey Vegeta", "Paragus", "Nappa"],
+    "respuesta_correcta": "Bardock"
+  },
+  {
+    "id": "ki_029",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué gobernante supremo de todo el multiverso tiene el poder de borrar universos enteros con un simple gesto?",
+    "emojis": "👑 👶 🌌",
+    "opciones": ["Zeno-sama", "Daishinkan", "Zalama", "Kamin"],
+    "respuesta_correcta": "Zeno-sama"
+  },
+  {
+    "id": "ki_030",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica de sellado ancestral en vasijas de arroz se utilizó contra Piccolo Daimaku?",
+    "emojis": "🏺 📜 🌀",
+    "opciones": ["Mafuba", "Kafuken", "Sokidan", "Kaioken"],
+    "respuesta_correcta": "Mafuba"
+  },
+  {
+    "id": "ki_031",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llamaba el abuelo adoptivo humano que crió y entrenó a Gokū en la montaña Paoz?",
+    "emojis": "👴 🏔️ 🥋",
+    "opciones": ["Son Gohan", "Maestro Roshi", "Mutaito", "Tsuru Sen'nin"],
+    "respuesta_correcta": "Son Gohan"
+  },
+  {
+    "id": "ki_032",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es la transformación en mono gigante que sufren los Saiyajines con cola ante la luna llena?",
+    "emojis": "🌕 🐵 💥",
+    "opciones": ["Ozaru", "Yeti", "Gorr", "Kong"],
+    "respuesta_correcta": "Ozaru"
+  },
+  {
+    "id": "ki_033",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué aprendiz Supremo Kaio-shin del Universo 10 robó el cuerpo de Gokū usando las Super Esferas?",
+    "emojis": "💍 🟢 🖤",
+    "opciones": ["Zamasu (Gokū Black)", "Gowasu", "Fu", "Demigra"],
+    "respuesta_correcta": "Zamasu (Gokū Black)"
+  },
+  {
+    "id": "ki_034",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué miembro de las Fuerzas Especiales Ginyu podía congelar el tiempo conteniendo su propia respiración?",
+    "emojis": "🫁 ⏱️ 👽",
+    "opciones": ["Guldo", "Burter", "Jeice", "Recoome"],
+    "respuesta_correcta": "Guldo"
+  },
+  {
+    "id": "ki_035",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién es el hermano biológico mayor de Gokū que llegó a la Tierra secuestrando al pequeño Gohan?",
+    "emojis": "🦱 🪖 🚀",
+    "opciones": ["Raditz", "Turles", "Nappa", "Broly"],
+    "respuesta_correcta": "Raditz"
+  },
+  {
+    "id": "ki_036",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es el ataque final de Vegeta donde abre los brazos acumulando Ki dorado devastador?",
+    "emojis": "⚡ 👐 💥",
+    "opciones": ["Final Flash (Resplandor Final)", "Galick Ho", "Big Bang Attack", "Ataque Big Bang"],
+    "respuesta_correcta": "Final Flash (Resplandor Final)"
+  },
+  {
+    "id": "ki_037",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué dios de la creación del Universo 7 estuvo encerrado millones de años dentro de la Espada Z?",
+    "emojis": "🗡️ 👴 🧙‍♂️",
+    "opciones": ["El Anciano Kaio-shin de hace 15 generaciones", "Shin", "Kibito", "Gran Kaio-sama"],
+    "respuesta_correcta": "El Anciano Kaio-shin de hace 15 generaciones"
+  },
+  {
+    "id": "ki_038",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el científico del Ejército de la Patrulla Roja que creó a Cell y a los androides?",
+    "emojis": "👨‍🔬 🤖 ⚙️",
+    "opciones": ["Dr. Gero (Androide 20)", "Dr. Myu", "Dr. Kochin", "Dr. Wheelo"],
+    "respuesta_correcta": "Dr. Gero (Androide 20)"
+  },
+  {
+    "id": "ki_039",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué esferas cósmicas gigantes del tamaño de planetas fueron forjadas por el dios Zalama?",
+    "emojis": "🪐 🟠 ⭐",
+    "opciones": ["Super Esferas del Dragón", "Esferas Oscuras", "Esferas de Namek", "Orbes Celestiales"],
+    "respuesta_correcta": "Super Esferas del Dragón"
+  },
+  {
+    "id": "ki_040",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué técnica recolecta la energía viva de la naturaleza y los planetas para formar una esfera colosal?",
+    "emojis": "🙌 🌍 ⚪",
+    "opciones": ["Genki-dama", "Bomba Espiritual", "Kamehameha Solar", "Esfera Destructora"],
+    "respuesta_correcta": "Genki-dama"
+  },
+  {
+    "id": "ki_041",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el saiyajin legendario de poder descontrolado exiliado en el inhóspito planeta Vampa?",
+    "emojis": "🟢 😡 ⚡",
+    "opciones": ["Broly", "Paragus", "Cumber", "Shallot"],
+    "respuesta_correcta": "Broly"
+  },
+  {
+    "id": "ki_042",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué alter ego enmascarado adopta Mr. Satán o Gohan para proteger Ciudad Satán durante la preparatoria?",
+    "emojis": "🦸‍♂️ 🕶️ 🏫",
+    "opciones": ["Gran Saiyaman", "Capitán Justicia", "Golden Warrior", "Hero Boy"],
+    "respuesta_correcta": "Gran Saiyaman"
+  },
+  {
+    "id": "ki_043",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué torneo multiversal reunió a 80 guerreros sobre una pista de Kachi Katchin en el Mundo de la Nada?",
+    "emojis": "🏟️ 🌌 🏆",
+    "opciones": ["Torneo de la Fuerza", "Torneo de Champa", "Torneo del Más Allá", "Torneo de Cell"],
+    "respuesta_correcta": "Torneo de la Fuerza"
+  },
+  {
+    "id": "ki_044",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué rey demoníaco de piel roja fue controlado por Babidi antes de ser devorado por Majin Buu?",
+    "emojis": "😈 🗡️ 👑",
+    "opciones": ["Dabura", "Janemba", "Yakon", "Pui Pui"],
+    "respuesta_correcta": "Dabura"
+  },
+  {
+    "id": "ki_045",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cuál es la forma dorada que alcanzó Freezer tras entrenar disciplinadamente por primera vez en su vida?",
+    "emojis": "🟡 👽 ⚡",
+    "opciones": ["Golden Freezer", "Freezer Forma Final", "Mecha Freezer", "Freezer Platino"],
+    "respuesta_correcta": "Golden Freezer"
+  },
+  {
+    "id": "ki_046",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué saiyajin femenina del Universo 6 desató una transformación berserker verde similar a Broly?",
+    "emojis": "🟢 👧 ⚡",
+    "opciones": ["Kale", "Caulifla", "Kefla", "Cocotte"],
+    "respuesta_correcta": "Kale"
+  },
+  {
+    "id": "ki_047",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué poder concedió el Anciano Kaio-shin a Gohan tras bailar a su alrededor liberando su potencial oculto?",
+    "emojis": "🧘 ⚡ 💥",
+    "opciones": ["Estado Místico (Gohan Definitivo)", "Super Saiyajin 3", "Modo Bestia", "Ki Divino"],
+    "respuesta_correcta": "Estado Místico (Gohan Definitivo)"
+  },
+  {
+    "id": "ki_048",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Cómo se llama el maestro de artes marciales rival de Roshi que entrenó a Tenshinhan y Chaoz?",
+    "emojis": "🥋 🪖 🦅",
+    "opciones": ["Tsuru Sen'nin (Maestro Cuervo)", "Maestro Mutaito", "Tao Pai Pai", "Bora"],
+    "respuesta_correcta": "Tsuru Sen'nin (Maestro Cuervo)"
+  },
+  {
+    "id": "ki_049",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Qué asesino cibernético a sueldo se transportaba montado sobre un pilar o tronco arrojado por él mismo?",
+    "emojis": "🪵 🗡️ 🥋",
+    "opciones": ["Tao Pai Pai", "General Blue", "Coronel Silver", "Ninja Murasaki"],
+    "respuesta_correcta": "Tao Pai Pai"
+  },
+  {
+    "id": "ki_050",
+    "categoria": "ANIMACIÓN",
+    "pack": "guerreros_ki",
+    "pregunta": "¿Quién pidió el deseo final a las Super Esferas para restaurar todos los universos borrados en el Torneo de la Fuerza?",
+    "emojis": "🤖 🏆 🌌",
+    "opciones": ["Androide 17", "Gokū", "Freezer", "Jiren"],
+    "respuesta_correcta": "Androide 17"
+  }
+];
+window.KI_QUESTIONS_FALLBACK = KI_QUESTIONS_FALLBACK;
+
+const REINO_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.REINO_QUESTIONS_FALLBACK && window.REINO_QUESTIONS_FALLBACK.length >= 50)
+  ? window.REINO_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "rch_001",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder otorga el Super Champiñón rojo al fontanero en sus aventuras?",
+    "emojis": "🍄 🧱 ⬆️",
+    "opciones": ["Duplica su tamaño y fuerza", "Invencibilidad temporal", "Lanzar bolas de fuego", "Volar por los aires"],
+    "respuesta_correcta": "Duplica su tamaño y fuerza"
+  },
+  {
+    "id": "rch_002",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el dinosaurio verde de montura que debutó en Dinosaur Land?",
+    "emojis": "🦖 🥚 🍎",
+    "opciones": ["Yoshi", "Birdo", "Rex", "Plesio"],
+    "respuesta_correcta": "Yoshi"
+  },
+  {
+    "id": "rch_003",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto temido persigue implacablemente al corredor en primera posición en las carreras de karts?",
+    "emojis": "🏎️ 🐢 💥",
+    "opciones": ["Caparazón azul con pinchos", "Caparazón rojo teledirigido", "Rayo reductor", "Bomba Bob-omb"],
+    "respuesta_correcta": "Caparazón azul con pinchos"
+  },
+  {
+    "id": "rch_004",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el reino donde gobierna la Princesa Peach con sus leales siervos Toad?",
+    "emojis": "🍄 🏰 👑",
+    "opciones": ["Reino Champiñón", "Reino Sarasaraland", "Isla Delfino", "Reino Judía"],
+    "respuesta_correcta": "Reino Champiñón"
+  },
+  {
+    "id": "rch_005",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor clásica transforma el atuendo a blanco y permite arrojar esferas ardientes?",
+    "emojis": "🔥 🌼 ⚪",
+    "opciones": ["Flor de Fuego", "Flor de Hielo", "Flor Boomerang", "Flor Nube"],
+    "respuesta_correcta": "Flor de Fuego"
+  },
+  {
+    "id": "rch_006",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rey de los Koopas que suele raptar a la princesa en su fortaleza?",
+    "emojis": "🐢 🔥 👑",
+    "opciones": ["Bowser", "Kamek", "Wart", "Tatl"],
+    "respuesta_correcta": "Bowser"
+  },
+  {
+    "id": "rch_007",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué artefacto aspirador utiliza el hermano de verde para capturar fantasmas en mansiones?",
+    "emojis": "👻 🧹 🔦",
+    "opciones": ["Poltergust (Succionaentes)", "GhostBuster 3000", "Aspiradora FLUDD", "Vaccum Buster"],
+    "respuesta_correcta": "Poltergust (Succionaentes)"
+  },
+  {
+    "id": "rch_008",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto estelar dorado otorga inmunidad absoluta a los peligros por tiempo limitado?",
+    "emojis": "⭐ ✨ 🌈",
+    "opciones": ["Super Estrella", "Estrella Carmesí", "Moneda Sol", "Gran Estrella"],
+    "respuesta_correcta": "Super Estrella"
+  },
+  {
+    "id": "rch_009",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llaman los enemigos marrones con forma de seta que caminan en línea recta?",
+    "emojis": "🍄 👞 👣",
+    "opciones": ["Goombas", "Koopas", "Buzzy Beetles", "Shy Guys"],
+    "respuesta_correcta": "Goombas"
+  },
+  {
+    "id": "rch_0010",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué dispositivo parlante de bombeo de agua acompañó al héroe a limpiar la Isla Delfino?",
+    "emojis": "💧 🏝️ 🎒",
+    "opciones": ["F.L.U.D.D.", "AquaPump", "HydroCannon", "SprayPack"],
+    "respuesta_correcta": "F.L.U.D.D."
+  },
+  {
+    "id": "rch_011",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuántas estrellas de poder se requerían en total para completar el rescate en el castillo 3D en 1996?",
+    "emojis": "⭐ 🏰 🔢",
+    "opciones": ["120 estrellas", "100 estrellas", "150 estrellas", "99 estrellas"],
+    "respuesta_correcta": "120 estrellas"
+  },
+  {
+    "id": "rch_012",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura fantasma tímida se tapa el rostro cuando la miras directamente de frente?",
+    "emojis": "👻 🙈 🏰",
+    "opciones": ["Boo", "Dry Bones", "Phanto", "Peepa"],
+    "respuesta_correcta": "Boo"
+  },
+  {
+    "id": "rch_013",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rival codicioso vestido de amarillo y morado obsesionado con el ajo y las monedas?",
+    "emojis": "🧄 🟡 💰",
+    "opciones": ["Wario", "Waluigi", "Tatanga", "Foreman Spike"],
+    "respuesta_correcta": "Wario"
+  },
+  {
+    "id": "rch_014",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué hoja especial concede orejas y cola de mapache para planear por el aire?",
+    "emojis": "🍃 🦝 ✈️",
+    "opciones": ["Super Hoja (Tanooki)", "Hoja Dorada", "Pluma Capa", "Brote Volador"],
+    "respuesta_correcta": "Super Hoja (Tanooki)"
+  },
+  {
+    "id": "rch_015",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la princesa gobernante del reino Sarasaland rescatada de las garras de Tatanga?",
+    "emojis": "🌼 👑 🧡",
+    "opciones": ["Princesa Daisy", "Princesa Rosalina", "Pauline", "Reina Shokora"],
+    "respuesta_correcta": "Princesa Daisy"
+  },
+  {
+    "id": "rch_016",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué planta carnívora con dientes afilados brota de las tuberías verdes para morder?",
+    "emojis": "🪴 🦷 🟢",
+    "opciones": ["Planta Piraña", "Nipper Plant", "Petey Piranha", "Flor Masticadora"],
+    "respuesta_correcta": "Planta Piraña"
+  },
+  {
+    "id": "rch_017",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué hechicero de túnica azul con varita mágica lidera a los Magikoopas sirviendo a Bowser?",
+    "emojis": "🧙‍♂️ 👓 🪄",
+    "opciones": ["Kamek", "Kammy", "Cackletta", "Fawful"],
+    "respuesta_correcta": "Kamek"
+  },
+  {
+    "id": "rch_018",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto verde otorga de forma inmediata una vida extra?",
+    "emojis": "🍄 🟢 💖",
+    "opciones": ["Champiñón 1-Up", "Hongo Vida", "Brote Esmeralda", "Mega Champiñón"],
+    "respuesta_correcta": "Champiñón 1-Up"
+  },
+  {
+    "id": "rch_019",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la guardiana del Observatorio del Cometa y madre adoptiva de los destellos Luma?",
+    "emojis": "🌌 👑 ⭐",
+    "opciones": ["Rosalina (Estela)", "Daisy", "Peach", "Pauline"],
+    "respuesta_correcta": "Rosalina (Estela)"
+  },
+  {
+    "id": "rch_020",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué vehículo volador individual con cara sonriente utiliza Bowser para patrullar los cielos?",
+    "emojis": "🚁 🤡 🛸",
+    "opciones": ["Koopa Clown Car", "Helicóptero Bowser", "AeroKoopa", "Airship Mini"],
+    "respuesta_correcta": "Koopa Clown Car"
+  },
+  {
+    "id": "rch_021",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura sobre una nube arroja pequeños huevos que se transforman en Spikies con pinchos?",
+    "emojis": "☁️ 👓 🐢",
+    "opciones": ["Lakitu", "Kamek", "Hammer Bro", "Chargin' Chuck"],
+    "respuesta_correcta": "Lakitu"
+  },
+  {
+    "id": "rch_022",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el nombre de la enorme bola de metal negra con dientes atada a una cadena?",
+    "emojis": "⛓️ 🦷 💣",
+    "opciones": ["Chain Chomp", "Bob-omb", "Thwomp", "Whomp"],
+    "respuesta_correcta": "Chain Chomp"
+  },
+  {
+    "id": "rch_023",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto de carreras arroja tinta negra tapando la pantalla de los oponentes?",
+    "emojis": "🦑 🖤 🏎️",
+    "opciones": ["Blooper", "Calamar Tinta", "Mancha Negra", "Octorok"],
+    "respuesta_correcta": "Blooper"
+  },
+  {
+    "id": "rch_024",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llaman las tortugas esqueléticas no muertas que se desarman al pisarlas y vuelven a ensamblarse?",
+    "emojis": "🦴 🐢 💀",
+    "opciones": ["Dry Bones (Huesitos)", "Koopa Skell", "Bony Beetle", "Skeleton Turtle"],
+    "respuesta_correcta": "Dry Bones (Huesitos)"
+  },
+  {
+    "id": "rch_025",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué instrumento ancestral o gorra mágica permite controlar a dinosaurios y enemigos en Odyssey?",
+    "emojis": "🧢 👁️ 🪄",
+    "opciones": ["Cappy", "Tiara", "Crownie", "Cap-Bot"],
+    "respuesta_correcta": "Cappy"
+  },
+  {
+    "id": "rch_026",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la pista final más célebre y desafiante de las copas de carreras, repleta de curvas al vacío?",
+    "emojis": "🌈 🏎️ 🌌",
+    "opciones": ["Senda Arcoíris (Rainbow Road)", "Pista Galáctica", "Autopista Estelar", "Circuito Cósmico"],
+    "respuesta_correcta": "Senda Arcoíris (Rainbow Road)"
+  },
+  {
+    "id": "rch_027",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el bloque de piedra con rostro enfadado que cae pesadamente para aplastar a quien pase?",
+    "emojis": "🗿 😠 💥",
+    "opciones": ["Thwomp (Roca Picuda)", "Whomp", "Crusher Block", "Stone Koopa"],
+    "respuesta_correcta": "Thwomp (Roca Picuda)"
+  },
+  {
+    "id": "rch_028",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué mono lanzaba barriles por vigas de construcción en el clásico arcade de 1981?",
+    "emojis": "🦍 🛢️ 🔨",
+    "opciones": ["Donkey Kong", "Diddy Kong", "Cranky Kong", "Funky Kong"],
+    "respuesta_correcta": "Donkey Kong"
+  },
+  {
+    "id": "rch_029",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué proyectil con mecha camina dando cuerda sobre sus patas antes de estallar?",
+    "emojis": "💣 💥 👣",
+    "opciones": ["Bob-omb", "Bullet Bill", "Banzai Bill", "Bomb Koopa"],
+    "respuesta_correcta": "Bob-omb"
+  },
+  {
+    "id": "rch_030",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué enemigas tortugas atacan a distancia arrojando martillos en arcos parabólicos?",
+    "emojis": "🔨 🐢 🪖",
+    "opciones": ["Hammer Bros", "Boomerang Bros", "Fire Bros", "Sledge Bros"],
+    "respuesta_correcta": "Hammer Bros"
+  },
+  {
+    "id": "rch_031",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la dama en apuros capturada en el rascacielos del juego original de Donkey Kong?",
+    "emojis": "👗 👠 🏙️",
+    "opciones": ["Pauline", "Peach", "Daisy", "Rosalina"],
+    "respuesta_correcta": "Pauline"
+  },
+  {
+    "id": "rch_032",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué enorme misil de ojos fieros es disparado desde torretas y cañones negros?",
+    "emojis": "🚀 👁️ 💣",
+    "opciones": ["Bullet Bill (Bala Bill)", "Torpedo Ted", "Banzai Blast", "Cannon Ball"],
+    "respuesta_correcta": "Bullet Bill (Bala Bill)"
+  },
+  {
+    "id": "rch_033",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor de hielo otorga la capacidad de disparar bolas gélidas para congelar rivales en cubos?",
+    "emojis": "❄️ 🌼 🧊",
+    "opciones": ["Flor de Hielo", "Flor Escarcha", "Campana Polar", "Flor Nevada"],
+    "respuesta_correcta": "Flor de Hielo"
+  },
+  {
+    "id": "rch_034",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el hijo pequeño y travieso de Bowser que usa un pañuelo con colmillos pintados?",
+    "emojis": "🐢 🎨 👶",
+    "opciones": ["Bowser Jr.", "Ludwig", "Iggy", "Morton"],
+    "respuesta_correcta": "Bowser Jr."
+  },
+  {
+    "id": "rch_035",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué campana mágica introducida en 3D World transforma a los personajes con trajes felinos para trepar?",
+    "emojis": "🔔 🐱 🐾",
+    "opciones": ["Super Campana (Cascabel)", "Campana de Oro", "Traje Felino", "Miau Bell"],
+    "respuesta_correcta": "Super Campana (Cascabel)"
+  },
+  {
+    "id": "rch_036",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué topo con lentes de sol excava y arroja llaves inglesas desde el subsuelo?",
+    "emojis": "🕶️ 🕳️ 🔧",
+    "opciones": ["Monty Mole", "Rocky Wrench", "Mega Mole", "Diglett Koopa"],
+    "respuesta_correcta": "Monty Mole"
+  },
+  {
+    "id": "rch_037",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pez inflable y picudo salta del agua intentando derribar plataformas en niveles marinos?",
+    "emojis": "🐡 🌊 🎈",
+    "opciones": ["Cheep Cheep", "Porcupuffer", "Rip Van Fish", "Blooper King"],
+    "respuesta_correcta": "Cheep Cheep"
+  },
+  {
+    "id": "rch_038",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la metrópoli cosmopolita repleta de taxis amarillos gobernada por la alcaldesa Pauline?",
+    "emojis": "🏙️ 🚕 🎩",
+    "opciones": ["New Donk City", "Metro Kingdom", "Toad City", "Coin City"],
+    "respuesta_correcta": "New Donk City"
+  },
+  {
+    "id": "rch_039",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué bicho con antifaz y túnica roja porta lanzas o zancos en niveles de plataformas?",
+    "emojis": "🎭 🔴 🦯",
+    "opciones": ["Shy Guy", "Snifit", "Fly Guy", "Bandit"],
+    "respuesta_correcta": "Shy Guy"
+  },
+  {
+    "id": "rch_040",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rey de los fantasmas con una corona de rubí y lengua morada?",
+    "emojis": "👑 👻 🟣",
+    "opciones": ["Rey Boo", "Big Boo", "Boolossus", "Ghost Lord"],
+    "respuesta_correcta": "Rey Boo"
+  },
+  {
+    "id": "rch_041",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué traje especial completo permite meterse en el caparazón y lanzar llamaradas de fuego?",
+    "emojis": "🪖 🐢 🔥",
+    "opciones": ["Traje Martillo / Tanooki", "Traje Rana", "Traje Ardilla", "Traje Boomerang"],
+    "respuesta_correcta": "Traje Martillo / Tanooki"
+  },
+  {
+    "id": "rch_042",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué oruga amarilla simpática se vuelve roja y enfurecida cuando saltas sobre su espalda?",
+    "emojis": "🐛 🌼 😡",
+    "opciones": ["Wiggler", "Caterpillar", "Flutter", "Spike Bug"],
+    "respuesta_correcta": "Wiggler"
+  },
+  {
+    "id": "rch_043",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura parecida a un dinosaurio rosa lanza huevos por su hocico tubular?",
+    "emojis": "🎀 🥚 🦖",
+    "opciones": ["Birdo", "Wendy", "Pom Pom", "Kamek"],
+    "respuesta_correcta": "Birdo"
+  },
+  {
+    "id": "rch_044",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la fortaleza aérea con cañones y hélices flotantes comandada por los Koopalings?",
+    "emojis": "🚢 ⚙️ 💨",
+    "opciones": ["Barco Volador (Airship)", "AeroFortaleza", "Nave Bowser", "Cloud Destroyer"],
+    "respuesta_correcta": "Barco Volador (Airship)"
+  },
+  {
+    "id": "rch_045",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder convierte al personaje en una estatua de piedra indestructible que resiste cualquier golpe?",
+    "emojis": "🗿 🦝 🛑",
+    "opciones": ["Estatua Tanooki", "Bloque Metal", "Poder Gravitatorio", "Roca Smash"],
+    "respuesta_correcta": "Estatua Tanooki"
+  },
+  {
+    "id": "rch_046",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor otorga a las naves o personajes la habilidad de lanzar bumeranes en trayectoria curva?",
+    "emojis": "🪃 🌼 🌀",
+    "opciones": ["Flor Boomerang", "Flor Curva", "Brote Giratorio", "Flor Viento"],
+    "respuesta_correcta": "Flor Boomerang"
+  },
+  {
+    "id": "rch_047",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el champiñón gigante que hace crecer al personaje hasta destruir el escenario entero a su paso?",
+    "emojis": "🍄 💥 🏢",
+    "opciones": ["Mega Champiñón", "Giga Champiñón", "Titan Shroom", "Super Coloso"],
+    "respuesta_correcta": "Mega Champiñón"
+  },
+  {
+    "id": "rch_048",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pluma mágica equipaba al héroe con una capa amarilla para elevarse alto en las colinas?",
+    "emojis": "🪶 💛 🦸‍♂️",
+    "opciones": ["Pluma Capa (Cape Feather)", "Pluma Alada", "Ala P", "Hoja Capa"],
+    "respuesta_correcta": "Pluma Capa (Cape Feather)"
+  },
+  {
+    "id": "rch_049",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué gorra metálica en Super Mario 64 permitía caminar por el fondo marino sin respirar ni ser arrastrado?",
+    "emojis": "🪙 🌊 🪖",
+    "opciones": ["Metal Cap (Gorra de Metal)", "Wing Cap", "Vanish Cap", "Iron Helm"],
+    "respuesta_correcta": "Metal Cap (Gorra de Metal)"
+  },
+  {
+    "id": "rch_050",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la célebre frase que solía pronunciar Toad al final de los primeros castillos?",
+    "emojis": "🍄 🏰 💬",
+    "opciones": [
+      "Gracias, pero nuestra princesa está en otro castillo",
+      "La princesa ha sido llevada a otra fortaleza",
+      "Llegas tarde, Bowser se la llevó",
+      "El camino sigue en el próximo reino"
+    ],
+    "respuesta_correcta": "Gracias, pero nuestra princesa está en otro castillo"
+  }
+];
+window.REINO_QUESTIONS_FALLBACK = REINO_QUESTIONS_FALLBACK;
+
+const MAGIA_QUESTIONS_FALLBACK = (typeof window !== 'undefined' && window.MAGIA_QUESTIONS_FALLBACK && window.MAGIA_QUESTIONS_FALLBACK.length >= 50)
+  ? window.MAGIA_QUESTIONS_FALLBACK
+  : [
+  {
+    "id": "mag_001",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento de iluminación hace brotar un haz de luz blanca en la punta de la varita?",
+    "emojis": "🪄 💡 ✨",
+    "opciones": ["Lumos", "Nox", "Alohomora", "Incendio"],
+    "respuesta_correcta": "Lumos"
+  },
+  {
+    "id": "mag_002",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la estación de tren y el andén secreto en Londres desde donde parte el expreso hacia el castillo?",
+    "emojis": "🚂 🧱 🎟️",
+    "opciones": ["Andén 9 ¾ en King's Cross", "Andén 7 ½ en Paddington", "Andén 9 ½ en Victoria", "Andén 8 ¾ en St. Pancras"],
+    "respuesta_correcta": "Andén 9 ¾ en King's Cross"
+  },
+  {
+    "id": "mag_003",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué artefacto parlante centenario asigna a cada estudiante a su respectiva casa en el Gran Comedor?",
+    "emojis": "🧙‍♂️ 🎩 🗣️",
+    "opciones": ["El Sombrero Seleccionador", "El Espejo de Oesed", "El Cáliz de Fuego", "El Libro de las Admisiones"],
+    "respuesta_correcta": "El Sombrero Seleccionador"
+  },
+  {
+    "id": "mag_004",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué pelota dorada con alas veloces otorga 150 puntos y finaliza el partido al ser atrapada?",
+    "emojis": "🧹 🟡 🪽",
+    "opciones": ["Snitch Dorada", "Quaffle", "Bludger", "Orbe Fugaz"],
+    "respuesta_correcta": "Snitch Dorada"
+  },
+  {
+    "id": "mag_005",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál de los tres objetos que componen las Reliquias de la Muerte permite vencer a cualquier rival en duelo?",
+    "emojis": "🪄 💀 🔺",
+    "opciones": ["La Varita de Saúco", "La Piedra de la Resurrección", "La Capa de Invisibilidad", "El Espejo de la Muerte"],
+    "respuesta_correcta": "La Varita de Saúco"
+  },
+  {
+    "id": "mag_006",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura espectral que custodia la prisión de Azkaban absorbe la felicidad y el alma humana?",
+    "emojis": "💀 🌫️ ⛓️",
+    "opciones": ["Dementor", "Boggart", "Thestral", "Inferius"],
+    "respuesta_correcta": "Dementor"
+  },
+  {
+    "id": "mag_007",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento defensivo plateado convoca un espíritu guardián animal contra las sombras?",
+    "emojis": "🦌 ✨ 🛡️",
+    "opciones": ["Expecto Patronum", "Riddikulus", "Protego Totalum", "Expelliarmus"],
+    "respuesta_correcta": "Expecto Patronum"
+  },
+  {
+    "id": "mag_008",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal legendario representativo de Godric simboliza el valor y la caballerosidad en su escudo?",
+    "emojis": "🦁 🔴 💛",
+    "opciones": ["León", "Serpiente", "Águila", "Tejón"],
+    "respuesta_correcta": "León"
+  },
+  {
+    "id": "mag_009",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama el sauce violento plantado en los terrenos del castillo que golpea con sus ramas?",
+    "emojis": "🌳 🥊 🏰",
+    "opciones": ["Sauce Boxeador", "Roble Furioso", "Fresno Chocador", "Pino Golpeador"],
+    "respuesta_correcta": "Sauce Boxeador"
+  },
+  {
+    "id": "mag_010",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué poción otorga suerte perfecta y éxito infalible a quien la bebe durante unas horas?",
+    "emojis": "🧪 🍀 🟡",
+    "opciones": ["Felix Felicis", "Poción Multijugos", "Amortentia", "Veritaserum"],
+    "respuesta_correcta": "Felix Felicis"
+  },
+  {
+    "id": "mag_011",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿En cuántos fragmentos o Horrocruxes dividió Lord Voldemort su alma para evitar la muerte?",
+    "emojis": "🐍 💍 💀",
+    "opciones": ["Siete partes (creando 6 horrocruxes intencionales)", "Tres partes", "Doce partes", "Cinco partes"],
+    "respuesta_correcta": "Siete partes (creando 6 horrocruxes intencionales)"
+  },
+  {
+    "id": "mag_012",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué planta mágica emite un llanto fatal que mata al instante a cualquiera que la escuche sin tapones?",
+    "emojis": "🌱 👶 💀",
+    "opciones": ["Mandrágora", "Lazo del Diablo", "Acónito", "Branquialgas"],
+    "respuesta_correcta": "Mandrágora"
+  },
+  {
+    "id": "mag_013",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura alada con cuerpo de caballo y garras de águila debe ser tratada con una reverencia formal?",
+    "emojis": "🦅 🐴 🪽",
+    "opciones": ["Hipogrifo", "Grifo", "Thestral", "Pegaso"],
+    "respuesta_correcta": "Hipogrifo"
+  },
+  {
+    "id": "mag_014",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué calle comercial adoquinada en Londres alberga todas las tiendas de varitas, libros y calderos?",
+    "emojis": "🏬 🪄 📜",
+    "opciones": ["Callejón Diagon", "Callejón Knockturn", "Privet Drive", "Grimmauld Place"],
+    "respuesta_correcta": "Callejón Diagon"
+  },
+  {
+    "id": "mag_015",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la fórmula para desarmar a un oponente quitándole la varita de las manos?",
+    "emojis": "🪄 💥 ✋",
+    "opciones": ["Expelliarmus", "Stupefy", "Petrificus Totalus", "Crucio"],
+    "respuesta_correcta": "Expelliarmus"
+  },
+  {
+    "id": "mag_016",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué famoso banco subterráneo custodiado por duendes y dragones resguarda el oro mágico?",
+    "emojis": "🏦 🪙 🐲",
+    "opciones": ["Gringotts", "Borgin & Burkes", "Azkaban Bank", "Ollivanders Vault"],
+    "respuesta_correcta": "Gringotts"
+  },
+  {
+    "id": "mag_017",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama el elfo doméstico leal que protegía al protagonista vistiendo una funda de almohada vieja?",
+    "emojis": "🧦 👂 🪄",
+    "opciones": ["Dobby", "Kreacher", "Winky", "Hokey"],
+    "respuesta_correcta": "Dobby"
+  },
+  {
+    "id": "mag_018",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué gigantesca bestia reptiliana fue oculta en la Cámara Secreta por Salazar Slytherin?",
+    "emojis": "🐍 👁️ 🪨",
+    "opciones": ["Basilisco", "Colacuerno Húngaro", "Acromántula", "Quimera"],
+    "respuesta_correcta": "Basilisco"
+  },
+  {
+    "id": "mag_019",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué potente poción de la verdad obliga a quien la bebe a revelar sus secretos más íntimos?",
+    "emojis": "🧪 🗣️ 💧",
+    "opciones": ["Veritaserum", "Amortentia", "Filtro de Paz", "Esencia de Díctamo"],
+    "respuesta_correcta": "Veritaserum"
+  },
+  {
+    "id": "mag_020",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal o criatura mágica solo puede ser visto por personas que han presenciado la muerte de cerca?",
+    "emojis": "🐴 🪽 💀",
+    "opciones": ["Thestral", "Bowtruckle", "Niffler (Escarbato)", "Kneazle"],
+    "respuesta_correcta": "Thestral"
+  },
+  {
+    "id": "mag_021",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué mapa mágico muestra cada rincón del castillo y la posición exacta de cada persona en tiempo real?",
+    "emojis": "📜 👣 🏰",
+    "opciones": ["El Mapa del Merodeador", "El Pergamino de Merlín", "El Plano de Flamel", "La Carta Secreta"],
+    "respuesta_correcta": "El Mapa del Merodeador"
+  },
+  {
+    "id": "mag_022",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué objeto mineral legendario creado por Nicolas Flamel produce el elixir de la vida eterna?",
+    "emojis": "🔴 💎 ⏳",
+    "opciones": ["La Piedra Filosofal", "La Gema de Fénix", "El Cristal Áureo", "La Esfera de Alquimia"],
+    "respuesta_correcta": "La Piedra Filosofal"
+  },
+  {
+    "id": "mag_023",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué tienda legendaria de varitas del Callejón Diagon ha operado desde el 382 a.C.?",
+    "emojis": "🪄 📦 👴",
+    "opciones": ["Ollivanders", "Madam Malkin", "Flourish & Blotts", "Honeydukes"],
+    "respuesta_correcta": "Ollivanders"
+  },
+  {
+    "id": "mag_024",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento imperdonable produce la muerte instantánea mediante un rayo de luz verde brillante?",
+    "emojis": "⚡ 🟢 💀",
+    "opciones": ["Avada Kedavra", "Crucio", "Imperio", "Sectumsempra"],
+    "respuesta_correcta": "Avada Kedavra"
+  },
+  {
+    "id": "mag_025",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué dulce o golosina mágica viene en paquetes con cromos de magos famosos y salta como anfibio?",
+    "emojis": "🍫 🐸 🃏",
+    "opciones": ["Ranas de Chocolate", "Grageas Bertie Bott", "Calderos de Chocolate", "Ratones de Azúcar"],
+    "respuesta_correcta": "Ranas de Chocolate"
+  },
+  {
+    "id": "mag_026",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la bebida tibia espumosa más consumida por los estudiantes en Las Tres Escobas de Hogsmeade?",
+    "emojis": "🍺 🧈 ❄️",
+    "opciones": ["Cerveza de Mantequilla", "Jugo de Calabaza", "Hidromiel de Alhelí", "Té de Ortigas"],
+    "respuesta_correcta": "Cerveza de Mantequilla"
+  },
+  {
+    "id": "mag_027",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué sala misteriosa del séptimo piso aparece solo ante quien la necesita de verdad y equipada para su fin?",
+    "emojis": "🚪 🤫 ✨",
+    "opciones": ["La Sala de los Menesteres", "La Cámara de los Secretos", "La Torre de Astronomía", "El Despacho Oculto"],
+    "respuesta_correcta": "La Sala de los Menesteres"
+  },
+  {
+    "id": "mag_028",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal fantástico y fiero adopta el escudo de la casa Hufflepuff?",
+    "emojis": "🦡 🟡 ⚫",
+    "opciones": ["Tejón", "Nutria", "Castor", "Armiño"],
+    "respuesta_correcta": "Tejón"
+  },
+  {
+    "id": "mag_029",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué vehículo volador azul turquesa estrellaron Ron y Harry en el Sauce Boxeador en su segundo año?",
+    "emojis": "🚙 🌲 👓",
+    "opciones": ["Ford Anglia", "Mini Cooper", "Austin Healey", "Vauxhall Viva"],
+    "respuesta_correcta": "Ford Anglia"
+  },
+  {
+    "id": "mag_030",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es el nombre del fénix leal del director Dumbledore cuyas lágrimas sanan heridas mortales?",
+    "emojis": "🔥 🦅 💧",
+    "opciones": ["Fawkes", "Errol", "Pigwidgeon", "Norberto"],
+    "respuesta_correcta": "Fawkes"
+  },
+  {
+    "id": "mag_031",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama la poción que permite transformarse físicamente en otra persona al añadir una muestra de su ADN?",
+    "emojis": "🧪 👤 🔁",
+    "opciones": ["Poción Multijugos", "Amortentia", "Filtro de los Muertos", "Elixir de Cambio"],
+    "respuesta_correcta": "Poción Multijugos"
+  },
+  {
+    "id": "mag_032",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué criatura peluda parecida a un ornitorrinco se siente atraída obsesivamente por cosas brillantes y oro?",
+    "emojis": "🦔 🪙 💍",
+    "opciones": ["Escarbato (Niffler)", "Bowtruckle", "Demiguise", "Kneazle"],
+    "respuesta_correcta": "Escarbato (Niffler)"
+  },
+  {
+    "id": "mag_033",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué artefacto temporal colgante utilizó Hermione en tercer año para asistir a varias clases a la vez?",
+    "emojis": "⏳ 🕰️ 👧",
+    "opciones": ["Giratiempo", "Reloj Astral", "Cronómetro de Arena", "Péndulo de Merlín"],
+    "respuesta_correcta": "Giratiempo"
+  },
+  {
+    "id": "mag_034",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál era la contraseña que abría el Mapa del Merodeador antes de usarlo?",
+    "emojis": "📜 🪄 👣",
+    "opciones": [
+      "Juro solemnemente que mis intenciones no son buenas",
+      "Travesura realizada",
+      "Ábrete sésamo mágico",
+      "Por los secretos de Hogwarts"
+    ],
+    "respuesta_correcta": "Juro solemnemente que mis intenciones no son buenas"
+  },
+  {
+    "id": "mag_035",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué raza de seres mágicos trabaja procesando el oro y las cuentas bancarias en el banco Gringotts?",
+    "emojis": "🪙 👺 🗝️",
+    "opciones": ["Duendes (Goblins)", "Elfos domésticos", "Gnomos", "Centauros"],
+    "respuesta_correcta": "Duendes (Goblins)"
+  },
+  {
+    "id": "mag_036",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué dragón de escamas negras y ojos amarillos enfrentó Harry en la primera prueba del Torneo de los Tres Magos?",
+    "emojis": "🐲 🔥 🥚",
+    "opciones": ["Colacuerno Húngaro", "Galés Verde Común", "Hocicorto Sueco", "Ironbelly Ucraniano"],
+    "respuesta_correcta": "Colacuerno Húngaro"
+  },
+  {
+    "id": "mag_037",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cómo se llama el pueblo 100% mágico vecino al castillo donde los alumnos van a comprar golosinas y bromas?",
+    "emojis": "🏘️ ❄️ 🍬",
+    "opciones": ["Hogsmeade", "Valle de Godric", "Ottery St. Catchpole", "Little Hangleton"],
+    "respuesta_correcta": "Hogsmeade"
+  },
+  {
+    "id": "mag_038",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento se utiliza para repeler y transformar a un Boggart mediante la risa?",
+    "emojis": "🤡 😂 🪄",
+    "opciones": ["Riddikulus", "Tarantallegra", "Rictusempra", "Engorgio"],
+    "respuesta_correcta": "Riddikulus"
+  },
+  {
+    "id": "mag_039",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué animal animago adoptaba Sirius Black para caminar desapercibido?",
+    "emojis": "🐕‍🦺 🐾 🌑",
+    "opciones": ["Un gran perro negro (Canuto)", "Un ciervo astado", "Una rata gris", "Un lobo feroz"],
+    "respuesta_correcta": "Un gran perro negro (Canuto)"
+  },
+  {
+    "id": "mag_040",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué espejo mágico muestra no el rostro del observador, sino el más profundo y desesperado deseo de su corazón?",
+    "emojis": "🪞 ✨ ❤️",
+    "opciones": ["El Espejo de Oesed", "El Cristal de Narcissa", "El Espejo Negro", "El Azogue de Flamel"],
+    "respuesta_correcta": "El Espejo de Oesed"
+  },
+  {
+    "id": "mag_041",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué filtro de amor es considerado el más poderoso del mundo mágico y huele diferente para cada persona?",
+    "emojis": "🧪 💖 🌸",
+    "opciones": ["Amortentia", "Felix Felicis", "Poción de la Pasión", "Elixir Cupido"],
+    "respuesta_correcta": "Amortentia"
+  },
+  {
+    "id": "mag_042",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué serpiente gigante acompañaba a Lord Voldemort y actuaba como uno de sus Horrocruxes?",
+    "emojis": "🐍 💀 🖤",
+    "opciones": ["Nagini", "Aragog", "Grawp", "Fang"],
+    "respuesta_correcta": "Nagini"
+  },
+  {
+    "id": "mag_043",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué planta acuática le permitió a Harry respirar bajo el lago con branquias y membranas en el Torneo?",
+    "emojis": "🌿 🌊 🏊",
+    "opciones": ["Branquialgas", "Algas de Sirena", "Lirio de Agua Dulce", "Musgo Branquial"],
+    "respuesta_correcta": "Branquialgas"
+  },
+  {
+    "id": "mag_044",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál era el nombre del perro cancerbero de tres cabezas de Hagrid que custodiaba la trampilla del castillo?",
+    "emojis": "🐶 🐶 🐶",
+    "opciones": ["Fluffy", "Fang", "Grawp", "Cerbero"],
+    "respuesta_correcta": "Fluffy"
+  },
+  {
+    "id": "mag_045",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué diario encantado manipuló a Ginny Weasley para reabrir la Cámara de los Secretos?",
+    "emojis": "📓 ✒️ 🐍",
+    "opciones": ["El Diario de Tom Riddle", "El Cuaderno de Salazar", "El Diario de Gaunt", "Las Memorias de Malfoy"],
+    "respuesta_correcta": "El Diario de Tom Riddle"
+  },
+  {
+    "id": "mag_046",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué lechuza nival blanca acompañó fielmente a Harry desde su primera visita al Callejón Diagon?",
+    "emojis": "🦉 ⚪ ✉️",
+    "opciones": ["Hedwig", "Errol", "Pigwidgeon", "Hermes"],
+    "respuesta_correcta": "Hedwig"
+  },
+  {
+    "id": "mag_047",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué encantamiento de corte oscuro fue inventado por el 'Príncipe Mestizo' en su libro de pociones?",
+    "emojis": "🩸 🗡️ 🪄",
+    "opciones": ["Sectumsempra", "Muffliato", "Levicorpus", "Langlock"],
+    "respuesta_correcta": "Sectumsempra"
+  },
+  {
+    "id": "mag_048",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué autobús morado de tres pisos recoge a cualquier bruja o mago varado en apuros en el mundo no mágico?",
+    "emojis": "🚌 🟣 💨",
+    "opciones": ["El Autobús Noctámbulo", "El Expreso Nocturno", "El Bus Fantasma", "El Ómnibus Mágico"],
+    "respuesta_correcta": "El Autobús Noctámbulo"
+  },
+  {
+    "id": "mag_049",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Qué pequeña criatura con aspecto de ramita verde custodia los árboles aptos para fabricar varitas?",
+    "emojis": "🌿 🪵 🍃",
+    "opciones": ["Bowtruckle", "Duendecillo de Cornualles", "Gnomo de Jardín", "Augurey"],
+    "respuesta_correcta": "Bowtruckle"
+  },
+  {
+    "id": "mag_050",
+    "categoria": "CINE & LITERATURA",
+    "pack": "castillo_magia",
+    "pregunta": "¿Cuál es la única palabra que responde Severus Snape al revelar que su Patronus sigue siendo la cierva de Lily?",
+    "emojis": "🦌 🖤 💬",
+    "opciones": ["Siempre (Always)", "Eternamente", "Por ella", "Jamás"],
+    "respuesta_correcta": "Siempre (Always)"
+  }
+];
+window.MAGIA_QUESTIONS_FALLBACK = MAGIA_QUESTIONS_FALLBACK;
+
 function getEmergencyQuestionsForCategory(cat, esModoTodo) {
   if (esModoTodo) {
-    return [...emergencyCine, ...emergencyVideojuegos, ...emergencyTV, ...emergencyMusica];
+    return [...emergencyCine, ...emergencyVideojuegos, ...emergencyTV, ...emergencyAnimacion];
   }
   const c = (cat || '').toUpperCase().trim();
   if (c === 'CINE') return emergencyCine;
   if (c === 'VIDEOJUEGOS' || c.includes('VIDEO') || c.includes('JUEGO')) return emergencyVideojuegos;
   if (c === 'TV' || c.includes('SERIE')) return emergencyTV;
-  if (c === 'MÚSICA' || c === 'MUSICA' || c.includes('MUS')) return emergencyMusica;
+  if (c === 'ANIMACIÓN' || c === 'ANIMACION' || c.includes('ANIM') || c === 'MÚSICA' || c === 'MUSICA' || c.includes('MUS')) return emergencyAnimacion;
   return emergencyCine;
 }
 
@@ -2327,7 +6402,9 @@ function getCategoryMeta(cat) {
   if (c === 'CINE' || c.includes('CINE')) return categoriesConfig.cine || { name: 'CINE', icon: '🎬', color: '#7b38e5' };
   if (c === 'VIDEOJUEGOS' || c.includes('VIDEO') || c.includes('JUEGO')) return categoriesConfig.videojuegos || { name: 'VIDEOJUEGOS', icon: '🎮', color: '#e2dd5f' };
   if (c === 'TV' || c.includes('SERIE')) return categoriesConfig.tv || { name: 'TV', icon: '📺', color: '#5fe2df' };
-  if (c === 'MÚSICA' || c === 'MUSICA' || c.includes('MUS') || c.includes('MÚS')) return categoriesConfig.musica || { name: 'MÚSICA', icon: '🎸', color: '#00FF66' };
+  if (c === 'ANIMACIÓN' || c === 'ANIMACION' || c.includes('ANIM') || c === 'MÚSICA' || c === 'MUSICA' || c.includes('MUS') || c.includes('MÚS')) {
+    return categoriesConfig.animacion || { name: 'ANIMACIÓN', icon: '✨', color: '#00FF66' };
+  }
   return categoriesConfig.todo || { name: 'TODO / MIX', icon: '❓', color: '#FF5A5F' };
 }
 window.getCategoryMeta = getCategoryMeta;
@@ -2347,8 +6424,8 @@ async function cargarBancoExclusivo(categoriaGanadora) {
     rutaArchivo = 'data/preguntas_videojuegos.json';
   } else if (cat === 'TV' || cat.includes('SERIE')) {
     rutaArchivo = 'data/preguntas_tv.json';
-  } else if (cat === 'MÚSICA' || cat === 'MUSICA' || cat.includes('MUS') || cat.includes('MÚS')) {
-    rutaArchivo = 'data/preguntas_musica.json';
+  } else if (cat === 'ANIMACIÓN' || cat === 'ANIMACION' || cat.includes('ANIM') || cat === 'MÚSICA' || cat === 'MUSICA' || cat.includes('MUS') || cat.includes('MÚS')) {
+    rutaArchivo = 'data/preguntas_animacion.json';
   } else if (cat === 'TODO' || cat === 'MIX') {
     esModoTodo = true;
   } else {
@@ -2364,13 +6441,13 @@ async function cargarBancoExclusivo(categoriaGanadora) {
       bancoCompleto = await res.json();
       console.log(`Cargando ÚNICAMENTE la categoría ${cat} con ${bancoCompleto.length} preguntas.`);
     } else {
-      const [cine, juegos, tv, musica] = await Promise.all([
+      const [cine, juegos, tv, animacion] = await Promise.all([
         fetch(`data/preguntas_cine.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json()),
         fetch(`data/preguntas_videojuegos.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json()),
         fetch(`data/preguntas_tv.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json()),
-        fetch(`data/preguntas_musica.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json())
+        fetch(`data/preguntas_animacion.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json())
       ]);
-      bancoCompleto = [...cine, ...juegos, ...tv, ...musica];
+      bancoCompleto = [...cine, ...juegos, ...tv, ...animacion];
       console.log(`Cargando MODO TODO / MIX con ${bancoCompleto.length} preguntas combinadas.`);
     }
   } catch (err) {
@@ -2386,7 +6463,7 @@ async function cargarBancoExclusivo(categoriaGanadora) {
       if (cat === 'CINE') return catQ.includes('CINE');
       if (cat === 'VIDEOJUEGOS' || cat.includes('VIDEO')) return catQ.includes('VIDEO') || catQ.includes('JUEGO');
       if (cat === 'TV' || cat.includes('SERIE')) return catQ.includes('TV') || catQ.includes('SERIE');
-      if (cat === 'MÚSICA' || cat === 'MUSICA') return catQ.includes('MUS') || catQ.includes('MÚS');
+      if (cat === 'ANIMACIÓN' || cat === 'ANIMACION' || cat.includes('ANIM') || cat === 'MÚSICA' || cat === 'MUSICA') return catQ.includes('ANIM') || catQ.includes('MUS');
       return true;
     });
   }
@@ -2414,7 +6491,7 @@ async function cargarBancoExclusivo(categoriaGanadora) {
       if (cat === 'CINE') return catQ.includes('CINE');
       if (cat === 'VIDEOJUEGOS' || cat.includes('VIDEO')) return catQ.includes('VIDEO') || catQ.includes('JUEGO');
       if (cat === 'TV' || cat.includes('SERIE')) return catQ.includes('TV') || catQ.includes('SERIE');
-      if (cat === 'MÚSICA' || cat === 'MUSICA') return catQ.includes('MUS') || catQ.includes('MÚS');
+      if (cat === 'ANIMACIÓN' || cat === 'ANIMACION' || cat.includes('ANIM') || cat === 'MÚSICA' || cat === 'MUSICA') return catQ.includes('ANIM') || catQ.includes('MUS');
       return false;
     });
     if (sonTodasValidas) {
@@ -2438,8 +6515,11 @@ function precargarPreguntasTrivia(categoriaSeleccionada) {
 let countdownInterval = null;
 
 function iniciarCuentaRegresivaTrivia(categoriaGanadora) {
-  // 1. Iniciar la precarga en segundo plano de las preguntas (Promise.all / fetch)
-  preloadedRoundQuestionsPromise = precargarPreguntasTrivia(categoriaGanadora);
+  // 1. Iniciar o verificar la precarga en segundo plano de las preguntas (Promise.all / fetch)
+  if (!window.state?.pendingQuestionsPromise && !preloadedRoundQuestionsPromise) {
+    window.state.pendingQuestionsPromise = cargarBancoExclusivo(categoriaGanadora);
+    preloadedRoundQuestionsPromise = window.state.pendingQuestionsPromise;
+  }
 
   // Detener en seco la música de la ruleta y cualquier BGM
   if (typeof SoundManager !== 'undefined') {
@@ -2520,9 +6600,10 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
 
   // Esperar a que la precarga de preguntas haya resuelto
   let questions = [];
-  if (preloadedRoundQuestionsPromise) {
+  const promise = (window.state && window.state.pendingQuestionsPromise) || preloadedRoundQuestionsPromise;
+  if (promise) {
     try {
-      questions = await preloadedRoundQuestionsPromise;
+      questions = await promise;
     } catch (e) {
       console.warn('Error resolviendo preguntas precargadas:', e);
     }
@@ -2536,6 +6617,10 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   // Asignar al estado global
   const isChallenge = Boolean(window.state && window.state.isChallengeMode);
   const isTieBreaker = Boolean(window.state && window.state.isTieBreaker);
+  const totalRonda = isTieBreaker ? 3 : (isChallenge ? 5 : 10);
+  questions = (questions || []).slice(0, totalRonda);
+
+  const tiempoBase = 20;
   if (window.state) {
     window.state.isChallengeMode = isChallenge;
     window.state.isTieBreaker = isTieBreaker;
@@ -2545,6 +6630,8 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
     window.state.correctAnswersCount = 0;
     window.state.currentRoundXP = 0;
     window.state.accumulatedAnswerTimeMs = 0;
+    window.state.timeLeft = tiempoBase;
+    window.state.currentStreak = 0;
   }
   state.currentRoundXP = 0;
   state.isChallengeMode = isChallenge;
@@ -2552,9 +6639,9 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   if (state.trivia) {
     state.trivia.isDuel = isChallenge;
     state.trivia.questions = questions;
-    state.trivia.totalQuestions = isTieBreaker ? 3 : (isChallenge ? 5 : 10);
-    state.trivia.timerSeconds = (isChallenge || isTieBreaker) ? 10 : 15;
-    state.trivia.remainingMs = (isChallenge || isTieBreaker ? 10 : 15) * 1000;
+    state.trivia.totalQuestions = totalRonda;
+    state.trivia.timerSeconds = tiempoBase;
+    state.trivia.remainingMs = tiempoBase * 1000;
     state.trivia.duelStartTime = performance.now();
     state.trivia.questionStartTime = performance.now();
     state.trivia.lives = 3;
@@ -2577,9 +6664,9 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   } else if (normCat.includes('TV') || normCat.includes('SERIE')) {
     themeColor = '#00E5FF';
     catClass = 'tv';
-  } else if (normCat.includes('MUS') || normCat.includes('MÚS')) {
+  } else if (normCat.includes('ANIM') || normCat.includes('DIBUJ') || normCat.includes('CARTOON') || normCat.includes('ANIME') || normCat.includes('MUS') || normCat.includes('MÚS')) {
     themeColor = '#00FF66';
-    catClass = 'musica';
+    catClass = 'animacion';
   } else if (normCat.includes('TODO') || normCat.includes('MIX')) {
     themeColor = '#FF5A5F';
     catClass = 'todo';
@@ -2587,11 +6674,32 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   if (state.trivia) state.trivia.category = catClass;
 
   const triviaView = document.getElementById('triviaView');
+  const triviaCard = document.getElementById('triviaCard');
   if (triviaView) {
     triviaView.style.setProperty('--trivia-theme-color', themeColor);
     triviaView.dataset.cat = catClass;
-    triviaView.classList.remove('siren-panic', 'cat-cine', 'cat-videojuegos', 'cat-musica', 'cat-tv', 'cat-todo', 'cat-mix');
+    triviaView.classList.remove('siren-panic', 'cat-cine', 'cat-videojuegos', 'cat-musica', 'cat-tv', 'cat-todo', 'cat-mix', 'cat-animacion', 'theme-animacion');
     triviaView.classList.add('cat-' + catClass);
+    if (catClass === 'animacion') {
+      triviaView.classList.add('theme-animacion');
+    }
+  }
+
+  if (triviaCard) {
+    triviaCard.classList.remove('theme-animacion');
+    if (catClass === 'animacion') {
+      triviaCard.classList.add('theme-animacion');
+    }
+  }
+
+  const catTag = document.getElementById('triviaCategoryTag');
+  if (catTag) {
+    catTag.textContent = (catClass === 'animacion') ? 'ANIMACIÓN' : (getCategoryMeta(categoriaGanadora)?.name || 'TRIVIA');
+    if (catClass === 'animacion') {
+      catTag.classList.add('theme-animacion');
+    } else {
+      catTag.classList.remove('theme-animacion');
+    }
   }
 
   const abandonModal = document.getElementById('abandonModal');
@@ -2812,14 +6920,44 @@ function triggerCrashCoinDrop(counterEl) {
   }
 }
 
-function updateTriviaHeartsUI() {
+// Microinteracción y badge flotante de regeneración de vida
+function showLifeRegeneratedFeedback() {
   const container = document.getElementById('triviaHeartsContainer');
   if (!container) return;
+  const badge = document.createElement('div');
+  badge.className = 'floating-life-badge';
+  badge.innerHTML = '+1 VIDA REGENERADA ❤️';
+
+  const rect = container.getBoundingClientRect();
+  badge.style.position = 'fixed';
+  badge.style.left = `${Math.max(10, rect.left + (rect.width / 2) - 85)}px`;
+  badge.style.top = `${Math.max(10, rect.top - 36)}px`;
+  badge.style.zIndex = '9999';
+
+  document.body.appendChild(badge);
+  if (typeof SoundManager !== 'undefined') {
+    SoundManager.playSFX('powerup.wav', 0.85);
+  }
+  setTimeout(() => {
+    if (badge.parentNode) badge.parentNode.removeChild(badge);
+  }, 1600);
+}
+window.showLifeRegeneratedFeedback = showLifeRegeneratedFeedback;
+
+function updateTriviaHeartsUI(regeneratedIndex = -1) {
+  const container = document.getElementById('triviaHeartsContainer');
+  if (!container) return;
+  const currentLives = (window.state && window.state.lives !== undefined) ? window.state.lives : (state.trivia.lives || 0);
   const hearts = container.querySelectorAll('.hud-heart');
   hearts.forEach((heartEl, idx) => {
-    if (idx < state.trivia.lives) {
+    heartEl.classList.remove('heart-regenerated');
+    if (idx < currentLives) {
       heartEl.classList.remove('heart-lost');
       heartEl.classList.add('active');
+      if (idx === regeneratedIndex) {
+        void heartEl.offsetWidth; // Forzar reflow para animación de pulso
+        heartEl.classList.add('heart-regenerated');
+      }
     } else {
       heartEl.classList.add('heart-lost');
       heartEl.classList.remove('active');
@@ -2846,6 +6984,20 @@ function renderizarPreguntaActual() {
   if (currentEl) currentEl.innerText = qIndex + 1;
   if (totalEl) totalEl.innerText = totalQ;
 
+  // Inyecta etiqueta superior de categoría
+  const catTag = document.getElementById('triviaCategoryTag');
+  if (catTag) {
+    const rawCat = (q.categoria || (state.trivia && state.trivia.category) || 'TRIVIA').toUpperCase().trim();
+    const isAnim = rawCat.includes('ANIM') || (state.trivia && state.trivia.category === 'animacion') || rawCat.includes('MUS');
+    if (isAnim) {
+      catTag.textContent = 'ANIMACIÓN';
+      catTag.classList.add('theme-animacion');
+    } else {
+      catTag.textContent = rawCat;
+      catTag.classList.remove('theme-animacion');
+    }
+  }
+
   // Inyecta q.pregunta en el título y q.emojis en #questionEmojis
   const qTextEl = document.getElementById('triviaQuestionText');
   if (qTextEl) qTextEl.innerText = q.pregunta || q.question || '';
@@ -2863,7 +7015,7 @@ function renderizarPreguntaActual() {
   if (optionsList) {
     const btns = optionsList.querySelectorAll('.trivia-option-btn');
     btns.forEach((btn, idx) => {
-      btn.classList.remove('option-correct', 'option-wrong');
+      btn.classList.remove('option-correct', 'option-wrong', 'btn-pop-success');
       btn.style.pointerEvents = 'auto';
       const text = shuffledOptions[idx] || '';
       btn.setAttribute('data-text', text);
@@ -2878,7 +7030,7 @@ function renderizarPreguntaActual() {
   const triviaView = document.getElementById('triviaView');
   if (triviaView) triviaView.classList.remove('siren-panic');
 
-  // Iniciar temporizador estricto de 15 segundos
+  // Iniciar temporizador estricto unificado de 20 segundos
   startTriviaTimer();
 }
 
@@ -2888,7 +7040,10 @@ function renderCurrentTriviaQuestion() {
 
 function startTriviaTimer() {
   state.trivia.isPaused = false;
-  const maxMs = (state.trivia.timerSeconds || 15) * 1000;
+  const tiempoBase = 20;
+  window.state.timeLeft = tiempoBase;
+  state.trivia.timerSeconds = tiempoBase;
+  const maxMs = tiempoBase * 1000;
   state.trivia.remainingMs = maxMs;
   if (typeof SoundManager !== 'undefined') {
     SoundManager.playBGM('trivia');
@@ -2912,7 +7067,9 @@ function resumeTriviaTimer() {
 
 function runTriviaTimer(initialRemainingMs) {
   clearInterval(state.trivia.timerInterval);
-  const totalMs = (state.trivia.timerSeconds || 15) * 1000;
+  const tiempoBase = 20;
+  state.trivia.timerSeconds = tiempoBase;
+  const totalMs = tiempoBase * 1000;
   const startTime = performance.now();
   const startRemaining = initialRemainingMs;
 
@@ -2922,6 +7079,7 @@ function runTriviaTimer(initialRemainingMs) {
 
   const updateDisplay = (ms) => {
     const remainingSecs = Math.ceil(ms / 1000);
+    window.state.timeLeft = remainingSecs;
     if (timerSecsEl) timerSecsEl.innerText = remainingSecs;
     if (fillEl) fillEl.style.width = `${(ms / totalMs) * 100}%`;
 
@@ -3012,6 +7170,100 @@ function showFloatingRewardBadge(sourceBtn, amount, hasStreakBonus = false) {
   }, 800);
 }
 
+// 1. Explosión de 6 partículas CSS/SVG (estrellitas o chispas doradas) desde el centro del botón (400 ms)
+function spawnSuccessParticles(sourceBtn) {
+  if (!sourceBtn) return;
+  const rect = sourceBtn.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const numParticles = 6;
+  const distance = 46;
+  const starSvg = `<svg viewBox="0 0 24 24" width="100%" height="100%"><polygon fill="#FFD700" stroke="#000" stroke-width="1.5" points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>`;
+
+  for (let i = 0; i < numParticles; i++) {
+    const angle = (i * (360 / numParticles)) * (Math.PI / 180);
+    const tx = Math.round(Math.cos(angle) * distance) + 'px';
+    const ty = Math.round(Math.sin(angle) * distance) + 'px';
+    const rot = (i * 60) + 'deg';
+
+    const particle = document.createElement('div');
+    particle.className = 'correct-spark-particle';
+    particle.style.left = `${centerX}px`;
+    particle.style.top = `${centerY}px`;
+    particle.style.setProperty('--tx', tx);
+    particle.style.setProperty('--ty', ty);
+    particle.style.setProperty('--rot', rot);
+    particle.innerHTML = starSvg;
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 400);
+  }
+}
+
+// 2. Shake Screen y Respuesta Háptica en Error (300 ms)
+function triggerWrongAnswerFeedback() {
+  const questionCard = document.querySelector('.card-question') || document.getElementById('triviaCard') || document.querySelector('.trivia-card');
+  if (questionCard) {
+    questionCard.classList.remove('shake-effect');
+    void questionCard.offsetWidth; // Forzar reflow
+    questionCard.classList.add('shake-effect');
+    setTimeout(() => {
+      questionCard.classList.remove('shake-effect');
+    }, 300);
+  }
+
+  if (typeof navigator !== 'undefined' && navigator.vibrate) {
+    try {
+      navigator.vibrate([50, 40, 50]);
+    } catch (e) {}
+  }
+}
+
+// 3. Contador de RetroCoins con Rodillo Dinámico (Rolling Counter en 800 ms)
+function animateRollingCounter(element, startVal, endVal, durationMs = 800, prefix = '', suffix = '') {
+  if (!element) return;
+  const start = Math.max(0, parseInt(startVal, 10) || 0);
+  const end = Math.max(0, parseInt(endVal, 10) || 0);
+  if (start === end) {
+    element.innerText = `${prefix}${end.toLocaleString()}${suffix}`;
+    return;
+  }
+
+  const diff = end - start;
+  const startTime = performance.now();
+  let lastSoundTime = 0;
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(1, elapsed / durationMs);
+    const currentVal = Math.round(start + diff * progress);
+
+    element.innerText = `${prefix}${currentVal.toLocaleString()}${suffix}`;
+
+    // Reproducir a bajo volumen retrocoin.wav en cada salto
+    if (currentTime - lastSoundTime >= 80 && progress < 1) {
+      lastSoundTime = currentTime;
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('retrocoin.wav', 0.25);
+      }
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      element.innerText = `${prefix}${end.toLocaleString()}${suffix}`;
+      if (typeof SoundManager !== 'undefined') {
+        SoundManager.playSFX('retrocoin.wav', 0.3);
+      }
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
 function handleTriviaAnswer(selectedIndex) {
   if (state.trivia.isAnswering) return;
   state.trivia.isAnswering = true;
@@ -3043,28 +7295,58 @@ function handleTriviaAnswer(selectedIndex) {
   window.state.accumulatedAnswerTimeMs = (window.state.accumulatedAnswerTimeMs || 0) + answerDuration;
 
   if (isCorrect) {
-    // Verde neón si acierta (animación de monedas al HUD)
-    if (selectedBtn) selectedBtn.classList.add('option-correct');
+    // Verde neón si acierta (#00E676), clase .btn-pop-success con animación y partículas radiales
+    if (selectedBtn) {
+      selectedBtn.classList.add('option-correct', 'btn-pop-success');
+      spawnSuccessParticles(selectedBtn);
+    }
     recordTriviaAnswerResult(true);
 
-    state.trivia.currentStreak = (state.trivia.currentStreak || 0) + 1;
+    window.state.currentStreak = (window.state.currentStreak || 0) + 1;
+    state.trivia.currentStreak = window.state.currentStreak;
+
+    // Bonificación por racha: cada 4 aciertos seguidos regenera +1 vida si < 3
+    if (window.state.currentStreak === 4) {
+      const currentLives = (window.state.lives !== undefined) ? window.state.lives : (state.trivia.lives || 0);
+      if (currentLives < 3) {
+        const newLives = currentLives + 1;
+        window.state.lives = newLives;
+        state.trivia.lives = newLives;
+        updateTriviaHeartsUI(newLives - 1);
+        showLifeRegeneratedFeedback();
+      }
+      window.state.currentStreak = 0;
+      state.trivia.currentStreak = 0;
+    }
+
     state.trivia.correctAnswersCount = (state.trivia.correctAnswersCount || 0) + 1;
     if (window.state) window.state.correctAnswersCount = state.trivia.correctAnswersCount;
     state.correctAnswersCount = state.trivia.correctAnswersCount;
 
-    // Sumar dominio de pack si se está jugando un pack temático (+1 hasta 50)
+    // Sumar dominio de pack si se está jugando un pack temático (array de preguntas dominadas hasta 50)
     const activeThematicPack = window.state?.activeThematicPackId || state.activeThematicPackId;
     if (activeThematicPack) {
       if (!state.packMastery) state.packMastery = {};
       if (window.state && !window.state.packMastery) window.state.packMastery = {};
-      const currentMastery = (window.state?.packMastery?.[activeThematicPack] || state.packMastery?.[activeThematicPack] || 0);
-      if (currentMastery < 50) {
-        const newMastery = currentMastery + 1;
-        state.packMastery[activeThematicPack] = newMastery;
-        if (window.state) window.state.packMastery[activeThematicPack] = newMastery;
-        if (typeof savePackProgressToCloud === 'function') {
-          savePackProgressToCloud();
-        }
+
+      let currentMastery = window.state?.packMastery?.[activeThematicPack] || state.packMastery?.[activeThematicPack];
+      let masteryArr = [];
+      if (Array.isArray(currentMastery)) {
+        masteryArr = [...currentMastery];
+      } else if (typeof currentMastery === 'number' && currentMastery > 0) {
+        masteryArr = Array.from({ length: Math.min(50, currentMastery) }, (_, i) => `prev_${i + 1}`);
+      }
+
+      // ID único de la pregunta (ej: "spr_001") o texto de la pregunta
+      const qId = q?.id || (q?.pregunta ? String(q.pregunta).trim() : null);
+      if (qId && !masteryArr.includes(qId) && masteryArr.length < 50) {
+        masteryArr.push(qId);
+      }
+
+      state.packMastery[activeThematicPack] = masteryArr;
+      if (window.state) window.state.packMastery[activeThematicPack] = masteryArr;
+      if (typeof savePackProgressToCloud === 'function') {
+        savePackProgressToCloud();
       }
     }
 
@@ -3159,12 +7441,16 @@ function handleTriviaAnswer(selectedIndex) {
       }
     });
 
+    window.state.currentStreak = 0;
     state.trivia.currentStreak = 0;
     state.trivia.lives--;
     window.state.lives = state.trivia.lives;
     updateTriviaHeartsUI();
     playErrorSound();
     if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
+
+    // 2. SHAKE SCREEN Y RESPUESTA HÁPTICA EN ERROR (300 ms)
+    triggerWrongAnswerFeedback();
 
     // CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
     if (window.state.lives <= 0) {
@@ -3267,6 +7553,7 @@ function handleTriviaTimeout() {
   // Registrar penalización de tiempo de respuesta (10s) en timeout
   window.state.accumulatedAnswerTimeMs = (window.state.accumulatedAnswerTimeMs || 0) + 10000;
 
+  window.state.currentStreak = 0;
   state.trivia.currentStreak = 0; // Reiniciar racha al agotarse el tiempo
   recordTriviaAnswerResult(false);
   state.trivia.lives--;
@@ -3274,6 +7561,9 @@ function handleTriviaTimeout() {
   updateTriviaHeartsUI();
   playErrorSound();
   if (typeof SoundManager !== 'undefined') SoundManager.playSFX('error.wav');
+
+  // 2. SHAKE SCREEN Y RESPUESTA HÁPTICA EN ERROR (300 ms)
+  triggerWrongAnswerFeedback();
 
   // CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
   if (window.state.lives <= 0) {
@@ -3656,6 +7946,7 @@ function showResults(aciertos = 10) {
   const currentTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
   window.state.xp = currentTotalXP;
   state.userScore = currentTotalXP;
+  const prevCoins = state.coins;
   window.state.coins = state.coins + sessionCoins;
   state.coins = window.state.coins;
 
@@ -3723,37 +8014,29 @@ function showResults(aciertos = 10) {
     resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10`;
   }
 
-  // Desglose de Nivel y XP Total del Jugador
+  // Desglose de Nivel y XP Total del Jugador (Esquema de rangos temáticos)
   const playerLevelEl = document.getElementById('resultsPlayerLevel');
   const playerXpEl = document.getElementById('resultsPlayerTotalXp');
-  if (playerLevelEl) playerLevelEl.innerText = `Nivel ${playerLevel}`;
-  if (playerXpEl) playerXpEl.innerText = `XP Total: ${window.state.xp.toLocaleString()} pts`;
+  const userXP = (window.state && typeof window.state.xp === 'number')
+    ? window.state.xp
+    : ((state && typeof state.xp === 'number') ? state.xp : (state?.userScore || 0));
+  const currentRank = (typeof getPlayerRank === 'function') ? getPlayerRank(userXP) : { name: 'Novato del Videoclub 📼' };
+  if (playerLevelEl) playerLevelEl.innerText = currentRank.name || currentRank.toString();
+  if (playerXpEl) playerXpEl.innerText = `${userXP.toLocaleString()} pts`;
 
   // 5. Tarjeta Inferior Dual (Racha y Retrocoins)
   const streakValEl = document.getElementById('resultsStreakVal');
   const coinsSessionEl = document.getElementById('resultsCoinsSessionVal');
   const coinsTotalEl = document.getElementById('resultsCoinsTotalVal');
   if (streakValEl) streakValEl.innerText = `+${state.winStreak} 🔥`;
-  if (coinsSessionEl) {
-    if (sessionCoins > 0) {
-      let currentCoin = 0;
-      const coinSteps = Math.min(sessionCoins, 8);
-      const stepVal = Math.ceil(sessionCoins / coinSteps);
-      const coinInterval = setInterval(() => {
-        currentCoin = Math.min(sessionCoins, currentCoin + stepVal);
-        coinsSessionEl.innerText = `+${currentCoin}`;
-        if (typeof SoundManager !== 'undefined') {
-          SoundManager.playSFX('retrocoin.wav', 0.5);
-        }
-        if (currentCoin >= sessionCoins) {
-          clearInterval(coinInterval);
-        }
-      }, 100);
-    } else {
-      coinsSessionEl.innerText = `+0`;
-    }
-  }
-  if (coinsTotalEl) coinsTotalEl.innerText = state.coins.toLocaleString();
+
+  // Inicializar estado del contador progresivo (arranca en +0)
+  window._lastResultsSessionCoins = sessionCoins;
+  window._lastResultsPrevCoins = prevCoins;
+  window._lastResultsFinalCoins = state.coins;
+
+  if (coinsSessionEl) coinsSessionEl.innerText = '+0';
+  if (coinsTotalEl) coinsTotalEl.innerText = prevCoins.toLocaleString();
 
   // 6. Secuencia de Audio y Confeti Condicional en Resultados
   playResultsAudioSequence(correctCount);
@@ -3788,6 +8071,9 @@ function showResults(aciertos = 10) {
   if (resultsAvatarImg) {
     resultsAvatarImg.src = activeAvatar;
   }
+
+  // 9. Disparar Cascada Escalonada y Conteo Progresivo con Sonido
+  triggerResultsEntranceAnimation();
 }
 
 function updateDuelCardToWaiting(rivalName = 'Usuario 2') {
@@ -3975,6 +8261,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   const rivalRoundsCompleted = (chData && chData.scores && rivalUid && chData.scores[rivalUid]?.roundsCompleted) || 0;
 
   // Actualizar monedas globales en memoria (la XP fluctúa de forma competitiva al cerrarse el duelo)
+  const prevCoins = state.coins;
   if (!isDirectView) {
     state.coins += roundCoins;
     if (window.state) {
@@ -4013,14 +8300,29 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
     }
   }
 
+  const localCountryCode = window.state?.country || window.state?.userCountry || state?.country || localStorage.getItem('retroquiz_user_country') || 'BO';
+  const rivalCountryCode = state.currentDuel?.rivalCountry || (isCreator ? (chData?.toCountry || chData?.targetUserCountry) : (chData?.fromCountry || chData?.challengerCountry)) || 'WORLD';
+  const localFlag = typeof getCountryFlag === 'function' ? getCountryFlag(localCountryCode) : '🇧🇴';
+  const rivalFlag = typeof getCountryFlag === 'function' ? getCountryFlag(rivalCountryCode) : '🌎';
+
   const localScoreEl = document.getElementById('duelResultLocalScore');
   if (localScoreEl) localScoreEl.innerText = `${localTotalScore} pts`;
 
+  const duelResultLocalName = document.getElementById('duelResultLocalName');
+  if (duelResultLocalName) {
+    duelResultLocalName.innerText = `${window.state?.username || localStorage.getItem('retroquiz_username') || "Tú"} ${localFlag}`;
+  }
+  const podiumLocalBadge = document.getElementById('podiumLocalCountryBadge');
+  if (podiumLocalBadge) podiumLocalBadge.innerText = localFlag;
+
   const rivalNameEl = document.getElementById('duelResultRivalName');
-  if (rivalNameEl) rivalNameEl.innerText = state.currentDuel.rivalName || 'Rival';
+  if (rivalNameEl) rivalNameEl.innerText = `${state.currentDuel?.rivalName || 'Rival'} ${rivalFlag}`;
+
+  const podiumRivalBadge = document.getElementById('podiumRivalCountryBadge');
+  if (podiumRivalBadge) podiumRivalBadge.innerText = rivalFlag;
 
   const rivalAvatarSpan = document.querySelector('#podiumRivalAvatar span');
-  if (rivalAvatarSpan) rivalAvatarSpan.innerText = state.currentDuel.rivalAvatar || '🕹️';
+  if (rivalAvatarSpan) rivalAvatarSpan.innerText = state.currentDuel?.rivalAvatar || '🕹️';
 
   const rivalScoreEl = document.getElementById('duelResultRivalScore');
   if (rivalScoreEl) rivalScoreEl.innerText = `${rivalTotalScore} pts`;
@@ -4055,7 +8357,13 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
   }
 
   const coinsEarnedEl = document.getElementById('duelCoinsEarned');
-  if (coinsEarnedEl) coinsEarnedEl.innerText = `+${roundCoins} RC`;
+  if (coinsEarnedEl) {
+    coinsEarnedEl.innerText = `+${roundCoins} RC`;
+    const hudUserCoins = document.getElementById('userCoins');
+    if (hudUserCoins && !isDirectView && roundCoins > 0) {
+      animateRollingCounter(hudUserCoins, prevCoins, state.coins, 800);
+    }
+  }
 
   // 5. Botones de Acción y Resolución
   const roundActions = document.getElementById('duelRoundActions');
@@ -4141,7 +8449,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
         pointsEarnedEl.style.color = '#2ee2b6';
       }
 
-      // Fluctuación de XP: Suma +120 XP (sin duplicar en visitas repetidas)
+      // Fluctuación de XP y Desafíos Ganados (sin duplicar en visitas repetidas)
       if (!alreadyProcessed) {
         const newXP = currentXp + 120;
         state.xp = newXP;
@@ -4150,8 +8458,15 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
           window.state.xp = newXP;
           window.state.userScore = newXP;
         }
+
+        const currentWins = Number((window.state && window.state.challengesWon !== undefined) ? window.state.challengesWon : ((state && state.challengesWon !== undefined) ? state.challengesWon : (localStorage.getItem('retroquiz_challenges_won') || 0)));
+        const newWins = currentWins + 1;
+        state.challengesWon = newWins;
+        if (window.state) window.state.challengesWon = newWins;
+
         try {
           localStorage.setItem('retroquiz_xp', String(newXP));
+          localStorage.setItem('retroquiz_challenges_won', String(newWins));
           localStorage.setItem(xpAwardedKey, 'true');
         } catch (e) {}
 
@@ -4160,16 +8475,19 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
           profileBadge.innerText = `${getPlayerRank(newXP)} • ${newXP} XP`;
         }
         if (typeof updateHUD === 'function') updateHUD();
+        if (typeof updateProfileStatsUI === 'function') updateProfileStatsUI();
 
-        // Persistir en Firestore usuarios/{userId}
+        // Persistir en Firestore usuarios/{userId} con increment(1)
         if (window.db && window.firestoreOps && currentUidVal) {
           try {
-            const { doc, updateDoc } = window.firestoreOps;
+            const { doc, updateDoc, increment } = window.firestoreOps;
             const userRef = doc(window.db, "usuarios", currentUidVal);
+            const incWon = (typeof increment === 'function') ? increment(1) : newWins;
             updateDoc(userRef, {
               xp: newXP,
+              challengesWon: incWon,
               updatedAt: new Date().toISOString()
-            }).catch(err => console.error("Error al actualizar XP del ganador en Firestore:", err));
+            }).catch(err => console.error("Error al actualizar XP y challengesWon del ganador en Firestore:", err));
 
             if (chId) {
               const chRef = doc(window.db, "desafios", chId);
@@ -4179,7 +8497,7 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
               }).catch(() => {});
             }
           } catch (err) {
-            console.error("Error preparando updateDoc de XP:", err);
+            console.error("Error preparando updateDoc de XP y challengesWon:", err);
           }
         }
       }
@@ -4201,7 +8519,11 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
       if (winnerAvatarImg) winnerAvatarImg.src = datosGanador.avatar;
       const winnerNameEl = document.getElementById('challengeWinnerName');
-      if (winnerNameEl) winnerNameEl.textContent = datosGanador.nombre;
+      const winnerCountryCode = soyGanador ? localCountryCode : rivalCountryCode;
+      const winnerFlag = typeof getCountryFlag === 'function' ? getCountryFlag(winnerCountryCode) : '🌎';
+      if (winnerNameEl) winnerNameEl.textContent = `${datosGanador.nombre} ${winnerFlag}`;
+      const winnerCountryBadge = document.getElementById('challengeWinnerCountryBadge');
+      if (winnerCountryBadge) winnerCountryBadge.innerText = winnerFlag;
 
       // Botón principal: "VOLVER A DESAFÍOS" en amarillo neón (ocultar revancha)
       if (btnRematchDuel) {
@@ -4648,6 +8970,11 @@ window.openAcceptChallengeModal = function() {
   openModal('acceptChallengeModal');
 };
 window.openSendChallengeModal = function() {
+  if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+    showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+    if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+    return;
+  }
   openModal('sendChallengeModal');
 };
 
@@ -4801,84 +9128,11 @@ function setupProfileAvatar() {
 
 function applyNoAdsState(purchased) {
   state.noAds = !!purchased;
-  const btn = document.getElementById('btnRemoveAds');
-  const wrapReset = document.getElementById('wrapResetAds');
-  if (!btn) return;
-
-  const icon = btn.querySelector('.no-ads-icon');
-  const title = btn.querySelector('.no-ads-title');
-  const sub = btn.querySelector('.no-ads-sub');
-  const price = btn.querySelector('.no-ads-price-pill');
-
-  if (purchased) {
-    btn.classList.add('is-purchased');
-    if (icon) icon.innerText = '😎';
-    if (title) title.innerText = 'PUBLICIDAD DESACTIVADA ✓';
-    if (sub) sub.innerText = 'Tu RetroQuiz esta sin anuncios';
-    if (price) price.innerText = 'ACTIVO';
-    btn.style.pointerEvents = 'none';
-    if (wrapReset) wrapReset.style.display = 'flex';
-  } else {
-    btn.classList.remove('is-purchased');
-    if (icon) icon.innerText = '📵';
-    if (title) title.innerText = 'ELIMINAR PUBLICIDAD';
-    if (sub) sub.innerText = 'Disfruta de RetroQuiz sin anuncios por $0.99';
-    if (price) price.innerText = '$0.99';
-    btn.style.pointerEvents = '';
-    if (wrapReset) wrapReset.style.display = 'none';
-  }
+  if (window.state) window.state.noAds = !!purchased;
 }
 
 function setupNoAdsFeature() {
-  const btn = document.getElementById('btnRemoveAds');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      if (state.noAds) return;
-      playCoinSound();
-
-      try {
-        localStorage.setItem('retroquiz_no_ads', 'true');
-      } catch (err) {
-        console.warn('Error saving no_ads to localStorage:', err);
-      }
-
-      applyNoAdsState(true);
-
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 60,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ffe600', '#ff007f', '#00f0ff', '#7b2cbf', '#00ff66'],
-          zIndex: 10005
-        });
-      }
-
-      showRetroToast('¡Publicidad eliminada con éxito!', '🎉');
-    });
-  }
-
-  // Botón discreto para reiniciar compra y probar
-  const btnReset = document.getElementById('btnResetNoAdsTest');
-  if (btnReset) {
-    btnReset.addEventListener('click', (e) => {
-      e.stopPropagation();
-      try {
-        localStorage.removeItem('retroquiz_no_ads');
-      } catch (err) {}
-      applyNoAdsState(false);
-      showRetroToast('Modo gratuito restaurado para pruebas', '📵');
-    });
-  }
-
-  // Carga de estado sin anuncios al iniciar
-  try {
-    const isNoAds = localStorage.getItem('retroquiz_no_ads') === 'true';
-    applyNoAdsState(isNoAds);
-  } catch (err) {
-    console.warn('Error reading no_ads from localStorage:', err);
-    applyNoAdsState(false);
-  }
+  // No-op tras la eliminación del botón en #profileView
 }
 
 // =============================================================================
@@ -4887,17 +9141,19 @@ function setupNoAdsFeature() {
 function updateProfileStatsUI() {
   const currentStats = (window.state && window.state.stats) || (state && state.stats) || { totalQuestions: 0, correctAnswers: 0, maxStreak: 0 };
   const accEl = document.getElementById('profileAccuracy');
-  const corEl = document.getElementById('profileCorrectCount');
+  const corEl = document.getElementById('profileChallengesWon') || document.getElementById('profileCorrectCount');
   const strEl = document.getElementById('profileMaxStreak');
 
   const total = Number(currentStats.totalQuestions) || 0;
   const correct = Number(currentStats.correctAnswers) || 0;
   const maxStr = Number(currentStats.maxStreak) || 0;
 
+  const wins = Number((window.state && window.state.challengesWon !== undefined) ? window.state.challengesWon : ((state && state.challengesWon !== undefined) ? state.challengesWon : (localStorage.getItem('retroquiz_challenges_won') || 0)));
+
   const accPercent = total > 0 ? Math.round((correct / total) * 100) + '%' : '0%';
 
   if (accEl) accEl.textContent = accPercent;
-  if (corEl) corEl.textContent = String(correct);
+  if (corEl) corEl.textContent = String(wins);
   if (strEl) strEl.textContent = String(maxStr);
 }
 window.updateProfileStatsUI = updateProfileStatsUI;
@@ -4907,17 +9163,24 @@ function updatePlayerNameAcrossApp(newName) {
   if (state) state.username = newName;
   if (window.state) window.state.username = newName;
 
+  const currentCountry = window.state?.country || window.state?.userCountry || state?.country || localStorage.getItem('retroquiz_user_country') || 'BO';
+  const flag = typeof getCountryFlag === 'function' ? getCountryFlag(currentCountry) : '🇧🇴';
+
   // 1. Tarjeta en Ranking (#userRankName)
   const userRankNameEl = document.getElementById('userRankName');
   if (userRankNameEl) {
-    userRankNameEl.textContent = `${newName} (Tú)`;
+    userRankNameEl.textContent = `${newName} ${flag} (Tú)`;
     userRankNameEl.style.color = '#FFFFFF';
   }
 
   // 2. Jugador Local en Duelo
-  const localDuelNameEl = document.querySelector('.duel-player-local .duel-player-name');
+  const localDuelNameEl = document.getElementById('duelLocalName') || document.querySelector('.duel-player-local .duel-player-name');
   if (localDuelNameEl) {
-    localDuelNameEl.textContent = newName;
+    localDuelNameEl.textContent = `${newName} ${flag}`;
+  }
+  const localBadge = document.getElementById('duelLocalCountryBadge');
+  if (localBadge) {
+    localBadge.textContent = flag;
   }
 
   // 3. Tarjetas de Desafíos activos (slots de usuario)
@@ -4980,21 +9243,23 @@ window.recordTriviaAnswerResult = recordTriviaAnswerResult;
 
 function setupProfileUserFields() {
   const nameInput = document.getElementById('profileUsernameInput') || document.getElementById('profileUserNameInput');
+  const btnConfirmName = document.getElementById('btnConfirmUsername');
+  const countrySelect = document.getElementById('profileCountrySelect');
   const editBtn = document.getElementById('btnEditUserName');
   const bioInput = document.getElementById('profileBioInput');
 
   // Sincronizar valores actuales
   const savedUsername = localStorage.getItem('retroquiz_username');
   const hasSavedName = (window.state && window.state.username) || (state && state.username) || savedUsername || '';
+  const currentCountry = (window.state && (window.state.country || window.state.userCountry)) || (state && (state.country || state.userCountry)) || localStorage.getItem('retroquiz_user_country') || 'BO';
   const currentBio = (state && state.bio) || (window.state && window.state.bio) || localStorage.getItem('retroquiz_bio') || '';
 
   if (nameInput) {
-    if (hasSavedName) {
-      nameInput.value = hasSavedName;
-    } else {
-      nameInput.value = '';
-    }
-    nameInput.placeholder = "Introduce tu nombre de usuario...";
+    nameInput.value = hasSavedName;
+    nameInput.placeholder = "Tu nombre de usuario...";
+  }
+  if (countrySelect) {
+    countrySelect.value = currentCountry;
   }
   if (bioInput) {
     bioInput.value = currentBio;
@@ -5007,48 +9272,108 @@ function setupProfileUserFields() {
     profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
   }
 
-  // Guardar nombre en change y blur
+  // Guardar nombre de usuario con validación y feedback
+  const saveName = async () => {
+    if (!nameInput) return;
+    const val = nameInput.value.trim();
+    if (!val) {
+      showRetroToast('Ingresa un nombre válido', '⚠️');
+      return;
+    }
+    nameInput.value = val;
+    state.username = val;
+    if (window.state) window.state.username = val;
+    try {
+      localStorage.setItem('retroquiz_username', val);
+    } catch (err) {
+      console.warn('Error saving username:', err);
+    }
+
+    // Actualizar inmediatamente en toda la app y ranking
+    updatePlayerNameAcrossApp(val);
+    if (typeof renderRankingUI === 'function') renderRankingUI();
+
+    // Feedback visual en el botón
+    if (btnConfirmName) {
+      btnConfirmName.classList.add('btn-confirmed-feedback');
+      const origText = btnConfirmName.innerText;
+      btnConfirmName.innerText = '✓ ¡Listo!';
+      setTimeout(() => {
+        btnConfirmName.classList.remove('btn-confirmed-feedback');
+        btnConfirmName.innerText = origText;
+      }, 1200);
+    }
+
+    // Actualizar en Firestore inmediatamente con updateDoc
+    const userId = window.state?.userId || state?.userId;
+    if (window.db && window.firestoreOps && userId) {
+      try {
+        const { doc, updateDoc } = window.firestoreOps;
+        const userRef = doc(window.db, "usuarios", userId);
+        await updateDoc(userRef, {
+          username: val,
+          updatedAt: new Date().toISOString()
+        });
+        console.log("Username actualizado en Firestore:", val);
+      } catch (err) {
+        console.error("Error al actualizar username en Firestore:", err);
+      }
+    }
+    showRetroToast('¡Nombre guardado! 🎉', '🎉');
+  };
+
+  if (btnConfirmName && !btnConfirmName.dataset.listenerAttached) {
+    btnConfirmName.dataset.listenerAttached = 'true';
+    btnConfirmName.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof playClickSound === 'function') playClickSound();
+      saveName();
+    });
+  }
+
   if (nameInput && !nameInput.dataset.listenerAttached) {
     nameInput.dataset.listenerAttached = 'true';
-    const saveName = async () => {
-      const val = nameInput.value.trim();
-      if (!val) {
-        return;
-      }
-      nameInput.value = val;
-      state.username = val;
-      if (window.state) window.state.username = val;
-      try {
-        localStorage.setItem('retroquiz_username', val);
-      } catch (err) {
-        console.warn('Error saving username:', err);
-      }
-
-      // Actualizar inmediatamente en toda la app
-      updatePlayerNameAcrossApp(val);
-
-      // Actualizar en Firestore inmediatamente con updateDoc
-      if (window.db && window.firestoreOps && window.state && window.state.userId) {
-        try {
-          const { doc, updateDoc } = window.firestoreOps;
-          const userRef = doc(window.db, "usuarios", window.state.userId);
-          await updateDoc(userRef, {
-            username: val,
-            updatedAt: new Date().toISOString()
-          });
-          console.log("Username actualizado en Firestore:", val);
-          showRetroToast('¡Nombre de usuario actualizado!', '👤');
-        } catch (err) {
-          console.error("Error al actualizar username en Firestore:", err);
-        }
-      }
-    };
-    nameInput.addEventListener('change', saveName);
-    nameInput.addEventListener('blur', saveName);
     nameInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        nameInput.blur();
+        e.preventDefault();
+        saveName();
       }
+    });
+  }
+
+  // Manejar selector de país
+  if (countrySelect && !countrySelect.dataset.listenerAttached) {
+    countrySelect.dataset.listenerAttached = 'true';
+    countrySelect.addEventListener('change', async () => {
+      const selectedCode = countrySelect.value || 'BO';
+      state.country = selectedCode;
+      state.userCountry = selectedCode;
+      if (window.state) {
+        window.state.country = selectedCode;
+        window.state.userCountry = selectedCode;
+      }
+      try {
+        localStorage.setItem('retroquiz_user_country', selectedCode);
+      } catch (e) {}
+
+      updatePlayerNameAcrossApp(state.username || window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú');
+      if (typeof renderRankingUI === 'function') renderRankingUI();
+
+      const userId = window.state?.userId || state?.userId;
+      if (window.db && window.firestoreOps && userId) {
+        try {
+          const { doc, updateDoc } = window.firestoreOps;
+          const userRef = doc(window.db, "usuarios", userId);
+          await updateDoc(userRef, {
+            country: selectedCode,
+            updatedAt: new Date().toISOString()
+          });
+          console.log("País actualizado en Firestore:", selectedCode);
+        } catch (err) {
+          console.error("Error al actualizar país en Firestore:", err);
+        }
+      }
+      showRetroToast('País actualizado 🌎', '🌎');
     });
   }
 
@@ -5181,8 +9506,8 @@ function openProfileModal() {
   const p = document.getElementById('profileView');
   if (!p) return;
 
-  setupProfileUserFields();
-  updateProfileStatsUI();
+  try { setupProfileUserFields(); } catch (e) { console.warn('setupProfileUserFields error:', e); }
+  try { updateProfileStatsUI(); } catch (e) { console.warn('updateProfileStatsUI error:', e); }
 
   // Mantén visible #homeView de fondo si no hay otra vista abierta
   const homeView = document.getElementById('homeView');
@@ -5198,7 +9523,7 @@ function openProfileModal() {
   p.style.display = 'flex';
   void p.offsetWidth; // Forzar reflow para animación suave scale(0.92) -> scale(1) y fade-in
   p.classList.add('open', 'active');
-  playModalOpenSound();
+  try { playModalOpenSound(); } catch (e) {}
 
   // Actualizar indicador visual en la barra inferior
   const tabPerfil = document.getElementById('tabPerfil');
@@ -5291,11 +9616,13 @@ function setupProfileNavigationEvents() {
 async function renderRankingUI() {
   const currentUsername = (window.state && window.state.username) || localStorage.getItem('retroquiz_username') || "Jugador";
   const userScore = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.userScore || 0);
+  const currentCountry = window.state?.country || window.state?.userCountry || state?.country || localStorage.getItem('retroquiz_user_country') || 'BO';
+  const userFlag = typeof getCountryFlag === 'function' ? getCountryFlag(currentCountry) : '🇧🇴';
 
   // 1. Actualizar Tarjeta del Jugador Local ("TÚ")
   const userRankNameEl = document.getElementById('userRankName');
   if (userRankNameEl) {
-    userRankNameEl.textContent = `${currentUsername} (Tú)`;
+    userRankNameEl.textContent = `${currentUsername} ${userFlag} (Tú)`;
   }
   const rankingUserPts = document.getElementById('rankingUserPts');
   if (rankingUserPts) {
@@ -5317,6 +9644,7 @@ async function renderRankingUI() {
           usersList.push({
             uid: docSnap.id,
             username: d.username || 'Jugador',
+            country: d.country || 'WORLD',
             xp: typeof d.xp === 'number' ? d.xp : 0,
             coins: typeof d.coins === 'number' ? d.coins : 0
           });
@@ -5334,6 +9662,7 @@ async function renderRankingUI() {
     usersList.push({
       uid: currentUid || 'local',
       username: currentUsername,
+      country: currentCountry,
       xp: userScore,
       coins: state.coins || 50,
       isLocalUser: true
@@ -5353,23 +9682,29 @@ async function renderRankingUI() {
   }
 
   // 3. Renderizar Puestos del Podio (1, 2 y 3)
-  const p1 = usersList[0] || { username: `${currentUsername}`, xp: userScore };
-  const p2 = usersList[1] || { username: 'Lugar disponible', xp: 0 };
-  const p3 = usersList[2] || { username: 'Lugar disponible', xp: 0 };
+  const p1 = usersList[0] || { username: `${currentUsername}`, country: currentCountry, xp: userScore };
+  const p2 = usersList[1] || { username: 'Lugar disponible', country: '', xp: 0 };
+  const p3 = usersList[2] || { username: 'Lugar disponible', country: '', xp: 0 };
+
+  const formatPodiumName = (player) => {
+    if (!player || player.username === 'Lugar disponible') return player?.username || 'Lugar disponible';
+    const flag = typeof getCountryFlag === 'function' ? getCountryFlag(player.country || 'WORLD') : '🌎';
+    return `${player.username} ${flag}`;
+  };
 
   const p1Name = document.querySelector('#podium1 .podium-name');
   const p1Score = document.querySelector('#podium1 .podium-score');
-  if (p1Name) p1Name.textContent = p1.username;
+  if (p1Name) p1Name.textContent = formatPodiumName(p1);
   if (p1Score) p1Score.textContent = `${(p1.xp || 0).toLocaleString()} pts`;
 
   const p2Name = document.querySelector('#podium2 .podium-name');
   const p2Score = document.querySelector('#podium2 .podium-score');
-  if (p2Name) p2Name.textContent = p2.username;
+  if (p2Name) p2Name.textContent = formatPodiumName(p2);
   if (p2Score) p2Score.textContent = `${(p2.xp || 0).toLocaleString()} pts`;
 
   const p3Name = document.querySelector('#podium3 .podium-name');
   const p3Score = document.querySelector('#podium3 .podium-score');
-  if (p3Name) p3Name.textContent = p3.username;
+  if (p3Name) p3Name.textContent = formatPodiumName(p3);
   if (p3Score) p3Score.textContent = `${(p3.xp || 0).toLocaleString()} pts`;
 }
 window.renderRankingUI = renderRankingUI;
@@ -5386,6 +9721,11 @@ function openModal(modalId) {
     if (typeof renderRankingUI === 'function') renderRankingUI();
   }
   if (modalId === 'sendChallengeModal') {
+    if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+      showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+      if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+      return;
+    }
     const input = document.getElementById('inputSearchUserChallenge');
     if (input) input.value = '';
     const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
@@ -5431,6 +9771,10 @@ function closeModal(modalId) {
     modal.classList.remove('open');
     playClickSound();
     
+    if (modalId === 'modalRanking' && window.location.hash === '#ranking') {
+      window.location.hash = '#home';
+    }
+
     if (modalId === 'modalTienda' || modalId === 'modalPerfil') {
       const currentActiveView = document.querySelector('.screen-view.active');
       if (currentActiveView) {
@@ -5598,11 +9942,65 @@ function saveCoinsToCloud(nuevasMonedas) {
 }
 window.saveCoinsToCloud = saveCoinsToCloud;
 
+// =============================================================================
+// LÍMITE DE PARTIDAS ACTIVAS SIMULTÁNEAS (MÁXIMO 3)
+// =============================================================================
+const MAX_ACTIVE_CHALLENGES = 3;
+window.MAX_ACTIVE_CHALLENGES = MAX_ACTIVE_CHALLENGES;
+
+function getActiveChallengesCount() {
+  // Cuenta desafíos donde el status sea 'active' o 'pending'
+  // e involucren al usuario local (challengerId === uid || targetUserId === uid)
+  const list = window.state?.activeMatchesList || state.activeMatchesList || window.state?.challenges || state.challenges;
+  if (!list || !Array.isArray(list)) return 0;
+  const uid = window.state?.userId || state.userId;
+  return list.filter(d => {
+    if (!d) return false;
+    const isStatusMatch = (d.status === 'active' || d.status === 'pending');
+    if (!isStatusMatch) return false;
+    if (!uid) return true;
+    const chId = d.challengerId || d.fromUid;
+    const tId = d.targetUserId || d.toUid;
+    return (chId === uid || tId === uid);
+  }).length;
+}
+window.getActiveChallengesCount = getActiveChallengesCount;
+
+function updateActiveChallengesBadge() {
+  const badge = document.getElementById('activeChallengesCounter');
+  if (!badge) return;
+  const count = getActiveChallengesCount();
+  if (count >= MAX_ACTIVE_CHALLENGES) {
+    badge.innerText = `${count} / ${MAX_ACTIVE_CHALLENGES} (MÁXIMO)`;
+    badge.classList.add('limit-reached');
+  } else {
+    badge.innerText = `${count} / ${MAX_ACTIVE_CHALLENGES} ACTIVAS`;
+    badge.classList.remove('limit-reached');
+  }
+}
+window.updateActiveChallengesBadge = updateActiveChallengesBadge;
+
+function triggerActiveMatchesShake() {
+  if (typeof navigator !== 'undefined' && navigator.vibrate) {
+    try { navigator.vibrate([40, 60, 40]); } catch (e) {}
+  }
+  const list = document.getElementById('challengesCardsList');
+  if (list) {
+    list.classList.remove('shake-active-matches');
+    void list.offsetWidth;
+    list.classList.add('shake-active-matches');
+    setTimeout(() => list.classList.remove('shake-active-matches'), 450);
+  }
+}
+window.triggerActiveMatchesShake = triggerActiveMatchesShake;
+
 function renderChallengesUI() {
+  updateActiveChallengesBadge();
   const container = document.getElementById('challengesCardsList');
   if (!container) return;
 
-  const MAX_INVITATION_TIME = 48 * 60 * 60 * 1000; // 48 horas para aceptar solicitud
+  const INVITATION_TTL = 48 * 60 * 60 * 1000;      // 48 horas para aceptar solicitud
+  const MAX_INVITATION_TIME = INVITATION_TTL;
   const MAX_TURN_TIME = 36 * 60 * 60 * 1000;       // 36 horas para responder turno
   const WARNING_TIME = 10 * 60 * 60 * 1000;        // Últimas 10 horas (Zona de alerta)
 
@@ -5618,12 +10016,13 @@ function renderChallengesUI() {
     if (!ch) return;
     if (ch.status === "rejected" || ch.status === "expired" || ch.status === "archived") return;
 
+    const tiempoCreacion = new Date(ch.createdAt || ch.updatedAt || ahora).getTime();
     const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
     const tiempoTranscurrido = ahora - ultimaActividad;
 
     // A. SI ES SOLICITUD PENDIENTE (status === "pending"):
     if (ch.status === "pending") {
-      if (tiempoTranscurrido > MAX_INVITATION_TIME) {
+      if ((ahora - tiempoCreacion) > INVITATION_TTL) {
         if (window.db && window.firestoreOps && ch.id) {
           try {
             const { doc, updateDoc } = window.firestoreOps;
@@ -5897,6 +10296,13 @@ function renderChallengesUI() {
               if (state.allChallengesList) {
                 state.allChallengesList = state.allChallengesList.filter(c => c.id !== challengeId);
               }
+              if (state.activeMatchesList) {
+                state.activeMatchesList = state.activeMatchesList.filter(c => c.id !== challengeId);
+              }
+              if (window.state?.activeMatchesList) {
+                window.state.activeMatchesList = window.state.activeMatchesList.filter(c => c.id !== challengeId);
+              }
+              if (typeof updateActiveChallengesBadge === 'function') updateActiveChallengesBadge();
 
               // 4. Si la lista queda vacía, muestra la tarjeta de "No tienes desafíos pendientes"
               const remainingWrappers = container.querySelectorAll('.swipe-wrapper');
@@ -5969,9 +10375,11 @@ function renderChallengesUI() {
         }
 
         const activeRoundNum = ch.currentRound || ch.round || 1;
-        setupDuelMatchUI(rivalName, rivalAvatar, activeRoundNum);
+        const rivalCountry = isCreator ? (ch.toCountry || ch.targetUserCountry || 'WORLD') : (ch.fromCountry || ch.challengerCountry || 'WORLD');
+        setupDuelMatchUI(rivalName, rivalAvatar, activeRoundNum, rivalCountry);
         state.currentDuel.challengeId = chId;
         state.currentDuel.rivalUid = rivalUid;
+        state.currentDuel.rivalCountry = rivalCountry;
         state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[rivalUid]?.totalScore) || (isCreator ? (ch.scores?.toScore || ch.scores?.p2Total || 0) : (ch.scores?.fromScore || ch.scores?.p1Total || 0));
         state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || (isCreator ? (ch.scores?.fromScore || ch.scores?.p1Total || 0) : (ch.scores?.toScore || ch.scores?.p2Total || 0));
         state.currentDuel.chData = ch;
@@ -6033,6 +10441,7 @@ function openCompletedChallengeResult(ch) {
   const rivalName = isCreator ? (ch.toUsername || 'Rival') : (ch.fromUsername || 'Retador');
   const rivalAvatar = isCreator ? (ch.toAvatar || '🕹️') : (ch.fromAvatar || '👾');
   const rivalUid = isCreator ? ch.toUid : ch.fromUid;
+  const rivalCountry = isCreator ? (ch.toCountry || ch.targetUserCountry || 'WORLD') : (ch.fromCountry || ch.challengerCountry || 'WORLD');
 
   const currentUsername = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
   const currentAvatar = window.state?.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
@@ -6056,6 +10465,7 @@ function openCompletedChallengeResult(ch) {
     rivalUid: rivalUid,
     rivalName: rivalName,
     rivalAvatar: rivalAvatar,
+    rivalCountry: rivalCountry,
     currentRound: 3,
     localTotalScore: localScore,
     rivalTotalScore: rivalScore,
@@ -6071,10 +10481,11 @@ function openCompletedChallengeResult(ch) {
   const localAvatarImg = document.getElementById('duelUserAvatarImg');
   if (localAvatarImg && currentAvatar) localAvatarImg.src = currentAvatar;
 
-  setupDuelMatchUI(rivalName, rivalAvatar, 3);
+  setupDuelMatchUI(rivalName, rivalAvatar, 3, rivalCountry);
   state.currentDuel.chData = ch;
   state.currentDuel.challengeId = ch.id;
   state.currentDuel.rivalUid = rivalUid;
+  state.currentDuel.rivalCountry = rivalCountry;
   state.currentDuel.localTotalScore = localScore;
   state.currentDuel.rivalTotalScore = rivalScore;
   state.currentDuel.isCompletedDuel = true;
@@ -6148,9 +10559,13 @@ async function syncUserProfileWithCloud(uid) {
     const snap = await getDoc(userRef);
     if (!snap.exists()) {
       const defaultUsername = localStorage.getItem('retroquiz_username') || ("Jugador_" + uid.slice(0, 4));
+      const defaultCountry = localStorage.getItem('retroquiz_user_country') || 'BO';
+      const defaultChallengesWon = Number(localStorage.getItem('retroquiz_challenges_won')) || 0;
       const defaultBio = localStorage.getItem('retroquiz_bio') || "¡Listo para competir!";
       const initialData = {
         username: defaultUsername,
+        country: defaultCountry,
+        challengesWon: defaultChallengesWon,
         bio: defaultBio,
         coins: 0,
         xp: 0,
@@ -6159,6 +10574,7 @@ async function syncUserProfileWithCloud(uid) {
           correctAnswers: Number(state.stats?.correctAnswers) || 0,
           maxStreak: Number(state.stats?.maxStreak) || 0
         },
+        themes: window.state?.themes || { unlocked: ["default"], active: "default" },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -6167,6 +10583,9 @@ async function syncUserProfileWithCloud(uid) {
       state.xp = 0;
       state.userScore = 0;
       state.username = defaultUsername;
+      state.country = defaultCountry;
+      state.userCountry = defaultCountry;
+      state.challengesWon = defaultChallengesWon;
       state.bio = defaultBio;
       state.challenges = [];
       if (window.state) {
@@ -6174,10 +10593,15 @@ async function syncUserProfileWithCloud(uid) {
         window.state.xp = 0;
         window.state.userScore = 0;
         window.state.username = defaultUsername;
+        window.state.country = defaultCountry;
+        window.state.userCountry = defaultCountry;
+        window.state.challengesWon = defaultChallengesWon;
         window.state.bio = defaultBio;
         window.state.challenges = [];
       }
       localStorage.setItem('retroquiz_username', defaultUsername);
+      localStorage.setItem('retroquiz_user_country', defaultCountry);
+      localStorage.setItem('retroquiz_challenges_won', String(defaultChallengesWon));
       localStorage.setItem('retroquiz_bio', defaultBio);
       console.log("Perfil de usuario inicial limpio creado en Firestore para:", uid);
     } else {
@@ -6198,6 +10622,20 @@ async function syncUserProfileWithCloud(uid) {
         state.username = data.username;
         if (window.state) window.state.username = data.username;
         localStorage.setItem('retroquiz_username', data.username);
+      }
+      if (data.country) {
+        state.country = data.country;
+        state.userCountry = data.country;
+        if (window.state) {
+          window.state.country = data.country;
+          window.state.userCountry = data.country;
+        }
+        localStorage.setItem('retroquiz_user_country', data.country);
+      }
+      if (typeof data.challengesWon === "number") {
+        state.challengesWon = data.challengesWon;
+        if (window.state) window.state.challengesWon = data.challengesWon;
+        localStorage.setItem('retroquiz_challenges_won', String(data.challengesWon));
       }
       if (data.bio) {
         state.bio = data.bio;
@@ -6231,6 +10669,28 @@ async function syncUserProfileWithCloud(uid) {
         if (window.state) window.state.packMastery = data.packMastery;
         try { localStorage.setItem('retroquiz_pack_mastery', JSON.stringify(data.packMastery)); } catch (e) {}
       }
+      if (data.themes && typeof data.themes === 'object') {
+        const cloudUnlocked = Array.isArray(data.themes.unlocked) ? data.themes.unlocked : ['default'];
+        const cloudActive = typeof data.themes.active === 'string' ? data.themes.active : 'default';
+        const currentUnlocked = (window.state && window.state.themes && Array.isArray(window.state.themes.unlocked)) ? window.state.themes.unlocked : ['default'];
+        const mergedUnlocked = Array.from(new Set([...currentUnlocked, ...cloudUnlocked]));
+        window.state.themes = {
+          unlocked: mergedUnlocked,
+          active: cloudActive
+        };
+        state.themes = window.state.themes;
+        if (state.store) {
+          state.store.purchasedThemes = mergedUnlocked;
+          state.store.activeTheme = cloudActive;
+        }
+        try {
+          localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(mergedUnlocked));
+          localStorage.setItem('retroquiz_active_theme', cloudActive);
+        } catch (e) {}
+        if (typeof applyTheme === 'function') {
+          applyTheme(cloudActive);
+        }
+      }
       console.log("Perfil de usuario obtenido de Firestore:", data);
     }
     updateHUD();
@@ -6251,9 +10711,154 @@ window.syncUserProfileWithCloud = syncUserProfileWithCloud;
 // =============================================================================
 // 6. INICIALIZACIÓN Y EVENT LISTENERS
 // =============================================================================
+
+function initHomeButtons() {
+  try {
+    // 1. Botón JUGAR: selecciona (#homeView .btn-play, #homeView .btn-jugar, #btnPlay, #btnJugar)
+    const playBtns = document.querySelectorAll('#homeView .btn-play, #homeView .btn-jugar, #btnPlay, #btnJugar');
+    playBtns.forEach(btn => {
+      btn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (window.state) window.state.isChallengeMode = false;
+        if (typeof state !== 'undefined') state.isChallengeMode = false;
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else if (typeof playClickSound === 'function') {
+          playClickSound();
+        }
+        navigateToScreen('wheelView');
+      };
+    });
+
+    // 2. Botón DESAFÍOS: selecciona (#homeView .btn-challenges, #homeView .btn-desafios, #btnChallenges, #btnDesafios)
+    const challengeBtns = document.querySelectorAll('#homeView .btn-challenges, #homeView .btn-desafios, #btnChallenges, #btnDesafios');
+    challengeBtns.forEach(btn => {
+      btn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else if (typeof playClickSound === 'function') {
+          playClickSound();
+        }
+        navigateToScreen('challengesView');
+      };
+    });
+
+    // 3. Botón RANKING: selecciona (#homeView .btn-ranking, #btnRanking)
+    const rankingBtns = document.querySelectorAll('#homeView .btn-ranking, #btnRanking');
+    rankingBtns.forEach(btn => {
+      btn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else if (typeof playClickSound === 'function') {
+          playClickSound();
+        }
+        navigateToScreen('modalRanking');
+      };
+    });
+
+    // 4. Pastilla de Monedas (#btnCoinPill)
+    const coinPills = document.querySelectorAll('#btnCoinPill, #homeView .coin-pill');
+    coinPills.forEach(pill => {
+      pill.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else if (typeof playCoinSound === 'function') {
+          playCoinSound();
+        }
+        navigateToScreen('storeView');
+      };
+    });
+
+    // 5. Botón de Ayuda (?) (#btnHelp)
+    const helpBtns = document.querySelectorAll('#btnHelp, #homeView .help-btn');
+    helpBtns.forEach(btn => {
+      btn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (typeof SoundManager !== 'undefined') {
+          SoundManager.playSFX('botones.wav', 0.60);
+        } else if (typeof playClickSound === 'function') {
+          playClickSound();
+        }
+        const htp = document.getElementById('howToPlayModal');
+        if (htp) {
+          htp.classList.remove('btn-exit-reverse');
+          htp.style.display = 'flex';
+          htp.classList.add('open');
+        }
+      };
+    });
+
+    // 6. Personajes / Avatar en Home -> Abre Perfil
+    const avatarTriggers = document.querySelectorAll('#homeView .avatar-container, #homeView .characters-stage, #homeView .char-hombre-wrap, #homeView .char-mujer-wrap');
+    avatarTriggers.forEach(el => {
+      el.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        navigateToScreen('profileView');
+      };
+    });
+
+    // 7. Navegación inferior (Bottom Nav: #tabInicio, #tabTienda, #tabPerfil)
+    const tabInicioList = document.querySelectorAll('#tabInicio, #homeView [data-tab="inicio"]');
+    tabInicioList.forEach(tab => {
+      tab.onclick = (e) => {
+        if (e) e.preventDefault();
+        navigateToScreen('homeView');
+        document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+      };
+    });
+
+    const tabTiendaList = document.querySelectorAll('#tabTienda, #homeView [data-tab="tienda"]');
+    tabTiendaList.forEach(tab => {
+      tab.onclick = (e) => {
+        if (e) e.preventDefault();
+        navigateToScreen('storeView');
+      };
+    });
+
+    const tabPerfilList = document.querySelectorAll('#tabPerfil, #homeView [data-tab="perfil"], #homeView .btn-nav-profile');
+    tabPerfilList.forEach(tab => {
+      tab.onclick = (e) => {
+        if (e) e.preventDefault();
+        navigateToScreen('profileView');
+      };
+    });
+  } catch (err) {
+    console.error('Error en initHomeButtons:', err);
+  }
+}
+window.initHomeButtons = initHomeButtons;
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  initHomeButtons();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Vinculación robusta inmediata de botones de Inicio
+  initHomeButtons();
+
   // Cargar progreso del jugador (XP y monedas) desde localStorage
-  loadStoredPlayerProgress();
+  try { loadStoredPlayerProgress(); } catch (e) { console.warn('loadStoredPlayerProgress:', e); }
 
   // Sincronización del Router Hash
   window.addEventListener('hashchange', () => {
@@ -6267,36 +10872,21 @@ document.addEventListener('DOMContentLoaded', () => {
     handleHashChange();
   }
 
-  updateWheelCategoriesUI();
-  renderCollectionCardsUI();
-  updateShotsUI();
-  setupProfileAvatar();
-  setupNoAdsFeature();
-  setupProfileUserFields();
-  updateProfileStatsUI();
-  setupAudioSettingsPersistence();
-  setupProfileNavigationEvents();
-  updatePendingChallengesBadge();
+  try { updateWheelCategoriesUI(); } catch (e) { console.warn(e); }
+  try { renderCollectionCardsUI(); } catch (e) { console.warn(e); }
+  try { updateShotsUI(); } catch (e) { console.warn(e); }
+  try { setupProfileAvatar(); } catch (e) { console.warn(e); }
+  try { setupNoAdsFeature(); } catch (e) { console.warn(e); }
+  try { setupProfileUserFields(); } catch (e) { console.warn(e); }
+  try { updateProfileStatsUI(); } catch (e) { console.warn(e); }
+  try { setupAudioSettingsPersistence(); } catch (e) { console.warn(e); }
+  try { setupProfileNavigationEvents(); } catch (e) { console.warn(e); }
+  try { updatePendingChallengesBadge(); } catch (e) { console.warn(e); }
 
   // --- NAVEGACIÓN PRINCIPAL ---
 
-  // Botón JUGAR en la Home -> Abre la pantalla de Ruleta (WheelSelectionScreen)
-  const btnJugar = document.getElementById('btnJugar') || document.querySelector('#homeView .btn-jugar, #homeView button');
-  if (btnJugar) {
-    btnJugar.onclick = () => {
-      window.state.isChallengeMode = false;
-      state.isChallengeMode = false;
-      if (typeof SoundManager !== 'undefined') {
-        SoundManager.playSFX('botones.wav', 0.60);
-      } else {
-        playClickSound();
-      }
-      navigateToScreen('wheelView');
-    };
-  }
-
   // Botón Flecha Retorno (<) en Ruleta -> Regresa al Home
-  const btnBackToHome = document.getElementById('btnBackToHome') || document.querySelector('#wheelView button, #wheelView .btn-back');
+  const btnBackToHome = document.getElementById('btnBackToHome') || document.querySelector('#wheelView .btn-back');
   if (btnBackToHome) {
     btnBackToHome.onclick = () => {
       if (typeof SoundManager !== 'undefined') {
@@ -6323,6 +10913,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (state.wheel.isSpinning || state.wheel.shots <= 0) return;
       window.state.isChallengeMode = false;
       state.isChallengeMode = false;
+
+      // Limpieza preventiva de colisiones de animación
+      const wheelView = document.getElementById('wheelView');
+      if (wheelView) wheelView.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+      const wheelStage = document.querySelector('#wheelView .wheel-stage') || document.querySelector('#wheelView .wheel-container');
+      if (wheelStage) wheelStage.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+      const wheelDisc = document.getElementById('wheelDisc');
+      if (wheelDisc) wheelDisc.classList.remove('wheelZoomPop', 'anim-wheel-zoom', 'micro-bounce', 'wheel-pop-in');
+
       if (typeof SoundManager !== 'undefined') {
         SoundManager.playSFX('ruleta.mp3', 0.70);
       }
@@ -6360,13 +10959,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Botón Desbloqueo Completo en #collectionView ($us2.99)
-  const btnUnlockAllCollection = document.getElementById('btnUnlockAllCollection');
-  if (btnUnlockAllCollection) {
-    btnUnlockAllCollection.addEventListener('click', () => {
-      desbloquearTodasLasColecciones();
-    });
-  }
+
 
   // Botón Dev: Desbloquear todas las categorías para pruebas
   const btnUnlockAllDev = document.getElementById('btnUnlockAllDev');
@@ -6431,6 +11024,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabEnviarDesafio = document.getElementById('tabEnviarDesafio');
   if (tabEnviarDesafio) {
     tabEnviarDesafio.addEventListener('click', () => {
+      if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+        showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+        if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+        return;
+      }
       document.querySelectorAll('.challenge-tab-pill').forEach(t => t.classList.remove('active'));
       tabEnviarDesafio.classList.add('active');
       openModal('sendChallengeModal');
@@ -6490,17 +11088,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const allMap = new Map([...fromChallengesMap, ...toChallengesMap]);
         const allList = Array.from(allMap.values());
 
-        const MAX_INVITATION_TIME = 48 * 60 * 60 * 1000; // 48 horas para aceptar solicitud
+        const INVITATION_TTL = 48 * 60 * 60 * 1000;      // 48 horas para aceptar solicitud
+        const MAX_INVITATION_TIME = INVITATION_TTL;
         const MAX_TURN_TIME = 36 * 60 * 60 * 1000;       // 36 horas para responder turno
         const WARNING_TIME = 10 * 60 * 60 * 1000;        // Últimas 10 horas (Zona de alerta)
         const ahora = Date.now();
 
         allList.forEach(ch => {
           if (!ch) return;
+          const tiempoCreacion = new Date(ch.createdAt || ch.updatedAt || ahora).getTime();
           const ultimaActividad = new Date(ch.updatedAt || ch.createdAt || ahora).getTime();
           const tiempoTranscurrido = ahora - ultimaActividad;
 
-          if (ch.status === "pending" && tiempoTranscurrido > MAX_INVITATION_TIME) {
+          if (ch.status === "pending" && (ahora - tiempoCreacion) > INVITATION_TTL) {
             ch.status = "expired";
             if (window.db && window.firestoreOps && ch.id) {
               try {
@@ -6543,12 +11143,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 1. Desafíos entrantes pendientes de aceptar
-        // Solo cuentan si toUid === userId, status === "pending", y el retador ya jugó su ronda inicial (currentTurn === userId)
+        // Solo cuentan si toUid === userId, status === "pending" (no vencidos), y el retador ya jugó su ronda inicial (currentTurn === userId)
         const pendingChallenges = allList.filter(ch => 
           ch.toUid === userId && 
           ch.status === "pending" && 
           ch.status !== "archived" &&
-          ch.currentTurn === userId
+          ch.status !== "expired" &&
+          ch.currentTurn === userId &&
+          (ahora - new Date(ch.createdAt || ahora).getTime()) <= INVITATION_TTL
         );
 
         const count = pendingChallenges.length;
@@ -6611,6 +11213,11 @@ document.addEventListener('DOMContentLoaded', () => {
             acceptList.querySelectorAll('.btn-req-accept').forEach(btn => {
               btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
+                if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+                  showRetroToast("¡Tienes el máximo de 3 partidas activas! Termina o resuelve un desafío antes de aceptar uno nuevo.", "⚠️");
+                  if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+                  return;
+                }
                 const chId = btn.getAttribute('data-challenge-id');
                 const ch = pendingChallenges.find(c => c.id === chId) || allMap.get(chId);
                 if (!ch) return;
@@ -6649,9 +11256,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                   const rivalName = ch.fromUsername || 'Retador';
                   const rivalAvatar = ch.fromAvatar || '👾';
-                  setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1);
+                  const rivalCountry = ch.fromCountry || ch.challengerCountry || 'WORLD';
+                  setupDuelMatchUI(rivalName, rivalAvatar, ch.round || 1, rivalCountry);
                   state.currentDuel.challengeId = chId;
                   state.currentDuel.rivalUid = ch.fromUid;
+                  state.currentDuel.rivalCountry = rivalCountry;
                   state.currentDuel.rivalTotalScore = (ch.scores && ch.scores[ch.fromUid]?.totalScore) || (ch.scores?.fromScore || 0);
                   state.currentDuel.localTotalScore = (ch.scores && ch.scores[window.state?.userId]?.totalScore) || 0;
                   state.currentDuel.chData = ch;
@@ -6736,10 +11345,12 @@ document.addEventListener('DOMContentLoaded', () => {
         state.challenges = activeMatches;
         state.pendingChallenges = pendingChallenges;
         state.allChallengesList = allList;
+        state.activeMatchesList = allList;
         if (window.state) {
           window.state.challenges = activeMatches;
           window.state.pendingChallenges = pendingChallenges;
           window.state.allChallengesList = allList;
+          window.state.activeMatchesList = allList;
         }
         renderChallengesUI();
       };
@@ -6840,6 +11451,7 @@ document.addEventListener('DOMContentLoaded', () => {
           matches.push({
             id: uid,
             username: username,
+            country: u.country || 'WORLD',
             xp: u.xp || 0,
             bio: u.bio || 'Jugador Retro',
             avatar: u.avatar || '🕹️'
@@ -6858,6 +11470,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ? `<img src="${user.avatar}" alt="${user.username}">`
           : `<span>${user.avatar || '🕹️'}</span>`;
         const subtitle = user.bio && user.bio.trim() ? user.bio.trim() : 'Jugador Retro';
+        const flag = typeof getCountryFlag === 'function' ? getCountryFlag(user.country || 'WORLD') : '🌎';
 
         return `
           <div class="user-search-row interactive-press" data-user-index="${idx}" data-rival-id="${user.id}">
@@ -6865,7 +11478,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${avatarHtml}
             </div>
             <div class="search-row-info">
-              <span class="search-row-username">${user.username}</span>
+              <span class="search-row-username">${user.username} ${flag}</span>
               <span class="search-row-subtitle">${subtitle}</span>
             </div>
             <div class="search-row-check">✓</div>
@@ -6886,7 +11499,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (selectedUser) {
             if (window.state) window.state.selectedRival = selectedUser;
             if (state) state.selectedRival = selectedUser;
+            const flag = typeof getCountryFlag === 'function' ? getCountryFlag(selectedUser.country || 'WORLD') : '🌎';
             if (confirmBtn) {
+              confirmBtn.innerHTML = `<span>Desafiar a ${selectedUser.username} ${flag} 🚀</span>`;
               confirmBtn.style.display = 'flex';
               confirmBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
@@ -6901,6 +11516,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- CREACIÓN DEL RETO EN LA COLECCIÓN "desafios" (Requirement 1 & 5) ---
   async function sendChallengeToUser(rival) {
+    if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+      showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+      if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+      return;
+    }
     if (!window.db || !window.firestoreOps || !window.state?.userId) {
       showRetroToast('Inicia sesión para enviar desafíos', '⚠️');
       return;
@@ -6909,6 +11529,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const { collection, addDoc } = window.firestoreOps;
     const currentUsername = window.state.username || localStorage.getItem('retroquiz_username') || "Jugador";
     const currentAvatar = window.state.customAvatar || state.customAvatar || 'assets/pantalla_inicio/hombre.webp';
+    const currentCountry = window.state?.country || window.state?.userCountry || state?.country || localStorage.getItem('retroquiz_user_country') || 'BO';
+    const rivalCountry = rival.country || 'WORLD';
 
     try {
       const desafiosRef = collection(window.db, "desafios");
@@ -6916,9 +11538,11 @@ document.addEventListener('DOMContentLoaded', () => {
         fromUid: window.state.userId,
         fromUsername: currentUsername,
         fromAvatar: currentAvatar,
+        fromCountry: currentCountry,
         toUid: rival.id,
         toUsername: rival.username,
         toAvatar: rival.avatar || '🕹️',
+        toCountry: rivalCountry,
         status: "pending",
         currentTurn: window.state.userId, // El retador arranca jugando su Ronda 1
         round: 1,
@@ -6961,9 +11585,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const localAvatarImg = document.getElementById('duelUserAvatarImg');
       if (localAvatarImg && currentAvatar) localAvatarImg.src = currentAvatar;
 
-      setupDuelMatchUI(rival.username, rival.avatar || '🕹️', 1);
+      setupDuelMatchUI(rival.username, rival.avatar || '🕹️', 1, rivalCountry);
       state.currentDuel.challengeId = docRef.id;
       state.currentDuel.rivalUid = rival.id;
+      state.currentDuel.rivalCountry = rivalCountry;
 
       // Ocultar hándicap inicial para la ronda 1 del retador
       const handicapPlate = document.getElementById('duelHandicapPlate');
@@ -6987,6 +11612,101 @@ document.addEventListener('DOMContentLoaded', () => {
         sendChallengeToUser(selectedRival);
       } else {
         showRetroToast('Selecciona a un jugador de la lista', '⚠️');
+      }
+    });
+  }
+
+  // Botón "🎲 RIVAL ALEATORIO" en #sendChallengeModal (Requirement 3)
+  const btnRandomRival = document.getElementById('btnRandomRival');
+  if (btnRandomRival && !btnRandomRival.dataset.listenerAttached) {
+    btnRandomRival.dataset.listenerAttached = 'true';
+    btnRandomRival.addEventListener('click', async () => {
+      if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+        showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+        if (typeof triggerActiveMatchesShake === 'function') triggerActiveMatchesShake();
+        return;
+      }
+      if (typeof playClickSound === 'function') playClickSound();
+      if (!window.db || !window.firestoreOps) {
+        showRetroToast('Error de conexión a la base de datos', '⚠️');
+        return;
+      }
+
+      const originalHtml = btnRandomRival.innerHTML;
+      btnRandomRival.disabled = true;
+      btnRandomRival.innerHTML = '<span>🎲</span> Buscando oponente...';
+
+      try {
+        const { collection, getDocs, query, limit } = window.firestoreOps;
+        const usersRef = collection(window.db, "usuarios");
+        const q = query(usersRef, limit(25));
+        const snapshot = await getDocs(q);
+
+        const currentUid = window.state?.userId || state?.userId || '';
+        const rivalesDisponibles = [];
+
+        snapshot.forEach(docSnap => {
+          const uid = docSnap.id;
+          if (uid === currentUid) return;
+          const u = docSnap.data();
+          const username = (u.username || '').trim() || 'Jugador Retro';
+          rivalesDisponibles.push({
+            id: uid,
+            username: username,
+            country: u.country || 'WORLD',
+            xp: u.xp || 0,
+            bio: u.bio || 'Jugador Retro',
+            avatar: u.avatar || '🕹️'
+          });
+        });
+
+        if (rivalesDisponibles.length === 0) {
+          showRetroToast('No hay oponentes disponibles por ahora', '⚠️');
+          return;
+        }
+
+        const randomRival = rivalesDisponibles[Math.floor(Math.random() * rivalesDisponibles.length)];
+        if (window.state) window.state.selectedRival = randomRival;
+        if (state) state.selectedRival = randomRival;
+
+        const container = document.getElementById('searchResultsList') || document.getElementById('searchResultsChallenge');
+        const confirmBtn = document.getElementById('confirmSendChallengeBtn');
+
+        if (container) {
+          container.style.display = 'flex';
+          const isImg = typeof randomRival.avatar === 'string' && (randomRival.avatar.startsWith('http') || randomRival.avatar.startsWith('assets/'));
+          const avatarHtml = isImg
+            ? `<img src="${randomRival.avatar}" alt="${randomRival.username}">`
+            : `<span>${randomRival.avatar || '🕹️'}</span>`;
+          const subtitle = randomRival.bio && randomRival.bio.trim() ? randomRival.bio.trim() : 'Jugador Retro';
+          const flag = typeof getCountryFlag === 'function' ? getCountryFlag(randomRival.country || 'WORLD') : '🌎';
+
+          container.innerHTML = `
+            <div class="user-search-row interactive-press selected" data-user-index="0" data-rival-id="${randomRival.id}">
+              <div class="search-row-avatar">
+                ${avatarHtml}
+              </div>
+              <div class="search-row-info">
+                <span class="search-row-username">${randomRival.username} ${flag}</span>
+                <span class="search-row-subtitle">${subtitle}</span>
+              </div>
+              <div class="search-row-check">✓</div>
+            </div>
+          `;
+        }
+
+        if (confirmBtn) {
+          const flag = typeof getCountryFlag === 'function' ? getCountryFlag(randomRival.country || 'WORLD') : '🌎';
+          confirmBtn.innerHTML = `<span>Desafiar a ${randomRival.username} ${flag} 🚀</span>`;
+          confirmBtn.style.display = 'flex';
+          confirmBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } catch (err) {
+        console.error("Error buscando rival aleatorio:", err);
+        showRetroToast('Error al buscar oponente', '⚠️');
+      } finally {
+        btnRandomRival.disabled = false;
+        btnRandomRival.innerHTML = originalHtml;
       }
     });
   }
@@ -7144,6 +11864,15 @@ document.addEventListener('DOMContentLoaded', () => {
       window.state.isChallengeMode = true;
       state.isChallengeMode = true;
       window.state.isChallengeRoundActive = true;
+
+      // Limpieza preventiva de colisiones de animación en Duelo
+      const matchView = document.getElementById('challengeMatchView');
+      if (matchView) matchView.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+      const duelStage = document.querySelector('#challengeMatchView .duel-wheel-stage') || document.querySelector('#challengeMatchView .wheel-stage');
+      if (duelStage) duelStage.classList.remove('run-stagger-assembly', 'anim-assembling', 'wheelZoomPop', 'anim-wheel-zoom');
+      const duelDisc = document.getElementById('duelWheelDisc');
+      if (duelDisc) duelDisc.classList.remove('wheelZoomPop', 'anim-wheel-zoom', 'micro-bounce', 'wheel-pop-in');
+
       if (typeof SoundManager !== 'undefined') {
         SoundManager.playSFX('ruleta.mp3', 0.70);
       }
@@ -7625,19 +12354,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#storeView .btn-theme-action').forEach(btn => {
     btn.addEventListener('click', () => {
       const themeId = btn.dataset.theme;
-      const cost = parseInt(btn.dataset.cost, 10) || 2500;
       const card = btn.closest('.store-theme-card');
-      const name = card?.querySelector('.theme-title')?.innerText || 'Tema';
+      const skin = THEME_SKINS[themeId];
+      const name = skin ? skin.name : (card?.querySelector('.theme-title')?.innerText || 'Tema');
+      const cost = skin ? skin.cost : (parseInt(btn.dataset.cost, 10) || 2500);
 
-      const isEquipped = state.store?.activeTheme === themeId;
-      const isPurchased = state.store?.purchasedThemes?.includes(themeId);
+      const activeTheme = window.state?.themes?.active || state?.themes?.active || 'default';
+      const unlockedThemes = window.state?.themes?.unlocked || state?.themes?.unlocked || ['default'];
+
+      const isEquipped = (activeTheme === themeId);
+      const isUnlocked = unlockedThemes.includes(themeId);
 
       if (isEquipped) {
-        showRetroToast(`El tema "${name}" ya está equipado`, 'info');
-      } else if (isPurchased) {
+        return;
+      } else if (isUnlocked) {
         equipTheme(themeId);
-        if (typeof SoundManager !== 'undefined') SoundManager.playSFX('compra_tienda.wav', 0.70);
-        showRetroToast(`¡Tema "${name}" equipado!`, '🎨');
+        if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
+          SoundManager.playSFX('compra_tienda.wav', 0.70);
+        }
+        showRetroToast(`¡Tema "${name}" equipado! 🎨`, '🎨');
       } else {
         buyTheme(themeId, cost, name);
       }
@@ -7653,43 +12388,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('tabPerfil')?.addEventListener('click', (e) => {
     e.preventDefault();
     openProfileModal();
-  });
-
-  // Mini Quiz dentro del Modal JUGAR
-  const quizButtons = document.querySelectorAll('.quiz-opt-btn');
-  const quizFeedback = document.getElementById('quizFeedback');
-
-  quizButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (state.answeredQuiz) return;
-      const isCorrect = btn.dataset.correct === 'true';
-
-      quizButtons.forEach(b => {
-        if (b.dataset.correct === 'true') {
-          b.classList.add('correct');
-        }
-      });
-
-      if (isCorrect) {
-        state.answeredQuiz = true;
-        btn.classList.add('correct');
-        if (quizFeedback) {
-          quizFeedback.innerText = '🎉 ¡CORRECTO! Ganaste +50 Monedas y Puntaje XP';
-          quizFeedback.style.color = '#4ADE80';
-        }
-        playSuccessSound();
-        setTimeout(() => {
-          updateCoinsDisplay(50);
-        }, 300);
-      } else {
-        btn.classList.add('wrong');
-        if (quizFeedback) {
-          quizFeedback.innerText = '❌ ¡Ups! SNES debutó en 1990 en Japón.';
-          quizFeedback.style.color = '#F87171';
-        }
-        playErrorSound();
-      }
-    });
   });
 
   // Reclamar Desafío
@@ -7807,6 +12505,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- LISTENERS DE PANTALLA DE RESULTADOS (#resultsView) ---
+  const btnResultsHome = document.getElementById('btnResultsHome');
+  if (btnResultsHome) {
+    btnResultsHome.addEventListener('click', () => {
+      playClickSound();
+      navigateToScreen('homeView');
+    });
+  }
+
+  const btnResultsChallenge = document.getElementById('btnResultsChallenge');
+  if (btnResultsChallenge) {
+    btnResultsChallenge.addEventListener('click', () => {
+      playClickSound();
+      if (typeof getActiveChallengesCount === 'function' && getActiveChallengesCount() >= MAX_ACTIVE_CHALLENGES) {
+        showRetroToast("⚠️ Límite alcanzado: Tienes 3 partidas en curso. Termina una para iniciar otro reto.", "⚠️");
+        return;
+      }
+      openModal('sendChallengeModal');
+    });
+  }
+
+  const btnResultsContinue = document.getElementById('btnResultsContinue') || document.getElementById('btnResultsPlayAgain');
+  if (btnResultsContinue) {
+    btnResultsContinue.addEventListener('click', () => {
+      playClickSound();
+      navigateToScreen('wheelView');
+    });
+  }
+
+  // Compatibilidad con botones previos
   const btnResultsRanking = document.getElementById('btnResultsRanking');
   if (btnResultsRanking) {
     btnResultsRanking.addEventListener('click', () => {
@@ -7818,7 +12545,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const btnResultsPlayAgain = document.getElementById('btnResultsPlayAgain');
-  if (btnResultsPlayAgain) {
+  if (btnResultsPlayAgain && btnResultsPlayAgain !== btnResultsContinue) {
     btnResultsPlayAgain.addEventListener('click', () => {
       playClickSound();
       navigateToScreen('wheelView');
@@ -7919,3 +12646,243 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { once: true });
 });
+
+// =============================================================================
+// CONSOLA DE REVISIÓN DIRECTA DE PANTALLAS Y MODALES (DEV REVIEW CONSOLE)
+// =============================================================================
+
+function openScreenConsole() {
+  const overlay = document.getElementById('screenReviewConsoleOverlay');
+  if (overlay) {
+    overlay.style.display = 'flex';
+    const indicator = document.getElementById('screenConsoleActiveIndicator');
+    if (indicator) {
+      const activeEl = document.querySelector('.screen-view.active');
+      const activeId = activeEl ? activeEl.id : 'homeView';
+      const hash = screenToHashMap[activeId] || window.location.hash || '#home';
+      indicator.innerText = `${activeId} (${hash})`;
+    }
+    if (typeof playModalOpenSound === 'function') playModalOpenSound();
+  }
+}
+
+function closeScreenConsole() {
+  const overlay = document.getElementById('screenReviewConsoleOverlay');
+  if (overlay) {
+    overlay.style.display = 'none';
+    if (typeof playClickSound === 'function') playClickSound();
+  }
+}
+
+function toggleScreenConsole() {
+  const overlay = document.getElementById('screenReviewConsoleOverlay');
+  if (overlay) {
+    if (overlay.style.display === 'none' || !overlay.style.display) {
+      openScreenConsole();
+    } else {
+      closeScreenConsole();
+    }
+  }
+}
+
+function debugNavigateScreen(screenId) {
+  closeScreenConsole();
+  document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+
+  // Preparar datos de muestra si la pantalla requiere estado activo
+  if (screenId === 'triviaView') {
+    if (!state.trivia || !state.trivia.questions || state.trivia.questions.length === 0) {
+      state.trivia = {
+        category: 'cine',
+        questions: [
+          {
+            pregunta: "¿En qué año se estrenó la película 'Volver al Futuro'?",
+            opciones: ["1985", "1989", "1982", "1991"],
+            correcta: 0,
+            curiosidad: "Dirigida por Robert Zemeckis y producida por Steven Spielberg."
+          },
+          {
+            pregunta: "¿Quién interpretó a Terminator en el clásico de 1984?",
+            opciones: ["Sylvester Stallone", "Arnold Schwarzenegger", "Bruce Willis", "Jean-Claude Van Damme"],
+            correcta: 1,
+            curiosidad: "La célebre frase 'I'll be back' fue casi improvisada."
+          }
+        ],
+        currentQuestionIndex: 0,
+        totalQuestions: 2,
+        lives: 3,
+        sessionCoins: 150,
+        timerSeconds: 20
+      };
+      state.lives = 3;
+    }
+    navigateToScreen('triviaView');
+    setTimeout(() => {
+      try { renderizarPreguntaActual(); } catch(e) {}
+    }, 50);
+  } else if (screenId === 'resultsView') {
+    if (!state.trivia) state.trivia = {};
+    const mockCoins = 50;
+    state.trivia.sessionCoins = mockCoins;
+    state.trivia.sessionXP = 0;
+    state.trivia.correctAnswersCount = 10;
+    state.trivia.totalQuestions = 10;
+    state.correctAnswersCount = 10;
+    window._lastResultsSessionCoins = mockCoins;
+    window._lastResultsPrevCoins = Math.max(0, (state.coins || 1000) - mockCoins);
+    window._lastResultsFinalCoins = state.coins || 1000;
+    navigateToScreen('resultsView');
+  } else if (screenId === 'challengeMatchView') {
+    if (typeof setupDuelMatchUI === 'function') {
+      setupDuelMatchUI('Rival Arcade 👾', '👾');
+    }
+    navigateToScreen('challengeMatchView');
+  } else if (screenId === 'challengeResultView') {
+    const timeSpentEl = document.getElementById('duelTimeSpent');
+    if (timeSpentEl && (!timeSpentEl.innerText || timeSpentEl.innerText === '0.0s')) {
+      timeSpentEl.innerText = '24.5s';
+    }
+    const pointsEarnedEl = document.getElementById('duelPointsEarned');
+    if (pointsEarnedEl && (!pointsEarnedEl.innerText || pointsEarnedEl.innerText === '+0 XP')) {
+      pointsEarnedEl.innerText = '+240 XP';
+    }
+    const coinsEarnedEl = document.getElementById('duelCoinsEarned');
+    if (coinsEarnedEl && (!coinsEarnedEl.innerText || coinsEarnedEl.innerText === '+0 RC')) {
+      coinsEarnedEl.innerText = '+20 RC';
+    }
+    const hitsNumEl = document.getElementById('duelHitsNumber');
+    if (hitsNumEl && !hitsNumEl.innerText) {
+      hitsNumEl.innerText = '4 / 5';
+    }
+    navigateToScreen('challengeResultView');
+    setTimeout(() => {
+      try { triggerDuelResultsEntranceAnimation(); } catch(e) {}
+    }, 50);
+  } else {
+    navigateToScreen(screenId);
+  }
+
+  const indicator = document.getElementById('screenConsoleActiveIndicator');
+  if (indicator) {
+    indicator.innerText = `${screenId} (${screenToHashMap[screenId] || ''})`;
+  }
+  showRetroToast(`Navegando a ${screenId}`, '📺');
+}
+
+function debugOpenModal(modalId) {
+  closeScreenConsole();
+  document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+
+  if (modalId === 'profileView') {
+    if (typeof openProfileModal === 'function') openProfileModal();
+    else openModal('profileView');
+  } else if (modalId === 'challengeOnboardingModal') {
+    if (typeof mostrarModalOnboarding === 'function') mostrarModalOnboarding();
+    else openModal('challengeOnboardingModal');
+  } else {
+    openModal(modalId);
+  }
+  showRetroToast(`Abriendo ${modalId}`, '🪟');
+}
+
+function debugOpenPack(packId) {
+  closeScreenConsole();
+  if (typeof openPackDetailModal === 'function') {
+    openPackDetailModal(packId);
+    showRetroToast(`Inspeccionando ${packId}`, '📦');
+  }
+}
+
+function debugTestCountdown() {
+  closeScreenConsole();
+  if (typeof iniciarCuentaRegresivaTrivia === 'function') {
+    iniciarCuentaRegresivaTrivia('cine');
+    showRetroToast('Probando conteo 3-2-1-¡YA!', '⏱️');
+  }
+}
+
+function debugAddCoins(amount = 5000) {
+  state.coins = (state.coins || 0) + amount;
+  if (window.state) window.state.coins = state.coins;
+  if (typeof updateHUD === 'function') updateHUD();
+  if (typeof updateStoreUI === 'function') updateStoreUI();
+  if (typeof renderCollectionCardsUI === 'function') renderCollectionCardsUI();
+  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
+  showRetroToast(`+${amount.toLocaleString()} RetroCoins agregadas`, '🪙');
+}
+
+function debugToggleAllPacks() {
+  state.allCategoriesUnlocked = !state.allCategoriesUnlocked;
+  if (window.state) window.state.allCategoriesUnlocked = state.allCategoriesUnlocked;
+  if (typeof renderCollectionCardsUI === 'function') renderCollectionCardsUI();
+  if (typeof updateStoreUI === 'function') updateStoreUI();
+  showRetroToast(state.allCategoriesUnlocked ? '¡Todos los packs desbloqueados!' : 'Packs restaurados a su estado original', '🔓');
+}
+
+function debugResetShots() {
+  state.shots = 3;
+  if (window.state) window.state.shots = 3;
+  if (typeof updateShotsUI === 'function') updateShotsUI();
+  showRetroToast('3 tiros diarios de ruleta restaurados', '🔄');
+}
+
+function debugCloseAllModals() {
+  closeScreenConsole();
+  document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+  showRetroToast('Modales cerrados', '❌');
+}
+
+// Event Listeners y Shortcuts de teclado para la Consola
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('btnToggleScreenConsole');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleScreenConsole();
+    });
+  }
+
+  const closeBtn = document.getElementById('btnCloseScreenConsole');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeScreenConsole();
+    });
+  }
+
+  const overlay = document.getElementById('screenReviewConsoleOverlay');
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeScreenConsole();
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    // Teclas de acceso directo: tecla F2 o virgulilla (`)
+    if (e.key === 'F2' || e.code === 'Backquote') {
+      e.preventDefault();
+      toggleScreenConsole();
+    }
+    if (e.key === 'Escape') {
+      const consoleOverlay = document.getElementById('screenReviewConsoleOverlay');
+      if (consoleOverlay && consoleOverlay.style.display !== 'none') {
+        closeScreenConsole();
+      }
+    }
+  });
+});
+
+window.openScreenConsole = openScreenConsole;
+window.closeScreenConsole = closeScreenConsole;
+window.toggleScreenConsole = toggleScreenConsole;
+window.debugNavigateScreen = debugNavigateScreen;
+window.debugOpenModal = debugOpenModal;
+window.debugOpenPack = debugOpenPack;
+window.debugTestCountdown = debugTestCountdown;
+window.debugAddCoins = debugAddCoins;
+window.debugToggleAllPacks = debugToggleAllPacks;
+window.debugResetShots = debugResetShots;
+window.debugCloseAllModals = debugCloseAllModals;
+

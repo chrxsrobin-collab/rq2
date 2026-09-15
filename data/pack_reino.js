@@ -1,0 +1,459 @@
+// Banco local integrado para el Pack Temático Reino Champiñón
+// Permite ejecución instantánea incluso en entornos locales sin servidor web (file://) o con restricciones CORS.
+window.REINO_QUESTIONS_FALLBACK = [
+  {
+    "id": "rch_001",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder otorga el Super Champiñón rojo al fontanero en sus aventuras?",
+    "emojis": "🍄 🧱 ⬆️",
+    "opciones": ["Duplica su tamaño y fuerza", "Invencibilidad temporal", "Lanzar bolas de fuego", "Volar por los aires"],
+    "respuesta_correcta": "Duplica su tamaño y fuerza"
+  },
+  {
+    "id": "rch_002",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el dinosaurio verde de montura que debutó en Dinosaur Land?",
+    "emojis": "🦖 🥚 🍎",
+    "opciones": ["Yoshi", "Birdo", "Rex", "Plesio"],
+    "respuesta_correcta": "Yoshi"
+  },
+  {
+    "id": "rch_003",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto temido persigue implacablemente al corredor en primera posición en las carreras de karts?",
+    "emojis": "🏎️ 🐢 💥",
+    "opciones": ["Caparazón azul con pinchos", "Caparazón rojo teledirigido", "Rayo reductor", "Bomba Bob-omb"],
+    "respuesta_correcta": "Caparazón azul con pinchos"
+  },
+  {
+    "id": "rch_004",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el reino donde gobierna la Princesa Peach con sus leales siervos Toad?",
+    "emojis": "🍄 🏰 👑",
+    "opciones": ["Reino Champiñón", "Reino Sarasaraland", "Isla Delfino", "Reino Judía"],
+    "respuesta_correcta": "Reino Champiñón"
+  },
+  {
+    "id": "rch_005",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor clásica transforma el atuendo a blanco y permite arrojar esferas ardientes?",
+    "emojis": "🔥 🌼 ⚪",
+    "opciones": ["Flor de Fuego", "Flor de Hielo", "Flor Boomerang", "Flor Nube"],
+    "respuesta_correcta": "Flor de Fuego"
+  },
+  {
+    "id": "rch_006",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rey de los Koopas que suele raptar a la princesa en su fortaleza?",
+    "emojis": "🐢 🔥 👑",
+    "opciones": ["Bowser", "Kamek", "Wart", "Tatl"],
+    "respuesta_correcta": "Bowser"
+  },
+  {
+    "id": "rch_007",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué artefacto aspirador utiliza el hermano de verde para capturar fantasmas en mansiones?",
+    "emojis": "👻 🧹 🔦",
+    "opciones": ["Poltergust (Succionaentes)", "GhostBuster 3000", "Aspiradora FLUDD", "Vaccum Buster"],
+    "respuesta_correcta": "Poltergust (Succionaentes)"
+  },
+  {
+    "id": "rch_008",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto estelar dorado otorga inmunidad absoluta a los peligros por tiempo limitado?",
+    "emojis": "⭐ ✨ 🌈",
+    "opciones": ["Super Estrella", "Estrella Carmesí", "Moneda Sol", "Gran Estrella"],
+    "respuesta_correcta": "Super Estrella"
+  },
+  {
+    "id": "rch_009",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llaman los enemigos marrones con forma de seta que caminan en línea recta?",
+    "emojis": "🍄 👞 👣",
+    "opciones": ["Goombas", "Koopas", "Buzzy Beetles", "Shy Guys"],
+    "respuesta_correcta": "Goombas"
+  },
+  {
+    "id": "rch_0010",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué dispositivo parlante de bombeo de agua acompañó al héroe a limpiar la Isla Delfino?",
+    "emojis": "💧 🏝️ 🎒",
+    "opciones": ["F.L.U.D.D.", "AquaPump", "HydroCannon", "SprayPack"],
+    "respuesta_correcta": "F.L.U.D.D."
+  },
+  {
+    "id": "rch_011",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuántas estrellas de poder se requerían en total para completar el rescate en el castillo 3D en 1996?",
+    "emojis": "⭐ 🏰 🔢",
+    "opciones": ["120 estrellas", "100 estrellas", "150 estrellas", "99 estrellas"],
+    "respuesta_correcta": "120 estrellas"
+  },
+  {
+    "id": "rch_012",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura fantasma tímida se tapa el rostro cuando la miras directamente de frente?",
+    "emojis": "👻 🙈 🏰",
+    "opciones": ["Boo", "Dry Bones", "Phanto", "Peepa"],
+    "respuesta_correcta": "Boo"
+  },
+  {
+    "id": "rch_013",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rival codicioso vestido de amarillo y morado obsesionado con el ajo y las monedas?",
+    "emojis": "🧄 🟡 💰",
+    "opciones": ["Wario", "Waluigi", "Tatanga", "Foreman Spike"],
+    "respuesta_correcta": "Wario"
+  },
+  {
+    "id": "rch_014",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué hoja especial concede orejas y cola de mapache para planear por el aire?",
+    "emojis": "🍃 🦝 ✈️",
+    "opciones": ["Super Hoja (Tanooki)", "Hoja Dorada", "Pluma Capa", "Brote Volador"],
+    "respuesta_correcta": "Super Hoja (Tanooki)"
+  },
+  {
+    "id": "rch_015",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la princesa gobernante del reino Sarasaland rescatada de las garras de Tatanga?",
+    "emojis": "🌼 👑 🧡",
+    "opciones": ["Princesa Daisy", "Princesa Rosalina", "Pauline", "Reina Shokora"],
+    "respuesta_correcta": "Princesa Daisy"
+  },
+  {
+    "id": "rch_016",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué planta carnívora con dientes afilados brota de las tuberías verdes para morder?",
+    "emojis": "🪴 🦷 🟢",
+    "opciones": ["Planta Piraña", "Nipper Plant", "Petey Piranha", "Flor Masticadora"],
+    "respuesta_correcta": "Planta Piraña"
+  },
+  {
+    "id": "rch_017",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué hechicero de túnica azul con varita mágica lidera a los Magikoopas sirviendo a Bowser?",
+    "emojis": "🧙‍♂️ 👓 🪄",
+    "opciones": ["Kamek", "Kammy", "Cackletta", "Fawful"],
+    "respuesta_correcta": "Kamek"
+  },
+  {
+    "id": "rch_018",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto verde otorga de forma inmediata una vida extra?",
+    "emojis": "🍄 🟢 💖",
+    "opciones": ["Champiñón 1-Up", "Hongo Vida", "Brote Esmeralda", "Mega Champiñón"],
+    "respuesta_correcta": "Champiñón 1-Up"
+  },
+  {
+    "id": "rch_019",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la guardiana del Observatorio del Cometa y madre adoptiva de los destellos Luma?",
+    "emojis": "🌌 👑 ⭐",
+    "opciones": ["Rosalina (Estela)", "Daisy", "Peach", "Pauline"],
+    "respuesta_correcta": "Rosalina (Estela)"
+  },
+  {
+    "id": "rch_020",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué vehículo volador individual con cara sonriente utiliza Bowser para patrullar los cielos?",
+    "emojis": "🚁 🤡 🛸",
+    "opciones": ["Koopa Clown Car", "Helicóptero Bowser", "AeroKoopa", "Airship Mini"],
+    "respuesta_correcta": "Koopa Clown Car"
+  },
+  {
+    "id": "rch_021",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura sobre una nube arroja pequeños huevos que se transforman en Spikies con pinchos?",
+    "emojis": "☁️ 👓 🐢",
+    "opciones": ["Lakitu", "Kamek", "Hammer Bro", "Chargin' Chuck"],
+    "respuesta_correcta": "Lakitu"
+  },
+  {
+    "id": "rch_022",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es el nombre de la enorme bola de metal negra con dientes atada a una cadena?",
+    "emojis": "⛓️ 🦷 💣",
+    "opciones": ["Chain Chomp", "Bob-omb", "Thwomp", "Whomp"],
+    "respuesta_correcta": "Chain Chomp"
+  },
+  {
+    "id": "rch_023",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué objeto de carreras arroja tinta negra tapando la pantalla de los oponentes?",
+    "emojis": "🦑 🖤 🏎️",
+    "opciones": ["Blooper", "Calamar Tinta", "Mancha Negra", "Octorok"],
+    "respuesta_correcta": "Blooper"
+  },
+  {
+    "id": "rch_024",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llaman las tortugas esqueléticas no muertas que se desarman al pisarlas y vuelven a ensamblarse?",
+    "emojis": "🦴 🐢 💀",
+    "opciones": ["Dry Bones (Huesitos)", "Koopa Skell", "Bony Beetle", "Skeleton Turtle"],
+    "respuesta_correcta": "Dry Bones (Huesitos)"
+  },
+  {
+    "id": "rch_025",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué instrumento ancestral o gorra mágica permite controlar a dinosaurios y enemigos en Odyssey?",
+    "emojis": "🧢 👁️ 🪄",
+    "opciones": ["Cappy", "Tiara", "Crownie", "Cap-Bot"],
+    "respuesta_correcta": "Cappy"
+  },
+  {
+    "id": "rch_026",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la pista final más célebre y desafiante de las copas de carreras, repleta de curvas al vacío?",
+    "emojis": "🌈 🏎️ 🌌",
+    "opciones": ["Senda Arcoíris (Rainbow Road)", "Pista Galáctica", "Autopista Estelar", "Circuito Cósmico"],
+    "respuesta_correcta": "Senda Arcoíris (Rainbow Road)"
+  },
+  {
+    "id": "rch_027",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el bloque de piedra con rostro enfadado que cae pesadamente para aplastar a quien pase?",
+    "emojis": "🗿 😠 💥",
+    "opciones": ["Thwomp (Roca Picuda)", "Whomp", "Crusher Block", "Stone Koopa"],
+    "respuesta_correcta": "Thwomp (Roca Picuda)"
+  },
+  {
+    "id": "rch_028",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué mono lanzaba barriles por vigas de construcción en el clásico arcade de 1981?",
+    "emojis": "🦍 🛢️ 🔨",
+    "opciones": ["Donkey Kong", "Diddy Kong", "Cranky Kong", "Funky Kong"],
+    "respuesta_correcta": "Donkey Kong"
+  },
+  {
+    "id": "rch_029",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué proyectil con mecha camina dando cuerda sobre sus patas antes de estallar?",
+    "emojis": "💣 💥 👣",
+    "opciones": ["Bob-omb", "Bullet Bill", "Banzai Bill", "Bomb Koopa"],
+    "respuesta_correcta": "Bob-omb"
+  },
+  {
+    "id": "rch_030",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué enemigas tortugas atacan a distancia arrojando martillos en arcos parabólicos?",
+    "emojis": "🔨 🐢 🪖",
+    "opciones": ["Hammer Bros", "Boomerang Bros", "Fire Bros", "Sledge Bros"],
+    "respuesta_correcta": "Hammer Bros"
+  },
+  {
+    "id": "rch_031",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama la dama en apuros capturada en el rascacielos del juego original de Donkey Kong?",
+    "emojis": "👗 👠 🏙️",
+    "opciones": ["Pauline", "Peach", "Daisy", "Rosalina"],
+    "respuesta_correcta": "Pauline"
+  },
+  {
+    "id": "rch_032",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué enorme misil de ojos fieros es disparado desde torretas y cañones negros?",
+    "emojis": "🚀 👁️ 💣",
+    "opciones": ["Bullet Bill (Bala Bill)", "Torpedo Ted", "Banzai Blast", "Cannon Ball"],
+    "respuesta_correcta": "Bullet Bill (Bala Bill)"
+  },
+  {
+    "id": "rch_033",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor de hielo otorga la capacidad de disparar bolas gélidas para congelar rivales en cubos?",
+    "emojis": "❄️ 🌼 🧊",
+    "opciones": ["Flor de Hielo", "Flor Escarcha", "Campana Polar", "Flor Nevada"],
+    "respuesta_correcta": "Flor de Hielo"
+  },
+  {
+    "id": "rch_034",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el hijo pequeño y travieso de Bowser que usa un pañuelo con colmillos pintados?",
+    "emojis": "🐢 🎨 👶",
+    "opciones": ["Bowser Jr.", "Ludwig", "Iggy", "Morton"],
+    "respuesta_correcta": "Bowser Jr."
+  },
+  {
+    "id": "rch_035",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué campana mágica introducida en 3D World transforma a los personajes con trajes felinos para trepar?",
+    "emojis": "🔔 🐱 🐾",
+    "opciones": ["Super Campana (Cascabel)", "Campana de Oro", "Traje Felino", "Miau Bell"],
+    "respuesta_correcta": "Super Campana (Cascabel)"
+  },
+  {
+    "id": "rch_036",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué topo con lentes de sol excava y arroja llaves inglesas desde el subsuelo?",
+    "emojis": "🕶️ 🕳️ 🔧",
+    "opciones": ["Monty Mole", "Rocky Wrench", "Mega Mole", "Diglett Koopa"],
+    "respuesta_correcta": "Monty Mole"
+  },
+  {
+    "id": "rch_037",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pez inflable y picudo salta del agua intentando derribar plataformas en niveles marinos?",
+    "emojis": "🐡 🌊 🎈",
+    "opciones": ["Cheep Cheep", "Porcupuffer", "Rip Van Fish", "Blooper King"],
+    "respuesta_correcta": "Cheep Cheep"
+  },
+  {
+    "id": "rch_038",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la metrópoli cosmopolita repleta de taxis amarillos gobernada por la alcaldesa Pauline?",
+    "emojis": "🏙️ 🚕 🎩",
+    "opciones": ["New Donk City", "Metro Kingdom", "Toad City", "Coin City"],
+    "respuesta_correcta": "New Donk City"
+  },
+  {
+    "id": "rch_039",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué bicho con antifaz y túnica roja porta lanzas o zancos en niveles de plataformas?",
+    "emojis": "🎭 🔴 🦯",
+    "opciones": ["Shy Guy", "Snifit", "Fly Guy", "Bandit"],
+    "respuesta_correcta": "Shy Guy"
+  },
+  {
+    "id": "rch_040",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el rey de los fantasmas con una corona de rubí y lengua morada?",
+    "emojis": "👑 👻 🟣",
+    "opciones": ["Rey Boo", "Big Boo", "Boolossus", "Ghost Lord"],
+    "respuesta_correcta": "Rey Boo"
+  },
+  {
+    "id": "rch_041",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué traje especial completo permite meterse en el caparazón y lanzar llamaradas de fuego?",
+    "emojis": "🪖 🐢 🔥",
+    "opciones": ["Traje Martillo / Tanooki", "Traje Rana", "Traje Ardilla", "Traje Boomerang"],
+    "respuesta_correcta": "Traje Martillo / Tanooki"
+  },
+  {
+    "id": "rch_042",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué oruga amarilla simpática se vuelve roja y enfurecida cuando saltas sobre su espalda?",
+    "emojis": "🐛 🌼 😡",
+    "opciones": ["Wiggler", "Caterpillar", "Flutter", "Spike Bug"],
+    "respuesta_correcta": "Wiggler"
+  },
+  {
+    "id": "rch_043",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué criatura parecida a un dinosaurio rosa lanza huevos por su hocico tubular?",
+    "emojis": "🎀 🥚 🦖",
+    "opciones": ["Birdo", "Wendy", "Pom Pom", "Kamek"],
+    "respuesta_correcta": "Birdo"
+  },
+  {
+    "id": "rch_044",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llamaba la fortaleza aérea con cañones y hélices flotantes comandada por los Koopalings?",
+    "emojis": "🚢 ⚙️ 💨",
+    "opciones": ["Barco Volador (Airship)", "AeroFortaleza", "Nave Bowser", "Cloud Destroyer"],
+    "respuesta_correcta": "Barco Volador (Airship)"
+  },
+  {
+    "id": "rch_045",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué poder convierte al personaje en una estatua de piedra indestructible que resiste cualquier golpe?",
+    "emojis": "🗿 🦝 🛑",
+    "opciones": ["Estatua Tanooki", "Bloque Metal", "Poder Gravitatorio", "Roca Smash"],
+    "respuesta_correcta": "Estatua Tanooki"
+  },
+  {
+    "id": "rch_046",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué flor otorga a las naves o personajes la habilidad de lanzar bumeranes en trayectoria curva?",
+    "emojis": "🪃 🌼 🌀",
+    "opciones": ["Flor Boomerang", "Flor Curva", "Brote Giratorio", "Flor Viento"],
+    "respuesta_correcta": "Flor Boomerang"
+  },
+  {
+    "id": "rch_047",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cómo se llama el champiñón gigante que hace crecer al personaje hasta destruir el escenario entero a su paso?",
+    "emojis": "🍄 💥 🏢",
+    "opciones": ["Mega Champiñón", "Giga Champiñón", "Titan Shroom", "Super Coloso"],
+    "respuesta_correcta": "Mega Champiñón"
+  },
+  {
+    "id": "rch_048",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué pluma mágica equipaba al héroe con una capa amarilla para elevarse alto en las colinas?",
+    "emojis": "🪶 💛 🦸‍♂️",
+    "opciones": ["Pluma Capa (Cape Feather)", "Pluma Alada", "Ala P", "Hoja Capa"],
+    "respuesta_correcta": "Pluma Capa (Cape Feather)"
+  },
+  {
+    "id": "rch_049",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Qué gorra metálica en Super Mario 64 permitía caminar por el fondo marino sin respirar ni ser arrastrado?",
+    "emojis": "🪙 🌊 🪖",
+    "opciones": ["Metal Cap (Gorra de Metal)", "Wing Cap", "Vanish Cap", "Iron Helm"],
+    "respuesta_correcta": "Metal Cap (Gorra de Metal)"
+  },
+  {
+    "id": "rch_050",
+    "categoria": "VIDEOJUEGOS",
+    "pack": "reino_champinon",
+    "pregunta": "¿Cuál es la célebre frase que solía pronunciar Toad al final de los primeros castillos?",
+    "emojis": "🍄 🏰 💬",
+    "opciones": [
+      "Gracias, pero nuestra princesa está en otro castillo",
+      "La princesa ha sido llevada a otra fortaleza",
+      "Llegas tarde, Bowser se la llevó",
+      "El camino sigue en el próximo reino"
+    ],
+    "respuesta_correcta": "Gracias, pero nuestra princesa está en otro castillo"
+  }
+];
