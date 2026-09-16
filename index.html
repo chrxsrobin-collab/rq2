@@ -48,11 +48,19 @@
         if (typeof initRealtimeChallengesListener === "function") {
           initRealtimeChallengesListener(user.uid);
         }
+        if (typeof window.hideSplashScreen === "function") {
+          window.hideSplashScreen();
+        }
       }
     });
   </script>
 </head>
 <body>
+
+  <!-- PANTALLA DE CARGA (SPLASH SCREEN) -->
+  <div id="appSplashScreen">
+    <img src="assets/splash_screen/splash.webp" alt="RetroQuiz Loading" class="splash-img" onerror="this.onerror=null;this.src='assets/splash_screen/Splash.webp';">
+  </div>
 
   <!-- Contenedor general centrado con marco de teléfono (toggleable) -->
   <div class="app-viewport">

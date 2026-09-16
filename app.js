@@ -11378,11 +11378,41 @@ function initHomeButtons() {
 }
 window.initHomeButtons = initHomeButtons;
 
+// --- CONTROL DE VISIBILIDAD DEL SPLASH SCREEN ---
+let splashDismissed = false;
+const splashStartTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+
+function hideSplashScreen() {
+  if (splashDismissed) return;
+  const minDuration = 1800; // Mínimo de 1.5 a 2.0 segundos para asegurar estilos y estado base (#homeView)
+  const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+  const elapsed = now - splashStartTime;
+  const remaining = Math.max(0, minDuration - elapsed);
+
+  setTimeout(() => {
+    if (splashDismissed) return;
+    splashDismissed = true;
+    const splash = document.getElementById('appSplashScreen');
+    if (splash) {
+      splash.style.opacity = '0';
+      splash.style.pointerEvents = 'none';
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 500);
+    }
+  }, remaining);
+}
+window.hideSplashScreen = hideSplashScreen;
+
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   initHomeButtons();
+  hideSplashScreen();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Ocultar Splash Screen tras el tiempo mínimo asegurado
+  hideSplashScreen();
+
   // Vinculación robusta inmediata de botones de Inicio
   initHomeButtons();
 

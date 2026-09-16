@@ -10966,5 +10966,26 @@ body.theme-verano {
   box-shadow: 1px 1px 0 #000000;
 }
 
+/* ==========================================================================
+   PANTALLA DE CARGA (SPLASH SCREEN)
+   ========================================================================== */
+#appSplashScreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0A021A;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 
-
+.splash-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
