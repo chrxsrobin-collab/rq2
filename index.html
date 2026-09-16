@@ -164,7 +164,7 @@
               <div class="btn-desafios-wrapper">
                 <!-- Botón DESAFÍOS con efecto de reflejo periódico -->
                 <button class="retro-btn btn-desafios periodic-shimmer interactive-press" id="btnDesafios">
-                  <span class="btn-icon">🏆</span>
+                  <span class="btn-icon"><img src="assets/global/copa.webp" class="btn-asset-icon" alt="Copa"></span>
                   <span class="btn-text">DESAFÍOS</span>
                   <!-- Capa para el barrido de reflejo de luz -->
                   <span class="shimmer-sweep"></span>
@@ -175,7 +175,7 @@
 
               <!-- Botón RANKING -->
               <button class="retro-btn btn-ranking interactive-press" id="btnRanking">
-                <span class="btn-icon">📊</span>
+                <span class="btn-icon"><img src="assets/global/ranking.webp" class="btn-asset-icon" alt="Ranking"></span>
                 <span class="btn-text">RANKING</span>
               </button>
             </div>
@@ -297,7 +297,6 @@
           <section class="shots-system-section">
             <!-- Contador de Energía / Tiros -->
             <div class="shots-counter-pill" id="shotsPill">
-              <span class="shots-icon">🎯</span>
               <span class="shots-text">TIROS DISPONIBLES: <strong id="shotsAvailable">3</strong>/3</span>
             </div>
 
@@ -309,7 +308,7 @@
 
             <!-- Botón Anuncio Recompensado (Rewarded Ad) -->
             <button class="btn-rewarded-ad interactive-press" id="btnWatchAd">
-              <span class="ad-icon">📺</span>
+              <span class="ad-icon"><img src="assets/global/tv.webp" class="btn-asset-icon" alt="TV"></span>
               <span class="ad-text">+1 TIRO EXTRA <small>(Ver Anuncio)</small></span>
             </button>
           </section>
@@ -570,7 +569,7 @@
               <div class="results-card-col results-streak-col">
                 <span class="results-col-label">RACHA</span>
                 <div class="results-streak-val-box">
-                  <span class="results-streak-val" id="resultsStreakVal">+1 🔥</span>
+                  <span class="results-streak-val" id="resultsStreakVal">+1 <img src="assets/global/fuego.webp" class="btn-asset-icon" alt="Fuego"></span>
                 </div>
               </div>
 
@@ -674,7 +673,7 @@
             <!-- Título de Sección -->
             <div class="challenges-section-header anim-ch-section-title">
               <h2 class="challenges-section-title">
-                <span>Partidas activas (¡continúa!)</span>
+                <span>Partidas</span>
                 <span id="activeChallengesCounter" class="badge-challenge-limit">0 / 3 ACTIVAS</span>
               </h2>
             </div>
@@ -855,7 +854,7 @@
                 <!-- Jugador Local -->
                 <div class="podium-player player-local" id="podiumLocalPlayer">
                   <div class="podium-avatar-wrap">
-                    <span class="winner-crown-icon hidden" id="localWinnerCrown">👑</span>
+                    <span class="winner-crown-icon hidden" id="localWinnerCrown"><img src="assets/global/corona.webp" class="btn-asset-icon" alt="Corona"></span>
                     <div class="podium-avatar-circle bg-purple">
                       <img src="assets/pantalla_inicio/hombre.webp" alt="Tú" class="podium-user-avatar-img user-avatar-sync" id="podiumUserAvatarImg">
                       <span class="duel-country-badge" id="podiumLocalCountryBadge">🌎</span>
@@ -871,7 +870,7 @@
                 <!-- Rival -->
                 <div class="podium-player player-rival" id="podiumRivalPlayer">
                   <div class="podium-avatar-wrap">
-                    <span class="winner-crown-icon hidden" id="rivalWinnerCrown">👑</span>
+                    <span class="winner-crown-icon hidden" id="rivalWinnerCrown"><img src="assets/global/corona.webp" class="btn-asset-icon" alt="Corona"></span>
                     <div class="podium-avatar-circle bg-yellow" id="podiumRivalAvatar">
                       <span>🕹️</span>
                       <span class="duel-country-badge" id="podiumRivalCountryBadge">🌎</span>
@@ -885,7 +884,7 @@
               <!-- Podio Central del Ganador Definitivo (Ronda 3 Final) -->
               <div class="winner-podium-container" id="duelWinnerPodiumContainer" style="display: none;">
                 <div class="winner-podium-wrap">
-                  <span class="winner-podium-crown" id="challengeWinnerCrown">👑</span>
+                  <span class="winner-podium-crown" id="challengeWinnerCrown"><img src="assets/global/corona.webp" class="btn-asset-icon" alt="Corona"></span>
                   <div class="winner-podium-frame">
                     <img id="challengeWinnerAvatar" class="winner-avatar-img" src="assets/pantalla_inicio/hombre.webp" alt="Ganador">
                     <span class="duel-country-badge winner-country-badge" id="challengeWinnerCountryBadge">🌎</span>
@@ -912,7 +911,7 @@
               <!-- Rejilla de Estadísticas -->
               <div class="perf-stats-grid">
                 <div class="perf-stat-box">
-                  <span class="stat-icon">⏱️</span>
+                  <span class="stat-icon"><img src="assets/global/reloj.webp" class="btn-asset-icon" alt="Reloj"></span>
                   <div class="stat-info">
                     <span class="stat-label">TIEMPO EMPLEADO</span>
                     <span class="stat-value" id="duelTimeSpent">28.4s</span>
@@ -920,7 +919,7 @@
                 </div>
 
                 <div class="perf-stat-box">
-                  <span class="stat-icon">⭐</span>
+                  <span class="stat-icon"><img src="assets/global/estrella.webp" class="btn-asset-icon" alt="Estrella"></span>
                   <div class="stat-info">
                     <span class="stat-label">PUNTOS GANADOS</span>
                     <span class="stat-value text-accent-xp" id="duelPointsEarned">+240 XP</span>
@@ -979,14 +978,13 @@
           <!-- Contenedor con Scroll Vertical de las 3 Secciones -->
           <div class="store-scroll-content">
             
-            <!-- SECCIÓN 1: 📦 PACKS DE PREGUNTAS -->
+            <!-- SECCIÓN 1: 📦 COLECCIONES -->
             <section class="store-section anim-st-packs">
               <div class="store-section-header">
                 <div class="store-section-title-wrap">
                   <span class="store-section-icon">📦</span>
-                  <h2 class="store-section-title">Packs de Preguntas</h2>
+                  <h2 class="store-section-title">Colecciones</h2>
                 </div>
-                <button class="store-see-all-btn interactive-press" id="btnStorePacksSeeAll">VER TODO</button>
               </div>
 
               <!-- Carrusel Horizontal de Packs -->
@@ -1082,7 +1080,7 @@
               <div class="store-section-header">
                 <div class="store-section-title-wrap">
                   <span class="store-section-icon">⚡</span>
-                  <h2 class="store-section-title">Potenciadores <span class="store-section-tag">Solo Solitario</span></h2>
+                  <h2 class="store-section-title">Potenciadores <span class="store-section-tag">Modo Solitario</span></h2>
                 </div>
               </div>
 
@@ -1091,7 +1089,7 @@
                 <!-- Potenciador 1: +5 Segundos Extra -->
                 <div class="booster-row-item">
                   <div class="booster-icon-circle bg-blue">
-                    <span>⏱️</span>
+                    <span><img src="assets/global/reloj.webp" class="btn-asset-icon" alt="Reloj"></span>
                   </div>
                   <div class="booster-details">
                     <div class="booster-name-wrap">
@@ -1127,7 +1125,7 @@
                 <!-- Potenciador 3: Respuesta Doble -->
                 <div class="booster-row-item">
                   <div class="booster-icon-circle bg-yellow">
-                    <span>⭐</span>
+                    <span><img src="assets/global/estrella.webp" class="btn-asset-icon" alt="Estrella"></span>
                   </div>
                   <div class="booster-details">
                     <div class="booster-name-wrap">
@@ -1144,12 +1142,12 @@
               </div>
             </section>
 
-            <!-- SECCIÓN 3: 🎨 TEMAS ESTACIONALES (SKINS) -->
+            <!-- SECCIÓN 3: 🎨 TEMAS -->
             <section class="store-section anim-st-themes">
               <div class="store-section-header">
                 <div class="store-section-title-wrap">
                   <span class="store-section-icon">🎨</span>
-                  <h2 class="store-section-title">Temas Estacionales <span class="store-section-tag">Skins App</span></h2>
+                  <h2 class="store-section-title">Temas</h2>
                 </div>
                 <button class="store-reset-theme-btn interactive-press" id="btnStoreResetTheme" title="Restaurar tema original">POR DEFECTO</button>
               </div>
@@ -1329,7 +1327,7 @@
               <!-- Bloque 1 - Experiencia y Ranking -->
               <div class="onboarding-card card-rank">
                 <div class="onboarding-card-icon-wrap bg-yellow">
-                  <span class="onboarding-card-icon">🏆</span>
+                  <span class="onboarding-card-icon"><img src="assets/global/copa.webp" class="btn-asset-icon" alt="Copa"></span>
                 </div>
                 <div class="onboarding-card-content">
                   <h3 class="onboarding-card-title">EXCLUSIVO PARA EL RANKING</h3>
@@ -1358,11 +1356,22 @@
                   <p class="onboarding-card-desc">Búscalos por su apodo. ¿Aún no juegan? ¡Envíales una invitación con tu enlace directo!</p>
                 </div>
               </div>
+
+              <!-- Bloque 4 - Deslizar para borrar resultado -->
+              <div class="onboarding-card card-swipe">
+                <div class="onboarding-card-icon-wrap bg-yellow">
+                  <span class="onboarding-card-icon">👈</span>
+                </div>
+                <div class="onboarding-card-content">
+                  <h3 class="onboarding-card-title">BORRAR RESULTADOS</h3>
+                  <p class="onboarding-card-desc">Una vez terminado el duelo, desliza la tarjeta hacia la izquierda para borrar el resultado.</p>
+                </div>
+              </div>
             </div>
 
             <!-- Botón de Acción Inferior -->
             <button type="button" class="btn-onboarding-start interactive-press" id="btnStartChallengeOnboarding">
-              ¡A COMPETIR! 🔥
+              ¡A COMPETIR! <img src="assets/global/fuego.webp" class="btn-asset-icon" alt="Fuego">
             </button>
           </div>
         </div>
@@ -1597,7 +1606,7 @@
         <div class="modal-backdrop" id="modalRanking">
           <div class="retro-modal">
             <div class="modal-header green-header">
-              <span class="modal-title">📊 SALÓN DE LA FAMA</span>
+              <span class="modal-title"><img src="assets/global/ranking.webp" class="btn-asset-icon" alt="Ranking"> SALÓN DE LA FAMA</span>
               <button class="close-modal-btn" data-close="modalRanking">&times;</button>
             </div>
             <div class="modal-body">
@@ -1609,7 +1618,7 @@
                   <div class="podium-rank">2</div>
                 </div>
                 <div class="podium-item podium-1" id="podium1">
-                  <div class="podium-crown">👑</div>
+                  <div class="podium-crown"><img src="assets/global/corona.webp" class="btn-asset-icon" alt="Corona"></div>
                   <div class="podium-avatar">🕹️</div>
                   <div class="podium-name">Jugador 1</div>
                   <div class="podium-score">0 pts</div>
@@ -1623,61 +1632,31 @@
                 </div>
               </div>
 
+              <!-- Filas de Puestos 4 y 5 (Ampliación Top 5) -->
+              <div class="ranking-rows-container" id="rankingRowsContainer">
+                <div class="ranking-row" id="rankingRow4">
+                  <span class="ranking-row-pos">4</span>
+                  <div class="ranking-row-avatar">
+                    <img src="assets/pantalla_inicio/hombre.webp" alt="Avatar" class="ranking-row-avatar-img" id="rankingRow4Avatar">
+                  </div>
+                  <span class="ranking-row-name" id="rankingRow4Name">Lugar disponible</span>
+                  <span class="ranking-row-xp" id="rankingRow4Xp">0 pts</span>
+                </div>
+                <div class="ranking-row" id="rankingRow5">
+                  <span class="ranking-row-pos">5</span>
+                  <div class="ranking-row-avatar">
+                    <img src="assets/pantalla_inicio/mujer.webp" alt="Avatar" class="ranking-row-avatar-img" id="rankingRow5Avatar">
+                  </div>
+                  <span class="ranking-row-name" id="rankingRow5Name">Lugar disponible</span>
+                  <span class="ranking-row-xp" id="rankingRow5Xp">0 pts</span>
+                </div>
+              </div>
+
               <!-- Fila Destacada del Usuario Actual -->
               <div class="user-rank-card" id="userRankCard">
                 <span class="rank-pos" id="userRankPos">#1</span>
                 <span class="rank-user" id="userRankName">Jugador (Tú)</span>
                 <span class="rank-pts" id="rankingUserPts">0 pts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal AJUSTES -->
-        <div class="modal-backdrop" id="modalSettings">
-          <div class="retro-modal">
-            <div class="modal-header dark-header">
-              <span class="modal-title">⚙️ CONFIGURACIÓN</span>
-              <button class="close-modal-btn" data-close="modalSettings">&times;</button>
-            </div>
-            <div class="modal-body">
-              <div class="settings-list">
-                <div class="setting-item">
-                  <div class="setting-label">
-                    <span>Efectos de Sonido (SFX)</span>
-                    <small>Beeps, fanfarrias y monedas</small>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" id="settingSoundToggle" checked>
-                    <span class="slider"></span>
-                  </label>
-                </div>
-
-                <div class="setting-item">
-                  <div class="setting-label">
-                    <span>Música Chiptune 8-Bit</span>
-                    <small>Sintonizador retro de fondo</small>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" id="settingMusicToggle">
-                    <span class="slider"></span>
-                  </label>
-                </div>
-
-                <div class="setting-item">
-                  <div class="setting-label">
-                    <span>Animaciones Dinámicas</span>
-                    <small>Flotación de personajes y reflejos</small>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" id="settingAnimToggle" checked>
-                    <span class="slider"></span>
-                  </label>
-                </div>
-
-                <div class="setting-action-row">
-                  <button class="retro-btn-sm" id="btnRestartIntroModal">Repetir Entrada</button>
-                </div>
               </div>
             </div>
           </div>
@@ -1788,7 +1767,7 @@
             <button id="btnCloseCredits" class="modal-close-circle-btn" aria-label="Cerrar créditos">✕</button>
             <div class="credits-content-wrapper">
               <div class="credits-header-title">SUPERQUIZ!</div>
-              <div class="credits-subtitle">"El Quiz Definitivo de la Cultura Pop Retro"</div>
+              <div class="credits-subtitle">"El Quiz Definitivo de la Cultura Pop"</div>
 
               <div class="credits-section-title">--- DIRECCIÓN Y DESARROLLO ---</div>
               <div class="credits-text-block">
@@ -1796,10 +1775,10 @@
                 Christian Mendez | M2M Studios
               </div>
 
-              <div class="credits-section-title">--- ARTE Y AUDIO ---</div>
+              <div class="credits-section-title">--- MÚSICA Y EFECTOS ---</div>
               <div class="credits-text-block">
-                <strong>Diseño UI/UX Neo-Memphis:</strong> Christian Mendez<br>
-                <strong>Banda Sonora y Efectos:</strong> Producido en Logic Pro por Christian Mendez
+                Nativica<br>
+                Millen
               </div>
 
               <div class="credits-section-title">--- AGRADECIMIENTOS ESPECIALES ---</div>
@@ -1822,7 +1801,7 @@
 
               <!-- EASTER EGG DE MONEDAS -->
               <div id="creditsEasterEgg" class="credits-easter-egg">
-                🍕 <em>Toca aquí si te gusta la pizza de las Tortugas Ninja...</em>
+                <img src="assets/global/pizza.webp" class="btn-asset-icon" alt="Pizza"> Toca aquí si te gusta la pizza ninja…
               </div>
             </div>
             <button id="btnCloseCreditsFooter" class="btn-credits-close">CERRAR</button>
@@ -1850,56 +1829,11 @@
           </div>
         </div>
 
-        <!-- Modal REGLAS DE JUEGO ('i') -->
-        <div class="modal-backdrop" id="modalRulesInfo">
-          <div class="retro-modal">
-            <div class="modal-header yellow-header">
-              <span class="modal-title">ℹ️ ¿CÓMO SE JUEGA?</span>
-              <button class="close-modal-btn" data-close="modalRulesInfo">&times;</button>
-            </div>
-            <div class="modal-body">
-              <div class="rules-list">
-                <div class="rule-card">
-                  <span class="rule-icon">🎯</span>
-                  <div class="rule-info">
-                    <h4>3 Lanzamientos Diarios</h4>
-                    <p>Tienes 3 tiros de ruleta cada 24 horas para jugar y ganar RetroCoins.</p>
-                  </div>
-                </div>
-
-                <div class="rule-card">
-                  <span class="rule-icon">⚡</span>
-                  <div class="rule-info">
-                    <h4>Velocidad = Más Monedas</h4>
-                    <p>Mientras más rápido respondas, mayor será la bonificación de RetroCoins.</p>
-                  </div>
-                </div>
-
-                <div class="rule-card">
-                  <span class="rule-icon">⏳</span>
-                  <div class="rule-info">
-                    <h4>Cuidado con el Tiempo</h4>
-                    <p>Si no respondes dentro del tiempo límite de la pregunta, pierdes 1 vida.</p>
-                  </div>
-                </div>
-
-                <div class="rule-card">
-                  <span class="rule-icon">🔓</span>
-                  <div class="rule-info">
-                    <h4>Categorías Temáticas</h4>
-                    <p>Desbloquea Música, TV, Todo y Videojuegos para activar sus colores en la ruleta.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Modal ANUNCIO RECOMPENSADO (Rewarded Ad) -->
         <div class="modal-backdrop" id="modalAdLoader">
           <div class="retro-modal ad-modal">
             <div class="modal-header dark-header">
-              <span class="modal-title">📺 ANUNCIO RECOMPENSADO</span>
+              <span class="modal-title"><img src="assets/global/tv.webp" class="btn-asset-icon" alt="TV"> ANUNCIO RECOMPENSADO</span>
             </div>
             <div class="modal-body text-center">
               <div class="ad-tv-frame">
@@ -2131,16 +2065,8 @@
               <span class="sc-name">Perfil</span>
             </button>
             <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalRanking')">
-              <span class="sc-icon">🏆</span>
+              <span class="sc-icon"><img src="assets/global/ranking.webp" class="btn-asset-icon" alt="Ranking"></span>
               <span class="sc-name">Ranking</span>
-            </button>
-            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalRulesInfo')">
-              <span class="sc-icon">ℹ️</span>
-              <span class="sc-name">Reglas ('i')</span>
-            </button>
-            <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('modalSettings')">
-              <span class="sc-icon">⚙️</span>
-              <span class="sc-name">Ajustes</span>
             </button>
             <button class="sc-btn sc-btn-modal interactive-press" onclick="debugOpenModal('sendChallengeModal')">
               <span class="sc-icon">✉️</span>

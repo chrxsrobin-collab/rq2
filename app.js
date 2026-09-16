@@ -6566,6 +6566,9 @@ function precargarPreguntasTrivia(categoriaSeleccionada) {
 let countdownInterval = null;
 
 function iniciarCuentaRegresivaTrivia(categoriaGanadora) {
+  if (window.state) window.state.isTransitioningRound = false;
+  if (state) state.isTransitioningRound = false;
+
   // 1. Iniciar o verificar la precarga en segundo plano de las preguntas (Promise.all / fetch)
   if (!window.state?.pendingQuestionsPromise && !preloadedRoundQuestionsPromise) {
     window.state.pendingQuestionsPromise = cargarBancoExclusivo(categoriaGanadora);
@@ -6758,6 +6761,8 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
 
   updateTriviaHeartsUI();
   updateRoundCoinsUI(0);
+  if (window.state) window.state.isTransitioningRound = false;
+  if (state) state.isTransitioningRound = false;
 
   // Enciende la pantalla de preguntas: showView('#triviaView')
   state.activeTab = 'trivia';
@@ -7447,12 +7452,12 @@ function handleTriviaAnswer(selectedIndex) {
           clearInterval(window.state.timerInterval);
           if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
 
-          // Enrutamiento según el modo:
+          if (window.state.isTransitioningRound) return;
+          window.state.isTransitioningRound = true;
+
+          // Enrutamiento según el modo (llamada única sin callbacks redundantes):
           if (window.state.isChallengeMode) {
-            showView('#challengeResultView');
-            if (typeof renderResultadosDesafio === 'function') {
-              renderResultadosDesafio();
-            }
+            guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
           } else {
             // Modo Clásico / Ruleta
             showView('#resultsView');
@@ -7506,14 +7511,14 @@ function handleTriviaAnswer(selectedIndex) {
     // CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
     if (window.state.lives <= 0) {
       setTimeout(() => {
+        if (window.state.isTransitioningRound) return;
+        window.state.isTransitioningRound = true;
+
         if (window.state.isChallengeMode) {
-          // En modo desafío NUNCA mostrar game over, ir directo a resultados de la ronda
+          // En modo desafío NUNCA mostrar game over, ir directo a resultados exclusivos de la ronda
           clearInterval(window.state.timerInterval);
           if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
-          showView('#challengeResultView');
-          if (typeof renderResultadosDesafio === 'function') {
-            renderResultadosDesafio();
-          }
+          guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
         } else {
           ejecutarSecuenciaGameOver('Te has quedado sin vidas');
         }
@@ -7536,12 +7541,12 @@ function handleTriviaAnswer(selectedIndex) {
             clearInterval(window.state.timerInterval);
             if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
 
+            if (window.state.isTransitioningRound) return;
+            window.state.isTransitioningRound = true;
+
             // Enrutamiento según el modo:
             if (window.state.isChallengeMode) {
-              showView('#challengeResultView');
-              if (typeof renderResultadosDesafio === 'function') {
-                renderResultadosDesafio();
-              }
+              guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
             } else {
               // Modo Clásico / Ruleta
               showView('#resultsView');
@@ -7619,14 +7624,14 @@ function handleTriviaTimeout() {
   // CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
   if (window.state.lives <= 0) {
     setTimeout(() => {
+      if (window.state.isTransitioningRound) return;
+      window.state.isTransitioningRound = true;
+
       if (window.state.isChallengeMode) {
         // En modo desafío NUNCA mostrar game over, ir directo a resultados de la ronda
         clearInterval(window.state.timerInterval);
         if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
-        showView('#challengeResultView');
-        if (typeof renderResultadosDesafio === 'function') {
-          renderResultadosDesafio();
-        }
+        guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
       } else {
         ejecutarSecuenciaGameOver('Se agotó el tiempo y te has quedado sin vidas');
       }
@@ -7649,12 +7654,12 @@ function handleTriviaTimeout() {
           clearInterval(window.state.timerInterval);
           if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
 
+          if (window.state.isTransitioningRound) return;
+          window.state.isTransitioningRound = true;
+
           // Enrutamiento según el modo:
           if (window.state.isChallengeMode) {
-            showView('#challengeResultView');
-            if (typeof renderResultadosDesafio === 'function') {
-              renderResultadosDesafio();
-            }
+            guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
           } else {
             // Modo Clásico / Ruleta
             showView('#resultsView');
@@ -7693,10 +7698,9 @@ function ejecutarSecuenciaGameOver(reason = 'Te has quedado sin vidas') {
     clearInterval(state.trivia.timerInterval);
     state.trivia.isPaused = false;
     state.trivia.isAnswering = false;
-    showView('#challengeResultView');
-    if (typeof renderResultadosDesafio === 'function') {
-      renderResultadosDesafio();
-    }
+    if (window.state.isTransitioningRound) return;
+    window.state.isTransitioningRound = true;
+    guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
     return;
   }
   // Bloquea inmediatamente las interacciones y detén el temporizador (clearInterval)
@@ -8449,14 +8453,26 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
 
   if (!isFinalResolution) {
     // Rondas Intermedias (1 y 2, o Ronda 3 previa al turno del rival)
-    if (outcomeTitle) outcomeTitle.innerText = `RESULTADOS RONDA ${currentRound}`;
+    if (outcomeTitle) {
+      outcomeTitle.innerText = `RESULTADOS RONDA ${currentRound}`;
+      outcomeTitle.style.color = '#FFFFFF';
+      outcomeTitle.style.textShadow = '3px 3px 0 #000000';
+    }
     if (outcomeSubtitle) outcomeSubtitle.style.display = 'none';
     if (versusPodium) versusPodium.style.display = 'flex';
     if (winnerPodium) winnerPodium.style.display = 'none';
     if (localCrown) localCrown.classList.add('hidden');
     if (rivalCrown) rivalCrown.classList.add('hidden');
 
-    if (roundActions) roundActions.style.display = 'flex';
+    if (roundActions) {
+      roundActions.style.display = 'flex';
+      const btnPass = document.getElementById('btnPassTurnWithoutAttack');
+      if (btnPass) btnPass.style.display = 'flex';
+      const allRoundBtns = roundActions.querySelectorAll('button');
+      allRoundBtns.forEach(b => {
+        if (b.id !== 'btnPassTurnWithoutAttack') b.style.display = 'none';
+      });
+    }
     if (finalActions) finalActions.style.display = 'none';
 
     playResultsAudioSequence(correctCount);
@@ -8515,18 +8531,37 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       ? window.state.xp 
       : (state.xp !== undefined ? state.xp : (state.userScore || 0));
 
-    if (soyGanador) {
-      // Feedback visual del ganador: texto verde menta #2ee2b6 "+120 XP"
-      if (pointsEarnedEl) {
-        pointsEarnedEl.innerText = '+120 XP';
-        pointsEarnedEl.classList.remove('text-accent-xp', 'duel-xp-loser');
-        pointsEarnedEl.classList.add('duel-xp-winner');
-        pointsEarnedEl.style.color = '#2ee2b6';
+    // Contabilidad real de XP: (aciertosDuelo * 50) + (bonusVictoria ? 100 : 25)
+    let aciertosDuelo = 0;
+    if (chData) {
+      if (isCreator) {
+        aciertosDuelo = (chData.round1_p1?.hits || 0) + (chData.round2_p1?.hits || 0) + (chData.round3_p1?.hits || 0);
+        if (!aciertosDuelo && chData.scores?.fromHits) aciertosDuelo = chData.scores.fromHits;
+      } else {
+        aciertosDuelo = (chData.round1_p2?.hits || 0) + (chData.round2_p2?.hits || 0) + (chData.round3_p2?.hits || 0);
+        if (!aciertosDuelo && chData.scores?.toHits) aciertosDuelo = chData.scores.toHits;
       }
+    }
+    if (!aciertosDuelo && correctCount) {
+      aciertosDuelo = correctCount;
+    }
+    if (!aciertosDuelo) {
+      aciertosDuelo = (state.trivia && state.trivia.correctAnswersCount) || (window.state && window.state.correctAnswersCount) || 4;
+    }
+    const bonusVictoria = soyGanador;
+    const xpGanado = (aciertosDuelo * 50) + (bonusVictoria ? 100 : 25);
 
+    if (pointsEarnedEl) {
+      pointsEarnedEl.innerText = `+${xpGanado} XP`;
+      pointsEarnedEl.classList.remove('text-accent-xp', 'duel-xp-loser');
+      pointsEarnedEl.classList.add('duel-xp-winner');
+      pointsEarnedEl.style.color = soyGanador ? '#2ee2b6' : '#FF3366';
+    }
+
+    if (soyGanador) {
       // Fluctuación de XP y Desafíos Ganados (sin duplicar en visitas repetidas)
       if (!alreadyProcessed) {
-        const newXP = currentXp + 120;
+        const newXP = currentXp + xpGanado;
         state.xp = newXP;
         state.userScore = newXP;
         if (window.state) {
@@ -8587,8 +8622,8 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
       const isTimeoutFinish = (chData?.finishReason === "timeout" || state.currentDuel?.chData?.finishReason === "timeout");
       if (outcomeTitle) {
-        outcomeTitle.innerText = "¡HAS GANADO! 🏆";
-        outcomeTitle.style.color = "#FFE600";
+        outcomeTitle.innerHTML = "¡HAS GANADO! <img src=\"assets/global/copa.webp\" class=\"btn-asset-icon\" alt=\"Copa\">";
+        outcomeTitle.style.color = "#ffed31";
         outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000";
       }
       if (outcomeSubtitle) {
@@ -8652,23 +8687,10 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       playDefeatBooSound(chId);
 
       const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
-      const isSafeZone = (currentXp < 700);
 
-      // Feedback visual del perdedor: texto rojo "-60 XP" (o "+0 XP en zona segura" si < 700 XP)
-      if (pointsEarnedEl) {
-        pointsEarnedEl.classList.remove('text-accent-xp', 'duel-xp-winner');
-        pointsEarnedEl.classList.add('duel-xp-loser');
-        pointsEarnedEl.style.color = '#FF3366';
-        if (isSafeZone) {
-          pointsEarnedEl.innerText = '+0 XP en zona segura';
-        } else {
-          pointsEarnedEl.innerText = '-60 XP';
-        }
-      }
-
-      // Fluctuación de XP: Si xp < 700: no pierde XP. Si xp >= 700: resta -60 XP (mínimo 0)
+      // Persistir XP calculada para el perdedor
       if (!alreadyProcessed) {
-        const newXP = isSafeZone ? currentXp : Math.max(0, currentXp - 60);
+        const newXP = currentXp + xpGanado;
         state.xp = newXP;
         state.userScore = newXP;
         if (window.state) {
@@ -8751,12 +8773,12 @@ function showChallengeDuelResults(round = 1, aciertos = 4, isDirectView = false)
       }
 
       // Botones de acción lado a lado:
-      // Botón principal: "🔄 SOLICITAR REVANCHA" (fondo naranja fuego #FF5E00)
+      // Botón principal: "🔄 SOLICITAR REVANCHA" (fondo verde neón #2ee2b6, texto negro mayúsculas, borde 3px)
       if (btnRematchDuel) {
         btnRematchDuel.style.display = 'flex';
         btnRematchDuel.style.flex = '1 1 0';
         btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
-        btnRematchDuel.style.cssText = 'display: flex !important; flex: 1 1 0 !important; background: #FF5E00 !important; color: #FFFFFF !important; border: 3px solid #000000 !important; font-weight: 800 !important; box-shadow: 3px 3px 0 #000000 !important;';
+        btnRematchDuel.style.cssText = 'display: flex !important; flex: 1 1 0 !important; background: #2ee2b6 !important; color: #000000 !important; border: 3px solid #000000 !important; font-weight: 800 !important; text-transform: uppercase !important; box-shadow: 3px 3px 0 #000000 !important;';
         btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-defeat interactive-press';
       }
       // Botón secundario: "VOLVER A DESAFÍOS"
@@ -9048,155 +9070,6 @@ function renderResultadosDesafio() {
         : (window.state && window.state.correctAnswersCount ? window.state.correctAnswersCount : 0));
 
   guardarPuntosRondaDesafio(aciertos);
-
-  // Estados dinámicos de Victoria / Derrota en #challengeResultView:
-  const container = document.getElementById('challengeResultView');
-  const outcomeTitle = document.getElementById('duelOutcomeTitle');
-  const outcomeSubtitle = document.getElementById('duelOutcomeSubtitle');
-  const winnerPodium = document.getElementById('duelWinnerPodiumContainer');
-  const versusPodium = document.getElementById('duelResultPodiumVersus');
-  const winnerAvatarImg = document.getElementById('challengeWinnerAvatar');
-  const winnerNameEl = document.getElementById('challengeWinnerName');
-  const challengeWinnerCrown = document.getElementById('challengeWinnerCrown');
-  const btnRematchDuel = document.getElementById('btnRematchDuel');
-  const btnDuelBackToChallenges = document.getElementById('btnDuelBackToChallenges');
-
-  const miPuntajeTotal = state.currentDuel?.localTotalScore || 0;
-  const rivalPuntajeTotal = state.currentDuel?.rivalTotalScore || 0;
-  const rivalName = state.currentDuel?.rivalName || 'Rival';
-  const localName = window.state?.username || localStorage.getItem('retroquiz_username') || 'Tú';
-  const localAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
-  let rivalAvatar = state.currentDuel?.rivalAvatar || 'assets/pantalla_inicio/hombre.webp';
-  if (!rivalAvatar || (!rivalAvatar.includes('/') && !rivalAvatar.startsWith('data:'))) {
-    rivalAvatar = 'assets/pantalla_inicio/hombre.webp';
-  }
-
-  const chData = state.currentDuel?.chData;
-  const currentUidVal = window.state?.userId || state.userId;
-  let soyGanador = (miPuntajeTotal > rivalPuntajeTotal);
-  if (chData?.winnerId || chData?.winnerUid) {
-    const wId = chData.winnerId || chData.winnerUid;
-    if (wId === currentUidVal) soyGanador = true;
-    else if (wId && wId !== "empate") soyGanador = false;
-  }
-
-  // Compara miPuntajeTotal vs rivalPuntajeTotal
-  if (soyGanador) {
-    if (container) {
-      container.classList.remove('is-defeat');
-      container.classList.add('is-victory');
-    }
-    if (outcomeTitle) {
-      outcomeTitle.innerText = "¡HAS GANADO! 🏆";
-      outcomeTitle.style.color = "#FFE600";
-      outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000";
-    }
-    if (outcomeSubtitle) {
-      outcomeSubtitle.innerText = '¡Has dominado el duelo frente a tu rival!';
-      outcomeSubtitle.style.display = 'block';
-    }
-    if (winnerPodium) winnerPodium.style.display = 'flex';
-    if (versusPodium) versusPodium.style.display = 'none';
-    if (winnerAvatarImg) winnerAvatarImg.src = localAvatar;
-    if (winnerNameEl) winnerNameEl.textContent = localName;
-    if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
-
-    // Bloque de puntuación
-    let scoreCompEl = document.getElementById('duelScoreComparison');
-    if (!scoreCompEl) {
-      scoreCompEl = document.createElement('div');
-      scoreCompEl.id = 'duelScoreComparison';
-      scoreCompEl.className = 'duel-score-comparison';
-      const infoBadge = document.querySelector('.winner-info-badge');
-      if (infoBadge) infoBadge.appendChild(scoreCompEl);
-    }
-    if (scoreCompEl) {
-      scoreCompEl.style.display = 'flex';
-      scoreCompEl.innerHTML = `
-        <span class="score-pill my-score-winner">${localName}: ${miPuntajeTotal} pts</span>
-        <span class="score-vs-divider">VS</span>
-        <span class="score-pill rival-score-loser">${rivalName}: ${rivalPuntajeTotal} pts</span>
-      `;
-    }
-
-    if (btnRematchDuel) btnRematchDuel.style.display = 'none';
-    if (btnDuelBackToChallenges) {
-      btnDuelBackToChallenges.style.display = 'flex';
-      btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
-      btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-winner-back interactive-press';
-    }
-
-    if (typeof confetti === 'function') {
-      confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
-    }
-    if (typeof playResultsAudioSequence === 'function') {
-      playResultsAudioSequence(aciertos);
-    }
-  } else {
-    // Usuario local es el PERDEDOR (¡HAS PERDIDO!)
-    if (container) {
-      container.classList.remove('is-victory');
-      container.classList.add('is-defeat');
-    }
-    // Detén y cancela cualquier confeti activo
-    if (typeof confetti?.reset === 'function') {
-      confetti.reset();
-    }
-    // Audio: Reproduce boo.mp3 una sola vez
-    playDefeatBooSound(chData?.id || '');
-    // Título principal: "HAS PERDIDO 💀" (color #FF3B30 con sombra negra profunda)
-    if (outcomeTitle) {
-      outcomeTitle.innerText = "HAS PERDIDO 💀";
-      outcomeTitle.style.color = "#FF3B30";
-      outcomeTitle.style.textShadow = "2px 2px 0 #000000, 3px 3px 0 #000000, 4px 4px 0 #000000";
-    }
-    // Subtítulo: `${rivalName} se lleva la corona en esta ocasión`
-    if (outcomeSubtitle) {
-      outcomeSubtitle.innerText = `${rivalName} se lleva la corona en esta ocasión`;
-      outcomeSubtitle.style.display = 'block';
-    }
-    // Podio central: Muestra el avatar y nombre del RIVAL con el marco dorado y la corona 👑
-    if (winnerPodium) winnerPodium.style.display = 'flex';
-    if (versusPodium) versusPodium.style.display = 'none';
-    if (winnerAvatarImg) winnerAvatarImg.src = rivalAvatar;
-    if (winnerNameEl) winnerNameEl.textContent = rivalName;
-    if (challengeWinnerCrown) challengeWinnerCrown.style.display = 'block';
-
-    // Bloque de puntuación: Muestra el comparativo de puntos (Mi puntaje vs Puntaje rival) destacando en rojo mis puntos y en verde los del rival
-    let scoreCompEl = document.getElementById('duelScoreComparison');
-    if (!scoreCompEl) {
-      scoreCompEl = document.createElement('div');
-      scoreCompEl.id = 'duelScoreComparison';
-      scoreCompEl.className = 'duel-score-comparison';
-      const infoBadge = document.querySelector('.winner-info-badge');
-      if (infoBadge) infoBadge.appendChild(scoreCompEl);
-    }
-    if (scoreCompEl) {
-      scoreCompEl.style.display = 'flex';
-      scoreCompEl.innerHTML = `
-        <span class="score-pill my-score-loser">${localName}: ${miPuntajeTotal} pts</span>
-        <span class="score-vs-divider">VS</span>
-        <span class="score-pill rival-score-winner">${rivalName}: ${rivalPuntajeTotal} pts</span>
-      `;
-    }
-
-    // Botones de acción lado a lado:
-    // Botón 1 (Principal): "🔄 SOLICITAR REVANCHA" (fondo naranja fuego #FF5E00, texto blanco, borde 3px solid #000, font-weight: 800, box-shadow: 3px 3px 0 #000)
-    if (btnRematchDuel) {
-      btnRematchDuel.style.display = 'flex';
-      btnRematchDuel.style.flex = '1 1 0';
-      btnRematchDuel.innerHTML = '<span class="btn-action-icon">🔄</span><span>SOLICITAR REVANCHA</span>';
-      btnRematchDuel.style.cssText = 'display: flex !important; flex: 1 1 0 !important; background: #FF5E00 !important; color: #FFFFFF !important; border: 3px solid #000000 !important; font-weight: 800 !important; box-shadow: 3px 3px 0 #000000 !important;';
-      btnRematchDuel.className = 'btn-duel-action btn-rematch-duel btn-rematch-defeat interactive-press';
-    }
-    // Botón 2 (Secundario): "VOLVER A DESAFÍOS" (botón de texto o pastilla discreta)
-    if (btnDuelBackToChallenges) {
-      btnDuelBackToChallenges.style.display = 'flex';
-      btnDuelBackToChallenges.style.flex = '1 1 0';
-      btnDuelBackToChallenges.innerText = 'VOLVER A DESAFÍOS';
-      btnDuelBackToChallenges.className = 'btn-duel-action btn-back-challenges btn-return-challenges btn-secondary-back interactive-press';
-    }
-  }
 }
 window.renderResultadosDesafio = renderResultadosDesafio;
 
@@ -9945,6 +9818,9 @@ function setupCreditsAndFeedbackModals() {
     if (localStorage.getItem('superquiz_egg_tmnt') === 'true') {
       creditsEasterEgg.classList.add('claimed');
       creditsEasterEgg.innerHTML = "✓ ¡PIZZA COBRADA! +10 🪙";
+    } else {
+      creditsEasterEgg.classList.remove('claimed');
+      creditsEasterEgg.innerHTML = '<img src="assets/global/pizza.webp" class="btn-asset-icon" alt="Pizza"> Toca aquí si te gusta la pizza ninja…';
     }
   }
 
@@ -10181,7 +10057,8 @@ async function renderRankingUI() {
             username: d.username || 'Jugador',
             country: d.country || 'WORLD',
             xp: typeof d.xp === 'number' ? d.xp : 0,
-            coins: typeof d.coins === 'number' ? d.coins : 0
+            coins: typeof d.coins === 'number' ? d.coins : 0,
+            avatar: d.customAvatar || d.avatar || (d.gender === 'mujer' ? 'assets/pantalla_inicio/mujer.webp' : 'assets/pantalla_inicio/hombre.webp')
           });
         });
       }
@@ -10200,6 +10077,7 @@ async function renderRankingUI() {
       country: currentCountry,
       xp: userScore,
       coins: state.coins || 50,
+      avatar: window.state?.customAvatar || state.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp',
       isLocalUser: true
     });
   }
@@ -10217,9 +10095,9 @@ async function renderRankingUI() {
   }
 
   // 3. Renderizar Puestos del Podio (1, 2 y 3)
-  const p1 = usersList[0] || { username: `${currentUsername}`, country: currentCountry, xp: userScore };
-  const p2 = usersList[1] || { username: 'Lugar disponible', country: '', xp: 0 };
-  const p3 = usersList[2] || { username: 'Lugar disponible', country: '', xp: 0 };
+  const p1 = usersList[0] || { username: `${currentUsername}`, country: currentCountry, xp: userScore, avatar: 'assets/pantalla_inicio/hombre.webp' };
+  const p2 = usersList[1] || { username: 'Lugar disponible', country: '', xp: 0, avatar: 'assets/pantalla_inicio/hombre.webp' };
+  const p3 = usersList[2] || { username: 'Lugar disponible', country: '', xp: 0, avatar: 'assets/pantalla_inicio/mujer.webp' };
 
   const formatPodiumName = (player) => {
     if (!player || player.username === 'Lugar disponible') return player?.username || 'Lugar disponible';
@@ -10241,6 +10119,24 @@ async function renderRankingUI() {
   const p3Score = document.querySelector('#podium3 .podium-score');
   if (p3Name) p3Name.textContent = formatPodiumName(p3);
   if (p3Score) p3Score.textContent = `${(p3.xp || 0).toLocaleString()} pts`;
+
+  // 4. Renderizar Puestos 4 y 5
+  const p4 = usersList[3] || { username: 'Lugar disponible', country: '', xp: 0, avatar: 'assets/pantalla_inicio/hombre.webp' };
+  const p5 = usersList[4] || { username: 'Lugar disponible', country: '', xp: 0, avatar: 'assets/pantalla_inicio/mujer.webp' };
+
+  const p4Name = document.getElementById('rankingRow4Name');
+  const p4Xp = document.getElementById('rankingRow4Xp');
+  const p4Avatar = document.getElementById('rankingRow4Avatar');
+  if (p4Name) p4Name.textContent = formatPodiumName(p4);
+  if (p4Xp) p4Xp.textContent = `${(p4.xp || 0).toLocaleString()} pts`;
+  if (p4Avatar && p4.avatar) p4Avatar.src = p4.avatar;
+
+  const p5Name = document.getElementById('rankingRow5Name');
+  const p5Xp = document.getElementById('rankingRow5Xp');
+  const p5Avatar = document.getElementById('rankingRow5Avatar');
+  if (p5Name) p5Name.textContent = formatPodiumName(p5);
+  if (p5Xp) p5Xp.textContent = `${(p5.xp || 0).toLocaleString()} pts`;
+  if (p5Avatar && p5.avatar) p5Avatar.src = p5.avatar;
 }
 window.renderRankingUI = renderRankingUI;
 
@@ -10749,11 +10645,11 @@ function renderChallengesUI() {
 
         // 2. TRANSFORMAR LA TARJETA SEGÚN EL ROL DEL USUARIO:
         if (soyGanador) {
-          statusHtml = `<div class="status-indicator status-victory" style="color: #00FF66; font-weight: 800; text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);">👑 ¡VICTORIA DEFINITIVA!</div>`;
-          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed challenge-btn-victory interactive-press" data-challenge-id="${ch.id}" style="background: #FFE600; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESUMEN 🏆</button>`;
+          statusHtml = `<div class="status-indicator status-victory" style="color: #00FF66; font-weight: 800; text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);"><img src="assets/global/corona.webp" class="btn-asset-icon" alt="Corona"> ¡VICTORIA DEFINITIVA!</div>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed challenge-btn-victory interactive-press" data-challenge-id="${ch.id}" style="background: #ffed31; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESUMEN <img src="assets/global/trofeo.webp" class="btn-asset-icon" alt="Trofeo"></button>`;
         } else if (esEmpate) {
           statusHtml = `<div class="status-indicator status-tie" style="color: #FFCC00; font-weight: 800;"><span class="status-tie-icon">🤝</span> ¡EMPATE!</div>`;
-          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}" style="background: #FFE600; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESULTADO 🏆</button>`;
+          buttonHtml = `<button class="challenge-play-btn challenge-btn-completed interactive-press" data-challenge-id="${ch.id}" style="background: #ffed31; border: 3px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; color: #000;">VER RESULTADO <img src="assets/global/trofeo.webp" class="btn-asset-icon" alt="Trofeo"></button>`;
         } else {
           // Si soyGanador === false (Perdedor)
           statusHtml = `<div class="status-indicator status-defeat" style="color: #FF3B30; font-weight: 800; text-shadow: 0 0 8px rgba(255, 59, 48, 0.35);">💀 DERROTA</div>`;
@@ -10773,7 +10669,7 @@ function renderChallengesUI() {
         } else {
           statusHtml = `<div class="status-indicator status-waiting"><span class="status-clock">⏳</span> Esperando (${roundLabel})</div>`;
         }
-        buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled><span class="btn-waiting-icon">🔥</span> ESPERANDO RIVAL...</button>`;
+        buttonHtml = `<button class="challenge-play-btn challenge-btn-waiting" disabled><span class="btn-waiting-icon"><img src="assets/global/fuego.webp" class="btn-asset-icon" alt="Fuego"></span> ESPERANDO RIVAL...</button>`;
       }
 
       return `
@@ -12969,16 +12865,6 @@ document.addEventListener('DOMContentLoaded', () => {
     openProfileModal();
   });
 
-  // Botón Ver Todo en Sección Packs de la Tienda -> Lleva a #collectionView
-  document.getElementById('btnStorePacksSeeAll')?.addEventListener('click', () => {
-    if (typeof SoundManager !== 'undefined') {
-      SoundManager.playSFX('botones.wav', 0.60);
-    } else {
-      playClickSound();
-    }
-    navigateToScreen('collectionView');
-  });
-
   // Compra de Potenciadores
   document.querySelectorAll('#storeView .btn-buy-booster').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -13212,12 +13098,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnReplayIntro')?.addEventListener('click', () => {
     navigateToScreen('homeView');
     triggerAppEntranceAnimation();
-  });
-
-  document.getElementById('btnRestartIntroModal')?.addEventListener('click', () => {
-    closeModal('modalSettings');
-    navigateToScreen('homeView');
-    setTimeout(triggerAppEntranceAnimation, 300);
   });
 
   const btnToggleSound = document.getElementById('btnToggleSound');
