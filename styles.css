@@ -8732,11 +8732,18 @@ body.theme-verano {
 #challengeResultView.is-defeat #btnRematchDuel {
   display: flex !important;
   flex: 1 1 0 !important;
-  background: #FF5E00 !important;
-  color: #FFFFFF !important;
+  background: #2ee2b6 !important;
+  color: #000000 !important;
   border: 3px solid #000000 !important;
+  border-radius: 16px !important;
   font-weight: 800 !important;
   box-shadow: 3px 3px 0px #000000 !important;
+  padding: 12px 8px !important;
+  min-height: 48px;
+  font-size: 13px !important;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 #challengeResultView.is-defeat #btnDuelBackToChallenges {
@@ -8745,7 +8752,14 @@ body.theme-verano {
   background: rgba(255, 255, 255, 0.12) !important;
   color: #FFFFFF !important;
   border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 16px !important;
   box-shadow: 2px 2px 0px #000000 !important;
+  padding: 12px 8px !important;
+  min-height: 48px;
+  font-size: 13px !important;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .duel-results-bg {
@@ -8811,8 +8825,11 @@ body.theme-verano {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: max(48px, env(safe-area-inset-top, 48px)) 16px max(24px, env(safe-area-inset-bottom, 24px)) 16px;
+  align-items: center;
+  padding: max(14px, env(safe-area-inset-top, 14px)) 16px max(20px, env(safe-area-inset-bottom, 20px)) 16px;
   box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Encabezado y Podio */
@@ -8821,7 +8838,8 @@ body.theme-verano {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  flex-shrink: 0;
   will-change: transform, opacity;
 }
 
@@ -8844,9 +8862,9 @@ body.theme-verano {
 }
 
 .duel-outcome-title {
-  margin: 2px 0 4px 0;
+  margin: 2px 0 2px 0;
   font-family: var(--font-retro-heavy), sans-serif;
-  font-size: clamp(17px, 4.8vw, 22px);
+  font-size: clamp(16px, 4.5vw, 21px);
   font-weight: 900;
   color: #FFFFFF !important;
   text-align: center;
@@ -8856,9 +8874,9 @@ body.theme-verano {
 }
 
 .duel-outcome-subtitle {
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   font-family: var(--font-body), sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: #FAF8F5;
   text-align: center;
@@ -8872,7 +8890,7 @@ body.theme-verano {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 4px auto 8px auto;
+  margin: 2px auto 4px auto;
 }
 
 .winner-podium-wrap {
@@ -8884,10 +8902,10 @@ body.theme-verano {
 
 .winner-podium-crown {
   position: absolute;
-  top: -14px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%) rotate(-6deg);
-  font-size: 30px;
+  font-size: 26px;
   z-index: 20;
   filter: drop-shadow(2px 2px 0px #000000);
   animation: crownBounce 1.5s ease-in-out infinite alternate;
@@ -8900,14 +8918,14 @@ body.theme-verano {
 }
 
 .winner-podium-frame {
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   border: 4px solid #000000;
-  box-shadow: 0 0 0 4px #FFE600, 6px 6px 0px rgba(0, 0, 0, 0.5); /* Resplandor dorado con sombra sólida */
+  box-shadow: 0 0 0 4px #FFE600, 5px 5px 0px rgba(0, 0, 0, 0.5); /* Resplandor dorado con sombra sólida */
   position: relative;
   overflow: visible;
-  margin: 12px auto;
+  margin: 8px auto 4px auto;
   background: #FFFFFF;
   display: flex;
   align-items: center;
@@ -8937,8 +8955,8 @@ body.theme-verano {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   pointer-events: none;
@@ -9075,13 +9093,14 @@ body.theme-verano {
 .duel-performance-card {
   width: 100%;
   max-width: 350px;
-  margin: 8px auto;
+  margin: 0 auto;
   background: var(--color-ivory);
   border: var(--border-atomic);
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow: var(--shadow-atomic);
-  padding: 16px 18px;
+  padding: 12px 14px;
   box-sizing: border-box;
+  flex-shrink: 0;
   will-change: transform, opacity;
 }
 
@@ -9089,9 +9108,9 @@ body.theme-verano {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
   border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
 }
 
@@ -9106,23 +9125,23 @@ body.theme-verano {
 .perf-hits-badge {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 5px;
   background: rgba(45, 226, 182, 0.2);
   border: 2px solid var(--color-mint);
   border-radius: 9999px;
-  padding: 4px 14px;
+  padding: 3px 12px;
 }
 
 .hits-number {
   font-family: var(--font-data-pixel);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 900;
   color: #065F46;
 }
 
 .hits-label {
   font-family: var(--font-body), sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
   color: #166534;
 }
@@ -9130,24 +9149,24 @@ body.theme-verano {
 .perf-stats-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .perf-stat-box {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: #FFFFFF;
   border: 3px solid #000000;
-  border-radius: 14px;
-  padding: 8px 12px;
+  border-radius: 12px;
+  padding: 6px 12px;
   box-shadow: 2px 2px 0 #000000;
 }
 
 .perf-stat-box .stat-icon {
-  font-size: 22px;
-  width: 32px;
+  font-size: 20px;
+  width: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9160,7 +9179,7 @@ body.theme-verano {
 
 .perf-stat-box .stat-label {
   font-family: var(--font-body), sans-serif;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
   color: #64748B;
 }
@@ -9192,7 +9211,8 @@ body.theme-verano {
 .duel-results-footer {
   width: 100%;
   max-width: 350px;
-  margin: 0 auto;
+  margin: 4px auto 0 auto;
+  flex-shrink: 0;
   will-change: transform, opacity;
 }
 
@@ -9216,7 +9236,7 @@ body.theme-verano {
   flex: 1 1 0;
   width: auto !important;
   min-width: 0;
-  padding: 12px 10px !important;
+  padding: 12px 8px !important;
   font-size: 13px !important;
   text-align: center;
   justify-content: center;
@@ -9258,18 +9278,18 @@ body.theme-verano {
   box-shadow: var(--shadow-atomic);
 }
 
-/* Ajustes de desplazamiento y área segura para resultados de desafío completados */
+/* Ajustes limpios y estables para resultados de desafío completados */
 #challengeResultView.is-victory .duel-performance-card,
 #challengeResultView.is-defeat .duel-performance-card,
 #challengeResultView.is-completed .duel-performance-card {
-  transform: translateY(-15px);
+  transform: none;
 }
 
 #challengeResultView.is-victory .duel-results-footer,
 #challengeResultView.is-defeat .duel-results-footer,
 #challengeResultView.is-completed .duel-results-footer {
-  transform: translateY(-15px);
-  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  transform: none;
+  padding-bottom: 0;
 }
 
 .btn-pass-turn {
@@ -9280,8 +9300,8 @@ body.theme-verano {
   box-shadow: 3px 3px 0px #000000 !important;
   font-family: var(--font-main, 'Futura', sans-serif) !important;
   font-weight: 900 !important;
-  font-size: 14.5px !important;
-  padding: 14px 20px !important;
+  font-size: 14px !important;
+  padding: 13px 18px !important;
   width: 100% !important;
   cursor: pointer;
   display: flex;
@@ -9298,15 +9318,16 @@ body.theme-verano {
   box-shadow: 3px 3px 0px #000000 !important;
   font-family: var(--font-main, 'Futura', sans-serif) !important;
   font-weight: 800 !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   text-transform: uppercase !important;
-  padding: 13px !important;
+  padding: 12px 8px !important;
+  min-height: 48px;
   width: 100% !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   box-sizing: border-box;
 }
 
@@ -9318,8 +9339,9 @@ body.theme-verano {
   box-shadow: 3px 3px 0px #000000 !important;
   font-family: var(--font-main, 'Futura', sans-serif) !important;
   font-weight: 800 !important;
-  font-size: 14px !important;
-  padding: 13px !important;
+  font-size: 13px !important;
+  padding: 12px 8px !important;
+  min-height: 48px;
   width: 100% !important;
   cursor: pointer;
   display: flex;
@@ -9364,6 +9386,29 @@ body.theme-verano {
   background: #F3F4F6 !important;
 }
 
+@media (max-height: 700px) {
+  .duel-results-content {
+    padding: max(8px, env(safe-area-inset-top, 8px)) 12px max(14px, env(safe-area-inset-bottom, 14px)) 12px;
+  }
+  .winner-podium-frame,
+  .winner-smoke-overlay {
+    width: 80px;
+    height: 80px;
+  }
+  .winner-podium-frame {
+    margin: 4px auto;
+  }
+  .duel-performance-card {
+    padding: 8px 12px;
+  }
+  .perf-stats-grid {
+    gap: 4px;
+  }
+  .perf-stat-box {
+    padding: 4px 10px;
+  }
+}
+
 /* =============================================================================
    MICROINTERACCIÓN: BOTÓN "VOLVER A DESAFÍOS" (#challengeResultView)
    ============================================================================= */
@@ -9390,6 +9435,11 @@ body.theme-verano {
   animation: challengeBtnBounce 2s ease-in-out infinite;
   will-change: transform;
   transform-origin: center center;
+}
+
+#challengeResultView.is-defeat #btnDuelBackToChallenges,
+#challengeResultView.is-defeat #btnRematchDuel {
+  animation: none !important;
 }
 
 #challengeResultView .btn-return-challenges:active,
