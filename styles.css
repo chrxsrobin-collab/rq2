@@ -17,6 +17,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Futura Medium';
+  src: url('assets/fonts/FuturaCyrillicMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
    RETRO QUIZ - ESTILOS PRINCIPALES Y ANIMACIONES
    ========================================================================== */
@@ -39,7 +47,7 @@
   
   /* Tipografías Oficiales */
   --font-retro-heavy: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
-  --font-body: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
+  --font-body: 'Futura', 'Futura Medium', 'League Spartan', 'Century Gothic', 'Trebuchet MS', sans-serif;
   --font-pixel: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
   --font-data-pixel: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
   --font-retro-sub: 'Futura', 'League Spartan', 'Trebuchet MS', sans-serif;
@@ -5287,9 +5295,12 @@ body.theme-verano {
 .trivia-question-text,
 .question-text,
 #triviaView .card-title,
-#triviaQuestionText {
-  font-family: var(--font-main, 'Futura', sans-serif);
+#triviaQuestionText,
+#triviaQuestionTitle {
+  font-family: var(--font-body);
   font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   font-size: clamp(17px, 4.5vw, 21px);
   line-height: 1.35;
   font-synthesis: none; /* Evita que el navegador genere pseudo-bold en glifos no indexados */
@@ -5375,8 +5386,16 @@ body.theme-verano {
 .badge-c { background: #F97316; }
 .badge-d { background: #22C55E; }
 
-.option-text {
-  font-family: var(--font-retro-heavy);
+.option-text,
+.option-btn,
+.option-btn text,
+.option-btn .option-text,
+.trivia-option-btn .option-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
   font-size: 15px;
   color: #181414;
   line-height: 1.25;

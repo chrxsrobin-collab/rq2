@@ -160,8 +160,10 @@ const state = {
   userScore: 0, // Puntaje/XP acumulado del usuario
   winStreak: 0, // Racha de victorias consecutivas
   currentStreak: 0, // Racha de respuestas correctas
+  streakRecovery: 0, // Contador para recuperación de vida (cada 2 aciertos seguidos)
   unlockedPacks: [], // IDs de packs temáticos adquiridos (ej: ["vecinos_springfield"])
   packMastery: {}, // Preguntas dominadas por pack temático (ej: { vecinos_springfield: ["spr_001", "spr_002"] })
+  activeThematicPack: null, // ID del pack temático activo
   activeThematicPackId: null, // ID del pack temático en juego directo
   allCategoriesUnlocked: true, // Todas las categorías habilitadas por defecto
   allUnlocked: true, // Estado global de desbloqueo completo
@@ -266,6 +268,7 @@ window.state = state;
 window.state.currentView = '#homeView';
 window.state.activeMatchesList = state.activeMatchesList;
 window.state.themes = state.themes;
+window.state.streakRecovery = 0;
 
 const THEME_SKINS = {
   navidad: { name: "Navidad Retro", cost: 3000, bodyClass: "theme-navidad" },
@@ -1025,8 +1028,16 @@ function showView(targetId) {
       SoundManager.stopSpinSound();
       // La música de trivia arrancará en startTriviaTimer() al hacerse visible e iniciar el temporizador de 15s
     } else if (targetSelector === '#gameOverView') {
+      clearInterval(state.trivia.timerInterval);
+      if (window.state?.timerInterval) clearInterval(window.state.timerInterval);
+      if (window.triviaTimerInterval) clearInterval(window.triviaTimerInterval);
       SoundManager.stopAllBGM();
-      // En #gameOverView se elimina la reproducción simultánea o previa de gameover.mp3
+      const gameOverView = document.getElementById('gameOverView');
+      if (gameOverView && !gameOverView.classList.contains('active')) {
+        if (typeof triggerGameOver === 'function') {
+          triggerGameOver();
+        }
+      }
     } else if (targetSelector === '#resultsView') {
       playResultsAudioSequence();
     } else if (targetSelector === '#challengeResultView') {
@@ -1952,6 +1963,8 @@ async function iniciarJuegoPack(packId) {
     window.state.currentRoundQuestions = roundQuestions;
     window.state.currentQuestionIndex = 0;
     window.state.lives = 3;
+    window.state.streakRecovery = 0;
+    window.state.isTransitioningRound = false;
     window.state.correctAnswersCount = 0;
     window.state.currentRoundXP = 0;
     window.state.accumulatedAnswerTimeMs = 0;
@@ -1960,6 +1973,7 @@ async function iniciarJuegoPack(packId) {
 
     state.isChallengeMode = false;
     state.isTieBreaker = false;
+    state.streakRecovery = 0;
     state.currentRoundXP = 0;
     state.correctAnswersCount = 0;
 
@@ -6678,15 +6692,22 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   if (window.state) {
     window.state.isChallengeMode = isChallenge;
     window.state.isTieBreaker = isTieBreaker;
+    window.state.activeThematicPack = null;
+    window.state.activeThematicPackId = null;
     window.state.currentRoundQuestions = questions;
     window.state.currentQuestionIndex = 0;
     window.state.lives = 3;
+    window.state.streakRecovery = 0;
+    window.state.isTransitioningRound = false;
     window.state.correctAnswersCount = 0;
     window.state.currentRoundXP = 0;
     window.state.accumulatedAnswerTimeMs = 0;
     window.state.timeLeft = tiempoBase;
     window.state.currentStreak = 0;
   }
+  state.activeThematicPack = null;
+  state.activeThematicPackId = null;
+  state.streakRecovery = 0;
   state.currentRoundXP = 0;
   state.isChallengeMode = isChallenge;
   state.isTieBreaker = isTieBreaker;
@@ -7021,6 +7042,21 @@ function updateTriviaHeartsUI(regeneratedIndex = -1) {
   });
 }
 
+function actualizarHUDVidas() {
+  const currentLives = (window.state && window.state.lives !== undefined) ? window.state.lives : (state.trivia?.lives || 0);
+  updateTriviaHeartsUI(currentLives - 1);
+}
+window.actualizarHUDVidas = actualizarHUDVidas;
+
+function showToast(msg) {
+  if (typeof showRetroToast === 'function') {
+    showRetroToast(msg, '❤️');
+  } else {
+    console.log(msg);
+  }
+}
+window.showToast = showToast;
+
 function renderizarPreguntaActual() {
   const questions = window.state.currentRoundQuestions || state.trivia.questions || [];
   const qIndex = window.state.currentQuestionIndex !== undefined ? window.state.currentQuestionIndex : (state.trivia.currentQuestionIndex || 0);
@@ -7320,6 +7356,65 @@ function animateRollingCounter(element, startVal, endVal, durationMs = 800, pref
   requestAnimationFrame(step);
 }
 
+function finalizarTandaTrivia() {
+  // Detén cualquier temporizador activo definitivamente
+  clearInterval(window.state?.timerInterval);
+  if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
+  if (window.triviaTimerInterval) clearInterval(window.triviaTimerInterval);
+
+  if (window.state.isTransitioningRound) return;
+  window.state.isTransitioningRound = true;
+
+  const isThematicPack = !!(window.state?.activeThematicPack || window.state?.activeThematicPackId || state.activeThematicPack || state.activeThematicPackId);
+
+  if (isThematicPack) {
+    // Actualiza el progreso del pack en window.state.unlockedPacks o en el registro de progreso (preguntas dominadas/aciertos)
+    const packId = window.state?.activeThematicPack || window.state?.activeThematicPackId || state.activeThematicPack || state.activeThematicPackId;
+    if (packId) {
+      if (!state.packMastery) state.packMastery = {};
+      if (window.state && !window.state.packMastery) window.state.packMastery = {};
+      if (window.state?.unlockedPacks && !window.state.unlockedPacks.includes(packId)) {
+        window.state.unlockedPacks.push(packId);
+      }
+      if (state.unlockedPacks && !state.unlockedPacks.includes(packId)) {
+        state.unlockedPacks.push(packId);
+      }
+      if (typeof savePackProgressToCloud === 'function') {
+        try { savePackProgressToCloud(); } catch (e) {}
+      }
+    }
+
+    // Modo Colección: NO intentar invocar cálculos de XP ni variables exclusivas de ruleta
+    showView('#resultsView');
+    if (typeof confetti === 'function') {
+      try { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } catch (e) {}
+    }
+    if (typeof renderizarResultados === 'function') {
+      renderizarResultados(state.trivia.correctAnswersCount);
+    } else if (typeof showResults === 'function') {
+      showResults(state.trivia.correctAnswersCount);
+    }
+    return;
+  }
+
+  // Enrutamiento según el modo (llamada única sin callbacks redundantes):
+  if (window.state.isChallengeMode) {
+    guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
+  } else {
+    // Modo Clásico / Ruleta
+    showView('#resultsView');
+    if (typeof confetti === 'function') {
+      try { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } catch (e) {}
+    }
+    if (typeof renderizarResultados === 'function') {
+      renderizarResultados(state.trivia.correctAnswersCount);
+    } else if (typeof showResults === 'function') {
+      showResults(state.trivia.correctAnswersCount);
+    }
+  }
+}
+window.finalizarTandaTrivia = finalizarTandaTrivia;
+
 function handleTriviaAnswer(selectedIndex) {
   if (state.trivia.isAnswering) return;
   state.trivia.isAnswering = true;
@@ -7361,18 +7456,22 @@ function handleTriviaAnswer(selectedIndex) {
     window.state.currentStreak = (window.state.currentStreak || 0) + 1;
     state.trivia.currentStreak = window.state.currentStreak;
 
-    // Bonificación por racha: cada 4 aciertos seguidos regenera +1 vida si < 3
-    if (window.state.currentStreak === 4) {
+    // Recuperación de vida (cada 2 aciertos seguidos):
+    window.state.streakRecovery = (window.state.streakRecovery || 0) + 1;
+    if (window.state.streakRecovery >= 2) {
       const currentLives = (window.state.lives !== undefined) ? window.state.lives : (state.trivia.lives || 0);
       if (currentLives < 3) {
         const newLives = currentLives + 1;
         window.state.lives = newLives;
         state.trivia.lives = newLives;
-        updateTriviaHeartsUI(newLives - 1);
-        showLifeRegeneratedFeedback();
+        actualizarHUDVidas(); // Vuelve a encender el corazón correspondiente
+        if (typeof showToast === 'function') {
+          showToast("+1 VIDA RECUPERADA ❤️");
+        } else if (typeof showRetroToast === 'function') {
+          showRetroToast("+1 VIDA RECUPERADA ❤️", '❤️');
+        }
       }
-      window.state.currentStreak = 0;
-      state.trivia.currentStreak = 0;
+      window.state.streakRecovery = 0; // Reinicia el contador de recuperación
     }
 
     state.trivia.correctAnswersCount = (state.trivia.correctAnswersCount || 0) + 1;
@@ -7448,26 +7547,7 @@ function handleTriviaAnswer(selectedIndex) {
         const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
-          // Detén el temporizador definitivamente
-          clearInterval(window.state.timerInterval);
-          if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
-
-          if (window.state.isTransitioningRound) return;
-          window.state.isTransitioningRound = true;
-
-          // Enrutamiento según el modo (llamada única sin callbacks redundantes):
-          if (window.state.isChallengeMode) {
-            guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
-          } else {
-            // Modo Clásico / Ruleta
-            showView('#resultsView');
-            if (typeof confetti === 'function') {
-              confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            }
-            if (typeof showResults === 'function') {
-              showResults(state.trivia.correctAnswersCount);
-            }
-          }
+          finalizarTandaTrivia();
           return;
         } else {
           renderizarPreguntaActual();
@@ -7497,6 +7577,7 @@ function handleTriviaAnswer(selectedIndex) {
       }
     });
 
+    window.state.streakRecovery = 0; // Se corta la racha
     window.state.currentStreak = 0;
     state.trivia.currentStreak = 0;
     state.trivia.lives--;
@@ -7510,14 +7591,15 @@ function handleTriviaAnswer(selectedIndex) {
 
     // CONECTAR AL AGOTARSE LAS VIDAS (lives <= 0)
     if (window.state.lives <= 0) {
+      clearInterval(window.state.timerInterval);
+      if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
+      if (window.triviaTimerInterval) clearInterval(window.triviaTimerInterval);
       setTimeout(() => {
         if (window.state.isTransitioningRound) return;
         window.state.isTransitioningRound = true;
 
         if (window.state.isChallengeMode) {
           // En modo desafío NUNCA mostrar game over, ir directo a resultados exclusivos de la ronda
-          clearInterval(window.state.timerInterval);
-          if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
           guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
         } else {
           ejecutarSecuenciaGameOver('Te has quedado sin vidas');
@@ -7537,26 +7619,7 @@ function handleTriviaAnswer(selectedIndex) {
           const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
           if (window.state.currentQuestionIndex >= totalPreguntas || 
               (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
-            // Detén el temporizador definitivamente
-            clearInterval(window.state.timerInterval);
-            if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
-
-            if (window.state.isTransitioningRound) return;
-            window.state.isTransitioningRound = true;
-
-            // Enrutamiento según el modo:
-            if (window.state.isChallengeMode) {
-              guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
-            } else {
-              // Modo Clásico / Ruleta
-              showView('#resultsView');
-              if (typeof confetti === 'function') {
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-              }
-              if (typeof showResults === 'function') {
-                showResults(state.trivia.correctAnswersCount);
-              }
-            }
+            finalizarTandaTrivia();
             return;
           } else {
             renderizarPreguntaActual();
@@ -7609,6 +7672,7 @@ function handleTriviaTimeout() {
   // Registrar penalización de tiempo de respuesta (10s) en timeout
   window.state.accumulatedAnswerTimeMs = (window.state.accumulatedAnswerTimeMs || 0) + 10000;
 
+  window.state.streakRecovery = 0; // Se corta la racha
   window.state.currentStreak = 0;
   state.trivia.currentStreak = 0; // Reiniciar racha al agotarse el tiempo
   recordTriviaAnswerResult(false);
@@ -7623,14 +7687,15 @@ function handleTriviaTimeout() {
 
   // CONECTAR AL AGOTARSE LAS VIDAS EN TIMEOUT (lives <= 0)
   if (window.state.lives <= 0) {
+    clearInterval(window.state.timerInterval);
+    if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
+    if (window.triviaTimerInterval) clearInterval(window.triviaTimerInterval);
     setTimeout(() => {
       if (window.state.isTransitioningRound) return;
       window.state.isTransitioningRound = true;
 
       if (window.state.isChallengeMode) {
         // En modo desafío NUNCA mostrar game over, ir directo a resultados de la ronda
-        clearInterval(window.state.timerInterval);
-        if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
         guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
       } else {
         ejecutarSecuenciaGameOver('Se agotó el tiempo y te has quedado sin vidas');
@@ -7650,26 +7715,7 @@ function handleTriviaTimeout() {
         const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
-          // Detén el temporizador definitivamente
-          clearInterval(window.state.timerInterval);
-          if (state.trivia && state.trivia.timerInterval) clearInterval(state.trivia.timerInterval);
-
-          if (window.state.isTransitioningRound) return;
-          window.state.isTransitioningRound = true;
-
-          // Enrutamiento según el modo:
-          if (window.state.isChallengeMode) {
-            guardarPuntosRondaDesafio(state.trivia.correctAnswersCount);
-          } else {
-            // Modo Clásico / Ruleta
-            showView('#resultsView');
-            if (typeof confetti === 'function') {
-              confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            }
-            if (typeof showResults === 'function') {
-              showResults(state.trivia.correctAnswersCount);
-            }
-          }
+          finalizarTandaTrivia();
           return;
         } else {
           renderizarPreguntaActual();
@@ -7931,6 +7977,16 @@ function triggerGameOver(reason = 'Te has quedado sin vidas') {
     }
     // Restablecer vidas a 3 en el HUD y estado
     state.trivia.lives = 3;
+    if (window.state) {
+      window.state.lives = 3;
+      window.state.streakRecovery = 0;
+      window.state.isTransitioningRound = false;
+      window.state.activeThematicPack = null;
+      window.state.activeThematicPackId = null;
+    }
+    state.streakRecovery = 0;
+    state.activeThematicPack = null;
+    state.activeThematicPackId = null;
     state.trivia.sessionCoins = 0;
     state.trivia.currentQuestionIndex = 0;
     state.trivia.correctAnswersCount = 0;
@@ -7965,170 +8021,207 @@ function triggerGameOver(reason = 'Te has quedado sin vidas') {
   }, 4000);
 }
 
+function renderizarResultados(aciertos = 10) {
+  return showResults(aciertos);
+}
+window.renderizarResultados = renderizarResultados;
+
 function showResults(aciertos = 10) {
-  // 1. Asegurar aciertos entre 0 y 10
-  const correctCount = Math.max(0, Math.min(10, parseInt(aciertos, 10) || 0));
-  if (window.state) window.state.correctAnswersCount = correctCount;
-  state.correctAnswersCount = correctCount;
-
-  // 2. Detener temporizador de trivia y alarmas
-  clearInterval(state.trivia.timerInterval);
-  state.trivia.isPaused = false;
-  state.trivia.isAnswering = false;
-
-  const triviaView = document.getElementById('triviaView');
-  if (triviaView) triviaView.classList.remove('siren-panic');
-
-  const abandonModal = document.getElementById('abandonModal');
-  if (abandonModal) abandonModal.style.display = 'none';
-
-  // 3. Métricas de la Sesión: En MODO SOLITARIO se otorga ÚNICAMENTE RetroCoins (XP ganada = 0)
-  if (!window.state) window.state = state;
-
-  const currentRoundXP = 0;
-  window.state.currentRoundXP = 0;
-  state.currentRoundXP = 0;
-
-  // Monedas dinámicas acumuladas en la sesión
-  const sessionCoins = (state.trivia.sessionCoins !== undefined && state.trivia.sessionCoins > 0)
-    ? state.trivia.sessionCoins
-    : (correctCount * 5);
-
-  // Incrementar Racha consecutiva (mínimo 1 al ganar/completar)
-  state.winStreak = Math.max(1, (state.winStreak || 0) + 1);
-
-  // En solitario la XP no se incrementa (sólo Modo Desafíos otorga XP)
-  const currentTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
-  window.state.xp = currentTotalXP;
-  state.userScore = currentTotalXP;
-  const prevCoins = state.coins;
-  window.state.coins = state.coins + sessionCoins;
-  state.coins = window.state.coins;
-
-  if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
-
-  // Actualizar progreso en localStorage
   try {
-    localStorage.setItem('retroquiz_coins', String(state.coins));
-  } catch (err) {
-    console.warn('Error saving Coins to localStorage:', err);
-  }
+    const isThematicPack = !!(window.state?.activeThematicPack || window.state?.activeThematicPackId || state.activeThematicPack || state.activeThematicPackId);
 
-  // Sincronizar actualización en Firestore si el usuario está autenticado
-  if (window.db && window.firestoreOps && window.state && window.state.userId) {
+    // 1. Asegurar aciertos entre 0 y 10
+    const correctCount = Math.max(0, Math.min(10, parseInt(aciertos, 10) || 0));
+    if (window.state) window.state.correctAnswersCount = correctCount;
+    state.correctAnswersCount = correctCount;
+
+    // 2. Detener temporizador de trivia y alarmas
+    clearInterval(state.trivia.timerInterval);
+    if (window.state?.timerInterval) clearInterval(window.state.timerInterval);
+    if (window.triviaTimerInterval) clearInterval(window.triviaTimerInterval);
+    state.trivia.isPaused = false;
+    state.trivia.isAnswering = false;
+
+    const triviaView = document.getElementById('triviaView');
+    if (triviaView) triviaView.classList.remove('siren-panic');
+
+    const abandonModal = document.getElementById('abandonModal');
+    if (abandonModal) abandonModal.style.display = 'none';
+
+    // 3. Métricas de la Sesión: En MODO SOLITARIO se otorga ÚNICAMENTE RetroCoins (XP ganada = 0)
+    if (!window.state) window.state = state;
+
+    const currentRoundXP = 0;
+    window.state.currentRoundXP = 0;
+    state.currentRoundXP = 0;
+
+    // Monedas dinámicas acumuladas en la sesión
+    const sessionCoins = (state.trivia.sessionCoins !== undefined && state.trivia.sessionCoins > 0)
+      ? state.trivia.sessionCoins
+      : (correctCount * 5);
+
+    // Incrementar Racha consecutiva (mínimo 1 al ganar/completar)
+    state.winStreak = Math.max(1, (state.winStreak || 0) + 1);
+
+    // En solitario la XP no se incrementa (sólo Modo Desafíos otorga XP)
+    const currentTotalXP = (window.state.xp !== undefined && window.state.xp !== null) ? window.state.xp : (state.userScore || 0);
+    window.state.xp = currentTotalXP;
+    state.userScore = currentTotalXP;
+    const prevCoins = state.coins;
+    window.state.coins = state.coins + sessionCoins;
+    state.coins = window.state.coins;
+
+    if (typeof saveCoinsToCloud === 'function') {
+      try { saveCoinsToCloud(state.coins); } catch (e) {}
+    }
+
+    // Actualizar progreso en localStorage
     try {
-      const { doc, updateDoc } = window.firestoreOps;
-      const userRef = doc(window.db, "usuarios", window.state.userId);
-      updateDoc(userRef, {
-        coins: window.state.coins,
-        updatedAt: new Date().toISOString()
-      }).catch(err => console.error("Error al actualizar datos en Firestore (showResults):", err));
+      localStorage.setItem('retroquiz_coins', String(state.coins));
     } catch (err) {
-      console.error("Error al preparar updateDoc en showResults:", err);
+      console.warn('Error saving Coins to localStorage:', err);
     }
-  }
 
-  // Nivel del jugador: Nivel 12 base + 1 nivel cada 250 XP acumulados
-  const playerLevel = 12 + Math.floor(state.userScore / 250);
-  try {
-    localStorage.setItem('retroquiz_player_level', String(playerLevel));
-  } catch (e) {}
-
-  const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
-  if (profileBadge) {
-    const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
-    profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
-  }
-
-  // Actualizar indicadores del usuario y modal ranking
-  const rankingUserPts = document.getElementById('rankingUserPts');
-  if (rankingUserPts) rankingUserPts.innerText = `${state.userScore.toLocaleString()} pts`;
-  
-  if (typeof updateHUD === 'function') updateHUD();
-
-  renderCollectionCardsUI();
-  updateWheelCategoriesUI();
-
-  // 4. Encabezado y Textos Dinámicos con Fallback Total
-  const resultsTitle = document.getElementById('resultsTitle');
-  const resultsSubtitle = document.getElementById('resultsSubtitle');
-  if (resultsTitle) {
-    if (correctCount >= 10) {
-      resultsTitle.innerText = '¡WOW, impresionante!';
-    } else if (correctCount === 9) {
-      resultsTitle.innerText = '¡MUY BIEN!';
-    } else if (correctCount === 8) {
-      resultsTitle.innerText = '¡POR POQUITO!';
-    } else if (correctCount >= 5) {
-      resultsTitle.innerText = '¡BIEN JUGADO!';
-    } else {
-      resultsTitle.innerText = '¡SIGUE PRACTICANDO!';
+    // Sincronizar actualización en Firestore si el usuario está autenticado
+    if (window.db && window.firestoreOps && window.state && window.state.userId) {
+      try {
+        const { doc, updateDoc } = window.firestoreOps;
+        const userRef = doc(window.db, "usuarios", window.state.userId);
+        updateDoc(userRef, {
+          coins: window.state.coins,
+          updatedAt: new Date().toISOString()
+        }).catch(err => console.error("Error al actualizar datos en Firestore (showResults):", err));
+      } catch (err) {
+        console.error("Error al preparar updateDoc en showResults:", err);
+      }
     }
-  }
-  if (resultsSubtitle) {
-    resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10`;
-  }
 
-  // Desglose de Nivel y XP Total del Jugador (Esquema de rangos temáticos)
-  const playerLevelEl = document.getElementById('resultsPlayerLevel');
-  const playerXpEl = document.getElementById('resultsPlayerTotalXp');
-  const userXP = (window.state && typeof window.state.xp === 'number')
-    ? window.state.xp
-    : ((state && typeof state.xp === 'number') ? state.xp : (state?.userScore || 0));
-  const currentRank = (typeof getPlayerRank === 'function') ? getPlayerRank(userXP) : { name: 'Novato del Videoclub 📼' };
-  if (playerLevelEl) playerLevelEl.innerText = currentRank.name || currentRank.toString();
-  if (playerXpEl) playerXpEl.innerText = `${userXP.toLocaleString()} pts`;
+    // Si NO viene de una colección, actualizar nivel y XP en perfil / ranking
+    if (!isThematicPack) {
+      const playerLevel = 12 + Math.floor(state.userScore / 250);
+      try {
+        localStorage.setItem('retroquiz_player_level', String(playerLevel));
+      } catch (e) {}
 
-  // 5. Tarjeta Inferior Dual (Racha y Retrocoins)
-  const streakValEl = document.getElementById('resultsStreakVal');
-  const coinsSessionEl = document.getElementById('resultsCoinsSessionVal');
-  const coinsTotalEl = document.getElementById('resultsCoinsTotalVal');
-  if (streakValEl) streakValEl.innerText = `+${state.winStreak} 🔥`;
+      const profileBadge = document.getElementById('profileBadge') || document.querySelector('.profile-badge');
+      if (profileBadge) {
+        const userXP = (window.state && typeof window.state.xp === 'number') ? window.state.xp : (state.xp !== undefined ? state.xp : (state.userScore || 0));
+        profileBadge.innerText = `${getPlayerRank(userXP)} • ${userXP} XP`;
+      }
 
-  // Inicializar estado del contador progresivo (arranca en +0)
-  window._lastResultsSessionCoins = sessionCoins;
-  window._lastResultsPrevCoins = prevCoins;
-  window._lastResultsFinalCoins = state.coins;
+      const rankingUserPts = document.getElementById('rankingUserPts');
+      if (rankingUserPts) rankingUserPts.innerText = `${state.userScore.toLocaleString()} pts`;
+    }
 
-  if (coinsSessionEl) coinsSessionEl.innerText = '+0';
-  if (coinsTotalEl) coinsTotalEl.innerText = prevCoins.toLocaleString();
+    if (typeof updateHUD === 'function') {
+      try { updateHUD(); } catch (e) {}
+    }
 
-  // 6. Secuencia de Audio y Confeti Condicional en Resultados
-  playResultsAudioSequence(correctCount);
-
-  // 7. Forzar Activación Directa de #resultsView ocultando todas las demás vistas
-  isNavigating = false;
-  document.querySelectorAll('.screen-view').forEach(view => {
-    view.classList.remove('active', 'slide-enter', 'slide-exit');
-    view.style.display = 'none';
-  });
-
-  const resultsView = document.getElementById('resultsView');
-  if (resultsView) {
-    resultsView.style.display = 'flex';
-    resultsView.classList.add('active');
-    state.activeTab = 'resultados';
-  }
-
-  // Sincronizar Hash sin disparar bucles de eventos
-  if (window.location.hash !== '#resultados') {
     try {
-      history.replaceState(null, '', '#resultados');
-    } catch (e) {
-      window.location.hash = '#resultados';
+      renderCollectionCardsUI();
+      if (!isThematicPack) {
+        updateWheelCategoriesUI();
+      }
+    } catch (e) {}
+
+    // 4. Encabezado y Textos Dinámicos con Fallback Total
+    const resultsTitle = document.getElementById('resultsTitle');
+    const resultsSubtitle = document.getElementById('resultsSubtitle');
+    if (resultsTitle) {
+      if (correctCount >= 10) {
+        resultsTitle.innerText = '¡WOW, impresionante!';
+      } else if (correctCount === 9) {
+        resultsTitle.innerText = '¡MUY BIEN!';
+      } else if (correctCount === 8) {
+        resultsTitle.innerText = '¡POR POQUITO!';
+      } else if (correctCount >= 5) {
+        resultsTitle.innerText = '¡BIEN JUGADO!';
+      } else {
+        resultsTitle.innerText = '¡SIGUE PRACTICANDO!';
+      }
     }
-  }
+    if (resultsSubtitle) {
+      resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10`;
+    }
 
-  // 8. Marco Central de Avatar en Solitario (#resultsUserAvatar)
-  document.querySelectorAll('.results-xp-label').forEach(el => el.remove());
-  const resultsAvatarImg = document.getElementById('resultsUserAvatar');
-  const activeAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
-  if (resultsAvatarImg) {
-    resultsAvatarImg.src = activeAvatar;
-  }
+    // Desglose de Nivel y XP Total del Jugador (Esquema de rangos temáticos)
+    const resultsLevelRow = document.getElementById('resultsLevelRow');
+    const playerLevelEl = document.getElementById('resultsPlayerLevel');
+    const playerXpEl = document.getElementById('resultsPlayerTotalXp');
+    if (isThematicPack) {
+      // En colecciones, ocultar la fila de nivel/XP para evitar campos inexistentes
+      if (resultsLevelRow) {
+        resultsLevelRow.style.display = 'none';
+      }
+    } else {
+      if (resultsLevelRow) {
+        resultsLevelRow.style.display = '';
+      }
+      const userXP = (window.state && typeof window.state.xp === 'number')
+        ? window.state.xp
+        : ((state && typeof state.xp === 'number') ? state.xp : (state?.userScore || 0));
+      const currentRank = (typeof getPlayerRank === 'function') ? getPlayerRank(userXP) : { name: 'Novato del Videoclub 📼' };
+      if (playerLevelEl) playerLevelEl.innerText = currentRank.name || currentRank.toString();
+      if (playerXpEl) playerXpEl.innerText = `${userXP.toLocaleString()} pts`;
+    }
 
-  // 9. Disparar Cascada Escalonada y Conteo Progresivo con Sonido
-  triggerResultsEntranceAnimation();
+    // 5. Tarjeta Inferior Dual (Racha y Retrocoins)
+    const streakValEl = document.getElementById('resultsStreakVal');
+    const coinsSessionEl = document.getElementById('resultsCoinsSessionVal');
+    const coinsTotalEl = document.getElementById('resultsCoinsTotalVal');
+    if (streakValEl) streakValEl.innerText = `+${state.winStreak} 🔥`;
+
+    // Inicializar estado del contador progresivo (arranca en +0)
+    window._lastResultsSessionCoins = sessionCoins;
+    window._lastResultsPrevCoins = prevCoins;
+    window._lastResultsFinalCoins = state.coins;
+
+    if (coinsSessionEl) coinsSessionEl.innerText = '+0';
+    if (coinsTotalEl) coinsTotalEl.innerText = prevCoins.toLocaleString();
+
+    // 6. Secuencia de Audio y Confeti Condicional en Resultados
+    try {
+      playResultsAudioSequence(correctCount);
+    } catch (e) {}
+
+    // 7. Forzar Activación Directa de #resultsView ocultando todas las demás vistas
+    isNavigating = false;
+    document.querySelectorAll('.screen-view').forEach(view => {
+      view.classList.remove('active', 'slide-enter', 'slide-exit');
+      view.style.display = 'none';
+    });
+
+    const resultsView = document.getElementById('resultsView');
+    if (resultsView) {
+      resultsView.style.display = 'flex';
+      resultsView.classList.add('active');
+      state.activeTab = 'resultados';
+    }
+
+    // Sincronizar Hash sin disparar bucles de eventos
+    if (window.location.hash !== '#resultados') {
+      try {
+        history.replaceState(null, '', '#resultados');
+      } catch (e) {
+        window.location.hash = '#resultados';
+      }
+    }
+
+    // 8. Marco Central de Avatar en Solitario (#resultsUserAvatar)
+    document.querySelectorAll('.results-xp-label').forEach(el => el.remove());
+    const resultsAvatarImg = document.getElementById('resultsUserAvatar');
+    const activeAvatar = window.state?.userAvatar || window.state?.customAvatar || state?.customAvatar || localStorage.getItem('retroquiz_custom_avatar') || 'assets/pantalla_inicio/hombre.webp';
+    if (resultsAvatarImg) {
+      resultsAvatarImg.src = activeAvatar;
+    }
+
+    // 9. Disparar Cascada Escalonada y Conteo Progresivo con Sonido
+    try {
+      triggerResultsEntranceAnimation();
+    } catch (e) {}
+  } catch (err) {
+    console.error("Error en renderizarResultados / showResults:", err);
+  }
 }
 
 function updateDuelCardToWaiting(rivalName = 'Usuario 2') {
@@ -13048,6 +13141,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnGameOverToWheel) {
     btnGameOverToWheel.addEventListener('click', () => {
       playClickSound();
+      if (gameOverTimeout) {
+        clearTimeout(gameOverTimeout);
+        gameOverTimeout = null;
+      }
+      if (gameOverPerdisteTimeout) {
+        clearTimeout(gameOverPerdisteTimeout);
+        gameOverPerdisteTimeout = null;
+      }
+      state.trivia.lives = 3;
+      if (window.state) {
+        window.state.lives = 3;
+        window.state.streakRecovery = 0;
+        window.state.isTransitioningRound = false;
+        window.state.activeThematicPack = null;
+        window.state.activeThematicPackId = null;
+      }
+      state.streakRecovery = 0;
+      state.activeThematicPack = null;
+      state.activeThematicPackId = null;
+      updateTriviaHeartsUI();
       navigateToScreen('wheelView');
     });
   }
@@ -13056,6 +13169,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnGameOverToHome) {
     btnGameOverToHome.addEventListener('click', () => {
       playClickSound();
+      if (gameOverTimeout) {
+        clearTimeout(gameOverTimeout);
+        gameOverTimeout = null;
+      }
+      if (gameOverPerdisteTimeout) {
+        clearTimeout(gameOverPerdisteTimeout);
+        gameOverPerdisteTimeout = null;
+      }
+      state.trivia.lives = 3;
+      if (window.state) {
+        window.state.lives = 3;
+        window.state.streakRecovery = 0;
+        window.state.isTransitioningRound = false;
+        window.state.activeThematicPack = null;
+        window.state.activeThematicPackId = null;
+      }
+      state.streakRecovery = 0;
+      state.activeThematicPack = null;
+      state.activeThematicPackId = null;
+      updateTriviaHeartsUI();
       navigateToScreen('homeView');
     });
   }
@@ -13065,6 +13198,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnResultsHome) {
     btnResultsHome.addEventListener('click', () => {
       playClickSound();
+      if (window.state) {
+        window.state.lives = 3;
+        window.state.streakRecovery = 0;
+        window.state.isTransitioningRound = false;
+        window.state.activeThematicPack = null;
+        window.state.activeThematicPackId = null;
+      }
+      state.trivia.lives = 3;
+      state.streakRecovery = 0;
+      state.activeThematicPack = null;
+      state.activeThematicPackId = null;
+      updateTriviaHeartsUI();
       navigateToScreen('homeView');
     });
   }
@@ -13085,7 +13230,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnResultsContinue) {
     btnResultsContinue.addEventListener('click', () => {
       playClickSound();
-      navigateToScreen('wheelView');
+      const wasThematic = !!(window.state?.activeThematicPack || window.state?.activeThematicPackId || state.activeThematicPack || state.activeThematicPackId);
+      if (window.state) {
+        window.state.lives = 3;
+        window.state.streakRecovery = 0;
+        window.state.isTransitioningRound = false;
+        window.state.activeThematicPack = null;
+        window.state.activeThematicPackId = null;
+      }
+      state.trivia.lives = 3;
+      state.streakRecovery = 0;
+      state.activeThematicPack = null;
+      state.activeThematicPackId = null;
+      updateTriviaHeartsUI();
+      if (wasThematic) {
+        navigateToScreen('collectionView');
+      } else {
+        navigateToScreen('wheelView');
+      }
     });
   }
 
