@@ -109,30 +109,6 @@ body {
   padding: 10px;
 }
 
-/* Navidad Retro */
-body.theme-navidad {
-  --bg-main: radial-gradient(circle at 50% 20%, #4A0E17 0%, #1A0508 100%);
-  --accent-theme: #00E676;
-}
-
-/* Noche Halloween */
-body.theme-halloween {
-  --bg-main: radial-gradient(circle at 50% 20%, #3B1700 0%, #12091F 100%);
-  --accent-theme: #FF7700;
-}
-
-/* Pascua Arcade */
-body.theme-pascua {
-  --bg-main: radial-gradient(circle at 50% 20%, #E8D7FF 0%, #B8E1FF 100%);
-  --accent-theme: #FF80BF;
-}
-
-/* Verano Synth */
-body.theme-verano {
-  --bg-main: radial-gradient(circle at 50% 20%, #004E64 0%, #250942 100%);
-  --accent-theme: #FF007F;
-}
-
 /* ==========================================================================
    BARRA DE HERRAMIENTAS EXTERNA Y CONSOLAS DE DEPURACIÓN (SUPRIMIDAS)
    ========================================================================== */
@@ -5155,7 +5131,7 @@ body.theme-verano {
   }
 }
 
-/* Marcador Central de Preguntas (1/10) */
+/* Marcador Central de Preguntas (1/5) */
 .trivia-progress-counter {
   font-family: var(--font-retro-heavy);
   font-size: 20px;
@@ -9865,8 +9841,7 @@ body.theme-verano {
   text-shadow: none !important;
 }
 
-.store-see-all-btn,
-.store-reset-theme-btn {
+.store-see-all-btn {
   background: var(--color-yellow-space);
   border: 3px solid #000000;
   border-radius: 9999px;
@@ -9880,8 +9855,7 @@ body.theme-verano {
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.store-see-all-btn:active,
-.store-reset-theme-btn:active {
+.store-see-all-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 0 0 0 #000000;
 }
@@ -10223,130 +10197,6 @@ body.theme-verano {
   box-shadow: 0 0 0 #000000;
 }
 
-/* SECCIÓN 3: Temas Estacionales (Skins) */
-.store-themes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.store-theme-card {
-  background: var(--color-ivory);
-  border: var(--border-atomic);
-  border-radius: 18px;
-  box-shadow: var(--shadow-atomic);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-}
-
-.theme-card-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 4px;
-}
-
-.theme-emoji {
-  font-size: 24px;
-}
-
-.theme-palette-dots {
-  display: flex;
-  gap: 4px;
-}
-
-.theme-palette-dots .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid #000000;
-}
-
-.theme-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.theme-title {
-  font-family: var(--font-retro-heavy), sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  color: #000000;
-  line-height: 1.2;
-}
-
-.theme-desc {
-  font-family: var(--font-body), sans-serif;
-  font-size: 9.5px;
-  font-weight: 600;
-  color: #475569;
-  line-height: 1.2;
-}
-
-.btn-theme-action {
-  background: var(--color-yellow-space);
-  border: 3px solid #000000;
-  border-radius: 10px;
-  padding: 5px 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-family: var(--font-retro-heavy), sans-serif;
-  font-size: 11px;
-  font-weight: 900;
-  color: #000000;
-  box-shadow: 2px 2px 0 #000000;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-  transition: all 0.1s ease;
-}
-
-.btn-theme-action:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0 0 0 #000000;
-}
-
-.btn-theme-action.is-equipped {
-  background: #00E676;
-  border: 3.5px solid #000000;
-  color: #000000;
-  box-shadow: 2px 2px 0 #000000;
-  pointer-events: none !important;
-}
-
-.btn-theme-action.is-purchased {
-  background: #00D2FF;
-  border: 3px solid #000000;
-  color: #000000;
-  box-shadow: 2px 2px 0 #000000;
-  cursor: pointer;
-}
-
-.store-reset-theme-btn.is-active,
-.store-reset-theme-btn:disabled {
-  background: #2DE2B6;
-  color: #000000;
-  cursor: default;
-  opacity: 0.85;
-}
-
-.btn-theme-price {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
 /* Barra de Navegación de Tienda */
 .store-bottom-navbar {
   position: absolute;
@@ -10365,31 +10215,6 @@ body.theme-verano {
   box-sizing: border-box;
 }
 
-/* Clases Temáticas Aplicadas al Body */
-body.theme-navidad {
-  --comic-bg: #881337;
-  --btn-yellow: #DC2626;
-  --btn-blue: #16A34A;
-}
-
-body.theme-halloween {
-  --comic-bg: #2E1065;
-  --btn-yellow: #F97316;
-  --btn-blue: #7C3AED;
-}
-
-body.theme-pascua {
-  --comic-bg: #4C1D95;
-  --btn-yellow: #FDE047;
-  --btn-blue: #34D399;
-}
-
-body.theme-verano {
-  --comic-bg: #1E1B4B;
-  --btn-yellow: #F43F5E;
-  --btn-blue: #06B6D4;
-}
-
 /* Animaciones Escalonadas de Entrada (#storeView) */
 .anim-assembling .anim-st-header {
   animation: chSlideDown 350ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -10401,10 +10226,6 @@ body.theme-verano {
 
 .anim-assembling .anim-st-boosters {
   animation: chCardSlideUp 400ms cubic-bezier(0.25, 1, 0.5, 1) 180ms forwards;
-}
-
-.anim-assembling .anim-st-themes {
-  animation: chCardSlideUp 400ms cubic-bezier(0.25, 1, 0.5, 1) 280ms forwards;
 }
 
 .anim-assembling .anim-st-navbar {

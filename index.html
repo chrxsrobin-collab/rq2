@@ -411,11 +411,11 @@
               <span class="round-coin-amount" id="roundCoinCounterVal">0</span>
             </div>
 
-            <!-- Centro: Progreso de preguntas 1/10 -->
+            <!-- Centro: Progreso de preguntas 1/5 -->
             <div class="trivia-progress-counter" id="triviaProgressCounter">
               <span class="q-current" id="triviaQCurrent">1</span>
               <span class="q-slash">/</span>
-              <span class="q-total" id="triviaQTotal">10</span>
+              <span class="q-total" id="triviaQTotal">5</span>
             </div>
 
             <!-- Derecha: Píldora Amarilla de Tiempo -->
@@ -553,7 +553,7 @@
             <!-- Encabezado y Textos Dinámicos -->
             <div class="results-header-box">
               <h1 class="results-main-title" id="resultsTitle">¡WOW, impresionante!</h1>
-              <p class="results-subtitle" id="resultsSubtitle">Respuestas correctas: 10/10</p>
+              <p class="results-subtitle" id="resultsSubtitle">Respuestas correctas: 5/5</p>
             </div>
 
             <!-- Marco de Avatar Circular Destacado en Solitario -->
@@ -1150,112 +1150,6 @@
               </div>
             </section>
 
-            <!-- SECCIÓN 3: 🎨 TEMAS -->
-            <section class="store-section anim-st-themes">
-              <div class="store-section-header">
-                <div class="store-section-title-wrap">
-                  <span class="store-section-icon">🎨</span>
-                  <h2 class="store-section-title">Temas</h2>
-                </div>
-                <button class="store-reset-theme-btn interactive-press" id="btnStoreResetTheme" title="Restaurar tema original">POR DEFECTO</button>
-              </div>
-
-              <!-- Rejilla de Temas -->
-              <div class="store-themes-grid">
-                <!-- Tema 1: Navidad Retro -->
-                <div class="store-theme-card theme-card-navidad" data-theme="navidad" data-cost="3000">
-                  <div class="theme-card-banner">
-                    <span class="theme-emoji">🎄</span>
-                    <div class="theme-palette-dots">
-                      <span class="dot" style="background: #DC2626;"></span>
-                      <span class="dot" style="background: #16A34A;"></span>
-                      <span class="dot" style="background: #FEF08A;"></span>
-                    </div>
-                  </div>
-                  <div class="theme-info">
-                    <span class="theme-title">Navidad Retro</span>
-                    <span class="theme-desc">Nieve, luces y tonos rojo carmesí.</span>
-                  </div>
-                  <button class="btn-theme-action interactive-press" data-theme="navidad" data-cost="3000">
-                    <span class="btn-theme-label">COMPRAR</span>
-                    <span class="btn-theme-price">
-                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                      <span>3,000</span>
-                    </span>
-                  </button>
-                </div>
-
-                <!-- Tema 2: Noche de Halloween -->
-                <div class="store-theme-card theme-card-halloween" data-theme="halloween" data-cost="3000">
-                  <div class="theme-card-banner">
-                    <span class="theme-emoji">🎃</span>
-                    <div class="theme-palette-dots">
-                      <span class="dot" style="background: #7C3AED;"></span>
-                      <span class="dot" style="background: #EA580C;"></span>
-                      <span class="dot" style="background: #FDE047;"></span>
-                    </div>
-                  </div>
-                  <div class="theme-info">
-                    <span class="theme-title">Noche Halloween</span>
-                    <span class="theme-desc">Calabazas, murciélagos y neón naranja.</span>
-                  </div>
-                  <button class="btn-theme-action interactive-press" data-theme="halloween" data-cost="3000">
-                    <span class="btn-theme-label">COMPRAR</span>
-                    <span class="btn-theme-price">
-                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                      <span>3,000</span>
-                    </span>
-                  </button>
-                </div>
-
-                <!-- Tema 3: Pascua Arcade -->
-                <div class="store-theme-card theme-card-pascua" data-theme="pascua" data-cost="2500">
-                  <div class="theme-card-banner">
-                    <span class="theme-emoji">🐣</span>
-                    <div class="theme-palette-dots">
-                      <span class="dot" style="background: #FDE047;"></span>
-                      <span class="dot" style="background: #6EE7B7;"></span>
-                      <span class="dot" style="background: #C084FC;"></span>
-                    </div>
-                  </div>
-                  <div class="theme-info">
-                    <span class="theme-title">Pascua Arcade</span>
-                    <span class="theme-desc">Tonos pastel primaverales y confeti.</span>
-                  </div>
-                  <button class="btn-theme-action interactive-press" data-theme="pascua" data-cost="2500">
-                    <span class="btn-theme-label">COMPRAR</span>
-                    <span class="btn-theme-price">
-                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                      <span>2,500</span>
-                    </span>
-                  </button>
-                </div>
-
-                <!-- Tema 4: Verano Synthwave -->
-                <div class="store-theme-card theme-card-verano" data-theme="verano" data-cost="2500">
-                  <div class="theme-card-banner">
-                    <span class="theme-emoji">🌴</span>
-                    <div class="theme-palette-dots">
-                      <span class="dot" style="background: #F43F5E;"></span>
-                      <span class="dot" style="background: #06B6D4;"></span>
-                      <span class="dot" style="background: #FBBF24;"></span>
-                    </div>
-                  </div>
-                  <div class="theme-info">
-                    <span class="theme-title">Verano Synth</span>
-                    <span class="theme-desc">Palmeras neón, degradados cian y fucsia.</span>
-                  </div>
-                  <button class="btn-theme-action interactive-press" data-theme="verano" data-cost="2500">
-                    <span class="btn-theme-label">COMPRAR</span>
-                    <span class="btn-theme-price">
-                      <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-                      <span>2,500</span>
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </section>
-
           </div>
 
           <!-- Barra de Navegación Inferior (Idéntica a la referencia de tienda) -->
@@ -1791,10 +1685,11 @@
 
               <div class="credits-section-title">--- AGRADECIMIENTOS ESPECIALES ---</div>
               <div class="credits-text-block">
-                <strong>Beta Testers:</strong><br>
+                <strong>Beta & Game Testers:</strong><br>
                 Favio Mendez<br>
                 Gonzalo Riera<br>
-                Yamil Perez<br><br>
+                Yamil Perez<br>
+                Gerson Alarcón (Game Tester)<br><br>
                 <em>Un agradecimiento especial a ti, por jugar.</em>
               </div>
 

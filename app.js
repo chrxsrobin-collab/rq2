@@ -165,8 +165,8 @@ const state = {
   packMastery: {}, // Preguntas dominadas por pack temático (ej: { vecinos_springfield: ["spr_001", "spr_002"] })
   activeThematicPack: null, // ID del pack temático activo
   activeThematicPackId: null, // ID del pack temático en juego directo
-  allCategoriesUnlocked: true, // Todas las categorías habilitadas por defecto
-  allUnlocked: true, // Estado global de desbloqueo completo
+  allCategoriesUnlocked: true, // Todas las categorías de la ruleta habilitadas por defecto
+  allUnlocked: false, // Estado global de desbloqueo completo (los packs requieren compra)
   isVIP: false, // Usuario VIP / Pase adquirido
   challenges: [], // Arreglo de desafíos del usuario (sin mock data)
   playedQuestionIds: new Set(), // Registro de preguntas ya jugadas
@@ -230,7 +230,7 @@ const state = {
   trivia: {
     category: 'cine',
     currentQuestionIndex: 0,
-    totalQuestions: 10,
+    totalQuestions: 5,
     lives: 3,
     timerSeconds: 20,
     remainingMs: 20000,
@@ -247,36 +247,20 @@ const state = {
   challenges: [],
   activeMatchesList: [],
 
-  themes: {
-    unlocked: ["default"],
-    active: "default"
-  },
-
   // Estado de la Tienda (#storeView)
   store: {
     boosters: {
       time: 1,       // +5 Segundos Extra
       fiftyFifty: 1, // 50 / 50
       double: 0      // Respuesta Doble
-    },
-    purchasedThemes: ['default'],
-    activeTheme: 'default'
+    }
   }
 };
 state.currentView = '#homeView';
 window.state = state;
 window.state.currentView = '#homeView';
 window.state.activeMatchesList = state.activeMatchesList;
-window.state.themes = state.themes;
 window.state.streakRecovery = 0;
-
-const THEME_SKINS = {
-  navidad: { name: "Navidad Retro", cost: 3000, bodyClass: "theme-navidad" },
-  halloween: { name: "Noche Halloween", cost: 3000, bodyClass: "theme-halloween" },
-  pascua: { name: "Pascua Arcade", cost: 2500, bodyClass: "theme-pascua" },
-  verano: { name: "Verano Synth", cost: 2500, bodyClass: "theme-verano" }
-};
-window.THEME_SKINS = THEME_SKINS;
 
 // =============================================================================
 // SISTEMA DE PROGRESIÓN Y RANGOS ARCADE (10 RANGOS TEMÁTICOS)
@@ -759,8 +743,8 @@ function playResultsAudioSequence(customCorrectas = null) {
     SoundManager.playSFX('resultados.mp3', 0.75);
   }
 
-  // 3. Obtén los aciertos y el total de la ronda
-  const total = window.state?.isChallengeMode ? 5 : 10;
+  // 3. Obtén los aciertos y el total de la ronda (5 preguntas en Solitario y Desafíos, 3 en Desempate)
+  const total = window.state?.isTieBreaker ? 3 : (window.state?.currentRoundQuestions?.length || 5);
   const correctas = (typeof customCorrectas === 'number')
     ? customCorrectas
     : ((window.state && typeof window.state.correctAnswersCount === 'number')
@@ -769,8 +753,8 @@ function playResultsAudioSequence(customCorrectas = null) {
             ? state.trivia.correctAnswersCount
             : 0));
 
-  // A. PUNTAJE PERFECTO (10 de 10 en Solitario O 5 de 5 en Desafíos):
-  if ((total === 10 && correctas === 10) || (total === 5 && correctas === 5)) {
+  // A. PUNTAJE PERFECTO (5 de 5 o 3 de 3):
+  if (correctas >= total) {
     if (typeof SoundManager !== 'undefined') {
       SoundManager.playSFX('pantalla_resultados_10.mp3', 0.85);
     }
@@ -778,14 +762,14 @@ function playResultsAudioSequence(customCorrectas = null) {
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     }
   } 
-  // B. EXCELENTE DESEMPEÑO (8 o 9 de 10 en Solitario O 4 de 5 en Desafíos):
-  else if ((total === 10 && (correctas === 8 || correctas === 9)) || (total === 5 && correctas === 4)) {
+  // B. EXCELENTE DESEMPEÑO (4 de 5 o 2 de 3):
+  else if ((total === 5 && correctas === 4) || (total === 3 && correctas === 2)) {
     if (typeof SoundManager !== 'undefined') {
       SoundManager.playSFX('pantalla_resultados_aplausos.mp3', 0.80);
     }
     // NO dispares confeti.
   } 
-  // C. DESEMPEÑO ESTÁNDAR (<= 7 en Solitario O <= 3 en Desafíos):
+  // C. DESEMPEÑO ESTÁNDAR (<= 3 en 5 preguntas o <= 1 en 3):
   else {
     // Solo suena la fanfarria base 'resultados.mp3' una vez. Sin aplausos, sin audio de 10 y sin confeti.
   }
@@ -1589,7 +1573,7 @@ function comprarThematicPack(packId) {
   // 1. Verificar saldo de RetroCoins
   if (currentCoins < cost) {
     if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
-    showRetroToast(`Necesitas ${cost.toLocaleString()} RetroCoins para desbloquear este pack. ¡Gánalas jugando!`, 'warning');
+    showRetroToast('RetroCoins insuficientes', 'warning');
     return;
   }
 
@@ -1649,13 +1633,15 @@ function openPackDetailModal(rawPackId) {
   if (!modal) return;
 
   const unlockedPacks = window.state?.unlockedPacks || state.unlockedPacks || [];
-  const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id) ||
+  const isUnlocked = (unlockedPacks.length > 0 && (
+    unlockedPacks.includes(pack.id) ||
     (pack.id === 'vecinos_springfield' && unlockedPacks.includes('cine_2000')) ||
     (pack.id === 'heroes_multiverso' && (unlockedPacks.includes('videojuegos_retro') || unlockedPacks.includes('videojuegos_clasicos'))) ||
     (pack.id === 'galaxias_lejanas' && (unlockedPacks.includes('series_iconicas') || unlockedPacks.includes('tv_series'))) ||
     (pack.id === 'guerreros_ki' && (unlockedPacks.includes('artistas_latinos') || unlockedPacks.includes('musica_latina'))) ||
     (pack.id === 'reino_champinon' && (unlockedPacks.includes('puro_90s') || unlockedPacks.includes('pack_puro_90s'))) ||
-    (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')));
+    (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')))
+  ));
 
   // Título
   const titleEl = document.getElementById('packDetailTitle');
@@ -1758,7 +1744,7 @@ function handleBuyPackFromModal(rawPackId) {
 
   if (currentCoins < cost) {
     if (typeof SoundManager !== 'undefined') SoundManager.playSFX('derrota.wav', 0.6);
-    showRetroToast(`Necesitas ${cost.toLocaleString()} RetroCoins para desbloquear este pack. ¡Gánalas jugando!`, 'warning');
+    showRetroToast('RetroCoins insuficientes', 'warning');
     return;
   }
 
@@ -1953,8 +1939,8 @@ async function iniciarJuegoPack(packId) {
       [preguntas[i], preguntas[j]] = [preguntas[j], preguntas[i]];
     }
 
-    // Configurar estado de la trivia temática (10 preguntas por tanda)
-    const roundQuestions = preguntas.slice(0, 10);
+    // Configurar estado de la trivia temática (5 preguntas por tanda)
+    const roundQuestions = preguntas.slice(0, 5);
     if (!window.state) window.state = (typeof state !== 'undefined' ? state : {});
     window.state.activeThematicPack = pack.id;
     window.state.activeThematicPackId = pack.id;
@@ -2198,13 +2184,15 @@ function renderCollectionCardsUI() {
   const packMastery = window.state?.packMastery || state.packMastery || {};
 
   container.innerHTML = THEMATIC_PACKS.map((pack, idx) => {
-    const isUnlocked = state.allCategoriesUnlocked || state.allUnlocked || unlockedPacks.includes(pack.id) ||
+    const isUnlocked = (unlockedPacks.length > 0 && (
+      unlockedPacks.includes(pack.id) ||
       (pack.id === 'vecinos_springfield' && unlockedPacks.includes('cine_2000')) ||
       (pack.id === 'heroes_multiverso' && (unlockedPacks.includes('videojuegos_retro') || unlockedPacks.includes('videojuegos_clasicos'))) ||
       (pack.id === 'galaxias_lejanas' && (unlockedPacks.includes('series_iconicas') || unlockedPacks.includes('tv_series'))) ||
       (pack.id === 'guerreros_ki' && (unlockedPacks.includes('artistas_latinos') || unlockedPacks.includes('musica_latina'))) ||
       (pack.id === 'reino_champinon' && (unlockedPacks.includes('puro_90s') || unlockedPacks.includes('pack_puro_90s'))) ||
-      (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')));
+      (pack.id === 'castillo_magia' && (unlockedPacks.includes('puro_80s') || unlockedPacks.includes('pack_puro_80s')))
+    ));
     
     // Lectura de dominio acumulado (soporta array de preguntas dominadas o conteo numérico)
     let rawMastery = packMastery[pack.id];
@@ -2293,7 +2281,7 @@ function renderCollectionCardsUI() {
           ` : `
             <button class="btn-collection-action interactive-press" onclick="event.stopPropagation(); openPackDetailModal('${pack.id}')">
               <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-              <span>🪙 ${(pack.price || pack.priceCoins || 5000).toLocaleString()} RetroCoins</span>
+              <span>COMPRAR 🪙 ${(pack.price || pack.priceCoins || 5000).toLocaleString()}</span>
             </button>
           `}
         </div>
@@ -2320,56 +2308,6 @@ function updateStoreUI() {
   if (b5050) b5050.innerText = `x${state.store?.boosters?.fiftyFifty || 0}`;
   if (bDouble) bDouble.innerText = `x${state.store?.boosters?.double || 0}`;
 
-  // Actualizar botones de temas estacionales y botón POR DEFECTO
-  const resetBtn = document.getElementById('btnStoreResetTheme');
-  const activeTheme = window.state?.themes?.active || state?.themes?.active || 'default';
-  const unlockedThemes = window.state?.themes?.unlocked || state?.themes?.unlocked || ['default'];
-
-  if (resetBtn) {
-    if (activeTheme === 'default') {
-      resetBtn.classList.add('is-active');
-      resetBtn.style.opacity = '0.7';
-      resetBtn.style.pointerEvents = 'none';
-    } else {
-      resetBtn.classList.remove('is-active');
-      resetBtn.style.opacity = '1';
-      resetBtn.style.pointerEvents = 'auto';
-    }
-  }
-
-  const themeCards = document.querySelectorAll('.store-theme-card');
-  themeCards.forEach(card => {
-    const themeId = card.dataset.theme;
-    const skin = THEME_SKINS[themeId];
-    const cost = skin ? skin.cost : (parseInt(card.dataset.cost, 10) || 2500);
-    const btn = card.querySelector('.btn-theme-action');
-    if (!btn) return;
-
-    const isUnlocked = unlockedThemes.includes(themeId);
-    const isEquipped = (activeTheme === themeId);
-
-    btn.classList.remove('is-equipped', 'is-purchased');
-
-    if (isEquipped) {
-      btn.classList.add('is-equipped');
-      btn.style.pointerEvents = 'none';
-      btn.innerHTML = '<span>EQUIPADO ✓</span>';
-    } else if (isUnlocked) {
-      btn.classList.add('is-purchased');
-      btn.style.pointerEvents = 'auto';
-      btn.innerHTML = '<span>EQUIPAR</span>';
-    } else {
-      btn.style.pointerEvents = 'auto';
-      btn.innerHTML = `
-        <span class="btn-theme-label">COMPRAR</span>
-        <span class="btn-theme-price">
-          <img src="assets/global/retrocoin.webp" alt="RC" class="global-retrocoin-img mini-coin">
-          <span>${cost.toLocaleString()}</span>
-        </span>
-      `;
-    }
-  });
-
   // Sección 1: Packs de Preguntas sincronizados con THEMATIC_PACKS
   const packsScroll = document.getElementById('storePacksScroll');
   if (packsScroll && Array.isArray(window.THEMATIC_PACKS)) {
@@ -2381,13 +2319,15 @@ function updateStoreUI() {
       const isKi = pack.id === 'guerreros_ki';
       const isReino = pack.id === 'reino_champinon';
       const isMagia = pack.id === 'castillo_magia';
-      const isAcquired = state.allCategoriesUnlocked || state.allUnlocked || unlocked.includes(pack.id) ||
+      const isAcquired = (unlocked.length > 0 && (
+        unlocked.includes(pack.id) ||
         (pack.id === 'vecinos_springfield' && unlocked.includes('cine_2000')) ||
         (pack.id === 'heroes_multiverso' && (unlocked.includes('videojuegos_retro') || unlocked.includes('videojuegos_clasicos'))) ||
         (pack.id === 'galaxias_lejanas' && (unlocked.includes('series_iconicas') || unlocked.includes('tv_series'))) ||
         (pack.id === 'guerreros_ki' && (unlocked.includes('artistas_latinos') || unlocked.includes('musica_latina'))) ||
         (pack.id === 'reino_champinon' && (unlocked.includes('puro_90s') || unlocked.includes('pack_puro_90s'))) ||
-        (pack.id === 'castillo_magia' && (unlocked.includes('puro_80s') || unlocked.includes('pack_puro_80s')));
+        (pack.id === 'castillo_magia' && (unlocked.includes('puro_80s') || unlocked.includes('pack_puro_80s')))
+      ));
       
       const boxImg = pack.coverImage || pack.boxImage || (isSpringfield ? 'assets/pantalla_colecciones/caja_springfield.webp' : (isMultiverso ? 'assets/pantalla_colecciones/caja_multiverso.webp' : (isGalaxias ? 'assets/pantalla_colecciones/caja_galaxias.webp' : (isKi ? 'assets/pantalla_colecciones/caja_ki.webp' : (isReino ? 'assets/pantalla_colecciones/caja_reino.webp' : (isMagia ? 'assets/pantalla_colecciones/caja_magia.webp' : null))))));
       
@@ -2448,7 +2388,7 @@ function buyBooster(type, cost, name) {
   if (state.coins >= price) {
     state.coins -= price;
     if (typeof saveCoinsToCloud === 'function') saveCoinsToCloud(state.coins);
-    if (!state.store) state.store = { boosters: {}, purchasedThemes: ['default'], activeTheme: 'default' };
+    if (!state.store) state.store = { boosters: {} };
     if (!state.store.boosters) state.store.boosters = {};
     state.store.boosters[type] = (state.store.boosters[type] || 0) + 1;
 
@@ -2466,182 +2406,6 @@ function buyBooster(type, cost, name) {
     showRetroToast(`No tienes suficientes RetroCoins (necesitas ${price} RC)`, '⚠️');
   }
 }
-
-function applyTheme(themeKey) {
-  const allThemeClasses = ['theme-navidad', 'theme-halloween', 'theme-pascua', 'theme-verano'];
-  document.body.classList.remove(...allThemeClasses);
-
-  if (themeKey && themeKey !== 'default' && THEME_SKINS[themeKey]) {
-    document.body.classList.add(THEME_SKINS[themeKey].bodyClass);
-  }
-}
-window.applyTheme = applyTheme;
-
-function buyTheme(themeId, cost, name) {
-  const skin = THEME_SKINS[themeId];
-  const price = skin ? skin.cost : (parseInt(cost, 10) || 2500);
-  const themeName = skin ? skin.name : (name || 'Tema');
-
-  const currentCoins = (window.state && typeof window.state.coins === 'number')
-    ? window.state.coins
-    : (state.coins || 0);
-
-  if (currentCoins >= price) {
-    const newCoins = currentCoins - price;
-    state.coins = newCoins;
-    if (window.state) window.state.coins = newCoins;
-
-    if (typeof saveCoinsToCloud === 'function') {
-      saveCoinsToCloud(newCoins);
-    } else {
-      try { localStorage.setItem('retroquiz_coins', String(newCoins)); } catch (e) {}
-      if (typeof updateHUD === 'function') updateHUD();
-    }
-
-    if (!window.state.themes) {
-      window.state.themes = { unlocked: ["default"], active: "default" };
-    }
-    if (!window.state.themes.unlocked.includes(themeId)) {
-      window.state.themes.unlocked.push(themeId);
-    }
-    if (state.themes) {
-      state.themes.unlocked = window.state.themes.unlocked;
-    }
-    if (!state.store) state.store = {};
-    state.store.purchasedThemes = window.state.themes.unlocked;
-
-    try {
-      localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(window.state.themes.unlocked));
-    } catch (e) {}
-
-    if (window.db && window.firestoreOps && window.state?.userId) {
-      try {
-        const { doc, updateDoc } = window.firestoreOps;
-        updateDoc(doc(window.db, "usuarios", window.state.userId), {
-          themes: window.state.themes,
-          coins: newCoins,
-          updatedAt: new Date().toISOString()
-        }).catch(() => {});
-      } catch (e) {}
-    }
-
-    if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
-      SoundManager.playSFX('compra_tienda.wav');
-    }
-
-    updateStoreUI();
-    showRetroToast(`¡${themeName} desbloqueado! (-${price.toLocaleString()} RC)`, '🪙');
-  } else {
-    playErrorSound();
-    showRetroToast('RetroCoins insuficientes', '⚠️');
-  }
-}
-window.buyTheme = buyTheme;
-
-function equipTheme(themeId) {
-  const targetTheme = (themeId && (themeId === 'default' || THEME_SKINS[themeId])) ? themeId : 'default';
-
-  if (!window.state.themes) {
-    window.state.themes = { unlocked: ["default"], active: "default" };
-  }
-  if (!state.themes) {
-    state.themes = window.state.themes;
-  }
-
-  if (!window.state.themes.unlocked.includes(targetTheme)) {
-    window.state.themes.unlocked.push(targetTheme);
-  }
-
-  applyTheme(targetTheme);
-
-  window.state.themes.active = targetTheme;
-  state.themes.active = targetTheme;
-  if (!state.store) state.store = {};
-  state.store.activeTheme = targetTheme;
-  state.store.purchasedThemes = window.state.themes.unlocked;
-
-  try {
-    localStorage.setItem('retroquiz_active_theme', targetTheme);
-    localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(window.state.themes.unlocked));
-  } catch (e) {}
-
-  if (window.db && window.firestoreOps && window.state?.userId) {
-    try {
-      const { doc, updateDoc } = window.firestoreOps;
-      updateDoc(doc(window.db, "usuarios", window.state.userId), {
-        themes: window.state.themes,
-        updatedAt: new Date().toISOString()
-      }).catch(() => {});
-    } catch (e) {}
-  }
-
-  updateStoreUI();
-  playClickSound();
-}
-window.equipTheme = equipTheme;
-
-function resetTheme() {
-  const allThemeClasses = ['theme-navidad', 'theme-halloween', 'theme-pascua', 'theme-verano'];
-  document.body.classList.remove(...allThemeClasses);
-
-  if (!window.state.themes) {
-    window.state.themes = { unlocked: ["default"], active: "default" };
-  }
-  window.state.themes.active = 'default';
-  if (state.themes) state.themes.active = 'default';
-  if (!state.store) state.store = {};
-  state.store.activeTheme = 'default';
-
-  try {
-    localStorage.setItem('retroquiz_active_theme', 'default');
-  } catch (e) {}
-
-  if (window.db && window.firestoreOps && window.state?.userId) {
-    try {
-      const { doc, updateDoc } = window.firestoreOps;
-      updateDoc(doc(window.db, "usuarios", window.state.userId), {
-        'themes.active': 'default',
-        updatedAt: new Date().toISOString()
-      }).catch(() => {});
-    } catch (e) {}
-  }
-
-  updateStoreUI();
-  showRetroToast('Tema por defecto restaurado 🎨', '🎨');
-}
-window.resetTheme = resetTheme;
-
-function initStoredTheme() {
-  try {
-    const savedActive = localStorage.getItem('retroquiz_active_theme') || 'default';
-    let savedUnlocked = ['default'];
-    try {
-      const raw = localStorage.getItem('retroquiz_unlocked_themes');
-      if (raw) savedUnlocked = JSON.parse(raw);
-    } catch (e) {}
-    if (!Array.isArray(savedUnlocked)) savedUnlocked = ['default'];
-    if (!savedUnlocked.includes('default')) savedUnlocked.unshift('default');
-
-    if (!window.state) window.state = {};
-    window.state.themes = {
-      unlocked: savedUnlocked,
-      active: savedActive
-    };
-    if (typeof state !== 'undefined') {
-      state.themes = window.state.themes;
-      if (!state.store) state.store = {};
-      state.store.purchasedThemes = savedUnlocked;
-      state.store.activeTheme = savedActive;
-    }
-
-    if (savedActive !== 'default') {
-      applyTheme(savedActive);
-    }
-  } catch (err) {
-    console.warn('initStoredTheme error:', err);
-  }
-}
-window.initStoredTheme = initStoredTheme;
 
 const COSPLAYS_HOMBRE = [
   'assets/pantalla_inicio/hombre.webp',
@@ -2682,10 +2446,8 @@ window.COSPLAYS_MUJER = COSPLAYS_MUJER;
 window.setRandomHomeCharacters = setRandomHomeCharacters;
 
 window.initApp = function() {
-  initStoredTheme();
   setRandomHomeCharacters();
 };
-initStoredTheme();
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   setRandomHomeCharacters();
 }
@@ -6544,8 +6306,8 @@ async function cargarBancoExclusivo(categoriaGanadora) {
   }
   const bancoMezclado = shuffle(bancoCompleto);
 
-  // Extrae la tanda exacta de la partida:
-  const totalRequerido = window.state.isChallengeMode ? 5 : 10;
+  // Extrae la tanda exacta de la partida (5 preguntas en Solitario y Desafíos):
+  const totalRequerido = 5;
   const preguntasFinales = bancoMezclado.slice(0, totalRequerido);
 
   // 4. VERIFICACIÓN Y RENDERIZADO:
@@ -6685,7 +6447,7 @@ async function finalizarConteoYEntrarATrivia(categoriaGanadora) {
   // Asignar al estado global
   const isChallenge = Boolean(window.state && window.state.isChallengeMode);
   const isTieBreaker = Boolean(window.state && window.state.isTieBreaker);
-  const totalRonda = isTieBreaker ? 3 : (isChallenge ? 5 : 10);
+  const totalRonda = isTieBreaker ? 3 : 5;
   questions = (questions || []).slice(0, totalRonda);
 
   const tiempoBase = 20;
@@ -7069,10 +6831,10 @@ function renderizarPreguntaActual() {
   state.trivia.isAnswering = false;
   state.trivia.questionStartTime = performance.now();
 
-  // Actualiza el contador "1/10", "2/10", etc.
+  // Actualiza el contador "1/5", "2/5", etc.
   const currentEl = document.getElementById('triviaQCurrent');
   const totalEl = document.getElementById('triviaQTotal');
-  const totalQ = questions.length || state.trivia.totalQuestions || 10;
+  const totalQ = questions.length || state.trivia.totalQuestions || 5;
   if (currentEl) currentEl.innerText = qIndex + 1;
   if (totalEl) totalEl.innerText = totalQ;
 
@@ -7544,7 +7306,7 @@ function handleTriviaAnswer(selectedIndex) {
         window.state.currentQuestionIndex++;
         state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-        const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
+        const totalPreguntas = window.state.isTieBreaker ? 3 : 5;
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
           finalizarTandaTrivia();
@@ -7616,7 +7378,7 @@ function handleTriviaAnswer(selectedIndex) {
           window.state.currentQuestionIndex++;
           state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-          const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
+          const totalPreguntas = window.state.isTieBreaker ? 3 : 5;
           if (window.state.currentQuestionIndex >= totalPreguntas || 
               (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
             finalizarTandaTrivia();
@@ -7712,7 +7474,7 @@ function handleTriviaTimeout() {
         window.state.currentQuestionIndex++;
         state.trivia.currentQuestionIndex = window.state.currentQuestionIndex;
 
-        const totalPreguntas = window.state.isTieBreaker ? 3 : (window.state.isChallengeMode ? 5 : 10);
+        const totalPreguntas = window.state.isTieBreaker ? 3 : 5;
         if (window.state.currentQuestionIndex >= totalPreguntas || 
             (window.state.currentRoundQuestions && window.state.currentQuestionIndex >= window.state.currentRoundQuestions.length)) {
           finalizarTandaTrivia();
@@ -8021,17 +7783,18 @@ function triggerGameOver(reason = 'Te has quedado sin vidas') {
   }, 4000);
 }
 
-function renderizarResultados(aciertos = 10) {
+function renderizarResultados(aciertos = 5) {
   return showResults(aciertos);
 }
 window.renderizarResultados = renderizarResultados;
 
-function showResults(aciertos = 10) {
+function showResults(aciertos = 5) {
   try {
     const isThematicPack = !!(window.state?.activeThematicPack || window.state?.activeThematicPackId || state.activeThematicPack || state.activeThematicPackId);
 
-    // 1. Asegurar aciertos entre 0 y 10
-    const correctCount = Math.max(0, Math.min(10, parseInt(aciertos, 10) || 0));
+    // 1. Asegurar aciertos entre 0 y el total de la ronda (5 por defecto o 3 en desempate)
+    const maxRonda = window.state?.isTieBreaker ? 3 : (window.state?.currentRoundQuestions?.length || 5);
+    const correctCount = Math.max(0, Math.min(maxRonda, parseInt(aciertos, 10) || 0));
     if (window.state) window.state.correctAnswersCount = correctCount;
     state.correctAnswersCount = correctCount;
 
@@ -8128,20 +7891,20 @@ function showResults(aciertos = 10) {
     const resultsTitle = document.getElementById('resultsTitle');
     const resultsSubtitle = document.getElementById('resultsSubtitle');
     if (resultsTitle) {
-      if (correctCount >= 10) {
+      if (correctCount >= maxRonda) {
         resultsTitle.innerText = '¡WOW, impresionante!';
-      } else if (correctCount === 9) {
+      } else if (correctCount === maxRonda - 1) {
         resultsTitle.innerText = '¡MUY BIEN!';
-      } else if (correctCount === 8) {
+      } else if (correctCount === 3 && maxRonda >= 5) {
         resultsTitle.innerText = '¡POR POQUITO!';
-      } else if (correctCount >= 5) {
+      } else if (correctCount >= 2) {
         resultsTitle.innerText = '¡BIEN JUGADO!';
       } else {
         resultsTitle.innerText = '¡SIGUE PRACTICANDO!';
       }
     }
     if (resultsSubtitle) {
-      resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/10`;
+      resultsSubtitle.innerText = `Respuestas correctas: ${correctCount}/${maxRonda}`;
     }
 
     // Desglose de Nivel y XP Total del Jugador (Esquema de rangos temáticos)
@@ -9168,7 +8931,7 @@ window.renderResultadosDesafio = renderResultadosDesafio;
 
 function completeTriviaRound() {
   const isDuel = state.trivia.isDuel || window.state.isChallengeMode;
-  const correctCount = state.trivia.correctAnswersCount !== undefined ? state.trivia.correctAnswersCount : (isDuel ? 4 : 10);
+  const correctCount = state.trivia.correctAnswersCount !== undefined ? state.trivia.correctAnswersCount : (isDuel ? 4 : 5);
   if (isDuel) {
     guardarPuntosRondaDesafio(correctCount);
   } else {
@@ -9176,9 +8939,9 @@ function completeTriviaRound() {
   }
 }
 
-// Exponer en window para pruebas y consola (showResults(9), debugShowResults(), spinWheel(), setCoinsAndSync(1000))
+// Exponer en window para pruebas y consola (showResults(5), debugShowResults(), spinWheel(), setCoinsAndSync(1000))
 window.showResults = showResults;
-window.debugShowResults = function(aciertos = 9) {
+window.debugShowResults = function(aciertos = 5) {
   showResults(aciertos);
 };
 window.showChallengeDuelResults = showChallengeDuelResults;
@@ -9295,9 +9058,6 @@ window.debugShowStore = function() {
 };
 window.updateStoreUI = updateStoreUI;
 window.buyBooster = buyBooster;
-window.buyTheme = buyTheme;
-window.equipTheme = equipTheme;
-window.resetTheme = resetTheme;
 
 // =============================================================================
 // 6. CONTROL DE PERFIL: AVATAR PERSONALIZADO Y ELIMINAR PUBLICIDAD
@@ -10398,8 +10158,17 @@ function loadStoredPlayerProgress() {
         if (Array.isArray(parsedPacks)) {
           state.unlockedPacks = parsedPacks;
           if (window.state) window.state.unlockedPacks = parsedPacks;
+        } else {
+          state.unlockedPacks = [];
+          if (window.state) window.state.unlockedPacks = [];
         }
-      } catch (e) {}
+      } catch (e) {
+        state.unlockedPacks = [];
+        if (window.state) window.state.unlockedPacks = [];
+      }
+    } else {
+      state.unlockedPacks = [];
+      if (window.state) window.state.unlockedPacks = [];
     }
 
     const savedMastery = localStorage.getItem('retroquiz_pack_mastery');
@@ -11193,7 +10962,8 @@ async function syncUserProfileWithCloud(uid) {
           correctAnswers: Number(state.stats?.correctAnswers) || 0,
           maxStreak: Number(state.stats?.maxStreak) || 0
         },
-        themes: window.state?.themes || { unlocked: ["default"], active: "default" },
+        unlockedPacks: [],
+        packMastery: {},
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -11207,6 +10977,8 @@ async function syncUserProfileWithCloud(uid) {
       state.challengesWon = defaultChallengesWon;
       state.bio = defaultBio;
       state.challenges = [];
+      state.unlockedPacks = [];
+      state.packMastery = {};
       if (window.state) {
         window.state.coins = 0;
         window.state.xp = 0;
@@ -11217,11 +10989,17 @@ async function syncUserProfileWithCloud(uid) {
         window.state.challengesWon = defaultChallengesWon;
         window.state.bio = defaultBio;
         window.state.challenges = [];
+        window.state.unlockedPacks = [];
+        window.state.packMastery = {};
       }
       localStorage.setItem('retroquiz_username', defaultUsername);
       localStorage.setItem('retroquiz_user_country', defaultCountry);
       localStorage.setItem('retroquiz_challenges_won', String(defaultChallengesWon));
       localStorage.setItem('retroquiz_bio', defaultBio);
+      try {
+        localStorage.setItem('retroquiz_unlocked_packs', JSON.stringify([]));
+        localStorage.setItem('retroquiz_pack_mastery', JSON.stringify({}));
+      } catch (e) {}
       console.log("Perfil de usuario inicial limpio creado en Firestore para:", uid);
     } else {
       const data = snap.data();
@@ -11282,33 +11060,19 @@ async function syncUserProfileWithCloud(uid) {
         state.unlockedPacks = data.unlockedPacks;
         if (window.state) window.state.unlockedPacks = data.unlockedPacks;
         try { localStorage.setItem('retroquiz_unlocked_packs', JSON.stringify(data.unlockedPacks)); } catch (e) {}
+      } else {
+        state.unlockedPacks = [];
+        if (window.state) window.state.unlockedPacks = [];
+        try { localStorage.setItem('retroquiz_unlocked_packs', JSON.stringify([])); } catch (e) {}
       }
       if (data.packMastery && typeof data.packMastery === 'object') {
         state.packMastery = data.packMastery;
         if (window.state) window.state.packMastery = data.packMastery;
         try { localStorage.setItem('retroquiz_pack_mastery', JSON.stringify(data.packMastery)); } catch (e) {}
-      }
-      if (data.themes && typeof data.themes === 'object') {
-        const cloudUnlocked = Array.isArray(data.themes.unlocked) ? data.themes.unlocked : ['default'];
-        const cloudActive = typeof data.themes.active === 'string' ? data.themes.active : 'default';
-        const currentUnlocked = (window.state && window.state.themes && Array.isArray(window.state.themes.unlocked)) ? window.state.themes.unlocked : ['default'];
-        const mergedUnlocked = Array.from(new Set([...currentUnlocked, ...cloudUnlocked]));
-        window.state.themes = {
-          unlocked: mergedUnlocked,
-          active: cloudActive
-        };
-        state.themes = window.state.themes;
-        if (state.store) {
-          state.store.purchasedThemes = mergedUnlocked;
-          state.store.activeTheme = cloudActive;
-        }
-        try {
-          localStorage.setItem('retroquiz_unlocked_themes', JSON.stringify(mergedUnlocked));
-          localStorage.setItem('retroquiz_active_theme', cloudActive);
-        } catch (e) {}
-        if (typeof applyTheme === 'function') {
-          applyTheme(cloudActive);
-        }
+      } else {
+        state.packMastery = {};
+        if (window.state) window.state.packMastery = {};
+        try { localStorage.setItem('retroquiz_pack_mastery', JSON.stringify({})); } catch (e) {}
       }
       console.log("Perfil de usuario obtenido de Firestore:", data);
     }
@@ -12997,41 +12761,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = row?.querySelector('.booster-name')?.innerText || 'Potenciador';
       buyBooster(type, cost, name);
     });
-  });
-
-  // Compra y Equipamiento de Temas Estacionales
-  document.querySelectorAll('#storeView .btn-theme-action').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const themeId = btn.dataset.theme;
-      const card = btn.closest('.store-theme-card');
-      const skin = THEME_SKINS[themeId];
-      const name = skin ? skin.name : (card?.querySelector('.theme-title')?.innerText || 'Tema');
-      const cost = skin ? skin.cost : (parseInt(btn.dataset.cost, 10) || 2500);
-
-      const activeTheme = window.state?.themes?.active || state?.themes?.active || 'default';
-      const unlockedThemes = window.state?.themes?.unlocked || state?.themes?.unlocked || ['default'];
-
-      const isEquipped = (activeTheme === themeId);
-      const isUnlocked = unlockedThemes.includes(themeId);
-
-      if (isEquipped) {
-        return;
-      } else if (isUnlocked) {
-        equipTheme(themeId);
-        if (typeof SoundManager !== 'undefined' && typeof SoundManager.playSFX === 'function') {
-          SoundManager.playSFX('compra_tienda.wav', 0.70);
-        }
-        showRetroToast(`¡Tema "${name}" equipado! 🎨`, '🎨');
-      } else {
-        buyTheme(themeId, cost, name);
-      }
-    });
-  });
-
-  // Restaurar Tema Original por defecto
-  document.getElementById('btnStoreResetTheme')?.addEventListener('click', () => {
-    playClickSound();
-    resetTheme();
   });
 
   document.getElementById('tabPerfil')?.addEventListener('click', (e) => {
