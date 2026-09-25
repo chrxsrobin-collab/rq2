@@ -50,8 +50,8 @@ export function computeEventEndTimestamp(date?: string, endTime?: string, startT
     // Fallback estándar
     const fallbackDate = new Date(`${trimmedDate}T${endTime || '23:59'}`).getTime();
     if (!isNaN(fallbackDate)) return fallbackDate;
-  } catch (e) {
-    console.warn('Error calculating event end timestamp:', e);
+  } catch {
+    // calculation fallback
   }
 
   return Date.now() + 24 * 60 * 60 * 1000;
@@ -70,4 +70,22 @@ export const formatCardDate = (dateStr?: string): string => {
   }
   return dateStr;
 };
+
+/**
+ * Formatea una hora HH:mm en formato legible con AM/PM (ej: "01:00" -> "01:00 AM", "23:30" -> "11:30 PM")
+ */
+export const formatVipCutoffDisplay = (timeStr?: string | null): string => {
+  if (!timeStr) return '';
+  const trimmed = timeStr.trim();
+  if (/[a-zA-Z]/.test(trimmed)) return trimmed;
+  const [hStr, mStr] = trimmed.split(':');
+  if (hStr === undefined || mStr === undefined) return trimmed;
+  const h = parseInt(hStr, 10);
+  if (isNaN(h)) return trimmed;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  const hDisplay = h12 < 10 ? `0${h12}` : `${h12}`;
+  return `${hDisplay}:${mStr.slice(0, 2)} ${period}`;
+};
+
 

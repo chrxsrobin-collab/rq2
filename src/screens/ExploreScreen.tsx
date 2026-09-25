@@ -52,6 +52,7 @@ const mapDocToVipFlyer = (id: string, data: any): VipFlyerItem => ({
   imageUrl: data.imageUrl || data.artImage || undefined,
   description: data.description || `Organizado por ${data.hostName || 'Comunidad +1'}. Acceso en puerta con código QR.`,
   isVipOrFree: true,
+  vipCutoffTime: data.vipCutoffTime || null,
 });
 
 export const ExploreScreen: React.FC<ExploreScreenProps> = ({
@@ -71,9 +72,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = ({
     const unsub = onSnapshot(q, (snap) => {
       const live = snap.docs.map((d) => mapDocToVipFlyer(d.id, d.data()));
       setEvents(live);
-    }, (err) => {
-      console.warn('ExploreScreen Firestore error:', err);
-    });
+    }, () => {});
     return () => unsub();
   }, []);
 
@@ -92,7 +91,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = ({
     } else if (activeFilter === 'Conciertos / Indie') {
       const match =
         evt.theme === 'indie' ||
-        /indie|concierto|rock|banda/i.test(`${evt.title} ${evt.subtitle} ${evt.description}`);
+        /indie|concierto|rock|banda|rock_indie|live rock/i.test(`${evt.title} ${evt.subtitle} ${evt.description}`);
       if (!match) return false;
     } else if (activeFilter === 'Club / Reggaeton') {
       const match =

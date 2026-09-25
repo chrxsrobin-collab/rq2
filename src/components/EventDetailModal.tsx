@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, addDoc, query, where, onSnapshot } from 'firebase/firestore';
 import { db, auth } from '../lib/firebase';
-import { VipFlyerItem, ConfirmedAttendee } from '../types/home';
+import { ConfirmedAttendee } from '../types/home';
 import { ShareEventModal } from './ShareEventModal';
-import { formatCardDate } from '../lib/dateUtils';
+import { formatCardDate, formatVipCutoffDisplay } from '../lib/dateUtils';
 
 interface EventDetailModalProps {
   event?: any;
@@ -26,7 +26,6 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
   const selectedEvent = propSelectedEvent || propEvent;
   const [passStatus, setPassStatus] = useState<'none' | 'pending' | 'active' | 'capacity_reached' | 'used'>('none');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Estados reactivos de Prueba Social y FOMO
@@ -39,17 +38,16 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
       : Math.max(0, (selectedEvent?.guestLimit || selectedEvent?.maxCapacity || 100) - (selectedEvent?.activePassesCount || 0))
   );
 
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 2500);
-  };
-
   const handleShareEvent = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!selectedEvent) return;
     setIsShareModalOpen(true);
+  };
+
+  const handleOpenHostProfile = (hostUserId?: string) => {
+    if (!hostUserId) return;
+    onClose();
+    onNavigate?.(`/profile/${hostUserId}`);
   };
 
   // Escucha del estado individual del pase del usuario
@@ -70,9 +68,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
       } else {
         setPassStatus('none');
       }
-    }, (err) => {
-      console.warn('Error escuchando estado del pase en modal:', err);
-    });
+    }, () => {});
     return () => unsub();
   }, [isOpen, selectedEvent?.id]);
 
@@ -112,9 +108,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
         (p: any) => (p.createdAt || 0) > oneDayAgo || (p.requestedAt || 0) > oneDayAgo
       ).length;
       setRecentRequestsCount(recent > 0 ? recent : (actCount > 0 ? actCount + 3 : 12));
-    }, (err) => {
-      console.warn('Error escuchando pases del evento en modal:', err);
-    });
+    }, () => {});
     return () => unsub();
   }, [isOpen, selectedEvent?.id, selectedEvent?.guestLimit, selectedEvent?.maxCapacity]);
 
@@ -247,22 +241,30 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 {selectedEvent.typeBadge ? `${selectedEvent.typeBadge}: ` : ''}{selectedEvent.title}
               </h3>
 
-              {/* Atribución del Anfitrión / Creador */}
-              <div className="flex items-center space-x-2 mt-2">
+              {/* Atribución interactiva del Anfitrión / Creador */}
+              <div 
+                onClick={() => handleOpenHostProfile(selectedEvent.hostUserId)}
+                className="inline-flex items-center gap-2 cursor-pointer group py-1 active:opacity-75 transition-opacity mt-2"
+                title={selectedEvent.hostUserId ? 'Ver perfil del anfitrión' : undefined}
+              >
+                {/* Micro-avatar del anfitrión si existe */}
                 {selectedEvent.hostPhotoUrl ? (
-                  <img
-                    src={selectedEvent.hostPhotoUrl}
-                    alt={selectedEvent.hostName || 'Anfitrión'}
-                    className="w-[18px] h-[18px] rounded-full object-cover border border-white/20 shrink-0"
+                  <img 
+                    src={selectedEvent.hostPhotoUrl} 
+                    alt={selectedEvent.hostName || 'Anfitrión'} 
+                    className="w-5 h-5 rounded-full object-cover border border-white/20 shrink-0"
                   />
                 ) : (
-                  <div className="w-[18px] h-[18px] rounded-full bg-[#26282E] border border-white/10 flex items-center justify-center shrink-0 text-[9px] text-[#E87A72] font-display font-black">
-                    {(selectedEvent.hostName || 'A').slice(0, 1).toUpperCase()}
+                  <div className="w-5 h-5 rounded-full bg-[#26282E] flex items-center justify-center text-[10px] text-[#E87A72] font-bold shrink-0">
+                    {selectedEvent.hostName ? selectedEvent.hostName.charAt(0).toUpperCase() : "+"}
                   </div>
                 )}
-                <span className="font-display text-xs sm:text-sm font-bold tracking-wider text-[#9CA3AF] uppercase flex items-center gap-1">
-                  BY <span className="text-[#E87A72]">{selectedEvent.hostName || 'ANFITRIÓN'}</span>
+
+                {/* Texto de atribución clickeable */}
+                <span className="font-sans text-xs tracking-wider text-[#9CA3AF] group-hover:text-white uppercase flex items-center gap-1">
+                  BY <strong className="text-white font-semibold underline decoration-white/30 underline-offset-2">{selectedEvent.hostName || "ANFITRIÓN"}</strong>
                 </span>
+                <span className="text-[10px] text-zinc-500 group-hover:text-zinc-300">›</span>
               </div>
 
               {selectedEvent.subtitle && (
@@ -290,6 +292,16 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                   <span>{event.exactAddress || event.location || 'Ubicación por confirmar'}</span>
                 </div>
               </div>
+
+              {/* Pastilla / Micro-badge de advertencia de Cierre de Lista VIP */}
+              {(event.vipCutoffTime || selectedEvent.vipCutoffTime) && (
+                <div className="mt-3 px-3.5 py-2 rounded-xl bg-[#E87A72]/15 border border-[#E87A72]/30 flex items-center space-x-2">
+                  <span className="text-sm">⏳</span>
+                  <span className="font-display text-[#E87A72] text-xs font-black tracking-wider uppercase">
+                    LISTA VIP VÁLIDA HASTA: {formatVipCutoffDisplay(event.vipCutoffTime || selectedEvent.vipCutoffTime)}
+                  </span>
+                </div>
+              )}
 
               {/* FILA DE ASISTENTES SOCIALES ("¿QUIÉN VA?") */}
               <div className="mt-4 p-3 rounded-xl bg-[#121316] border border-neutral-800 flex items-center space-x-3">
@@ -434,19 +446,6 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 </svg>
               </button>
             </div>
-
-            {/* Toast flotante */}
-            {toastMessage && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-[#E87A72] text-black font-display text-xs font-black px-4 py-2 rounded-xl shadow-2xl tracking-wider uppercase z-50 whitespace-nowrap pointer-events-none"
-              >
-                {toastMessage}
-              </motion.div>
-            )}
-
           </motion.div>
         </div>
       )}

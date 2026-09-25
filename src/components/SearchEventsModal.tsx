@@ -39,14 +39,18 @@ export const SearchEventsModal: React.FC<SearchEventsModalProps> = ({
 
   // Autoenfoque al abrir
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
     if (isOpen) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
     } else {
       setSearchQuery('');
       setActiveFilter('Todos');
     }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [isOpen]);
 
   // Manejo de tecla Escape
@@ -83,7 +87,7 @@ export const SearchEventsModal: React.FC<SearchEventsModalProps> = ({
       const match =
         evt.theme === 'indie' ||
         evt.categoryTag === 'concierto' ||
-        /indie|concierto|rock|banda/i.test(`${evt.title} ${evt.subtitle} ${evt.description}`);
+        /indie|concierto|rock|banda|rock_indie|live rock/i.test(`${evt.title} ${evt.subtitle} ${evt.description}`);
       if (!match) return false;
     } else if (activeFilter === 'Club / Reggaeton') {
       const match =

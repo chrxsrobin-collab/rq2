@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { PassItem } from '../types/home';
 import { TicketsCoverFlow } from '../components/TicketsCoverFlow';
 import { db, auth } from '../lib/firebase';
-import { collection, query, where, onSnapshot, getDoc, doc } from 'firebase/firestore';
+import { collection, query, where, onSnapshot, getDoc, doc, getDocs } from 'firebase/firestore';
+import { PullToRefresh } from '../components/PullToRefresh';
 import '../styles/fonts.css';
 
 export interface TicketsScreenProps {
@@ -117,15 +118,13 @@ export const TicketsScreen: React.FC<TicketsScreenProps> = ({
                   );
                 }
               }
-            } catch (e) {
-              console.warn('Error resolviendo flyer en TicketsScreen:', e);
+            } catch {
+              // flyer resolution fallback
             }
           }
         });
       },
-      (err) => {
-        console.warn('Error escuchando pases activos en TicketsScreen:', err);
-      }
+      () => {}
     );
 
     return () => unsubscribe();
@@ -175,14 +174,64 @@ export const TicketsScreen: React.FC<TicketsScreenProps> = ({
       onBack();
     } else if (onNavigate) {
       onNavigate('/');
-    } else {
-      console.log('[Navigation] -> Back to Home');
     }
   };
 
   const handleDownloadCopy = () => {
     if (!activeTicket) return;
     showToast(`Pase de "${activeTicket.title}" guardado en Fotos ✓`);
+  };
+
+  const handleRefresh = async () => {
+    try {
+      if (auth.currentUser) {
+        const q = query(
+          collection(db, 'passes'),
+          where('userId', '==', auth.currentUser.uid),
+          where('status', '==', 'active')
+        );
+        const snap = await getDocs(q);
+        const refreshedPasses: PassItem[] = snap.docs.map((d) => {
+          const data = d.data();
+          const rawHolderName = (
+            data.rawHolderName ||
+            data.userName ||
+            data.holderName ||
+            auth.currentUser?.displayName ||
+            'INVITADO'
+          )
+            .replace(/\s*·\s*(\+1(\s*INCLUIDO)?|INDIVIDUAL)$/i, '')
+            .trim();
+
+          const allowsPlusOne = Boolean(
+            data.allowsPlusOne ??
+              data.withPlusOne ??
+              data.allowPlusOne ??
+              false
+          );
+
+          return {
+            id: d.id,
+            eventId: data.eventId || '',
+            eventName: data.eventName || data.eventTitle || 'EVENTO +1',
+            eventDate: data.eventDate || 'PRÓXIMAMENTE',
+            eventTime: data.eventTime || data.timeRange || '22:00',
+            eventLocation: data.eventLocation || data.location || 'UBICACIÓN RESERVADA',
+            holderName: rawHolderName,
+            status: data.status || 'active',
+            qrCodeData: data.qrCodeData || data.qrCode || `PLUS1-PASS-${d.id}`,
+            ticketType: allowsPlusOne ? '+1 VIP PASS' : 'VIP PASS INDIVIDUAL',
+            allowsPlusOne,
+            imageUrl: data.imageUrl || data.eventImage || undefined,
+            checkInCode: data.checkInCode || d.id.slice(0, 6).toUpperCase(),
+          };
+        });
+        setUserPasses(refreshedPasses);
+      }
+      showToast('Pases actualizados');
+    } catch (err) {
+      console.error('[TicketsScreen] Error al refrescar:', err);
+    }
   };
 
   return (
@@ -201,8 +250,11 @@ export const TicketsScreen: React.FC<TicketsScreenProps> = ({
       {/* Degradado superior para HUD */}
       <div className="fixed inset-x-0 top-0 h-28 bg-gradient-to-b from-[#000000] via-[#000000]/70 to-transparent pointer-events-none z-10" />
 
-      {/* Contenedor central móvil acotado */}
-      <div className="relative z-20 flex-1 flex flex-col w-full max-w-md mx-auto px-4 justify-between">
+      {/* Contenedor central móvil acotado con Pull-to-Refresh */}
+      <PullToRefresh
+        onRefresh={handleRefresh}
+        className="relative z-20 flex-1 flex flex-col w-full max-w-md mx-auto px-4 justify-between"
+      >
         {/* 1. TOP BAR */}
         <header className="flex items-center justify-between pt-[calc(1.25rem+env(safe-area-inset-top,0px))] pb-1 w-full relative z-30">
           {/* Botón de retroceso (←) */}
@@ -282,11 +334,11 @@ export const TicketsScreen: React.FC<TicketsScreenProps> = ({
             </main>
 
             {/* 4. ACCIÓN INFERIOR: GUARDAR COPIA EN FOTOS */}
-            <div className="w-full pt-2 pb-2">
+            <div className="w-full pt-2 pb-2 flex justify-center">
               <motion.button
                 whileTap={{ scale: 0.98 }}
                 onClick={handleDownloadCopy}
-                className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-neutral-200 text-black font-display text-base font-black tracking-wider uppercase flex items-center justify-center space-x-2 transition-colors shadow-2xl focus:outline-none cursor-pointer mb-2"
+                className="w-full max-w-[340px] py-3.5 px-4 rounded-2xl bg-white hover:bg-neutral-200 text-black font-display text-sm sm:text-base font-black tracking-wider uppercase flex items-center justify-center space-x-2 transition-colors shadow-2xl focus:outline-none cursor-pointer mb-2"
               >
                 <span className="text-lg leading-none">⬇</span>
                 <span>GUARDAR COPIA EN FOTOS</span>
@@ -294,7 +346,7 @@ export const TicketsScreen: React.FC<TicketsScreenProps> = ({
             </div>
           </>
         )}
-      </div>
+      </PullToRefresh>
 
       {/* TOAST FLOTANTE */}
       {toastMessage && (

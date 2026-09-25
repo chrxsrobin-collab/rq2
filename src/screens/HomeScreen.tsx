@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TopHud } from '../components/TopHud';
 import { FullCardCoverFlow } from '../components/FullCardCoverFlow';
 import { ActionFooter } from '../components/ActionFooter';
 import { BottomNav } from '../components/BottomNav';
@@ -9,6 +8,7 @@ import { SelectEventToScanSheet, HostScanEventItem } from '../components/SelectE
 import { EventDetailModal } from '../components/EventDetailModal';
 import { SearchEventsModal } from '../components/SearchEventsModal';
 import { NotificationsModal } from '../components/NotificationsModal';
+import { PullToRefresh } from '../components/PullToRefresh';
 import { db, auth } from '../lib/firebase';
 import {
   collection,
@@ -22,7 +22,7 @@ import {
   collectionGroup,
 } from 'firebase/firestore';
 import { mockUserProfile, mockNotifications } from '../data/mockData';
-import { TabType, VipFlyerItem, NotificationItem, AppNotification, ConfirmedAttendee, EventSocialProof } from '../types/home';
+import { TabType, VipFlyerItem, AppNotification, ConfirmedAttendee, EventSocialProof, UserProfile } from '../types/home';
 import { computeEventEndTimestamp } from '../lib/dateUtils';
 import '../styles/fonts.css';
 
@@ -34,6 +34,67 @@ export const formatCardDate = (dateStr: string) => {
     return `${parts[2]}.${parts[1]}.${year}`;
   }
   return dateStr;
+};
+
+// Utilidad para extraer componentes de fecha y formatear agrupaciones por día
+export const getDayParts = (dateStr?: string) => {
+  if (!dateStr) {
+    return {
+      dayOfWeek: 'HOY',
+      dayNum: '—',
+      dayTitle: 'PRÓXIMAMENTE',
+      fullDateStr: 'Fecha por confirmar',
+      dateKey: '',
+    };
+  }
+
+  const clean = dateStr.trim();
+  let d: Date | null = null;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(clean)) {
+    const [y, m, day] = clean.split('-').map(Number);
+    d = new Date(y, m - 1, day);
+  } else if (/^(\d{1,2})\.(\d{2})\.(\d{2,4})$/.test(clean)) {
+    const match = clean.match(/^(\d{1,2})\.(\d{2})\.(\d{2,4})$/);
+    if (match) {
+      const day = parseInt(match[1], 10);
+      const m = parseInt(match[2], 10) - 1;
+      let y = parseInt(match[3], 10);
+      if (y < 100) y += 2000;
+      d = new Date(y, m, day);
+    }
+  } else {
+    const parsed = new Date(clean);
+    if (!isNaN(parsed.getTime())) d = parsed;
+  }
+
+  if (!d) {
+    return {
+      dayOfWeek: 'PRÓX',
+      dayNum: '—',
+      dayTitle: 'PRÓXIMAMENTE',
+      fullDateStr: dateStr,
+      dateKey: '',
+    };
+  }
+
+  const daysOfWeek = ['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB'];
+  const fullDays = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+  const dayOfWeek = daysOfWeek[d.getDay()];
+  const dayNum = String(d.getDate()).padStart(2, '0');
+  const dayNameFull = fullDays[d.getDay()];
+  const monthName = months[d.getMonth()];
+
+  return {
+    dayOfWeek,
+    dayNum,
+    dayNameFull,
+    monthName,
+    dayTitle: `${dayNameFull.toUpperCase()}, ${d.getDate()} DE ${monthName.toUpperCase()}`,
+    fullDateStr: `${dayNameFull}, ${d.getDate()} de ${monthName}`,
+    dateKey: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`,
+  };
 };
 
 // Mapeo seguro de documentos de Firestore a la interfaz VipFlyerItem
@@ -59,7 +120,14 @@ const mapDocToVipFlyer = (id: string, data: any): VipFlyerItem => ({
   isVipOrFree: true,
   tags: data.tags || [],
   endTimestamp: data.endTimestamp || computeEventEndTimestamp(data.date, data.endTime, data.startTime),
+  vipCutoffTime: data.vipCutoffTime || null,
 });
+
+const BellIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+  </svg>
+);
 
 export interface HomeScreenProps {
   onNavigate?: (route: string) => void;
@@ -71,7 +139,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSelectEventSheetOpen, setIsSelectEventSheetOpen] = useState<boolean>(false);
   const [hostEventsToScan, setHostEventsToScan] = useState<HostScanEventItem[]>([]);
-  const [isCheckingScannerEvents, setIsCheckingScannerEvents] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<VipFlyerItem | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
@@ -98,8 +165,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
         setEvents(activeEvents);
         setIsEventsLoading(false);
       },
-      (error) => {
-        console.warn('Error escuchando eventos públicos de Firestore:', error);
+      () => {
         setEvents([]);
         setIsEventsLoading(false);
       }
@@ -108,15 +174,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
     return () => unsubscribe();
   }, []);
 
+  const [isCheckingScannerEvents, setIsCheckingScannerEvents] = useState<boolean>(false);
+
   // Estado reactivo del perfil del usuario conectado (por cada dispositivo)
-  const [userProfile, setUserProfile] = useState<{ name?: string } | null>(null);
+  const [userProfile, setUserProfile] = useState<{ name?: string; following?: string[]; interests?: string[] } | null>(null);
 
   useEffect(() => {
     if (!auth.currentUser) return;
     const userRef = doc(db, 'users', auth.currentUser.uid);
     const unsubscribe = onSnapshot(userRef, (snapshot) => {
       if (snapshot.exists()) {
-        setUserProfile(snapshot.data() as { name?: string });
+        setUserProfile(snapshot.data() as { name?: string; following?: string[]; interests?: string[] });
       }
     });
     return () => unsubscribe();
@@ -124,7 +192,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
 
   // Escucha reactiva en tiempo real de los pases del usuario (activos y pendientes)
   const [userPasses, setUserPasses] = useState<Record<string, string>>({});
-  const [activeApprovedPasses, setActiveApprovedPasses] = useState<any[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -144,29 +211,21 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
       q,
       (snapshot) => {
         const passMap: Record<string, string> = {};
-        const activeList: any[] = [];
         snapshot.docs.forEach((d) => {
           const data = d.data();
           if (data.eventId) {
             passMap[data.eventId] = data.status || 'pending';
           }
-          if (data.status === 'active' || data.status === 'confirmed') {
-            activeList.push({ id: d.id, ...data });
-          }
         });
         setUserPasses(passMap);
-        setActiveApprovedPasses(activeList);
       },
-      (error) => {
-        console.warn('Error escuchando pases en HomeScreen:', error);
-      }
+      () => {}
     );
     return () => unsubscribe();
   }, [auth.currentUser]);
 
   // Escucha reactiva en tiempo real de notificaciones dedicadas del usuario
   const [realtimeNotifications, setRealtimeNotifications] = useState<AppNotification[]>([]);
-  const [unreadNotifCount, setUnreadNotifCount] = useState<number>(0);
 
   // Escucha reactiva en tiempo real de todos los pases para prueba social (asistentes, aforo restante, FOMO)
   const [socialProofMap, setSocialProofMap] = useState<Record<string, EventSocialProof>>({});
@@ -224,9 +283,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
 
         setSocialProofMap(proofMap);
       },
-      (error) => {
-        console.warn('Error escuchando pases globales para prueba social:', error);
-      }
+      () => {}
     );
 
     return () => unsubscribe();
@@ -249,12 +306,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
         notifs.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
         setRealtimeNotifications(notifs);
         const unread = notifs.filter((n) => !n.read).length;
-        setUnreadNotifCount(unread);
         setUnreadCount(unread);
       },
-      (error) => {
-        console.warn('Error escuchando notifications en HomeScreen:', error);
-      }
+      () => {}
     );
     return () => unsubscribe();
   }, [auth.currentUser]);
@@ -266,6 +320,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
   const touchStartYRef = useRef<number>(0);
   
   const user = propUser || mockUserProfile;
+  const userName = userProfile?.name || auth.currentUser?.displayName || (auth.currentUser?.isAnonymous ? "INVITADO #" + auth.currentUser.uid.slice(-4).toUpperCase() : (user.name || 'USUARIO'));
+  const userPhotoUrl = auth.currentUser?.photoURL || user.avatarUrl;
 
   // Temporizador para auto-ocultar la barra tras 4 segundos de inactividad
   const resetHideTimer = useCallback(() => {
@@ -350,29 +406,177 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
   const handleNavigate = (route: string) => {
     if (onNavigate) {
       onNavigate(route);
-    } else {
-      console.log(`[Navigation] -> ${route}`);
     }
   };
 
-  // Combinar eventos con su prueba social y aforo restante en tiempo real
-  const eventsWithSocialProof: VipFlyerItem[] = events.map((event) => {
-    const proof = socialProofMap[event.id];
-    const guestLimit = event.guestLimit || event.maxCapacity || 100;
-    if (proof) {
+  const openNotifications = () => {
+    setIsNotificationsOpen(true);
+  };
+
+  const openProfile = () => {
+    handleNavigate('/profile');
+  };
+
+  const handleRefresh = async () => {
+    try {
+      const now = Date.now();
+      const qEvents = query(collection(db, 'events'), where('type', '==', 'public'));
+      const evSnap = await getDocs(qEvents);
+      const activeEvents = evSnap.docs
+        .map((d) => mapDocToVipFlyer(d.id, d.data()))
+        .filter((event) => {
+          const eventEnd = event.endTimestamp || computeEventEndTimestamp(event.date, event.endTime, event.startTime);
+          return eventEnd > now;
+        });
+      setEvents(activeEvents);
+
+      if (auth.currentUser) {
+        const userRef = doc(db, 'users', auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setUserProfile(userSnap.data() as { name?: string });
+        }
+      }
+      showToast('Eventos actualizados');
+    } catch (err) {
+      console.error('[HomeScreen] Error en pull-to-refresh:', err);
+    }
+  };
+
+  // Combinar eventos con su prueba social y aforo restante en tiempo real,
+  // con prioridad algorítmica: eventos de anfitriones seguidos (currentUser.following) primero
+  const eventsWithSocialProof: VipFlyerItem[] = useMemo(() => {
+    const rawEvents = events.map((event) => {
+      const proof = socialProofMap[event.id];
+      const guestLimit = event.guestLimit || event.maxCapacity || 100;
+      if (proof) {
+        return {
+          ...event,
+          ...proof,
+        };
+      }
       return {
         ...event,
-        ...proof,
+        activePassesCount: 0,
+        confirmedUsers: [],
+        remainingSpots: guestLimit,
+        recentRequestsCount: 12,
       };
-    }
-    return {
-      ...event,
-      activePassesCount: 0,
-      confirmedUsers: [],
-      remainingSpots: guestLimit,
-      recentRequestsCount: 12,
-    };
-  });
+    });
+
+    const following = userProfile?.following || [];
+    if (!following.length) return rawEvents;
+
+    return [...rawEvents].sort((a, b) => {
+      const aFollowed = a.hostUserId ? following.includes(a.hostUserId) : false;
+      const bFollowed = b.hostUserId ? following.includes(b.hostUserId) : false;
+      if (aFollowed && !bFollowed) return -1;
+      if (!aFollowed && bFollowed) return 1;
+      return 0;
+    });
+  }, [events, socialProofMap, userProfile?.following]);
+
+  const userInterests = useMemo(() => {
+    return (userProfile?.interests || propUser?.interests || []).map((t) => t.toLowerCase());
+  }, [userProfile?.interests, propUser?.interests]);
+
+  // Segmentación: "EVENTOS HOY" (3 a 6 eventos recomendados con filtro de afinidad y relevancia)
+  const todayCoverFlowEvents = useMemo(() => {
+    if (!eventsWithSocialProof.length) return [];
+
+    const now = new Date();
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+    // Calcular puntaje de afinidad y relevancia para cada evento
+    const scoredEvents = eventsWithSocialProof.map((evt) => {
+      let score = 0;
+      const evtTags = (evt.tags || []).map((t) => t.toLowerCase());
+      const theme = (evt.theme || '').toLowerCase();
+      const title = (evt.title || '').toLowerCase();
+      const desc = (evt.description || '').toLowerCase();
+
+      // Afinidad con tags de intereses del usuario
+      userInterests.forEach((interest) => {
+        if (evtTags.some((t) => t.includes(interest) || interest.includes(t))) score += 10;
+        if (theme.includes(interest)) score += 8;
+        if (title.includes(interest)) score += 6;
+        if (desc.includes(interest)) score += 4;
+      });
+
+      // Timeliness: Ocurre hoy / esta noche
+      const isToday = evt.date === todayStr || evt.isTonight;
+      if (isToday) score += 25;
+
+      // Anfitrión seguido
+      const following = userProfile?.following || [];
+      if (evt.hostUserId && following.includes(evt.hostUserId)) score += 12;
+
+      return { evt, score, isToday };
+    });
+
+    // Ordenar: primero mayor puntaje, luego fecha más próxima
+    scoredEvents.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return (a.evt.date || '').localeCompare(b.evt.date || '');
+    });
+
+    // Limitar carrusel entre 3 y 6 tarjetas
+    const limit = Math.min(6, Math.max(3, Math.min(scoredEvents.length, 6)));
+    return scoredEvents.slice(0, limit).map((s) => s.evt);
+  }, [eventsWithSocialProof, userInterests, userProfile?.following]);
+
+  // Segmentación: "EVENTOS ESTA SEMANA" (agenda cronológica agrupada por días, excluyendo los del Cover Flow)
+  const thisWeekGroupedEvents = useMemo(() => {
+    const coverFlowIds = new Set(todayCoverFlowEvents.map((e) => e.id));
+    const remainingEvents = eventsWithSocialProof.filter((e) => !coverFlowIds.has(e.id));
+
+    // Filtrar eventos de los próximos 7 días (o si hay pocos, mostrar los activos disponibles)
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const in7Days = new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000);
+
+    const upcomingEvents = remainingEvents.filter((e) => {
+      if (!e.date) return true;
+      const dParts = getDayParts(e.date);
+      if (dParts.dateKey) {
+        const [y, m, day] = dParts.dateKey.split('-').map(Number);
+        const evDate = new Date(y, m - 1, day);
+        return evDate >= now && evDate <= in7Days;
+      }
+      return true;
+    });
+
+    const listToDisplay = upcomingEvents.length > 0 ? upcomingEvents : remainingEvents;
+
+    // Ordenar cronológicamente ascendente
+    const sorted = [...listToDisplay].sort((a, b) => {
+      const dateA = a.date || '9999-99-99';
+      const dateB = b.date || '9999-99-99';
+      if (dateA !== dateB) return dateA.localeCompare(dateB);
+      return (a.startTime || '22:00').localeCompare(b.startTime || '22:00');
+    });
+
+    // Agrupar por día
+    const groups: { dayKey: string; dayTitle: string; events: VipFlyerItem[] }[] = [];
+    const groupMap = new Map<string, { dayKey: string; dayTitle: string; events: VipFlyerItem[] }>();
+
+    sorted.forEach((evt) => {
+      const parts = getDayParts(evt.date);
+      const key = parts.dateKey || parts.dayOfWeek;
+      if (!groupMap.has(key)) {
+        const newGroup = {
+          dayKey: key,
+          dayTitle: parts.dayTitle,
+          events: [],
+        };
+        groupMap.set(key, newGroup);
+        groups.push(newGroup);
+      }
+      groupMap.get(key)!.events.push(evt);
+    });
+
+    return groups;
+  }, [eventsWithSocialProof, todayCoverFlowEvents]);
 
   const handleApplyVip = (flyerId: string) => {
     const targetEvt = eventsWithSocialProof.find((e) => e.id === flyerId);
@@ -485,8 +689,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
             }
           }
         }
-      } catch (err) {
-        console.warn('Fallback checking staff door pairing:', err);
+      } catch {
+        // Fallback checking staff door pairing
       }
 
       // 3. Respaldo local de Staff de Puerta vinculado
@@ -497,8 +701,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
           if (evSnap.exists()) {
             staffEvents.push({ id: evSnap.id, ...evSnap.data() } as HostScanEventItem);
           }
-        } catch (e) {
-          console.warn('Local staff doc check error:', e);
+        } catch {
+          // Local staff doc check fallback
         }
       }
 
@@ -520,11 +724,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
         setHostEventsToScan(allAuthorizedEvents);
         setIsSelectEventSheetOpen(true);
       }
-    } catch (error) {
-      console.warn('Error consultando eventos para escanear:', error);
+    } catch {
       setIsModalOpen(true);
-    } finally {
-      setIsCheckingScannerEvents(false);
     }
   };
 
@@ -562,51 +763,68 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
       {/* Degradado superior sutil para HUD */}
       <div className="fixed inset-x-0 top-0 h-28 bg-gradient-to-b from-[#000000] via-[#000000]/70 to-transparent pointer-events-none z-10" />
 
-      {/* Contenedor central móvil estructurado */}
-      <div className="relative z-10 flex-1 flex flex-col w-full max-w-md mx-auto pb-28">
+      {/* Contenedor central móvil estructurado con Pull-to-Refresh */}
+      <PullToRefresh
+        onRefresh={handleRefresh}
+        className="relative z-10 flex-1 flex flex-col w-full max-w-md mx-auto pb-28"
+      >
         
-        {/* 1. TOP BAR / HUD (Logo +1 en #E87A72, Notificaciones y Avatar) */}
-        <TopHud
-          user={{ ...user, unreadNotifications: unreadCount }}
-          onNotificationsClick={() => {
-            setIsNotificationsOpen(true);
-          }}
-          onProfileClick={() => handleNavigate('/profile')}
-        />
+        {/* REESTRUCTURACIÓN DEL HEADER (DOS NIVELES VERTICALES) */}
+        <header className="w-full z-20 flex flex-col">
+          {/* NIVEL 1: TOP BAR (LOGO +1 INDEPENDIENTE) */}
+          <div className="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+            {/* Isotipo +1 en solitario a la izquierda */}
+            <span className="font-display text-3xl text-[#E87A72] font-bold tracking-tight">
+              +1
+            </span>
 
-        {/* 2. SALUDO PRINCIPAL: HEY, [NOMBRE DE USUARIO] */}
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
-          className="px-6 pt-1 pb-1"
-        >
-          <h1 className="font-display text-white text-[38px] sm:text-[42px] font-black tracking-tight leading-none uppercase">
-            HEY, {userProfile?.name || auth.currentUser?.displayName || (auth.currentUser?.isAnonymous ? "INVITADO #" + auth.currentUser.uid.slice(-4).toUpperCase() : (user.name || 'USUARIO'))}
-          </h1>
-        </motion.div>
+            {/* Lado derecho: Notificaciones y Avatar */}
+            <div className="flex items-center gap-3">
+              <button onClick={openNotifications} className="relative p-1 text-white hover:text-[#E87A72] transition-colors focus:outline-none cursor-pointer" aria-label="Notificaciones">
+                <BellIcon className="w-5 h-5"/>
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#E87A72] text-[10px] text-white font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                    {unreadCount}
+                  </span>
+                )}
+              </button>
+              <div 
+                onClick={openProfile} 
+                className="w-8 h-8 rounded-full overflow-hidden border border-white/20 cursor-pointer transition-transform duration-150 hover:scale-105 active:scale-95 flex items-center justify-center p-0"
+                aria-label="Perfil de usuario"
+              >
+                <img 
+                  src={userPhotoUrl || "/assets/images/avatar_placeholder.png"} 
+                  alt="Avatar" 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+            </div>
+          </div>
 
-        {/* 3. ENCABEZADO INDEPENDIENTE: EVENTOS PARA TI (FUERA DE LA TARJETA) */}
-        <motion.div
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: 'easeOut', delay: 0.15 }}
-          className="px-6 pt-1 pb-1 mt-2"
-        >
-          <h2 className="font-sans text-[#9CA3AF] text-sm sm:text-base font-semibold tracking-wider uppercase m-0 leading-none">
-            EVENTOS PARA TI
-          </h2>
-        </motion.div>
+          {/* NIVEL 2: PASTILLA NEGRA CON SALUDO Y EVENTOS (ANCHO DINÁMICO) */}
+          <div className="w-full flex justify-start my-3">
+            {/* Pastilla dinámica que solo cubre el ancho del texto */}
+            <div className="bg-black rounded-none pl-5 pr-5 py-2.5 w-max max-w-[85%] flex flex-col justify-center shadow-none border-0">
+              <h1 className="font-display text-[22px] text-white tracking-wide uppercase leading-tight whitespace-nowrap">
+                HEY, {userName}
+              </h1>
+              <span className="font-sans text-[11px] text-[#E87A72] font-semibold tracking-wider uppercase mt-0.5 whitespace-nowrap">
+                EVENTOS HOY
+              </span>
+            </div>
+          </div>
+        </header>
 
-        {/* 4. CARRUSEL COVER FLOW DE TARJETAS COMPLETAS O ESTADO VACÍO */}
+        {/* 4. CARRUSEL COVER FLOW DE TARJETAS COMPLETAS (EVENTOS HOY) O ESTADO VACÍO */}
         <motion.main
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-          className="flex-1 flex flex-col items-center justify-center my-auto py-1"
+          className="flex-1 flex flex-col items-center justify-center my-auto py-1 w-full overflow-x-visible"
         >
           {isEventsLoading ? (
-            <div className="w-full max-w-[340px] sm:max-w-[360px] h-[460px] sm:h-[480px] bg-[#16171B]/50 border border-[#26282E] rounded-[28px] p-6 flex flex-col items-center justify-center text-center shadow-xl select-none mx-auto animate-pulse">
+            <div className="w-full max-w-[340px] sm:max-w-[360px] h-[435px] sm:h-[465px] bg-[#16171B]/50 border border-[#26282E] rounded-[28px] p-6 flex flex-col items-center justify-center text-center shadow-xl select-none mx-auto animate-pulse">
               <div className="w-12 h-12 rounded-full border-2 border-[#E87A72] border-t-transparent animate-spin mb-4" />
               <span className="font-display text-neutral-400 text-xs font-bold tracking-widest uppercase">
                 CARGANDO EVENTOS...
@@ -616,7 +834,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="w-full max-w-[340px] sm:max-w-[360px] h-[460px] sm:h-[480px] bg-[#16171B] border border-[#26282E] rounded-[28px] p-6 flex flex-col items-center justify-center text-center shadow-xl select-none mx-auto"
+              className="w-full max-w-[340px] sm:max-w-[360px] h-[435px] sm:h-[465px] bg-[#16171B] border border-[#26282E] rounded-[28px] p-6 flex flex-col items-center justify-center text-center shadow-xl select-none mx-auto"
             >
               <div className="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-2xl mb-4">
                 🎪
@@ -633,7 +851,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
             </motion.div>
           ) : (
             <FullCardCoverFlow
-              flyers={eventsWithSocialProof}
+              flyers={todayCoverFlowEvents}
               userPasses={userPasses}
               onRequestVip={handleRequestVipDirect}
               onApplyVipClick={handleApplyVip}
@@ -645,15 +863,120 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
           )}
         </motion.main>
 
-        {/* 5. BARRA DE ACCIÓN FLOTANTE: [ + ] CREAR EVENTO + [ ⛶ ESCANEAR QR ] (INMEDIATAMENTE DEBAJO DEL CARRUSEL) */}
-        <div className="pt-2 pb-2">
+        {/* 5. NUEVA SECCIÓN: "EVENTOS ESTA SEMANA" (AGENDA CRONOLÓGICA) */}
+        {!isEventsLoading && events.length > 0 && (
+          <section className="w-full flex flex-col mt-2">
+            {/* 1. Encabezado de Sección Brutalista */}
+            <div className="w-full flex justify-start mt-6 mb-3">
+              <div className="bg-black rounded-none pl-5 pr-5 py-2 inline-flex items-center">
+                <span className="font-display text-base text-white tracking-widest uppercase">
+                  EVENTOS ESTA SEMANA
+                </span>
+              </div>
+            </div>
+
+            {/* 2. Lista Cronológica Agrupada por Día */}
+            {thisWeekGroupedEvents.length > 0 ? (
+              <div className="w-full flex flex-col">
+                {thisWeekGroupedEvents.map((group) => (
+                  <div key={group.dayKey} className="w-full mb-3">
+                    {/* Subencabezado de día */}
+                    <div className="px-5 mb-2 flex items-center gap-2">
+                      <span className="font-display text-xs text-[#E87A72] font-black uppercase tracking-wider">
+                        {group.dayTitle}
+                      </span>
+                      <div className="h-px flex-1 bg-white/10" />
+                    </div>
+
+                    {/* Fila / Tarjeta Horizontal */}
+                    {group.events.map((event) => {
+                      const { dayOfWeek, dayNum } = getDayParts(event.date);
+                      const remainingSpots = event.remainingSpots ?? 100;
+                      const tagText = (event.tags && event.tags[0]) || (event.theme !== 'custom' ? event.theme : null) || 'VIP';
+
+                      return (
+                        <div
+                          key={event.id}
+                          onClick={() => {
+                            setSelectedEvent(event);
+                            setIsDetailModalOpen(true);
+                          }}
+                          className="bg-[#16171B] border border-[#26282E] rounded-xl p-2.5 flex items-center gap-3 mb-2.5 mx-4 active:scale-[0.99] transition-transform cursor-pointer hover:border-white/20 shadow-md"
+                        >
+                          {/* Columna Día (Izquierda): Micro-badge vertical en Antonio Bold */}
+                          <div className="w-12 h-14 rounded-lg bg-black/60 border border-[#26282E] flex flex-col items-center justify-center shrink-0">
+                            <span className="font-display text-[11px] text-[#E87A72] font-black uppercase tracking-wider leading-none">
+                              {dayOfWeek}
+                            </span>
+                            <span className="font-display text-lg text-white font-black leading-tight mt-0.5">
+                              {dayNum}
+                            </span>
+                          </div>
+
+                          {/* Miniatura Cuadrada: Foto/flyer del evento */}
+                          {event.imageUrl ? (
+                            <img
+                              src={event.imageUrl}
+                              alt={event.title}
+                              className="w-14 h-14 rounded-lg object-cover bg-zinc-800 shrink-0"
+                            />
+                          ) : (
+                            <div className="w-14 h-14 rounded-lg bg-zinc-800 border border-white/5 flex items-center justify-center text-xl shrink-0">
+                              🎪
+                            </div>
+                          )}
+
+                          {/* Información Central */}
+                          <div className="flex-1 min-w-0 flex flex-col justify-center">
+                            <h3 className="font-display text-sm font-black text-white uppercase truncate tracking-wide leading-tight">
+                              {event.title}
+                            </h3>
+                            <span className="font-sans text-xs text-zinc-400 truncate mt-0.5">
+                              {event.location || event.exactAddress || 'Lugar por confirmar'} · {event.timeRange || (event.startTime ? `${event.startTime} hs` : '22:00')}
+                            </span>
+                            <div className="flex items-center gap-1.5 mt-1">
+                              {remainingSpots <= 30 ? (
+                                <span className="text-[10px] font-display text-[#E87A72] bg-[#E87A72]/15 px-1.5 py-0.5 rounded font-black tracking-wider uppercase">
+                                  🔥 {remainingSpots > 0 ? `ÚLTIMOS ${remainingSpots} CUPOS` : 'AGOTADO'}
+                                </span>
+                              ) : (
+                                <span className="text-[10px] font-sans text-zinc-400 bg-white/5 px-1.5 py-0.5 rounded font-medium tracking-wider uppercase">
+                                  {tagText}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Flecha / Acción (Derecha) */}
+                          <span className="text-sm text-[#9CA3AF] shrink-0 font-bold pr-1">›</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mx-4 p-4 rounded-xl bg-[#16171B]/60 border border-dashed border-[#26282E] text-center mb-4">
+                <span className="font-display text-xs text-zinc-400 uppercase tracking-wider font-bold">
+                  NO HAY MÁS EVENTOS PROGRAMADOS ESTA SEMANA
+                </span>
+                <p className="font-sans text-[11px] text-zinc-500 mt-1">
+                  Revisa los eventos destacados de hoy arriba
+                </p>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 6. DOCK DE ACCIÓN INFERIOR: [ + ] CREAR EVENTO + [ ⛶ ESCANEAR QR ] */}
+        <div className="w-full mt-6 mb-24 pb-[90px]">
           <ActionFooter
             onCreateEventClick={handleCreateEvent}
             onScanQrClick={handleScanQr}
           />
         </div>
 
-      </div>
+      </PullToRefresh>
 
       {/* 6. BOTTOM NAVIGATION BAR FLOTANTE DINÁMICA (Auto-Hiding Floating Capsule) */}
       <BottomNav
@@ -674,7 +997,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate, user: propUs
       <SelectEventToScanSheet
         isOpen={isSelectEventSheetOpen}
         events={hostEventsToScan}
-        onClose={() => setIsEventSelectSheetOpen(false)}
+        onClose={() => setIsSelectEventSheetOpen(false)}
         onSelectEvent={handleSelectEventForScan}
       />
 

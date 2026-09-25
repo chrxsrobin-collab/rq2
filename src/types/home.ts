@@ -25,6 +25,7 @@ export interface PassItem {
   accessType?: string;
   venue?: string;
   feedbackMessage?: string;
+  vipCutoffTime?: string | null;
 }
 
 export interface ConfirmedAttendee {
@@ -74,6 +75,7 @@ export interface VipFlyerItem {
   confirmedUsers?: ConfirmedAttendee[];
   remainingSpots?: number;
   recentRequestsCount?: number;
+  vipCutoffTime?: string | null;
 }
 
 export interface UserProfile {
@@ -94,6 +96,11 @@ export interface UserProfile {
   isAdult?: boolean;
   interests?: string[];
   onboardingCompleted?: boolean;
+  coverPhotoUrl?: string;
+  businessCategory?: 'club' | 'promotor' | 'cafe' | 'teatro' | 'cine' | 'salon_eventos' | 'conferencista' | 'pub' | 'gimnasio';
+  galleryPhotos?: string[];
+  followersCount?: number;
+  following?: string[];
 }
 
 export interface CreatedEventItem {
@@ -105,6 +112,7 @@ export interface CreatedEventItem {
   maxCapacity: number;
   endTimestamp?: number;
   isFinished?: boolean;
+  vipCutoffTime?: string | null;
 }
 
 export interface SouvenirItem {
@@ -177,18 +185,21 @@ export interface CreateEventFormData {
   allowPlusOne: boolean;
   maxCapacity: number;
   tags?: string[];
+  vipCutoffTime?: string | null;
 }
 
-export const AVAILABLE_EVENT_TAGS = [
+export const AVAILABLE_CATEGORIES = [
   { id: "reggaeton", label: "Reggaetón 🍑" },
   { id: "techno", label: "Electrónica / Techno 🎧" },
-  { id: "indie", label: "Indie & Live Rock 🎸" },
+  { id: "rock_indie", label: "Live Rock & Indie 🎸" },      // Antes: Indie & Live Rock
   { id: "previas", label: "Previas & Juntadas 🍻" },
   { id: "boliches", label: "Boliches & Clubs 🪩" },
-  { id: "cocktails", label: "Cocktails & Lounges 🍸" },
+  { id: "arte_cocktails", label: "Arte & Cocktails 🎨" },   // Antes: Cocktails & Lounges
   { id: "festivales", label: "Festivales & Open Air ⚡" },
-  { id: "rooftops", label: "VIP & Rooftops 🏙️" },
+  { id: "deportes_salud", label: "Deportes & Salud 🏃‍♂️" },  // Antes: VIP & Rooftops
 ] as const;
+
+export const AVAILABLE_EVENT_TAGS = AVAILABLE_CATEGORIES;
 
 export interface EventInviteData {
   id: string;

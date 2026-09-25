@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { db, auth } from '../lib/firebase';
 import { collection, addDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { CreateEventFormData, AVAILABLE_EVENT_TAGS } from '../types/home';
+import { CreateEventFormData, AVAILABLE_CATEGORIES, AVAILABLE_EVENT_TAGS } from '../types/home';
 import { LocationPickerModal, Coordinates } from '../components/LocationPickerModal';
 import { ShareEventModal } from '../components/ShareEventModal';
-import { computeEventEndTimestamp } from '../lib/dateUtils';
+import { computeEventEndTimestamp, formatVipCutoffDisplay } from '../lib/dateUtils';
 import '../styles/fonts.css';
 
-export { AVAILABLE_EVENT_TAGS };
+export { AVAILABLE_CATEGORIES, AVAILABLE_EVENT_TAGS };
 
 export interface CreateEventScreenProps {
   eventId?: string;
@@ -38,10 +38,11 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
     privacy: 'public',
     allowPlusOne: true,
     maxCapacity: 150,
+    vipCutoffTime: null,
   });
 
+  const [isVipCutoffActive, setIsVipCutoffActive] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [isLoadingEvent, setIsLoadingEvent] = useState(isEditMode);
   const [eventHostUserId, setEventHostUserId] = useState<string | null>(null);
 
   // Cargar datos del evento existente desde Firestore cuando se pasa eventId
@@ -50,7 +51,6 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
 
     let isMounted = true;
     const fetchEventData = async () => {
-      setIsLoadingEvent(true);
       try {
         const eventRef = doc(db, 'events', eventId);
         const snap = await getDoc(eventRef);
@@ -79,10 +79,15 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
             privacy: (d.type as 'public' | 'private') || 'public',
             allowPlusOne: d.allowsPlusOne !== undefined ? Boolean(d.allowsPlusOne) : true,
             maxCapacity: d.guestLimit || d.maxCapacity || 150,
+            vipCutoffTime: d.vipCutoffTime || null,
           });
+          setIsVipCutoffActive(Boolean(d.vipCutoffTime));
 
           if (d.tags && Array.isArray(d.tags)) {
             const normalized = d.tags.map((t: string) => {
+              if (t === 'indie') return 'rock_indie';
+              if (t === 'cocktails') return 'arte_cocktails';
+              if (t === 'rooftops' || t === 'deportes') return 'deportes_salud';
               const found = AVAILABLE_EVENT_TAGS.find((at) => at.id === t || at.label === t);
               return found ? found.id : t;
             });
@@ -91,8 +96,6 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
         }
       } catch (err) {
         console.error('Error al cargar datos del evento para editar:', err);
-      } finally {
-        if (isMounted) setIsLoadingEvent(false);
       }
     };
 
@@ -149,8 +152,6 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
       onBack();
     } else if (onNavigate) {
       onNavigate('/');
-    } else {
-      console.log('[Navigation] -> Back to Home');
     }
   };
 
@@ -286,6 +287,7 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
           maxCapacity: Number(formData.maxCapacity),
           imageUrl: formData.artImage || null,
           artImage: formData.artImage || null,
+          vipCutoffTime: formData.vipCutoffTime || null,
           updatedAt: Date.now(),
         });
 
@@ -337,6 +339,7 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
           maxCapacity: Number(formData.maxCapacity),
           imageUrl: formData.artImage || null,
           artImage: formData.artImage || null,
+          vipCutoffTime: formData.vipCutoffTime || null,
           hostUserId: auth.currentUser?.uid || null,
           hostName: resolvedHostName,
           hostPhotoUrl: resolvedHostPhoto,
@@ -352,6 +355,7 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
           location: formData.location || 'Por definir',
           coordinates: formData.coordinates || null,
           imageUrl: formData.artImage || null,
+          vipCutoffTime: formData.vipCutoffTime || null,
         });
 
         setIsPublished(true);
@@ -613,6 +617,61 @@ export const CreateEventScreen: React.FC<CreateEventScreenProps> = ({
                 className="w-full min-w-0 max-w-full h-11 px-2.5 rounded-xl bg-[#16171B] border border-[#26282E] focus:border-[#E87A72] text-white font-sans text-xs text-center outline-none transition-colors box-border"
               />
             </div>
+          </div>
+
+          {/* CONTROL: CIERRE DE LISTA VIP (OPCIONAL) */}
+          <div className="w-full">
+            {!isVipCutoffActive && !formData.vipCutoffTime ? (
+              /* ESTADO INACTIVO */
+              <button
+                type="button"
+                onClick={() => {
+                  setIsVipCutoffActive(true);
+                  if (!formData.vipCutoffTime) {
+                    setFormData((prev) => ({ ...prev, vipCutoffTime: '01:00' }));
+                  }
+                }}
+                className="w-full py-2.5 px-3 rounded-xl bg-[#16171B] hover:bg-[#1E2025] border border-[#26282E] text-[#8E8E93] hover:text-white font-display text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-[0.99]"
+              >
+                <span>+ DEFINIR HORA DE CIERRE DE LISTA VIP (OPCIONAL)</span>
+              </button>
+            ) : (
+              /* ESTADO ACTIVO */
+              <div className="p-3 rounded-xl bg-[#16171B] border border-[#26282E] space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-[#E87A72] text-base">⏳</span>
+                    <label className="font-display text-white text-xs font-bold tracking-wider uppercase truncate">
+                      Cierre de Lista: {formData.vipCutoffTime ? formatVipCutoffDisplay(formData.vipCutoffTime) : '01:00 AM'}
+                    </label>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsVipCutoffActive(false);
+                      setFormData((prev) => ({ ...prev, vipCutoffTime: null }));
+                    }}
+                    title="Remover límite de lista VIP"
+                    className="w-7 h-7 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold transition-all active:scale-90 cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <input
+                    type="time"
+                    value={formData.vipCutoffTime || '01:00'}
+                    onChange={(e) => setFormData({ ...formData, vipCutoffTime: e.target.value })}
+                    className="w-full h-11 px-3 rounded-xl bg-[#101114] border border-[#26282E] focus:border-[#E87A72] text-white font-sans text-xs text-center outline-none transition-colors"
+                  />
+                </div>
+
+                <p className="font-sans text-[#8E8E93] text-xs leading-relaxed">
+                  Los pases VIP solicitados solo serán válidos para ingresar hasta esta hora.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* CAMPO 4: LUGAR / UBICACIÓN (INTERFAZ PROGRESIVA BASADA EN MAPA) */}
